@@ -1,0 +1,61 @@
+        <!--PAGE CONTENT -->
+        <div id="content">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2> Opname <?php echo __get_inventory_type($type); ?></h2>
+                    </div>
+                </div>
+
+                <hr />
+	<?php echo __get_error_msg(); ?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Opname <?php echo __get_inventory_type($type); ?>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+          <th>Branch</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Stock Begining</th>
+          <th>Stock In</th>
+          <th>Stock Out</th>
+          <th>Stock Final</th>
+          <th style="width: 50px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+		  <?php
+		  foreach($opname as $k => $v) :
+		  ?>
+                                        <tr>
+          <td><?php echo $v -> bname; ?></td>
+          <td><?php echo $v -> code; ?></td>
+          <td><?php echo $v -> name; ?></td>
+          <td style="text-align:right;"><?php echo $v -> istockbegining; ?></td>
+          <td style="text-align:right;"><?php echo $v -> istockin; ?></td>
+          <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
+          <td style="text-align:right;"><?php echo $v -> istock; ?></td>
+		  <td>
+              <a href="<?php echo site_url('opname/opname_update/' . $type.'/' . $v -> iid); ?>"><i class="icon-pencil"></i></a>
+          </td>
+										</tr>
+        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+    <?php echo $pages; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+       <!--END PAGE CONTENT -->
