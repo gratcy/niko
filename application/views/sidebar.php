@@ -24,7 +24,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">10</span>&nbsp;
+                       &nbsp; <span class="label label-danger">11</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
                         <li class=""><a href="<?php echo site_url('branch'); ?>"><i class="icon-angle-right"></i> Branch </a></li>
@@ -33,6 +33,7 @@
                         <li class=""><a href="<?php echo site_url('packaging'); ?>"><i class="icon-angle-right"></i> Packaging </a></li>
                         <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Categories Product </a></li>
                          <li class=""><a href="<?php echo site_url('sparepart'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
+                        <li class=""><a href="<?php echo site_url('target'); ?>"><i class="icon-angle-right"></i> Target Omset </a></li>
                         <li class=""><a href="<?php echo site_url('sales'); ?>"><i class="icon-angle-right"></i> Sales </a></li>
                         <li class=""><a href="<?php echo site_url('sales_commision'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
                           <li class=""><a href="<?php echo site_url('technical'); ?>"><i class="icon-angle-right"></i> Technical </a></li>

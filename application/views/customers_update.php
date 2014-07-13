@@ -29,6 +29,13 @@ $addr = explode('*', $detail[0] -> caddr);
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Category</label>
+
+                    <div class="col-lg-4">
+                        <?php echo __get_customer_category($detail[0] -> ccat,2); ?>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
@@ -137,7 +144,7 @@ $addr = explode('*', $detail[0] -> caddr);
 
                     <div class="col-lg-4">
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_customers_spec($detail[0] -> cpkp,2,'pkp'); ?>
+                        <input type="text" name="pkp" class="form-control" value="<?php echo $detail[0] -> cpkp; ?>" />
                             </div>
                     </div>
                 </div>

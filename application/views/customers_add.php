@@ -26,6 +26,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Category</label>
+
+                    <div class="col-lg-4">
+                        <?php echo __get_customer_category(0,2); ?>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
@@ -134,7 +141,7 @@
 
                     <div class="col-lg-4">
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_customers_spec(0,2,'pkp'); ?>
+                        <input type="text" placeholder="PKP" name="pkp" class="form-control" />
                             </div>
                     </div>
                 </div>

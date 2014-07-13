@@ -35,6 +35,7 @@ class Home extends MY_Controller {
 			$basic = $this -> input -> post('basic', TRUE);
 			$name = $this -> input -> post('name', TRUE);
 			$code = $this -> input -> post('code', TRUE);
+			$disc = (int) $this -> input -> post('disc');
 			$status = (int) $this -> input -> post('status');
 			
 			if (!$name || !$desc || !$consume || !$store || !$key || !$semi || !$dist || !$code) {
@@ -42,7 +43,7 @@ class Home extends MY_Controller {
 				redirect(site_url('products' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('pcid' => $category, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pstatus' => $status);
+				$arr = array('pcid' => $category, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
 				if ($this -> products_model -> __insert_products($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('products'));
@@ -76,6 +77,7 @@ class Home extends MY_Controller {
 			$packaging = (int) $this -> input -> post('packaging');
 			$category = (int) $this -> input -> post('category');
 			$status = (int) $this -> input -> post('status');
+			$disc = (int) $this -> input -> post('disc');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
@@ -84,7 +86,7 @@ class Home extends MY_Controller {
 					redirect(site_url('products' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('pcid' => $category, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pstatus' => $status);
+					$arr = array('pcid' => $category, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
 					if ($this -> products_model -> __update_products($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('products'));

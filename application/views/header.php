@@ -45,6 +45,7 @@
       <!-- PAGE LEVEL SCRIPT-->
  <script src="<?php echo site_url('application/views/assets/js/jquery-ui.min.js');?>"></script>
  <script src="<?php echo site_url('application/views/assets/js/js.js');?>"></script>
+ <script src="<?php echo site_url('application/views/assets/js/monthpicker.js');?>"></script>
  <script src="<?php echo site_url('application/views/assets/plugins/uniform/jquery.uniform.min.js');?>"></script>
 <script src="<?php echo site_url('application/views/assets/plugins/inputlimiter/jquery.inputlimiter.1.3.1.min.js');?>"></script>
 <script src="<?php echo site_url('application/views/assets/plugins/chosen/chosen.jquery.min.js');?>"></script>

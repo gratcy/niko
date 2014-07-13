@@ -33,10 +33,19 @@ function __get_customers_spec($status, $type, $name='') {
 }
 
 function __get_delivery($id, $type) {
-	if ($type == 1)
-		return ($id == 1 ? 'Jakarta' : 'Semarang');
-	else
-		return ($id == 1 ? '<label>Jakarta <input class="uniform" type="radio" name="cond" value="1" checked></label> <label>Semarang <input class="uniform" type="radio" name="del" value="2"></label>' : '<label>Jakarta <input class="uniform" type="radio" name="cond" value="1"></label> <label>Semarang <input class="uniform" type="radio" name="del" value="2" checked></label>');
+	$data = array('Jakarta','Semarang','Bandung', 'Surabaya');
+	if ($type == 1) {
+		return $data[$id];
+	}
+	else {
+		$res = '';
+		foreach($data as $k => $v)
+			if ($id == $k)
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'" checked></label> <br />';
+			else
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'"></label> <br />';
+		return $res;
+	}
 }
 
 function __get_rupiah($num,$type=1) {
@@ -189,4 +198,20 @@ function __get_new_pm($uid) {
 	foreach($sql as $k => $v)
 		$res .= '<li><a href="'.site_url('pm/pm_read/' . $v -> pid).'"><div><strong>'.$v -> uemail.'</strong><span class="pull-right text-muted"><em>'.__get_date($v -> pdate).'</em></span></div><div>'.substr($v -> psubject,0,50).'</div></a></li>';
 	return $res;
+}
+
+function __get_customer_category($cid, $type) {
+	$data = array('DISTI', 'REG', 'SEMI', 'CASH');
+	if ($type == 1) {
+		return $data[$cid];
+	}
+	else {
+		$res = '';
+		foreach($data as $k => $v)
+			if ($cid == $k)
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'" checked></label>';
+			else
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'"></label>';
+		return $res;
+	}
 }

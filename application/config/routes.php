@@ -148,6 +148,11 @@ $route['pm/pm_delete/(:num)/(:num)'] = 'pm/home/pm_delete/$1/$2';
 $route['opname/?(:num)?/?(:num)?'] = 'opname/home/index/$1/$2';
 $route['opname/opname_update/?(:num)?/?(:num)?'] = 'opname/home/opname_update/$1/$2';
 
+$route['target/?(:num)?'] = 'target/home/index/$1';
+$route['target/target_add'] = 'target/home/target_add';
+$route['target/target_update/?(:num)?'] = 'target/home/target_update/$1';
+$route['target/target_delete/(:num)'] = 'target/home/target_delete/$1';
+
 $route['reportopname/?(:num)?/?(:num)?'] = 'reportopname/home/index/$1/$2';
 $route['reportopname/sortreport/?(:num)?/?(:num)?/?(:num)?'] = 'reportopname/home/sortreport/$1/$2/$3';
 /* End of file routes.php */
