@@ -41,62 +41,56 @@ class Home extends MY_Controller {
 
 		    $ssid = $this -> input -> post('id', TRUE);
 			$spid = $this -> input -> post('spid', TRUE);
+			$sqty = $this -> input -> post('sqty', TRUE);
+			$sprice = $this -> input -> post('price', TRUE);
+			$sdisc = $this -> input -> post('pdisc', TRUE);
 
 			// if (!$name || !$npwp || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
 				// __set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				// redirect(site_url('sales_order_detail' . '/' . __FUNCTION__));
 			// }
 			// else {
-			if ($id) {
+			//if ($id) {
 
-			$jml=count($spid);
+			// $jml=count($spid);
 
-			$i=0;
-			while($i<$jml)
-			{
+			// $i=0;
+				// while($i<$jml)
+				// {
 
-				$arr = array( 'sid' =>'' ,'ssid' => $ssid[$i],'spid' => $spid[$i] );					
-				if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr,$spid[$i])) {
-					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-					//redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));
-				}
-				else {
-					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
-					redirect(site_url('sales_order_detail/home'));
-				}
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc);					
+					if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr,$spid)) {
+						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));
+					}
+					else {
+						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+						redirect(site_url('sales_order_detail/home'));
+					}
 
-				$i++;
-			}	
+					// $i++;
+				// }	
 
-					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-					redirect(site_url('sales_order_detail/home/sales_order_details/'. $id .'/'. $scid .''));	
-
-			
-					// $arr = array( '' ,'ssid' => $ssid,'spid' => $spid );	
-					////print_r($arr);die;
-				// if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr)) {
 					// __set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-					// redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .''));
-				// }
-				// else {
-					// __set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
-					// redirect(site_url('sales_order_detail/home'));
-				// }
-			}else{
-				__set_error_msg(array('error' => 'Kesalahan input data !!!'));
-				redirect(site_url('sales_order_detail/home'));			
+					// redirect(site_url('sales_order_detail/home/sales_order_details/'. $id .'/'. $scid .''));	
+
+			// }else{
+				// __set_error_msg(array('error' => 'Kesalahan input data !!!'));
+				// redirect(site_url('sales_order_detail/home'));			
 			
-			}
+			// }
 		}
 		else {
 		
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> purchase_order_detail_model -> __get_purchase_order_detail_cust($scid);
+			//$view['detail'] =$this -> purchase_order_detail_model -> __get_purchase_order_detail_cust($scid);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
-			$view['pppid'] = $this -> products_lib -> __get_products();			
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+//print_r($view);die;			
 			$this->load->view('sales_order_detail_add',$view);
 		}
 	}
@@ -119,11 +113,7 @@ class Home extends MY_Controller {
 				// }
 				// else {
 			// else {
-					$arr = array('ssid' => $ssid, 'spid' => $spid );	
-					
-					
-					
-					
+					$arr = array('ssid' => $ssid, 'spid' => $spid );						
 					if ($this -> sales_order_detail_model -> __update_sales_order_detail($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('sales_order_detail/home'));

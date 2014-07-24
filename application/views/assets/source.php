@@ -1,0 +1,34 @@
+<?php
+$mysql_server = 'localhost';
+$mysql_login = 'root';
+$mysql_password = '';
+$mysql_database = 'distribution_db';
+if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
+
+
+mysql_connect($mysql_server, $mysql_login, $mysql_password);
+mysql_select_db($mysql_database);
+
+$req = "SELECT cid,cbid,ccat, cname,caddr,cdeliver,cphone,csid,ccash,ccredit,climit, cnpwp,cpkp,cspecial,bname,sname "
+	."FROM customers_tab a,branch_tab b,sales_tab c "
+	."WHERE a.cbid=b.bid  AND a.csid=c.sid  AND cname LIKE '%".$_REQUEST['term']."%'"; 
+
+	//echo "$req";
+	
+$query = mysql_query($req);
+
+while($row = mysql_fetch_array($query))
+{
+// if($row['ctax']==0){$ctx="InTaxable";}
+// else if($row['ctax']==1){$ctx="Taxable";}
+$phone=explode('*',$row['cphone']);
+$addr=explode('*',$row['caddr']);
+	$results[] = array('label' => $row['cname'],'cid' => $row['cid'],'cbid' => $row['cbid'],
+	'ccat' => $row['ccat'],'caddr' => $addr[0],'cdeliver' => $row['cdeliver'],'cphone' => $phone[0],
+	'csid' => $row['csid'],'ccash' => $row['ccash'],'ccredit' => $row['ccredit'],'climit' => $row['climit'],'cnpwp' => $row['cnpwp'],'cpkp' => $row['cpkp'],'cspecial' => $row['cspecial'],'bname' => $row['bname'],
+	'csname' => $row['sname'] );
+}
+
+echo json_encode($results);
+flush();
+?>

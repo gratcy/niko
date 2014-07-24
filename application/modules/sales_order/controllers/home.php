@@ -28,17 +28,17 @@ class Home extends MY_Controller {
 			$snoso = $this -> input -> post('snoso', TRUE);			
 			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
 			$stgl="$stglx[2]-$stglx[1]-$stglx[0]";			
-			$ssid = $this -> input -> post('ssid', TRUE);			
+			$ssid = $this -> input -> post('csid', TRUE);			
 			$sstatus = (int)$this ->input -> post('sstatus', TRUE);
 			$scdate=date('Y-m-d');
-			$scid = $this -> input -> post('scid', TRUE);
+			$scid = $this -> input -> post('cid', TRUE);
 			$stype = $this -> input -> post('stype', TRUE);
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
-
+			$sreff = $this -> input -> post('sreff', TRUE);
 			$scurrency = $this -> input -> post('scurrency', TRUE);
-			$skurs = $this -> input -> post('skurs', TRUE);
-			$snpwp = $this -> input -> post('snpwp', TRUE);
-			$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
+			// $skurs = $this -> input -> post('skurs', TRUE);
+			// $snpwp = $this -> input -> post('snpwp', TRUE);
+			//$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
 			
 			$ssubtotal = 0;
@@ -55,13 +55,12 @@ class Home extends MY_Controller {
 				// redirect(site_url('sales_order' . '/' . __FUNCTION__));
 			// }
 			// else {
-					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'stgl' => $stgl, 'ssid' => $ssid,'scid'=>$scid,'stype' => $stype,
-					'scurrency' => $scurrency,'skurs' => $skurs,
-					'snpwp' => $snpwp,'ssisaplafon' => $ssisaplafon,
-					'sfreeppn' => $sfreeppn, 'ssubtotal' => $ssubtotal,		
-					'sppnnpwp' => $sfreeppn, 'stotalsubppn' => $ssubtotal,	
-					'sppn' => $sfreeppn, 'stotal' => $ssubtotal,'sketerangan' => $sketerangan,
-					'sstatus' => $sstatus,'scdate' => $scdate );	
+					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
+					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
+					'ssid' => $ssid,'sppn' => $sfreeppn, 
+					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
+					'sketerangan' => $sketerangan
+					 );	
 				if ($this -> sales_order_model -> __insert_sales_order($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					

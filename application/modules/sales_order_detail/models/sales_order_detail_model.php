@@ -24,6 +24,14 @@ class sales_order_detail_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 
+	function __get_sales_order_detail_cust($id) {
+		$this -> db -> select('* FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=' . $id);
+		
+		//echo "select * FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.sid= $id";die;
+		return $this -> db -> get() -> result();
+	}		
+	
+	
 	function __update_sales_order_detail($id, $data) {
         $this -> db -> where('sid', $id);
         return $this -> db -> update('sales_order_detail_tab', $data);
