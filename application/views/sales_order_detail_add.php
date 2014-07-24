@@ -1,4 +1,4 @@
-
+<head>
         <!-- Load jQuery and bootstrap datepicker scripts -->
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
@@ -12,6 +12,43 @@
             
             });
         </script>
+		
+<script>
+$(function() {
+$("#search").autocomplete({
+delay:0, 
+cacheLength: 0,
+minLength: 1,
+    source: '<?php echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>',
+     select: function(event, ui) { 
+	    $("#theId").val(ui.item.pid),
+        $("#theCid").val(ui.item.pcid),
+		$("#theCode").val(ui.item.pcode),
+		$("#theHpp").val(ui.item.phpp),
+		$("#theDist").val(ui.item.pdist),
+		$("#theSemi").val(ui.item.psemi),
+		$("#theKey").val(ui.item.pkey),
+		$("#theStore").val(ui.item.pstore),
+		$("#theConsume").val(ui.item.pconsume),
+		$("#thePoint").val(ui.item.ppoint),
+		$("#theDisc").val(ui.item.ddisc),
+		$("#thePrice").val(ui.item.price),
+		$("#theQty").val(ui.item.mqty),
+		$("#theStatus").val(ui.item.pstatus)
+	
+		
+    }
+	
+
+})
+
+});
+</script>		
+		
+</head>		
+		
+	
+		
     
        <!--PAGE CONTENT -->
         <div id="content">
@@ -30,9 +67,16 @@
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post">
+            <!--form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
+<?php echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
+<?php  
+//print_r($detailx);
+//print_r($detail);die;
+?>
 
-<?php  //print_r($detailx);?>
+
+ <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
@@ -51,18 +95,7 @@
                 </div>
 
 				
-	            <div class="form-group">
-						<label for="status" class="control-label col-lg-4">Type SO</label>
-                    
-                    <div class="col-lg-4">
-						<select name="stype" data-placeholder="Type SO" class="form-control chzn-select">
-						<option value="<?php echo $detailx[0]->stype; ?>"><?php echo $detailx[0]->stype; ?></option>
-						<option value="penjualan">Penjualan</option>
-						<option value="retur">Retur</option>
-						<option value="adj">Adj</option>
-						</select>
-                    </div>
-				</div>					
+				
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
@@ -92,56 +125,6 @@
 					
                 </div>
 
-
-
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Currency</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Currency" value="<?php echo $detailx[0]->scurrency; ?>" class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Kurs</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Kurs" value="<?php echo $detailx[0]->skurs; ?>" class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">NPWP</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Npwp" value="<?php echo $detailx[0]->snpwp; ?>" class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sisa Plafon</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="sisa plafon" value="<?php echo $detailx[0]->ssisaplafon; ?>" class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">FREE PPN</label>
-
-                    <div class="col-lg-4">
-                        <select name="sfreeppn">
-						<option value="<?php echo $detailx[0]->sfreeppn; ?>"><?php echo $detailx[0]->sfreeppn; ?></option>
-						<option value="0">No</option>
-						<option value="1">Yes</option>
-						</select>
-                    </div>
-                </div>
-               
-				
-	
-				
-
-				
-				
-				
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Keterangan</label>
@@ -150,23 +133,67 @@
                         <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
                     </div>
                 </div>				
+		
+
+
+               <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Product</label>
+
+                    <div class="col-lg-4">
+                        <input  name=pname type="text" id="search" class="form-control"   />
+                    </div>
+                </div>	
+		
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Batas Bawah Harga</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text  id="thePrice" class="form-control" disabled>
+                    </div>
+                </div>			
+
+
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Batas QTY</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text  id="theQty" class="form-control" disabled>
+							<input type=hidden  id="theId" class="form-control" name=spid  >
+                    </div>
+                </div>	
+				
 				
                 <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Status</label>
-                    
+                    <label for="text1" class="control-label col-lg-4">Discount</label>
+
                     <div class="col-lg-4">
-						<select name="pstatus" data-placeholder="status" class="form-control chzn-select">
-						<option value="<?php echo $detailx[0]->sstatus; ?>"><?php echo $detailx[0]->sstatus; ?></option>
-						<option value=0>Pending</option>
-						<option value=1>Ok</option>
-						</select>
+                       	
+							<input type=text  id="theDisc" class="form-control" name=pdisc  >
                     </div>
-				</div>
+                </div>					
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">QTY</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text   class="form-control" name=sqty  >
+                    </div>
+                </div>	
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Harga</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text   name=price  class="form-control" >
+                    </div>
+                </div>					
+		
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-				<!--button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button-->
+				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
 				</div>
             </form>
@@ -178,7 +205,7 @@
 
 
 
- <form class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
+ <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
 
   <div class="panel-body">
                             <div class="table-responsive">
@@ -187,57 +214,54 @@
                                         <tr>
           
           <th>Kode Product</th>
-          <th>Currency</th>
+          
           <th>Qty</th>
           <th>Harga</th>
           <th>Discount </th>
-		  <th>Keterangan</th>
-          <th>Status</th>
-		  <th>Action</th>
+		  <th>Jumlah</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
-		  
-		
+		$totalqty=0;  
+		$total=0;
 		  foreach($detail as $k => $v) :	
+	//print_r($v);
+	$sqtyx=$v -> sqty;
+	$spricex=$v -> sprice;
+	$sdiscx=$v -> sdisc;
+	$qtyx=$v -> sqty;
+	$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
 	
 		  ?>
           <tr>
           
-          <td><?php echo $v -> pppid; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
-          <td><?php echo $v -> pcurrency; ?></td>
-          <td><?php echo $v -> pqty; ?></td>
-          <td><?php echo $v -> pharga; ?></td>
-          <td><?php echo $v -> pdisc; ?></td>
-		  <td><?php echo $v -> pketerangan; ?></td>
-          <td><?php echo $v -> pstatus; ?></td>
-		
-		
-		  <td>
-                        <input type="checkbox" name="spid[]" value="<?php echo $v -> pid; ?>" class="form-control" />
-          </td>		
-		
-		
-										</tr>
-        <?php endforeach; ?>
+          <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+          <td><?php echo $v -> sqty; ?></td>
+          <td><?php echo $v -> sprice; ?></td>
+          <td><?php echo $v -> sdisc; ?></td>
+		  <td> <?php echo $subtotal; ?> </td>		
+		  </tr>
+        <?php 
+		$total=$subtotal+$total;
+		$totalqty=$qtyx+$totalqty;
+		endforeach; ?>
 		
           <tr>
           
+          <td>TOTAL</td>
+          <td><?php echo $totalqty; ?></td>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-		  <td></td>
-          <td></td>		
-		  <td><input type=submit value=add></td>		
+          <td><?php echo $total; ?></td>
+		 
+		
 		
 		
 										</tr>		
                                     </tbody>
                                 </table>
-		</form>						
+		<form action="<?php echo site_url('sales_order/home'); ?>" ><input type=submit value=Complete></form>						
     <?php //echo $pages; ?>
                             </div>
                         </div>
