@@ -42,6 +42,13 @@
                         <input type="text" placeholder="Sparepart Name" name="name" class="form-control" value="<?php echo $detail[0] -> sname; ?>" />
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Group</label>
+
+                    <div class="col-lg-4">
+                                <?php echo __get_product_group($detail[0] -> sgroup,2); ?>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">No Component</label>

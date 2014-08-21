@@ -23,19 +23,19 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$branch = (int) $this -> input -> post('branch');
 			$category = (int) $this -> input -> post('category');
-			$scoma = (int) $this -> input -> post('scoma');
-			$scomb = (int) $this -> input -> post('scomb');
-			$scomc = (int) $this -> input -> post('scomc');
-			$scomd = (int) $this -> input -> post('scomd');
-			$scome = (int) $this -> input -> post('scome');
-			$scredita = (int) $this -> input -> post('scredita');
-			$screditb = (int) $this -> input -> post('screditb');
-			$screditc = (int) $this -> input -> post('screditc');
-			$screditd = (int) $this -> input -> post('screditd');
-			$scredite = (int) $this -> input -> post('scredite');
+			$scoma = $this -> input -> post('scoma');
+			$scomb = $this -> input -> post('scomb');
+			$scomc = $this -> input -> post('scomc');
+			$scomd = $this -> input -> post('scomd');
+			$scome = $this -> input -> post('scome');
+			$scredita = $this -> input -> post('scredita');
+			$screditb = $this -> input -> post('screditb');
+			$screditc = $this -> input -> post('screditc');
+			$screditd = $this -> input -> post('screditd');
+			$scredite = $this -> input -> post('scredite');
 			$status = (int) $this -> input -> post('status');
 			
-			if (!$branch || !$category || !$scoma || !$scomb || !$scomc || !$scomd || !$scome || !$scredita || !$screditb || !$screditc || !$screditd || !$scredite) {
+			if (!$branch || !$category || $scoma == '' || $scomb == '' || $scomc == '' || $scomd == '' || $scome == '' || $scredita == '' || $screditb == '' || $screditc == '' || $screditd == '' || $scredite == '') {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('sales_commision' . '/' . __FUNCTION__));
 			}
@@ -62,21 +62,21 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$branch = (int) $this -> input -> post('branch');
 			$category = (int) $this -> input -> post('category');
-			$scoma = (int) $this -> input -> post('scoma');
-			$scomb = (int) $this -> input -> post('scomb');
-			$scomc = (int) $this -> input -> post('scomc');
-			$scomd = (int) $this -> input -> post('scomd');
-			$scome = (int) $this -> input -> post('scome');
-			$scredita = (int) $this -> input -> post('scredita');
-			$screditb = (int) $this -> input -> post('screditb');
-			$screditc = (int) $this -> input -> post('screditc');
-			$screditd = (int) $this -> input -> post('screditd');
-			$scredite = (int) $this -> input -> post('scredite');
+			$scoma = $this -> input -> post('scoma');
+			$scomb = $this -> input -> post('scomb');
+			$scomc = $this -> input -> post('scomc');
+			$scomd = $this -> input -> post('scomd');
+			$scome = $this -> input -> post('scome');
+			$scredita = $this -> input -> post('scredita');
+			$screditb = $this -> input -> post('screditb');
+			$screditc = $this -> input -> post('screditc');
+			$screditd = $this -> input -> post('screditd');
+			$scredite = $this -> input -> post('scredite');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$branch || !$category || !$scoma || !$scomb || !$scomc || !$scomd || !$scome || !$scredita || !$screditb || !$screditc || !$screditd || !$scredite) {
+				if (!$branch || !$category || $scoma == '' || $scomb == '' || $scomc == '' || $scomd == '' || $scome == '' || $scredita == '' || $screditb == '' || $screditc == '' || $screditd == '' || $scredite == '') {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('sales_commision' . '/' . __FUNCTION__ . '/' . $id));
 				}

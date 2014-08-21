@@ -22,6 +22,8 @@ class Home extends MY_Controller {
 	function customers_add() {
 		if ($_POST) {
 			$name = $this -> input -> post('name', TRUE);
+			$contactname = $this -> input -> post('contactname', TRUE);
+			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$cash = $this -> input -> post('cash', TRUE);
@@ -30,22 +32,19 @@ class Home extends MY_Controller {
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
+			$fax = $this -> input -> post('fax', TRUE);
 			$branch = (int) $this -> input -> post('branch');
 			$city = (int) $this -> input -> post('city');
 			$prov = (int) $this -> input -> post('prov');
-			$pkp = (int) $this -> input -> post('pkp');
+			$pkp = $this -> input -> post('pkp');
 			$special = (int) $this -> input -> post('special');
 			$sales = (int) $this -> input -> post('sales');
-			$cond = (int) $this -> input -> post('cond');
 			$cat = (int) $this -> input -> post('cat');
+			$delivery = (int) $this -> input -> post('delivery');
 			$status = (int) $this -> input -> post('status');
 			
 			if (!$branch || !$name || !$sales) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
-				redirect(site_url('customers' . '/' . __FUNCTION__));
-			}
-			else if (!$npwp) {
-				__set_error_msg(array('error' => 'NPWP harus di isi !!!'));
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else if (!$phone1 || !$phone2) {
@@ -57,7 +56,7 @@ class Home extends MY_Controller {
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $cond, 'cphone' => $phone1 . '*' . $phone2, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'cstatus' => $status);
+				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'cstatus' => $status);
 				if ($this -> customers_model -> __insert_customers($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('customers'));
@@ -78,6 +77,8 @@ class Home extends MY_Controller {
 	function customers_update($id) {
 		if ($_POST) {
 			$name = $this -> input -> post('name', TRUE);
+			$contactname = $this -> input -> post('contactname', TRUE);
+			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$cash = $this -> input -> post('cash', TRUE);
@@ -86,24 +87,21 @@ class Home extends MY_Controller {
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
+			$fax = $this -> input -> post('fax', TRUE);
 			$branch = (int) $this -> input -> post('branch');
 			$city = (int) $this -> input -> post('city');
 			$prov = (int) $this -> input -> post('prov');
-			$pkp = (int) $this -> input -> post('pkp');
+			$pkp = $this -> input -> post('pkp');
 			$special = (int) $this -> input -> post('special');
 			$sales = (int) $this -> input -> post('sales');
-			$cond = (int) $this -> input -> post('cond');
 			$status = (int) $this -> input -> post('status');
 			$cat = (int) $this -> input -> post('cat');
+			$delivery = (int) $this -> input -> post('delivery');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
 				if (!$branch || !$name || !$sales) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
-					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
-				}
-				else if (!$npwp) {
-					__set_error_msg(array('error' => 'NPWP harus di isi !!!'));
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else if (!$phone1 || !$phone2) {
@@ -115,7 +113,7 @@ class Home extends MY_Controller {
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $cond, 'cphone' => $phone1 . '*' . $phone2, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'cstatus' => $status);
+					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'cstatus' => $status);
 					if ($this -> customers_model -> __update_customers($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));

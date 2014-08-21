@@ -45,4 +45,14 @@ class Products_model extends CI_Model {
 		$this -> db -> select('mbid,mqty FROM moq_tab WHERE mpid='.$id.' ORDER BY mbid ASC');
 		return $this -> db -> get() -> result();
 	}
+	
+	function __insert_moq($data) {
+        return $this -> db -> insert('moq_tab', $data);
+	}
+	
+	function __update_moq($pid, $bid, $data) {
+        $this -> db -> where('mbid', $bid);
+        $this -> db -> where('mpid', $pid);
+        return $this -> db -> update('moq_tab', $data);
+	}
 }

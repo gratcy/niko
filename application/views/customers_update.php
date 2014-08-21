@@ -100,6 +100,29 @@ $addr = explode('*', $detail[0] -> caddr);
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">FAX</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="FAX" name="fax" class="form-control" value="<?php echo $phone[2]; ?>" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Contact Name</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" value="<?php echo $detail[0] -> ccontactname; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Email</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Email" name="email" class="form-control" value="<?php echo $detail[0] -> cemail; ?>" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
@@ -143,9 +166,7 @@ $addr = explode('*', $detail[0] -> caddr);
                     <label for="text1" class="control-label col-lg-4">PKP</label>
 
                     <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                        <input type="text" name="pkp" class="form-control" value="<?php echo $detail[0] -> cpkp; ?>" />
-                            </div>
+                        <input type="text" placeholder="PKP" name="pkp" class="form-control" value="<?php echo $detail[0] -> cpkp; ?>" />
                     </div>
                 </div>
 
