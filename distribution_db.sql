@@ -101,7 +101,7 @@ CREATE TABLE `categories_tab` (
 
 LOCK TABLES `categories_tab` WRITE;
 /*!40000 ALTER TABLE `categories_tab` DISABLE KEYS */;
-INSERT INTO `categories_tab` VALUES (1,1,1,1,'wew','wew','90',1),(2,1,1,2,'qqww','qqww','',1),(3,1,1,3,'Pcs','Pcs','',1);
+INSERT INTO `categories_tab` VALUES (1,1,1,1,'wew','wew','0',1),(2,1,1,2,'qqww','qqww','',1),(3,1,1,3,'Pcs','Pcs','',1);
 /*!40000 ALTER TABLE `categories_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,6 +157,8 @@ CREATE TABLE `customers_tab` (
   `cprov` int(10) DEFAULT NULL,
   `cdeliver` tinyint(1) DEFAULT NULL,
   `cphone` varchar(50) DEFAULT NULL,
+  `cemail` varchar(50) DEFAULT NULL,
+  `ccontactname` varchar(150) DEFAULT NULL,
   `csid` int(10) DEFAULT NULL,
   `ccash` int(10) DEFAULT NULL,
   `ccredit` int(10) DEFAULT NULL,
@@ -175,7 +177,7 @@ CREATE TABLE `customers_tab` (
 
 LOCK TABLES `customers_tab` WRITE;
 /*!40000 ALTER TABLE `customers_tab` DISABLE KEYS */;
-INSERT INTO `customers_tab` VALUES (1,1,1,1,1,'palma','      jakarta*      semarang',1,1,1,'909090*232323',1,10000,10000,10000,'1212','1',1,1);
+INSERT INTO `customers_tab` VALUES (1,1,1,1,3,'palma','               jakarta*               semarang',1,1,0,'909090*232323*1212','gratcypalma@gmail.com','asasa',1,10000,10000,10000,'1212','1aa',1,1);
 /*!40000 ALTER TABLE `customers_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,7 +255,7 @@ CREATE TABLE `moq_tab` (
   `mpid` int(10) DEFAULT NULL,
   `mqty` int(10) DEFAULT NULL,
   PRIMARY KEY (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,7 +264,7 @@ CREATE TABLE `moq_tab` (
 
 LOCK TABLES `moq_tab` WRITE;
 /*!40000 ALTER TABLE `moq_tab` DISABLE KEYS */;
-INSERT INTO `moq_tab` VALUES (1,1,1,1,1,10),(2,1,1,2,1,20);
+INSERT INTO `moq_tab` VALUES (1,1,1,1,1,1144422),(2,1,1,2,1,11111),(3,NULL,NULL,1,2,1144422),(4,NULL,NULL,2,2,101);
 /*!40000 ALTER TABLE `moq_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,10 +364,12 @@ DROP TABLE IF EXISTS `products_tab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_tab` (
-  `pid` int(10) NOT NULL,
+  `pid` int(10) NOT NULL AUTO_INCREMENT,
   `puid` int(10) DEFAULT NULL,
   `pluid` int(10) DEFAULT NULL,
   `pcid` int(10) DEFAULT NULL,
+  `pgroup` tinyint(1) DEFAULT '0',
+  `ptype` tinyint(1) DEFAULT '0',
   `ppid` int(10) DEFAULT '1',
   `pcode` varchar(50) DEFAULT NULL,
   `pname` varchar(150) DEFAULT NULL,
@@ -380,7 +384,7 @@ CREATE TABLE `products_tab` (
   `pdisc` int(10) DEFAULT NULL,
   `pstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +393,7 @@ CREATE TABLE `products_tab` (
 
 LOCK TABLES `products_tab` WRITE;
 /*!40000 ALTER TABLE `products_tab` DISABLE KEYS */;
-INSERT INTO `products_tab` VALUES (1,1,1,1,3,'xwew','wewe','ere',10000,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1);
+INSERT INTO `products_tab` VALUES (1,1,1,1,2,2,3,'xwew','wewe','ere',10000,100000,0,0,0,0,0,0,1),(2,NULL,NULL,0,0,0,3,'xwew','wew','111',0,0,0,0,0,0,1,11,1);
 /*!40000 ALTER TABLE `products_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,7 +522,7 @@ CREATE TABLE `sales_commision_tab` (
 
 LOCK TABLES `sales_commision_tab` WRITE;
 /*!40000 ALTER TABLE `sales_commision_tab` DISABLE KEYS */;
-INSERT INTO `sales_commision_tab` VALUES (1,1,1,1,1,90.00,90.00,90.00,90.00,90.00,90.00,90.00,90.00,90.00,90.00,1);
+INSERT INTO `sales_commision_tab` VALUES (1,1,1,1,1,-90.00,90.00,90.00,0.00,90.00,90.00,90.00,90.00,90.00,90.00,1);
 /*!40000 ALTER TABLE `sales_commision_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -722,6 +726,7 @@ CREATE TABLE `sparepart_tab` (
   `scode` varchar(50) DEFAULT NULL,
   `sname` varchar(150) DEFAULT NULL,
   `snocomponent` varchar(10) DEFAULT NULL,
+  `sgroup` tinyint(1) DEFAULT '0',
   `spriceagent` int(10) DEFAULT NULL,
   `spriceretail` int(10) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
@@ -735,7 +740,7 @@ CREATE TABLE `sparepart_tab` (
 
 LOCK TABLES `sparepart_tab` WRITE;
 /*!40000 ALTER TABLE `sparepart_tab` DISABLE KEYS */;
-INSERT INTO `sparepart_tab` VALUES (1,1,1,1,'asasx','asas','1021902',10,10,1);
+INSERT INTO `sparepart_tab` VALUES (1,1,1,1,'asasx','asas','1021902',0,10,10,1);
 /*!40000 ALTER TABLE `sparepart_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -857,7 +862,7 @@ CREATE TABLE `users_tab` (
 
 LOCK TABLES `users_tab` WRITE;
 /*!40000 ALTER TABLE `users_tab` DISABLE KEYS */;
-INSERT INTO `users_tab` VALUES (1,1,1,'admin@admin.com','e89591ee9b8e7018511649a2146ae279','2130706433*1405221171',1),(2,1,1,'admin@dluxor.com','e89591ee9b8e7018511649a2146ae279',NULL,1),(3,1,1,'admin@dluxor.com','4f71fccac43c73545ddd9cd772f37598',NULL,1);
+INSERT INTO `users_tab` VALUES (1,1,1,'admin@admin.com','e89591ee9b8e7018511649a2146ae279','2130706433*1408593271',1),(2,1,1,'admin@dluxor.com','e89591ee9b8e7018511649a2146ae279',NULL,1),(3,1,1,'admin@dluxor.com','4f71fccac43c73545ddd9cd772f37598',NULL,1);
 /*!40000 ALTER TABLE `users_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -870,4 +875,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-13 11:25:03
+-- Dump completed on 2014-08-21 13:53:17
