@@ -41,9 +41,9 @@ function __get_delivery($id, $type) {
 		$res = '';
 		foreach($data as $k => $v)
 			if ($id == $k)
-				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'" checked></label> <br />';
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="delivery" value="'.$k.'" checked></label> <br />';
 			else
-				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'"></label> <br />';
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="delivery" value="'.$k.'"></label> <br />';
 		return $res;
 	}
 }
@@ -212,6 +212,38 @@ function __get_customer_category($cid, $type) {
 				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'" checked></label>';
 			else
 				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="cat" value="'.$k.'"></label>';
+		return $res;
+	}
+}
+
+function __get_product_group($cid,$type) {
+	$data = array('DVD', 'TV', 'AC');
+	if ($type == 1) {
+		return $data[$cid];
+	}
+	else {
+		$res = '';
+		foreach($data as $k => $v)
+			if ($cid == $k)
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="group" value="'.$k.'" checked></label>';
+			else
+				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="group" value="'.$k.'"></label>';
+		return $res;
+	}
+}
+
+function __get_product_type($cid,$type) {
+	$data = array('FINISH GOOD', 'RAW MATERIAL', 'PACKAGING');
+	if ($type == 1) {
+		return $data[$cid];
+	}
+	else {
+		$res = '';
+		foreach($data as $k => $v)
+			if ($cid == $k)
+				$res .= '<label><input class="uniform" type="radio" name="type" value="'.$k.'" checked> '.$v.'</label><br>';
+			else
+				$res .= '<label> <input class="uniform" type="radio" name="type" value="'.$k.'"> '.$v.'</label><br>';
 		return $res;
 	}
 }

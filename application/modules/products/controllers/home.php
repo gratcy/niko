@@ -27,24 +27,32 @@ class Home extends MY_Controller {
 			$packaging = (int) $this -> input -> post('packaging');
 			$category = (int) $this -> input -> post('category');
 			$point = $this -> input -> post('point', TRUE);
-			$consume = $this -> input -> post('consume', TRUE);
-			$store = $this -> input -> post('store', TRUE);
-			$key = $this -> input -> post('key', TRUE);
-			$semi = $this -> input -> post('semi', TRUE);
-			$dist = $this -> input -> post('dist', TRUE);
-			$basic = $this -> input -> post('basic', TRUE);
+			$type = (int) $this -> input -> post('type');
+			$group = (int) $this -> input -> post('group');
+			$consume = str_replace(',','',$this -> input -> post('consume', TRUE));
+			$store = str_replace(',','',$this -> input -> post('store', TRUE));
+			$key = str_replace(',','',$this -> input -> post('key', TRUE));
+			$semi = str_replace(',','',$this -> input -> post('semi', TRUE));
+			$dist = str_replace(',','',$this -> input -> post('dist', TRUE));
+			$basic = str_replace(',','',$this -> input -> post('basic', TRUE));
 			$name = $this -> input -> post('name', TRUE);
 			$code = $this -> input -> post('code', TRUE);
+			$moq = $this -> input -> post('moq', TRUE);
 			$disc = (int) $this -> input -> post('disc');
 			$status = (int) $this -> input -> post('status');
-			
-			if (!$name || !$desc || !$consume || !$store || !$key || !$semi || !$dist || !$code) {
+
+			if (!$name || !$desc || $consume == '' || $store == '' || $key == '' || $semi == '' || $dist == '' || !$code) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('products' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('pcid' => $category, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
+				$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
 				if ($this -> products_model -> __insert_products($arr)) {
+					$pid = $this -> db-> insert_id();
+					
+					foreach($moq as $k => $v)
+						$this -> products_model -> __insert_moq(array('mbid' => $k, 'mpid' => $pid, 'mqty' => str_replace(',','',$v)));
+
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('products'));
 				}
@@ -66,12 +74,12 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$desc = $this -> input -> post('desc', TRUE);
 			$point = $this -> input -> post('point', TRUE);
-			$consume = $this -> input -> post('consume', TRUE);
-			$store = $this -> input -> post('store', TRUE);
-			$key = $this -> input -> post('key', TRUE);
-			$semi = $this -> input -> post('semi', TRUE);
-			$dist = $this -> input -> post('dist', TRUE);
-			$basic = $this -> input -> post('basic', TRUE);
+			$consume = str_replace(',','',$this -> input -> post('consume', TRUE));
+			$store = str_replace(',','',$this -> input -> post('store', TRUE));
+			$key = str_replace(',','',$this -> input -> post('key', TRUE));
+			$semi = str_replace(',','',$this -> input -> post('semi', TRUE));
+			$dist = str_replace(',','',$this -> input -> post('dist', TRUE));
+			$basic = str_replace(',','',$this -> input -> post('basic', TRUE));
 			$name = $this -> input -> post('name', TRUE);
 			$code = $this -> input -> post('code', TRUE);
 			$packaging = (int) $this -> input -> post('packaging');
@@ -79,15 +87,21 @@ class Home extends MY_Controller {
 			$status = (int) $this -> input -> post('status');
 			$disc = (int) $this -> input -> post('disc');
 			$id = (int) $this -> input -> post('id');
+			$group = (int) $this -> input -> post('group');
+			$type = (int) $this -> input -> post('type');
+			$moq = $this -> input -> post('moq', TRUE);
 			
 			if ($id) {
-				if (!$name || !$desc || !$consume || !$store || !$key || !$semi || !$dist || !$code) {
+				if (!$name || !$desc || $consume == '' || $store == '' || $key == '' || $semi == '' || $dist == '' || !$code) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('products' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('pcid' => $category, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
-					if ($this -> products_model -> __update_products($id, $arr)) {	
+					$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
+					if ($this -> products_model -> __update_products($id, $arr)) {
+						foreach($moq as $k => $v)
+							$this -> products_model -> __update_moq($id,$k, array('mqty' => str_replace(',','',$v)));
+						
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('products'));
 					}
@@ -108,6 +122,7 @@ class Home extends MY_Controller {
 			$view['category'] = $this -> categories_lib -> __get_categories($view['detail'][0] -> pcid);
 			$view['packaging'] = $this -> packaging_lib -> __get_packaging($view['detail'][0] -> ppid);
 			$view['moq'] = $this -> products_model -> __get_moq($id);
+
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

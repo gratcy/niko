@@ -24,12 +24,12 @@ class Branch_lib {
 		$branch = $this -> _ci -> branch_model -> __get_branch_select();
 		$res = '';
 		foreach($branch as $k => $v)
-			$res .= $v -> bname.' <input type="text" name="moq['.$v -> bid.']" class="form-control" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="'.($arr == array() ? '0' : self::__check_moq($arr, 1)).'" />';
+			$res .= $v -> bname.' <input type="text" name="moq['.$v -> bid.']" class="form-control" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="'.($arr == array() ? '0' : self::__check_moq($arr, $v -> bid)).'" />';
 		return $res;
 	}
 	
 	function __check_moq($arr, $bid) {
 		foreach($arr as $k => $v)
-			if ($v -> mbid == $bid) return $v -> mqty;
+			if ($v -> mbid == $bid) return __get_rupiah($v -> mqty,2);
 	}
 }

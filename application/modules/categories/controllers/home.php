@@ -24,12 +24,12 @@ class Home extends MY_Controller {
 			$disc = (int) $this -> input -> post('disc');
 			$status = (int) $this -> input -> post('status');
 			
-			if (!$name || !$desc || !$disc) {
+			if (!$name || !$desc) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('categories' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cname' => $name, 'cdesc' => $desc, 'cstatus' => $status);
+				$arr = array('cname' => $name, 'cdesc' => $desc, 'cdiscount' => $disc, 'cstatus' => $status);
 				if ($this -> categories_model -> __insert_categories($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('categories'));
@@ -54,12 +54,12 @@ class Home extends MY_Controller {
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$name || !$desc || !$disc) {
+				if (!$name || !$desc) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('categories' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cname' => $name, 'cdesc' => $desc, 'ctype' => 1, 'cstatus' => $status);
+					$arr = array('cname' => $name, 'cdesc' => $desc, 'cdiscount' => $disc, 'ctype' => 1, 'cstatus' => $status);
 					if ($this -> categories_model -> __update_categories($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('categories'));
