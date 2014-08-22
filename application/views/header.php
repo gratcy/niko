@@ -15,6 +15,8 @@
         <![endif]-->
     <!-- GLOBAL STYLES -->
     <!-- GLOBAL STYLES -->
+	<link rel="shortcut icon" href="<?php echo site_url('application/views/assets/img/favicon.ico');?>" />
+
     <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/bootstrap/css/bootstrap.css');?>" />
     <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/main.css');?>" />
     <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/theme.css');?>" />
