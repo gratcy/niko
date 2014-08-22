@@ -42,7 +42,7 @@ class Home extends MY_Controller {
 					redirect(site_url('users/users_add'));
 				}
 				else {
-					if ($this -> users_model -> __insert_users($uemail, $confpass, $group, $branch, $status)) {
+					if ($this -> users_model -> __insert_users($uemail, md5(sha1($confpass, true)), $group, $branch, $status)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 						redirect(site_url('users'));
 					}
