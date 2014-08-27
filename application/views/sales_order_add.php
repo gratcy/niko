@@ -62,8 +62,8 @@ minLength: 1,
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">sales Order Add</h1>
-					<?php echo site_url('application/views/assets/source.php'); ?>
+                    <h1 class="page-header">Sales Order Add</h1>
+					<?php //echo site_url('application/views/assets/source.php'); ?>
                 </div>
             </div>
 <div class="row">
@@ -77,7 +77,7 @@ minLength: 1,
 	<?php echo __get_error_msg(); ?>
             <form id="form1" class="form-horizontal" action="<?php echo site_url('sales_order/home/sales_order_add'); ?>" method="post">
 
-
+<table width=80% border=0><tr><td width=40% >
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
@@ -106,17 +106,7 @@ minLength: 1,
 					</div>
        		</div>
    
-	            <!--div class="form-group">
-						<label for="status" class="control-label col-lg-4">Type SO</label>
-                    
-                    <div class="col-lg-4">
-						<select name="stype" data-placeholder="gudang" class="form-control chzn-select">
-						<option value="penjualan">Penjualan</option>
-						<option value="retur">Retur</option>
-						<option value="adj">Adj</option>
-						</select>
-                    </div>
-				</div-->			
+	
 
 
             <div class="form-group">
@@ -167,7 +157,7 @@ minLength: 1,
                     </div>
                 </div>		
 				
-
+		</td><td width=40% >
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
@@ -229,11 +219,12 @@ minLength: 1,
 				</div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
-                    <div class="col-lg-4">
+                 
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-					</div>
-				</div>
+					
+				</div>				
+				</td></tr></table>
             </form>
         </div>
     </div>

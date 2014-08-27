@@ -54,21 +54,19 @@ minLength: 1,
         <div id="content">
                 <div class="inner">
                     <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">sales Order Add</h1>
-                </div>
+               
             </div>
 <div class="row">
 <div class="col-lg-12">
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>sales Order Add <?php echo "$id $scid";?></h5>
+            <h5>sales Order Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
             <!--form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
-<?php echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
+<?php //echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
 <?php  
 //print_r($detailx);
 //print_r($detail);die;
@@ -76,12 +74,12 @@ minLength: 1,
 
 
  <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
-
+<table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
                     <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->sbid; ?>" class="form-control" disabled>
+					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
                     </div>
                 </div>
 
@@ -101,7 +99,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Customer</label>
 
                     <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->scid; ?>" class="form-control" disabled>
+                       	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
                     </div>
                 </div>
 				
@@ -110,7 +108,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->ssid; ?>" class="form-control" disabled>
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
                     </div>
                 </div>				
 				
@@ -120,10 +118,25 @@ minLength: 1,
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
-                    </div>   				
-					
-					
+                    </div>   							
                 </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">FREE PPN</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php 
+						if($detailx[0]->sfreeppn=='1'){
+						echo "YES";
+						}else{
+						echo "NO";
+						}						
+						//echo $detailx[0]->sfreeppn; 
+						?>" class="form-control" disabled>
+							<input type=hidden value="<?php echo $detailx[0]->sfreeppn; ?>" class="form-control" >
+                    </div>
+                </div>
+
 
 				
                 <div class="form-group">
@@ -134,7 +147,7 @@ minLength: 1,
                     </div>
                 </div>				
 		
-
+</td><td width=40%>
 
                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Product</label>
@@ -191,11 +204,12 @@ minLength: 1,
 		
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
-                    <div class="col-lg-4">
+                    
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-					</div>
+					
 				</div>
+				</td></tr></table>
             </form>
         </div>
     </div>
@@ -209,6 +223,10 @@ minLength: 1,
 
   <div class="panel-body">
                             <div class="table-responsive">
+							<?php 
+							$freeppn=$detailx[0]->sfreeppn;
+							//echo $freeppn; 
+							?>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -222,18 +240,21 @@ minLength: 1,
                                         </tr>
                                     </thead>
                                     <tbody>
-		  <?php
+    <?php
 		$totalqty=0;  
 		$total=0;
-		  foreach($detail as $k => $v) :	
-	//print_r($v);
-	$sqtyx=$v -> sqty;
-	$spricex=$v -> sprice;
-	$sdiscx=$v -> sdisc;
-	$qtyx=$v -> sqty;
-	$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+		$totalppn=0;
+		$totalall=0;
+		
+		foreach($detail as $k => $v) :	
+			//print_r($v);
+			$sqtyx=$v -> sqty;
+			$spricex=$v -> sprice;
+			$sdiscx=$v -> sdisc;
+			$qtyx=$v -> sqty;
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
 	
-		  ?>
+    ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
@@ -245,20 +266,35 @@ minLength: 1,
         <?php 
 		$total=$subtotal+$total;
 		$totalqty=$qtyx+$totalqty;
+		$totalppn=$total * 10/100;
+		if($freeppn==1){
+		$totalall= $total;
+		}else{
+		$totalall= $total + $totalppn;
+		}
 		endforeach; ?>
 		
-          <tr>
-          
-          <td>TOTAL</td>
+         <tr>          
+          <td>SUB TOTAL</td>
           <td><?php echo $totalqty; ?></td>
           <td></td>
           <td></td>
           <td><?php echo $total; ?></td>
-		 
-		
-		
-		
-										</tr>		
+		 </tr>		
+         <tr>          
+          <td>PPN</td>
+          <td>10%</td>
+          <td></td>
+          <td></td>
+          <td><?php echo $totalppn; ?></td>
+		 </tr>			
+         <tr>          
+          <td>TOTAL</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><?php echo $totalall; ?></td>
+		 </tr>		 
                                     </tbody>
                                 </table>
 		<form action="<?php echo site_url('sales_order/home'); ?>" ><input type=submit value=Complete></form>						

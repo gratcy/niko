@@ -36,7 +36,10 @@ class sales_order_detail_model extends CI_Model {
         $this -> db -> where('sid', $id);
         return $this -> db -> update('sales_order_detail_tab', $data);
 	}
-	
+	function __update_delivery_order($id, $data) {
+        $this -> db -> where('sid', $id);
+        return $this -> db -> update('sales_order_tab', $data);
+	}	
 	function __insert_sales_order_detail($data,$pid) {
 	
 	$this -> db -> query('update purchase_order_detail_tab set pstatus=1 WHERE pid='.$pid.'');
