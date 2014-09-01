@@ -21,7 +21,7 @@ $addr = explode('*', $detail[0] -> caddr);
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('customers/customers_update'); ?>" method="post">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
-                <div class="form-group">
+                <div class="form-group" id="pbranch">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
@@ -205,3 +205,10 @@ $addr = explode('*', $detail[0] -> caddr);
         </div>
         </div>
         <!-- END PAGE CONTENT -->
+
+<?php if (__get_roles('ExecuteAllBranchCustomers') <> 1) : ?>
+<script type="text/javascript">
+$('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
+$('#pbranch').css('display','none');
+</script>
+<?php endif; ?>

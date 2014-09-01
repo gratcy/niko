@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+				<?php if (__get_roles('SparepartAdd')) : ?>
                 <a href="<?php echo site_url('sparepart/sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sparepart</a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -46,8 +48,12 @@
           <td style="text-align:right;"><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
+				<?php if (__get_roles('SparepartUpdate')) : ?>
               <a href="<?php echo site_url('sparepart/sparepart_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
+				<?php if (__get_roles('SparepartDelete')) : ?>
               <a href="<?php echo site_url('sparepart/sparepart_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
           </td>
 										</tr>
         <?php endforeach; ?>

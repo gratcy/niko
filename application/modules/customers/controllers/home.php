@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> customers_model -> __get_customers(),3,10,site_url('customers'));
+		$pager = $this -> pagination_lib -> pagination($this -> customers_model -> __get_customers((__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('customers'));
 		$view['customers'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('customers', $view);
@@ -131,7 +131,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['id'] = $id;
-			$view['detail'] = $this -> customers_model -> __get_customers_detail($id);
+			$view['detail'] = $this -> customers_model -> __get_customers_detail($id, (__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> cbid);
 			$view['sales'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> csid);
 			$this->load->view(__FUNCTION__, $view);
@@ -139,7 +139,7 @@ class Home extends MY_Controller {
 	}
 	
 	function customers_delete($id) {
-		if ($this -> customers_model -> __delete_customers($id)) {
+		if ($this -> customers_model -> __delete_customers($id, (__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('customers'));
 		}

@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+				<?php if (__get_roles('InventoryAdd')) : ?>
                 <a href="<?php echo site_url('inventory/inventory_add/' . $type); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Stock <?php echo __get_inventory_type($type); ?></a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -48,8 +50,12 @@
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
           <td><?php echo __get_status($v -> istatus,1); ?></td>
 		  <td>
+				<?php if (__get_roles('InventoryUpdate')) : ?>
               <a href="<?php echo site_url('inventory/inventory_update/' . $type.'/' . $v -> iid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
+				<?php if (__get_roles('InventoryDelete')) : ?>
               <a href="<?php echo site_url('inventory/inventory_delete/' . $type.'/' . $v -> iid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
           </td>
 										</tr>
         <?php endforeach; ?>

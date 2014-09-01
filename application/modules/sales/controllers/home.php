@@ -12,7 +12,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> sales_model -> __get_sales(),3,10,site_url('sales'));
+		$pager = $this -> pagination_lib -> pagination($this -> sales_model -> __get_sales((__get_roles('ExecuteAllBranchSales') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('sales'));
 		$view['sales'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('sales', $view);
@@ -85,14 +85,14 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['id'] = $id;
-			$view['detail'] = $this -> sales_model -> __get_sales_detail($id);
+			$view['detail'] = $this -> sales_model -> __get_sales_detail($id,(__get_roles('ExecuteAllBranchSales') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> sbid);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
 	
 	function sales_delete($id) {
-		if ($this -> sales_model -> __delete_sales($id)) {
+		if ($this -> sales_model -> __delete_sales($id,(__get_roles('ExecuteAllBranchSales') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('sales'));
 		}

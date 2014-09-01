@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+				<?php if (__get_roles('COAAdd')) : ?>
                 <a href="<?php echo site_url('coa/coa_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Chart of Account</a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

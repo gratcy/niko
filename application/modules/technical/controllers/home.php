@@ -12,7 +12,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> technical_model -> __get_technical(),3,10,site_url('technical'));
+		$pager = $this -> pagination_lib -> pagination($this -> technical_model -> __get_technical((__get_roles('ExecuteAllBranchTechnical') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('technical'));
 		$view['technical'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('technical', $view);
@@ -85,14 +85,14 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['id'] = $id;
-			$view['detail'] = $this -> technical_model -> __get_technical_detail($id);
+			$view['detail'] = $this -> technical_model -> __get_technical_detail($id,(__get_roles('ExecuteAllBranchTechnical') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> tbid);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
 	
 	function technical_delete($id) {
-		if ($this -> technical_model -> __delete_technical($id)) {
+		if ($this -> technical_model -> __delete_technical($id,(__get_roles('ExecuteAllBranchTechnical') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('technical'));
 		}

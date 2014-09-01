@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+				<?php if (__get_roles('BranchAdd')) : ?>
                 <a href="<?php echo site_url('branch/branch_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Branch</a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -50,8 +52,12 @@
           <td><?php echo __get_status($v -> bstatus,1); ?></td>
 		  <td>
 	<?php if ($v -> bid <> 1) : ?>
+				<?php if (__get_roles('BranchUpdate')) : ?>
               <a href="<?php echo site_url('branch/branch_update/' . $v -> bid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
+				<?php if (__get_roles('BranchDelete')) : ?>
               <a href="<?php echo site_url('branch/branch_delete/' . $v -> bid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
 		<?php endif; ?>
 		</td>
 										</tr>

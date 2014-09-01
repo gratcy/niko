@@ -43,7 +43,9 @@
           <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
 		  <td>
+				<?php if (__get_roles('OpnameUpdate')) : ?>
               <a href="<?php echo site_url('opname/opname_update/' . $type.'/' . $v -> iid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
           </td>
 										</tr>
         <?php endforeach; ?>

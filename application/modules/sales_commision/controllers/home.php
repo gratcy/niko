@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> sales_commision_model -> __get_sales_commision(),3,10,site_url('sales_commision'));
+		$pager = $this -> pagination_lib -> pagination($this -> sales_commision_model -> __get_sales_commision((__get_roles('ExecuteAllBranchSalesCommision') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('sales_commision'));
 		$view['sales_commision'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('sales_commision', $view);
@@ -99,7 +99,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['id'] = $id;
-			$view['detail'] = $this -> sales_commision_model -> __get_sales_commision_detail($id);
+			$view['detail'] = $this -> sales_commision_model -> __get_sales_commision_detail($id,(__get_roles('ExecuteAllBranchSalesCommision') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> sbid);
 			$view['category'] = $this -> categories_lib -> __get_categories($view['detail'][0] -> scid);
 			$this->load->view(__FUNCTION__, $view);
@@ -107,7 +107,7 @@ class Home extends MY_Controller {
 	}
 	
 	function sales_commision_delete($id) {
-		if ($this -> sales_commision_model -> __delete_sales($id)) {
+		if ($this -> sales_commision_model -> __delete_sales($id,(__get_roles('ExecuteAllBranchSalesCommision') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('sales_commision'));
 		}

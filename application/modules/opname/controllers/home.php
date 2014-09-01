@@ -16,7 +16,18 @@ class Home extends MY_Controller {
 
 	function index($type=1) {
 		if (!$type) $type = 1;
-		$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type),3,10,site_url('opname/' . $type));
+		
+		if ($type == 1)
+			$perm = (__get_roles('ExecuteAllBranchOpnameProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 2)
+			$perm = (__get_roles('ExecuteAllBranchOpnameSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 3)
+			$perm = (__get_roles('ExecuteAllBranchOpnameServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		else
+			$perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		
+		
+		$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type,$perm),3,10,site_url('opname/' . $type));
 		$view['opname'] = $this -> pagination_lib -> paginate();
 		$view['type'] = $type;
 		$view['pages'] = $this -> pagination_lib -> pages();

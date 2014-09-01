@@ -15,7 +15,17 @@ class Home extends MY_Controller {
 
 	function index($type) {
 		if (!$type) $type = 1;
-		$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory($type),3,10,site_url('inventory/' . $type));
+		
+		if ($type == 1)
+			$perm = (__get_roles('ExecuteAllBranchInventoryProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 2)
+			$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 3)
+			$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		else
+			$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		
+		$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory($type,$perm),3,10,site_url('inventory/' . $type));
 		$view['inventory'] = $this -> pagination_lib -> paginate();
 		$view['type'] = $type;
 		$view['pages'] = $this -> pagination_lib -> pages();
@@ -97,7 +107,7 @@ class Home extends MY_Controller {
 		else {
 			$view['id'] = $id;
 			$view['type'] = $type;
-			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type,$id);
+			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type,$id,$this -> memcachedlib -> sesresult['ubid']);
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> ibid);
 			if ($type == 1 || $type == 2 || $type == 3)
 				$view['items'] = $this -> products_lib -> __get_products($view['detail'][0] -> iiid);
@@ -108,7 +118,7 @@ class Home extends MY_Controller {
 	}
 
 	function inventory_delete($type,$id) {
-		if ($this -> inventory_model -> __delete_inventory($id)) {
+		if ($this -> inventory_model -> __delete_inventory($id,$this -> memcachedlib -> sesresult['ubid'])) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('inventory'));
 		}

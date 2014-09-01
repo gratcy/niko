@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+				<?php if (__get_roles('ServicesAdd')) : ?>
                 <a href="<?php echo site_url('services/services_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Service</a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -48,8 +50,12 @@
           <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
+				<?php if (__get_roles('ServicesUpdate')) : ?>
               <a href="<?php echo site_url('services/services_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
+				<?php if (__get_roles('ServicesDelete')) : ?>
               <a href="<?php echo site_url('services/services_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
           </td>
 										</tr>
         <?php endforeach; ?>

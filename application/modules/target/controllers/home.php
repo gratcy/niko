@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> target_model -> __get_target(),3,10,site_url('target'));
+		$pager = $this -> pagination_lib -> pagination($this -> target_model -> __get_target((__get_roles('ExecuteAllBranchTargetOmset') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('target'));
 		$view['target'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('target', $view);
@@ -83,7 +83,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['id'] = $id;
-			$view['detail'] = $this -> target_model -> __get_target_detail($id);
+			$view['detail'] = $this -> target_model -> __get_target_detail($id,(__get_roles('ExecuteAllBranchTargetOmset') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> tbid);
 			$view['sales'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> tsid);
 			$this->load->view(__FUNCTION__, $view);
@@ -91,7 +91,7 @@ class Home extends MY_Controller {
 	}
 	
 	function target_delete($id) {
-		if ($this -> target_model -> __delete_target($id)) {
+		if ($this -> target_model -> __delete_target($id,(__get_roles('ExecuteAllBranchTargetOmset') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('target'));
 		}

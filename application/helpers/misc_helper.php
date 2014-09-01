@@ -5,6 +5,15 @@ function __set_error_msg($arr) {
 	return $CI -> memcachedlib -> set('__msg', $arr, '60');
 }
 
+function __get_roles($key) {
+    $arr = array();
+    $CI =& get_instance();
+    $permission = $CI -> memcachedlib -> sesresult['permission'];
+    foreach($permission as $k => $v)
+        $arr[$v['pname']] = $v['aaccess'];
+    return (isset($arr[$key]) ? $arr[$key] : '');
+}
+
 function __get_error_msg() {
 	$CI =& get_instance();
 	$css = (isset($CI -> memcachedlib -> get('__msg')['error']) == '' ? 'success' : 'danger');
@@ -53,15 +62,6 @@ function __get_rupiah($num,$type=1) {
 	elseif ($type == 2) return number_format($num,0,',',',');
 	elseif ($type == 3) return number_format($num,2,',','.');
 	else return "Rp. " . number_format($num,2,',','.');
-}
-
-function __get_roles($key) {
-    $arr = array();
-    $CI =& get_instance();
-    $roles = $CI -> memcachedlib -> sesresult['permission'];
-    foreach($roles as $k => $v)
-        $arr[$v['pname']] = $v['aaccess'];
-    return (isset($arr[$key]) ? $arr[$key] : '');
 }
 
 function __get_roles_by_id($key) {

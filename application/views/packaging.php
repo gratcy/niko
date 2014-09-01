@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+				<?php if (__get_roles('PackagingAdd')) : ?>
                 <a href="<?php echo site_url('packaging/packaging_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Packaging</a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -38,8 +40,12 @@
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
+				<?php if (__get_roles('PackagingUpdate')) : ?>
               <a href="<?php echo site_url('packaging/packaging_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
+				<?php if (__get_roles('PackagingDelete')) : ?>
               <a href="<?php echo site_url('packaging/packaging_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
           </td>
 										</tr>
         <?php endforeach; ?>

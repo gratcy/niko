@@ -13,9 +13,9 @@ class Home extends MY_Controller {
 
 	function index() {
 		$view['products'] = $this -> products_model -> __get_recent_products();
-		$view['customers'] = $this -> customers_model -> __get_recent_customers();
+		$view['customers'] = $this -> customers_model -> __get_recent_customers($this -> memcachedlib -> sesresult['ubid']);
 		$view['sparepart'] = $this -> sparepart_model -> __get_recent_sparepart();
-		$view['services'] = $this -> services_model -> __get_recent_services();
+		$view['services'] = $this -> services_model -> __get_recent_services($this -> memcachedlib -> sesresult['ubid']);
 		$view['total_product'] = $this -> products_model -> __get_total_product();
 		$view['total_branch'] = $this -> branch_model -> __get_total_branch();
 		$this->load->view('index', $view);

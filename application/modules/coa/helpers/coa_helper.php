@@ -5,12 +5,12 @@ function __get_account_type($id, $type) {
 	$res = '';
 	$arr = array('Cash', 'Bank', 'Other Current Asset', 'Inventory Asset', 'Other Asset', 'Fixed Asset', 'Credit Card', 'Payroll Liability', 'Current Liability', 'Long-term Liability', 'Equity', 'Income', 'Expense', 'Other Income', 'Other Expense', 'Cost Of Goods Sold');
 	if ($type == 1) {
-		$res = $arr[($id + 1)];
+		$res = $arr[($id - 1)];
 	}
 	else {
 		foreach($arr as $k => $v)
-			if (($k+1) == $id) $res .= '<option value="'.($k+1).'">'.$v.'</option>';
-			else $res .= '<option value="'.($k+1).'">'.$v.'</option>';
+			if (($k+1) == $id) $res .= '<option value="'.($k-1).'" selected>'.$v.'</option>';
+			else $res .= '<option value="'.($k-1).'">'.$v.'</option>';
 	}
 	return $res;
 }

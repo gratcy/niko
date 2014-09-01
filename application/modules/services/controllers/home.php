@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> services_model -> __get_services(),3,10,site_url('services'));
+		$pager = $this -> pagination_lib -> pagination($this -> services_model -> __get_services((__get_roles('ExecuteAllBranchServices') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('services'));
 		$view['services'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('services', $view);
@@ -89,7 +89,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['id'] = $id;
-			$view['detail'] = $this -> services_model -> __get_services_detail($id);
+			$view['detail'] = $this -> services_model -> __get_services_detail($id, (__get_roles('ExecuteAllBranchServices') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> sbid);
 			$view['products'] = $this -> products_lib -> __get_products($view['detail'][0] -> spid);
 			$this->load->view(__FUNCTION__, $view);
@@ -97,7 +97,7 @@ class Home extends MY_Controller {
 	}
 	
 	function services_delete($id) {
-		if ($this -> services_model -> __delete_services($id)) {
+		if ($this -> services_model -> __delete_services($id, (__get_roles('ExecuteAllBranchServices') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('services'));
 		}

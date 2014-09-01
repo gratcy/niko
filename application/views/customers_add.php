@@ -18,7 +18,7 @@
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('customers/customers_add'); ?>" method="post">
 
-                <div class="form-group">
+                <div class="form-group" id="pbranch">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
@@ -202,3 +202,9 @@
         </div>
         </div>
         <!-- END PAGE CONTENT -->
+<?php if (__get_roles('ExecuteAllBranchCustomers') <> 1) : ?>
+<script type="text/javascript">
+$('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
+$('#pbranch').css('display','none');
+</script>
+<?php endif; ?>

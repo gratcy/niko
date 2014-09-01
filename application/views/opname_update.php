@@ -22,7 +22,7 @@
 <input type="hidden" name="stock2" value="<?php echo $detail[0] -> istock; ?>">
 <input type="hidden" name="stockout2" value="<?php echo $detail[0] -> istockout; ?>">
 <input type="hidden" name="stockbegining2" value="<?php echo $detail[0] -> istockbegining; ?>">
-                <div class="form-group">
+                <div class="form-group" id="pbranch">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
@@ -95,3 +95,9 @@
         </div>
         </div>
         <!-- END PAGE CONTENT -->
+<?php if (__get_roles('ExecuteAllBranchOpname') <> 1) : ?>
+<script type="text/javascript">
+$('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
+$('#pbranch').css('display','none');
+</script>
+<?php endif; ?>
