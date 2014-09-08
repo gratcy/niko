@@ -9,12 +9,13 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('branch/branch_lib');
 		$this -> load -> library('sales/sales_lib');
+		$this -> load -> library('delivery_order/delivery_order_lib');
 		$this -> load -> model('sales_order_model');
 		$this -> load -> library('customers/customers_lib');
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order'));
+		$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_sales_order(),3,10,site_url('sales_order'));
 		$view['sales_order'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('delivery_orders', $view);

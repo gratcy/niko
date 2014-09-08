@@ -16,7 +16,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            sales Order
+                            Sales Order
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -36,20 +36,22 @@
                                     <tbody>
 		  <?php
 		  foreach($sales_order as $k => $v) :
-	
+			  // echo "<pre>";
+	// print_r($sales_order);
+	 // echo "</pre>";
 		  ?>
                                         <tr>
-          <td><?php echo $v -> sbid; ?></td>
+          <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> snoso; ?></td>
           <td><?php echo $v -> stype; ?></td>
           <td><?php echo $v -> stgl; ?></td>
-          <td><?php echo $v -> ssid; ?></td>
-          <td><?php echo $v -> scid; ?></td>
+          <td><?php echo $v -> sname; ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sketerangan; ?></td>
 		
 		
 		  <td>
-              <a href="<?php echo site_url('sales_order/home/sales_order_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
+              <a href="<?php //echo site_url('sales_order/home/sales_order_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
 			  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
               <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
           </td>		

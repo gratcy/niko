@@ -10,7 +10,10 @@ class Purchase_order_model extends CI_Model {
 	}
 	
 	function __get_purchase_order() {
-		return 'SELECT * FROM purchase_order_tab WHERE (pstatus=0 OR pstatus=1 OR pstatus=2) ORDER BY pid DESC';
+		return 'SELECT *,
+        (select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid) as bname,
+		(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid) as sname
+		FROM purchase_order_tab WHERE (pstatus=0 OR pstatus=1 OR pstatus=2) ORDER BY pid DESC';
 	}
 	
 	function __get_total_purchase_order() {

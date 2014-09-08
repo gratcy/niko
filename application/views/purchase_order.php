@@ -27,9 +27,9 @@
           <th>No Bukti</th>
           <th>Reff</th>
           <th>Tanggal</th>
-          <th>Psid</th>
+          <th>Sales</th>
           <th>Gudang </th>
-          <th>Status</th>
+         
 		  <th></th>
                                         </tr>
                                     </thead>
@@ -39,13 +39,13 @@
 	
 		  ?>
                                         <tr>
-          <td><?php echo $v -> pbid; ?></td>
+          <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> pnobukti; ?></td>
           <td><?php echo $v -> pref; ?></td>
           <td><?php echo $v -> ptgl; ?></td>
-          <td><?php echo $v -> psid; ?></td>
+          <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> pgudang; ?></td>
-          <td><?php echo $v -> pstatus; ?></td>
+         
 		
 		
 		  <td>
