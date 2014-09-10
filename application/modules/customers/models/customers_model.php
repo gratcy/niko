@@ -43,4 +43,30 @@ class Customers_model extends CI_Model {
 		else $bid = "";
 		return $this -> db -> query('update customers_tab set cstatus=2 where '.$bid.'cid=' . $id);
 	}
+	
+	function __get_suggestion() {
+		$data = array();
+		$d = array();
+		$this -> db -> select('cname as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
+		$name = $this -> db -> get() -> result();
+		$this -> db -> select('caddr as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
+		$addr = $this -> db -> get() -> result();
+		$this -> db -> select('ccontactname as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
+		$cp = $this -> db -> get() -> result();
+		
+		foreach($addr as $k => $v) :
+			$d = explode('*',$v -> name);
+			$data[] = (object) array('name' => $d[0]);
+			$data[] = (object) array('name' => $d[1]);
+		endforeach;
+		
+		return array_merge($name, $data, $cp);
+	}
+	
+	function __get_search($keyword, $bid="") {
+		if ($bid != "") $bid = " AND a.cbid=" . $bid;
+		else $bid = "";
+		$this -> db -> select("a.*,b.bname FROM customers_tab a left join branch_tab b ON a.cbid=b.bid WHERE (a.cstatus=1 or a.cstatus=0)".$bid." AND (a.cname LIKE '%".$keyword."%' OR a.caddr LIKE '%".$keyword."%' OR a.ccontactname LIKE '%".$keyword."%') ORDER BY cid DESC");
+		return $this -> db -> get() -> result();
+	}
 }

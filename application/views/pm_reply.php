@@ -1,5 +1,4 @@
 
-    <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/suggestions.css');?>" />
        <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">

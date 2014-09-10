@@ -29,7 +29,9 @@
                     <label for="text1" class="control-label col-lg-4">Group</label>
 
                     <div class="col-lg-4">
+						<select name="group" data-placeholder="Group" class="form-control chzn-select">
                                 <?php echo __get_product_group($detail[0] -> pgroup,2); ?>
+                                </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,6 +47,13 @@
 
                     <div class="col-lg-4">
 						<select name="packaging" data-placeholder="Product Packaging" class="form-control chzn-select"><?php echo $packaging; ?></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Isi / Volume</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Isi / Volume" name="isi" class="form-control" value="<?php echo $detail[0] -> pvolume; ?>" />
                     </div>
                 </div>
                 <div class="form-group">

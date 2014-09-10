@@ -1,6 +1,4 @@
-﻿
-    <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/suggestions.css');?>" />
-    <style>
+﻿    <style>
     #txtHint{width:94%!important;}
     </style>
  <link href="<?php echo site_url('application/views/assets/css/layout2.css');?>" rel="stylesheet" />

@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/datepicker/css/datepicker.css');?>" />
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/timepicker/css/bootstrap-timepicker.min.css');?>" />
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/switch/static/stylesheets/bootstrap-switch.css');?>" />
-   
+<link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/suggestions.css');?>" />
      <!-- GLOBAL SCRIPTS -->
     <script src="<?php echo site_url('application/views/assets/plugins/jquery-2.0.3.min.js');?>"></script>
      <script src="<?php echo site_url('application/views/assets/plugins/bootstrap/js/bootstrap.min.js');?>"></script>

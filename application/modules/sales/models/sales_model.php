@@ -36,4 +36,16 @@ class Sales_model extends CI_Model {
 		else $bid = "";
 		return $this -> db -> query('update sales_tab set sstatus=2 where '.$bid.'sid=' . $id);
 	}
+	
+	function __get_suggestion() {
+		$this -> db -> select('sname as name FROM sales_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_search($keyword, $bid="") {
+		if ($bid != "") $bid = " AND sbid=" . $bid;
+		else $bid = "";
+		$this -> db -> select("a.*,b.bname FROM sales_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') ORDER BY a.sid DESC");
+		return $this -> db -> get() -> result();
+	}
 }

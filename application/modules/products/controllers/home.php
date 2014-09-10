@@ -15,9 +15,18 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products(),3,10,site_url('products'));
-		$view['products'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['products'] = $this -> products_model -> __get_search($keyword);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products(),3,10,site_url('products'));
+			$view['products'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
 		$this->load->view('products', $view);
 	}
 	
@@ -39,6 +48,7 @@ class Home extends MY_Controller {
 			$code = $this -> input -> post('code', TRUE);
 			$moq = $this -> input -> post('moq', TRUE);
 			$disc = (int) $this -> input -> post('disc');
+			$isi = (int) $this -> input -> post('isi');
 			$status = (int) $this -> input -> post('status');
 
 			if (!$name || !$desc || $consume == '' || $store == '' || $key == '' || $semi == '' || $dist == '' || !$code) {
@@ -46,7 +56,7 @@ class Home extends MY_Controller {
 				redirect(site_url('products' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
+				$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
 				if ($this -> products_model -> __insert_products($arr)) {
 					$pid = $this -> db-> insert_id();
 					
@@ -89,6 +99,7 @@ class Home extends MY_Controller {
 			$id = (int) $this -> input -> post('id');
 			$group = (int) $this -> input -> post('group');
 			$type = (int) $this -> input -> post('type');
+			$isi = (int) $this -> input -> post('isi');
 			$moq = $this -> input -> post('moq', TRUE);
 			
 			if ($id) {
@@ -97,7 +108,7 @@ class Home extends MY_Controller {
 					redirect(site_url('products' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
+					$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
 					if ($this -> products_model -> __update_products($id, $arr)) {
 						foreach($moq as $k => $v)
 							$this -> products_model -> __update_moq($id,$k, array('mqty' => str_replace(',','',$v)));
@@ -136,5 +147,27 @@ class Home extends MY_Controller {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
 			redirect(site_url('products'));
 		}
+	}
+	
+	function get_suggestion() {
+		$hint = '';
+		$a = array();
+		$q = $_SERVER['QUERY_STRING'];
+		$arr = $this -> products_model -> __get_suggestion();
+		
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
+		
+		if (strlen($q) > 0) {
+			for($i=0; $i<count($a); $i++) {
+				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+					if ($hint == '')
+						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+					else
+						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+				}
+			}
+		}
+		
+		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
 	}
 }

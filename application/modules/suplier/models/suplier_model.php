@@ -25,4 +25,14 @@ class Suplier_model extends CI_Model {
 	function __delete_suplier($id) {
 		return $this -> db -> query('update suplier_tab set sstatus=2 where sid=' . $id);
 	}
+	
+	function __get_suggestion() {
+		$this -> db -> select('sname as name FROM suplier_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_search($keyword) {
+		$this -> db -> select("* FROM suplier_tab WHERE (sstatus=1 or sstatus=0) AND sname LIKE '%".$keyword."%' ORDER BY sid DESC");
+		return $this -> db -> get() -> result();
+	}
 }

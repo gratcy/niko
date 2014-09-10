@@ -13,9 +13,18 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> customers_model -> __get_customers((__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('customers'));
-		$view['customers'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['customers'] = $this -> customers_model -> __get_search($keyword, (__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
+			$view['keyword'] = $keyword;
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> customers_model -> __get_customers((__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('customers'));
+			$view['customers'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
 		$this->load->view('customers', $view);
 	}
 	
@@ -45,10 +54,6 @@ class Home extends MY_Controller {
 			
 			if (!$branch || !$name || !$sales) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
-				redirect(site_url('customers' . '/' . __FUNCTION__));
-			}
-			else if (!$phone1 || !$phone2) {
-				__set_error_msg(array('error' => 'Telp I dan Telp II harus di isi !!!'));
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else if (!$addr || !$city || !$prov) {
@@ -104,10 +109,6 @@ class Home extends MY_Controller {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
-				else if (!$phone1 || !$phone2) {
-					__set_error_msg(array('error' => 'Telp I dan Telp II harus di isi !!!'));
-					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
-				}
 				else if (!$addr || !$city || !$prov) {
 					__set_error_msg(array('error' => 'Alamat, Kota dan Provinsi harus di isi !!!'));
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
@@ -147,5 +148,27 @@ class Home extends MY_Controller {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
 			redirect(site_url('customers'));
 		}
+	}
+	
+	function get_suggestion() {
+		$hint = '';
+		$a = array();
+		$q = $_SERVER['QUERY_STRING'];
+		$arr = $this -> customers_model -> __get_suggestion();
+		
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
+		
+		if (strlen($q) > 0) {
+			for($i=0; $i<count($a); $i++) {
+				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+					if ($hint == '')
+						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+					else
+						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+				}
+			}
+		}
+		
+		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
 	}
 }

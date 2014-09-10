@@ -58,11 +58,13 @@ $route['users/users_group_update/?(:num)?'] = 'users/home/users_group_update/$1'
 $route['users/users_group_delete/(:num)'] = 'users/home/users_group_delete/$1';
 
 $route['branch/?(:num)?'] = 'branch/home/index/$1';
+$route['branch/get_suggestion'] = 'branch/home/get_suggestion';
 $route['branch/branch_add'] = 'branch/home/branch_add';
 $route['branch/branch_update/?(:num)?'] = 'branch/home/branch_update/$1';
 $route['branch/branch_delete/(:num)'] = 'branch/home/branch_delete/$1';
 
 $route['customers/?(:num)?'] = 'customers/home/index/$1';
+$route['customers/get_suggestion'] = 'customers/home/get_suggestion';
 $route['customers/customers_add'] = 'customers/home/customers_add';
 $route['customers/customers_update/?(:num)?'] = 'customers/home/customers_update/$1';
 $route['customers/customers_delete/(:num)'] = 'customers/home/customers_delete/$1';
@@ -83,11 +85,13 @@ $route['price/price_update/(:num)/?(:num)?'] = 'price/home/price_update/$1/$2';
 $route['price/price_delete/(:num)/(:num)'] = 'price/home/price_delete/$1/$2';
 
 $route['products/?(:num)?'] = 'products/home/index/$1';
+$route['products/get_suggestion'] = 'products/home/get_suggestion';
 $route['products/products_add'] = 'products/home/products_add';
 $route['products/products_update/?(:num)?'] = 'products/home/products_update/$1';
 $route['products/products_delete/(:num)'] = 'products/home/products_delete/$1';
 
 $route['sales/?(:num)?'] = 'sales/home/index/$1';
+$route['sales/get_suggestion'] = 'sales/home/get_suggestion';
 $route['sales/sales_add'] = 'sales/home/sales_add';
 $route['sales/sales_update/?(:num)?'] = 'sales/home/sales_update/$1';
 $route['sales/sales_delete/(:num)'] = 'sales/home/sales_delete/$1';
@@ -98,11 +102,13 @@ $route['sales_commision/sales_commision_update/?(:num)?'] = 'sales_commision/hom
 $route['sales_commision/sales_commision_delete/(:num)'] = 'sales_commision/home/sales_commision_delete/$1';
 
 $route['services/?(:num)?'] = 'services/home/index/$1';
+$route['services/get_suggestion'] = 'services/home/get_suggestion';
 $route['services/services_add'] = 'services/home/services_add';
 $route['services/services_update/?(:num)?'] = 'services/home/services_update/$1';
 $route['services/services_delete/(:num)'] = 'services/home/services_delete/$1';
 
 $route['inventory/?(:num)?/?(:num)?'] = 'inventory/home/index/$1/$2';
+$route['inventory/(:num)/get_suggestion'] = 'inventory/home/get_suggestion/$1';
 $route['inventory/inventory_add/?(:num)?'] = 'inventory/home/inventory_add/$1';
 $route['inventory/inventory_update/?(:num)?/?(:num)?'] = 'inventory/home/inventory_update/$1/$2';
 $route['inventory/inventory_delete/(:num)/(:num)'] = 'inventory/home/inventory_delete/$1/$2';
@@ -123,11 +129,13 @@ $route['technical/technical_update/?(:num)?'] = 'technical/home/technical_update
 $route['technical/technical_delete/(:num)'] = 'technical/home/technical_delete/$1';
 
 $route['sparepart/?(:num)?'] = 'sparepart/home/index/$1';
+$route['sparepart/get_suggestion'] = 'sparepart/home/get_suggestion';
 $route['sparepart/sparepart_add'] = 'sparepart/home/sparepart_add';
 $route['sparepart/sparepart_update/?(:num)?'] = 'sparepart/home/sparepart_update/$1';
 $route['sparepart/sparepart_delete/(:num)'] = 'sparepart/home/sparepart_delete/$1';
 
 $route['suplier/?(:num)?'] = 'suplier/home/index/$1';
+$route['suplier/get_suggestion'] = 'suplier/home/get_suggestion';
 $route['suplier/suplier_add'] = 'suplier/home/suplier_add';
 $route['suplier/suplier_update/?(:num)?'] = 'suplier/home/suplier_update/$1';
 $route['suplier/suplier_delete/(:num)'] = 'suplier/home/suplier_delete/$1';

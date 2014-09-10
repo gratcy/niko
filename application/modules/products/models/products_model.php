@@ -55,4 +55,17 @@ class Products_model extends CI_Model {
         $this -> db -> where('mpid', $pid);
         return $this -> db -> update('moq_tab', $data);
 	}
+	
+	function __get_suggestion() {
+		$this -> db -> select('pname as name FROM products_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY name ASC');
+		$name = $this -> db -> get() -> result();
+		$this -> db -> select('pcode as name FROM products_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY name ASC');
+		$code = $this -> db -> get() -> result();
+		return array_merge($name, $code);
+	}
+	
+	function __get_search($keyword) {
+		$this -> db -> select("a.*,b.cname,c.cname as ppname FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 WHERE (a.pstatus=1 or a.pstatus=0) AND (a.pname LIKE '%".$keyword."%' OR a.pcode LIKE '%".$keyword."%') ORDER BY a.pid DESC");
+		return $this -> db -> get() -> result();
+	}
 }

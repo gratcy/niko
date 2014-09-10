@@ -11,9 +11,18 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> suplier_model -> __get_suplier(),3,10,site_url('suplier'));
-		$view['suplier'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['suplier'] = $this -> suplier_model -> __get_search($keyword);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> suplier_model -> __get_suplier(),3,10,site_url('suplier'));
+			$view['suplier'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
 		$this->load->view('suplier', $view);
 	}
 	
@@ -105,5 +114,27 @@ class Home extends MY_Controller {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
 			redirect(site_url('suplier'));
 		}
+	}
+	
+	function get_suggestion() {
+		$hint = '';
+		$a = array();
+		$q = $_SERVER['QUERY_STRING'];
+		$arr = $this -> suplier_model -> __get_suggestion();
+		
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
+		
+		if (strlen($q) > 0) {
+			for($i=0; $i<count($a); $i++) {
+				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+					if ($hint == '')
+						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+					else
+						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+				}
+			}
+		}
+		
+		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
 	}
 }

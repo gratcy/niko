@@ -35,4 +35,17 @@ class Sparepart_model extends CI_Model {
 	function __delete_sparepart($id) {
 		return $this -> db -> query('update sparepart_tab set sstatus=2 where sid=' . $id);
 	}
+	
+	function __get_suggestion() {
+		$this -> db -> select('sname as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$name = $this -> db -> get() -> result();
+		$this -> db -> select('scode as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$code = $this -> db -> get() -> result();
+		return array_merge($name, $code);
+	}
+	
+	function __get_search($keyword) {
+		$this -> db -> select("a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') ORDER BY a.sid DESC");
+		return $this -> db -> get() -> result();
+	}
 }

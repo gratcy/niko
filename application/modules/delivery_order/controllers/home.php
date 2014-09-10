@@ -15,9 +15,18 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_sales_order(),3,10,site_url('sales_order'));
-		$view['sales_order'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['pages'] = '';
+			$view['sales_order'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_sales_order(),3,10,site_url('sales_order'));
+			$view['sales_order'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
 		$this->load->view('delivery_orders', $view);
 	}
 	

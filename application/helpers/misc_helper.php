@@ -222,12 +222,12 @@ function __get_product_group($cid,$type) {
 		return $data[$cid];
 	}
 	else {
-		$res = '';
+		$res = '<option value=""></option>';
 		foreach($data as $k => $v)
-			if ($cid == $k)
-				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="group" value="'.$k.'" checked></label>';
+			if ($cid && $cid == $k)
+				$res .= '<option value="'.$k.'" selected>'.$v.'</option>';
 			else
-				$res .= '<label>'.$v.' <input class="uniform" type="radio" name="group" value="'.$k.'"></label>';
+				$res .= '<option value="'.$k.'">'.$v.'</option>';
 		return $res;
 	}
 }

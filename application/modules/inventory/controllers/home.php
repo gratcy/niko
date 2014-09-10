@@ -24,11 +24,21 @@ class Home extends MY_Controller {
 			$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 		else
 			$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			
+		$keyword = $this -> input -> post('keyword');
 		
-		$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory($type,$perm),3,10,site_url('inventory/' . $type));
-		$view['inventory'] = $this -> pagination_lib -> paginate();
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['inventory'] = $this -> inventory_model -> __get_search($keyword,$type,$perm);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory($type,$perm),3,10,site_url('inventory/' . $type));
+			$view['inventory'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
 		$view['type'] = $type;
-		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('inventory', $view);
 	}
 	
@@ -126,5 +136,33 @@ class Home extends MY_Controller {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
 			redirect(site_url('inventory'));
 		}
+	}
+	
+	function get_suggestion($type) {
+		$hint = '';
+		$a = array();
+		$q = $_SERVER['QUERY_STRING'];
+		$this -> load -> model('products/products_model');
+		$this -> load -> model('sparepart/sparepart_model');
+		
+		if ($type == 1 || $type == 3 || $type == 4)
+			$arr = $this -> products_model -> __get_suggestion();
+		else
+			$arr = $this -> sparepart_model -> __get_suggestion();
+		
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
+		
+		if (strlen($q) > 0) {
+			for($i=0; $i<count($a); $i++) {
+				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+					if ($hint == '')
+						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+					else
+						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+				}
+			}
+		}
+		
+		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
 	}
 }
