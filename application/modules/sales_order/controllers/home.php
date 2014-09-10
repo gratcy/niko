@@ -201,11 +201,4 @@ class Home extends MY_Controller {
 		
 		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
 	}
-	
-	function get_search() {
-		$keyword = $this -> input -> post('keyword');
-		$view['branch'] = $this -> sales_order_model -> __get_search($keyword);
-		$view['pages'] = '';
-		$this->load->view('branch', $view);
-	}
 }
