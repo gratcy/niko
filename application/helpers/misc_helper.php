@@ -216,21 +216,21 @@ function __get_customer_category($cid, $type) {
 	}
 }
 
-function __get_product_group($cid,$type) {
-	$data = array('DVD', 'TV', 'AC');
-	if ($type == 1) {
-		return $data[$cid];
-	}
-	else {
-		$res = '<option value=""></option>';
-		foreach($data as $k => $v)
-			if ($cid && $cid == $k)
-				$res .= '<option value="'.$k.'" selected>'.$v.'</option>';
-			else
-				$res .= '<option value="'.$k.'">'.$v.'</option>';
-		return $res;
-	}
-}
+//~ function __get_product_group($cid,$type) {
+	//~ $data = array('DVD', 'TV', 'AC');
+	//~ if ($type == 1) {
+		//~ return $data[$cid];
+	//~ }
+	//~ else {
+		//~ $res = '<option value=""></option>';
+		//~ foreach($data as $k => $v)
+			//~ if ($cid && $cid == $k)
+				//~ $res .= '<option value="'.$k.'" selected>'.$v.'</option>';
+			//~ else
+				//~ $res .= '<option value="'.$k.'">'.$v.'</option>';
+		//~ return $res;
+	//~ }
+//~ }
 
 function __get_product_type($cid,$type) {
 	$data = array('FINISH GOOD', 'RAW MATERIAL', 'PACKAGING');

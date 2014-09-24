@@ -24,7 +24,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">11</span>&nbsp;
+                       &nbsp; <span class="label label-danger">12</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
 						<?php if (__get_roles('BranchView')) : ?>
@@ -38,6 +38,9 @@
                          <?php endif; ?>
 						<?php if (__get_roles('PackagingView')) : ?>
                         <li class=""><a href="<?php echo site_url('packaging'); ?>"><i class="icon-angle-right"></i> Packaging </a></li>
+                         <?php endif; ?>
+						<?php if (__get_roles('GroupProductView')) : ?>
+                        <li class=""><a href="<?php echo site_url('product_group'); ?>"><i class="icon-angle-right"></i> Groups Product </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('CategoriesProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Categories Product </a></li>

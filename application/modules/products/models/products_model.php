@@ -5,7 +5,7 @@ class Products_model extends CI_Model {
     }
 	
 	function __get_products() {
-		return 'SELECT a.*,b.cname,c.cname as ppname FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid DESC';
+		return 'SELECT a.*,b.cname,c.cname as ppname,d.cname as cnamegroup FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid DESC';
 	}
 	
 	function __get_products_select() {

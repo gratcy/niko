@@ -30,7 +30,7 @@
 
                     <div class="col-lg-4">
 						<select name="group" data-placeholder="Group" class="form-control chzn-select">
-                                <?php echo __get_product_group('',2); ?>
+                                <?php echo $group_product; ?>
                                 </select>
                     </div>
                 </div>

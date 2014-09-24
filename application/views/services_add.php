@@ -61,10 +61,10 @@
                     <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-2">
-						From <input type="text" data-date-format="dd/mm/yyyy" name="dfrom" class="form-control" value="<?php echo date('d/m/Y'); ?>" />
+						From <input type="text" data-date-format="dd/mm/yyyy" name="dfrom" class="form-control" value="<?php echo date('d/m/Y'); ?>" autocomplete="off" />
                     </div>
                     <div class="col-lg-2">
-						To <input type="text" data-date-format="dd/mm/yyyy" name="dto" class="form-control" value="<?php echo date('d/m/Y'); ?>" />
+						To <input type="text" data-date-format="dd/mm/yyyy" name="dto" class="form-control" value="<?php echo date('d/m/Y'); ?>" autocomplete="off" />
                     </div>
                 </div>
 

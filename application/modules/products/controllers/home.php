@@ -9,6 +9,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('categories/categories_lib');
 		$this -> load -> library('packaging/packaging_lib');
+		$this -> load -> library('group_product/group_product_lib');
 		$this -> load -> library('products/products_lib');
 		$this -> load -> library('branch/branch_lib');
 		$this -> load -> model('products_model');
@@ -76,6 +77,7 @@ class Home extends MY_Controller {
 			$view['products'] = $this -> products_lib -> __get_products();
 			$view['category'] = $this -> categories_lib -> __get_categories();
 			$view['packaging'] = $this -> packaging_lib -> __get_packaging();
+			$view['group_product'] = $this -> group_product_lib -> __get_group_product();
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -132,6 +134,7 @@ class Home extends MY_Controller {
 			$view['detail'] = $this -> products_model -> __get_products_detail($id);
 			$view['category'] = $this -> categories_lib -> __get_categories($view['detail'][0] -> pcid);
 			$view['packaging'] = $this -> packaging_lib -> __get_packaging($view['detail'][0] -> ppid);
+			$view['group_product'] = $this -> group_product_lib -> __get_group_product($view['detail'][0] -> pgroup);
 			$view['moq'] = $this -> products_model -> __get_moq($id);
 
 			$this->load->view(__FUNCTION__, $view);

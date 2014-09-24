@@ -48,6 +48,7 @@ left:inherit!important;
           <th>Code</th>
           <th>Packaging</th>
           <th>Category</th>
+          <th>Group</th>
           <th>Name</th>
           <th>Description</th>
           <th style="text-align:center;">Basic Price</th>
@@ -63,6 +64,7 @@ left:inherit!important;
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> ppname; ?></td>
           <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> cnamegroup; ?></td>
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo substr($v -> pdesc,0,150); ?></td>
           <td style="text-align:right;"><?php echo __get_rupiah($v -> phpp,4); ?></td>

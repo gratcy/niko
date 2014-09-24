@@ -44,6 +44,8 @@ class Home extends MY_Controller {
 				redirect(site_url('services' . '/' . __FUNCTION__));
 			}
 			else {
+				$dfrom = strtotime(str_replace('/','-',$dfrom));
+				$dto = strtotime(str_replace('/','-',$dto));
 				$arr = array('sdate' => time(), 'spid' => $product, 'sbid' => $branch, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
 				if ($this -> services_model -> __insert_services($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
@@ -80,7 +82,10 @@ class Home extends MY_Controller {
 					redirect(site_url('services' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('sdate' => time(), 'spid' => $product, 'sbid' => $branch, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
+					$dfrom = strtotime(str_replace('/','-',$dfrom));
+					$dto = strtotime(str_replace('/','-',$dto));
+					
+					$arr = array('spid' => $product, 'sbid' => $branch, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
 					if ($this -> services_model -> __update_services($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('services'));

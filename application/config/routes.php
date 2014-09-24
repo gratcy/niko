@@ -90,6 +90,11 @@ $route['products/products_add'] = 'products/home/products_add';
 $route['products/products_update/?(:num)?'] = 'products/home/products_update/$1';
 $route['products/products_delete/(:num)'] = 'products/home/products_delete/$1';
 
+$route['group_product/?(:num)?'] = 'group_product/home/index/$1';
+$route['group_product/group_product_add'] = 'group_product/home/group_product_add';
+$route['group_product/group_product_update/?(:num)?'] = 'group_product/home/group_product_update/$1';
+$route['group_product/group_product_delete/(:num)'] = 'group_product/home/group_product_delete/$1';
+
 $route['sales/?(:num)?'] = 'sales/home/index/$1';
 $route['sales/get_suggestion'] = 'sales/home/get_suggestion';
 $route['sales/sales_add'] = 'sales/home/sales_add';
