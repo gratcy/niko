@@ -8,6 +8,7 @@ class Home extends MY_Controller {
 		parent::__construct();
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('products/products_lib');
+		$this -> load -> library('group_sparepart/group_sparepart_lib');
 		$this -> load -> model('sparepart_model');
 	}
 
@@ -55,6 +56,7 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
+			$view['group_sparepart'] = $this -> group_sparepart_lib -> __get_group_sparepart();
 			$view['products'] = $this -> products_lib -> __get_products();
 			$this->load->view(__FUNCTION__, $view);
 		}
@@ -98,6 +100,7 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['detail'] = $this -> sparepart_model -> __get_sparepart_detail($id);
 			$view['products'] = $this -> products_lib -> __get_products($view['detail'][0] -> spid);
+			$view['group_sparepart'] = $this -> group_sparepart_lib -> __get_group_sparepart($view['detail'][0] -> sgroup);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

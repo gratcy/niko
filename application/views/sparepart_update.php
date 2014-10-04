@@ -46,7 +46,9 @@
                     <label for="text1" class="control-label col-lg-4">Group</label>
 
                     <div class="col-lg-4">
-                                <?php echo __get_product_group($detail[0] -> sgroup,2); ?>
+						<select name="group" data-placeholder="Group Product" class="form-control chzn-select">
+                                <?php echo $group_sparepart; ?>
+                    </select>
                     </div>
                 </div>
 

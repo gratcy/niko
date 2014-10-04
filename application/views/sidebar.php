@@ -42,6 +42,9 @@
 						<?php if (__get_roles('GroupProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('group_product'); ?>"><i class="icon-angle-right"></i> Groups Product </a></li>
                          <?php endif; ?>
+						<?php if (__get_roles('GroupSparepartView')) : ?>
+                        <li class=""><a href="<?php echo site_url('group_sparepart'); ?>"><i class="icon-angle-right"></i> Groups Sparepart </a></li>
+                         <?php endif; ?>
 						<?php if (__get_roles('CategoriesProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Categories Product </a></li>
                          <?php endif; ?>

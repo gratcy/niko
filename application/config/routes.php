@@ -95,6 +95,11 @@ $route['group_product/group_product_add'] = 'group_product/home/group_product_ad
 $route['group_product/group_product_update/?(:num)?'] = 'group_product/home/group_product_update/$1';
 $route['group_product/group_product_delete/(:num)'] = 'group_product/home/group_product_delete/$1';
 
+$route['group_sparepart/?(:num)?'] = 'group_sparepart/home/index/$1';
+$route['group_sparepart/group_sparepart_add'] = 'group_sparepart/home/group_sparepart_add';
+$route['group_sparepart/group_sparepart_update/?(:num)?'] = 'group_sparepart/home/group_sparepart_update/$1';
+$route['group_sparepart/group_sparepart_delete/(:num)'] = 'group_sparepart/home/group_sparepart_delete/$1';
+
 $route['sales/?(:num)?'] = 'sales/home/index/$1';
 $route['sales/get_suggestion'] = 'sales/home/get_suggestion';
 $route['sales/sales_add'] = 'sales/home/sales_add';

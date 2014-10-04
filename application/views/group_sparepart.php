@@ -3,13 +3,13 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Groups Product </h2>
+                        <h2> Groups Sparepart </h2>
                     </div>
                 </div>
 
                 <hr />
-				<?php if (__get_roles('GroupProductAdd')) : ?>
-                <a href="<?php echo site_url('group_product/group_product_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Groups Product</a>
+				<?php if (__get_roles('GroupSparepartAdd')) : ?>
+                <a href="<?php echo site_url('group_sparepart/group_sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Groups Product</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -33,18 +33,18 @@
                                     </thead>
                                     <tbody>
 		  <?php
-		  foreach($group_product as $k => $v) :
+		  foreach($group_sparepart as $k => $v) :
 		  ?>
                                         <tr>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('CategoriesProductUpdate')) : ?>
-              <a href="<?php echo site_url('group_product/group_product_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
+				<?php if (__get_roles('CategoriesSparepartUpdate')) : ?>
+              <a href="<?php echo site_url('group_sparepart/group_sparepart_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('CategoriesProductDelete')) : ?>
-              <a href="<?php echo site_url('group_product/group_product_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+				<?php if (__get_roles('CategoriesSparepartDelete')) : ?>
+              <a href="<?php echo site_url('group_sparepart/group_sparepart_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>
 										</tr>
