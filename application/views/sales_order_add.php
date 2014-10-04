@@ -61,17 +61,14 @@ minLength: 1,
         <div id="content">
                 <div class="inner">
                     <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Sales Order Add</h1>
-					<?php //echo site_url('application/views/assets/source.php'); ?>
-                </div>
+               
             </div>
 <div class="row">
 <div class="col-lg-12">
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>sales Order Add</h5>
+            <h5>Sales Order Add</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -164,6 +161,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
 					<input  name=csname type="text" id="theSname" class="form-control"   />
+
                         <!--select name="ssid" data-placeholder="sales" class="form-control chzn-select"><?php //echo $ssid; ?></select-->		
                     </div>
                 </div>
@@ -195,9 +193,21 @@ minLength: 1,
                     </div>
                 </div>
                
-				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Type Pembayaran</label>
+
+                    <div class="col-lg-4">
+                       	<select name=stypepay class="form-control chzn-select">
+						<option>Cash</option>
+						<option>Credit</option>
+						</select>
+
+                    </div>
+                </div>					
 	
-				
+
+
+	
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Keterangan</label>
 

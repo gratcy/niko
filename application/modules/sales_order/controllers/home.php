@@ -49,7 +49,18 @@ class Home extends MY_Controller {
 			// $snpwp = $this -> input -> post('snpwp', TRUE);
 			//$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
-			
+			$stypepay = $this -> input -> post('stypepay', TRUE);
+			$ccash = $this -> input -> post('ccash', TRUE);
+			$ccredit = $this -> input -> post('ccredit', TRUE);
+			if($stypepay=="Cash"){
+// $x= "03-02-2014"; 
+// var_dump($x);
+// $yy=strtotime($x);
+// $y= date("Y-m-d H:i:s",strtotime($x ." + 15 days"));	
+			$sduedate = date("Y-m-d",strtotime("+$ccash days"));			
+			}else{			
+			$sduedate = date("Y-m-d",strtotime("+$ccredit days"));
+			}
 			$ssubtotal = 0;
 			$sppnnpwp = 0;
 			$stotalsubppn = 0;
@@ -68,7 +79,7 @@ class Home extends MY_Controller {
 					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
-					'sketerangan' => $sketerangan
+					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay
 					 );	
 				if ($this -> sales_order_model -> __insert_sales_order($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));

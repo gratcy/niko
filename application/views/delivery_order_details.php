@@ -207,20 +207,7 @@ minLength: 1,
           <td></td>
           <td><?php echo $total; ?></td>
 		 </tr>		
-         <tr>          
-          <td>PPN</td>
-          <td>10%</td>
-          <td></td>
-          <td></td>
-          <td><?php echo $totalppn; ?></td>
-		 </tr>			
-         <tr>          
-          <td>TOTAL</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><?php echo $totalall; ?></td>
-		 </tr>		 
+ 	 
                                     </tbody>
                                 </table>
 								

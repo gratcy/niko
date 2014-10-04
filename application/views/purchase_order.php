@@ -74,6 +74,10 @@ left:inherit!important;
 				<?php if (__get_roles('PurchaseOrderUpdate')) : ?>
               <a href="<?php echo site_url('purchase_order/home/purchase_order_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
+				
+			<a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_add/' . $v -> pid); ?>"><i class="icon-book"></i></a>	
+				
+				
 				<?php if (__get_roles('PurchaseOrderDelete')) : ?>
               <a href="<?php echo site_url('purchase_order/home/purchase_order_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>

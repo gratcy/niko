@@ -17,9 +17,7 @@
         <div id="content">
                 <div class="inner">
                     <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Purchase Order Add</h1>
-                </div>
+              
             </div>
 <div class="row">
 <div class="col-lg-12">
@@ -31,13 +29,13 @@
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_add'); ?>" method="post">
-
+<p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
                     <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->pbid; ?>" class="form-control" disabled>
+					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
                     </div>
                 </div>
 
@@ -73,10 +71,12 @@
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->psid; ?>" class="form-control" disabled>
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
                     </div>
                 </div>
 
+				
+				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Gudang</label>
 
@@ -84,6 +84,9 @@
 						<input type=text value="<?php echo $detailx[0]->pgudang; ?>" class="form-control" disabled>
                     </div>
                 </div>
+				
+				
+	</td><td>			
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Kode Barang</label>
@@ -142,6 +145,9 @@
 						</select>
                     </div>
 				</div>
+				
+				</td></tr></table></p>
+				
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">

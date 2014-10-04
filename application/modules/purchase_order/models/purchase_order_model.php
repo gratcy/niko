@@ -33,7 +33,8 @@ class Purchase_order_model extends CI_Model {
 	
 	
 	function __get_purchase_order_detail($id) {
-		$this -> db -> select('* FROM purchase_order_tab WHERE (pstatus=1 OR pstatus=0) AND pid=' . $id);
+		$this -> db -> select('*,(select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid)as bname,
+(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid)as sname		FROM purchase_order_tab WHERE (pstatus=1 OR pstatus=0) AND pid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	

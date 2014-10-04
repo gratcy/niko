@@ -33,7 +33,9 @@ minLength: 1,
 		$("#thePoint").val(ui.item.ppoint),
 		$("#theDisc").val(ui.item.ddisc),
 		$("#thePrice").val(ui.item.price),
+		$("#thePricex").val(ui.item.price),
 		$("#theQty").val(ui.item.mqty),
+		$("#theQtyx").val(ui.item.mqty),
 		$("#theStatus").val(ui.item.pstatus)
 	
 		
@@ -43,7 +45,113 @@ minLength: 1,
 })
 
 });
-</script>		
+</script>
+
+
+
+
+
+
+<script type="text/javascript" >
+function validateForm()
+{
+// alert(3);
+var goodColor = "#66cc66";
+var badColor = "#ff6666";
+
+
+
+ var messagea = document.getElementById('confirmMessagea');
+ var a=document.forms["myForm"]["pname"].value;
+
+ //var messageb = document.getElementById('confirmMessageb');
+ var b=parseInt(document.forms["myForm"]["qtyx"].value);
+
+ var messagec = document.getElementById('confirmMessagec');
+ var c=document.forms["myForm"]["sqty"].value;
+
+
+ 
+ 
+ 
+ //var messaged = document.getElementById('confirmMessaged');
+ var d=parseInt(document.forms["myForm"]["pricex"].value);
+
+ var messagee = document.getElementById('confirmMessagee');
+ var e=document.forms["myForm"]["price"].value; 
+  
+	if(a=="" )
+	  {
+	  //alert(1);
+	  messagea.style.color = badColor;
+	  messagea.innerHTML =  "Product Tidak Boleh Kosong";  
+	  }else{
+	  // alert(2);
+	   messagea.innerHTML = "";  
+	  }  
+
+	// if(b==null || b=="" )
+	  // {
+	  //alert(3);
+	  // messageb.style.color = badColor;
+	  // messageb.innerHTML  = "Batas Qty Masih Kosong";  
+	  // }else{
+	  //alert(4);
+	   // messageb.innerHTML = "";  
+	  // }  
+	if( c==null || c=="" || c <= b )
+	  {
+	   // alert(5);
+	  messagec.style.color = badColor;
+	  messagec.innerHTML  = "Qty masih kosong atau dibawah batas qty";  
+	  }else{
+	   // alert(6);
+	   messagec.innerHTML = "";  
+	  }  	  
+	// if(d==null || d=="" )
+	  // {
+	  // alert(33);
+	  // messaged.style.color = badColor;
+	  // messaged.innerHTML  = "Batas Bawah Harga Masih Kosong";  
+	  // }else{
+	  // alert(44);
+	   // messaged.innerHTML = "";  
+	  // } 
+ 
+	if(e==null || e=="" || e <= d )
+	  {
+	  // alert(9);
+	  messagee.style.color = badColor;
+	  messagee.innerHTML  = "Harga masih kosong atau dibawah batas harga";  
+	  }else{
+	  // alert(10);
+	   messagee.innerHTML = "";  
+	  }  
+	  
+ if(  messagea.innerHTML==""   &&  messagec.innerHTML==""  &&  messagee.innerHTML==""  )
+ {
+// alert(11);
+  return true;
+ } else{
+// alert(20);
+  return false;
+ } 
+  
+  
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 		
 </head>		
 		
@@ -61,7 +169,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>sales Order Add <?php //echo "$id $scid";?></h5>
+            <h5>Sales Order Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -73,7 +181,7 @@ minLength: 1,
 ?>
 
 
- <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
+ <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
@@ -154,6 +262,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
                         <input  name=pname type="text" id="search" class="form-control"   />
+						&nbsp;&nbsp;<span id="confirmMessagea"></span>
                     </div>
                 </div>	
 		
@@ -163,6 +272,9 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        	<input type=text  id="thePrice" class="form-control" disabled>
+						
+						<input type=hidden  id="thePricex" class="form-control" name=pricex >
+						
                     </div>
                 </div>			
 
@@ -174,6 +286,8 @@ minLength: 1,
                     <div class="col-lg-4">
                        	<input type=text  id="theQty" class="form-control" disabled>
 							<input type=hidden  id="theId" class="form-control" name=spid  >
+							<input type=hidden  id="theQtyx" class="form-control" name=qtyx  >
+							
                     </div>
                 </div>	
 				
@@ -192,6 +306,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        	<input type=text   class="form-control" name=sqty  >
+						&nbsp;&nbsp;<span id="confirmMessagec"></span>
                     </div>
                 </div>	
                 <div class="form-group">
@@ -199,13 +314,14 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        	<input type=text   name=price  class="form-control" >
+						&nbsp;&nbsp;<span id="confirmMessagee"></span>
                     </div>
                 </div>					
 		
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					
 				</div>
