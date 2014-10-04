@@ -10,8 +10,10 @@ class Sales_model extends CI_Model {
 		return 'SELECT a.*,b.bname FROM sales_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0)'.$bid.' ORDER BY a.sid DESC';
 	}
     
-    function __get_sales_select() {
-		$this -> db -> select('sid,sname FROM sales_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY sname ASC');
+    function __get_sales_select($bid) {
+		if ($bid != "") $bid = " AND sbid=" . $bid;
+		else $bid = "";
+		$this -> db -> select('sid,sname FROM sales_tab WHERE (sstatus=1 OR sstatus=0) '.$bid.' ORDER BY sname ASC');
 		return $this -> db -> get() -> result();
 	}
 	

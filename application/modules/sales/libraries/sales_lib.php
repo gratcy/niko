@@ -9,8 +9,8 @@ class Sales_lib {
         $this->_ci->load->model('sales/sales_model');
     }
     
-    function __get_sales($id='') {
-		$users = $this -> _ci -> sales_model -> __get_sales_select();
+    function __get_sales($id='', $bid='') {
+		$users = $this -> _ci -> sales_model -> __get_sales_select($bid);
 		$res = '<option value=""></option>';
 		foreach($users as $k => $v)
 			if ($id == $v -> sid)

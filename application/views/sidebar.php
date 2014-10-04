@@ -24,16 +24,16 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">12</span>&nbsp;
+                       &nbsp; <span class="label label-danger">13</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
-						<?php if (__get_roles('BranchView')) : ?>
+						<?php if (__get_roles('BranchView') || __get_roles('BranchViewAsBranch')) : ?>
                         <li class=""><a href="<?php echo site_url('branch'); ?>"><i class="icon-angle-right"></i> Branch </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('CustomersView')) : ?>
                          <li class=""><a href="<?php echo site_url('customers'); ?>"><i class="icon-angle-right"></i> Customers </a></li>
                          <?php endif; ?>
-						<?php if (__get_roles('ProductsView')) : ?>
+						<?php if (__get_roles('ProductsView') || __get_roles('ProductViewAsBranch')) : ?>
                         <li class=""><a href="<?php echo site_url('products'); ?>"><i class="icon-angle-right"></i> Products </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('PackagingView')) : ?>

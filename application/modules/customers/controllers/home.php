@@ -74,7 +74,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['branch'] = $this -> branch_lib -> __get_branch();
-			$view['sales'] = $this -> sales_lib -> __get_sales();
+			$view['sales'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -134,7 +134,7 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['detail'] = $this -> customers_model -> __get_customers_detail($id, (__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> cbid);
-			$view['sales'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> csid);
+			$view['sales'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> csid,$this -> memcachedlib -> sesresult['ubid']);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

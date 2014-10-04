@@ -34,6 +34,13 @@ function __get_status($status, $type) {
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="status" value="1" />' : '<input type="checkbox" name="status" value="1" />');
 }
 
+function __get_is_general($status, $type) {
+	if ($type == 1)
+		return ($status == 1 ? 'Generalized' : 'Not Generalized');
+	else
+		return ($status == 1 ? '<input type="checkbox" checked="checked" name="general" value="1" />' : '<input type="checkbox" name="general" value="1" />');
+}
+
 function __get_customers_spec($status, $type, $name='') {
 	if ($type == 1)
 		return ($status == 1 ? 'Yes' : 'No');

@@ -4,8 +4,8 @@ class Products_model extends CI_Model {
         parent::__construct();
     }
 	
-	function __get_products() {
-		return 'SELECT a.*,b.cname,c.cname as ppname,d.cname as cnamegroup FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid DESC';
+	function __get_products($bid) {
+		return 'SELECT a.*,b.cname,c.cname as ppname,d.cname as cnamegroup,e.mqty FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 LEFT JOIN moq_tab e ON a.pid=e.mpid AND e.mbid='.$bid.' WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid DESC';
 	}
 	
 	function __get_products_select() {
@@ -64,8 +64,8 @@ class Products_model extends CI_Model {
 		return array_merge($name, $code);
 	}
 	
-	function __get_search($keyword) {
-		$this -> db -> select("a.*,b.cname,c.cname as ppname FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 WHERE (a.pstatus=1 or a.pstatus=0) AND (a.pname LIKE '%".$keyword."%' OR a.pcode LIKE '%".$keyword."%') ORDER BY a.pid DESC");
+	function __get_search($keyword, $bid) {
+		$this -> db -> select("a.*,b.cname,c.cname as ppname,d.cname as cnamegroup,e.mqty FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 LEFT JOIN moq_tab e ON a.pid=e.mpid AND e.mbid=".$bid." WHERE (a.pstatus=1 or a.pstatus=0) AND (a.pname LIKE '%".$keyword."%' OR a.pcode LIKE '%".$keyword."%') ORDER BY a.pid DESC", FALSE);
 		return $this -> db -> get() -> result();
 	}
 }

@@ -45,15 +45,32 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+		  <?php if (__get_roles('ProductViewAsBranch')) : ?>
           <th>Code</th>
-          <th>Packaging</th>
-          <th>Category</th>
-          <th>Group</th>
           <th>Name</th>
-          <th>Description</th>
-          <th style="text-align:center;">Basic Price</th>
+          <th>Type</th>
+          <th>Packaging</th>
+          <th style="text-align:center;">Distributor Price</th>
+          <th style="text-align:center;">Semi Price</th>
+          <th style="text-align:center;">Key Price</th>
+          <th style="text-align:center;">Store Price</th>
+          <th style="text-align:center;">Consume Price</th>
+          <th style="text-align:center;">MOQ</th>
+          <th style="text-align:center;">Cash Discount</th>
+          <?php else : ?>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Packaging</th>
+          <th>Isi / Volume</th>
+          <th>Basic Price</th>
+          <th style="text-align:center;">Cash Discount</th>
+          <th>Point</th>
           <th>Status</th>
+          <?php endif; ?>
+		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
           <th style="width: 50px;"></th>
+          <?php endif; ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,14 +78,30 @@ left:inherit!important;
 		  foreach($products as $k => $v) :
 		  ?>
                                         <tr>
+		  <?php if (__get_roles('ProductViewAsBranch')) : ?>
           <td><?php echo $v -> pcode; ?></td>
-          <td><?php echo $v -> ppname; ?></td>
-          <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> cnamegroup; ?></td>
           <td><?php echo $v -> pname; ?></td>
-          <td><?php echo substr($v -> pdesc,0,150); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> phpp,4); ?></td>
+          <td><?php echo __get_product_type($v -> ptype,1); ?></td>
+          <td><?php echo $v -> ppname; ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> pdist,4); ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> psemi,4); ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> pkey,4); ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> pstore,4); ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> pconsume,4); ?></td>
+          <td><?php echo $v -> mqty; ?></td>
+          <td><?php echo $v -> pdisc; ?>%</td>
+          <?php else : ?>
+          <td><?php echo $v -> pcode; ?></td>
+          <td><?php echo $v -> pname; ?></td>
+          <td><?php echo __get_product_type($v -> ptype,1); ?></td>
+          <td><?php echo $v -> ppname; ?></td>
+          <td><?php echo $v -> pvolume; ?></td>
+          <td><?php echo __get_rupiah($v -> phpp,4); ?></td>
+          <td><?php echo $v -> pdisc; ?>%</td>
+          <td><?php echo $v -> ppoint; ?></td>
           <td><?php echo __get_status($v -> pstatus,1); ?></td>
+          <?php endif; ?>
+		<?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
 		  <td>
 				<?php if (__get_roles('ProductsUpdate')) : ?>
               <a href="<?php echo site_url('products/products_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>
@@ -77,6 +110,7 @@ left:inherit!important;
               <a href="<?php echo site_url('products/products_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>
+          <?php endif; ?>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

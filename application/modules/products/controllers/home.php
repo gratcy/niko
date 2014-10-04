@@ -19,11 +19,11 @@ class Home extends MY_Controller {
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
 			$view['keyword'] = $keyword;
-			$view['products'] = $this -> products_model -> __get_search($keyword);
+			$view['products'] = $this -> products_model -> __get_search($keyword, $this -> memcachedlib -> sesresult['ubid']);
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products(),3,10,site_url('products'));
+			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('products'));
 			$view['products'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';

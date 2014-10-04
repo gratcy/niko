@@ -32,6 +32,7 @@ left:inherit!important;
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Branch
+				<?php if (__get_roles('BranchViewAsBranch')) : ?>
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
@@ -39,6 +40,7 @@ left:inherit!important;
                         <span id="sg1"></span>
                 </form>
                 </div>
+                <?php endif; ?>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

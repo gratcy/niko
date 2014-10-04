@@ -38,13 +38,14 @@ class Home extends MY_Controller {
 			$product = (int) $this -> input -> post('product');
 			$status = (int) $this -> input -> post('status');
 			$group = (int) $this -> input -> post('group');
+			$general = (int) $this -> input -> post('general');
 			
 			if (!$code || !$agent || !$retail || !$name || !$nocomp || !$product) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('sparepart' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('spid' => $product, 'scode' => $code, 'sname' => $name, 'sgroup' => $group, 'snocomponent' => $nocomp, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sstatus' => $status);
+				$arr = array('spid' => $product, 'scode' => $code, 'sname' => $name, 'sgroup' => $group, 'snocomponent' => $nocomp, 'sgeneral' => $general, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sstatus' => $status);
 				if ($this -> sparepart_model -> __insert_sparepart($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('sparepart'));
@@ -73,6 +74,7 @@ class Home extends MY_Controller {
 			$status = (int) $this -> input -> post('status');
 			$group = (int) $this -> input -> post('group');
 			$id = (int) $this -> input -> post('id');
+			$general = (int) $this -> input -> post('general');
 			
 			if ($id) {
 				if (!$code || !$agent || !$retail || !$name || !$nocomp || !$product) {
@@ -80,7 +82,7 @@ class Home extends MY_Controller {
 					redirect(site_url('sparepart' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('spid' => $product, 'scode' => $code, 'sname' => $name, 'sgroup' => $group, 'snocomponent' => $nocomp, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sstatus' => $status);
+					$arr = array('spid' => $product, 'scode' => $code, 'sname' => $name, 'sgroup' => $group, 'snocomponent' => $nocomp, 'sgeneral' => $general, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sstatus' => $status);
 					if ($this -> sparepart_model -> __update_sparepart($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('sparepart'));
