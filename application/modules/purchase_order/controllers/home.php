@@ -77,7 +77,7 @@ class Home extends MY_Controller {
 			
 		$view['pcid'] = $this -> customers_lib -> __get_customers();
 		$view['pbid'] = $this -> branch_lib -> __get_branch();
-		$view['psid'] = $this -> sales_lib -> __get_sales();
+		$view['psid'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 		$this->load->view('purchase_order_add',$view);
 		}
 	}
@@ -129,7 +129,7 @@ class Home extends MY_Controller {
 			
 			$view['detail'] = $this -> purchase_order_model -> __get_purchase_order_detail($id);
 			$view['pbid'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> pbid);
-			$view['psid'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> psid);
+			$view['psid'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> psid,$this -> memcachedlib -> sesresult['ubid']);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

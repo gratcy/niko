@@ -39,8 +39,8 @@
                                         <tr>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
-          <td><?php echo $v -> cdiscount; ?>%</td>
-          <td><?php echo __get_status($v -> cstatus,1); ?></td>
+          <td style="text-align:right;width:100px;"><?php echo $v -> cdiscount; ?>%</td>
+          <td style="width:150px;"><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CategoriesProductUpdate')) : ?>
               <a href="<?php echo site_url('categories/categories_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>

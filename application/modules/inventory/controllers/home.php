@@ -115,9 +115,18 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
+			if ($type == 1)
+				$perm = (__get_roles('ExecuteAllBranchInventoryProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			elseif ($type == 2)
+				$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			elseif ($type == 3)
+				$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			else
+				$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+				
 			$view['id'] = $id;
 			$view['type'] = $type;
-			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type,$id,$this -> memcachedlib -> sesresult['ubid']);
+			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type,$id,$perm);
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> ibid);
 			if ($type == 1 || $type == 2 || $type == 3)
 				$view['items'] = $this -> products_lib -> __get_products($view['detail'][0] -> iiid);
@@ -128,7 +137,16 @@ class Home extends MY_Controller {
 	}
 
 	function inventory_delete($type,$id) {
-		if ($this -> inventory_model -> __delete_inventory($id,$this -> memcachedlib -> sesresult['ubid'])) {
+		if ($type == 1)
+			$perm = (__get_roles('ExecuteAllBranchInventoryProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 2)
+			$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 3)
+			$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		else
+			$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			
+		if ($this -> inventory_model -> __delete_inventory($id,$perm)) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('inventory'));
 		}

@@ -1,4 +1,13 @@
-        <!--PAGE CONTENT -->
+<?php
+if ($type == 1)
+$add = 'Product';
+elseif ($type == 2)
+$add = 'Sparepart';
+elseif ($type == 3)
+$add = 'Services';
+else
+$add = 'Return';
+?>        <!--PAGE CONTENT -->
         <div id="content">
             <div class="inner">
                 <div class="row">
@@ -43,7 +52,7 @@
           <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
 		  <td>
-				<?php if (__get_roles('OpnameUpdate')) : ?>
+				<?php if (__get_roles('Opname'.$add.'Update')) : ?>
               <a href="<?php echo site_url('opname/opname_update/' . $type.'/' . $v -> iid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
           </td>

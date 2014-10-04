@@ -72,8 +72,8 @@
 				</div>
 				</div>
                 <div class="form-group">
-							<label for="status" class="control-label col-lg-4"></label>
-                    <div class="col-lg-4">
+				<label for="status" class="control-label col-lg-4"></label>
+				<div class="col-lg-4">
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>

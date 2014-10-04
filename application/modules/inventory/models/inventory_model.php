@@ -16,7 +16,7 @@ class Inventory_model extends CI_Model {
 	function __get_inventory_detail($type,$id, $bid) {
 		if ($bid != "") $bid = " AND ibid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('* FROM inventory_tab WHERE (istatus=1 OR istatus=0)'.$bid.' AND itype='.$type.' AND iid=' . $id);
+		$this -> db -> select('* FROM inventory_tab WHERE (istatus=1 OR istatus=0) AND itype='.$type.$bid.' AND iid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	

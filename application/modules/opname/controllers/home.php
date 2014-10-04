@@ -26,7 +26,6 @@ class Home extends MY_Controller {
 		else
 			$perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 		
-		
 		$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type,$perm),3,10,site_url('opname/' . $type));
 		$view['opname'] = $this -> pagination_lib -> paginate();
 		$view['type'] = $type;
@@ -69,9 +68,18 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
+			if ($type == 1)
+				$perm = (__get_roles('ExecuteAllBranchOpnameProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			elseif ($type == 2)
+				$perm = (__get_roles('ExecuteAllBranchOpnameSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			elseif ($type == 3)
+				$perm = (__get_roles('ExecuteAllBranchOpnameServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			else
+				$perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			
 			$view['id'] = $id;
 			$view['type'] = $type;
-			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type, $id);
+			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type, $id, $perm);
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> ibid);
 			if ($type == 1 || $type == 3 || $type == 4)
 				$view['items'] = $this -> products_lib -> __get_products($view['detail'][0] -> iiid);
