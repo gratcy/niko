@@ -142,7 +142,7 @@
 						<?php if (__get_roles('PurchaseOrderView')) : ?>
                         <li class=""><a href="<?php echo site_url('purchase_order/home/'); ?>"><i class="icon-angle-right"></i> Purchase Order </a></li>
 						<?php endif; ?>
-                         <li class=""><a href="<?php echo site_url('penerimaan'); ?>"><i class="icon-angle-right"></i> Penerimaan </a></li>
+                         <li class=""><a href="<?php echo site_url('purchase_order/home/penerimaan'); ?>"><i class="icon-angle-right"></i> Penerimaan </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>

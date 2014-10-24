@@ -8,6 +8,11 @@ class Suplier_model extends CI_Model {
 		return 'SELECT * FROM suplier_tab WHERE (sstatus=1 or sstatus=0) ORDER BY sid DESC';
 	}
 	
+    function __get_suplier_select() {
+		$this -> db -> select('sid,sname FROM suplier_tab WHERE sstatus=1 ORDER BY sname ASC');
+		return $this -> db -> get() -> result();
+	}	
+	
 	function __get_suplier_detail($id) {
 		$this -> db -> select('* FROM suplier_tab WHERE (sstatus=1 OR sstatus=0) AND sid=' . $id);
 		return $this -> db -> get() -> result();

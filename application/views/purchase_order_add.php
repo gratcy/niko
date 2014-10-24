@@ -68,7 +68,16 @@
                 </div>				
 				
 				
-				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Supplier</label>
+
+                    <div class="col-lg-4">
+                       
+						<select name="pssid" data-placeholder="Supplier" class="form-control chzn-select"><?php echo $pssid; ?></select>						
+						
+                    </div>
+                </div>				
+								
 				
 				
 				

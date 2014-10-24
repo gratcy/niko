@@ -30,7 +30,7 @@
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <form class="form-horizontal" action="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_update'); ?>" method="post">
+            <form class="form-horizontal" action="<?php echo site_url('purchase_order_detail/home/penerimaan_update'); ?>" method="post">
 
 <?php //print_r($id);die;?>
 

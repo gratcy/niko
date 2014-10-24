@@ -11,6 +11,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('sales/sales_lib');
 		$this -> load -> model('purchase_order_model');
 		$this -> load -> library('customers/customers_lib');
+		$this -> load -> library('suplier/suplier_lib');
 	}
 
 	function index() {
@@ -29,6 +30,22 @@ class Home extends MY_Controller {
 		$this->load->view('purchase_order', $view);
 	}
 	
+	function penerimaan() {
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['purchase_order'] = $this -> purchase_order_model -> __get_search($keyword);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> purchase_order_model -> __get_purchase_order(),3,10,site_url('purchase_order'));
+			$view['purchase_order'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
+		$this->load->view('penerimaan', $view);
+	}	
+	
 	function purchase_order_add() {
 		if ($_POST) {
 		
@@ -37,15 +54,13 @@ class Home extends MY_Controller {
 			$pnobukti = $this -> input -> post('pnobukti', TRUE);
 			$pref = $this -> input -> post('pref', TRUE);
 			$ptglx = explode("/",$this -> input -> post('ptgl', TRUE));			
-			$ptgl="$ptglx[2]-$ptglx[1]-$ptglx[0]";		
-
-
-			
+			$ptgl="$ptglx[2]-$ptglx[1]-$ptglx[0]";					
 			$psid = $this -> input -> post('psid', TRUE);
 			$pgudang = $this -> input -> post('pgudang', TRUE);
 			$pstatus = (int)$this ->input -> post('pstatus', TRUE);
 			$pcdate=date('Y-m-d');
 			$pcid = $this -> input -> post('pcid', TRUE);
+			$pssid = $this -> input -> post('pssid', TRUE);
 			$ptype = $this -> input -> post('ptype', TRUE);
 		
 			// print_r($_POST);die;
@@ -55,7 +70,7 @@ class Home extends MY_Controller {
 				// redirect(site_url('purchase_order' . '/' . __FUNCTION__));
 			// }
 			// else {
-					$arr = array('pbid' => $pbid, 'pnobukti' => $pnobukti, 'pref' => $pref, 'ptgl' => $ptgl, 'psid' => $psid, 'pgudang' => $pgudang,'pstatus' => $pstatus,'pcdate' => $pcdate,'pcid'=>$pcid,'ptype' => $ptype );	
+					$arr = array('pbid' => $pbid, 'pnobukti' => $pnobukti, 'pref' => $pref, 'ptgl' => $ptgl, 'psid' => $psid, 'pgudang' => $pgudang,'pstatus' => $pstatus,'pcdate' => $pcdate,'pcid'=>$pcid,'ptype' => $ptype,'pssid'=>$pssid );	
 				if ($this -> purchase_order_model -> __insert_purchase_order($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					
@@ -76,6 +91,7 @@ class Home extends MY_Controller {
 
 			
 		$view['pcid'] = $this -> customers_lib -> __get_customers();
+		$view['pssid'] = $this -> suplier_lib -> __get_suplier();
 		$view['pbid'] = $this -> branch_lib -> __get_branch();
 		$view['psid'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 		$this->load->view('purchase_order_add',$view);

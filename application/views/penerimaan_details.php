@@ -24,7 +24,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Purchase Order Add</h5>
+            <h5>Penerimaan Barang</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -68,6 +68,11 @@
 					   <input type=text value="<?php echo $detailx[0]->pnobukti; ?>" class="form-control" disabled>
                     </div>
                 </div>
+				
+				
+	</td><td>			
+
+
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Ref</label>
@@ -83,12 +88,11 @@
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->ptgl; ?>" class="form-control" disabled>
                     </div>
-       				
-					
+       					
 					
                 </div>
 
-                <div class="form-group">
+                   <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
@@ -104,79 +108,17 @@
                     <div class="col-lg-4">
 						<input type=text value="<?php echo $detailx[0]->pgudang; ?>" class="form-control" disabled>
                     </div>
-                </div>
-				
-				
-	</td><td>			
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Kode Barang</label>
-
-                    <div class="col-lg-4">
-                        <select name="pppid" data-placeholder="Kode Barang" class="form-control chzn-select"><?php echo $pppid; ?></select>	
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Mata Uang</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" name="pcurrency" class="form-control"     />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Qty</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" name="pqty" class="form-control" data-placeholder="Point" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" name="pharga" class="form-control" data-placeholder="Point" 
-						onkeyup="formatharga(this.value,this)" value="0" />
-                    </div>
-                </div>
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Discount</label>
-                    <div class="col-lg-4">
-                        <input type="text" name="pdisc" class="form-control" data-placeholder="Point" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
-
-                    <div class="col-lg-4">
-                        <textarea name="pketerangan" class="form-control" placeholder="Description"></textarea>
-                    </div>
-                </div>				
-				
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Status</label>
-                    
-                    <div class="col-lg-4">
-						<select name="pstatus" data-placeholder="gudang" class="form-control chzn-select">
-						<option value=0>Pending</option>
-						<option value=1>Ok</option>
-						</select>
-                    </div>
-				</div>
+                </div>       
 				
 				</td></tr></table></p>
 				
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
-                    <div class="col-lg-4">
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-					</div>
+
 				</div>
             </form>
+
+			
         </div>
     </div>
 </div>
@@ -225,8 +167,8 @@
 		
 		
 		  <td>
-              <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_update/' . $v -> pid .'/'. $v -> ppid); ?>"><i class="icon-pencil"></i></a>
-              <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_delete/' . $v -> pid.'/'. $v -> ppid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+              <a href="<?php echo site_url('purchase_order_detail/home/penerimaan_update/' . $v -> pid .'/'. $v -> ppid); ?>"><i class="icon-pencil"></i></a>
+              <a href="<?php echo site_url('purchase_order_detail/home/penerimaan_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
           </td>		
 		
 		
@@ -235,9 +177,7 @@
                                     </tbody>
                                 </table>
 								
-			
-<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_details/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">SAVE</button></a>			
-								
+		<a href= "<?php echo site_url('purchase_order_detail/home/penerimaan_report/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">CETAK PENERIMAAN</button></a>											
 								
     <?php //echo $pages; ?>
                             </div>

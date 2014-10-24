@@ -237,7 +237,11 @@ minLength: 1,
 		 </tr>		 
                                     </tbody>
                                 </table>
-		<form action="<?php echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>" ><input type=submit value=Cetak ></form>						
+		<form action="<?php echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>" ><input type=submit value=Cetak ></form><br>	
+
+<a href="javascript:void(0);" onclick="print_data('<?php echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>', 'Print SO');"><input type=button value=PRINT></a>
+
+		
     <?php //echo $pages; ?>
                             </div>
                         </div>
