@@ -34,8 +34,9 @@ class sales_order_model extends CI_Model {
 	
 	function __get_sales_order_detail($id) {
 		$this -> db -> select('*,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
-		(select cname from customers_tab where customers_tab.cid=sales_order_tab.ssid)as cname,
-		(select caddr from customers_tab where customers_tab.cid=sales_order_tab.ssid)as caddr,
+		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
+		(select caddr from customers_tab where customers_tab.cid=sales_order_tab.scid)as caddr,
+		(select climit from customers_tab where customers_tab.cid=sales_order_tab.scid)as sisaplafon,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname
 		FROM sales_order_tab WHERE (sstatus=1 OR sstatus=0) AND sid=' . $id);
 		return $this -> db -> get() -> result();

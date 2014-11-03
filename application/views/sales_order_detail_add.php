@@ -36,7 +36,12 @@ minLength: 1,
 		$("#thePricex").val(ui.item.price),
 		$("#theQty").val(ui.item.mqty),
 		$("#theQtyx").val(ui.item.mqty),
-		$("#theStatus").val(ui.item.pstatus)
+		$("#theStatus").val(ui.item.pstatus),
+		$("#thePriceq").val(ui.item.priceq),
+		$("#thePriceqq").val(ui.item.priceq),
+		$("#theCcat").val(ui.item.ccat),
+		$("#theCcatt").val(ui.item.ccat),
+		$("#theNamecat").val(ui.item.namecat)
 	
 		
     }
@@ -80,6 +85,8 @@ var badColor = "#ff6666";
  var messagee = document.getElementById('confirmMessagee');
  var e=document.forms["myForm"]["price"].value; 
   
+ var k=document.forms["myForm"]["ccat"].value;  
+  
 	if(a=="" )
 	  {
 	  //alert(1);
@@ -90,37 +97,26 @@ var badColor = "#ff6666";
 	   messagea.innerHTML = "";  
 	  }  
 
-	// if(b==null || b=="" )
-	  // {
-	  //alert(3);
-	  // messageb.style.color = badColor;
-	  // messageb.innerHTML  = "Batas Qty Masih Kosong";  
-	  // }else{
-	  //alert(4);
-	   // messageb.innerHTML = "";  
-	  // }  
-	if( c==null || c=="" || c <= b )
-	  {
-	   // alert(5);
-	  messagec.style.color = badColor;
-	  messagec.innerHTML  = "Qty masih kosong atau dibawah batas qty";  
-	  }else{
-	   // alert(6);
-	   messagec.innerHTML = "";  
-	  }  	  
-	// if(d==null || d=="" )
-	  // {
-	  // alert(33);
-	  // messaged.style.color = badColor;
-	  // messaged.innerHTML  = "Batas Bawah Harga Masih Kosong";  
-	  // }else{
-	  // alert(44);
-	   // messaged.innerHTML = "";  
-	  // } 
+
+	if( k==0 || k== 2){  
+		if( c==null || c=="" || c <= b )
+		  {
+		    alert(k);
+		  messagec.style.color = badColor;
+		  messagec.innerHTML  = "Qty masih kosong atau dibawah batas qty";  
+		  }else{
+		   // alert(6);
+		   messagec.innerHTML = "";  
+		  }  
+	}else{
+		   // alert(6);
+		   messagec.innerHTML = "";  
+		  } 
+
  
 	if(e==null || e=="" || e <= d )
 	  {
-	  // alert(9);
+	  alert('Harga masih kosong atau dibawah batas harga');
 	  messagee.style.color = badColor;
 	  messagee.innerHTML  = "Harga masih kosong atau dibawah batas harga";  
 	  }else{
@@ -128,7 +124,7 @@ var badColor = "#ff6666";
 	   messagee.innerHTML = "";  
 	  }  
 	  
- if(  messagea.innerHTML==""   &&  messagec.innerHTML==""  &&  messagee.innerHTML==""  )
+ if(  messagea.innerHTML==""   &&  messagec.innerHTML==""   )
  {
 // alert(11);
   return true;
@@ -248,12 +244,26 @@ var badColor = "#ff6666";
 
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Sisa Plafon</label>
 
                     <div class="col-lg-4">
-                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
+					<input type=text value="<?php echo $detailx[0]->sisaplafon; ?>" class="form-control"  disabled >
+                        <input type=hidden value="<?php echo $detailx[0]->sisaplafon; ?>" class="form-control" name="sisaplafon" >
                     </div>
-                </div>				
+                </div>			
+				
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Category Customer</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text  id="theNamecat" class="form-control" disabled>
+						
+						<input type=hidden  id="theCcatt" class="form-control" name=ccat >
+						
+                    </div>
+                </div>					
+				
 		
 </td><td width=40%>
 
@@ -267,6 +277,10 @@ var badColor = "#ff6666";
                 </div>	
 		
 
+		
+		
+		
+		
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Batas Bawah Harga</label>
 
@@ -279,6 +293,18 @@ var badColor = "#ff6666";
                 </div>			
 
 
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Harga Store</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text  id="thePriceqq" class="form-control" disabled>
+						
+						<input type=hidden  id="thePriceq" class="form-control" name=priceq >
+						
+                    </div>
+                </div>					
+				
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Batas QTY</label>
@@ -290,6 +316,7 @@ var badColor = "#ff6666";
 							
                     </div>
                 </div>	
+
 				
 				
                 <div class="form-group">

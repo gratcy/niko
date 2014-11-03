@@ -18,13 +18,13 @@ class Purchase_order_detail_model extends CI_Model {
 	
 	function __get_purchase_order_detail($id) {
 	//echo "select('* FROM purchase_order_detail_tab WHERE (pstatus=1 OR pstatus=0) AND ppid=' . $id)";die;
-		$this -> db -> select('* FROM purchase_order_detail_tab WHERE (pstatus=1 OR pstatus=0) AND ppid=' . $id);
+		$this -> db -> select('*,(select pname from products_tab where purchase_order_detail_tab.pppid= products_tab.pid)as pname FROM purchase_order_detail_tab WHERE (pstatus = 1)  AND ppid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 
 
-	function __get_penerimaan_detail($id) {
-		$this -> db -> select('* FROM penerimaan_detail_tab WHERE (pstatus=1 OR pstatus=0) AND ppid=' . $id);
+	function __get_penerimaan_detail($id,$pno) {
+		$this -> db -> select("* ,(select pname from products_tab where penerimaan_detail_tab.pppid= products_tab.pid)as pname FROM penerimaan_detail_tab WHERE (pstatus=1) AND pqty<>0 AND ppid=" . $id . " AND pno_penerimaan= '$pno'" );
 		return $this -> db -> get() -> result();
 	}
 
@@ -35,13 +35,13 @@ class Purchase_order_detail_model extends CI_Model {
 	}	
 	
 	function __get_purchase_order_details($scid) {
-		$this -> db -> select('* FROM purchase_order_tab a,purchase_order_detail_tab b,sales_order_detail_tab c WHERE  b.pstatus=1 AND a.pid=b.ppid AND b.pid=c.spid AND pcid=' . $scid);
+		$this -> db -> select('* FROM purchase_order_tab a,purchase_order_detail_tab b,sales_order_detail_tab c WHERE  (pstatus<>2) AND a.pid=b.ppid AND b.pid=c.spid AND pcid=' . $scid);
 		return $this -> db -> get() -> result();
 	}	
 	
 	function __get_purchase_order_detailx($id) {
 	//echo "select('* FROM purchase_order_detail_tab WHERE (pstatus=1 OR pstatus=0) AND ppid=' . $id)";die;
-		$this -> db -> select('* FROM purchase_order_detail_tab WHERE (pstatus=1 OR pstatus=0) AND pid=' . $id);
+		$this -> db -> select('* FROM purchase_order_detail_tab WHERE (pstatus<>2)  AND pid=' . $id);
 		return $this -> db -> get() -> result();
 	}	
 	

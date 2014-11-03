@@ -77,7 +77,7 @@ left:inherit!important;
 		  <?php
 		  foreach($products as $k => $v) :
 		  ?>
-                                        <tr>
+          <tr>
 		  <?php if (__get_roles('ProductViewAsBranch')) : ?>
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
@@ -101,7 +101,7 @@ left:inherit!important;
           <td><?php echo $v -> ppoint; ?></td>
           <td><?php echo __get_status($v -> pstatus,1); ?></td>
           <?php endif; ?>
-		<?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
+		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
 		  <td>
 				<?php if (__get_roles('ProductsUpdate')) : ?>
               <a href="<?php echo site_url('products/products_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>

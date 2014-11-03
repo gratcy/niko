@@ -5,7 +5,8 @@ class Customers_model extends CI_Model {
     }
  
     function __get_customers_select() {
-		$this -> db -> select('cid,cname FROM customers_tab WHERE cstatus=1 ORDER BY cname ASC');
+	$bidd= $this -> memcachedlib -> sesresult['ubid']; 
+		$this -> db -> select('cid,cname FROM customers_tab WHERE cstatus=1 AND cbid=' . $bidd. '  ORDER BY cname ASC');
 		return $this -> db -> get() -> result();
 	}
  

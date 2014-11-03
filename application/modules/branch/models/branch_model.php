@@ -5,7 +5,8 @@ class Branch_model extends CI_Model {
     }
     
     function __get_branch_select() {
-		$this -> db -> select('bid,bname FROM branch_tab WHERE bstatus=1 ORDER BY bname ASC');
+	$bidd= $this -> memcachedlib -> sesresult['ubid']; 
+		$this -> db -> select('bid,bname,baddr FROM branch_tab WHERE bstatus=1 AND bid='.$bidd.' ORDER BY bname ASC');
 		return $this -> db -> get() -> result();
 	}
 	

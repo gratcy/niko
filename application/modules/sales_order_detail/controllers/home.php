@@ -75,15 +75,26 @@ class Home extends MY_Controller {
 	
 	function sales_order_detail_add($id,$scid) {
 		if ($_POST) {
-		
-
+			$pricex = $this -> input -> post('pricex', TRUE);
+			$priceq = $this -> input -> post('priceq', TRUE);
+			$qtyx = $this -> input -> post('qtyx', TRUE);
 		    $ssid = $this -> input -> post('id', TRUE);
 			$spid = $this -> input -> post('spid', TRUE);
 			$sqty = $this -> input -> post('sqty', TRUE);
 			$sprice = $this -> input -> post('price', TRUE);
 			$sdisc = $this -> input -> post('pdisc', TRUE);
-
+			$ccat = $this -> input -> post('ccat', TRUE);
+		if($ccat=='1'){			
+			if($qtyx>$sqty){
+				$sprice=$priceq;
+			}else if($qtyx==$sqty){
+				$sprice=$pricex;
+			}
+		}
 		
+		if($ccat=='3'){
+			$sprice=$priceq;
+		}
 
 					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc);					
 					if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr,$spid)) {

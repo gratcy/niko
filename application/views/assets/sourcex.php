@@ -19,7 +19,7 @@ $qq="select * from customers_tab where cid= '$_GET[scid]'";
 $qr=mysql_query($qq);
 $r=mysql_fetch_array($qr);
 $ccat=$r['ccat'];	
-	
+
 	
 $query = mysql_query($req);
 
@@ -28,16 +28,24 @@ while($row = mysql_fetch_array($query))
 
 
 if($ccat==0){
+$namecat="dist";
 	$price=$row['pdist'];
+	$priceq=$row['pdist'];
 	$ddisc=0;
 }elseif($ccat==1){
+$namecat="reg";
 	$price=$row['pkey'];
+	$priceq=$row['pstore'];
 	$ddisc=0;
 }elseif($ccat==2){
+$namecat="semi";
 	$price=$row['psemi'];
+	$priceq=$row['psemi'];
 	$ddisc=0;
 }elseif($ccat==3){
+$namecat="cash";
 	$price=$row['pstore'];
+	$priceq=$row['pstore'];
 	$ddisc=$row['pdisc'];
 }
 
@@ -50,7 +58,7 @@ if($ccat==0){
 	'ppid' => $row['ppid'],'pcode' =>$row['pcode'],'pdesc' => $row['pdesc'],'phpp' => $row['phpp'],
 	'pdist' => $row['pdist'],'psemi' => $row['psemi'],'pkey' => $row['pkey'],'pstore' => $row['pstore'],
 	'pconsume' => $row['pconsume'],'ppoint' => $row['ppoint'],'pdisc' => $row['pdisc'],'pstatus' => $row['pstatus'],
-	'price'=>$price, 'mqty'=>$row['mqty'],'ddisc'=>$ddisc );
+	'price'=>$price, 'mqty'=>$row['mqty'],'ddisc'=>$ddisc ,'priceq'=>$priceq ,'ccat'=>$ccat,'namecat'=>$namecat );
 }
 
 echo json_encode($results);

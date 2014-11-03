@@ -12,7 +12,30 @@
             
             });
         </script>
-    
+  
+
+<script>
+$(function() {
+$("#search").autocomplete({
+delay:0, 
+cacheLength: 0,
+minLength: 1,
+    source: '<?php echo site_url('application/views/assets/source_po.php'); ?>',
+     select: function(event, ui) { 
+	    $("#thePid").val(ui.item.pid),
+        $("#thePhpp").val(ui.item.phpp)
+	
+		
+    }
+	
+
+})
+
+});
+</script>
+
+
+  
        <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">
@@ -28,6 +51,7 @@
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
+	<?php echo $pno; ?>
             <form class="form-horizontal" action="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_add'); ?>" method="post">
 <p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>
@@ -48,16 +72,6 @@
                 </div>				
 				
  
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Supplier</label>
-
-                    <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->ssname; ?>" class="form-control" disabled>
-                    </div>
-                </div>
-
-
 
 
 				<div class="form-group">
@@ -88,18 +102,11 @@
 					
                 </div>
 
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
-
-                    <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
-                    </div>
-                </div>
 
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Gudang</label>
+                    <label for="text1" class="control-label col-lg-4">Alamat</label>
 
                     <div class="col-lg-4">
 						<input type=text value="<?php echo $detailx[0]->pgudang; ?>" class="form-control" disabled>
@@ -113,7 +120,8 @@
                     <label for="text1" class="control-label col-lg-4">Kode Barang</label>
 
                     <div class="col-lg-4">
-                        <select name="pppid" data-placeholder="Kode Barang" class="form-control chzn-select"><?php echo $pppid; ?></select>	
+<input  name=pname type="text" id="search" class="form-control"   />
+<input  name=pppid type="hidden" id="thePid" class="form-control"   />
                     </div>
                 </div>
 
@@ -121,7 +129,7 @@
                     <label for="text1" class="control-label col-lg-4">Mata Uang</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="pcurrency" class="form-control"     />
+                        <input type="text" name="pcurrency" class="form-control"  value="IDR"   />
                     </div>
                 </div>
 
@@ -136,17 +144,10 @@
                     <label for="text1" class="control-label col-lg-4">Harga</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="pharga" class="form-control" data-placeholder="Point" 
-						onkeyup="formatharga(this.value,this)" value="0" />
+<input  name=pharga type="text" id="thePhpp" class="form-control"   />
                     </div>
                 </div>
 				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Discount</label>
-                    <div class="col-lg-4">
-                        <input type="text" name="pdisc" class="form-control" data-placeholder="Point" />
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Keterangan</label>
@@ -160,10 +161,14 @@
 							<label for="status" class="control-label col-lg-4">Status</label>
                     
                     <div class="col-lg-4">
-						<select name="pstatus" data-placeholder="gudang" class="form-control chzn-select">
+					
+					         <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_status(0,2); ?>
+                            </div>
+						<!--select name="pstatus" data-placeholder="gudang" class="form-control chzn-select">
 						<option value=0>Pending</option>
 						<option value=1>Ok</option>
-						</select>
+						</select-->
                     </div>
 				</div>
 				
@@ -172,8 +177,9 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+				<a href= "<?php echo site_url('purchase_order/home/purchase_order_update/' . $id); ?>" ><button class="btn text-muted text-center btn-primary" type="button">EDIT</button></a>	
+				<button class="btn text-muted text-center btn-danger" type="submit">ADD ITEM</button>
+				
 					</div>
 				</div>
             </form>
@@ -196,11 +202,12 @@
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
+          <th>Nama Product</th>
           <th>Currency</th>
           <th>Qty</th>
           <th>Harga</th>
           <th>Discount </th>
+		  <th>Total </th>
 		  <th>Keterangan</th>
           <th>Status</th>
 		  <th>Action</th>
@@ -208,18 +215,26 @@
                                     </thead>
                                     <tbody>
 		  <?php
-		  
+		  $totalharga=0;
 		
 		  foreach($detail as $k => $v) :	
 	
 		  ?>
-          <tr>
+         <tr>
           
-          <td><?php echo $v -> pppid; ?></td>
+          <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pcurrency; ?></td>
           <td><?php echo $v -> pqty; ?></td>
           <td><?php echo $v -> pharga; ?></td>
           <td><?php echo $v -> pdisc; ?></td>
+		  
+		<?php
+		$total= ($v -> pharga* $v -> pqty)-($v -> pharga * $v -> pdisc *0.01 * $v -> pqty );
+		?>
+		<td><?php echo $total; ?></td>
+		
+		  
+		  
 		  <td><?php echo $v -> pketerangan; ?></td>
           <td><?php echo $v -> pstatus; ?></td>
 		
@@ -228,13 +243,69 @@
               <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_update/' . $v -> pid .'/'. $v -> ppid); ?>"><i class="icon-pencil"></i></a>
               <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_delete/' . $v -> pid.'/'. $v -> ppid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
           </td>		
-		
-		
-										</tr>
+		</tr>
+		<?php 
+		$totalharga=$totalharga+$total;
+		?>
         <?php endforeach; ?>
+		
+		<form>
+		         <tr>
+          
+          <td>DPP</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+		  <td></td>
+          <td></td>
+		
+		
+		  <td>
+              
+          </td>		
+		</tr>
+		         <tr>
+          
+          <td>PPN</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+		  <td></td>
+          <td></td>
+		
+		
+		  <td>
+              
+          </td>		
+		</tr>	
+		         <tr>
+          
+          <td>TOTAL</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+		  <td><?php echo $totalharga;?></td>
+          <td></td>
+		
+		
+		  <td>
+              
+          </td>		
+		</tr>		
+		</form>
+		
+		
+		
+		
+		
+		
                                     </tbody>
                                 </table>
-								
+					
+		
 			
 <a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_details/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">SAVE</button></a>			
 								

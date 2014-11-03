@@ -10,16 +10,28 @@ class Branch_lib {
     }
     
     function __get_branch($id='') {
-		$branch = $this -> _ci -> branch_model -> __get_branch_select();
-		$res = '<option value=""></option>';
+	
+		$branch = $this -> _ci -> branch_model -> __get_branch_select();		
+		//$res = '<option value=""></option>';
 		foreach($branch as $k => $v)
 			if ($id == $v -> bid)
-				$res .= '<option value="'.$v -> bid.'" selected>'.$v -> bname.'</option>';
+				$res = '<option value="'.$v -> bid.'" selected>'.$v -> bname.'</option>';
 			else
-				$res .= '<option value="'.$v -> bid.'">'.$v -> bname.'</option>';
+				$res = '<option value="'.$v -> bid.'">'.$v -> bname.'</option>';
 		return $res;
 	}
 
+	
+    function __get_branch_add($id='') {
+	
+		$branch = $this -> _ci -> branch_model -> __get_branch_select();		
+		//print_r($branch[0]->baddr);
+		$res = $branch[0]->baddr;
+		return $res;
+	}	
+	
+	
+	
 	function __get_branch_moq($arr = array()) {
 		$branch = $this -> _ci -> branch_model -> __get_branch_select();
 		$res = '';

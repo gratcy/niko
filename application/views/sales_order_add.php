@@ -30,11 +30,15 @@ minLength: 1,
 		$("#theDeliver").val(ui.item.cdeliver),
 		$("#theTopcash").val(ui.item.ccash),
 		$("#theTopcredit").val(ui.item.ccredit),
+		$("#theTopcashx").val(ui.item.ccash),
+		$("#theTopcreditx").val(ui.item.ccredit),		
 		$("#theAddr").val(ui.item.caddr),
 		$("#thePkp").val(ui.item.cpkp),
 		$("#theSid").val(ui.item.csid),
 		$("#theSname").val(ui.item.csname),
-		$("#thePhone").val(ui.item.cphone)
+		$("#thePhone").val(ui.item.cphone),
+		$("#theTopx").val(ui.item.topx),
+		$("#theTopxx").val(ui.item.topx)
 	
 		
     }
@@ -137,25 +141,60 @@ minLength: 1,
                 </div>				
 				
 		
+
+	
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Term Of Payment</label>
+
+                    <div class="col-lg-4">
+                        <input  type="text" id="theTopxx" class="form-control"   disabled />
+						<input  name=topx type="hidden" id="theTopx" class="form-control"   />
+                    </div>
+                </div>		
+	
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Term Of Payment Cash</label>
+
+                    <div class="col-lg-4">
+                        <input  type="text" id="theTopcashx" class="form-control"   disabled/>
+						
+                    </div>
+                </div>			
+
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Term Of Payment Credit</label>
+
+                    <div class="col-lg-4">
+                        <input   type="text" id="theTopcreditx" class="form-control"  disabled  />
+						
+                    </div>
+                </div>					
+
+	
+	
+				
+		</td><td width=40% >
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
                         <input  name=caddr type="text" id="theAddr" class="form-control"   />
                     </div>
-                </div>		
-	
-
+                </div>				
+		
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Telp</label>
 
                     <div class="col-lg-4">
                         <input  name=cphone type="text" id="thePhone" class="form-control"   />
                     </div>
-                </div>		
-				
-		</td><td width=40% >
-
+                </div>			
+		
+		
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 

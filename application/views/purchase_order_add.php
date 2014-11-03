@@ -31,122 +31,54 @@
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('purchase_order/home/purchase_order_add'); ?>" method="post">
-
-
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
                     <div class="col-lg-4">
-                        <!--input type="text" placeholder="Purchase Order Code" name="pbid" class="form-control" /-->
-						
-						<select name="pbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $pbid; ?></select>						
+                        <select name="pbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $pbid; ?></select>						
 						
                     </div>
                 </div>
-				
-				
-	                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Type PO</label>
-                    
-                    <div class="col-lg-4">
-						<select name="ptype" data-placeholder="gudang" class="form-control chzn-select">
-						<option value="in">IN</option>
-						<option value="out">OUT</option>
-						</select>
-                    </div>
-				</div>			
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Customer</label>
-
-                    <div class="col-lg-4">
-                        <!--input type="text" placeholder="Purchase Order Code" name="pbid" class="form-control" /-->
-						
-						<select name="pcid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $pcid; ?></select>						
-						
-                    </div>
-                </div>				
-				
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Supplier</label>
-
-                    <div class="col-lg-4">
-                       
-						<select name="pssid" data-placeholder="Supplier" class="form-control chzn-select"><?php echo $pssid; ?></select>						
-						
-                    </div>
-                </div>				
-								
-				
-				
-				
-				
-				
-				
-				
-				
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No bukti</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="No Bukti" name="pnobukti" class="form-control" />
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Ref</label>
 
                     <div class="col-lg-4">
+						<input type="hidden" name="pssid" />
+						<input type="hidden" name="psid" />
+						<input type="hidden" name="pcid"  />
+						<input type="hidden" name="ptype" value="in"   />
                         <input type="text" name="pref" class="form-control"     />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
-
-                    <div class="col-lg-4">
-                  
-
-                <input  name="ptgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
-            </div>
-       				
-					
-					
+                    <div class="col-lg-4">                
+					<input  name="ptgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
+				</div>				
                 </div>
 
+
+
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
+                    <label for="text1" class="control-label col-lg-4">Alamat</label>
 
                     <div class="col-lg-4">
-                        <select name="psid" data-placeholder="sales" class="form-control chzn-select"><?php echo $psid; ?></select>		
+						<input type="text" name="pgudang" class="form-control" value="<?php echo $pbadd; ?>" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Gudang</label>
-
+					<label for="status" class="control-label col-lg-4">Status</label>                    
                     <div class="col-lg-4">
-						<input type="text" name="pgudang" class="form-control"  />
-                    </div>
-                </div>
-
-                		
-				
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Status</label>
-                    
-                    <div class="col-lg-4">
-						<select name="pstatus" data-placeholder="gudang" class="form-control chzn-select">
-						<option value=0>Pending</option>
-						<option value=1>Ok</option>
-						</select>
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_status(0,2); ?>
+                            </div>
                     </div>
 				</div>
                 <div class="form-group">
-							<label for="status" class="control-label col-lg-4"></label>
-                    <div class="col-lg-4">
+				<label for="status" class="control-label col-lg-4"></label>
+                <div class="col-lg-4">
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>

@@ -59,7 +59,7 @@
 
                     <div class="col-lg-4">
                         <input type="text" name="pharga" class="form-control" data-placeholder="Point" 
-						onkeyup="formatharga(this.value,this)" value="<?php echo $detail[0] -> pharga; ?>" />
+						 value="<?php echo $detail[0] -> pharga; ?>" />
                     </div>
                 </div>
 				

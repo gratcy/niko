@@ -48,10 +48,8 @@ left:inherit!important;
           <th>Cabang</th>
           <th>No Bukti</th>
           <th>Reff</th>
-          <th>Tanggal</th>
-          <th>Sales</th>
-          <th>Gudang </th>
-         
+          <th>Tanggal</th>       
+          <th>Gudang </th>         
 		  <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
@@ -60,23 +58,17 @@ left:inherit!important;
 		  foreach($purchase_order as $k => $v) :
 	
 		  ?>
-                                        <tr>
+          <tr>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> pnobukti; ?></td>
           <td><?php echo $v -> pref; ?></td>
           <td><?php echo __get_date(strtotime($v -> ptgl,2)); ?></td>
-          <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> pgudang; ?></td>
-         
-		
+          <td><?php echo $v -> pgudang; ?></td>	
 		
 		  <td>
-				
-				
-			<a href="<?php echo site_url('purchase_order_detail/home/penerimaan_details/' . $v -> pid); ?>"><i class="icon-book"></i></a>	
-				
-				
-          </td>		
+<a href="<?php echo site_url('purchase_order_detail/home/penerimaan_details/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>		  
+			<a href="<?php echo site_url('purchase_order/home/sub_penerimaan/' . $v -> pid); ?>"><i class="icon-book"></i></a>	
+		  </td>		
 		
 		
 										</tr>

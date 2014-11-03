@@ -34,10 +34,11 @@ class Home extends MY_Controller {
 	
 	
 	
-	function penerimaan_details($id) {
+	function penerimaan_details($id,$pno) {
 		$view['id'] = $id;
+		$view['pno'] = $pno;		
 		$view['detailx'] = $this -> purchase_order_model -> __get_purchase_order_detail($id);
-		$view['detail'] = $this -> purchase_order_detail_model -> __get_penerimaan_detail($id);
+		$view['detail'] = $this -> purchase_order_detail_model -> __get_penerimaan_detail($id,$pno);
 		$view['pbid'] = $this -> branch_lib -> __get_branch();
 		$view['psid'] = $this -> sales_lib -> __get_sales();
 		$view['pppid'] = $this -> products_lib -> __get_products();
@@ -46,7 +47,55 @@ class Home extends MY_Controller {
 			$this->load->view('penerimaan_details',$view);	
 	}	
 	
-	
+
+	function penerimaan_details_add($id,$pno) {
+		if($_POST){
+			$jum=count($_POST['pqty']);
+			echo count($_POST['pqty']);
+			//print_r($_POST);
+				for($j=0;$j<$jum;$j++){
+					$pid=$_POST['pid'][$j];
+					$ppid=$_POST['ppid'][$j];
+					$pppid=$_POST['pppid'][$j];
+					$pcurrency=$_POST['pcurrency'][$j];
+					$pqtyz=(int)$_POST['pqtyz'][$j];
+					$pqty=(int)$_POST['pqty'][$j];
+					$psisa=$pqtyz-$pqty;
+					$pharga=$_POST['pharga'][$j];
+					$pdisc=$_POST['pdisc'][$j];
+					$pketerangan=$_POST['pketerangan'][$j];
+					$pstatus=$_POST['pstatus'][$j];
+					$pno_penerimaan=$_POST['pno_penerimaan'][$j];
+
+					$arr = array('psisa' => $psisa );						
+					
+						$this -> purchase_order_detail_model ->  __update_purchase_order_detail($pid, $arr);
+
+
+					
+						 $arry = array( 'pid' => $pid ,'ppid' => $ppid ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus,'pno_penerimaan' => $pno_penerimaan );
+						 $this -> purchase_order_detail_model -> __insert_penerimaan_detail($arry);	
+						 
+				}
+				
+			redirect(site_url('purchase_order_detail/home/penerimaan_details/'.$ppid .'/' .$pno_penerimaan));
+					// $arry = array( 'pid' => $idd ,'ppid' => $id ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus );
+
+					// $arrz = array( 'pid' => $idd ,'ppid' => $id ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus );
+					//$this -> purchase_order_detail_model -> __insert_penerimaan_detail($arry);		
+		}else{
+			$view['id'] = $id;
+			$view['pno'] = $pno;
+			$view['detailx'] = $this -> purchase_order_model -> __get_purchase_order_detailzz($id,$pno);
+			$view['detail'] = $this -> purchase_order_detail_model -> __get_purchase_order_detail($id);
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();
+			
+			// print_r($view['detailx']);die;
+				$this->load->view('penerimaan_details_add',$view);	
+		}
+	}	
 	
 	
 	
@@ -59,25 +108,26 @@ class Home extends MY_Controller {
 	
 	function purchase_order_detail_add($id) {
 		if ($_POST) {
-		
+		//print_r($_POST);die;
 			$pppid = $this -> input -> post('pppid', TRUE);
 			$pcurrency = $this -> input -> post('pcurrency', TRUE);
 			$pqty = $this -> input -> post('pqty', TRUE);
 			$pharga = $this -> input -> post('pharga', TRUE);
 			$pdisc = $this -> input -> post('pdisc', TRUE);
 			$pketerangan = $this -> input -> post('pketerangan', TRUE);
-			$pstatus = (int)$this ->input -> post('pstatus', TRUE);
+			$pstatus = (int)$this ->input -> post('status', TRUE);
 			$id = (int) $this -> input -> post('id');
+			$psisa = $this -> input -> post('pqty', TRUE);
 		
 
 			if ($id) {
 			
-					$arr = array( 'ppid' => $id ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus );	
+					$arr = array( 'ppid' => $id ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus,'psisa' => $psisa );	
 					//print_r($arr);die;
 				if ($this -> purchase_order_detail_model -> __insert_purchase_order_detail($arr)) {
 				$idd=  $this->db->insert_id();
 				$arry = array( 'pid' => $idd ,'ppid' => $id ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus );
-				$this -> purchase_order_detail_model -> __insert_penerimaan_detail($arry);
+				//$this -> purchase_order_detail_model -> __insert_penerimaan_detail($arry);
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('purchase_order_detail/home/purchase_order_detail_add/'. $id .''));
 				}
@@ -121,10 +171,10 @@ class Home extends MY_Controller {
 			$this->load->view('purchase_order_report',$view);
 	}	
 	
-	function penerimaan_report($id) {
+	function penerimaan_report($id,$pno) {
 		$view['id'] = $id;
 		$view['detailx'] = $this -> purchase_order_model -> __get_purchase_order_detail($id);
-		$view['detail'] = $this -> purchase_order_detail_model -> __get_penerimaan_detail($id);
+		$view['detail'] = $this -> purchase_order_detail_model -> __get_penerimaan_detail($id,$pno);
 		$view['pbid'] = $this -> branch_lib -> __get_branch();
 		$view['psid'] = $this -> sales_lib -> __get_sales();
 		$view['pppid'] = $this -> products_lib -> __get_products();						
@@ -132,7 +182,7 @@ class Home extends MY_Controller {
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
 	
-			$this->load->view('purchase_order_report',$view);
+			$this->load->view('penerimaan_report',$view);
 	}		
 	
 	

@@ -28,7 +28,7 @@
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <form class="form-horizontal" action="<?php echo site_url('purchase_order/home/penerimaan_add'); ?>" method="post">
+            <form class="form-horizontal" action="<?php echo site_url('purchase_order/home/penerimaan_add/'.$id); ?>" method="post">
 <p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>
                 <div class="form-group">
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">No Penerimaan</label>
 
-                    <div class="col-lg-4">	
+                    <div class="col-lg-4">	<?php $tg= date('his');  $pno=$detailx[0]->pnobukti . '-' . $tg; ?>
 					<input type=text  class="form-control" name=pno_penerimaan  value="<?php echo $pno; ?>" >
                     </div>
                 </div>
@@ -97,7 +97,7 @@
 				</td></tr></table></p>
 				
                 <div class="form-group">
-				
+				<button class="btn text-muted text-center btn-danger" type="submit">Add Penerimaan</button>
 							<label for="status" class="control-label col-lg-4"></label>
 
 				</div>
@@ -108,129 +108,10 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-  <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-          
-          <th>Nama Product</th>
-          <th>Currency</th>
-          <th>Qty</th>
-          <th>Harga</th>
-          <th>Discount </th>
-		  <th>Total</th>
-		  <th>Keterangan</th>
-       
-		
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-		  <?php
-		  $totalharga=0;
-		
-		  foreach($detail as $k => $v) :	
-		  $total= ($v -> pharga* $v -> pqty)-($v -> pharga * $v -> pdisc *0.01 * $v -> pqty );
-		  ?>
-          <tr>
-          
-          <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> pcurrency; ?></td>
-          <td><?php echo $v -> pqty; ?></td>
-          <td><?php echo $v -> pharga; ?></td>
-          <td><?php echo $v -> pdisc; ?></td>
-		  <td><?php echo $total; ?></td>
-		  <td><?php echo $v -> pketerangan; ?></td>
-         
-		
-		
-	
-		
-		
-										</tr>
-        <?php 
-		$totalharga=$totalharga+$total;
-		endforeach; ?>
-		
-		
-<form>
-		         <tr>
-          
-          <td>DPP</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-		  <td></td>
-          <td></td>
-		
-		
-		  <td>
-              
-          </td>		
-		</tr>
-		         <tr>
-          
-          <td>PPN</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-		  <td></td>
-          <td></td>
-		
-		
-		  <td>
-              
-          </td>		
-		</tr>	
-		         <tr>
-          
-          <td>TOTAL</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-		  <td><?php echo $totalharga;?></td>
-          <td></td>
-		
-		
-		  <td>
-              
-          </td>		
-		</tr>		
-		</form>		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-                                    </tbody>
-                                </table>
-
-		<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_report/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">LIHAT PO</button></a>								
-		<a href= "<?php echo site_url('purchase_order_detail/home/penerimaan_report/' . $id .'/'.$pno); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">CETAK PENERIMAAN</button></a>											
-								
-    <?php //echo $pages; ?>
-                            </div>
-                        </div>
                     
     </div>
-                    </div>
-                  </div>
+    </div>
+    </div>
         </div>
         </div>
         <!-- END PAGE CONTENT -->

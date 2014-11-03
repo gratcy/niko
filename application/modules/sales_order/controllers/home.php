@@ -50,13 +50,11 @@ class Home extends MY_Controller {
 			//$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
+			$topx = $this -> input -> post('topx', TRUE);			
 			$ccash = $this -> input -> post('ccash', TRUE);
 			$ccredit = $this -> input -> post('ccredit', TRUE);
 			if($stypepay=="Cash"){
-// $x= "03-02-2014"; 
-// var_dump($x);
-// $yy=strtotime($x);
-// $y= date("Y-m-d H:i:s",strtotime($x ." + 15 days"));	
+
 			$sduedate = date("Y-m-d",strtotime("+$ccash days"));			
 			}else{			
 			$sduedate = date("Y-m-d",strtotime("+$ccredit days"));

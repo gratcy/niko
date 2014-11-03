@@ -16,14 +16,14 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Purchase Order </h2>
+                        <h2>Penerimaan Barang</h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('PurchaseOrderAdd')) : ?>
-                <a href="<?php echo site_url('purchase_order/home/purchase_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Purchase Order</a>
-                <br />
+  <a href="<?php echo site_url('purchase_order/home/penerimaan_add/'.$id); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Penerimaan</a>
+               <br>
                 <br />
                 <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Purchase Order
+                            Penerimaan Barang
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
@@ -45,11 +45,12 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
+          <th>No Penerimaan</th>
+		  <th>Cabang</th>
           <th>No Bukti</th>
           <th>Reff</th>
-          <th>Tanggal</th>                   
-         <th>Status </th>
+          <th>Tanggal</th>       
+          <th>Gudang </th>         
 		  <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
@@ -58,40 +59,17 @@ left:inherit!important;
 		  foreach($purchase_order as $k => $v) :
 	
 		  ?>
-                                        <tr>
+          <tr>
+		  <td><?php echo $v -> pno_penerimaan; ?></td>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> pnobukti; ?></td>
           <td><?php echo $v -> pref; ?></td>
           <td><?php echo __get_date(strtotime($v -> ptgl,2)); ?></td>
-          
-          <td><?php 
-		  if($v -> pstatus==0){
-		  $status= "Cancel";
-		  }elseif($v -> pstatus==1){
-		  $status= "Active";
-		  }elseif($v -> pstatus==2){
-		  $status= "Delete";
-		  }elseif($v -> pstatus==3){
-		  $status= "Approve";
-		  }elseif($v -> pstatus==4){
-		  $status= "Done";
-		  }
-		  echo $status; ?></td>
-         
+          <td><?php echo $v -> pgudang; ?></td>	
 		
-		
-		  <td>
-				<?php if (__get_roles('PurchaseOrderUpdate')) : ?>
-              <a href="<?php echo site_url('purchase_order/home/purchase_order_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>
-                <?php endif; ?>
-				<?php //echo site_url('purchase_order_detail/home/purchase_order_detail_add/' . $v -> pid); ?>
-			<a href="<?php echo site_url('purchase_order_detail/home/purchase_order_details/' . $v -> pid); ?>"><i class="icon-book"></i></a>	
-				
-				
-				<?php if (__get_roles('PurchaseOrderDelete')) : ?>
-              <a href="<?php echo site_url('purchase_order/home/purchase_order_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-                <?php endif; ?>
-          </td>		
+		  <td>				
+			<a href="<?php echo site_url('purchase_order_detail/home/penerimaan_details/' . $v -> pid .'/'. $v -> pno_penerimaan  ); ?>"><i class="icon-book"></i></a>	
+		  </td>		
 		
 		
 										</tr>

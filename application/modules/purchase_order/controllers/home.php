@@ -29,6 +29,29 @@ class Home extends MY_Controller {
 		}
 		$this->load->view('purchase_order', $view);
 	}
+
+
+	function purchase_order_approve($id) {
+		if ($this -> purchase_order_model -> __approve_purchase($id)) {
+			__set_error_msg(array('info' => 'Approval Berhasil.'));
+			redirect(site_url('purchase_order_detail/home/purchase_order_details/'.$id));
+		}
+		else {
+			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
+			redirect(site_url('purchase_order_detail'));
+		}
+	}
+
+	function purchase_order_cancel($id) {
+		if ($this -> purchase_order_model -> __cancel_purchase($id)) {
+			__set_error_msg(array('info' => 'Cancel Berhasil.'));
+			redirect(site_url('purchase_order_detail/home/purchase_order_details/'.$id));
+		}
+		else {
+			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
+			redirect(site_url('purchase_order_detail'));
+		}
+	}	
 	
 	function penerimaan() {
 		$keyword = $this -> input -> post('keyword');
@@ -38,13 +61,60 @@ class Home extends MY_Controller {
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> purchase_order_model -> __get_purchase_order(),3,10,site_url('purchase_order'));
+			$pager = $this -> pagination_lib -> pagination($this -> purchase_order_model -> __get_purchase_orderp(),3,10,site_url('purchase_order'));
 			$view['purchase_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
 		}
 		$this->load->view('penerimaan', $view);
 	}	
+	
+
+	function penerimaan_add($id) {
+	if($_POST){
+			$pno_penerimaan = $this -> input -> post('pno_penerimaan', TRUE);
+			$id = $this -> input -> post('id', TRUE);
+			$pstatus=1;
+				$arry = array( 'pid' => '' ,'ppid' => $id ,'pppid' => '', 'pcurrency' => '' , 'pqty' => '' , 'pharga' => '' , 'pdisc' => '' ,'pketerangan' => '','pstatus' => $pstatus,'pno_penerimaan' => $pno_penerimaan );
+				//print_r($arry);die;
+				$this -> purchase_order_model -> __insert_penerimaan_detail($arry);		
+					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+					//http://localhost/dist/purchase_order_detail/home/penerimaan_details/3
+					redirect(site_url('purchase_order_detail/home/penerimaan_details_add/'. $id .'/'.$pno_penerimaan));	
+	}
+	
+	
+		$view['id'] = $id;
+		$view['detailx'] = $this -> purchase_order_model -> __get_purchase_order_detail($id);
+		//$view['detail'] = $this -> purchase_order_detail_model -> __get_penerimaan_detail($id);
+		$view['pbid'] = $this -> branch_lib -> __get_branch();
+		$view['psid'] = $this -> sales_lib -> __get_sales();
+		//$view['pppid'] = $this -> products_lib -> __get_products();
+		
+		// print_r($view['detailx']);die;
+			$this->load->view('penerimaan_add',$view);	
+	}	
+
+	
+	
+	function sub_penerimaan($id) {
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['purchase_order'] = $this -> purchase_order_model -> __get_search($keyword);
+			$view['pages'] = '';
+		}
+		else {
+		//echo $id;die;
+			$pager = $this -> pagination_lib -> pagination($this -> purchase_order_model -> __get_penerimaan($id),3,10,site_url('purchase_order'));
+			$view['id']=$id;
+			$view['purchase_order'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
+		$this->load->view('sub_penerimaan', $view);
+	}		
+	
 	
 	function purchase_order_add() {
 		if ($_POST) {
@@ -57,7 +127,7 @@ class Home extends MY_Controller {
 			$ptgl="$ptglx[2]-$ptglx[1]-$ptglx[0]";					
 			$psid = $this -> input -> post('psid', TRUE);
 			$pgudang = $this -> input -> post('pgudang', TRUE);
-			$pstatus = (int)$this ->input -> post('pstatus', TRUE);
+			$pstatus = (int)$this ->input -> post('status', TRUE);
 			$pcdate=date('Y-m-d');
 			$pcid = $this -> input -> post('pcid', TRUE);
 			$pssid = $this -> input -> post('pssid', TRUE);
@@ -93,6 +163,7 @@ class Home extends MY_Controller {
 		$view['pcid'] = $this -> customers_lib -> __get_customers();
 		$view['pssid'] = $this -> suplier_lib -> __get_suplier();
 		$view['pbid'] = $this -> branch_lib -> __get_branch();
+		$view['pbadd'] = $this -> branch_lib -> __get_branch_add();
 		$view['psid'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 		$this->load->view('purchase_order_add',$view);
 		}
