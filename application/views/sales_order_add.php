@@ -25,7 +25,8 @@ minLength: 1,
      select: function(event, ui) { 
 	    $("#theCid").val(ui.item.cid),
         $("#theCat").val(ui.item.ccat),
-		$("#theLimit").val(ui.item.climit),
+		$("#theClimit").val(ui.item.climit),
+		$("#theClimitx").val(ui.item.climit),
 		$("#theNpwp").val(ui.item.cnpwp),
 		$("#theDeliver").val(ui.item.cdeliver),
 		$("#theTopcash").val(ui.item.ccash),
@@ -173,18 +174,18 @@ minLength: 1,
                     </div>
                 </div>					
 
-	
-	
-				
-		</td><td width=40% >
-
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
                         <input  name=caddr type="text" id="theAddr" class="form-control"   />
                     </div>
-                </div>				
+                </div>	
+	
+				
+		</td><td width=40% >
+
+			
 		
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Telp</label>
@@ -218,7 +219,8 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Sisa Plafon</label>
 
                     <div class="col-lg-4">
-                        <input  id="theLimit" name=ssisaplafon type="text" placeholder="sisa plafon" name="climit" class="form-control" />
+                        <input  id="theClimitx"  type="text" placeholder="sisa plafon"  class="form-control" disabled/>
+						<input  id="theClimit" name="climit" type="hidden" placeholder="sisa plafon"  class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -226,8 +228,8 @@ minLength: 1,
 
                     <div class="col-lg-4">
                         <select name="sfreeppn">
-						<option value="0">No</option>
-						<option value="1">Yes</option>
+						<option value="0">Yes</option>
+						<option value="1">No</option>
 						</select>
                     </div>
                 </div>
@@ -237,8 +239,9 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        	<select name=stypepay class="form-control chzn-select">
-						<option>Cash</option>
+						<option>Auto</option>
 						<option>Credit</option>
+						<option>Cash</option>						
 						</select>
 
                     </div>

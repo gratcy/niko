@@ -45,9 +45,7 @@ class Home extends MY_Controller {
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
 			$sreff = $this -> input -> post('sreff', TRUE);
 			$scurrency = $this -> input -> post('scurrency', TRUE);
-			// $skurs = $this -> input -> post('skurs', TRUE);
-			// $snpwp = $this -> input -> post('snpwp', TRUE);
-			//$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
+			$sfreeppn = $this -> input -> post('climit', TRUE);
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
 			$topx = $this -> input -> post('topx', TRUE);			
@@ -126,7 +124,7 @@ class Home extends MY_Controller {
 			$scurrency = $this -> input -> post('scurrency', TRUE);
 			$skurs = $this -> input -> post('skurs', TRUE);
 			$snpwp = $this -> input -> post('snpwp', TRUE);
-			$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
+			$climit = $this -> input -> post('climit', TRUE);
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
 			$ssubtotal = 0;
 			$sppnnpwp = 0;
@@ -143,7 +141,7 @@ class Home extends MY_Controller {
 			// else {
 					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'stgl' => $stgl, 'ssid' => $ssid,'scid'=>$scid,'stype' => $stype,
 					'scurrency' => $scurrency,'skurs' => $skurs,
-					'snpwp' => $snpwp,'ssisaplafon' => $ssisaplafon,
+					'snpwp' => $snpwp,'climit' => $climit,
 					'sfreeppn' => $sfreeppn, 'ssubtotal' => $ssubtotal,		
 					'sppnnpwp' => $sfreeppn, 'stotalsubppn' => $ssubtotal,	
 					'sppn' => $sfreeppn, 'stotal' => $ssubtotal,'sketerangan' => $sketerangan,

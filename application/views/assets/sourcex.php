@@ -44,8 +44,8 @@ $namecat="semi";
 	$ddisc=0;
 }elseif($ccat==3){
 $namecat="cash";
-	$price=$row['pstore'];
-	$priceq=$row['pstore'];
+	$price=$row['pconsume'];
+	$priceq=$row['pconsume'];
 	$ddisc=$row['pdisc'];
 }
 

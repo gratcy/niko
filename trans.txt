@@ -1,0 +1,146 @@
+
+
+CREATE TABLE IF NOT EXISTS `purchase_order_detail_tab` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `ppid` int(11) NOT NULL,
+  `pppid` int(11) NOT NULL,
+  `pcurrency` varchar(15) NOT NULL,
+  `pqty` int(11) NOT NULL,
+  `pharga` int(11) NOT NULL,
+  `pdisc` double NOT NULL,
+  `pketerangan` text NOT NULL,
+  `pstatus` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `purchase_order_detail_tab`
+--
+
+INSERT INTO `purchase_order_detail_tab` (`pid`, `ppid`, `pppid`, `pcurrency`, `pqty`, `pharga`, `pdisc`, `pketerangan`, `pstatus`) VALUES
+(1, 20, 2, 'IDR', 5, 100, 10, 'ok', 1),
+(2, 21, 2, 'IDR', 15, 120, 10, 'ok', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchase_order_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `purchase_order_tab` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `pbid` int(11) NOT NULL,
+  `pnobukti` varchar(20) NOT NULL,
+  `pref` varchar(20) NOT NULL,
+  `ptgl` date DEFAULT NULL,
+  `psid` int(11) NOT NULL,
+  `pgudang` varchar(15) NOT NULL,
+  `pstatus` tinyint(1) NOT NULL DEFAULT '0',
+  `pcdate` date DEFAULT NULL,
+  `pcid` tinyint(4) NOT NULL,
+  `ptype` varchar(5) NOT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `purchase_order_tab`
+--
+
+INSERT INTO `purchase_order_tab` (`pid`, `pbid`, `pnobukti`, `pref`, `ptgl`, `psid`, `pgudang`, `pstatus`, `pcdate`, `pcid`, `ptype`) VALUES
+(1, 1, '123', 'tes', '2014-06-14', 1, '1', 2, NULL, 0, ''),
+(2, 0, '123', 'kjhkjjk', '2000-02-01', 2, 'ABC', 2, NULL, 0, ''),
+(4, 1, '1234', 'sandi', '2014-06-15', 1, '0', 2, NULL, 0, ''),
+(15, 2, '8999', 'nnn', '2014-05-28', 1, 'ZZ', 0, NULL, 0, ''),
+(16, 1, '123', 'dhafir', '2014-06-16', 1, 'ABC', 0, '2014-06-15', 0, ''),
+(17, 2, '4', 'sansan', '2014-06-15', 1, 'GEDE', 0, '2014-06-15', 0, ''),
+(18, 2, '5', 'sansan ok', '2014-06-15', 1, 'GEDE', 0, '2014-06-15', 0, ''),
+(19, 2, '1', 'HHH', '2014-07-03', 1, 'X', 0, '2014-06-15', 0, ''),
+(20, 1, '1', 'sandi', '2014-08-18', 1, 'A', 1, '2014-08-18', 4, 'in'),
+(21, 2, '2', 'sss', '2014-08-28', 2, 'A', 1, '2014-08-28', 4, 'out');
+
+-- --------------------------------------------------------
+
+--
+
+
+--
+-- Table structure for table `sales_order_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `sales_order_tab` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `sbid` int(11) NOT NULL,
+  `snoso` varchar(20) NOT NULL,
+  `snopo` varchar(30) NOT NULL,
+  `sreff` varchar(20) NOT NULL,
+  `stgl` date DEFAULT NULL,
+  `scid` int(11) NOT NULL,
+  `stype` varchar(12) DEFAULT NULL,
+  `ssid` int(11) NOT NULL,
+  `sppn` varchar(15) NOT NULL,
+  `sfreeppn` tinyint(1) NOT NULL,
+  `sstatus` tinyint(1) NOT NULL DEFAULT '0',
+  `scdate` date DEFAULT NULL,
+  `sketerangan` varchar(50) NOT NULL,
+  `snodo` varchar(15) DEFAULT NULL,
+  `snopol` varchar(10) DEFAULT NULL,
+  `stgldo` date DEFAULT NULL,
+  `snomor` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+
+--
+-- Dumping data for table `sales_order_tab`
+--
+
+INSERT INTO `sales_order_tab` (`sid`, `sbid`, `snoso`, `snopo`, `sreff`, `stgl`, `scid`, `stype`, `ssid`, `sppn`, `sfreeppn`, `sstatus`, `scdate`, `sketerangan`, `snodo`, `snopol`, `stgldo`, `snomor`) VALUES
+(1, 1, '123', '', 'tes', '2014-06-14', 0, NULL, 1, '', 0, 2, NULL, '', NULL, NULL, NULL, NULL),
+(2, 0, '123', '', 'kjhkjjk', '2000-02-01', 0, NULL, 2, '', 0, 2, NULL, '', NULL, NULL, NULL, NULL),
+(4, 1, '1234', '', 'sandi', '2014-06-15', 0, NULL, 1, '', 0, 2, NULL, '', NULL, NULL, NULL, NULL),
+(15, 2, '8999', '', 'nnn', '2014-05-28', 0, NULL, 1, '', 0, 0, NULL, '', NULL, NULL, NULL, NULL),
+(16, 1, '123', '', 'dhafir', '2014-06-16', 0, NULL, 1, '', 0, 0, '2014-06-15', '', NULL, NULL, NULL, NULL),
+(17, 2, '4', '', 'sansan', '2014-06-15', 0, NULL, 1, '', 0, 0, '2014-06-15', '', NULL, NULL, NULL, NULL),
+(18, 2, '5', '', 'sansan ok', '2014-06-15', 0, NULL, 1, '', 0, 0, '2014-06-15', '', NULL, NULL, NULL, NULL),
+(19, 2, '1', '', 'HHH', '2014-07-03', 0, NULL, 1, '', 0, 0, '2014-06-15', '', NULL, NULL, NULL, NULL),
+(20, 2, '2', '', '0', '2014-07-24', 12, '', 1, '0', 1, 1, '2014-07-24', 'ok', '7', 'B 123 X', '2014-08-20', '9999'),
+(21, 2, '3', '', 'kakak', '2014-07-24', 1, '', 1, '1', 1, 1, '2014-07-24', 'ok', NULL, NULL, NULL, NULL),
+(22, 0, '4', '', 'sandi', '2014-07-24', 4, '', 1, '0', 0, 1, '2014-07-24', 'ok', NULL, NULL, NULL, NULL),
+(23, 1, '1', '', 'sandiiii', '2014-08-18', 1, '', 1, '1', 1, 1, '2014-08-18', 'ok', NULL, NULL, NULL, NULL),
+(24, 2, '2', '', 'sandi', '2014-08-25', 1, '', 1, '1', 1, 1, '2014-08-25', 'ok', NULL, NULL, NULL, NULL),
+(25, 0, '3', '', 'sandi', '2014-08-19', 1, '', 1, '1', 1, 1, '2014-08-26', 'ok', NULL, NULL, NULL, NULL),
+(26, 2, '4', '', 'sandi', '2014-08-12', 1, '', 1, '1', 1, 1, '2014-08-27', 'OK', 'DO0001', 'B 123 X', '2014-08-28', '9898'),
+(27, 2, '5', '', 'sandi', '2014-08-04', 0, '', 1, '0', 0, 1, '2014-08-27', 'ok', '1', 'B 12345 X', '2014-08-27', '12345'),
+(28, 2, '6', '', 'sss', '2014-08-28', 3, '', 1, '0', 0, 1, '2014-08-28', 'ok', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+
+-- Table structure for table `sales_order_detail_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `sales_order_detail_tab` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `ssid` int(11) DEFAULT NULL,
+  `spid` int(11) DEFAULT NULL,
+  `sqty` int(11) DEFAULT NULL,
+  `sprice` double DEFAULT NULL,
+  `sdisc` double DEFAULT NULL,
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `sales_order_detail_tab`
+--
+
+INSERT INTO `sales_order_detail_tab` (`sid`, `ssid`, `spid`, `sqty`, `sprice`, `sdisc`) VALUES
+(4, 20, 2, 12, 300000, NULL),
+(5, 20, 3, 17, 220000, NULL),
+(6, 20, 2, 10, 350000, 15),
+(7, 22, 3, 15, 300000, 0),
+(8, 23, 2, 5, 300000, 0),
+(9, 24, 2, 11, 300000, 0),
+(10, 25, 1, 12, 2000, 0),
+(11, 26, 1, 12, 200000, 0),
+(12, 28, 3, 17, 18000, 0);
+
+-- --------------------------------------------------------

@@ -76,7 +76,11 @@ class Home extends MY_Controller {
 	function sales_order_detail_add($id,$scid) {
 		if ($_POST) {
 			$pricex = $this -> input -> post('pricex', TRUE);
-			$priceq = $this -> input -> post('priceq', TRUE);
+			$pricedist = $this -> input -> post('pricedist', TRUE);
+			$pricesemi = $this -> input -> post('pricesemi', TRUE);
+			$pricekey = $this -> input -> post('pricekey', TRUE);			
+			$pricestore = $this -> input -> post('pricestore', TRUE);
+			$priceconsume = $this -> input -> post('priceconsume', TRUE);
 			$qtyx = $this -> input -> post('qtyx', TRUE);
 		    $ssid = $this -> input -> post('id', TRUE);
 			$spid = $this -> input -> post('spid', TRUE);
@@ -84,19 +88,40 @@ class Home extends MY_Controller {
 			$sprice = $this -> input -> post('price', TRUE);
 			$sdisc = $this -> input -> post('pdisc', TRUE);
 			$ccat = $this -> input -> post('ccat', TRUE);
-		if($ccat=='1'){			
-			if($qtyx>$sqty){
-				$sprice=$priceq;
-			}else if($qtyx==$sqty){
-				$sprice=$pricex;
+			$stypepay = $this -> input -> post('stypepay', TRUE);
+		
+		if($stypepay=="auto"){	
+		echo "";
+			if($ccat=='1'){			
+				if($qtyx>$sqty){
+					$sprice=$pricestore;
+					
+				}else if($qtyx==$sqty){
+					$sprice=$pricekey;
+				}
+			}
+			if($ccat=='3'){
+				$sprice=$priceconsume;
+			}
+		}elseif($stypepay=="cash"){
+		
+			$sprice=$priceconsume;
+			
+		}elseif($stypepay=="credit"){
+			if(($ccat=='1')or($ccat=='3')){			
+				if($qtyx>$sqty){
+					$sprice=$pricestore;
+					
+				}else if($qtyx==$sqty){
+					$sprice=$pricekey;
+					
+				}
 			}
 		}
-		
-		if($ccat=='3'){
-			$sprice=$priceq;
-		}
-
-					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc);					
+		// echo $stypepay;
+		// echo $ccat;
+		// echo $sprice;die;
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'ssisa'=>$sqty);					
 					if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr,$spid)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));

@@ -51,7 +51,6 @@ minLength: 1,
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-	<?php echo $pno; ?>
             <form class="form-horizontal" action="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_add'); ?>" method="post">
 <p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>

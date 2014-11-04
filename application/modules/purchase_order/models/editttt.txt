@@ -1,0 +1,31 @@
+SELECT distinct(purchase_order_tab.pid ),
+        (select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid) as bname,
+		(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid) as sname
+		FROM purchase_order_tab,penerimaan_detail_tab where  penerimaan_detail_tab.ppid=purchase_order_tab.pid  ORDER BY purchase_order_tab.pid DESC
+		
+		
+		
+SELECT purchase_order_tab.*,penerimaan_detail_tab.pno_penerimaan,
+        (select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid) as bname,
+		(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid) as sname
+		FROM purchase_order_tab,penerimaan_detail_tab where  penerimaan_detail_tab.ppid=purchase_order_tab.pid  
+		AND purchase_order_tab.pid= '.$id.' 
+ORDER BY purchase_order_tab.pid DESC 		
+
+
+
+SELECT purchase_order_tab.*,distinct(penerimaan_detail_tab.pno_penerimaan),
+        (select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid) as bname,
+		(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid) as sname
+		FROM purchase_order_tab,penerimaan_detail_tab where  penerimaan_detail_tab.ppid=purchase_order_tab.pid  
+		AND purchase_order_tab.pid='2' 
+ORDER BY purchase_order_tab.pid DESC 
+
+
+
+SELECT distinct(penerimaan_detail_tab.pno_penerimaan),purchase_order_tab.pid,
+        (select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid) as bname,
+		(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid) as sname
+		FROM purchase_order_tab,penerimaan_detail_tab where  penerimaan_detail_tab.ppid=purchase_order_tab.pid  
+		AND purchase_order_tab.pid='2' 
+ORDER BY purchase_order_tab.pid DESC 
