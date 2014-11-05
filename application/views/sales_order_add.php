@@ -228,8 +228,8 @@ minLength: 1,
 
                     <div class="col-lg-4">
                         <select name="sfreeppn">
-						<option value="0">Yes</option>
-						<option value="1">No</option>
+						<option value="0">No</option>
+						<option value="1">Yes</option>
 						</select>
                     </div>
                 </div>
@@ -255,25 +255,16 @@ minLength: 1,
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="Keterangan" name="sketerangan" class="form-control" />
+						<input type="hidden"  name="sstatus" value="1" />
                     </div>
                 </div>
                 		
 				
+
                 <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Status</label>
-                    
-                    <div class="col-lg-4">
-						<select name="sstatus" data-placeholder="status" class="form-control chzn-select">
-						<option value=0>Pending</option>
-						<option value=1>Ok</option>
-						</select>
-                    </div>
-				</div>
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4"></label>
-                 
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+					<label for="status" class="control-label col-lg-4"></label>                 
+					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+					<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					
 				</div>				
 				</td></tr></table>

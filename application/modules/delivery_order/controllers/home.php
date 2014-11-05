@@ -30,71 +30,16 @@ class Home extends MY_Controller {
 		$this->load->view('delivery_orders', $view);
 	}
 	
-	function sales_order_add() {
-		if ($_POST) {
+	function delivery_order_sub($id,$sbid) {
 		
-		
-			$sbid = $this -> input -> post('sbid', TRUE);
-			$snoso = $this -> input -> post('snoso', TRUE);			
-			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
-			$stgl="$stglx[2]-$stglx[1]-$stglx[0]";			
-			$ssid = $this -> input -> post('csid', TRUE);			
-			$sstatus = (int)$this ->input -> post('sstatus', TRUE);
-			$scdate=date('Y-m-d');
-			$scid = $this -> input -> post('cid', TRUE);
-			$stype = $this -> input -> post('stype', TRUE);
-			$sketerangan = $this -> input -> post('sketerangan', TRUE);
-			$sreff = $this -> input -> post('sreff', TRUE);
-			$scurrency = $this -> input -> post('scurrency', TRUE);
-			// $skurs = $this -> input -> post('skurs', TRUE);
-			// $snpwp = $this -> input -> post('snpwp', TRUE);
-			//$ssisaplafon = $this -> input -> post('ssisaplafon', TRUE);
-			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
-			
-			$ssubtotal = 0;
-			$sppnnpwp = 0;
-			$stotalsubppn = 0;
-			$sppn = 0;
-			$stotal = 0;			
 
-			
-			// print_r($_POST);die;
-			
-			// if (!$name || !$npwp || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
-				// __set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
-				// redirect(site_url('sales_order' . '/' . __FUNCTION__));
-			// }
-			// else {
-					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
-					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
-					'ssid' => $ssid,'sppn' => $sfreeppn, 
-					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
-					'sketerangan' => $sketerangan
-					 );	
-				if ($this -> sales_order_model -> __insert_sales_order($arr)) {
-					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-					
-					$lastid=$this->db->insert_id();	
-					
-					 $this -> sales_order_model -> __get_total_sales_order_monthly($stglx[1],$stglx[2],$lastid);
-					
-									
-					redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $lastid .'/'. $scid .''));
-				}
-				else {
-					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
-					redirect(site_url('sales_order/home'));
-				}
-			//}
-		}
-		else {
-
-			
-		$view['scid'] = $this -> customers_lib -> __get_customers();
-		$view['sbid'] = $this -> branch_lib -> __get_branch();
-		$view['ssid'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
-		$this->load->view('sales_order_add',$view);
-		}
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_do_list($id),3,10,site_url('delivery_order/home/delivery_order_details'));
+			$view['sales_order'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['id'] = $id;
+			$view['sbid'] = $sbid;			
+			$view['headerx'] = $this->delivery_order_model -> __get_do_select($id);
+		$this->load->view('delivery_order_sub', $view);
 	}
 	
 	function sales_order_update($id) {

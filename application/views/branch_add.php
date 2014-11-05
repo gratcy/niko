@@ -41,7 +41,13 @@
                         <textarea name="addr" class="form-control" placeholder="Address"></textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Address II</label>
 
+                    <div class="col-lg-4">
+                        <textarea name="addr2" class="form-control" placeholder="Address"></textarea>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">City</label>
 

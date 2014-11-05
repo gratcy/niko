@@ -110,7 +110,12 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgldo; ?>" class="form-control" disabled>
+					<input type=text value="<?php 
+					$stgldos=$detailx[0]->stgldo;
+					$stgldox = explode("-",$stgldos);			
+					$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";	
+					echo $stgldo;
+					 ?>" class="form-control" disabled>
                     </div>   							
                 </div>
 
@@ -145,8 +150,19 @@ minLength: 1,
 
 
 
- <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
+ <form  id="form1" class="form-horizontal"  method="post">
+ <input type=hidden value="<?php echo $detailx[0]->sbid; ?>" name=sbid class="form-control" >
+<input type=hidden value="<?php 
+			$stgldos=$detailx[0]->stgldo;
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";	
 
+echo $stgldo; ?>" name=stgldo class="form-control" >
+<?php //print_r($detailx[0]);?>
+<input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snodo; ?>" name=snodo class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snopol; ?>" name=snopol class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snomor; ?>" name=snomor class="form-control" >
   <div class="panel-body">
                             <div class="table-responsive">
 							<?php 
@@ -173,16 +189,29 @@ minLength: 1,
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;
-
+			$spricex=$v -> sprice;
+			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
-			$subtotal=$sqtyx;
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
 	
     ?>
           <tr>
           
-          <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+          <td><?php echo $v -> pcode; ?>
+		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
+		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> sqty; ?>">
+		  </td>
 		  <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> sqty; ?></td>
+          <td><select name="sqty[]">
+		  
+		  <?php $ssisa= $v -> ssisa; 
+		  for($k=$ssisa;$k>=0;$k--){
+		  echo "<option>$k</option>";	
+		  }
+		  ?>
+		  </select>
+		  </td>
 
 		  </tr>
         <?php 
@@ -205,9 +234,10 @@ minLength: 1,
         
                                     </tbody>
                                 </table>
-								
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$sbid.'/'.$snodo); ?>" ><input type=submit value=Cetak ></form>	
-		<!--form action="<?php //echo site_url('sales_order_detail/home/delivery_order/'.$id.'/'.$sbid.'/'.$snodo); ?>" ><input type=submit value=Update ></form-->		
+		<br><input type=submit>						
+		</form>						
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$sbid); ?>" ><input type=submit value=Cetak ></form>	
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order/'.$id.'/'.$sbid); ?>" ><input type=submit value=Update ></form>		
     <?php //echo $pages; ?>
                             </div>
                         </div>

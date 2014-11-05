@@ -26,6 +26,15 @@ class Home extends MY_Controller {
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
 		}
+		if(!isset($_POST['approve'])){$_POST['approve']="";}
+		if($_POST['approve']=='1'){
+			$id=$this -> input -> post('id', TRUE);
+			$arr=array('sstatus' => '3');
+			$this -> sales_order_model -> __update_sales_order($id, $arr);
+		
+		}
+		
+		
 		$this->load->view('sales_order', $view);
 	}
 	

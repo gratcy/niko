@@ -51,6 +51,7 @@ class Home extends MY_Controller {
 			$cat = (int) $this -> input -> post('cat');
 			$delivery = (int) $this -> input -> post('delivery');
 			$status = (int) $this -> input -> post('status');
+			$ctyperetur = (int) $this -> input -> post('ctyperetur');
 			
 			if (!$branch || !$name || !$sales) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
@@ -61,7 +62,7 @@ class Home extends MY_Controller {
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'cstatus' => $status);
+				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'cstatus' => $status, 'ctyperetur' => $ctyperetur);
 				if ($this -> customers_model -> __insert_customers($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('customers'));

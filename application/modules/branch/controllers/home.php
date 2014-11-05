@@ -31,11 +31,13 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
+			$addr2 = $this -> input -> post('addr2', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$city = (int) $this -> input -> post('city');
 			$prov = (int) $this -> input -> post('prov');
 			$status = (int) $this -> input -> post('status');
+			$addr="$addr*$addr2";
 			
 			if (!$name || !$npwp || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));

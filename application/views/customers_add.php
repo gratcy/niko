@@ -176,6 +176,18 @@
                             </div>
                     </div>
                 </div>
+				
+			    <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Type Retur</label>
+
+                    <div class="col-lg-4">
+                        <select name=ctyperetur >
+						<option value=0 >Tukar Barang</option>
+						<option value=1 >Potong Hutang</option>
+						</select>
+                    </div>
+                </div>
+				
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">

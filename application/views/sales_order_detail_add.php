@@ -261,14 +261,7 @@ var badColor = "#ff6666";
                     </div>
                 </div>			
 				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Type Pay</label>
 
-                    <div class="col-lg-4">                      
-					   <input type=text value="<?php echo $detailx[0]->stypepay; ?>" class="form-control" disabled>
-					   <input type=hidden value="<?php echo $detailx[0]->stypepay; ?>" name="stypepay">
-                    </div>
-                </div>
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Category Customer</label>
@@ -296,6 +289,16 @@ $cname="Cash";
 		
 </td><td width=40%>
 
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Type Pay</label>
+
+                    <div class="col-lg-4">                      
+					   <input type=text value="<?php echo $detailx[0]->stypepay; ?>" class="form-control" disabled>
+					   <input type=hidden value="<?php echo $detailx[0]->stypepay; ?>" name="stypepay">
+                    </div>
+                </div>
+
+
                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Product</label>
 
@@ -306,10 +309,12 @@ $cname="Cash";
                 </div>	
 		
 
-		
+						<input type=hidden  id="theStore" class="form-control" name="pricestore" >
 						<input type=hidden  id="theKey" class="form-control" name="pricekey" >
 						<input type=hidden  id="theDist" class="form-control" name="pricedist" >
-						<input type=hidden  id="thePricex" class="form-control" name=pricex >
+						<input type=hidden  id="thePricex" class="form-control" name="pricex" >
+						<input type=hidden  id="theSemi" class="form-control" name="pricesemi" >
+						<input type=hidden  id="theConsume" class="form-control" name="priceconsume" >
 <?php 
 $ccats= $detailx[0]->ccat; 
 if($ccats==0){
@@ -344,7 +349,7 @@ if($ccats==0){
                     <div class="col-lg-4">
                        	<input type=text  id="theStoree" class="form-control" disabled>
 						
-						<input type=hidden  id="theStore" class="form-control" name="pricestore" >
+						
 						
                     </div>
                 </div>	
@@ -356,7 +361,7 @@ if($ccats==0){
                     <div class="col-lg-4">
                        	<input type=text  id="theSemii" class="form-control" disabled>
 						
-						<input type=hidden  id="theSemi" class="form-control" name="pricesemi" >
+				
 						
                     </div>
                 </div>	
@@ -369,7 +374,7 @@ if($ccats==0){
                     <div class="col-lg-4">
                        	<input type=text  id="theConsumee" class="form-control" disabled>
 						
-						<input type=hidden  id="theConsume" class="form-control" name="priceconsume" >
+						
 						
                     </div>
                 </div>					
@@ -395,6 +400,8 @@ if($ccats==0){
                        	<?php
 						if($detailx[0]->stypepay=="cash"){ ?>  
 							<input type=text  id="thePdisc" class="form-control" name=ddisc  >
+						<?php }elseif($detailx[0]->stypepay=="credit"){ ?>  
+							<input type=text   class="form-control" name=ddisc value="0" >
 						<?php }else{?>	
 						<input type=text  id="theDisc" class="form-control" name=ddisc  >
 						<?php }?>
@@ -422,6 +429,10 @@ if($ccats==0){
 						<input type=text  id="theDisttt" name=price  class="form-control" >
 						<?php }elseif($ccats==2){ ?>
 						<input type=text  id="theSemiii" name=price  class="form-control" >
+						<?php } elseif(($ccats==3) and ($detailx[0]->stypepay=="auto")){ ?>
+						<input type=text  id="theConsumeee" name=price  class="form-control" >
+						<?php } elseif(($ccats==3) and ($detailx[0]->stypepay=="credit")){ ?>
+						<input type=hidden   name=price  class="form-control" >
 						<?php } ?>
 						&nbsp;&nbsp;<span id="confirmMessagee"></span>
                     </div>
@@ -462,6 +473,7 @@ if($ccats==0){
           <th>Harga</th>
           <th>Discount </th>
 		  <th>Jumlah</th>
+		  <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -470,7 +482,7 @@ if($ccats==0){
 		$total=0;
 		$totalppn=0;
 		$totalall=0;
-		
+		$persen=0;
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;
@@ -487,14 +499,18 @@ if($ccats==0){
           <td><?php echo $v -> sprice; ?></td>
           <td><?php echo $v -> sdisc; ?></td>
 		  <td> <?php echo $subtotal; ?> </td>		
+		  <td><a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
         <?php 
 		$total=$subtotal+$total;
 		$totalqty=$qtyx+$totalqty;
 		$totalppn=$total * 10/100;
 		if($freeppn==1){
+		$persen="0";
+		$totalppn=0;		
 		$totalall= $total;
 		}else{
+		$persen="10";
 		$totalall= $total + $totalppn;
 		}
 		endforeach; ?>
@@ -508,7 +524,7 @@ if($ccats==0){
 		 </tr>		
          <tr>          
           <td>PPN</td>
-          <td>10%</td>
+          <td><?php echo $persen;?> % </td>
           <td></td>
           <td></td>
           <td><?php echo $totalppn; ?></td>
@@ -522,7 +538,11 @@ if($ccats==0){
 		 </tr>		 
                                     </tbody>
                                 </table>
-		<form action="<?php echo site_url('sales_order/home'); ?>" ><input type=submit value=Complete></form>						
+		<form method="POST" action="<?php echo site_url('sales_order/home'); ?>" >
+		<input type=hidden  value="<?php echo $id;?>" name="id" >
+		<input type=hidden  value=1 name="approve" >
+		<input type=submit value=Complete>
+		</form>						
     <?php //echo $pages; ?>
                             </div>
                         </div>

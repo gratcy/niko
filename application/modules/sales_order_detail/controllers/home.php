@@ -29,7 +29,7 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
@@ -37,23 +37,27 @@ class Home extends MY_Controller {
 			$this->load->view('sales_order_details',$view);
 	}
 	
-	function delivery_order_details($id,$scid) {
+	function delivery_order_details($id,$sbid,$snodo) {
 			$view['id'] = $id;
-			$view['scid'] = $scid;
-			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
+			$view['sbid'] = $sbid;
+			$view['snodo'] = $snodo;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
 	
 			$this->load->view('delivery_order_details',$view);
 	}	
+	
+	
+
 
 	function sales_order_report($id,$scid) {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
@@ -61,11 +65,11 @@ class Home extends MY_Controller {
 			$this->load->view('sales_order_report',$view);
 	}	
 
-	function delivery_order_report($id,$scid) {
+	function delivery_order_report($id,$sbid,$snodo) {
 			$view['id'] = $id;
-			$view['scid'] = $scid;
-			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
+			$view['sbid'] = $sbid;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
@@ -108,11 +112,12 @@ class Home extends MY_Controller {
 			$sprice=$priceconsume;
 			
 		}elseif($stypepay=="credit"){
-			if(($ccat=='1')or($ccat=='3')){			
+			if(($ccat=='1')or($ccat=='3')){	
+		
 				if($qtyx>$sqty){
 					$sprice=$pricestore;
 					
-				}else if($qtyx==$sqty){
+				}else if($sqty >=$qtyx){
 					$sprice=$pricekey;
 					
 				}
@@ -120,7 +125,11 @@ class Home extends MY_Controller {
 		}
 		// echo $stypepay;
 		// echo $ccat;
-		// echo $sprice;die;
+		// echo $sprice;
+		// echo $qtyx;
+		// echo $sqty;
+		
+		// die;
 					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'ssisa'=>$sqty);					
 					if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr,$spid)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
@@ -137,7 +146,7 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
@@ -147,6 +156,105 @@ class Home extends MY_Controller {
 	}
 
 
+	function delivery_order_add($id,$scid) {
+		if ($_POST) {
+
+		    $sid = $this -> input -> post('id', TRUE);
+			$scid = $this -> input -> post('scid', TRUE);
+			$snodo = $this -> input -> post('snodo', TRUE);
+			$snopol = $this -> input -> post('snopol', TRUE);
+			$stgldos = $this -> input -> post('stgldo', TRUE);
+			
+			$stgldox = explode("/",$stgldos);			
+			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";				
+
+			$snomor = $this -> input -> post('snomor', TRUE);
+
+
+
+					$arr = array('sid' => 0, 'ssid' => $id, 'spid' => 0, 'sqty' => 0, 
+					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor	);						
+					if ($this -> sales_order_detail_model -> __insert_delivery_order_detail($arr)) {
+						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+						redirect(site_url('sales_order_detail/home/delivery_order_details_add/'. $id .'/'. $scid .''));
+					}
+					else {
+						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+						redirect(site_url('sales_order_detail/home/delivery_order_add/'. $id .'/'. $scid .''));
+					}
+					
+					
+
+		}
+		else {
+		
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+			
+			$this->load->view('delivery_order_add',$view);
+		}
+	}
+	
+
+	function delivery_order_details_add($id,$sbid) {
+		if ($_POST) {
+		
+		
+			$sbid = $this -> input -> post('sbid', TRUE);
+			$snodo = $this -> input -> post('snodo', TRUE);
+			$snopol = $this -> input -> post('snopol', TRUE);
+			$stgldos = $this -> input -> post('stgldo', TRUE);			
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";				
+			$snomor = $this -> input -> post('snomor', TRUE);		
+	//echo $stgldo;	
+		$jum=count($_POST['sqty']);
+
+		for($j=0;$j<$jum;$j++){		
+			$sid = $_POST['sid'][$j];
+			$spid = $_POST['spid'][$j];
+			$qty = $_POST['qty'][$j];
+			$sqty =$_POST['sqty'][$j];			
+			$ssisa=$qty-$sqty;
+
+
+
+					$arrqty = array('ssisa' => $ssisa);
+					$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,
+					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor	);	
+
+//print_r($arr);					
+					if ($this -> sales_order_detail_model -> __insert_delivery_order_detail($arr)) {
+					$this -> sales_order_detail_model ->__update_sales_order_detail($sid,$arrqty);
+
+					}
+					else {
+						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+						redirect(site_url('sales_order_detail/home/delivery_order_details_add/'. $id .'/'. $sbid .''));
+					}
+			}		
+						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+						redirect(site_url('sales_order_detail/home/delivery_order_details/'. $id .'/'. $sbid .'/'.$snodo));	
+
+		}
+		else {
+		
+			$view['id'] = $id;
+			$view['sbid'] = $sbid;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			$this->load->view('delivery_order_details_add',$view);
+		}
+	}
 
 
 	function delivery_order($id,$scid) {
@@ -184,7 +292,7 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_cust($id);						
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
@@ -192,9 +300,6 @@ class Home extends MY_Controller {
 			$this->load->view('delivery_order',$view);
 		}
 	}
-
-
-
 
 
 	

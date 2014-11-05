@@ -29,3 +29,22 @@ SELECT distinct(penerimaan_detail_tab.pno_penerimaan),purchase_order_tab.pid,
 		FROM purchase_order_tab,penerimaan_detail_tab where  penerimaan_detail_tab.ppid=purchase_order_tab.pid  
 		AND purchase_order_tab.pid='2' 
 ORDER BY purchase_order_tab.pid DESC 
+
+
+
+SELECT distinct(penerimaan_detail_tab.pno_penerimaan),purchase_order_tab.pid,
+purchase_order_tab.pbid,
+purchase_order_tab.pref,
+purchase_order_tab.ptgl,
+purchase_order_tab.pgudang,
+purchase_order_tab.pstatus,
+purchase_order_tab.pcdate,
+purchase_order_tab.pcid,
+purchase_order_tab.ptype,
+purchase_order_tab.pssid,
+purchase_order_tab.psid,
+        (select bname from branch_tab where branch_tab.bid= purchase_order_tab.pbid) as bname,
+		(select sname from sales_tab where sales_tab.sid= purchase_order_tab.psid) as sname
+		FROM purchase_order_tab,penerimaan_detail_tab where  penerimaan_detail_tab.ppid=purchase_order_tab.pid  
+		AND purchase_order_tab.pid='2' 
+ORDER BY purchase_order_tab.pid DESC 

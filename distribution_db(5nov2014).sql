@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2014 at 11:16 AM
+-- Generation Time: Nov 05, 2014 at 05:37 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.16
 
@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `branch_tab` (
   `bphone` varchar(50) DEFAULT NULL,
   `bstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `branch_tab`
@@ -335,7 +335,8 @@ INSERT INTO `branch_tab` (`bid`, `buid`, `bluid`, `bname`, `bnpwp`, `baddr`, `bc
 (1, 1, 1, 'Pusat', NULL, 'wew', 1, 1, '989898*121212', 1),
 (2, 1, 1, 'Semarang', 'aaaa', 'aasas', 1, 2, '989898*121212', 1),
 (3, NULL, NULL, 'Bandung', '98987898', 'jakarta', 2, 2, '870900*080980980', 1),
-(4, NULL, NULL, 'Balikpapan', '97979879', 'Jl Kalimantan Balikpapan', 1, 1, '8799890*79890090', 1);
+(4, NULL, NULL, 'Balikpapan', '97979879', 'Jl Kalimantan Balikpapan', 1, 1, '8799890*79890090', 1),
+(5, NULL, NULL, 'BALI', '86876799898', 'Bali satu*Bali Dua', 3, 3, '98798798789*8798797', 1);
 
 -- --------------------------------------------------------
 
@@ -429,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `customers_tab` (
   `cstatus` tinyint(1) DEFAULT '0',
   `ctyperetur` int(11) NOT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `customers_tab`
@@ -437,8 +438,37 @@ CREATE TABLE IF NOT EXISTS `customers_tab` (
 
 INSERT INTO `customers_tab` (`cid`, `cuid`, `cluid`, `cbid`, `ccat`, `cname`, `caddr`, `ccity`, `cprov`, `cdeliver`, `cphone`, `cemail`, `ccontactname`, `csid`, `ccash`, `ccredit`, `climit`, `cnpwp`, `cpkp`, `cspecial`, `cstatus`, `ctyperetur`) VALUES
 (1, 1, 1, 2, 3, 'palma', ' jakarta* semarang', 1, 1, 0, '909090*232323*1212', 'gratcypalma@gmail.com', 'asasa', 3, 10, 15, 1500000, '1212', '1aa', 1, 1, 0),
-(2, NULL, NULL, 2, 1, 'Bareksa Portal Investasi', '    jakarta*    bandung', 2, 3, 0, '8798798979*8799898798*2333', 'gratcypalma@gmail.com', 'asasa', 2, 5, 10, 8000000, '86788767', '1aa', 0, 1, 0),
-(3, NULL, NULL, 2, 2, 'AAA', 'JAKARTA*JAKARTA', 1, 2, 2, '09900*566778*', 'ariessandi7@gmail.com', 'aaa', 2, 10, 20, 30, '877979879', '989809', 1, 1, 0);
+(2, NULL, NULL, 2, 0, 'Bareksa Portal Investasi', '          jakarta*          bandung', 2, 3, 0, '8798798979*8799898798*2333', 'gratcypalma@gmail.com', 'asasa', 2, 5, 10, 8000000, '86788767', '1aa', 0, 1, 0),
+(3, NULL, NULL, 2, 2, 'AAA', 'JAKARTA*JAKARTA', 1, 2, 2, '09900*566778*', 'ariessandi7@gmail.com', 'aaa', 2, 10, 20, 30, '877979879', '989809', 1, 1, 0),
+(4, NULL, NULL, 2, 0, 'SEMARANG JAYA', 'Semaran 1*Semarang 2', 2, 2, 1, '987898979*78979890*89789790889', 'sandi@yahoo.com', 'sandi', 3, 10, 15, 10000000, '86876799898', '123', 0, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_order_detail_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `delivery_order_detail_tab` (
+  `did` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL,
+  `ssid` int(11) DEFAULT NULL,
+  `spid` int(11) DEFAULT NULL,
+  `sqty` int(11) DEFAULT NULL,
+  `snodo` varchar(20) NOT NULL,
+  `snopol` varchar(10) NOT NULL,
+  `stgldo` date NOT NULL,
+  `snomor` varchar(20) NOT NULL,
+  PRIMARY KEY (`did`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+
+--
+-- Dumping data for table `delivery_order_detail_tab`
+--
+
+INSERT INTO `delivery_order_detail_tab` (`did`, `sid`, `ssid`, `spid`, `sqty`, `snodo`, `snopol`, `stgldo`, `snomor`) VALUES
+(47, 0, 18, 0, 0, '999', 'AB', '2014-11-05', '23456'),
+(48, 22, 18, 1, 5, '999', 'AB', '2014-11-05', '23456'),
+(49, 23, 18, 1, 2, '999', 'AB', '2014-11-05', '23456');
 
 -- --------------------------------------------------------
 
@@ -817,7 +847,7 @@ CREATE TABLE IF NOT EXISTS `products_tab` (
 --
 
 INSERT INTO `products_tab` (`pid`, `puid`, `pluid`, `pcid`, `pvolume`, `pgroup`, `ptype`, `ppid`, `pcode`, `pname`, `pdesc`, `phpp`, `pdist`, `psemi`, `pkey`, `pstore`, `pconsume`, `ppoint`, `pdisc`, `pstatus`) VALUES
-(1, 1, 1, 1, 0, 0, 2, 3, 'xwew', 'wewe', 'ere', 10000, 100000, 200000, 300000, 400000, 500000, 0, 0, 1),
+(1, 1, 1, 1, 0, 0, 2, 3, 'xwew', 'wewe', 'ere', 10000, 100000, 200000, 300000, 400000, 500000, 0, 15, 1),
 (2, NULL, NULL, 1, 20, 4, 0, 3, 'w23', 'wew', '111', 111, 110, 11110, 101, 10, 10, 1, 11, 1),
 (3, NULL, NULL, 1, 111111, 4, 2, 3, '1asas', 'admins', '111111', 1111, 1111, 1011, 1011, 1011, 1011, 111, 11, 1);
 
@@ -839,7 +869,7 @@ CREATE TABLE IF NOT EXISTS `purchase_order_detail_tab` (
   `pstatus` tinyint(1) NOT NULL DEFAULT '0',
   `psisa` int(11) NOT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `purchase_order_detail_tab`
@@ -847,7 +877,8 @@ CREATE TABLE IF NOT EXISTS `purchase_order_detail_tab` (
 
 INSERT INTO `purchase_order_detail_tab` (`pid`, `ppid`, `pppid`, `pcurrency`, `pqty`, `pharga`, `pdisc`, `pketerangan`, `pstatus`, `psisa`) VALUES
 (6, 3, 1, 'IDR', 2, 10000, 0, 'ok', 1, 0),
-(7, 3, 2, 'IDR', 9, 111, 0, '', 1, 5);
+(7, 3, 2, 'IDR', 9, 111, 0, '', 1, 5),
+(8, 5, 1, 'IDR', 5, 10000, 0, '', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -873,14 +904,16 @@ CREATE TABLE IF NOT EXISTS `purchase_order_tab` (
   `disc` double NOT NULL,
   `total` double NOT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `purchase_order_tab`
 --
 
 INSERT INTO `purchase_order_tab` (`pid`, `pbid`, `pnobukti`, `pref`, `ptgl`, `psid`, `pgudang`, `pstatus`, `pcdate`, `pcid`, `ptype`, `pssid`, `dpp`, `ppn`, `disc`, `total`) VALUES
-(3, 2, '1', 'sandi', '2014-11-02', 0, 'aasas', 3, '2014-11-02', 0, 'in', 0, 0, 0, 0, 0);
+(3, 2, '1', 'sandi', '2014-11-02', 0, 'aasas', 3, '2014-11-02', 0, 'in', 0, 0, 0, 0, 0),
+(4, 2, '2', 'vvv', '2014-11-04', 0, 'aasas', 1, '2014-11-03', 0, 'in', 0, 0, 0, 0, 0),
+(5, 2, '3', 'zzz', '2014-11-04', 0, 'aasas', 1, '2014-11-03', 0, 'in', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -953,18 +986,19 @@ CREATE TABLE IF NOT EXISTS `sales_order_detail_tab` (
   `sqty` int(11) DEFAULT NULL,
   `sprice` double DEFAULT NULL,
   `sdisc` double DEFAULT NULL,
+  `ssisa` int(11) NOT NULL,
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `sales_order_detail_tab`
 --
 
-INSERT INTO `sales_order_detail_tab` (`sid`, `ssid`, `spid`, `sqty`, `sprice`, `sdisc`) VALUES
-(1, 1, 1, 6, 100000, 0),
-(2, 1, 1, 6, 400000, 0),
-(3, 1, 2, 10, 101, 0),
-(4, 1, 1, 12, 0, 0);
+INSERT INTO `sales_order_detail_tab` (`sid`, `ssid`, `spid`, `sqty`, `sprice`, `sdisc`, `ssisa`) VALUES
+(19, 16, 1, 9, 500000, 0, 8),
+(20, 16, 2, 3, 10, 0, 2),
+(22, 18, 1, 9, 100000, 0, 4),
+(23, 18, 1, 12, 100000, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -987,21 +1021,18 @@ CREATE TABLE IF NOT EXISTS `sales_order_tab` (
   `sstatus` tinyint(1) NOT NULL DEFAULT '0',
   `scdate` date DEFAULT NULL,
   `sketerangan` varchar(50) NOT NULL,
-  `snodo` varchar(15) DEFAULT NULL,
-  `snopol` varchar(10) DEFAULT NULL,
-  `stgldo` date DEFAULT NULL,
-  `snomor` varchar(15) DEFAULT NULL,
   `sduedate` date DEFAULT NULL,
-  `stypepay` enum('cash','credit') NOT NULL,
+  `stypepay` enum('auto','cash','credit') NOT NULL,
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `sales_order_tab`
 --
 
-INSERT INTO `sales_order_tab` (`sid`, `sbid`, `snoso`, `snopo`, `sreff`, `stgl`, `scid`, `stype`, `ssid`, `sppn`, `sfreeppn`, `sstatus`, `scdate`, `sketerangan`, `snodo`, `snopol`, `stgldo`, `snomor`, `sduedate`, `stypepay`) VALUES
-(1, 2, '1', '', 'sss', '2014-11-03', 2, '', 2, '0', 0, 1, '2014-11-03', '', NULL, NULL, NULL, NULL, '2014-11-13', 'credit');
+INSERT INTO `sales_order_tab` (`sid`, `sbid`, `snoso`, `snopo`, `sreff`, `stgl`, `scid`, `stype`, `ssid`, `sppn`, `sfreeppn`, `sstatus`, `scdate`, `sketerangan`, `sduedate`, `stypepay`) VALUES
+(16, 2, '15', '', 'ggg', '2014-11-04', 2, '', 2, '1', 1, 3, '2014-11-04', 'ok', '2014-11-14', 'auto'),
+(18, 2, '2', '', 'sandi', '2014-11-05', 2, '', 2, '1', 1, 3, '2014-11-05', 'ok', '2014-11-15', 'auto');
 
 -- --------------------------------------------------------
 
@@ -1244,7 +1275,7 @@ CREATE TABLE IF NOT EXISTS `users_tab` (
 --
 
 INSERT INTO `users_tab` (`uid`, `ugid`, `ubid`, `uemail`, `upass`, `ulastlogin`, `ustatus`) VALUES
-(1, 1, 2, 'admin@admin.com', 'e89591ee9b8e7018511649a2146ae279', '*1415009627', 1),
+(1, 1, 2, 'admin@admin.com', 'e89591ee9b8e7018511649a2146ae279', '*1415159638', 1),
 (2, 2, 1, 'admin@dluxor.com', 'e89591ee9b8e7018511649a2146ae279', '2130706433*1410292202', 1),
 (3, 1, 1, 'admin@dluxor.com', '4f71fccac43c73545ddd9cd772f37598', NULL, 2);
 

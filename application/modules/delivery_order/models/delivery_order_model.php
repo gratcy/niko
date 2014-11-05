@@ -13,8 +13,40 @@ class delivery_order_model extends CI_Model {
 		return 'SELECT *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
         (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname
-		FROM sales_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) ORDER BY sid DESC';
+		FROM sales_order_tab WHERE (sstatus=3) ORDER BY sid DESC';
 	}
+
+	function __get_do($snodo) {
+		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
+		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
+		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
+		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
+		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
+		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
+		FROM delivery_order_detail_tab WHERE (sid=0) AND snodo='.$snodo.' ORDER BY did DESC';
+	}	
+
+	function __get_do_list($id) {
+		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
+		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
+		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
+		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
+		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
+		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
+		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY did DESC';
+	}		
+	
+    function __get_do_select($id) {
+		$this -> db -> select('*,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
+		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
+		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
+		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
+		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
+		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
+		FROM delivery_order_detail_tab WHERE (sid=0) AND snodo='.$id.' ORDER BY did DESC');
+		return $this -> db -> get() -> result();
+	}	
+	
 	
 	function __get_total_sales_order() {
 		$sql = $this -> db -> query('SELECT * FROM sales_order_tab WHERE sstatus=1');
