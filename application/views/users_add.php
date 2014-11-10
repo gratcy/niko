@@ -33,6 +33,20 @@
 						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Division</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" data-placeholder="Division" name="division" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Position</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" data-placeholder="Position" name="position" class="form-control" />
+                    </div>
+                </div>
                 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">User Group</label>

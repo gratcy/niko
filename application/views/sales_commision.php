@@ -27,8 +27,16 @@
                                         <tr>
           <th>Branch</th>
           <th>Category</th>
-          <th>Sales Commision (%)</th>
-          <th>Sales Credit (%)</th>
+          <th>Cash Com A (%)</th>
+          <th>Cash Com B (%)</th>
+          <th>Cash Com C (%)</th>
+          <th>Cash Com D (%)</th>
+          <th>Cash Com E (%)</th>
+          <th>Credit Com A (%)</th>
+          <th>Credit Com B (%)</th>
+          <th>Credit Com C (%)</th>
+          <th>Credit Com D (%)</th>
+          <th>Credit Com E (%)</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -40,8 +48,16 @@
           <tr>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td style="text-align:right;"><?php echo $v -> scoma.'<br />'.$v -> scomb.'<br />'.$v -> scomc.'<br />'.$v -> scomd.'<br />'.$v -> scome; ?></td>
-          <td style="text-align:right;"><?php echo $v -> scredita.'<br />'.$v -> screditb.'<br />'.$v -> screditc.'<br />'.$v -> screditd.'<br />'.$v -> scredite.'<br />'; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scoma; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scomb; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scomc; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scomd; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scome; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scredita; ?></td>
+          <td style="text-align:right;"><?php echo $v -> screditb; ?></td>
+          <td style="text-align:right;"><?php echo $v -> screditc; ?></td>
+          <td style="text-align:right;"><?php echo $v -> screditd; ?></td>
+          <td style="text-align:right;"><?php echo $v -> scredite; ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('SalesCommisionUpdate')) : ?>

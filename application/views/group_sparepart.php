@@ -9,7 +9,7 @@
 
                 <hr />
 				<?php if (__get_roles('GroupSparepartAdd')) : ?>
-                <a href="<?php echo site_url('group_sparepart/group_sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Groups Product</a>
+                <a href="<?php echo site_url('group_sparepart/group_sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Groups Sparepart</a>
                 <br />
                 <br />
                 <?php endif; ?>

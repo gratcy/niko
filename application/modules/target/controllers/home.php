@@ -24,6 +24,7 @@ class Home extends MY_Controller {
 			$branch = (int) $this -> input -> post('branch');
 			$sales = (int) $this -> input -> post('sales');
 			$target = str_replace(',','',$this -> input -> post('target'));
+			$ptarget = str_replace(',','',$this -> input -> post('ptarget'));
 			$my = $this -> input -> post('my', TRUE);
 			$status = (int) $this -> input -> post('status');
 			
@@ -32,7 +33,7 @@ class Home extends MY_Controller {
 				redirect(site_url('target' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('tbid' => $branch, 'tsid' => $sales, 'tmy' => $my, 'ttarget' => $target, 'tstatus' => $status);
+				$arr = array('tbid' => $branch, 'tsid' => $sales, 'tmy' => $my, 'ttarget' => $target, 'tpaytarget' => $ptarget, 'tstatus' => $status);
 				if ($this -> target_model -> __insert_target($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('target'));
@@ -55,6 +56,7 @@ class Home extends MY_Controller {
 			$branch = (int) $this -> input -> post('branch');
 			$sales = (int) $this -> input -> post('sales');
 			$target = str_replace(',','',$this -> input -> post('target'));
+			$ptarget = str_replace(',','',$this -> input -> post('ptarget'));
 			$my = $this -> input -> post('my', TRUE);
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
@@ -65,7 +67,7 @@ class Home extends MY_Controller {
 					redirect(site_url('target' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('tbid' => $branch, 'tsid' => $sales, 'tmy' => $my, 'ttarget' => $target, 'tstatus' => $status);
+					$arr = array('tbid' => $branch, 'tsid' => $sales, 'tmy' => $my, 'ttarget' => $target, 'tpaytarget' => $ptarget, 'tstatus' => $status);
 					if ($this -> target_model -> __update_target($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('target'));

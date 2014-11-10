@@ -62,11 +62,12 @@ left:inherit!important;
 		  <?php
 		  foreach($branch as $k => $v) :
 		  $phone = explode('*', $v -> bphone);
+		  $baddr = explode('*', $v -> baddr);
 		  ?>
                                         <tr>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> bnpwp; ?></td>
-          <td><?php echo $v -> baddr; ?></td>
+          <td><?php echo $baddr[0]; ?></td>
           <td><?php echo __get_cities($v -> bcity,1); ?></td>
           <td><?php echo __get_province($v -> bprovince,1); ?></td>
           <td><?php echo $phone[0]; ?></td>

@@ -24,6 +24,8 @@ class Home extends MY_Controller {
 			$uemail = $this -> input -> post('uemail', true);
 			$newpass = $this -> input -> post('newpass', true);
 			$confpass = $this -> input -> post('confpass', true);
+			$division = $this -> input -> post('division', true);
+			$position = $this -> input -> post('position', true);
 			$group = (int) $this -> input -> post('group');
 			$branch = (int) $this -> input -> post('branch');
 			$status = (int) $this -> input -> post('status');
@@ -42,7 +44,7 @@ class Home extends MY_Controller {
 					redirect(site_url('users/users_add'));
 				}
 				else {
-					if ($this -> users_model -> __insert_users($uemail, md5(sha1($confpass, true)), $group, $branch, $status)) {
+					if ($this -> users_model -> __insert_users($uemail, md5(sha1($confpass, true)), $group, $division, $position, $branch, $status)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 						redirect(site_url('users'));
 					}
@@ -70,6 +72,8 @@ class Home extends MY_Controller {
 			$uemail = $this -> input -> post('uemail', true);
 			$newpass = $this -> input -> post('newpass', true);
 			$confpass = $this -> input -> post('confpass', true);
+			$division = $this -> input -> post('division', true);
+			$position = $this -> input -> post('position', true);
 			$group = (int) $this -> input -> post('group');
 			$id = (int) $this -> input -> post('id');
 			$branch = (int) $this -> input -> post('branch');
@@ -83,7 +87,7 @@ class Home extends MY_Controller {
 					}
 					else
 						$this -> settings_model -> __update_password($newpass, $id);
-					$this -> users_model -> __update_users($uemail, $id, $group, $branch, $status);
+					$this -> users_model -> __update_users($uemail, $id, $group, $division, $position, $branch, $status);
 					__set_error_msg(array('info' => 'Data berhasil di ubah.'));
 					redirect(site_url('users'));
 				}
@@ -92,7 +96,7 @@ class Home extends MY_Controller {
 					redirect(site_url('users/users_update/' . $id));
 				}
 				else {
-					$this -> users_model -> __update_users($uemail, $id, $group, $branch, $status);
+					$this -> users_model -> __update_users($uemail, $id, $group, $division, $position, $branch, $status);
 					__set_error_msg(array('info' => 'Data berhasil di ubah.'));
 					redirect(site_url('users'));
 				}

@@ -51,6 +51,7 @@ left:inherit!important;
           <th>Email</th>
           <th>Phone I</th>
           <th>Phone II</th>
+          <th>Join Date</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -67,6 +68,7 @@ left:inherit!important;
           <td><?php echo $v -> semail; ?></td>
           <td><?php echo $phone[0]; ?></td>
           <td><?php echo $phone[1]; ?></td>
+          <td><?php echo __get_date($v -> sjoindate,1); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('SalesUpdate')) : ?>

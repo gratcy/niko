@@ -35,6 +35,8 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
+			$joindate = strtotime($this -> input -> post('joindate', TRUE));
+			$sarea = (int) $this -> input -> post('sarea');
 			$status = (int) $this -> input -> post('status');
 			
 			if (!$name || !$branch || !$phone1 || !$phone2 || !$email || !$code) {
@@ -42,7 +44,7 @@ class Home extends MY_Controller {
 				redirect(site_url('sales' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('sbid' => $branch, 'scode' => $code, 'sname' => $name, 'sphone' => $phone1 . '*' . $phone2, 'semail' => $email, 'sstatus' => $status);
+				$arr = array('sbid' => $branch, 'scode' => $code, 'sname' => $name, 'sphone' => $phone1 . '*' . $phone2, 'semail' => $email, 'sjoindate' => $joindate, 'sarea' => $sarea, 'sstatus' => $status);
 				if ($this -> sales_model -> __insert_sales($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('sales'));
@@ -67,6 +69,8 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
+			$joindate = strtotime($this -> input -> post('joindate', TRUE));
+			$sarea = (int) $this -> input -> post('sarea');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			
@@ -76,7 +80,7 @@ class Home extends MY_Controller {
 					redirect(site_url('sales' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('sbid' => $branch, 'scode' => $code, 'sname' => $name, 'sphone' => $phone1 . '*' . $phone2, 'semail' => $email, 'sstatus' => $status);
+					$arr = array('sbid' => $branch, 'scode' => $code, 'sname' => $name, 'sphone' => $phone1 . '*' . $phone2, 'semail' => $email, 'sjoindate' => $joindate, 'sarea' => $sarea, 'sstatus' => $status);
 					if ($this -> sales_model -> __update_sales($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('sales'));

@@ -41,10 +41,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Total Target</label>
+                    <label for="text1" class="control-label col-lg-4">Sales Target</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="Total Target" onkeyup="formatharga(this.value,this)" name="target" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> ttarget,2); ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Payment Target</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Payment Target" onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> tpaytarget,2); ?>" />
                     </div>
                 </div>
                 <div class="form-group">

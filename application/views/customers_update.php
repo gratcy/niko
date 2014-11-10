@@ -79,7 +79,9 @@ $addr = explode('*', $detail[0] -> caddr);
                     <label for="text1" class="control-label col-lg-4">Delivery</label>
 
                     <div class="col-lg-4">
-                                <?php echo __get_delivery($detail[0] -> cdeliver,2); ?>
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec($detail[0] -> cdeliver,2); ?>
+                    </div>
                     </div>
                 </div>
 
@@ -179,6 +181,14 @@ $addr = explode('*', $detail[0] -> caddr);
                             </div>
                     </div>
                 </div>
+			    <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Type Retur</label>
+
+                    <div class="col-lg-4">
+                        <?php echo __get_customer_retur($detail[0] -> ctyperetur,2);?>
+                    </div>
+                </div>
+				
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">

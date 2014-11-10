@@ -40,10 +40,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Total Target</label>
+                    <label for="text1" class="control-label col-lg-4">Sales Target</label>
 
                     <div class="col-lg-4">
                         <input type="text" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="0" placeholder="Total Target" name="target" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Payment Target</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Payment Target" onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="0" />
                     </div>
                 </div>
                 <div class="form-group">

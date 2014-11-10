@@ -5,24 +5,24 @@ class Users_model extends CI_Model {
     }
     
 	function __get_users() {
-		return 'select a.uid,a.uemail,a.ulastlogin,a.ustatus,b.gname,c.bname from users_tab a, groups_tab b, branch_tab c where a.ubid=c.bid and a.ugid=b.gid and (a.ustatus=1 or a.ustatus=0)';
+		return 'select a.uid,a.udivision,a.uposition,a.uemail,a.ulastlogin,a.ustatus,b.gname,c.bname from users_tab a, groups_tab b, branch_tab c where a.ubid=c.bid and a.ugid=b.gid and (a.ustatus=1 or a.ustatus=0)';
 	}
 	
 	function __delete_users($id) {
 		return $this -> db -> query('update users_tab set ustatus=2 where uid=' . $id);
 	}
 	
-    function __update_users($uemail, $id, $gid, $bid, $ustatus) {
-		return $this -> db -> query("update users_tab set uemail='".$uemail."',ugid=".$gid.", ubid=".$bid.", ustatus=".$ustatus." where uid=" . $id);
+    function __update_users($uemail, $id, $gid, $division, $position, $bid, $ustatus) {
+		return $this -> db -> query("update users_tab set uemail='".$uemail."',udivision='".$division."',uposition='".$position."',ugid=".$gid.", ubid=".$bid.", ustatus=".$ustatus." where uid=" . $id);
 	}
 	
 	function __get_detail_users($id) {
-		$this -> db -> select('a.uemail,a.ustatus,a.ugid,a.ubid from users_tab a where (a.ustatus=1 or a.ustatus=0) and a.uid=' . $id);
+		$this -> db -> select('a.uemail,a.udivision,a.uposition,a.ustatus,a.ugid,a.ubid from users_tab a where (a.ustatus=1 or a.ustatus=0) and a.uid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
-	function __insert_users($uemail, $upass, $gid, $bid, $ustatus) {
-		return $this -> db -> query("insert into users_tab (uemail,upass,ugid,ubid,ustatus) values ('".$uemail."','".md5(sha1($upass, true))."',".$gid.",".$bid.",".$ustatus.")");
+	function __insert_users($uemail, $upass, $gid, $division,$position, $bid, $ustatus) {
+		return $this -> db -> query("insert into users_tab (uemail,upass,ugid,udivision,uposition,ubid,ustatus) values ('".$uemail."','".md5(sha1($upass, true))."',".$gid.",'".$division."','".$position."',".$bid.",".$ustatus.")");
 	}
 	
 	function __get_groups() {

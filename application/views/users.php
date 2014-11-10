@@ -26,8 +26,8 @@
           <th>Group</th>
           <th>Branch</th>
           <th>Email</th>
-          <th>History IP Address</th>
-          <th>History Date</th>
+          <th>Division</th>
+          <th>Position</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -41,8 +41,8 @@
           <td><?php echo $v -> gname; ?></td>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> uemail; ?></td>
-          <td><?php echo (isset($hist[0]) && $hist[0] != '' ? long2ip($hist[0]) : ''); ?></td>
-          <td><?php echo (isset($hist[1]) && $hist[1] != '' ? __get_date($hist[1],1) : ''); ?></td>
+          <td><?php echo $v -> udivision; ?></td>
+          <td><?php echo $v -> uposition; ?></td>
           <td><?php echo __get_status($v -> ustatus,1); ?></td>
 											<td>
 	<?php if ($v -> uid <> 1) : ?>

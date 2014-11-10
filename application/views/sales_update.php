@@ -66,6 +66,19 @@ $phone = explode('*', $detail[0] -> sphone);
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Join Date</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Join Date" name="joindate" class="form-control" value="<?php echo __get_date($detail[0] -> sjoindate,1); ?>" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+							<label for="status" class="control-label col-lg-4">Sales Area</label>
+                    <div class="col-lg-4">
+						<?php echo __get_sales_area($detail[0] -> sarea,2); ?>
+					</div>
+				</div>
+                <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">
 						
@@ -91,10 +104,13 @@ $phone = explode('*', $detail[0] -> sphone);
         </div>
         </div>
         <!-- END PAGE CONTENT -->
-<?php if (__get_roles('ExecuteAllBranchSales') <> 1) : ?>
 <script type="text/javascript">
+<?php if (__get_roles('ExecuteAllBranchSales') <> 1) : ?>
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
-</script>
 <?php endif; ?>
+$('input[name="joindate"]').datepicker({
+	dateFormat: 'dd/mm/yy'
+});
+</script>
 

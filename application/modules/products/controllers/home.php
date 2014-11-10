@@ -113,8 +113,11 @@ class Home extends MY_Controller {
 					$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
 					if ($this -> products_model -> __update_products($id, $arr)) {
 						foreach($moq as $k => $v)
-							$this -> products_model -> __update_moq($id,$k, array('mqty' => str_replace(',','',$v)));
-						
+							if ($this -> products_model -> __check_moq($id, $k))
+								$this -> products_model -> __update_moq($id,$k, array('mqty' => str_replace(',','',$v)));
+							else
+								$this -> products_model -> __insert_moq(array('mbid' => $k, 'mpid' => $id, 'mqty' => str_replace(',','',$v)));
+
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('products'));
 					}

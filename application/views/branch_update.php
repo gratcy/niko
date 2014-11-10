@@ -1,5 +1,6 @@
 <?php
 $phone = explode('*', $detail[0] -> bphone);
+		  $baddr = explode('*', $detail[0] -> baddr);
 ?>
        <!--PAGE CONTENT -->
         <div id="content">
@@ -41,7 +42,15 @@ $phone = explode('*', $detail[0] -> bphone);
                     <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr" class="form-control" placeholder="Address"><?php echo $detail[0] -> baddr; ?></textarea>
+                        <textarea name="addr" class="form-control" placeholder="Address"><?php echo $baddr[0]; ?></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Address II</label>
+
+                    <div class="col-lg-4">
+                        <textarea name="addr2" class="form-control" placeholder="Address"><?php echo $baddr[1]; ?></textarea>
                     </div>
                 </div>
 

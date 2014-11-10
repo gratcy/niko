@@ -4,9 +4,10 @@ class Branch_model extends CI_Model {
         parent::__construct();
     }
     
-    function __get_branch_select() {
-	$bidd= $this -> memcachedlib -> sesresult['ubid']; 
-		$this -> db -> select('bid,bname,baddr FROM branch_tab WHERE bstatus=1 AND bid='.$bidd.' ORDER BY bname ASC');
+    function __get_branch_select($bid="") {
+		if ($bid != "") $bid = " AND bid=" . $bid;
+		else $bid = "";
+		$this -> db -> select('bid,bname,baddr FROM branch_tab WHERE bstatus=1'.$bid.' ORDER BY bname ASC');
 		return $this -> db -> get() -> result();
 	}
 	

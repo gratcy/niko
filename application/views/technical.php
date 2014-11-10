@@ -31,6 +31,7 @@
           <th>Email</th>
           <th>Phone I</th>
           <th>Phone II</th>
+          <th>Join Date</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -47,6 +48,7 @@
           <td><?php echo $v -> temail; ?></td>
           <td><?php echo $phone[0]; ?></td>
           <td><?php echo $phone[1]; ?></td>
+          <td><?php echo __get_date($v -> tjoindate,1); ?></td>
           <td><?php echo __get_status($v -> tstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('TechnicalUpdate')) : ?>

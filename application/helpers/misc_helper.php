@@ -254,3 +254,26 @@ function __get_product_type($cid,$type) {
 		return $res;
 	}
 }
+
+function __get_customer_retur($status, $type) {
+	if ($type == 1)
+		return ($status === 0 ? 'Tukar Barang' : 'Potong Hutang');
+	else
+		return ($status === 0 ? '<label> Tukar Barang <input type="radio" class="uniform" name="ctyperetur" value="0" checked /></label> <label>Potong Hutang <input type="radio" class="uniform" name="ctyperetur" value="1" /></label>' : '<label> Tukar Barang <input type="radio" class="uniform" name="ctyperetur" value="0" /></label> <label>Potong Hutang <input type="radio" class="uniform" name="ctyperetur" value="1" checked /></label>');
+}
+
+function __get_sales_area($id, $type='') {
+	$area = array('Dalam Kota', 'Luar Kota', 'Luar Pulau');
+	if ($type == 1) {
+		return $area[$id];
+	}
+	else {
+		$res = '';
+		foreach($area as $k => $v)
+			if ($k == $id)
+				$res .= '<label> '.$v . ' <input type="radio" class="uniform" name="sarea" value="'.$k.'" checked /></label>';
+			else
+				$res .= '<label> '.$v . ' <input type="radio" class="uniform" name="sarea" value="'.$k.'" /></label>';
+		return $res;
+	}
+}

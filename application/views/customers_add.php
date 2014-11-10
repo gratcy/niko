@@ -76,7 +76,9 @@
                     <label for="text1" class="control-label col-lg-4">Delivery</label>
 
                     <div class="col-lg-4">
-                                <?php echo __get_delivery(0,2); ?>
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec(0,2); ?>
+                    </div>
                     </div>
                 </div>
 
@@ -181,10 +183,7 @@
                     <label for="text1" class="control-label col-lg-4">Type Retur</label>
 
                     <div class="col-lg-4">
-                        <select name=ctyperetur >
-						<option value=0 >Tukar Barang</option>
-						<option value=1 >Potong Hutang</option>
-						</select>
+                        <?php echo __get_customer_retur(0,2);?>
                     </div>
                 </div>
 				

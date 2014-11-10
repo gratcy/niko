@@ -46,6 +46,11 @@ class Products_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 	
+	function __check_moq($id, $bid) {
+		$this -> db -> select('mpid FROM moq_tab WHERE mpid='.$id.' and mbid='.$bid.' ORDER BY mbid ASC');
+		return $this -> db -> get() -> result();
+	}
+	
 	function __insert_moq($data) {
         return $this -> db -> insert('moq_tab', $data);
 	}

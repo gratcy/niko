@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `distribution_db`
 --
-CREATE DATABASE IF NOT EXISTS `distribution_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `distribution_db`;
+CREATE DATABASE IF NOT EXISTS `b8_3720841_niko` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `b8_3720841_niko`;
 
 -- --------------------------------------------------------
 

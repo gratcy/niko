@@ -64,6 +64,19 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Join Date</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Join Date" name="joindate" class="form-control" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+							<label for="status" class="control-label col-lg-4">Sales Area</label>
+                    <div class="col-lg-4">
+						<?php echo __get_sales_area(0,2); ?>
+					</div>
+				</div>
+                <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">
 						
@@ -90,9 +103,12 @@
         </div>
         <!-- END PAGE CONTENT -->
 
-<?php if (__get_roles('ExecuteAllBranchSales') <> 1) : ?>
 <script type="text/javascript">
+<?php if (__get_roles('ExecuteAllBranchSales') <> 1) : ?>
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
-</script>
 <?php endif; ?>
+$('input[name="joindate"]').datepicker({
+	dateFormat: 'dd/mm/yy'
+});
+</script>

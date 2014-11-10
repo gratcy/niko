@@ -26,6 +26,7 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
+			$joindate = strtotime($this -> input -> post('joindate', TRUE));
 			$status = (int) $this -> input -> post('status');
 			
 			if (!$name || !$branch || !$phone1 || !$phone2 || !$email || !$code) {
@@ -33,7 +34,7 @@ class Home extends MY_Controller {
 				redirect(site_url('technical' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('tbid' => $branch, 'tcode' => $code, 'tname' => $name, 'tphone' => $phone1 . '*' . $phone2, 'temail' => $email, 'tstatus' => $status);
+				$arr = array('tbid' => $branch, 'tcode' => $code, 'tname' => $name, 'tphone' => $phone1 . '*' . $phone2, 'temail' => $email, 'tjoindate' => $joindate, 'tstatus' => $status);
 				if ($this -> technical_model -> __insert_technical($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('technical'));
@@ -58,6 +59,7 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
+			$joindate = strtotime($this -> input -> post('joindate', TRUE));
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			
@@ -67,7 +69,7 @@ class Home extends MY_Controller {
 					redirect(site_url('technical' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('tbid' => $branch, 'tcode' => $code, 'tname' => $name, 'tphone' => $phone1 . '*' . $phone2, 'temail' => $email, 'tstatus' => $status);
+					$arr = array('tbid' => $branch, 'tcode' => $code, 'tname' => $name, 'tphone' => $phone1 . '*' . $phone2, 'temail' => $email, 'tjoindate' => $joindate, 'tstatus' => $status);
 					if ($this -> technical_model -> __update_technical($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('technical'));
