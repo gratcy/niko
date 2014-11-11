@@ -142,9 +142,10 @@
 	
 	
 			
-			
+		<?php if($detailx[0]->pstatus<'3'){ ?>			
 		<a href= "<?php echo site_url('purchase_order/home/purchase_order_update/' . $id); ?>" ><button class="btn text-muted text-center btn-primary" type="submit">EDIT</button></a>	
 		<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_detail_add/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">ADD ITEM</button></a>
+		<?php }?>
         </div>
     </div>
 </div>
@@ -205,8 +206,10 @@
 		
 		
 		  <td>
-              <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_update/' . $v -> pid .'/'. $v -> ppid); ?>"><i class="icon-pencil"></i></a>
-              <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+		  <?php if($detailx[0]->pstatus<'3'){ ?>
+             
+              <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_delete/' . $v -> pid .'/'.$id); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+			<?php }else { echo "DONE";}?>  
           </td>		
 		
 		
@@ -215,11 +218,12 @@
                                     </tbody>
                                 </table>
 								
+		<?php if($detailx[0]->pstatus<'3'){ ?>
 		<a href= "<?php echo site_url('purchase_order/home/purchase_order_approve/' . $id); ?>" ><button class="btn text-muted text-center btn-primary" type="submit">APPROVED</button></a> &nbsp;
 
 		<a href= "<?php echo site_url('purchase_order/home/purchase_order_cancel/' . $id); ?>" ><button class="btn text-muted text-center btn-primary" type="submit">CANCEL</button></a> &nbsp;
 		
-		<?php if($detailx[0]->pstatus=='3'){ ?>
+		<?php }elseif($detailx[0]->pstatus=='3'){ ?>
 		<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_report/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">CETAK PO</button></a>											
 								
     <?php } ?>

@@ -61,30 +61,31 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Sales Order <?php //echo "$id $scid";?></h5>
+            <h5>Delivery Order  <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
+            <!--form class="form-horizontal" action="<?php //echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
 
-	 <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
-	<table border=0 width=90% ><tr><td width=50%>
-                <div class="form-group" id="sbranch">
+
+ <form  id="form1" class="form-horizontal"  method="post">
+
+<table border=0 width=90% ><tr><td width=50%>
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
-                    <div class="col-lg-4">
-                        <!--input type="text" placeholder="sales Order Code" name="sbid" class="form-control" /-->
-						
-						<select name="sbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $sbid; ?></select>						
-						
+                    <div class="col-lg-4">	
+					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>"  name=sbid class="form-control" >
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No SO</label>
+                    <label for="text1" class="control-label col-lg-4">No DO</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
-					   <input type=text value="<?php echo $detailx[0]->snoso; ?>" class="form-control" disabled>
+					   <input type=text value="<?php echo $detailx[0]->snodo; ?>" class="form-control" disabled>
                     </div>
                 </div>
 
@@ -99,52 +100,30 @@ minLength: 1,
                     </div>
                 </div>
 				
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
-
-                    <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
-                    </div>
-                </div>				
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Status</label>
-
-                    <div class="col-lg-4">
-					<?php
-					$stat=$detailx[0]->sstatus;
-					if($stat==0){
-					$sstatuss="Not Active";					
-					}elseif($stat==1){
-					$sstatuss="Active";					
-					}elseif($stat==2){
-					$sstatuss="Remove";					
-					}elseif($stat==3){
-					$sstatuss="Done";					
-					}
-					
-					?>
-                       	<input type=text value="<?php echo $sstatuss; ?>" class="form-control" disabled>
-                    </div>
-                </div>					
-	</td><td width=40%>
+			
+				
+</td><td width=40%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
+					<input type=text value="<?php 
+					$stgldos=$detailx[0]->stgldo;
+					$stgldox = explode("-",$stgldos);			
+					$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";	
+					echo $stgldo;
+					 ?>" class="form-control" disabled>
                     </div>   							
                 </div>
 
-               <div class="form-group">
-							<label for="status" class="control-label col-lg-4">FREE PPN</label>
+              
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">No Pol</label>
+
                     <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
-                            </div>
-					</div>
-				</div>	
+                       	<input type=text value="<?php echo $detailx[0]->snopol; ?>" class="form-control" disabled>
+                    </div>
+                </div>	
 
 
 				
@@ -168,8 +147,19 @@ minLength: 1,
 
 
 
- <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
-
+ <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add/$id/$scid/$snodo"); ?>" method="post">
+	 <?php 
+				$stgldos=$detailx[0]->stgldo;
+				$stgldox = explode("-",$stgldos);			
+				$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";
+				
+	?>
+<input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
+<input type=hidden value="<?php echo $stgldo; ?>" name=stgldo class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snodo; ?>" name=snodo class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snopol; ?>" name=snopol class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snomor; ?>" name=snomor class="form-control" >
   <div class="panel-body">
                             <div class="table-responsive">
 							<?php 
@@ -181,11 +171,9 @@ minLength: 1,
                                         <tr>
           
           <th>Kode Product</th>
-          
+          <th>Nama Product</th>
           <th>Qty</th>
-          <th>Harga</th>
-          <th>Discount </th>
-		  <th>Jumlah</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -196,63 +184,59 @@ minLength: 1,
 		$totalall=0;
 		
 		foreach($detail as $k => $v) :	
-			//print_r($v);
-			$sqtyx=$v -> sqty;
-			$spricex=$v -> sprice;
-			$sdiscx=$v -> sdisc;
-			$qtyx=$v -> sqty;			
-			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
-	
+			//print_r($detail[0]);
+
+			$qtyy= $detail[$k]->sqty;
+			echo $qtyy;
+			if($qtyy>0){
     ?>
           <tr>
           
-          <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
-          <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo $v -> sprice; ?></td>
-          <td><?php echo $v -> sdisc; ?></td>
-		  <td> <?php echo $subtotal; ?> </td>		
+          <td><?php echo $v -> pcode; ?>
+		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
+		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> sqty; ?>">
+		  </td>
+		  <td><?php echo $v -> pname; ?></td>
+          <td><select name="sqty[]">
+		  
+		  <?php 
+		  echo "<option>$qtyy</option>";	
+		  
+		  ?>
+		  </select>
+		  </td>
+
 		  </tr>
         <?php 
-		$total=$subtotal+$total;
-		$totalqty=$qtyx+$totalqty;
-		$totalppn=$total * 10/100;
-		if($freeppn==1){
-		$totalall= $total;
-		}else{
-		$totalall= $total + $totalppn;
+		
+		$totalqty=$qtyy+$totalqty;
+		
+
 		}
 		endforeach; ?>
 		
          <tr>          
           <td>SUB TOTAL</td>
+		  <td></td>
           <td><?php echo $totalqty; ?></td>
-          <td></td>
-          <td></td>
-          <td><?php echo $total; ?></td>
+          
 		 </tr>		
-         <tr>          
-          <td>PPN</td>
-          <td><?php if($freeppn==0){ echo 10;}else{echo 0;}?>%</td>
-          <td></td>
-          <td></td>
-          <td><?php 
-		  if($freeppn==0){ echo $totalppn; }else{echo 0;}?></td>
-		 </tr>			
-         <tr>          
-          <td>TOTAL</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><?php echo $totalall; ?></td>
-		 </tr>		 
+        
                                     </tbody>
                                 </table>
-	<?php if($stat==3){?>				
+								
+		<?php $stat= $detailx[0]->dstatus; 
+		//echo $stat;
+		?>						
+		<br>
+		<?php if($stat < 3){ ?>
+		<a href="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" >
+		<input type=button  class="btn text-muted text-center btn-primary" value="EDIT DO" ></a>
+		<?php } ?>
+		<input type=submit  class="btn text-muted text-center btn-danger" value="DO DONE" >						
+		</form>						
 
-			<a href="javascript:void(0);" onclick="print_data('<?php echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>', 'Print SO');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
-			   <?php }else{?>
-			<a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_add/'.$id.'/'.$scid); ?>"><input type=button class="btn text-muted text-center btn-danger" value="APPROVE / EDIT SO"></a>		
-    <?php } ?>
                             </div>
                         </div>
                     
@@ -262,9 +246,3 @@ minLength: 1,
         </div>
         </div>
         <!-- END PAGE CONTENT -->
-<?php if (__get_roles('ExecuteAllBranchSalesOrder') <> 1) : ?>
-<script type="text/javascript">
-$('select[name="sbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
-$('#sbranch').css('display','none');
-</script>
-<?php endif; ?>

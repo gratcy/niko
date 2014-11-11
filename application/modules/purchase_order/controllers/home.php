@@ -121,6 +121,7 @@ class Home extends MY_Controller {
 		
 		
 			$pbid = $this -> input -> post('pbid', TRUE);
+			//echo $pbid;die;
 			$pnobukti = $this -> input -> post('pnobukti', TRUE);
 			$pref = $this -> input -> post('pref', TRUE);
 			$ptglx = explode("/",$this -> input -> post('ptgl', TRUE));			
@@ -177,6 +178,7 @@ class Home extends MY_Controller {
 			$pnobukti = $this -> input -> post('pnobukti', TRUE);
 			$pref = $this -> input -> post('pref', TRUE);
 			$ptgl = $this -> input -> post('ptgl', TRUE);
+			$ptglx=date('Y-m-d',strtotime($ptgl));
 			$psid = $this -> input -> post('psid', TRUE);
 			$pgudang = $this -> input -> post('pgudang', TRUE);
 			$pstatus = (int)$this ->input -> post('pstatus', TRUE);
@@ -189,7 +191,7 @@ class Home extends MY_Controller {
 				// }
 				// else {
 			// else {
-					$arr = array('pbid' => $pbid, 'pnobukti' => $pnobukti, 'pref' => $pref, 'ptgl' => $ptgl, 'psid' => $psid, 'pgudang' => $pgudang,'pstatus' => $pstatus );	
+					$arr = array('pbid' => $pbid, 'pnobukti' => $pnobukti, 'pref' => $pref, 'ptgl' => $ptglx, 'psid' => $psid, 'pgudang' => $pgudang,'pstatus' => $pstatus );	
 					
 					
 					

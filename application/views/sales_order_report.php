@@ -51,33 +51,31 @@ table.gridtablex td {
 <!-- Table goes in the document BODY -->
 
 <p align=center>
-<?php //print_r($detailx); ?>
+<?php //print_r($detailx); 
+$caddrx=explode("*",$detailx[0]->caddr);
+
+?>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td rowspan=2 colspan=2 width="40%" align=center  ><h1>SALES ORDER</h1></td><td>No SO</td><td><?php echo $detailx[0]->snoso; ?></td>
+<td rowspan=2 colspan=2 width="40%" align=center  ><h2>SALES ORDER</h2></td><td><b>No SO</b></td><td><?php echo $detailx[0]->snoso; ?></td>
 </tr>
 <tr>
-<td>Tanggal</td><td><?php echo $detailx[0]->stgl; ?></td>
+<td><b>Tanggal</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
 </tr>
 <tr>
-<td width="20%" align=center  >Kode Sales</td><td width="30%" ><?php echo $detailx[0]->ssid; ?>-<?php echo $detailx[0]->sname; ?></td><td width="10%">Alamat</td><td rowspan=3 valign=top width=30% ><?php echo $detailx[0]->caddr; ?></td>
+<td width="10%" align=left  ><b>Sales</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->sname; ?></td><td width="10%"><b>Alamat</b></td><td rowspan=3 valign=top width=30% ><?php echo $caddrx[1]; ?></td>
 </tr>
 <tr>
-<td width="20%" align=center  >Kode Toko</td><td  ><?php echo $detailx[0]->scid; ?></td><td></td>
+<td width="10%" align=left  ><b>Kode Toko</b></td><td  ><?php echo $detailx[0]->scid; ?></td><td></td>
 </tr>
 <tr>
-<td width="20%" align=center  >Nama Toko</td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
+<td width="10%" align=left  ><b>Nama Toko</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
 </tr>
 </table>
 </p>
-<p align=center>
-
-
-
-
-
 
 <div class="gridtable">
+<p align=center>
 							<?php 
 							$freeppn=$detailx[0]->sfreeppn;
 							//echo $freeppn; 
@@ -114,10 +112,10 @@ table.gridtablex td {
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
           <td><?php echo $v -> pname; ?></td>
-		  <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo $v -> sprice; ?></td>
-          <td><?php echo $v -> sdisc; ?></td>
-		  <td> <?php echo $subtotal; ?> </td>		
+		  <td align=center ><?php echo $v -> sqty; ?></td>
+          <td align=center ><?php echo __get_rupiah($v -> sprice); ?></td>
+          <td align=center ><?php echo $v -> sdisc; ?></td>
+		  <td align=center > <?php echo __get_rupiah($subtotal); ?> </td>		
 		  </tr>
         <?php 
 		$total=$subtotal+$total;
@@ -137,55 +135,46 @@ table.gridtablex td {
           <th></th>
           <th></th>
 		  
-          <th><?php echo $total; ?></th>
+          <th><?php echo __get_rupiah($total); ?></th>
 		 </tr>		
          <tr>          
           <td>PPN</td>
-          <td>10%</td>
+          <td><?php if($freeppn==0){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
           <td></td>
 		  <td></td>
-          <td><?php echo $totalppn; ?></td>
+          <td align=center ><?php 
+		  if($freeppn==0){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
+		  </td>
 		 </tr>			
          <tr>          
-          <td>TOTAL</td>
-          <td></td>
-          <td></td>
-          <td></td>
-		  <td></td>
-          <td><?php echo $totalall; ?></td>
+          <th>TOTAL</th>
+          <th></th>
+          <th></th>
+          <th></th>
+		  <th></th>
+          <th><?php echo __get_rupiah($totalall); ?></th>
 		 </tr>		 
                                     </tbody>
                                 </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </p>	
-
-
 <p align=center>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td  width=20% align=left  >CARA BAYAR</td><td align=left width=20%><?php echo $detailx[0]->stypepay; ?></td><td width=20% align=right >CATATAN</td>
+<td  width=20% align=left  >CARA BAYAR</td><td align=left width=20%>
+						<?php
+						$ccats= $detailx[0]->ccat; 
+						$stypepay=$detailx[0]->stypepay;
+						if($stypepay == "auto"){
+						if($ccats==3){ 	$stype="cash";	}else{ $stype="credit";}
+						}else{ $stype=$stypepay ;}
+						?>
+
+<?php echo $stype; ?></td><td width=20% align=right >CATATAN</td>
 <td valign=top  align=left rowspan=2 width=40%><?php echo $detailx[0]->sketerangan; ?></td>
 </tr>
 <tr>
-<td  align=left  >JATUH TEMPO</td><td align=left ><?php echo $detailx[0]->sduedate; ?></td><td></td>
+<td  align=left  >JATUH TEMPO</td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
 </tr>
 
 </table>

@@ -132,7 +132,7 @@
 				<?php if (__get_roles('PurchaseOrderView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#purchase">
-                        <i class="icon-money"> </i> Purchase &amp; Sales
+                        <i class="icon-money"> </i> Purchase
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
@@ -162,6 +162,7 @@
 						<?php if (__get_roles('DeliveryOrderView')) : ?>
                          <li class=""><a href="<?php echo site_url('delivery_order/home/'); ?>"><i class="icon-angle-right"></i> Delivery Order </a></li>
 						<?php endif; ?>
+						<li class=""><a href="<?php echo site_url('retur/home/'); ?>"><i class="icon-angle-right"></i> Retur Order </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>

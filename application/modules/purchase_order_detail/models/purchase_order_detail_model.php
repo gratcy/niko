@@ -9,7 +9,9 @@ class Purchase_order_detail_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 	
-
+	function __insert_inventory($data) {
+        return $this -> db -> insert('log_inventory_tab', $data);
+	}
 	
 	function __get_total_purchase_order_detail() {
 		$sql = $this -> db -> query('SELECT * FROM purchase_order_tab WHERE pstatus=1');

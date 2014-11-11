@@ -77,7 +77,7 @@
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->ptgl; ?>" class="form-control" disabled>
+					<input type=text value="<?php echo date('d/m/Y',strtotime($detailx[0]->ptgl)); ?>" class="form-control" disabled>
                     </div>
        					
 					
@@ -222,7 +222,7 @@
                                 </table>
 
 		<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_report/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">LIHAT PO</button></a>								
-		<a href= "<?php echo site_url('purchase_order_detail/home/penerimaan_report/' . $id .'/'.$pno); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">CETAK PENERIMAAN</button></a>											
+		<a href= "<?php echo site_url('purchase_order_detail/home/penerimaan_report/' . $id .'/'.$pno); ?>" ><button class="btn text-muted text-center btn-primary" type="submit">CETAK PENERIMAAN</button></a>											
 								
     <?php //echo $pages; ?>
                             </div>

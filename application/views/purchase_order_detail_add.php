@@ -20,7 +20,7 @@ $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-    source: '<?php echo site_url('application/views/assets/source_po.php'); ?>',
+    source: '<?php echo site_url('purchase_order_detail/home/source_po'); ?>',
      select: function(event, ui) { 
 	    $("#thePid").val(ui.item.pid),
         $("#thePhpp").val(ui.item.phpp)
@@ -94,7 +94,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->ptgl; ?>" class="form-control" disabled>
+					<input type=text value="<?php echo date('d/m/Y',strtotime($detailx[0]->ptgl)); ?>" class="form-control" disabled>
                     </div>
        				
 					
@@ -205,7 +205,7 @@ minLength: 1,
           <th>Currency</th>
           <th>Qty</th>
           <th>Harga</th>
-          <th>Discount </th>
+       
 		  <th>Total </th>
 		  <th>Keterangan</th>
           <th>Status</th>
@@ -225,8 +225,7 @@ minLength: 1,
           <td><?php echo $v -> pcurrency; ?></td>
           <td><?php echo $v -> pqty; ?></td>
           <td><?php echo $v -> pharga; ?></td>
-          <td><?php echo $v -> pdisc; ?></td>
-		  
+          		  
 		<?php
 		$total= ($v -> pharga* $v -> pqty)-($v -> pharga * $v -> pdisc *0.01 * $v -> pqty );
 		?>
@@ -239,7 +238,7 @@ minLength: 1,
 		
 		
 		  <td>
-              <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_update/' . $v -> pid .'/'. $v -> ppid); ?>"><i class="icon-pencil"></i></a>
+            
               <a href="<?php echo site_url('purchase_order_detail/home/purchase_order_detail_delete/' . $v -> pid.'/'. $v -> ppid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
           </td>		
 		</tr>

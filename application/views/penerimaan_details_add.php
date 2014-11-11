@@ -36,6 +36,7 @@
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					
 					<input type=hidden value="<?php echo $id; ?>" class="form-control" name=id >
                     </div>
                 </div>
@@ -108,7 +109,7 @@
 </div>
 
 
-<?php echo site_url('purchase_order_detail/home/penerimaan_details_add/'.$id); ?>
+<?php //echo site_url('purchase_order_detail/home/penerimaan_details_add/'.$id); ?>
 
 
 
@@ -143,8 +144,9 @@
           <tr>
           
           <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> pcurrency; ?></td>
+          <td><?php echo $v -> pcurrency; ?> </td>
           <td>
+		  <input type=hidden value="<?php echo $detailx[0]->pbid; ?>" name=pbid[] class="form-control" >
 		  <input type=hidden name=pid[] value="<?php echo $v -> pid; ?>">
 		  <input type=hidden name=ppid[] value="<?php echo $v -> ppid; ?>">
 		  <input type=hidden name=pppid[] value="<?php echo $v -> pppid; ?>">
@@ -227,23 +229,12 @@
 		</tr>	
   </tbody>
                                 </table>
-<br><input type=submit value=add >		
+<br><input class="btn text-muted text-center btn-primary" type=submit value="APPROVE PENERIMAAN" >		
 		</form>		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-                                  
+	<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_details/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">LIHAT PO</button></a>								
+											
 
-		<a href= "<?php echo site_url('purchase_order_detail/home/purchase_order_details/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">LIHAT PO</button></a>								
-		<a href= "<?php echo site_url('purchase_order_detail/home/penerimaan_report/' . $id); ?>" ><button class="btn text-muted text-center btn-danger" type="submit">CETAK PENERIMAAN</button></a>											
-								
-    <?php //echo $pages; ?>
                             </div>
                         </div>
                     

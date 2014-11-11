@@ -57,34 +57,25 @@ table.gridtablex td {
 <td rowspan=3 colspan=2 width="40%" align=center  ><h3>PENERIMAAN BARANG</h3></td><td></td><td></td>
 </tr>
 <tr>
-<td>Cabang</td><td><?php echo $detailx[0]->bname; ?></td>
+<td><b>Cabang</b></td><td><?php echo $detailx[0]->bname; ?></td>
 </tr>
 <tr>
 <td></td><td></td>
 </tr>
 <tr>
-<td width="20%" align=left  >No PO</td><td width="30%" ><?php echo $detailx[0]->pnobukti; ?></td><td width="10%">Reff</td><td  valign=top width=30% ><?php echo $detailx[0]->pref; ?></td>
+<td width="10%" align=left  ><b>No PO</b></td><td width="40%" align="left" ><?php echo $detailx[0]->pnobukti; ?></td><td width="10%"><b>Reff</b></td><td  valign=top width=30% ><?php echo $detailx[0]->pref; ?></td>
 </tr>
 <tr>
-<td width="20%" align=left  >Tanggal</td><td  ><?php echo $detailx[0]->ptgl; ?></td><td width="10%">Alamat</td><td valign=top width=30% ><?php echo $detailx[0]->pgudang; ?></td>
+<td width="10%" align="left" ><b>Tanggal</b></td><td width=30%  ><?php echo date('d/m/Y',strtotime($detailx[0]->ptgl)); ?></td><td width="10%"><b>Alamat</b></td><td valign=top  ><?php echo $detailx[0]->pgudang; ?></td>
 </tr>
 <tr>
 <td width="20%" align=left  ></td><td  ></td><td width="10%"></td><td  valign=top width=30% ></td>
 </tr>
 </table>
 </p>
-<p align=center>
-
-
-
-
-
 
 <div class="gridtable">
-							<?php 
-							//$freeppn=$detailx[0]->sfreeppn;
-							//echo $freeppn; 
-							?>
+<p align=center>
  <table class="gridtable" width=800px >
                                     <thead>
                                         <tr>
@@ -92,8 +83,7 @@ table.gridtablex td {
           <th>Nama Product</th>
           <th>Currency</th>
           <th>Qty</th>
-          <th>Harga</th>
-          <th>Discount </th>
+          <th>Harga</th>       
 		  <th>Total </th>
 		  
 
@@ -103,6 +93,7 @@ table.gridtablex td {
 		  <?php
 		  $total=0;
 		  $totalharga=0;
+		  $totqty=0;
 		  foreach($detail as $k => $v) :	
 		  $total= ($v -> pharga* $v -> pqty)-($v -> pharga * $v -> pdisc *0.01 * $v -> pqty );
 		  ?>
@@ -111,8 +102,7 @@ table.gridtablex td {
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pcurrency; ?></td>
           <td><?php echo $v -> pqty; ?></td>
-          <td><?php echo __get_rupiah($v -> pharga); ?></td>
-          <td><?php echo $v -> pdisc; ?></td>
+          <td><?php echo __get_rupiah($v -> pharga); ?></td>        
 		  <td><?php echo __get_rupiah($total); ?></td>
 		  
 
@@ -121,6 +111,7 @@ table.gridtablex td {
 		
 										</tr>
         <?php 
+		$totqty=$v -> pqty+$totqty;
 		$totalharga=$total+$totalharga;
 		endforeach; ?>
                                     </tbody>
@@ -131,26 +122,22 @@ table.gridtablex td {
 		  <td></td>
 		  <td></td>
 		  <td></td>         
-          <td></td>
-          <td><?php echo __get_rupiah($totalharga); ?></td>		  
-          
+       
+          <td><?php echo __get_rupiah($totalharga); ?></td>	          
 		 </tr>		
          <tr>          
           <td>PPN</td>
           <td>10%</td>
           <td></td>
 		  <td></td>
-		  <td></td>
-          <td></td>          
+		  <td></td>               
 		 </tr>			
          <tr>          
-          <td>TOTAL</td>
-          <td></td>
-		  <td></td>
-		  <td></td>
-          <td></td>
-         
-		  <td><?php echo __get_rupiah($totalharga); ?></td>
+          <th>TOTAL</th>
+          <th></th>
+		  <th><?php echo $totqty;?></th>
+		  <th></th>        
+		  <th><?php echo __get_rupiah($totalharga); ?></th>
           
 		 </tr>		 
                                     </tbody>

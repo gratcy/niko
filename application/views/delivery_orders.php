@@ -8,9 +8,8 @@
                 </div>
 
                 <hr />
-                <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Delivery Order</a>
-                <br />
-                <br />
+
+               
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

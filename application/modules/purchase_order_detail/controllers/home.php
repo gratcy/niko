@@ -55,6 +55,7 @@ class Home extends MY_Controller {
 			//print_r($_POST);
 				for($j=0;$j<$jum;$j++){
 					$pid=$_POST['pid'][$j];
+					$pbid=$_POST['pbid'][$j];
 					$ppid=$_POST['ppid'][$j];
 					$pppid=$_POST['pppid'][$j];
 					$pcurrency=$_POST['pcurrency'][$j];
@@ -75,7 +76,8 @@ class Home extends MY_Controller {
 					
 						 $arry = array( 'pid' => $pid ,'ppid' => $ppid ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus,'pno_penerimaan' => $pno_penerimaan );
 						 $this -> purchase_order_detail_model -> __insert_penerimaan_detail($arry);	
-						 
+						 $arrx = array('ibid' => $pbid, 'iiid' => $pid, 'itype' => 1, 'istockbegining' => '', 'istockin' => $pqty, 'istockout' => '', 'istock' => '', 'istatus' => 1 );
+					$this -> purchase_order_detail_model -> __insert_inventory($arrx);	
 				}
 				
 			redirect(site_url('purchase_order_detail/home/penerimaan_details/'.$ppid .'/' .$pno_penerimaan));
@@ -155,7 +157,14 @@ class Home extends MY_Controller {
 		}
 	}
 	
-	
+	function source_po() {
+		$view['hostname']=$this->db->hostname;
+		$view['username']=$this->db->username;
+		$view['password']=$this->db->password;
+		$view['database']=$this->db->database;
+		
+		$this->load->view('source_po',$view,FALSE);
+	}	
 	
 	function purchase_order_report($id) {
 		$view['id'] = $id;
@@ -168,7 +177,7 @@ class Home extends MY_Controller {
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
 	
-			$this->load->view('purchase_order_report',$view);
+			$this->load->view('purchase_order_report',$view,FALSE);
 	}	
 	
 	function penerimaan_report($id,$pno) {
@@ -182,7 +191,7 @@ class Home extends MY_Controller {
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
 	
-			$this->load->view('penerimaan_report',$view);
+			$this->load->view('penerimaan_report',$view,FALSE);
 	}		
 	
 	

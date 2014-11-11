@@ -5,7 +5,7 @@
         <script type="text/javascript">
             // When the document is ready
             $(document).ready(function () {
-                
+                 
                 $('#example1').datepicker({
                     format: "dd/mm/yyyy"
                 });  
@@ -19,7 +19,7 @@ $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-    source: '<?php echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>',
+    source: '<?php echo site_url('sales_order_detail/home/sourcex/'.$scid); ?>',
      select: function(event, ui) { 
 	    $("#theId").val(ui.item.pid),
         $("#theCid").val(ui.item.pcid),
@@ -69,26 +69,17 @@ minLength: 1,
 <script type="text/javascript" >
 function validateForm()
 {
-// alert(3);
 var goodColor = "#66cc66";
 var badColor = "#ff6666";
-
-
 
  var messagea = document.getElementById('confirmMessagea');
  var a=document.forms["myForm"]["pname"].value;
 
- //var messageb = document.getElementById('confirmMessageb');
  var b=parseInt(document.forms["myForm"]["qtyx"].value);
 
  var messagec = document.getElementById('confirmMessagec');
  var c=document.forms["myForm"]["sqty"].value;
-
-
  
- 
- 
- //var messaged = document.getElementById('confirmMessaged');
  var d=parseInt(document.forms["myForm"]["pricex"].value);
 
  var messagee = document.getElementById('confirmMessagee');
@@ -102,7 +93,6 @@ var badColor = "#ff6666";
 	  messagea.style.color = badColor;
 	  messagea.innerHTML =  "Product Tidak Boleh Kosong";  
 	  }else{
-	  // alert(2);
 	   messagea.innerHTML = "";  
 	  }  
 
@@ -110,35 +100,31 @@ var badColor = "#ff6666";
 	if( k==0 || k== 2){  
 		if( c==null || c=="" || c <= b )
 		  {
-		    alert(k);
+		    
 		  messagec.style.color = badColor;
 		  messagec.innerHTML  = "Qty masih kosong atau dibawah batas qty";  
 		  }else{
-		   // alert(6);
 		   messagec.innerHTML = "";  
 		  }  
 	}else{
-		   // alert(6);
 		   messagec.innerHTML = "";  
 		  } 
 
  
 	if(e==null || e=="" || e <= d )
 	  {
-	  //alert('Harga masih kosong atau dibawah batas harga');
 	  messagee.style.color = badColor;
 	  messagee.innerHTML  = " .";  
 	  }else{
-	  // alert(10);
-	   messagee.innerHTML = "";  
+	     messagee.innerHTML = "";  
 	  }  
 	  
  if(  messagea.innerHTML==""   &&  messagec.innerHTML==""   )
  {
-// alert(11);
+
   return true;
  } else{
-// alert(20);
+
   return false;
  } 
   
@@ -146,18 +132,7 @@ var badColor = "#ff6666";
   }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-		
+	
 </head>		
 		
 	
@@ -174,16 +149,10 @@ var badColor = "#ff6666";
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Sales Order Add <?php //echo "$id $scid";?></h5>
+            <h5>Sales Order Detail Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <!--form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
-<?php //echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
-<?php  
-//print_r($detailx);
-//print_r($detail);die;
-?>
 
 
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
@@ -204,9 +173,6 @@ var badColor = "#ff6666";
 					   <input type=text value="<?php echo $detailx[0]->snoso; ?>" class="form-control" disabled>
                     </div>
                 </div>
-
-				
-				
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
@@ -235,20 +201,21 @@ var badColor = "#ff6666";
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">FREE PPN</label>
+                    <label for="text1" class="control-label col-lg-4">Tanggal Jatuh Tempo</label>
 
                     <div class="col-lg-4">
-                       	<input type=text value="<?php 
-						if($detailx[0]->sfreeppn=='1'){
-						echo "YES";
-						}else{
-						echo "NO";
-						}						
-						//echo $detailx[0]->sfreeppn; 
-						?>" class="form-control" disabled>
-							<input type=hidden value="<?php echo $detailx[0]->sfreeppn; ?>" class="form-control" >
-                    </div>
-                </div>
+					<input type=text value="<?php echo $detailx[0]->sduedate; ?>" class="form-control" disabled>
+                    </div>   							
+                </div>				
+				
+               <div class="form-group">
+							<label for="status" class="control-label col-lg-4">FREE PPN</label>
+                    <div class="col-lg-4">
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
+                            </div>
+					</div>
+				</div>	
 
 
 				
@@ -265,19 +232,19 @@ var badColor = "#ff6666";
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Category Customer</label>
-<?php 
-$ccats= $detailx[0]->ccat; 
-if($ccats==0){
-$cname="Dist";
-}elseif($ccats==1){
-$cname="Reguler";
-}elseif($ccats==2){
-$cname="Semi";
-}elseif($ccats==3){
-$cname="Cash";
-}
+		<?php 
+		$ccats= $detailx[0]->ccat; 
+		if($ccats==0){
+			$cname="Dist";
+		}elseif($ccats==1){
+			$cname="Reguler";
+		}elseif($ccats==2){
+			$cname="Semi";
+		}elseif($ccats==3){
+			$cname="Cash";
+		}
 
-?>
+		?>
                     <div class="col-lg-4">
                        	<!--input type=text  id="theNamecat" class="form-control" disabled-->
 						<input type=text   class="form-control" value="<?php echo $cname; ?>" disabled >
@@ -287,13 +254,19 @@ $cname="Cash";
                 </div>					
 				
 		
-</td><td width=40%>
+		</td><td width=40%>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Type Pay</label>
 
-                    <div class="col-lg-4">                      
-					   <input type=text value="<?php echo $detailx[0]->stypepay; ?>" class="form-control" disabled>
+                    <div class="col-lg-4">           
+						<?php
+						$stypepay=$detailx[0]->stypepay;
+						if($stypepay == "auto"){
+							if($ccats==3){ 	$stype="cash";	}else{ $stype="credit";}
+						}else{ $stype=$stypepay ;}
+						?>
+					   <input type=text value="<?php echo $stype; ?>" class="form-control" disabled>
 					   <input type=hidden value="<?php echo $detailx[0]->stypepay; ?>" name="stypepay">
                     </div>
                 </div>
@@ -315,42 +288,33 @@ $cname="Cash";
 						<input type=hidden  id="thePricex" class="form-control" name="pricex" >
 						<input type=hidden  id="theSemi" class="form-control" name="pricesemi" >
 						<input type=hidden  id="theConsume" class="form-control" name="priceconsume" >
-<?php 
-$ccats= $detailx[0]->ccat; 
-if($ccats==0){
-?>	
+		<?php 
+		$ccats= $detailx[0]->ccat; 
+		if($ccats==0){
+		?>	
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Harga Distributor</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theDistt" class="form-control" disabled>
-						
-						
-						
+
                     </div>
                 </div>				
-<?php }elseif($ccats==1){ ?>
+		<?php }elseif($ccats==1){ ?>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Harga Kunci</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theKeyy" class="form-control" disabled>
-						
-						
-						
                     </div>
                 </div>	
 				
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Harga Toko</label>
-
                     <div class="col-lg-4">
-                       	<input type=text  id="theStoree" class="form-control" disabled>
-						
-						
-						
+                       	<input type=text  id="theStoree" class="form-control" disabled>						
                     </div>
                 </div>	
 <?php }elseif($ccats==2){ ?>			
@@ -413,6 +377,7 @@ if($ccats==0){
 
                     <div class="col-lg-4">
                        	<input type=text   class="form-control" name=sqty  >
+						<input type=hidden  value=0 name="add_plafon" >
 						&nbsp;&nbsp;<span id="confirmMessagec"></span>
                     </div>
                 </div>	
@@ -441,9 +406,7 @@ if($ccats==0){
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     
-				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-					
+				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>		
 				</div>
 				</td></tr></table>
             </form>
@@ -452,16 +415,10 @@ if($ccats==0){
 </div>
 
 
-
-
-
- <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
-
   <div class="panel-body">
                             <div class="table-responsive">
 							<?php 
 							$freeppn=$detailx[0]->sfreeppn;
-							//echo $freeppn; 
 							?>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
@@ -499,7 +456,7 @@ if($ccats==0){
           <td><?php echo $v -> sprice; ?></td>
           <td><?php echo $v -> sdisc; ?></td>
 		  <td> <?php echo $subtotal; ?> </td>		
-		  <td><a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
+		  <td><a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
         <?php 
 		$total=$subtotal+$total;
@@ -538,12 +495,31 @@ if($ccats==0){
 		 </tr>		 
                                     </tbody>
                                 </table>
-		<form method="POST" action="<?php echo site_url('sales_order/home'); ?>" >
+		<?php 
+		$sisaplafon=$detailx[0]->sisaplafon;
+		if($totalall <=	$sisaplafon	){	
+		$sisaplafon_after= $sisaplafon -$totalall;
+
+		?>	
+		<form method="POST" action="<?php echo site_url('sales_order_detail/home/sales_order_details/'.$id.'/'.$scid); ?>" >
 		<input type=hidden  value="<?php echo $id;?>" name="id" >
+		<input type=hidden  value="<?php echo $scid;?>" name="scid" >
+		<input type=hidden  value="<?php echo $sisaplafon_after;?>" name="sisaplafon_after" >
 		<input type=hidden  value=1 name="approve" >
-		<input type=submit value=Complete>
-		</form>						
-    <?php //echo $pages; ?>
+		<input type=hidden  value=0 name="add_plafon" >		
+		<input class="btn text-muted text-center btn-danger" type=submit value="Complete Approval" >
+		</form>	
+		<?php }else{ ?>
+		Sisa Plafon Anda Kurang, <br> Silahkan Edit Item atau Tambah Plafon<br>
+		<form method="POST"  >
+		<input type=hidden  value="<?php echo $scid;?>" name="scid" >
+		<input type=hidden  value="<?php echo $sisaplafon;?>" name="sisa" >
+		<input type=text   name="plafon" >
+		<input type=hidden  value=1 name="add_plafon" >
+		<input class="btn text-muted text-center btn-danger" type=submit value="TAMBAH PLAFON"  >
+		</form>		
+		
+    <?php } ?>
                             </div>
                         </div>
                     

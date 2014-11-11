@@ -1,3 +1,10 @@
+<?php
+// $mysql_server = $this->db->hostname;
+// $mysql_login =$this->db->username;
+// $mysql_password = $this->db->password;
+// $mysql_database = $this->db->database;
+?>
+
 <head>
         <!-- Load jQuery and bootstrap datepicker scripts -->
         <script src="js/jquery-1.9.1.min.js"></script>
@@ -21,7 +28,7 @@ $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-    source: '<?php echo site_url('application/views/assets/source.php'); ?>',
+    source: '<?php echo site_url('sales_order/home/source'); ?>',
      select: function(event, ui) { 
 	    $("#theCid").val(ui.item.cid),
         $("#theCat").val(ui.item.ccat),
@@ -60,7 +67,6 @@ minLength: 1,
 
 
 
-
   
        <!--PAGE CONTENT -->
         <div id="content">
@@ -73,14 +79,15 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Sales Order Add</h5>
+            <h5>Sales Order</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <form id="form1" class="form-horizontal" action="<?php echo site_url('sales_order/home/sales_order_add'); ?>" method="post">
+
+<form id="form1" class="form-horizontal" action="<?php echo site_url('sales_order/home/sales_order_add'); ?>" method="post">
 
 <table width=80% border=0><tr><td width=40% >
-                <div class="form-group">
+                <div class="form-group" id="sbranch">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
                     <div class="col-lg-4">
@@ -201,8 +208,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
 					<input  name=csname type="text" id="theSname" class="form-control"   />
-
-                        <!--select name="ssid" data-placeholder="sales" class="form-control chzn-select"><?php //echo $ssid; ?></select-->		
+		
                     </div>
                 </div>
 
@@ -223,16 +229,14 @@ minLength: 1,
 						<input  id="theClimit" name="climit" type="hidden" placeholder="sisa plafon"  class="form-control" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">FREE PPN</label>
-
+                    <div class="form-group">
+							<label for="status" class="control-label col-lg-4">FREE PPN</label>
                     <div class="col-lg-4">
-                        <select name="sfreeppn">
-						<option value="0">No</option>
-						<option value="1">Yes</option>
-						</select>
-                    </div>
-                </div>
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_ppn(0,2); ?>
+                            </div>
+					</div>
+				</div>	
                
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Type Pembayaran</label>
@@ -278,3 +282,9 @@ minLength: 1,
         </div>
         </div>
         <!-- END PAGE CONTENT -->
+<?php if (__get_roles('ExecuteAllBranchSalesOrder') <> 1) : ?>
+<script type="text/javascript">
+$('select[name="sbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
+$('#sbranch').css('display','none');
+</script>
+<?php endif; ?>

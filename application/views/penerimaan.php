@@ -66,7 +66,7 @@ left:inherit!important;
           <td><?php echo $v -> pgudang; ?></td>	
 		
 		  <td>
-<a href="<?php echo site_url('purchase_order_detail/home/penerimaan_details/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>		  
+	  
 			<a href="<?php echo site_url('purchase_order/home/sub_penerimaan/' . $v -> pid); ?>"><i class="icon-book"></i></a>	
 		  </td>		
 		

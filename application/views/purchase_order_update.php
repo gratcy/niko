@@ -32,19 +32,12 @@
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('purchase_order/home/purchase_order_update'); ?>" method="post">
 
-<?php //print_r($id);die;?>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
 
+                <div class="form-group" id="pbranch">
+                    <label for="text1" class="control-label col-lg-4">Cabang</label>
                     <div class="col-lg-4">
-		
-					
-                        <!--input type="text" placeholder="Purchase Order Code" name="pbid" class="form-control" value="<?php //echo $detail[0] -> pbid; ?>"  /-->
-						<input type=hidden name=id value="<?php echo $id; ?>">
-						
-<select name="pbid" data-placeholder="pbid" class="form-control chzn-select"><?php echo $pbid; ?></select>						
-						
-						
+						<input type=hidden name=id value="<?php echo $id; ?>">						
+						<select name="pbid" data-placeholder="pbid" class="form-control chzn-select"><?php echo $pbid; ?></select>								
                     </div>
                 </div>
 
@@ -71,21 +64,11 @@
                     <div class="col-lg-4">
                   
 
-                <input  name="ptgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control" value="<?php echo $detail[0] -> ptgl; ?>" >
+                <input  name="ptgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control" value="<?php echo date('d/m/Y',strtotime($detail[0] -> ptgl)); ?>" >
             </div>
-       				
-					
-					
-                </div>
+       		</div>
 
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
 
-                    <div class="col-lg-4">
-                        <!--input type="text" name="psid" class="form-control"  value="<?php //echo $detail[0] -> psid; ?>"   /-->
-<select name="psid" data-placeholder="sales" class="form-control chzn-select"><?php echo $psid; ?></select>							
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Gudang</label>
@@ -96,21 +79,7 @@
                 </div>
 
 				
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Status</label>
-                    
-                    <div class="col-lg-4">
-						<select name="pstatus" data-placeholder="gudang" class="form-control chzn-select">
-						<option value="<?php echo $detail[0] -> pgudang; ?>" >
-						<?php 
-						$st=$detail[0]->pstatus;
-						if($st=='0'){$stat="pending";}else{$stat="Ok";}
-						echo "$stat";?></option>						
-						<option value=0>Pending</option>
-						<option value=1>Ok</option>
-						</select>
-                    </div>
-				</div>
+
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
@@ -128,3 +97,10 @@
         </div>
         </div>
         <!-- END PAGE CONTENT -->
+
+<?php if (__get_roles('ExecuteAllBranchPurchaseOrder') <> 1) : ?>
+<script type="text/javascript">
+$('select[name="pbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
+$('#pbranch').css('display','none');
+</script>
+<?php endif; ?>

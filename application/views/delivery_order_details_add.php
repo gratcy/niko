@@ -61,25 +61,19 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Delivery Order  <?php //echo "$id $scid";?></h5>
+            <h5>Delivery Order </h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <!--form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
-<?php //echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
-<?php  
-//print_r($detailx);
-//print_r($detail);die;
-?>
 
-
- <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$sbid"); ?>" method="post">
+ <form  id="form1" class="form-horizontal"  method="post">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" class="form-control" name=sbid >
                     </div>
                 </div>
 
@@ -106,16 +100,18 @@ minLength: 1,
 			
 				
 </td><td width=40%>
+
+ <?php 
+ 			$stgldos=$detailx[0]->stgldo;
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";	
+?>			
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php 
-					$stgldos=$detailx[0]->stgldo;
-					$stgldox = explode("-",$stgldos);			
-					$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";	
-					echo $stgldo;
-					 ?>" class="form-control" disabled>
+					<input type=text value="<?php echo $stgldo; ?>" class="form-control" disabled>
                     </div>   							
                 </div>
 
@@ -150,14 +146,10 @@ minLength: 1,
 
 
 
- <form  id="form1" class="form-horizontal"  method="post">
- <input type=hidden value="<?php echo $detailx[0]->sbid; ?>" name=sbid class="form-control" >
-<input type=hidden value="<?php 
-			$stgldos=$detailx[0]->stgldo;
-			$stgldox = explode("-",$stgldos);			
-			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";	
-
-echo $stgldo; ?>" name=stgldo class="form-control" >
+ <form  id="form1" class="form-horizontal" 
+ action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add_confirm/$id/$scid/$snodo"); ?>" method="post">
+<input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
+<input type=hidden value="<?php echo $stgldo; ?>" name=stgldo class="form-control" >
 <?php //print_r($detailx[0]);?>
 <input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->snodo; ?>" name=snodo class="form-control" >
@@ -167,7 +159,6 @@ echo $stgldo; ?>" name=stgldo class="form-control" >
                             <div class="table-responsive">
 							<?php 
 							$freeppn=$detailx[0]->sfreeppn;
-							//echo $freeppn; 
 							?>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
@@ -225,20 +216,13 @@ echo $stgldo; ?>" name=stgldo class="form-control" >
 		}
 		endforeach; ?>
 		
-         <tr>          
-          <td>SUB TOTAL</td>
-		  <td></td>
-          <td><?php echo $totalqty; ?></td>
-          
-		 </tr>		
-        
-                                    </tbody>
+                         </tbody>
                                 </table>
-		<br><input type=submit>						
+								
+							
+		<br><input class="btn text-muted text-center btn-primary" type=submit value ="Create DO" >						
 		</form>						
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$sbid); ?>" ><input type=submit value=Cetak ></form>	
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order/'.$id.'/'.$sbid); ?>" ><input type=submit value=Update ></form>		
-    <?php //echo $pages; ?>
+
                             </div>
                         </div>
                     

@@ -61,7 +61,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Delivery Order Add <?php //echo "$id $scid";?></h5>
+            <h5>sales Order Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -79,23 +79,10 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">No DO</label>
 
                     <div class="col-lg-4">	
-					<?php
-					$nodo=$id.'-'.date('dmyhis');
-					?>
-					<input type=text value="<?php echo $nodo;?>" class="form-control" disabled>
-					<input type=hidden value="<?php echo $nodo;?>" name=snodo class="form-control" >
+					<input type=text name=snodo class="form-control" >
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Driver</label>
-
-                    <div class="col-lg-4">                     
-					   <input type=text name=driver class="form-control" >
-                    </div>
-                </div>				
-				
-				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">No Pol</label>
 
@@ -135,7 +122,7 @@ minLength: 1,
 				
 				                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label>
-					<input class="btn text-muted text-center btn-danger" type=submit value=create>
+					<input type=submit value=create>
                     <div class="col-lg-4">                        
                     </div>
                 </div>	
@@ -144,6 +131,12 @@ minLength: 1,
         </div>
     </div>
 </div>
+
+
+
+
+
+ <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
 
   <div class="panel-body">
                             <div class="table-responsive">

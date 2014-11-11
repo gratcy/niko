@@ -73,7 +73,7 @@ minLength: 1,
 ?>
 
 
- <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$sbid"); ?>" method="post">
+ <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
@@ -106,11 +106,19 @@ minLength: 1,
 			
 				
 </td><td width=40%>
+
+ <?php 
+			$stgldos=$detailx[0]->stgldo;			
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";
+			
+?>
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Tanggal</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgldo; ?>" class="form-control" disabled>
+					<input type=text value="<?php echo $stgldo; ?>" class="form-control" disabled>
                     </div>   							
                 </div>
 
@@ -145,14 +153,17 @@ minLength: 1,
 
 
 
- <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
+ <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add/$id/$scid/$snodo"); ?>" method="post">
 
-  <div class="panel-body">
+<input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
+<input type=hidden value="<?php echo $stgldo; ?>" name=stgldo class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snodo; ?>" name=snodo class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snopol; ?>" name=snopol class="form-control" >
+<input type=hidden value="<?php echo $detailx[0]->snomor; ?>" name=snomor class="form-control" >
+<div class="panel-body">
                             <div class="table-responsive">
-							<?php 
-							$freeppn=$detailx[0]->sfreeppn;
-							//echo $freeppn; 
-							?>
+							<?php 	$freeppn=$detailx[0]->sfreeppn;		?>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -170,17 +181,25 @@ minLength: 1,
 		$totalppn=0;
 		$totalall=0;
 		
+		foreach($details as $l => $m) :	
+		?>
+		<input type=hidden name="qty[]" value="<?php echo $m -> sqty; ?>">
+		<?php
+		endforeach;
 		foreach($detail as $k => $v) :	
-			//print_r($v);
+			
 			$sqtyx=$v -> sqty;
-
 			$qtyx=$v -> sqty;
 			$subtotal=$sqtyx;
 	
     ?>
           <tr>
           
-          <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+          <td>
+		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
+		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
+		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
+		  <?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> sqty; ?></td>
 
@@ -205,10 +224,21 @@ minLength: 1,
         
                                     </tbody>
                                 </table>
+								<br>
+		<table border=0>
+        <tr><td>		
 								
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$sbid.'/'.$snodo); ?>" ><input type=submit value=Cetak ></form>	
-		<!--form action="<?php //echo site_url('sales_order_detail/home/delivery_order/'.$id.'/'.$sbid.'/'.$snodo); ?>" ><input type=submit value=Update ></form-->		
-    <?php //echo $pages; ?>
+		<?php 	if ($detailx[0]->dstatus==1){?>						
+			<input class="btn text-muted text-center btn-danger" type=submit value="POSTING DO">
+		<?php }?>						
+			</form></td><td>
+		<?php 
+		if ($detailx[0]->dstatus==1){?>						
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type=submit value="EDIT DO" ></form>	
+		<?php }else{?>
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-danger" type=submit value="CETAK" ></form>	
+		<?php }?></td></tr></table>
+
                             </div>
                         </div>
                     

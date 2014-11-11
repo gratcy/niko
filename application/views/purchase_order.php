@@ -81,16 +81,19 @@ left:inherit!important;
 		
 		
 		  <td>
+		  <?php if($v -> pstatus !=2){?>
 				<?php if (__get_roles('PurchaseOrderUpdate')) : ?>
+				<?php if($v -> pstatus <3){?>
               <a href="<?php echo site_url('purchase_order/home/purchase_order_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>
-                <?php endif; ?>
-				<?php //echo site_url('purchase_order_detail/home/purchase_order_detail_add/' . $v -> pid); ?>
+                <?php } endif; ?>
+				
 			<a href="<?php echo site_url('purchase_order_detail/home/purchase_order_details/' . $v -> pid); ?>"><i class="icon-book"></i></a>	
 				
 				
 				<?php if (__get_roles('PurchaseOrderDelete')) : ?>
               <a href="<?php echo site_url('purchase_order/home/purchase_order_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-                <?php endif; ?>
+			  
+                <?php endif; }?>
           </td>		
 		
 		

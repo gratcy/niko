@@ -75,7 +75,7 @@ table.gridtablex td {
 
 
 <tr>
-<td width="10%" align=left  >Referensi</td><td width="20%" ></td>
+<td width="10%" align=left  >Driver</td><td width="20%" ><?php echo $detailx[0]->driver; ?></td>
 <td width="10%">No </td><td  valign=top width=20% ><?php echo $detailx[0]->snodo; ?></td>
 <td width="10%">Tanggal </td><td  valign=top width=20% ><?php echo $detailx[0]->stgldo; ?></td>
 </tr>
@@ -119,7 +119,7 @@ table.gridtablex td {
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> sqty; ?></td>
+          <td align=center ><?php echo $v -> sqty; ?></td>
 	
 		  </tr>
         <?php 

@@ -1,5 +1,5 @@
 <?php
-class sales_order_model extends CI_Model {
+class retur_model extends CI_Model {
     function __construct() {
         parent::__construct();
     }
@@ -13,7 +13,7 @@ class sales_order_model extends CI_Model {
 		return 'SELECT *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname
-		FROM sales_order_tab WHERE sstatus<>2 ORDER BY sid DESC';
+		FROM sales_order_tab  ORDER BY sid DESC';
 	}
 	
 	function __get_total_sales_order() {
@@ -39,16 +39,9 @@ class sales_order_model extends CI_Model {
 		(select ccat from customers_tab where customers_tab.cid=sales_order_tab.scid)as ccat,
 		(select climit from customers_tab where customers_tab.cid=sales_order_tab.scid)as sisaplafon,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname
-		FROM sales_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=3) AND sid=' . $id);
+		FROM sales_order_tab WHERE (sstatus=1 OR sstatus=3) AND sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
-	function __get_customers_detail($id) {
-		$this -> db -> select('*,
-		(select sname from sales_tab where sales_tab.sid=customers_tab.csid)as sname
-		FROM customers_tab WHERE  cid=' . $id);
-		return $this -> db -> get() -> result();
-	}	
-	
 	
 	function __insert_sales_order($data) {
 	

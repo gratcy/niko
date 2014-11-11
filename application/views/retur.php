@@ -16,13 +16,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Sales Order </h2>
+                        <h2>Retur Order </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('SalesOrderAdd')) : ?>
-                <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add sales Order</a>
+                <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Retur</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Sales Order
+                            Retur Order
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
@@ -45,12 +45,11 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
-          <th>No so</th>
-          <th>Type</th>
+		  <th>No Retur</th>								
+          <th>Produk</th>
+          <th>Customer</th>
+          <th>Type Retur</th>
           <th>Tanggal</th>
-          <th>Sales</th>
-          <th>Customer </th>
           <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
@@ -63,12 +62,11 @@ left:inherit!important;
 	 // echo "</pre>";
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
-          <td><?php echo $v -> snoso; ?></td>
-          <td><?php echo (isset($v -> stype) ? $v -> stype : ''); ?></td>
-          <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
-          <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> no_retur; ?></td>
+          <td><?php echo $v -> pname; ?></td>
+          <td><?php echo $v -> cname; ?></td>        
+          <td><?php echo $v -> typeretur; ?></td>
+          <td><?php echo $v -> tgl_retur; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
 		  if($sstatus==0){
@@ -79,25 +77,19 @@ left:inherit!important;
 		  $st="Delete";
 		  }if($sstatus==3){
 		  $st="Approve";
-		  }if($sstatus==4){
-		  $st="Done";
 		  }
 		  echo $st; ?></td>
 		
 		
 		  <td>
 				<?php if (__get_roles('SalesOrderUpdate')) : ?>
-				<?php if($sstatus<3){?>
-              <a href="<?php echo site_url('sales_order/home/sales_order_update/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-pencil"></i></a>
-			  <?php }?>
+              <a href="<?php //echo site_url('sales_order/home/sales_order_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
 				<?php if (__get_roles('SalesOrderUpdate')) : ?>
 			  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
                 <?php endif; ?>
 				<?php if (__get_roles('SalesOrderDelete')) : ?>
-				<?php if($sstatus<3){?>
-              <a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-			  <?php } ?>
+              <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>		
 		
