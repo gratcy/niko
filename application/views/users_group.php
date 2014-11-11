@@ -7,9 +7,11 @@
                     </div>
                 </div>
                 <hr />
+				<?php if (__get_roles('UsersGroupAdd')) : ?>
                 <a href="<?php echo site_url('users/users_group_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add User Group</a>
                 <br />
                 <br />
+                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

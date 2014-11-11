@@ -180,10 +180,10 @@
                     </a>
                     <ul class="collapse" id="accounting">
                        
-				<?php if (__get_roles('COAView') || __get_roles('COAView')) : ?>
+				<?php if (__get_roles('COAView')) : ?>
                         <li class=""><a href="<?php echo site_url('coa'); ?>"><i class="icon-angle-right"></i> COA </a></li>
 			   <?php endif; ?>
-				<?php if (__get_roles('COAView') || __get_roles('JournalView')) : ?>
+				<?php if (__get_roles('JournalView')) : ?>
                          <li class=""><a href="<?php echo site_url('journal'); ?>"><i class="icon-angle-right"></i> Journal </a></li>
 			   <?php endif; ?>
                         <li class=""><a href="<?php echo site_url('generalledger'); ?>"><i class="icon-angle-right"></i> General Ledger </a></li>
@@ -230,6 +230,7 @@
                         <li class=""><a href="<?php echo site_url('pm/outbox'); ?>"><i class="icon-angle-right"></i> Outbox </a></li>
                     </ul>
                 </li>
+				<?php if (__get_roles('UsersView') || __get_roles('UsersGroupView')) : ?>
                 <li class="panel">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#chart-nav">
                         <i class="icon-group"></i> Users
@@ -240,10 +241,15 @@
                           &nbsp; <span class="label label-warning">2</span>&nbsp;
                     </a>
                     <ul class="collapse" id="chart-nav">
+				<?php if (__get_roles('UsersView')) : ?>
                         <li><a href="<?php echo site_url('users'); ?>"><i class="icon-angle-right"></i> Users </a></li>
+			   <?php endif; ?>
+				<?php if (__get_roles('UsersGroupView')) : ?>
                         <li><a href="<?php echo site_url('users/users_group'); ?>"><i class="icon-angle-right"></i> User Group</a></li>
+			   <?php endif; ?>
                     </ul>
                 </li>
+			   <?php endif; ?>
                 <li><a href="<?php echo site_url('login/logout'); ?>" onclick="return confirm('<?php echo $this -> memcachedlib -> sesresult['uemail']; ?>, are you sure you want to logout?');"><i class="icon-signin"></i> Logout </a></li>
             </ul>
 

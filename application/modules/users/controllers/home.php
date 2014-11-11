@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> users_model -> __get_users(),3,10,site_url('users'));
+		$pager = $this -> pagination_lib -> pagination($this -> users_model -> __get_users((__get_roles('ExecuteAllBranchUsers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('users'));
 		$view['users'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('users', $view);

@@ -4,8 +4,10 @@ class Users_model extends CI_Model {
         parent::__construct();
     }
     
-	function __get_users() {
-		return 'select a.uid,a.udivision,a.uposition,a.uemail,a.ulastlogin,a.ustatus,b.gname,c.bname from users_tab a, groups_tab b, branch_tab c where a.ubid=c.bid and a.ugid=b.gid and (a.ustatus=1 or a.ustatus=0)';
+	function __get_users($bid="") {
+		if ($bid != "") $bid = " AND a.ubid=" . $bid;
+		else $bid = "";
+		return 'select a.uid,a.udivision,a.uposition,a.uemail,a.ulastlogin,a.ustatus,b.gname,c.bname from users_tab a, groups_tab b, branch_tab c where a.ubid=c.bid and a.ugid=b.gid and (a.ustatus=1 or a.ustatus=0)'.$bid;
 	}
 	
 	function __delete_users($id) {
