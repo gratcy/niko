@@ -8,6 +8,7 @@ class Home extends MY_Controller {
 		parent::__construct();
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('branch/branch_lib');
+		$this -> load -> model('branch/branch_model');
 		$this -> load -> library('sales/sales_lib');
 		$this -> load -> model('purchase_order_model');
 		$this -> load -> library('customers/customers_lib');
@@ -254,5 +255,12 @@ class Home extends MY_Controller {
 		}
 		
 		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
+	}
+	
+	function branch_address() {
+		$pbid = (int) $this -> input -> post('pbid');
+		$addr = $this -> branch_model -> __get_branch_detail($pbid);
+		$addr = explode('*',$addr[0] -> baddr);
+		echo isset($addr[1]) ? $addr[1] : '';
 	}
 }

@@ -282,9 +282,9 @@ minLength: 1,
         </div>
         </div>
         <!-- END PAGE CONTENT -->
-<?php if (__get_roles('ExecuteAllBranchSalesOrder') <> 1) : ?>
 <script type="text/javascript">
+<?php if (__get_roles('ExecuteAllBranchSalesOrder') <> 1) : ?>
 $('select[name="sbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#sbranch').css('display','none');
-</script>
 <?php endif; ?>
+</script>

@@ -1,4 +1,6 @@
-
+<?php
+$pbadd = explode('*',$pbadd);
+?>
         <!-- Load jQuery and bootstrap datepicker scripts -->
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
@@ -64,7 +66,7 @@
                     <label for="text1" class="control-label col-lg-4">Alamat</label>
 
                     <div class="col-lg-4">
-						<input type="text" name="pgudang" class="form-control" value="<?php echo $pbadd; ?>" />
+						<input type="text" name="pgudang" class="form-control" value="<?php echo $pbadd[1]; ?>" />
                     </div>
                 </div>
 
@@ -93,10 +95,14 @@
         </div>
         </div>
         <!-- END PAGE CONTENT -->
-
-<?php if (__get_roles('ExecuteAllBranchPurchaseOrder') <> 1) : ?>
 <script type="text/javascript">
+<?php if (__get_roles('ExecuteAllBranchPurchaseOrder') <> 1) : ?>
 $('select[name="pbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
-</script>
 <?php endif; ?>
+$('select[name="pbid"]').change(function(){
+	$.post( "<?php echo site_url('purchase_order/home/branch_address');?>", { pbid: $(this).val() }).done(function( data ) {
+		$('input[name="pgudang"]').val(data);
+	});
+});
+</script>
