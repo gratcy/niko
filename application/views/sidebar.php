@@ -75,12 +75,15 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">1</span>&nbsp;
+                       &nbsp; <span class="label label-danger">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="services">
 						<?php if (__get_roles('ServicesView')) : ?>
                          <li class=""><a href="<?php echo site_url('services'); ?>"><i class="icon-angle-right"></i> Services </a></li>
 						<?php endif; ?>
+                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Services Workorder </a></li>
+                         <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Services Sparepart </a></li>
+                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Report Sparepart </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>

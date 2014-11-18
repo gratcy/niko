@@ -50,7 +50,7 @@ left:inherit!important;
           <th>Reff</th>
           <th>Tanggal</th>                   
          <th>Status </th>
-		  <th style="width: 50px;"></th>
+		  <th style="width: 80px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>

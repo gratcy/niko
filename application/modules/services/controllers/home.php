@@ -9,6 +9,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('branch/branch_lib');
 		$this -> load -> library('products/products_lib');
+		$this -> load -> library('customers/customers_lib');
 		$this -> load -> model('services_model');
 	}
 
@@ -37,16 +38,17 @@ class Home extends MY_Controller {
 			$product = (int) $this -> input -> post('product');
 			$cond = (int) $this -> input -> post('cond');
 			$qty = (int) $this -> input -> post('qty');
+			$scid = (int) $this -> input -> post('scid');
 			$status = (int) $this -> input -> post('status');
 			
-			if (!$noseri || !$dfrom || !$dto || !$branch || !$product || !$qty) {
+			if (!$noseri || !$dfrom || !$dto || !$branch || !$product || !$qty || !$scid) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('services' . '/' . __FUNCTION__));
 			}
 			else {
 				$dfrom = strtotime(str_replace('/','-',$dfrom));
 				$dto = strtotime(str_replace('/','-',$dto));
-				$arr = array('sdate' => time(), 'spid' => $product, 'sbid' => $branch, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
+				$arr = array('sdate' => time(), 'sbid' => $branch, 'scid' => $scid, 'spid' => $product, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
 				if ($this -> services_model -> __insert_services($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('services'));
@@ -58,6 +60,7 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
+			$view['customers'] = $this -> customers_lib -> __get_customers();
 			$view['branch'] = $this -> branch_lib -> __get_branch();
 			$view['products'] = $this -> products_lib -> __get_products();
 			$this->load->view(__FUNCTION__, $view);
@@ -73,11 +76,12 @@ class Home extends MY_Controller {
 			$product = (int) $this -> input -> post('product');
 			$cond = (int) $this -> input -> post('cond');
 			$qty = (int) $this -> input -> post('qty');
+			$scid = (int) $this -> input -> post('scid');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$noseri || !$dfrom || !$dto || !$branch || !$product || !$qty) {
+				if (!$noseri || !$dfrom || !$dto || !$branch || !$product || !$qty || !$scid) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('services' . '/' . __FUNCTION__ . '/' . $id));
 				}
@@ -85,7 +89,7 @@ class Home extends MY_Controller {
 					$dfrom = strtotime(str_replace('/','-',$dfrom));
 					$dto = strtotime(str_replace('/','-',$dto));
 					
-					$arr = array('spid' => $product, 'sbid' => $branch, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
+					$arr = array('sbid' => $branch, 'scid' => $scid, 'spid' => $product, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
 					if ($this -> services_model -> __update_services($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('services'));
@@ -106,6 +110,7 @@ class Home extends MY_Controller {
 			$view['detail'] = $this -> services_model -> __get_services_detail($id, (__get_roles('ExecuteAllBranchServices') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> sbid);
 			$view['products'] = $this -> products_lib -> __get_products($view['detail'][0] -> spid);
+			$view['customers'] = $this -> customers_lib -> __get_customers($view['detail'][0] -> scid);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

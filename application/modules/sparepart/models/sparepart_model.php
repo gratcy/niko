@@ -8,6 +8,17 @@ class Sparepart_model extends CI_Model {
 		return 'SELECT a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC';
 	}
 	
+	function __get_sparepart_services($ids,$sid) {
+		if ($ids) {
+			if ($sid)
+				$this -> db -> select('a.sid,a.sname,a.scode,a.snocomponent,b.pname,c.sqty FROM sparepart_tab a left join products_tab b ON a.spid=b.pid LEFT JOIN services_sparepart_detail_tab c ON a.sid=c.sssid AND c.ssid='.$sid.' AND c.sstatus=1 WHERE (a.sstatus=1 or a.sstatus=0) AND a.sid IN ('.$ids.') ORDER BY a.sid DESC', FALSE);
+			else
+				$this -> db -> select('a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) AND a.sid IN ('.$ids.') ORDER BY a.sid DESC', FALSE);
+			return $this -> db -> get() -> result();
+		}
+		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC";
+	}
+	
 	function __get_recent_sparepart() {
 		$this -> db -> select('a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC LIMIT 0,5', FALSE);
 		return $this -> db -> get() -> result();

@@ -7,7 +7,7 @@ class Services_model extends CI_Model {
 	function __get_services($bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		return 'SELECT a.*,b.bname,c.pname FROM services_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0)'.$bid.' ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.bname,c.pname,d.cname FROM services_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE (a.sstatus=1 or a.sstatus=0)'.$bid.' ORDER BY a.sid DESC';
 	}
 	
 	function __get_recent_services($bid="") {
@@ -47,7 +47,7 @@ class Services_model extends CI_Model {
 	function __get_search($keyword, $bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select("a.*,b.bname,c.pname FROM services_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND a.snoseri LIKE '%".$keyword."%' ORDER BY a.sid DESC");
+		$this -> db -> select("a.*,b.bname,c.pname,d.cname FROM services_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND a.snoseri LIKE '%".$keyword."%' ORDER BY a.sid DESC");
 		return $this -> db -> get() -> result();
 	}
 }

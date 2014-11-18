@@ -37,8 +37,9 @@
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/timepicker/css/bootstrap-timepicker.min.css');?>" />
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/switch/static/stylesheets/bootstrap-switch.css');?>" />
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/suggestions.css');?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo site_url('application/views/assets/plugins/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css'); ?>" media="screen" />
      <!-- GLOBAL SCRIPTS -->
-    <script src="<?php echo site_url('application/views/assets/plugins/jquery-2.0.3.min.js');?>"></script>
+    <script src="<?php echo site_url('application/views/assets/plugins/jquery.min.js');?>"></script>
      <script src="<?php echo site_url('application/views/assets/plugins/bootstrap/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo site_url('application/views/assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js');?>"></script>
     <!-- END GLOBAL SCRIPTS -->
@@ -62,6 +63,8 @@
 <script src="<?php echo site_url('application/views/assets/plugins/jquery.dualListbox-1.3/jquery.dualListBox-1.3.min.js');?>"></script>
 <script src="<?php echo site_url('application/views/assets/plugins/autosize/jquery.autosize.min.js');?>"></script>
 <script src="<?php echo site_url('application/views/assets/plugins/jasny/js/bootstrap-inputmask.js');?>"></script>
+<script type="text/javascript" src="<?php echo site_url('application/views/assets/plugins/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('application/views/assets/plugins/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js'); ?>"></script>
     <!-- END PAGE LEVEL  STYLES -->
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

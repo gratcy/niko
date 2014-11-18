@@ -26,6 +26,13 @@
 						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Customer</label>
+
+                    <div class="col-lg-4">
+						<select name="scid" data-placeholder="Customer" class="form-control chzn-select"><?php echo $customers; ?></select>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Product</label>
