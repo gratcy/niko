@@ -89,6 +89,9 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
+				<?php if (__get_roles('ServicesApproval')) : ?>
+				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
+				<?php endif; ?>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
@@ -106,6 +109,11 @@
 <script type="text/javascript">
 	$('input[name="dfrom"],input[name="dto"]').datepicker({
 		dateFormat: 'dd/mm/yy'
+	});
+	
+	$('#approve').click(function(){
+		$('form.form-horizontal').append('<input type="hidden" name="appsev" value="3">');
+		$('form.form-horizontal').submit();
 	});
 </script>
 

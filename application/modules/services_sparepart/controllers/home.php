@@ -9,7 +9,9 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('services_wo/services_wo_lib');
 		$this -> load -> model('sparepart/sparepart_model');
+		$this -> load -> model('services_wo/services_wo_model');
 		$this -> load -> model('services_sparepart_model');
+		$this -> load -> model('inventory/inventory_model');
 	}
 
 	function index() {
@@ -71,6 +73,7 @@ class Home extends MY_Controller {
 			$status = (int) $this -> input -> post('status');
 			$sid = $this -> input -> post('sid');
 			$id = (int) $this -> input -> post('id');
+			$appsev = (int) $this -> input -> post('appsev');
 			
 			if ($id) {
 				if (!$wo || !$sid || !$qty) {
@@ -78,8 +81,24 @@ class Home extends MY_Controller {
 					redirect(site_url('services_sparepart' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
+					if ($appsev == 3) $status = 3;
 					$arr = array('ssid' => $wo, 'sdesc' => $desc, 'sstatus' => $status);
 					if ($this -> services_sparepart_model -> __update_services_sparepart($id, $arr)) {
+						$dwo = $this -> services_wo_model -> __get_services_wo_detail($wo);
+						//~ if ($appsev == 3) {
+							//~ for($i=0;$i<count($sid);++$i) {
+								//~ if ($this -> inventory_model -> __check_inventory(2,$dwo[0] -> sbid,$sid[$i])) {
+									//~ $r = $this -> inventory_model -> __check_inventory(2,$dwo[0] -> sbid,$sid[$i]);
+									//~ $arr = array('istockin' => ($r[0] -> istockin - $qty[$sid[$i]]), 'istockout' => 0, 'istock' => ($r[0] -> istock - $qty[$sid[$i]]));
+									//~ $this -> inventory_model -> __update_inventory($r[0] -> iid, $arr, 2);
+								//~ }
+								//~ else {
+									//~ $arr = array('ibid' => $dwo[0] -> sbid, 'iiid' => $sid[$i], 'itype' => 2, 'istockbegining' => $qty[$sid[$i]], 'istockin' => $qty[$sid[$i]], 'istockout' => 0, 'istock' => $qty[$sid[$i]], 'istatus' => 1);
+									//~ $this -> inventory_model -> __insert_inventory($arr);
+								//~ }
+							//~ }
+						//~ }
+						
 						for($i=0;$i<count($sid);++$i) $this -> services_sparepart_model -> __update_services_sparepart_det($id,$sid[$i],array('sqty' => $qty[$sid[$i]]));
 					
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
@@ -115,28 +134,6 @@ class Home extends MY_Controller {
 		}
 	}
 	
-	function get_suggestion() {
-		$hint = '';
-		$a = array();
-		$q = $_SERVER['QUERY_STRING'];
-		$arr = $this -> services_sparepart_model -> __get_suggestion();
-		
-		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
-		
-		if (strlen($q) > 0) {
-			for($i=0; $i<count($a); $i++) {
-				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
-					if ($hint == '')
-						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
-					else
-						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
-				}
-			}
-		}
-		
-		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
-	}
-	
 	function sparepart_delete($type) {
 		$ssid = (int) $this -> input -> post('ssid');
 		$sid = (int) $this -> input -> post('sid');
@@ -152,6 +149,19 @@ class Home extends MY_Controller {
 				$this -> services_sparepart_model -> __delete_sparepart_services_det($sid, $ssid);
 			}
 		}
+	}
+	
+	function sparepart_search($type) {
+		$id = (int) $this -> input -> get('id');
+		$keyword = $this -> input -> post('keyword');
+		
+		$pager = $this -> pagination_lib -> pagination($this -> sparepart_model -> __get_sparepart_services_search($keyword),3,10,site_url('services_sparepart/sparepart_add/' . $type));
+		$view['sparepart'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['id'] = $id;
+		$view['type'] = $type;
+		$view['services'] = true;
+		$this -> load -> view('box/sparepart_add', $view, false);
 	}
 	
 	function sparepart_add($type) {

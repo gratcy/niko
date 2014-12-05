@@ -45,4 +45,9 @@ class Inventory_model extends CI_Model {
 			$this -> db -> select("a.*,b.bname,c.sname as name,c.scode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join sparepart_tab c on a.iiid=c.sid WHERE (a.istatus=1 or a.istatus=0)".$bid." and a.itype=".$type." AND (c.sname LIKE '%".$keyword."%' OR c.scode LIKE '%".$keyword."%') ORDER BY a.iid DESC", FALSE);
 		return $this -> db -> get() -> result();
 	}
+	
+	function __check_inventory($type,$branch,$pid) {
+		$this -> db -> select('* FROM inventory_tab WHERE itype='.$type.' and ibid='.$branch.' and iiid=' . $pid, FALSE);
+		return $this -> db -> get() -> result();
+	}
 }

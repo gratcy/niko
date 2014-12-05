@@ -70,9 +70,18 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
+			if ($type == 1)
+			$view['perm'] = 'ExecuteAllBranchInventoryProduct';
+			else if ($type == 2)
+			$view['perm'] = 'ExecuteAllBranchInventorySparepart';
+			else if ($type == 3)
+			$view['perm'] = 'ExecuteAllBranchInventoryServices';
+			else
+			$view['perm'] = 'ExecuteAllBranchInventoryReturn';
+			
 			$view['type'] = $type;
 			$view['branch'] = $this -> branch_lib -> __get_branch();
-			if ($type == 1 || $type == 2 || $type == 3)
+			if ($type == 1 || $type == 3)
 				$view['items'] = $this -> products_lib -> __get_products();
 			else
 				$view['items'] = $this -> sparepart_lib -> __get_sparepart();
@@ -123,15 +132,25 @@ class Home extends MY_Controller {
 				$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 			else
 				$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-				
+			
+			if ($type == 1)
+			$view['perm'] = 'ExecuteAllBranchInventoryProduct';
+			else if ($type == 2)
+			$view['perm'] = 'ExecuteAllBranchInventorySparepart';
+			else if ($type == 3)
+			$view['perm'] = 'ExecuteAllBranchInventoryServices';
+			else
+			$view['perm'] = 'ExecuteAllBranchInventoryReturn';
+			
 			$view['id'] = $id;
 			$view['type'] = $type;
 			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type,$id,$perm);
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> ibid);
-			if ($type == 1 || $type == 2 || $type == 3)
+			if ($type == 1 || $type == 3)
 				$view['items'] = $this -> products_lib -> __get_products($view['detail'][0] -> iiid);
 			else
 				$view['items'] = $this -> sparepart_lib -> __get_sparepart($view['detail'][0] -> iiid);
+				
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -148,11 +167,11 @@ class Home extends MY_Controller {
 			
 		if ($this -> inventory_model -> __delete_inventory($id,$perm)) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
-			redirect(site_url('inventory'));
+			redirect(site_url('inventory/' . $type));
 		}
 		else {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
-			redirect(site_url('inventory'));
+			redirect(site_url('inventory/' . $type));
 		}
 	}
 	

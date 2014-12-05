@@ -4,7 +4,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Services Sparepart Update</h1>
+                    <h1 class="page-header">Services Report Update</h1>
                 </div>
             </div>
 <div class="row">
@@ -12,13 +12,14 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Services Sparepart Update</h5>
+            <h5>Services Report Update</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <form class="form-horizontal" action="<?php echo site_url('services_sparepart/services_sparepart_update'); ?>" method="post">
+            <form class="form-horizontal" action="<?php echo site_url('services_report/services_report_update'); ?>" method="post">
 
 <input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="hidden" name="swo" value="<?php echo $detail[0] -> ssid; ?>">
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Work Order</label>
 
@@ -45,16 +46,15 @@
 					</div>
 				</div>
                 <div class="form-group">
-                    <div class="col-lg-8" id="sparepartTMP" style="margin:0 auto;float:none;"> </div>
+                    <div class="col-lg-8" id="productTMP" style="margin:0 auto;float:none;"> </div>
 				</div>
 				<div style="clear:both;"></div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-				<?php if (__get_roles('ServicesSparepartApproval')) : ?>
+				<?php if (__get_roles('ServicesReportApproval')) : ?>
 				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
 				<?php endif; ?>
-				<a href="<?php echo site_url('services_sparepart/sparepart_add/2?id=' . $id); ?>" class="btn text-muted text-center btn-info" id="sparepart">Add Sparepart</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
@@ -74,22 +74,24 @@ $(function(){
 		$('form.form-horizontal').append('<input type="hidden" name="appsev" value="3">');
 		$('form.form-horizontal').submit();
 	});
-	$('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/2?id=' . $id);?>');
-	$("#sparepart").fancybox({
-		'width'				: '65%',
-		'height'			: '100%',
-		'autoScale'			: false,
-		'transitionIn'		: 'none',
-		'transitionOut'		: 'none',
-		'type'				: 'iframe'
+	$('div#productTMP').load('<?php echo site_url('services_report/product_tmp/' . $detail[0] -> ssid);?>?id=<?php echo $id;?>&t=2');
+	$('select[name="wo"]').attr('disabled', true);
+	
+	$(document).ajaxComplete(function(){
+		$('input[name*="spr"]').change(function(){
+			var spr = $(this).val();
+			res = '';
+			ras = '';
+			for(var i=0; i<spr; i++) {
+				res += '<input type="text" class="form-control" name="sqty['+$(this).attr('pl')+'][]">';
+				ras += '<select name="spn['+$(this).attr('pl')+'][]" data-placeholder="Item Sparepart" class="form-control chzn-select">';
+                ras += '<?php echo $sparepart; ?>';
+                ras += '</select>';
+			}
+			$('tr[aw="'+$(this).attr('pl')+'"] > td:eq(4)').html(res);
+			$('tr[aw="'+$(this).attr('pl')+'"] > td:eq(3)').html(ras);
+		});
 	});
-	$('a#fancybox-close').click(function(){
-		$('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/2?id=' . $id);?>');
-	});
-	$.fancybox.originalClose = $.fancybox.close;
-	$.fancybox.close = function() {
-		$('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/2?id=' . $id);?>');
-		$.fancybox.originalClose();
-	}
 });
 </script>
+

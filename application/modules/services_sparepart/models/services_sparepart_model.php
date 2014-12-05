@@ -7,11 +7,11 @@ class Services_sparepart_model extends CI_Model {
 	function __get_services_sparepart($bid="") {
 		if ($bid != "") $bid = " AND b.sbid=" . $bid;
 		else $bid = "";
-		return 'SELECT a.*,b.sno,c.bname FROM services_sparepart_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0)'.$bid.' ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.sno,c.bname FROM services_sparepart_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
 	}
 	
 	function __get_services_sparepart_detail($id) {
-		$this -> db -> select('* FROM services_sparepart_tab WHERE (sstatus=1 OR sstatus=0) AND sid=' . $id);
+		$this -> db -> select('* FROM services_sparepart_tab WHERE (sstatus=1 OR sstatus=0 OR sstatus=3) AND sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -55,7 +55,7 @@ class Services_sparepart_model extends CI_Model {
 	function __get_search($keyword, $bid="") {
 		if ($bid != "") $bid = " AND b.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select("a.*,b.sno,c.bname FROM services_sparepart_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND b.sno LIKE '%".$keyword."%' ORDER BY a.sid DESC");
+		$this -> db -> select("a.*,b.sno,c.bname FROM services_sparepart_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)".$bid." AND b.sno LIKE '%".$keyword."%' ORDER BY a.sid DESC");
 		return $this -> db -> get() -> result();
 	}
 }

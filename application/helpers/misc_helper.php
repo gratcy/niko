@@ -30,8 +30,10 @@ function __get_error_msg() {
 function __get_status($status, $type) {
 	if ($type == 1)
 		return ($status == 1 ? 'Active' : 'Not Active');
-	else
+	elseif ($type == 2)
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="status" value="1" />' : '<input type="checkbox" name="status" value="1" />');
+	else
+		return ($status == 3 ? '<span style="font-weight:bold;color:#5cb85c;">Approved</span>' : ($status == 1 ? 'Active' : 'No Active'));
 }
 
 function __get_ppn($status, $type) {

@@ -7,20 +7,20 @@ class Services_wo_model extends CI_Model {
 	function __get_services_wo($bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		return 'SELECT a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0)'.$bid.' ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
 	}
 	
 	function __get_services_wo_detail($id, $bid="") {
 		if ($bid != "") $bid = " AND sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('* FROM services_workorder_tab WHERE (sstatus=1 OR sstatus=0)'.$bid.' AND sid=' . $id);
+		$this -> db -> select('* FROM services_workorder_tab WHERE (sstatus=1 OR sstatus=0 OR sstatus=3)'.$bid.' AND sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_services_wo_select($bid="") {
 		if ($bid != "") $bid = " AND sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('sid,sno FROM services_workorder_tab WHERE (sstatus=1 OR sstatus=0)'.$bid);
+		$this -> db -> select('sid,sno FROM services_workorder_tab WHERE sstatus=1'.$bid);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -40,7 +40,7 @@ class Services_wo_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('sno as name FROM services_workorder_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$this -> db -> select('sno as name FROM services_workorder_tab WHERE (sstatus=1 OR sstatus=0 OR sstatus=3) ORDER BY name ASC');
 		return $this -> db -> get() -> result();
 	}
 	

@@ -11,6 +11,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('products/products_lib');
 		$this -> load -> library('customers/customers_lib');
 		$this -> load -> model('services_model');
+		$this -> load -> model('inventory/inventory_model');
 	}
 
 	function index() {
@@ -79,6 +80,7 @@ class Home extends MY_Controller {
 			$scid = (int) $this -> input -> post('scid');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
+			$appsev = (int) $this -> input -> post('appsev');
 			
 			if ($id) {
 				if (!$noseri || !$dfrom || !$dto || !$branch || !$product || !$qty || !$scid) {
@@ -86,11 +88,24 @@ class Home extends MY_Controller {
 					redirect(site_url('services' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
+					if ($appsev == 3) $status = 3;
 					$dfrom = strtotime(str_replace('/','-',$dfrom));
 					$dto = strtotime(str_replace('/','-',$dto));
 					
 					$arr = array('sbid' => $branch, 'scid' => $scid, 'spid' => $product, 'sqty' => $qty, 'snoseri' => $noseri, 'scondition' => $cond, 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sstatus' => $status);
-					if ($this -> services_model -> __update_services($id, $arr)) {	
+					if ($this -> services_model -> __update_services($id, $arr)) {
+						if ($appsev == 3) {
+							if ($this -> inventory_model -> __check_inventory(4,$branch,$product)) {
+								$r = $this -> inventory_model -> __check_inventory(4,$branch,$product);
+								$arr = array('istockin' => ($r[0] -> istockin + $qty), 'istockout' => 0, 'istock' => ($r[0] -> istock + $qty));
+								$this -> inventory_model -> __update_inventory($r[0] -> iid, $arr, 4);
+							}
+							else {
+								$arr = array('ibid' => $branch, 'iiid' => $product, 'itype' => 4, 'istockbegining' => $qty, 'istockin' => $qty, 'istockout' => 0, 'istock' => $qty, 'istatus' => 1);
+								$this -> inventory_model -> __insert_inventory($arr);
+							}
+						}
+						
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('services'));
 					}

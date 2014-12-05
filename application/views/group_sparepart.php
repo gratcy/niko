@@ -40,10 +40,10 @@
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('CategoriesSparepartUpdate')) : ?>
+				<?php if (__get_roles('GroupSparepartUpdate')) : ?>
               <a href="<?php echo site_url('group_sparepart/group_sparepart_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('CategoriesSparepartDelete')) : ?>
+				<?php if (__get_roles('GroupSparepartDelete')) : ?>
               <a href="<?php echo site_url('group_sparepart/group_sparepart_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

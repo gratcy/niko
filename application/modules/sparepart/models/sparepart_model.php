@@ -19,6 +19,10 @@ class Sparepart_model extends CI_Model {
 		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC";
 	}
 	
+	function __get_sparepart_services_search($keyword) {
+		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') ORDER BY a.sid DESC";
+	}
+	
 	function __get_recent_sparepart() {
 		$this -> db -> select('a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC LIMIT 0,5', FALSE);
 		return $this -> db -> get() -> result();

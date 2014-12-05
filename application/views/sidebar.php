@@ -87,7 +87,7 @@
                     </ul>
                 </li>
 			   <?php endif; ?>
-				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryServicesView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameServicesView') || __get_roles('OpnameReturnView')) : ?>
+				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#inventory">
                         <i class="icon-barcode"> </i> Inventory
@@ -95,7 +95,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">5</span>&nbsp;
+                       &nbsp; <span class="label label-primary">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
@@ -104,13 +104,10 @@
 							<?php if (__get_roles('InventorySparepartView')) : ?>
 								<li class=""><a href="<?php echo site_url('inventory/2'); ?>"><i class="icon-angle-right"></i> Inventory Sparepart </a></li>
 							<?php endif; ?>
-							<?php if (__get_roles('InventoryServicesView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Inventory Services </a></li>
-							<?php endif; ?>
 							<?php if (__get_roles('InventoryReturnView')) : ?>
 								<li class=""><a href="<?php echo site_url('inventory/4'); ?>"><i class="icon-angle-right"></i> Inventory Return </a></li>
 							<?php endif; ?>
-							<?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameServicesView') || __get_roles('OpnameReturnView')) : ?>
+							<?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
 								<li class=""><a href="javascript:void(0);"><i class="icon-angle-down"></i> Inventory Opname </a>
 							<?php endif; ?>
 								<ul>
@@ -119,9 +116,6 @@
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameSparepartView')) : ?>
 								<li><a href="<?php echo site_url('opname/2'); ?>"><i class="icon-angle-right"></i> Sparepart Opname</a></li>
-							<?php endif; ?>
-							<?php if (__get_roles('OpnameServicesView')) : ?>
-								<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Services Opname</a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameReturnView')) : ?>
 								<li><a href="<?php echo site_url('opname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>

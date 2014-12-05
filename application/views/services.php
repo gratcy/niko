@@ -70,13 +70,15 @@ left:inherit!important;
           <td><?php echo $v -> snoseri; ?></td>
           <td><?php echo __get_condition_services($v -> scondition,1); ?></td>
           <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
-          <td><?php echo __get_status($v -> sstatus,1); ?></td>
+          <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
+			  <?php if ($v -> sstatus <> 3) : ?>
 				<?php if (__get_roles('ServicesUpdate')) : ?>
               <a href="<?php echo site_url('services/services_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
 				<?php if (__get_roles('ServicesDelete')) : ?>
               <a href="<?php echo site_url('services/services_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
                 <?php endif; ?>
           </td>
 										</tr>

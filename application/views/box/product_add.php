@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Sparepart Add</title>
+<title>Product Add</title>
     <link rel="stylesheet" href="<?php echo site_url('application/views/assets/plugins/bootstrap/css/bootstrap.css');?>" />
     <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/main.css');?>" />
     <link rel="stylesheet" href="<?php echo site_url('application/views/assets/css/theme.css');?>" />
@@ -14,11 +14,11 @@
 <body>
 <div style="padding:10px;width: 99%;">
 <section class="content-header">
-<h1>Add sparepart</h1>
+<h1>Add product</h1>
 </section>
 	<?php echo __get_error_msg(); ?>
                     <div class="row">
-						<form action="<?php echo site_url('services_sparepart/sparepart_search/' . $type); ?>" method="post">
+						<form action="<?php echo site_url('services_report/product_search/' . $type); ?>" method="post">
 						<input type="hidden" name="type" value="<?php echo $type; ?>">
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-1" style="float:left;">Name/Code</label>
@@ -32,26 +32,24 @@
 						</form>
 						</div>
 						<br />
-<form action="<?php echo site_url('services_sparepart/sparepart_add/'.$type.'?id=' . $id); ?>" method="post">
+<form action="<?php echo site_url('services_report/product_add/'.$type.'?id=' . $id); ?>" method="post">
 <div class="box-body">
 <table class="table table-bordered">
 <thead>
 <tr>
 <th style="width:50px;"></th>
-<th>Product</th>
 <th>Code</th>
 <th>Name</th>
-<th>No Component</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
-<?php foreach($sparepart as $k => $v) : ?>
+<?php foreach($product as $k => $v) : ?>
 <tr>
-<td style="text-align:center;"><input type="checkbox" name="sid[]" value="<?php echo $v -> sid?>"></td>
+<td style="text-align:center;"><input type="checkbox" name="pid[]" value="<?php echo $v -> pid?>"></td>
+<td><?php echo $v -> pcode; ?></td>
 <td><?php echo $v -> pname; ?></td>
-<td><?php echo $v -> scode; ?></td>
-<td><?php echo $v -> sname; ?></td>
-<td><?php echo $v -> snocomponent; ?></td>
+<td><?php echo $v -> pdesc; ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
@@ -71,6 +69,6 @@
 </html>
 <script type="text/javascript">
 $(function(){
-	$('input[name="keyword"]').sSuggestion('span#sg1','<?php echo site_url('sparepart/get_suggestion'); ?>', 'sid');
+	$('input[name="keyword"]').sSuggestion('span#sg1','<?php echo site_url('products/get_suggestion'); ?>', 'pid');
 });
 </script>

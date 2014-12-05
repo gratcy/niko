@@ -47,6 +47,7 @@ left:inherit!important;
                                         <tr>
           <th>WO No.</th>
           <th>Branch</th>
+          <th>Description</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -58,13 +59,16 @@ left:inherit!important;
                                         <tr>
           <td><?php echo $v -> sno; ?></td>
           <td><?php echo $v -> bname; ?></td>
-          <td><?php echo __get_status($v -> sstatus,1); ?></td>
+          <td><?php echo $v -> sdesc; ?></td>
+          <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
+			  <?php if ($v -> sstatus <> 3) : ?>
 				<?php if (__get_roles('ServicesSparepartUpdate')) : ?>
               <a href="<?php echo site_url('services_sparepart/services_sparepart_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
 				<?php if (__get_roles('ServicesSparepartDelete')) : ?>
               <a href="<?php echo site_url('services_sparepart/services_sparepart_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
                 <?php endif; ?>
           </td>
 										</tr>
