@@ -290,6 +290,50 @@ class Home extends MY_Controller {
 	}
 	
 
+	
+	
+function invoice_order_add($id,$scid,$snodo) {
+		if ($_POST) {
+
+		
+			$scid = $scid;
+			$snodo = $snodo;
+			$sno_invoice = $this -> input -> post('sno_invoice', TRUE);
+			$stgl_invoicex = $this -> input -> post('stgl_invoice', TRUE);
+			$stgl_invoice=date('Y-m-d',strtotime($stgl_invoicex));
+			$sduedate_invoice = $this -> input -> post('stgl_invoice', TRUE);
+
+
+
+					$arr = array('sno_invoice' => $sno_invoice, 'stgl_invoice' => $stgl_invoice,
+					'sduedate_invoice' => $sduedate_invoice	);						
+					if ($this -> sales_order_detail_model -> __update_invoice_order($snodo,$arr)) {
+						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+						redirect(site_url('sales_order_detail/home/invoice_report/'. $id .'/'. $scid .'/'.$snodo));
+					}
+					else {
+						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+						redirect(site_url('invoice/home/invoice_order_add/'. $id .'/'. $scid .''));
+					}
+
+		}
+		else {
+		
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['snodo'] = $snodo;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			$this->load->view('invoice_order_details_add',$view);
+		}
+	}	
+	
+	
+	
 	function delivery_order_details_add($id,$scid,$snodo) {
 		if ($_POST) {
 		
@@ -298,7 +342,7 @@ class Home extends MY_Controller {
 			$snodo = $this -> input -> post('snodo', TRUE);
 			$snopol = $this -> input -> post('snopol', TRUE);
 			$stgldos = $this -> input -> post('stgldo', TRUE);			
-			$stgldox = explode("-",$stgldos);			
+			$stgldox = explode("/",$stgldos);			
 			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";				
 			$snomor = $this -> input -> post('snomor', TRUE);		
 			$jum=count($_POST['sqty']);
@@ -309,7 +353,8 @@ class Home extends MY_Controller {
 			$qty = $_POST['qty'][$j];
 			$sqty =$_POST['sqty'][$j];			
 			$ssisa=$qty-$sqty;
-
+			
+//echo "$qty - $sqty - $ssisa";//die;
 
 					$arrdo=array('dstatus'=>3);
 					$arrqty = array('ssisa' => $ssisa);
@@ -429,6 +474,20 @@ class Home extends MY_Controller {
 	
 			$this->load->view('delivery_order_report',$view,FALSE);
 	}	
+	
+	
+	function invoice_report($id,$sbid,$snodo) {
+			$view['id'] = $id;
+			$view['sbid'] = $sbid;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			$this->load->view('invoice_report',$view,FALSE);
+	}		
+	
 	
 	
 }

@@ -158,7 +158,7 @@ var badColor = "#ff6666";
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Cabang  </label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
@@ -405,6 +405,9 @@ var badColor = "#ff6666";
 		
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
+					<a href="<?php echo site_url("sales_order/home/sales_order_update/$id/$scid"); ?>">
+					<button class="btn text-muted text-center btn-primary" >Edit Header</button>	
+					</a>
                     
 				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>		
 				</div>
@@ -510,14 +513,15 @@ var badColor = "#ff6666";
 		<input class="btn text-muted text-center btn-danger" type=submit value="Complete Approval" >
 		</form>	
 		<?php }else{ ?>
-		Sisa Plafon Anda Kurang, <br> Silahkan Edit Item atau Tambah Plafon<br>
+		Sisa Plafon Anda Kurang <br> 
+		<!--Silahkan Edit Item atau Tambah Plafon<br>
 		<form method="POST"  >
-		<input type=hidden  value="<?php echo $scid;?>" name="scid" >
-		<input type=hidden  value="<?php echo $sisaplafon;?>" name="sisa" >
+		<input type=hidden  value="<?php //echo $scid;?>" name="scid" >
+		<input type=hidden  value="<?php //echo $sisaplafon;?>" name="sisa" >
 		<input type=text   name="plafon" >
 		<input type=hidden  value=1 name="add_plafon" >
 		<input class="btn text-muted text-center btn-danger" type=submit value="TAMBAH PLAFON"  >
-		</form>		
+		</form-->		
 		
     <?php } ?>
                             </div>

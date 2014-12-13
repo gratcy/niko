@@ -12,7 +12,8 @@ class delivery_order_model extends CI_Model {
 	function __get_sales_order() {
 		return 'SELECT *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
-        (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname
+        (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
+        (select sum(ssisa) from sales_order_detail_tab where sales_order_detail_tab.ssid=sales_order_tab.sid)as sisa
 		FROM sales_order_tab WHERE (sstatus=3) ORDER BY sid DESC';
 	}
 
@@ -26,6 +27,13 @@ class delivery_order_model extends CI_Model {
 		FROM delivery_order_detail_tab WHERE (sid=0) AND snodo='.$snodo.' ORDER BY did DESC';
 	}	
 
+	function __get_sisa_so($id) {
+		$this -> db -> SELECT ('sum(sales_order_detail_tab.ssisa) as sisa
+		FROM sales_order_tab,sales_order_detail_tab where   sales_order_tab.sid=sales_order_detail_tab.ssid
+		AND sales_order_tab.sid='.$id);
+return $this -> db -> get() -> result();
+	}	 	
+	
 	function __get_do_list($id) {
 		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,

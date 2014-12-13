@@ -109,9 +109,11 @@ class Home extends MY_Controller {
 		//echo $id;die;
 			$pager = $this -> pagination_lib -> pagination($this -> purchase_order_model -> __get_penerimaan($id),3,10,site_url('purchase_order'));
 			$view['id']=$id;
+			$view['psisa']=$this -> purchase_order_model -> __get_sisa($id);
 			$view['purchase_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
+			
 		}
 		$this->load->view('sub_penerimaan', $view);
 	}		

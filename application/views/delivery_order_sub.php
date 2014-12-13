@@ -7,8 +7,14 @@
                     </div>
                 </div>
 
-                <hr /><?php //print_r($headerx);die;?>
+                <hr />
+				<?php 
+				$ssisa= $ssisa[0]->sisa;
+				if($ssisa >'0'){
+				$statusdo="Aktif";
+				?>
                 <a href="<?php 	echo site_url('sales_order_detail/home/delivery_order_add/'.$id.'/'.$sbid); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Delivery Order</a>
+				<?php  }else{$statusdo="DONE";} ?>
                 <br />
                 <br />
 	<?php echo __get_error_msg(); ?>
@@ -16,7 +22,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Delivery Order
+                          <?php echo $statusdo;?>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -48,10 +54,26 @@
           
 		
 		
-		  <td>
-              <a href="<?php //echo site_url('sales_order/home/sales_order_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
-			  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> sbid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
+		  <td> <?php 
+		  if($v -> sno_invoice <>""){
+		  ?>
+		  <a href="<?php echo site_url('sales_order_detail/home/invoice_report/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
+		  <?php
+		  }else{
+			if($statusdo=="DONE"){ ?>
+              <a href="<?php echo site_url('sales_order_detail/home/invoice_order_add/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-pencil"></i></a>
+			  
+			  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>			  
+			  <?php } ?>
+			  
+			<?php	if($statusdo=="AKTIF"){ ?>
+			  
+			  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
               <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+			  <?php } ?>		  
+			  
+
+		<?php }?>
           </td>		
 		
 		

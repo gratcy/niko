@@ -182,8 +182,9 @@ minLength: 1,
 		$totalall=0;
 		
 		foreach($details as $l => $m) :	
+		//print_r($m -> ssisa);
 		?>
-		<input type=hidden name="qty[]" value="<?php echo $m -> sqty; ?>">
+		<input type=hidden name="qty[]" value="<?php echo $m -> ssisa; ?>">
 		<?php
 		endforeach;
 		foreach($detail as $k => $v) :	

@@ -1,9 +1,3 @@
-<?php
-// $mysql_server = $this->db->hostname;
-// $mysql_login =$this->db->username;
-// $mysql_password = $this->db->password;
-// $mysql_database = $this->db->database;
-?>
 
 <head>
         <!-- Load jQuery and bootstrap datepicker scripts -->

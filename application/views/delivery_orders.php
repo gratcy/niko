@@ -24,33 +24,32 @@
                                         <tr>
           <th>Cabang</th>
           <th>No so</th>
-          <th>Type</th>
           <th>Tanggal</th>
           <th>Sales</th>
           <th>Customer </th>
           <th>Keterangan</th>
+		  <th>Status</th>
 		  <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
 		  foreach($sales_order as $k => $v) :
-	
+	      $sisa= $v->sisa;
+		  if($sisa==0){ $statt="DONE";}else{ $statt="AKTIF"; }
 		  ?>
                                         <tr>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> snoso; ?></td>
-          <td><?php echo $v -> stype; ?></td>
           <td><?php echo $v -> stgl; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sketerangan; ?></td>
-		
+		  <td><?php echo $statt; ?></td>
 		
 		  <td>
-              <a href="<?php //echo site_url('sales_order/home/sales_order_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
+              
 			  <a href="<?php echo site_url('delivery_order/home/delivery_order_sub/' . $v -> sid .'/' . $v -> scid ); ?>"><i class="icon-book"></i></a>
-              <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
           </td>		
 		
 		

@@ -47,6 +47,14 @@ purchase_order_tab.psid,
 ORDER BY purchase_order_tab.pid DESC ';
 	}	
 	
+
+	function __get_sisa($id) {
+		$this -> db -> SELECT ('sum(purchase_order_detail_tab.psisa) as sisa
+		FROM purchase_order_tab,purchase_order_detail_tab where   purchase_order_tab.pid=purchase_order_detail_tab.ppid
+		AND purchase_order_tab.pid='.$id);
+return $this -> db -> get() -> result();
+	}	 
+
 	
 	function __approve_purchase($id) {
 	//echo 'update purchase_order_detail_tab set pstatus=0 where pid=' . $id;die;

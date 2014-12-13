@@ -47,7 +47,7 @@ left:inherit!important;
                                         <tr>
           <th>Cabang</th>
           <th>No so</th>
-          <th>Type</th>
+    
           <th>Tanggal</th>
           <th>Sales</th>
           <th>Customer </th>
@@ -65,7 +65,7 @@ left:inherit!important;
                                         <tr>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> snoso; ?></td>
-          <td><?php echo (isset($v -> stype) ? $v -> stype : ''); ?></td>
+      
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> cname; ?></td>

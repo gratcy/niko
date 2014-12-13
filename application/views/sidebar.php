@@ -159,7 +159,11 @@
 						<?php if (__get_roles('DeliveryOrderView')) : ?>
                          <li class=""><a href="<?php echo site_url('delivery_order/home/'); ?>"><i class="icon-angle-right"></i> Delivery Order </a></li>
 						<?php endif; ?>
-						<li class=""><a href="<?php echo site_url('retur/home/'); ?>"><i class="icon-angle-right"></i> Retur Order </a></li>
+						<?php if (__get_roles('InvoiceOrderView')) : ?>
+                         <li class=""><a href="<?php echo site_url('invoice_order/home/'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
+						<?php endif; ?>
+						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Retur Order </a></li>
+						<li class=""><a href="<?php echo site_url('pembayaran/home/pembayaran_add'); ?>"><i class="icon-angle-right"></i> Pembayaran </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>

@@ -68,16 +68,8 @@ minLength: 1,
 
 	 <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 	<table border=0 width=90% ><tr><td width=50%>
-                <div class="form-group" id="sbranch">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+	<input type=hidden name=sbid value="<?php echo $detailx[0]->sbid; ?>">
 
-                    <div class="col-lg-4">
-                        <!--input type="text" placeholder="sales Order Code" name="sbid" class="form-control" /-->
-						
-						<select name="sbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $sbid; ?></select>						
-						
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">No SO</label>

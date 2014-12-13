@@ -67,9 +67,9 @@ class Home extends MY_Controller {
 			$ccredit = $this -> input -> post('ccredit', TRUE);
 			if($stypepay=="Cash"){
 
-			$sduedate = date("Y-m-d",strtotime("+$ccash days"));			
+			$sduedate = date("Y-m-d",strtotime("$stgl + $ccash days"));			
 			}else{			
-			$sduedate = date("Y-m-d",strtotime("+$ccredit days"));
+			$sduedate = date("Y-m-d",strtotime("$stgl +$ccredit days"));
 			}
 			$ssubtotal = 0;
 			$sppnnpwp = 0;
@@ -140,9 +140,9 @@ class Home extends MY_Controller {
 			$ccredit = $this -> input -> post('ccredit', TRUE);
 			if($stypepay=="Cash"){
 
-			$sduedate = date("Y-m-d",strtotime("+$ccash days"));			
+			$sduedate = date("Y-m-d",strtotime("$stglin + $ccash days"));			
 			}else{			
-			$sduedate = date("Y-m-d",strtotime("+$ccredit days"));
+			$sduedate = date("Y-m-d",strtotime("$stglin + $ccredit days"));
 			}
 			$ssubtotal = 0;
 			$sppnnpwp = 0;

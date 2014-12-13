@@ -61,8 +61,10 @@ table.gridtablex td {
 <td width="10%">No DO</td><td  valign=top width=30% ><?php echo $detailx[0]->snodo; ?></td>
 </tr>
 <tr>
-<td width="10%" align=left  >Alamat</td><td  ><?php echo $detailx[0]->caddr; ?></td>
-<td width="10%">Tanggal</td><td  valign=top width=30% ><?php echo $detailx[0]->stgldo; ?></td>
+<td width="10%" align=left  >Alamat</td><td  ><?php 
+$caddr=explode("*",$detailx[0]->caddr);
+echo $caddr[1]; ?></td>
+<td width="10%">Tanggal</td><td  valign=top width=30% ><?php echo date('d-m-Y',strtotime($detailx[0]->stgldo)); ?></td>
 </tr>
 <tr>
 <td width="10%" align=left  >Kode</td><td ><?php echo $detailx[0]->snomor; ?></td>

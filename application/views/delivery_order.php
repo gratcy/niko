@@ -61,7 +61,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>sales Order Add <?php //echo "$id $scid";?></h5>
+            <h5>Delivery Order <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -132,11 +132,6 @@ minLength: 1,
     </div>
 </div>
 
-
-
-
-
- <!--form  id="form1" class="form-horizontal" action="<?php //echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post"-->
 
   <div class="panel-body">
                             <div class="table-responsive">

@@ -22,7 +22,14 @@ left:inherit!important;
 
                 <hr />
 				<?php if (__get_roles('PurchaseOrderAdd')) : ?>
-  <a href="<?php echo site_url('purchase_order/home/penerimaan_add/'.$id); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Penerimaan</a>
+				<?php 
+				$psisa= $psisa[0]->sisa;
+				if($psisa >'0'){
+				$statuspn="Aktif";
+				?>
+  <a href="<?php echo site_url('purchase_order/home/penerimaan_add/'.$id); ?>" class="btn btn-default btn-grad">
+  <i class="icon-plus"></i> Add Penerimaan</a>
+  <?php }else{ $statuspn="DONE";} ?>
                <br>
                 <br />
                 <?php endif; ?>
@@ -31,7 +38,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Penerimaan Barang
+                            Status : <?php echo $statuspn;?>
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>

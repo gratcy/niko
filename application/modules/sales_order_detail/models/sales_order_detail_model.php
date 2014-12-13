@@ -20,7 +20,7 @@ class sales_order_detail_model extends CI_Model {
 	
 	function __get_sales_order_detail($id) {
 	
-		$this -> db -> select('* FROM sales_order_detail_tab WHERE  ssid=' . $id);
+		$this -> db -> select('*,(select sbid from sales_order_tab where sales_order_tab.sid=sales_order_detail_tab.ssid)as sbid FROM sales_order_detail_tab WHERE  ssid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 
@@ -45,7 +45,8 @@ class sales_order_detail_model extends CI_Model {
 	}		
 	
 	function __get_delivery_order_detail_prod($id,$snodo) {
-		$this -> db -> select("* FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'");
+		$this -> db -> select("*,(select sprice FROM sales_order_detail_tab c where c.sid=a.sid) as sprice,
+		(select sdisc FROM sales_order_detail_tab c where c.sid=a.sid) as sdisc	FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'");
 		
 		//echo "select * FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.sid= $id";die;
 		return $this -> db -> get() -> result();
@@ -81,6 +82,10 @@ class sales_order_detail_model extends CI_Model {
         return $this -> db -> insert('delivery_order_detail_tab', $data);
 	}	
 
+	function __update_invoice_order($snodo, $data) {
+        $this -> db -> where('snodo', $snodo);
+        return $this -> db -> update('delivery_order_detail_tab', $data);
+	}		
 	
 	function __delete_sales_order_detail($id) {
 		return $this -> db -> query('Delete FROM sales_order_detail_tab where sid=' . $id);
