@@ -68,7 +68,7 @@
                          <?php endif; ?>
                     </ul>
                 </li>
-				<?php if (__get_roles('services_wo') || __get_roles('services_sparepart') || __get_roles('services_report')) : ?>
+				<?php if (__get_roles('ServicesWOView') || __get_roles('ServicesSparepartView') || __get_roles('ServicesReportView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#services">
                         <i class="icon-cogs"> </i> Services
@@ -78,9 +78,15 @@
                        &nbsp; <span class="label label-danger">3</span>&nbsp;
                     </a>
                     <ul class="collapse" id="services">
+						<?php if (__get_roles('ServicesWOView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Services Workorder </a></li>
+                         <?php endif; ?>
+						<?php if (__get_roles('ServicesSparepartView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Services Sparepart </a></li>
+                         <?php endif; ?>
+						<?php if (__get_roles('ServicesReportView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Services Report </a></li>
+                         <?php endif; ?>
                     </ul>
                 </li>
 			   <?php endif; ?>
@@ -92,7 +98,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">4</span>&nbsp;
+                       &nbsp; <span class="label label-primary">6</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
