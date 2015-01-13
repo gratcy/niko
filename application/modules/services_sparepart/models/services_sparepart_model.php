@@ -15,6 +15,11 @@ class Services_sparepart_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 	
+	function __get_services_sparepart_detail_print($id) {
+		$this -> db -> select('a.*,b.sno FROM services_sparepart_tab a LEFT JOIN services_workorder_tab b ON a.ssid=b.sid WHERE a.sstatus=3 AND a.sid=' . $id);
+		return $this -> db -> get() -> result();
+	}
+	
 	function __insert_services_sparepart($data) {
         return $this -> db -> insert('services_sparepart_tab', $data);
 	}

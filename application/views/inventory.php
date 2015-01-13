@@ -4,9 +4,12 @@ $add = 'Product';
 elseif ($type == 2)
 $add = 'Sparepart';
 elseif ($type == 3)
-$add = 'Services';
-else
+$add = 'RejectProduct';
+elseif ($type == 4)
 $add = 'Return';
+else
+$add = 'RejectSparepart';
+
 ?><style type="text/css">
 div#txtHint{position: absolute;
 width: 230px;

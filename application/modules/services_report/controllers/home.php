@@ -13,6 +13,7 @@ class Home extends MY_Controller {
 		$this -> load -> model('products/products_model');
 		$this -> load -> model('services_report_model');
 		$this -> load -> model('inventory/inventory_model');
+		$this -> load -> model('sparepart/sparepart_model');
 	}
 
 	function index() {
@@ -36,12 +37,18 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$desc = $this -> input -> post('desc', TRUE);
 			$wo = (int) $this -> input -> post('wo');
-			$qty = $this -> input -> post('qty');
+			$wqty = $this -> input -> post('wqty');
 			$status = (int) $this -> input -> post('status');
+			$fqty = (int) $this -> input -> post('fqty');
+			$uqty = (int) $this -> input -> post('uqty');
 			$sno = $this -> input -> post('sno');
 			
 			if (!$wo || !$sno) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
+				redirect(site_url('services_report' . '/' . __FUNCTION__));
+			}
+			else if (($fqty + $uqty) != $wqty) {
+				__set_error_msg(array('error' => 'Kuantiti produk tidak sesuai !!!'));
 				redirect(site_url('services_report' . '/' . __FUNCTION__));
 			}
 			else {
@@ -51,7 +58,7 @@ class Home extends MY_Controller {
 					redirect(site_url('services_report' . '/' . __FUNCTION__));
 				}
 				
-				$arr = array('ssid' => $wo, 'sdate' => time(), 'sdesc' => $desc, 'sstatus' => $status);
+				$arr = array('ssid' => $wo, 'sdate' => time(),'sqtypf' => $fqty,'sqtypu' => $uqty, 'sdesc' => $desc, 'sstatus' => $status);
 				if ($this -> services_report_model -> __insert_services_report($arr)) {
 					$lastID = $this -> db -> insert_id();
 					
@@ -76,18 +83,25 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$desc = $this -> input -> post('desc', TRUE);
 			$swo = (int) $this -> input -> post('swo');
-			$qty = $this -> input -> post('qty');
+			$wqty = $this -> input -> post('wqty');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
+			$pid = (int) $this -> input -> post('pid');
 			$spr = $this -> input -> post('spr');
 			$sno = $this -> input -> post('sno');
 			$spn = $this -> input -> post('spn');
 			$sqty = $this -> input -> post('sqty');
+			$fqty = (int) $this -> input -> post('fqty');
+			$uqty = (int) $this -> input -> post('uqty');
 			$appsev = (int) $this -> input -> post('appsev');
-
+			
 			if ($id) {
 				if (!$sno || !$swo) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
+					redirect(site_url('services_report' . '/' . __FUNCTION__ . '/' . $id));
+				}
+				else if (($fqty + $uqty) != $wqty) {
+					__set_error_msg(array('error' => 'Kuantiti produk tidak sesuai !!!'));
 					redirect(site_url('services_report' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
@@ -95,8 +109,8 @@ class Home extends MY_Controller {
 						$status = 3;
 						$this -> services_wo_model -> __update_services_wo($swo, array('sstatus' => 3));
 					}
-					
-					$arr = array('sdesc' => $desc, 'sstatus' => $status);
+
+					$arr = array('sqtypf' => $fqty,'sqtypu' => $uqty,'sdesc' => $desc, 'sstatus' => $status);
 					if ($this -> services_report_model -> __update_services_report($id, $arr)) {
 						foreach($sno as $k => $v) $this -> services_report_model -> __update_services_report_product($k, array('sno' => $v, 'stsparepart' => $spr[$k]));
 						$this -> services_report_model -> __delete_services_report_sparepart($id);
@@ -107,24 +121,51 @@ class Home extends MY_Controller {
 							}
 						}
 						
-						$dspn = array();
-						foreach($spn as $k => $v) {
-							foreach($v as $k1 => $v1) {
-								$dspn[] = array('sid' => $v1, 'sqty' => $sqty[$k][$k1]);
+						if ($appsev == 3) {
+							$dspn = array();
+							foreach($spn as $k => $v) {
+								foreach($v as $k1 => $v1) {
+									$dspn[] = array('sid' => $v1, 'sqty' => $sqty[$k][$k1]);
+								}
+							}
+
+							$dwo = $this -> services_wo_model -> __get_services_wo_detail($swo);
+							foreach($dspn as $k => $v) {
+								$r = $this -> inventory_model -> __check_inventory(2,$dwo[0] -> sbid,$v['sid']);
+								$arr = array('istockout' => ($r[0] -> istockout + $v['sqty']), 'istock' => ($r[0] -> istock - $v['sqty']));
+								$this -> inventory_model -> __update_inventory($r[0] -> iid, $arr, 2);
+							}
+							
+							$r1 = $this -> inventory_model -> __check_inventory(1,$dwo[0] -> sbid,$pid);
+							$arr1 = array('istockin' => ($r1[0] -> istockin + $fqty), 'istock' => ($r1[0] -> istock - $fqty));
+							$this -> inventory_model -> __update_inventory($r1[0] -> iid, $arr1, 1);
+							
+							$r2 = $this -> inventory_model -> __check_inventory(3,$dwo[0] -> sbid,$pid);
+							if ($r2[0]) {
+								$arr2 = array('istockin' => ($r2[0] -> istockin + $uqty), 'istock' => ($r2[0] -> istock - $uqty));
+								$this -> inventory_model -> __update_inventory($r2[0] -> iid, $arr2, 3);
+							}
+							else {
+								$arr2 = array('ibid' => $dwo[0] -> sbid, 'iiid' => $pid, 'itype' => 3, 'istockbegining' => $uqty, 'istockin' => $uqty, 'istockout' => 0, 'istock' => $uqty, 'istatus' => 1);
+								$this -> inventory_model -> __insert_inventory($arr2);
+							}
+							
+							$r3 = $this -> inventory_model -> __check_inventory(4,$dwo[0] -> sbid,$pid);
+							if ($r3[0]) {
+								$arr3 = array('ibid' => $dwo[0] -> sbid, 'iiid' => $pid, 'itype' => 4, 'istockbegining' => $wqty, 'istockin' => $wqty, 'istockout' => 0, 'istock' => $wqty, 'istatus' => 1);
+								$this -> inventory_model -> __insert_inventory($arr3);
+							}
+							else {
+								$arr3 = array('istockout' => ($r3[0] -> istockout + $wqty), 'istock' => ($r3[0] -> istock - $wqty));
+								$this -> inventory_model -> __update_inventory($r3[0] -> iid, $arr3, 4);
 							}
 						}
 						
-						$dwo = $this -> services_wo_model -> __get_services_wo_detail($swo);
-						foreach($dspn as $k => $v) {
-							$r = $this -> inventory_model -> __check_inventory(2,$dwo[0] -> sbid,$v['sid']);
-							$arr = array('istockout' => ($r[0] -> istockout + $v['sqty']), 'istock' => ($r[0] -> istock - $v['sqty']));
-							$this -> inventory_model -> __update_inventory($r[0] -> iid, $arr, 2);
-						}
-						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('services_report'));
 					}
 					else {
-						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+						__set_error_msg(array('error' => 'Gagal mengubah data !!!'));
 						redirect(site_url('services_report'));
 					}
 				}
@@ -160,7 +201,7 @@ class Home extends MY_Controller {
 		$r = $this -> services_wo_model -> __get_services_wo_detail($wo);
 		$p = $this -> products_model -> __get_products_detail($r[0] -> spid);
 		
-		$res = '<label for="text1" class="control-label">Product: '.$p[0] -> pname.'</label><br>';
+		$res = '<input type="hidden" value="'.$p[0] -> pid.'" name="pid"><label for="text1" class="control-label">Product: '.$p[0] -> pname.'</label><br>';
 		$res .= '<label for="text1" class="control-label">Code: '.$p[0] -> pcode.'</label><br><br>';
 		if ($t == 2) {
 			$sql = $this -> services_report_model -> __get_services_report_product($id);
@@ -191,7 +232,7 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
-			$res .= '<table class="table table-bordered">';
+			$res .= '<table class="table table-bordered" id="sadd">';
 			$res .= '<thead>';
 			$res .= '<tr><th style="width:20px;">No. </th><th>Serial No.</th></tr>';
 			$res .= '</thead>';
@@ -203,5 +244,11 @@ class Home extends MY_Controller {
 		$res .= '</tbody>';
 		$res .= '</table>';
 		echo $res;
+	}
+	
+	function services_report_print($id) {
+		$view['detail'] = $this -> services_report_model -> __get_services_report_detail_print($id);
+		$view['rlist'] = $this -> services_report_model -> __get_services_report_product($id);
+		$this -> load -> view('print/services_report', $view, false);
 	}
 }

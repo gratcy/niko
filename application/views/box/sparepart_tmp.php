@@ -1,7 +1,7 @@
 <table class="table table-bordered">
 <thead>
 <tr>
-<th>Product</th>
+<th>Group Product</th>
 <th>Code</th>
 <th>Name</th>
 <th>No Component</th>
@@ -13,7 +13,7 @@
 <?php foreach($sparepart as $k => $v) : ?>
 <tr id="sparepart_id_<?php echo $v -> sid?>">
 <input type="hidden" name="sid[]" value="<?php echo $v -> sid;?>">
-<td><?php echo $v -> pname; ?></td>
+<td><?php echo $v -> cname; ?></td>
 <td><?php echo $v -> scode; ?></td>
 <td><?php echo $v -> sname; ?></td>
 <td><?php echo $v -> snocomponent; ?></td>

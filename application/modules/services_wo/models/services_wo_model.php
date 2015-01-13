@@ -4,10 +4,24 @@ class Services_wo_model extends CI_Model {
         parent::__construct();
     }
 	
+	function __get_recent_services_wo($bid="") {
+		if ($bid != "") $bid = " AND a.sbid=" . $bid;
+		else $bid = "";
+		$this -> db -> select('a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC LIMIT 5');
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_services_wo($bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
 		return 'SELECT a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
+	}
+	
+	function __get_services_wo_detail_print($id, $bid="") {
+		if ($bid != "") $bid = " AND a.sbid=" . $bid;
+		else $bid = "";
+		$this -> db -> select('a.*,b.bname,c.pname FROM services_workorder_tab a LEFT JOIN branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3)'.$bid.' AND a.sid=' . $id);
+		return $this -> db -> get() -> result();
 	}
 	
 	function __get_services_wo_detail($id, $bid="") {

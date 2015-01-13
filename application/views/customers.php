@@ -45,13 +45,12 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Branch</th>
           <th>Name</th>
+          <th>Category</th>
           <th>Address</th>
-          <th>City</th>
-          <th>Province</th>
-          <th>Phone I</th>
-          <th>Phone II</th>
+          <th>Phone</th>
+          <th>Salesman</th>
+          <th>Limit</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -63,13 +62,12 @@ left:inherit!important;
 		  $addr = explode('*', $v -> caddr);
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $addr[0]; ?></td>
-          <td><?php echo __get_cities($v -> ccity,1); ?></td>
-          <td><?php echo __get_province($v -> cprov,1); ?></td>
-          <td><?php echo $phone[0]; ?></td>
-          <td><?php echo $phone[1]; ?></td>
+          <td><?php echo __get_customer_category($v -> ccat,1); ?></td>
+          <td><?php echo $addr[0]. ', ' . __get_cities($v -> ccity,1). ', ' . __get_province($v -> cprov,1); ?></td>
+          <td><?php echo $phone[0] . '/' . $phone[1]; ?></td>
+          <td><?php echo $v -> sname; ?></td>
+          <td><?php echo $v -> ccredit; ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CustomersUpdate')) : ?>

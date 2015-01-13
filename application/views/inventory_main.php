@@ -1,4 +1,16 @@
-<style type="text/css">
+<?php
+if ($type == 1)
+$add = 'Product';
+elseif ($type == 2)
+$add = 'Sparepart';
+elseif ($type == 3)
+$add = 'RejectProduct';
+elseif ($type == 4)
+$add = 'Return';
+else
+$add = 'RejectSparepart';
+
+?><style type="text/css">
 div#txtHint{position: absolute;
 width: 230px;
 top: 40px;
@@ -16,13 +28,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Products </h2>
+                        <h2> Inventory <?php echo __get_inventory_type($type); ?></h2>
                     </div>
                 </div>
 
                 <hr />
-				<?php if (__get_roles('ProductsAdd')) : ?>
-                <a href="<?php echo site_url('products/products_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Product</a>
+				<?php if (__get_roles('Inventory'.$add.'Add') && $type >= 3) : ?>
+                <a href="<?php echo site_url('inventory/inventory_add/' . $type); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Stock <?php echo __get_inventory_type($type); ?></a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,7 +43,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Products
+                            Inventory <?php echo __get_inventory_type($type); ?>
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
@@ -47,36 +59,24 @@ left:inherit!important;
                                         <tr>
           <th>Code</th>
           <th>Name</th>
-          <th>Isi / Volume</th>
-          <th style="text-align:center;">Distributor Price</th>
-          <th style="text-align:center;">Semi Price</th>
-          <th style="text-align:center;">Key Price</th>
-		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
-          <th style="width: 50px;"></th>
-          <?php endif; ?>
+          <?php foreach($branch as $k => $v) : ?>
+          <th><?php echo $v -> bname; ?></th>
+          <?php endforeach;?>
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
-		  foreach($products as $k => $v) :
+		  foreach($inventory as $k => $v) :
 		  ?>
-          <tr>
-          <td><?php echo $v -> pcode; ?></td>
-          <td><?php echo $v -> pname; ?></td>
-          <td style="text-align:right;"><?php echo $v -> pvolume; ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> pdist,1); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> psemi,1); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> pkey,1); ?></td>
-		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
-		  <td>
-				<?php if (__get_roles('ProductsUpdate')) : ?>
-              <a href="<?php echo site_url('products/products_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>
-                <?php endif; ?>
-				<?php if (__get_roles('ProductsDelete')) : ?>
-              <a href="<?php echo site_url('products/products_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-                <?php endif; ?>
-          </td>
-          <?php endif; ?>
+                                        <tr>
+          <td><?php echo $v -> code; ?></td>
+          <td><?php echo $v -> name; ?></td>
+          <?php
+          foreach($branch as $key => $val) :
+          $r = $this -> inventory_model -> __get_total_inventory_branches($v -> id, $val -> bid, $type);
+          ?>
+          <td><?php echo (isset($r[0] -> istock) ? $r[0] -> istock : 0); ?></td>
+          <?php endforeach;?>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -87,11 +87,10 @@ left:inherit!important;
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        </div>
        <!--END PAGE CONTENT -->
-        </div>
-        </div>
-        </div>
-
 
 <script type="text/javascript">
 $(function(){

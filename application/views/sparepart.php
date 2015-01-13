@@ -45,7 +45,7 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Product</th>
+          <th>Group Product</th>
           <th>Code</th>
           <th>Name</th>
           <th>No Component</th>
@@ -61,7 +61,7 @@ left:inherit!important;
 		  foreach($sparepart as $k => $v) :
 		  ?>
                                         <tr>
-          <td><?php echo $v -> pname; ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>

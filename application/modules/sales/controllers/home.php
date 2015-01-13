@@ -36,7 +36,7 @@ class Home extends MY_Controller {
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
 			$joindate = strtotime($this -> input -> post('joindate', TRUE));
-			$sarea = (int) $this -> input -> post('sarea');
+			$sarea = implode(',',$this -> input -> post('sarea'));
 			$status = (int) $this -> input -> post('status');
 			
 			if (!$name || !$branch || !$phone1 || !$phone2 || !$email || !$code) {
@@ -70,10 +70,10 @@ class Home extends MY_Controller {
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
 			$joindate = strtotime($this -> input -> post('joindate', TRUE));
-			$sarea = (int) $this -> input -> post('sarea');
+			$sarea = implode($this -> input -> post('sarea'),',');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
-			
+
 			if ($id) {
 				if (!$name || !$branch || !$phone1 || !$phone2 || !$email || !$code) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));

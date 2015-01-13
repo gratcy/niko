@@ -225,4 +225,12 @@ class Home extends MY_Controller {
 			$this -> load -> view('box/technical_tmp', $view, false);
 		}
 	}
+	
+	function services_wo_print($id) {
+		$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail_print($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
+		$arr = $this -> services_wo_model -> __get_technical_services($id);
+		foreach($arr as $k => $v) $ids[] = $v -> stid;
+		$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
+		$this -> load -> view('print/services_wo', $view, false);
+	}
 }

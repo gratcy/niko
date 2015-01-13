@@ -25,7 +25,28 @@
 						<select name="wo" data-placeholder="Work Order" class="form-control chzn-select"><?php echo $wo; ?></select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">QTY</label>
 
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="QTY Workorder" name="wqty" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Product Finished (QTY)</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="QTY Finished" name="fqty" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Product Unfinished (QTY)</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="QTY Unfinished" name="uqty" class="form-control" />
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
@@ -67,6 +88,9 @@
 $(function(){
 	$('select[name="wo"]').change(function(){
 		$('div#productTMP').load('<?php echo site_url('services_report/product_tmp');?>/'+$(this).val());
+		$( document ).ajaxComplete(function() {
+			$('input[name="wqty"]').val($('#sadd > tbody > tr').length);
+		});
 	});
 });
 </script>

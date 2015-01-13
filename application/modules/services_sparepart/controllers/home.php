@@ -220,4 +220,12 @@ class Home extends MY_Controller {
 			$this -> load -> view('box/sparepart_tmp', $view, false);
 		}
 	}
+	
+	function services_sparepart_print($id) {
+		$view['detail'] = $this -> services_sparepart_model -> __get_services_sparepart_detail_print($id);
+		$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
+		foreach($arr as $k => $v) $ids[] = $v -> sssid;
+		$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id);
+		$this -> load -> view('print/services_sparepart', $view, false);
+	}
 }

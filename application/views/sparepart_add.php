@@ -19,18 +19,20 @@
             <form class="form-horizontal" action="<?php echo site_url('sparepart/sparepart_add'); ?>" method="post">
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Code</label>
+                    <label for="text1" class="control-label col-lg-4">Group Product</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Sparepart Code" name="code" class="form-control" />
+						<select name="groupproduct" data-placeholder="Group Product" class="form-control chzn-select">
+                                <?php echo $group_product; ?>
+                    </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Product</label>
+                    <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-						<select name="product" data-placeholder="Product" class="form-control chzn-select"><?php echo $products; ?></select>
+                        <input type="text" placeholder="Sparepart Code" name="code" class="form-control" />
                     </div>
                 </div>
 
@@ -42,10 +44,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Group</label>
+                    <label for="text1" class="control-label col-lg-4">Group Sparepart</label>
 
                     <div class="col-lg-4">
-						<select name="group" data-placeholder="Group Product" class="form-control chzn-select">
+						<select name="group" data-placeholder="Group Sparepart" class="form-control chzn-select">
                                 <?php echo $group_sparepart; ?>
                     </select>
                     </div>
@@ -82,6 +84,15 @@
                         <input type="text" name="retail" class="form-control" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="0" />
                     </div>
                 </div>
+                <div class="form-group">
+							<label for="status" class="control-label col-lg-4">Special</label>
+                    <div class="col-lg-4">
+						
+                            <div class="make-switch has-switch" data-on="primary" data-off="default">
+                                <?php echo __get_customers_spec(0,2, 'special'); ?>
+                            </div>
+					</div>
+				</div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">

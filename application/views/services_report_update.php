@@ -27,7 +27,27 @@
 						<select name="wo" data-placeholder="Work Order" class="form-control chzn-select"><?php echo $wo; ?></select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">QTY</label>
 
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="QTY Workorder" name="wqty" class="form-control" value="<?php echo $detail[0] -> sqty;?>" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Product Finished (QTY)</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="QTY Finished" name="fqty" class="form-control" value="<?php echo $detail[0] -> sqtypf;?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Product Unfinished (QTY)</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="QTY Unfinished" name="uqty" class="form-control" value="<?php echo $detail[0] -> sqtypu;?>" />
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
