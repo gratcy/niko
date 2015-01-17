@@ -40,6 +40,7 @@
           <th>Stock In</th>
           <th>Stock Out</th>
           <th>Stock Final</th>
+          <th>Description</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,6 +56,7 @@
           <td style="text-align:right;"><?php echo $v -> ostockin; ?></td>
           <td style="text-align:right;"><?php echo $v -> ostockout; ?></td>
           <td style="text-align:right;"><?php echo $v -> ostock; ?></td>
+          <td style="text-align:justify;"><?php echo $v -> odesc; ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

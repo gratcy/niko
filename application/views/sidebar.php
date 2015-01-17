@@ -24,7 +24,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">13</span>&nbsp;
+                       &nbsp; <span class="label label-danger">12</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
 						<?php if (__get_roles('BranchView') || __get_roles('BranchViewAsBranch')) : ?>
@@ -41,9 +41,6 @@
                          <?php endif; ?>
 						<?php if (__get_roles('GroupProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('group_product'); ?>"><i class="icon-angle-right"></i> Groups Product </a></li>
-                         <?php endif; ?>
-						<?php if (__get_roles('GroupSparepartView')) : ?>
-                        <li class=""><a href="<?php echo site_url('group_sparepart'); ?>"><i class="icon-angle-right"></i> Groups Sparepart </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('CategoriesProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Categories Product </a></li>
@@ -107,14 +104,11 @@
 							<?php if (__get_roles('InventorySparepartView')) : ?>
 								<li class=""><a href="<?php echo site_url('inventory/2'); ?>"><i class="icon-angle-right"></i> Inventory Sparepart </a></li>
 							<?php endif; ?>
-							<?php if (__get_roles('InventoryRejectProductView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Inventory Reject Product </a></li>
-							<?php endif; ?>
-							<?php if (__get_roles('InventoryRejectSparepartView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/5'); ?>"><i class="icon-angle-right"></i> Inventory Reject Sparepart </a></li>
-							<?php endif; ?>
 							<?php if (__get_roles('InventoryReturnView')) : ?>
 								<li class=""><a href="<?php echo site_url('inventory/4'); ?>"><i class="icon-angle-right"></i> Inventory Return </a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('InventoryRejectProductView')) : ?>
+								<li class=""><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Inventory Reject Product </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
 								<li class=""><a href="javascript:void(0);"><i class="icon-angle-down"></i> Inventory Opname </a>
@@ -128,6 +122,9 @@
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameReturnView')) : ?>
 								<li><a href="<?php echo site_url('opname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('OpnameRejectProductView')) : ?>
+								<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Reject Product Opname</a></li>
 							<?php endif; ?>
 								</ul>
 								</li>
@@ -218,8 +215,8 @@
                         <ul>
 								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product Opname</a></li>
 								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart Opname</a></li>
-								<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Services Opname</a></li>
 								<li><a href="<?php echo site_url('reportopname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>
+								<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Reject Product Opname</a></li>
                         </ul>
                         </li>
                     </ul>

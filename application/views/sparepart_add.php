@@ -43,16 +43,6 @@
                         <input type="text" placeholder="Sparepart Name" name="name" class="form-control" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Group Sparepart</label>
-
-                    <div class="col-lg-4">
-						<select name="group" data-placeholder="Group Sparepart" class="form-control chzn-select">
-                                <?php echo $group_sparepart; ?>
-                    </select>
-                    </div>
-                </div>
-
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">No Component</label>
@@ -61,15 +51,6 @@
                         <input type="text" placeholder="No Component" name="nocomp" class="form-control" />
                     </div>
                 </div>
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">General</label>
-                    <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="success" data-off="default">
-                                <?php echo __get_is_general(0,2); ?>
-                            </div>
-					</div>
-				</div>
-
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price Agent</label>
 

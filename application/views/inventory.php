@@ -5,10 +5,8 @@ elseif ($type == 2)
 $add = 'Sparepart';
 elseif ($type == 3)
 $add = 'RejectProduct';
-elseif ($type == 4)
-$add = 'Return';
 else
-$add = 'RejectSparepart';
+$add = 'Return';
 
 ?><style type="text/css">
 div#txtHint{position: absolute;

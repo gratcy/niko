@@ -43,14 +43,6 @@ function __get_ppn($status, $type) {
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="sfreeppn" value="1" />' : '<input type="checkbox" name="sfreeppn" value="1" />');
 }
 
-
-function __get_is_general($status, $type) {
-	if ($type == 1)
-		return ($status == 1 ? 'Generalized' : 'Not Generalized');
-	else
-		return ($status == 1 ? '<input type="checkbox" checked="checked" name="general" value="1" />' : '<input type="checkbox" name="general" value="1" />');
-}
-
 function __get_customers_spec($status, $type, $name='') {
 	if ($type == 1)
 		return ($status == 1 ? 'Yes' : 'No');
@@ -194,8 +186,7 @@ function __get_inventory_type($type) {
 	if ($type == 1) return 'Product';
 	elseif ($type == 2) return 'Sparepart';
 	elseif ($type == 3) return 'Reject Product';
-	elseif ($type == 4) return 'Return';
-	else return 'Reject Sparepart';
+	else return 'Return';
 }
 
 function __get_price_type($type) {

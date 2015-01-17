@@ -70,6 +70,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Description</label>
+
+                    <div class="col-lg-4">
+                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">
 						

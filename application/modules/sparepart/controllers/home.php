@@ -39,16 +39,14 @@ class Home extends MY_Controller {
 			$nocomp = $this -> input -> post('nocomp', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
 			$status = (int) $this -> input -> post('status');
-			$group = (int) $this -> input -> post('group');
-			$general = (int) $this -> input -> post('general');
 			$special = (int) $this -> input -> post('special');
 			
-			if (!$code || !$agent || !$retail || !$name || !$nocomp || !$group) {
+			if (!$code || !$agent || !$retail || !$name || !$nocomp) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('sparepart' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'sgroup' => $group, 'snocomponent' => $nocomp, 'sgeneral' => $general, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
+				$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'snocomponent' => $nocomp, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
 				if ($this -> sparepart_model -> __insert_sparepart($arr)) {
 					$sid = $this -> db -> insert_id();
 					$branch = $this -> branch_model -> __get_branch_select('');
@@ -67,7 +65,6 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
-			$view['group_sparepart'] = $this -> group_sparepart_lib -> __get_group_sparepart();
 			$view['group_product'] = $this -> group_product_lib -> __get_group_product();
 			$this->load->view(__FUNCTION__, $view);
 		}
@@ -82,18 +79,16 @@ class Home extends MY_Controller {
 			$nocomp = $this -> input -> post('nocomp', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
 			$status = (int) $this -> input -> post('status');
-			$group = (int) $this -> input -> post('group');
 			$id = (int) $this -> input -> post('id');
 			$special = (int) $this -> input -> post('special');
-			$general = (int) $this -> input -> post('general');
 			
 			if ($id) {
-				if (!$code || !$agent || !$retail || !$name || !$nocomp || !$group) {
+				if (!$code || !$agent || !$retail || !$name || !$nocomp) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('sparepart' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'sgroup' => $group, 'snocomponent' => $nocomp, 'sgeneral' => $general, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
+					$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'snocomponent' => $nocomp, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
 					if ($this -> sparepart_model -> __update_sparepart($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('sparepart'));
@@ -113,7 +108,6 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['detail'] = $this -> sparepart_model -> __get_sparepart_detail($id);
 			$view['group_product'] = $this -> group_product_lib -> __get_group_product($view['detail'][0] -> sgroupproduct);
-			$view['group_sparepart'] = $this -> group_sparepart_lib -> __get_group_sparepart($view['detail'][0] -> sgroup);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
