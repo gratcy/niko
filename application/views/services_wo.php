@@ -34,7 +34,7 @@ left:inherit!important;
                             Services Work Order
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="No. Work Order" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
+					<div class="sLeft"><input type="text" placeholder="No. Work Order" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>
@@ -48,8 +48,6 @@ left:inherit!important;
           <th>WO No.</th>
           <th>Branch</th>
           <th>Date</th>
-          <th>Product</th>
-          <th>QTY</th>
           <th>Duration</th>
           <th>Status</th>
           <th style="width: 80px;"></th>
@@ -63,8 +61,6 @@ left:inherit!important;
           <td><?php echo $v -> sno; ?></td>
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo __get_date($v -> sdate); ?></td>
-          <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> sqty; ?></td>
           <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>

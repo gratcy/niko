@@ -80,7 +80,6 @@
           <th>Packaging</th>
           <th>Category</th>
           <th>Name</th>
-          <th style="text-align:center;">Basic Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,7 +91,6 @@
           <td><?php echo $v -> ppname; ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pname; ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> phpp,4); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -204,8 +202,7 @@
                                         <tr>
           <th>WO No.</th>
           <th>Date</th>
-          <th>Product</th>
-          <th>QTY</th>
+          <th>Duration</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -215,8 +212,7 @@
                                         <tr>
           <td><?php echo $v -> sno; ?></td>
           <td><?php echo __get_date($v -> sdate); ?></td>
-          <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> sqty; ?></td>
+          <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

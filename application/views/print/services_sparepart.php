@@ -42,7 +42,7 @@ table.gridtable td {
                                     </thead>
                                     <tbody>
 	<?php foreach($sparepart as $k => $v) : ?>
-	<tr><td><?php echo $v -> cname; ?></td><td><?php echo $v -> scode; ?></td><td><?php echo $v -> sname; ?></td><td><?php echo $v -> snocomponent; ?></td><td><?php echo $v -> sqty; ?></td></tr>
+	<tr><td><?php echo $v -> cname; ?></td><td><?php echo $v -> scode; ?></td><td><?php echo $v -> sname; ?></td><td><?php echo $v -> snocomponent; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td></tr>
 	<?php endforeach; ?>
 	</tbody>
 	</table>

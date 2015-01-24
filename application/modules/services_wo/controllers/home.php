@@ -10,11 +10,14 @@ class Home extends MY_Controller {
 		$this -> load -> library('branch/branch_lib');
 		$this -> load -> library('products/products_lib');
 		$this -> load -> model('technical/technical_model');
+		$this -> load -> model('products/products_model');
 		$this -> load -> model('services_wo_model');
+		$this -> load -> model('services_report/services_report_model');
 	}
 
 	function index() {
 		($this -> memcachedlib -> get('__services_wo_technical_add') ? $this -> memcachedlib -> delete('__services_wo_technical_add') : false);
+		($this -> memcachedlib -> get('__services_wo_product_add') ? $this -> memcachedlib -> delete('__services_wo_product_add') : false);
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
 			$view['keyword'] = $keyword;
@@ -36,19 +39,19 @@ class Home extends MY_Controller {
 			$dto = $this -> input -> post('dto', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$branch = (int) $this -> input -> post('branch');
-			$product = (int) $this -> input -> post('product');
-			$qty = (int) $this -> input -> post('qty');
 			$status = (int) $this -> input -> post('status');
 			$tid = $this -> input -> post('tid');
-			
-			if (!$dfrom || !$dto || !$branch || !$product || !$qty) {
+			$pid = $this -> input -> post('pid');
+			$tqty = $this -> input -> post('tqty');
+
+			if (!$dfrom || !$dto || !$branch) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('services_wo' . '/' . __FUNCTION__));
 			}
 			else {
 				$dfrom = strtotime(str_replace('/','-',$dfrom));
 				$dto = strtotime(str_replace('/','-',$dto));
-				$arr = array('sno' => '', 'sbid' => $branch, 'spid' => $product, 'sqty' => $qty, 'sdate' => time(), 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sdesc' => $desc, 'sstatus' => $status);
+				$arr = array('sno' => '', 'sbid' => $branch, 'sdate' => time(), 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sdesc' => $desc, 'sstatus' => $status);
 				if ($this -> services_wo_model -> __insert_services_wo($arr)) {
 					$lastID = $this -> db -> insert_id();
 					
@@ -56,6 +59,7 @@ class Home extends MY_Controller {
 					$this -> services_wo_model -> __update_services_wo($lastID, array('sno' => $nowo));
 					
 					for($i=0;$i<count($tid);++$i) $this -> services_wo_model -> __insert_services_wo_technical(array('ssid' => $lastID, 'stid' => $tid[$i], 'sstatus' => 1));
+					for($i=0;$i<count($pid);++$i) $this -> services_wo_model -> __insert_services_wo_product(array('ssid' => $lastID, 'spid' => $pid[$i], 'sqty' => $tqty[$pid[$i]], 'sstatus' => 1));
 					
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('services_wo'));
@@ -68,7 +72,6 @@ class Home extends MY_Controller {
 		}
 		else {
 			$view['branch'] = $this -> branch_lib -> __get_branch();
-			$view['products'] = $this -> products_lib -> __get_products();
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -79,21 +82,23 @@ class Home extends MY_Controller {
 			$dto = $this -> input -> post('dto', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$branch = (int) $this -> input -> post('branch');
-			$product = (int) $this -> input -> post('product');
-			$qty = (int) $this -> input -> post('qty');
+			$tqty = $this -> input -> post('tqty');
+			$pid = $this -> input -> post('pid');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
-			
+
 			if ($id) {
-				if (!$dfrom || !$dto || !$branch || !$product || !$qty) {
+				if (!$dfrom || !$dto || !$branch) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('services_wo' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
 					$dfrom = strtotime(str_replace('/','-',$dfrom));
 					$dto = strtotime(str_replace('/','-',$dto));
+
+					for($i=0;$i<count($pid);++$i) $this -> services_wo_model -> __update_services_wo_product($id,$pid[$i],array('sqty' => $tqty[$pid[$i]]));
 					
-					$arr = array('sbid' => $branch, 'spid' => $product, 'sqty' => $qty, 'sdate' => time(), 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sdesc' => $desc, 'sstatus' => $status);
+					$arr = array('sbid' => $branch, 'sdate' => time(), 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sdesc' => $desc, 'sstatus' => $status);
 					if ($this -> services_wo_model -> __update_services_wo($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('services_wo'));
@@ -113,7 +118,6 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> sbid);
-			$view['products'] = $this -> products_lib -> __get_products($view['detail'][0] -> spid);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -205,6 +209,7 @@ class Home extends MY_Controller {
 	
 	function technical_tmp($type) {
 		$id = (int) $this -> input -> get('id');
+		$rep = (int) $this -> input -> get('r');
 		$ids = array();
 		$view['technical'] = array();
 		
@@ -219,10 +224,89 @@ class Home extends MY_Controller {
 		$view['id'] = $id;
 		$view['type'] = $type;
 		$view['services'] = true;
+		$view['report'] = $rep;
 		
 		if ($ids) {
 			$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
 			$this -> load -> view('box/technical_tmp', $view, false);
+		}
+	}
+	function product_delete($type) {
+		$pid = (int) $this -> input -> post('pid');
+		$sid = (int) $this -> input -> post('sid');
+		if ($pid) {
+			if ($type == 1) {
+				$ids = $this -> memcachedlib -> get('__services_wo_product_add');
+				$res = array();
+				for($i=0;$i<count($ids);++$i)
+					if ($ids[$i] <> $pid) $res[] = $ids[$i];
+				$this -> memcachedlib -> set('__services_wo_product_add', $res, 3600);
+			}
+			else {
+				$this -> services_wo_model -> __delete_product_services($sid, $pid);
+			}
+		}
+	}
+	
+	function product_add($type) {
+		$id = (int) $this -> input -> get('id');
+		if ($_POST) {
+			$pid = $this -> input -> post('pid');
+			if ($type == 1) {
+				$ids = $this -> memcachedlib -> get('__services_wo_product_add');
+				if ($ids) $tid = array_unique(array_merge($pid, $ids));
+				
+				$this -> memcachedlib -> set('__services_wo_product_add', $pid, 3600);
+			}
+			else {
+				for($i=0;$i<count($pid);++$i) {
+					if (!$this -> services_wo_model -> __check_product_services($id, $pid[$i])) {
+						$this -> services_wo_model -> __insert_services_wo_product(array('ssid' => $id, 'spid' => $pid[$i], 'sqty' => 0, 'sstatus' => 1));
+					}
+					else {
+						__set_error_msg(array('error' => 'product sudah terdaftar !!!'));
+						redirect(site_url('services_wo/product_add/' . $type . '?id=' . $id));
+					}
+				}
+			}
+			__set_error_msg(array('info' => 'product berhasil ditambahkan.'));
+			redirect(site_url('services_wo/product_add/' . $type . '?id=' . $id));
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products_services(''),3,10,site_url('services_wo/product_add/' . $type));
+			$view['product'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['id'] = $id;
+			$view['type'] = $type;
+			$view['services'] = true;
+			$this -> load -> view('box/product_add', $view, false);
+		}
+	}
+	
+	function product_tmp($type) {
+		$id = (int) $this -> input -> get('id');
+		$rep = (int) $this -> input -> get('r');
+		$sid = (int) $this -> input -> get('sid');
+		$ids = array();
+		$view['product'] = array();
+		
+		if ($type == 1) {
+			$ids = $this -> memcachedlib -> get('__services_wo_product_add');
+		}
+		else {
+			$arr = $this -> services_wo_model -> __get_product_services($id);
+			foreach($arr as $k => $v) $ids[] = $v -> spid;
+		}
+		
+		$view['id'] = $id;
+		$view['type'] = $type;
+		$view['services'] = true;
+		$view['report'] = $rep;
+		$view['sid'] = $sid;
+		
+		if ($ids) {
+			$view['product'] = $this -> products_model -> __get_products_services(implode(',', $ids), $type, $id);
+			$this -> load -> view('box/product_tmp', $view, false);
 		}
 	}
 	
@@ -231,6 +315,12 @@ class Home extends MY_Controller {
 		$arr = $this -> services_wo_model -> __get_technical_services($id);
 		foreach($arr as $k => $v) $ids[] = $v -> stid;
 		$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
+		
+		$ids = array();
+		$arr = $this -> services_wo_model -> __get_product_services($id);
+		foreach($arr as $k => $v) $ids[] = $v -> spid;
+		
+		$view['product'] = $this -> products_model -> __get_products_services(implode(',', $ids), 2, $id);
 		$this -> load -> view('print/services_wo', $view, false);
 	}
 }

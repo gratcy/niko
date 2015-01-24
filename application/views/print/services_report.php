@@ -29,46 +29,54 @@ table.gridtable td {
 <body>
 <div style="padding:10px;width: 800px;">
 	<h1 style="margin: 0;">PT. Niko Electronik Indonesia</h1>
-	<h3 style="margin: 0;">Services Report</h3>
+	<h3 style="margin: 0;">Services Work Order</h3>
 	<div style="border-bottom:1px solid #000;margin-bottom: 10px;"></div>
 	<table border="0">
-	<tr><td width="160">No. Work Order</td><td>: <?php echo $detail[0] -> sno; ?></td></tr>
-	<tr><td>QTY</td><td>: <?php echo $detail[0] -> sqty; ?></td></tr>
-	<tr><td>Product Finished (QTY)</td><td>: <?php echo $detail[0] -> sqtypf; ?></td></tr>
-	<tr><td>Product Unfinished (QTY)</td><td>: <?php echo $detail[0] -> sqtypu; ?></td></tr>
+	<tr><td width="120">No. Work Order</td><td>: <?php echo $detail[0] -> sno; ?></td></tr>
+	<tr><td>Branch</td><td>:  <?php echo $detail[0] -> bname; ?></td></tr>
+	<tr><td>Date</td><td>:  <?php echo __get_date($detail[0] -> sdatefrom,1) . ' s/d ' .__get_date($detail[0] -> sdatefrom,1); ?></td></tr>
 	<tr><td>Description</td><td>:  <?php echo $detail[0] -> sdesc; ?></td></tr>
-	</table>
-	<br />
+	</table>	<br />
+	<h3>Technical</h3>
 	<table border="0" class="gridtable" width="780">
                                     <thead>
-	<tr><th>No.</th><th>Serial No.</th><th>Total Sparepart</th><th>Sparepart</th><th>QTY</th></tr>
+	<tr><th>Code</th><th>Name</th></tr>
                                     </thead>
                                     <tbody>
-	<?php
-	$x=1;
-	foreach($rlist as $k => $v) :
-					$d  = $this -> services_report_model -> __get_detail_sparepart($detail[0] -> sid, $v -> sid);
-	?>
-	<tr><td><?php echo $x; ?>.</td><td><?php echo $v -> sno; ?></td><td><?php echo $v -> stsparepart; ?></td>
-	<td>
-	<?php
-	for($i=0;$i<$v -> stsparepart;++$i) :
-	$r = $this -> sparepart_model -> __get_sparepart_detail($d[$i] -> sspareid);
-	?>
-	<?php echo $r[0] -> sname . '<br />'; ?>
-	<?php endfor; ?>
-	</td>
-	<td>
-	<?php for($i=0;$i<$v -> stsparepart;++$i) :?>
-	<?php echo $d[$i] -> sqty . '<br />'; ?>
-	<?php endfor; ?>
-	</td>
-	</tr>
-	<?php
-	++$x;
-	endforeach;
-	?>
+	<?php foreach($technical as $k => $v) : ?>
+	<tr><td><?php echo $v -> tcode; ?></td><td><?php echo $v -> tname; ?></td></tr>
+	<?php endforeach; ?>
                                     </tbody>
+	</table>
+	<br />
+	<h3>Product</h3>
+	<table border="0" class="gridtable" width="780">
+                                    <thead>
+	<tr><th>Code</th><th>Name</th><th>Group</th><th>QTY</th><th>QTY Finished</th></tr>
+                                    </thead>
+                                    <tbody>
+	<?php foreach($product as $k => $v) :
+	
+$qty = $this -> services_report_model -> __get_qty($sid,$v -> pid, 1);
+	?>
+	<tr><td><?php echo $v -> pcode; ?></td><td><?php echo $v -> pname; ?></td><td><?php echo $v -> cname; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td><td style="text-align:right;"><?php echo $qty[0] -> sqty; ?></td></tr>
+	<?php endforeach; ?>
+                                    </tbody>
+	</table>
+	<br />
+	<h3>Sparepart</h3>
+	<table border="0" class="gridtable" width="780">
+                                    <thead>
+	<tr><th>Group Product</th><th>Code</th><th>Name</th><th>No Component</th><th>QTY</th><th>QTY Used</th></tr>
+                                    </thead>
+                                    <tbody>
+	<?php foreach($sparepart as $k => $v) :
+	
+$qty = $this -> services_report_model -> __get_qty($sid,$v -> sid, 2);
+	?>
+	<tr><td><?php echo $v -> cname; ?></td><td><?php echo $v -> scode; ?></td><td><?php echo $v -> sname; ?></td><td><?php echo $v -> snocomponent; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td><td style="text-align:right;"><?php echo $qty[0] -> sqty; ?></td></tr>
+	<?php endforeach; ?>
+	</tbody>
 	</table>
 	
 	<br />

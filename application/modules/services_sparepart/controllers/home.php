@@ -12,6 +12,7 @@ class Home extends MY_Controller {
 		$this -> load -> model('services_wo/services_wo_model');
 		$this -> load -> model('services_sparepart_model');
 		$this -> load -> model('inventory/inventory_model');
+		$this -> load -> model('services_report/services_report_model');
 	}
 
 	function index() {
@@ -69,12 +70,13 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$desc = $this -> input -> post('desc', TRUE);
 			$wo = (int) $this -> input -> post('wo');
+			$owo = (int) $this -> input -> post('owo');
 			$qty = $this -> input -> post('qty');
 			$status = (int) $this -> input -> post('status');
 			$sid = $this -> input -> post('sid');
 			$id = (int) $this -> input -> post('id');
 			$appsev = (int) $this -> input -> post('appsev');
-			
+			//~ var_dump($_POST);die;
 			if ($id) {
 				if (!$wo || !$sid || !$qty) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
@@ -85,6 +87,11 @@ class Home extends MY_Controller {
 					$arr = array('ssid' => $wo, 'sdesc' => $desc, 'sstatus' => $status);
 					if ($this -> services_sparepart_model -> __update_services_sparepart($id, $arr)) {
 						$dwo = $this -> services_wo_model -> __get_services_wo_detail($wo);
+						if ($owo <> $wo) {
+							for($i=0;$i<count($sid);++$i)
+							$this -> services_sparepart_model -> __update_services_sparepart_det($owo,$sid[$i],array('ssid' => $wo));
+						}
+						
 						//~ if ($appsev == 3) {
 							//~ for($i=0;$i<count($sid);++$i) {
 								//~ if ($this -> inventory_model -> __check_inventory(2,$dwo[0] -> sbid,$sid[$i])) {
@@ -201,6 +208,8 @@ class Home extends MY_Controller {
 	
 	function sparepart_tmp($type) {
 		$id = (int) $this -> input -> get('id');
+		$rep = (int) $this -> input -> get('r');
+		$sid = (int) $this -> input -> get('sid');
 		$ids = array();
 		$view['sparepart'] = array();
 		
@@ -208,13 +217,19 @@ class Home extends MY_Controller {
 			$ids = $this -> memcachedlib -> get('__services_sparepart_sparepart_add');
 		}
 		else {
+			if ($rep == 1) {
+				$qr = $this -> services_sparepart_model -> __get_sparepart_services_det_r($id);
+				$id = $qr[0] -> sid;
+			}
 			$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
 			foreach($arr as $k => $v) $ids[] = $v -> sssid;
 		}
-		
+
 		$view['id'] = $id;
+		$view['report'] = $rep;
 		$view['type'] = $type;
 		$view['services'] = true;
+		$view['sid'] = $sid;
 		if ($ids) {
 			$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id);
 			$this -> load -> view('box/sparepart_tmp', $view, false);

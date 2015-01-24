@@ -43,6 +43,11 @@ class Services_sparepart_model extends CI_Model {
         return $this -> db -> update('services_sparepart_detail_tab', $data);
 	}
 	
+	function __get_sparepart_services_det_r($id) {
+		$this -> db -> select('sid FROM services_sparepart_tab WHERE sstatus=3 AND ssid=' . $id);
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_sparepart_services_det($id) {
 		$this -> db -> select('sssid FROM services_sparepart_detail_tab WHERE sstatus=1 AND ssid=' . $id);
 		return $this -> db -> get() -> result();

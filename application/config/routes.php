@@ -120,6 +120,10 @@ $route['services_wo/services_wo_delete/(:num)'] = 'services_wo/home/services_wo_
 $route['services_wo/technical_add/(:num)'] = 'services_wo/home/technical_add/$1';
 $route['services_wo/technical_tmp/(:num)'] = 'services_wo/home/technical_tmp/$1';
 $route['services_wo/technical_delete/(:num)'] = 'services_wo/home/technical_delete/$1';
+$route['services_wo/product_add/(:num)'] = 'services_wo/home/product_add/$1';
+$route['services_wo/product_tmp/(:num)'] = 'services_wo/home/product_tmp/$1';
+$route['services_wo/product_delete/(:num)'] = 'services_wo/home/product_delete/$1';
+$route['services_wo/product_search/(:num)'] = 'services_wo/home/product_search/$1';
 
 $route['services_sparepart/?(:num)?'] = 'services_sparepart/home/index/$1';
 $route['services_sparepart/services_sparepart_add'] = 'services_sparepart/home/services_sparepart_add';

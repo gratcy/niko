@@ -34,12 +34,22 @@ table.gridtable td {
 	<table border="0">
 	<tr><td width="120">No. Work Order</td><td>: <?php echo $detail[0] -> sno; ?></td></tr>
 	<tr><td>Branch</td><td>:  <?php echo $detail[0] -> bname; ?></td></tr>
-	<tr><td>Product</td><td>:  <?php echo $detail[0] -> pname; ?></td></tr>
-	<tr><td>QTY</td><td>:  <?php echo $detail[0] -> sqty; ?></td></tr>
 	<tr><td>Date</td><td>:  <?php echo __get_date($detail[0] -> sdatefrom,1) . ' s/d ' .__get_date($detail[0] -> sdatefrom,1); ?></td></tr>
 	<tr><td>Description</td><td>:  <?php echo $detail[0] -> sdesc; ?></td></tr>
+	</table>	<br />
+	<h3>Product</h3>
+	<table border="0" class="gridtable" width="780">
+                                    <thead>
+	<tr><th>Code</th><th>Name</th><th>Group</th><th>QTY</th></tr>
+                                    </thead>
+                                    <tbody>
+	<?php foreach($product as $k => $v) : ?>
+	<tr><td><?php echo $v -> pcode; ?></td><td><?php echo $v -> pname; ?></td><td><?php echo $v -> cname; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td></tr>
+	<?php endforeach; ?>
+                                    </tbody>
 	</table>
 	<br />
+	<h3>Technical</h3>
 	<table border="0" class="gridtable" width="780">
                                     <thead>
 	<tr><th>Code</th><th>Name</th></tr>

@@ -7,20 +7,20 @@ class Services_wo_model extends CI_Model {
 	function __get_recent_services_wo($bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC LIMIT 5');
+		$this -> db -> select('a.*,b.bname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC LIMIT 5');
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_services_wo($bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		return 'SELECT a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.bname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
 	}
 	
 	function __get_services_wo_detail_print($id, $bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('a.*,b.bname,c.pname FROM services_workorder_tab a LEFT JOIN branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3)'.$bid.' AND a.sid=' . $id);
+		$this -> db -> select('a.*,b.bname FROM services_workorder_tab a LEFT JOIN branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3)'.$bid.' AND a.sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -62,8 +62,28 @@ class Services_wo_model extends CI_Model {
         return $this -> db -> insert('services_tecnical_tab', $data);
 	}
 	
+	function __insert_services_wo_product($data) {
+        return $this -> db -> insert('services_products_tab', $data);
+	}
+	
+	function __update_services_wo_product($id, $pid, $data) {
+        $this -> db -> where('ssid', $id);
+        $this -> db -> where('spid', $pid);
+        return $this -> db -> update('services_products_tab', $data);
+	}
+	
 	function __get_technical_services($id) {
 		$this -> db -> select('stid FROM services_tecnical_tab WHERE sstatus=1 AND ssid=' . $id);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_product_services_r($id) {
+		$this -> db -> select('sid FROM services_products_tab WHERE sstatus=1 AND spid=' . $id);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_product_services($id) {
+		$this -> db -> select('spid FROM services_products_tab WHERE sstatus=1 AND ssid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -72,14 +92,23 @@ class Services_wo_model extends CI_Model {
 		return  $this -> db -> get() -> result();
 	}
 	
+	function __check_product_services($id,$pid) {
+		$this -> db -> select('spid FROM services_products_tab WHERE sstatus=1 AND spid=' . $pid . ' AND ssid=' . $id);
+		return  $this -> db -> get() -> result();
+	}
+	
 	function __delete_technical_services($id,$tid) {
 		return $this -> db -> query('update services_tecnical_tab set sstatus=2 where ssid='.$id.' and stid=' . $tid);
+	}
+	
+	function __delete_product_services($id,$tid) {
+		return $this -> db -> query('update services_products_tab set sstatus=2 where ssid='.$id.' and spid=' . $tid);
 	}
 	
 	function __get_search($keyword, $bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select("a.*,b.bname,c.pname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid LEFT JOIN products_tab c ON a.spid=c.pid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND a.sno LIKE '%".$keyword."%' ORDER BY a.sid DESC");
+		$this -> db -> select("a.*,b.bname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND a.sno LIKE '%".$keyword."%' ORDER BY a.sid DESC");
 		return $this -> db -> get() -> result();
 	}
 	

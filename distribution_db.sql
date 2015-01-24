@@ -264,7 +264,7 @@ CREATE TABLE `inventory_tab` (
   `istock` int(10) DEFAULT '0',
   `istatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`iid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +273,7 @@ CREATE TABLE `inventory_tab` (
 
 LOCK TABLES `inventory_tab` WRITE;
 /*!40000 ALTER TABLE `inventory_tab` DISABLE KEYS */;
-INSERT INTO `inventory_tab` VALUES (1,1,1,1,1,1,0,0,0,0,1),(3,1,1,1,1,3,NULL,NULL,NULL,100,1),(4,NULL,NULL,2,1,1,111,111,11,11,1),(5,NULL,NULL,1,1,4,0,105,0,116,1),(6,NULL,NULL,1,3,4,5,5,5,0,1),(7,NULL,NULL,1,3,4,NULL,NULL,0,NULL,2),(13,NULL,NULL,1,3,2,10,10,9,1,1),(14,NULL,NULL,1,2,2,10,10,42,-32,1),(15,NULL,NULL,1,1,2,10,10,41,-31,1),(16,NULL,NULL,1,3,1,100,104,0,96,1),(17,NULL,NULL,1,2,1,1000,1000,0,1000,1),(18,NULL,NULL,2,3,1,1000,0,0,1000,0),(19,NULL,NULL,2,2,1,1000,0,0,1000,1),(20,NULL,NULL,5,5,1,0,0,0,0,1),(21,NULL,NULL,4,5,1,0,0,0,0,1),(22,NULL,NULL,3,5,1,0,0,0,0,1),(23,NULL,NULL,2,5,1,0,0,0,0,1),(24,NULL,NULL,5,4,2,0,0,0,0,1),(25,NULL,NULL,4,4,2,0,0,0,0,1),(26,NULL,NULL,3,4,2,0,0,0,0,1),(27,NULL,NULL,1,4,2,0,0,0,0,1),(28,NULL,NULL,2,4,2,0,0,0,0,1),(29,NULL,NULL,1,3,3,1,2,0,10,1);
+INSERT INTO `inventory_tab` VALUES (1,1,1,1,1,1,0,0,0,0,1),(3,1,1,1,1,3,0,0,0,100,1),(4,NULL,NULL,2,1,1,111,111,11,11,1),(5,NULL,NULL,1,1,4,0,105,0,116,1),(6,NULL,NULL,1,3,4,5,5,32,-27,1),(7,NULL,NULL,1,3,4,NULL,NULL,0,NULL,2),(13,NULL,NULL,1,3,2,10,10,33,-23,1),(14,NULL,NULL,1,2,2,10,10,42,-32,1),(15,NULL,NULL,1,1,2,10,10,41,-31,1),(16,NULL,NULL,1,3,1,100,131,0,123,1),(17,NULL,NULL,1,2,1,1000,1000,0,1000,1),(18,NULL,NULL,2,3,1,1000,90,0,1090,0),(19,NULL,NULL,2,2,1,1000,0,0,1000,1),(20,NULL,NULL,5,5,1,0,0,0,0,1),(21,NULL,NULL,4,5,1,0,0,0,0,1),(22,NULL,NULL,3,5,1,0,0,0,0,1),(23,NULL,NULL,2,5,1,0,100,0,100,1),(24,NULL,NULL,5,4,2,0,0,0,0,1),(25,NULL,NULL,4,4,2,0,0,0,0,1),(26,NULL,NULL,3,4,2,0,0,0,0,1),(27,NULL,NULL,1,4,2,0,0,27,-27,1),(28,NULL,NULL,2,4,2,0,0,0,0,1),(29,NULL,NULL,1,3,3,1,5,0,13,1),(30,0,0,2,5,3,1,1,0,1,1),(31,0,0,2,3,3,10,10,0,10,1),(32,0,0,2,5,4,100,100,0,100,1),(33,0,0,2,3,4,90,90,0,90,1),(34,0,0,1,5,3,0,0,0,0,1),(35,0,0,1,5,4,10,10,20,-10,1),(36,0,0,1,5,1,0,10,0,20,1);
 /*!40000 ALTER TABLE `inventory_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,7 +323,7 @@ CREATE TABLE `opname_tab` (
   `ostock` int(10) DEFAULT NULL,
   `odesc` varchar(350) DEFAULT NULL,
   PRIMARY KEY (`oid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +332,7 @@ CREATE TABLE `opname_tab` (
 
 LOCK TABLES `opname_tab` WRITE;
 /*!40000 ALTER TABLE `opname_tab` DISABLE KEYS */;
-INSERT INTO `opname_tab` VALUES (2,1,1,1397310166,0,0,0,0,NULL),(3,2,2,1397310166,0,0,0,0,NULL),(4,2,2,1397310166,0,0,0,0,NULL),(5,2,2,1397310166,10,10,10,10,NULL),(6,29,3,1421480889,1,1,0,1,'test');
+INSERT INTO `opname_tab` VALUES (2,1,1,1397310166,0,0,0,0,NULL),(3,2,2,1397310166,0,0,0,0,NULL),(4,2,2,1397310166,0,0,0,0,NULL),(5,2,2,1397310166,10,10,10,10,NULL),(6,29,3,1421480889,1,1,0,1,'test'),(7,3,3,1421667086,0,0,0,100,''),(8,29,3,1421667096,1,2,0,10,'test doang');
 /*!40000 ALTER TABLE `opname_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,7 +552,7 @@ CREATE TABLE `products_tab` (
 
 LOCK TABLES `products_tab` WRITE;
 /*!40000 ALTER TABLE `products_tab` DISABLE KEYS */;
-INSERT INTO `products_tab` VALUES (1,1,1,1,0,0,2,3,'KG0281','Kompor Gas','ere',10000,100000,200000,300000,400000,500000,0,1),(2,NULL,NULL,1,20,4,0,3,'T21CH01','TV 21 Inch','111',111,110,11110,101,10,10,1,1),(3,NULL,NULL,1,111111,4,2,3,'DP0102','DVD Player','111111',1111,1111,1011,1011,1011,1011,111,1),(4,NULL,NULL,1,100,4,0,3,'AWA102','Kipas Angin','Kipas Angin',100,100,100,100,100,100,2,1),(5,NULL,NULL,1,100,4,0,3,'AWA103','Air Conditioner','Kipas Angin',100,100,100,100,100,100,2,1);
+INSERT INTO `products_tab` VALUES (1,1,1,1,0,4,2,3,'KG0281','Kompor Gas','ere',10000,100000,200000,300000,400000,500000,0,1),(2,NULL,NULL,1,20,4,0,3,'T21CH01','TV 21 Inch','111',111,110,11110,101,10,10,1,1),(3,NULL,NULL,1,111111,4,2,3,'DP0102','DVD Player','111111',1111,1111,1011,1011,1011,1011,111,1),(4,NULL,NULL,1,100,4,0,3,'AWA102','Kipas Angin','Kipas Angin',100,100,100,100,100,100,2,1),(5,NULL,NULL,1,100,4,0,3,'AWA103','Air Conditioner','Kipas Angin',100,100,100,100,100,100,2,1);
 /*!40000 ALTER TABLE `products_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -959,6 +959,33 @@ LOCK TABLES `sales_target_tab` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `services_products_tab`
+--
+
+DROP TABLE IF EXISTS `services_products_tab`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `services_products_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `ssid` int(10) DEFAULT NULL,
+  `spid` int(10) DEFAULT NULL,
+  `sqty` int(10) DEFAULT NULL,
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `services_products_tab`
+--
+
+LOCK TABLES `services_products_tab` WRITE;
+/*!40000 ALTER TABLE `services_products_tab` DISABLE KEYS */;
+INSERT INTO `services_products_tab` VALUES (1,1,5,10,1),(2,1,3,10,1);
+/*!40000 ALTER TABLE `services_products_tab` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `services_report_product_tab`
 --
 
@@ -968,11 +995,11 @@ DROP TABLE IF EXISTS `services_report_product_tab`;
 CREATE TABLE `services_report_product_tab` (
   `sid` int(10) NOT NULL AUTO_INCREMENT,
   `ssid` int(10) DEFAULT NULL,
-  `sno` varchar(50) DEFAULT NULL,
-  `stsparepart` varchar(45) DEFAULT NULL,
+  `spid` int(10) DEFAULT '0',
+  `sqty` int(10) DEFAULT '0',
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -981,7 +1008,7 @@ CREATE TABLE `services_report_product_tab` (
 
 LOCK TABLES `services_report_product_tab` WRITE;
 /*!40000 ALTER TABLE `services_report_product_tab` DISABLE KEYS */;
-INSERT INTO `services_report_product_tab` VALUES (1,1,'XAGZU-SJ0FO-BDLTK-B3C3V','1',1),(2,1,'Y5LUM-NFE0Q-GJR2L-5B86I','2',1),(3,1,'4BTJF-DYNIL-LD8CN-MM8X5','1',1),(4,1,'Y5LUM-NFE0Q-GJR2L-5B86I','2',1),(5,1,'XAGZU-SJ0FO-BDLTK-B3C3V','1',1),(6,2,'','',1),(7,2,'','',1),(8,2,'','',1),(9,2,'','',1),(10,2,'','',1),(11,2,'','',1),(12,2,'','',1),(13,2,'','',1),(14,2,'','',1),(15,2,'','',1);
+INSERT INTO `services_report_product_tab` VALUES (1,1,5,10,1),(2,1,3,9,1);
 /*!40000 ALTER TABLE `services_report_product_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,11 +1023,10 @@ CREATE TABLE `services_report_sparepart_tab` (
   `sid` int(10) NOT NULL AUTO_INCREMENT,
   `ssid` int(10) DEFAULT NULL,
   `sssid` int(10) DEFAULT NULL,
-  `sspareid` int(10) DEFAULT NULL,
   `sqty` int(10) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1009,7 +1035,7 @@ CREATE TABLE `services_report_sparepart_tab` (
 
 LOCK TABLES `services_report_sparepart_tab` WRITE;
 /*!40000 ALTER TABLE `services_report_sparepart_tab` DISABLE KEYS */;
-INSERT INTO `services_report_sparepart_tab` VALUES (1,1,1,1,1,2),(2,1,2,1,1,2),(3,1,2,2,1,2),(4,1,3,1,1,2),(5,1,4,2,1,2),(6,1,4,1,1,2),(7,1,5,2,1,2),(8,1,1,1,1,2),(9,1,2,1,1,2),(10,1,2,2,1,2),(11,1,3,1,1,2),(12,1,4,2,1,2),(13,1,4,1,1,2),(14,1,5,2,1,2),(15,1,1,1,4,2),(16,1,2,3,1,2),(17,1,2,2,2,2),(18,1,3,1,1,2),(19,1,4,2,1,2),(20,1,4,1,1,2),(21,1,5,2,1,2),(22,1,1,1,1,2),(23,1,2,3,1,2),(24,1,2,2,2,2),(25,1,3,1,1,2),(26,1,4,2,1,2),(27,1,4,1,1,2),(28,1,5,2,1,2),(29,1,1,1,1,2),(30,1,2,3,1,2),(31,1,2,2,2,2),(32,1,3,1,1,2),(33,1,4,2,1,2),(34,1,4,1,1,2),(35,1,5,2,1,2),(36,1,1,1,1,2),(37,1,2,3,1,2),(38,1,2,2,2,2),(39,1,3,1,1,2),(40,1,4,2,1,2),(41,1,4,1,1,2),(42,1,5,2,1,2),(43,1,1,1,1,2),(44,1,2,3,1,2),(45,1,2,2,2,2),(46,1,3,1,1,2),(47,1,4,2,1,2),(48,1,4,1,1,2),(49,1,5,2,1,2),(50,1,1,1,1,2),(51,1,2,3,1,2),(52,1,2,2,2,2),(53,1,3,1,1,2),(54,1,4,2,1,2),(55,1,4,1,1,2),(56,1,5,2,1,2),(57,1,1,1,1,2),(58,1,2,3,1,2),(59,1,2,2,2,2),(60,1,3,1,1,2),(61,1,4,2,1,2),(62,1,4,1,1,2),(63,1,5,2,1,2),(64,1,1,1,1,2),(65,1,2,3,1,2),(66,1,2,2,2,2),(67,1,3,1,1,2),(68,1,4,2,1,2),(69,1,4,1,1,2),(70,1,5,2,1,2),(71,1,1,1,1,2),(72,1,2,3,1,2),(73,1,2,2,1,2),(74,1,3,1,1,2),(75,1,4,2,1,2),(76,1,4,1,1,2),(77,1,5,2,1,2),(78,1,1,1,1,2),(79,1,2,3,1,2),(80,1,2,2,1,2),(81,1,3,1,1,2),(82,1,4,2,1,2),(83,1,4,1,1,2),(84,1,5,2,1,2),(85,1,1,1,1,2),(86,1,2,3,1,2),(87,1,2,2,1,2),(88,1,3,1,1,2),(89,1,4,2,1,2),(90,1,4,1,5,2),(91,1,5,2,5,2),(92,1,1,1,2,2),(93,1,2,3,1,2),(94,1,2,2,1,2),(95,1,3,1,1,2),(96,1,4,2,1,2),(97,1,4,1,5,2),(98,1,5,2,5,2),(99,1,1,1,2,2),(100,1,2,3,2,2),(101,1,2,2,2,2),(102,1,3,1,2,2),(103,1,4,2,2,2),(104,1,4,1,5,2),(105,1,5,2,5,2),(106,1,1,1,2,2),(107,1,2,3,2,2),(108,1,2,2,2,2),(109,1,3,1,2,2),(110,1,4,2,2,2),(111,1,4,1,5,2),(112,1,5,2,5,2),(113,1,1,1,2,1),(114,1,2,3,2,1),(115,1,2,2,2,1),(116,1,3,1,2,1),(117,1,4,2,2,1),(118,1,4,1,5,1),(119,1,5,2,5,1);
+INSERT INTO `services_report_sparepart_tab` VALUES (1,1,4,9,1),(2,1,3,8,1);
 /*!40000 ALTER TABLE `services_report_sparepart_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1024,12 +1050,10 @@ CREATE TABLE `services_report_tab` (
   `sid` int(10) NOT NULL AUTO_INCREMENT,
   `ssid` int(10) DEFAULT NULL,
   `sdate` int(10) DEFAULT NULL,
-  `sqtypf` int(10) DEFAULT NULL,
-  `sqtypu` int(10) DEFAULT NULL,
   `sdesc` varchar(300) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1038,7 +1062,7 @@ CREATE TABLE `services_report_tab` (
 
 LOCK TABLES `services_report_tab` WRITE;
 /*!40000 ALTER TABLE `services_report_tab` DISABLE KEYS */;
-INSERT INTO `services_report_tab` VALUES (1,1,1417754519,4,1,'Servis DVD',3),(2,2,1418461144,5,5,'test',1);
+INSERT INTO `services_report_tab` VALUES (1,1,1422036408,'wewewe',3);
 /*!40000 ALTER TABLE `services_report_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1058,7 +1082,7 @@ CREATE TABLE `services_sparepart_detail_tab` (
   `sqty` int(10) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1067,7 +1091,7 @@ CREATE TABLE `services_sparepart_detail_tab` (
 
 LOCK TABLES `services_sparepart_detail_tab` WRITE;
 /*!40000 ALTER TABLE `services_sparepart_detail_tab` DISABLE KEYS */;
-INSERT INTO `services_sparepart_detail_tab` VALUES (1,NULL,NULL,1,3,5,1),(2,NULL,NULL,1,2,5,1),(3,NULL,NULL,2,3,10,1),(4,NULL,NULL,2,2,10,1);
+INSERT INTO `services_sparepart_detail_tab` VALUES (1,NULL,NULL,1,4,10,1),(2,NULL,NULL,1,3,10,1);
 /*!40000 ALTER TABLE `services_sparepart_detail_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1084,7 +1108,7 @@ CREATE TABLE `services_sparepart_tab` (
   `sdesc` varchar(350) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1093,7 +1117,7 @@ CREATE TABLE `services_sparepart_tab` (
 
 LOCK TABLES `services_sparepart_tab` WRITE;
 /*!40000 ALTER TABLE `services_sparepart_tab` DISABLE KEYS */;
-INSERT INTO `services_sparepart_tab` VALUES (1,1,'Servis DVD Cepat',1),(2,2,'test',3);
+INSERT INTO `services_sparepart_tab` VALUES (1,1,'wewewe',3);
 /*!40000 ALTER TABLE `services_sparepart_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1110,7 +1134,7 @@ CREATE TABLE `services_tecnical_tab` (
   `stid` int(10) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1119,7 +1143,7 @@ CREATE TABLE `services_tecnical_tab` (
 
 LOCK TABLES `services_tecnical_tab` WRITE;
 /*!40000 ALTER TABLE `services_tecnical_tab` DISABLE KEYS */;
-INSERT INTO `services_tecnical_tab` VALUES (1,1,2,1),(2,1,1,1),(3,2,1,1),(4,3,2,1),(5,3,1,1),(6,4,2,1),(7,4,1,1);
+INSERT INTO `services_tecnical_tab` VALUES (1,1,2,1),(2,1,1,1);
 /*!40000 ALTER TABLE `services_tecnical_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1134,15 +1158,13 @@ CREATE TABLE `services_workorder_tab` (
   `sid` int(10) NOT NULL AUTO_INCREMENT,
   `sno` varchar(20) DEFAULT NULL,
   `sbid` int(10) DEFAULT NULL,
-  `spid` int(10) DEFAULT NULL,
-  `sqty` int(10) DEFAULT NULL,
   `sdate` int(10) DEFAULT NULL,
   `sdatefrom` int(10) DEFAULT NULL,
   `sdateto` int(10) DEFAULT NULL,
   `sdesc` varchar(350) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1151,7 +1173,7 @@ CREATE TABLE `services_workorder_tab` (
 
 LOCK TABLES `services_workorder_tab` WRITE;
 /*!40000 ALTER TABLE `services_workorder_tab` DISABLE KEYS */;
-INSERT INTO `services_workorder_tab` VALUES (1,'0001/01/12/2014/002',1,3,5,1417754358,1417708800,1421942400,'wq',3),(2,'0002/01/12/2014/003',1,2,10,1418461085,1418400000,1421078400,'test',2),(3,'0003/02/12/2014/002',2,1,10,1418462319,1418400000,1421078400,'test',2),(4,'0004/01/01/2015/002',1,2,5,1421132576,1421078400,1423756800,'test',2);
+INSERT INTO `services_workorder_tab` VALUES (1,'0001/01/01/2015/002',1,1422036312,1422028800,1424707200,'eeeewww',3);
 /*!40000 ALTER TABLE `services_workorder_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1279,7 +1301,7 @@ CREATE TABLE `technical_tab` (
 
 LOCK TABLES `technical_tab` WRITE;
 /*!40000 ALTER TABLE `technical_tab` DISABLE KEYS */;
-INSERT INTO `technical_tab` VALUES (1,1,1,2,'D10A2','Gratcy Palma P Hutapea','098128192*121212','palma@admin.com',1401638400,1),(2,NULL,NULL,2,'01D21','Untung Ariesandi','8909809*121212','untung@admin.com',1356969600,1);
+INSERT INTO `technical_tab` VALUES (1,1,1,1,'D10A2','Gratcy Palma P Hutapea','098128192*121212','palma@admin.com',1391616000,1),(2,NULL,NULL,1,'01D21','Untung Ariesandi','8909809*121212','untung@admin.com',1356969600,1);
 /*!40000 ALTER TABLE `technical_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1310,7 +1332,7 @@ CREATE TABLE `users_tab` (
 
 LOCK TABLES `users_tab` WRITE;
 /*!40000 ALTER TABLE `users_tab` DISABLE KEYS */;
-INSERT INTO `users_tab` VALUES (1,1,1,'admin@admin.com','IT','Programmer','e89591ee9b8e7018511649a2146ae279','2130706433*1421480663',1),(2,2,2,'admin@dluxor.com','web','programmer','e89591ee9b8e7018511649a2146ae279','2130706433*1421476836',1);
+INSERT INTO `users_tab` VALUES (1,1,1,'admin@admin.com','IT','Programmer','e89591ee9b8e7018511649a2146ae279','2130706433*1422034144',1),(2,2,2,'admin@dluxor.com','web','programmer','e89591ee9b8e7018511649a2146ae279','2130706433*1421476836',1);
 /*!40000 ALTER TABLE `users_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1323,4 +1345,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-17 15:17:15
+-- Dump completed on 2015-01-24 10:18:12

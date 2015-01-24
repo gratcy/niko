@@ -26,28 +26,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="QTY Workorder" name="wqty" class="form-control" readonly />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Product Finished (QTY)</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="QTY Finished" name="fqty" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Product Unfinished (QTY)</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="QTY Unfinished" name="uqty" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
@@ -65,7 +43,9 @@
 					</div>
 				</div>
                 <div class="form-group">
+                    <div class="col-lg-8" id="technicalTMP" style="margin:0 auto;float:none;"> </div>
                     <div class="col-lg-8" id="productTMP" style="margin:0 auto;float:none;"> </div>
+                    <div class="col-lg-8" id="sparepartTMP" style="margin:0 auto;float:none;"> </div>
 				</div>
 				<div style="clear:both;"></div>
                 <div class="form-group">
@@ -87,10 +67,9 @@
 <script type="text/javascript">
 $(function(){
 	$('select[name="wo"]').change(function(){
-		$('div#productTMP').load('<?php echo site_url('services_report/product_tmp');?>/'+$(this).val());
-		$( document ).ajaxComplete(function() {
-			$('input[name="wqty"]').val($('#sadd > tbody > tr').length);
-		});
+		$('div#productTMP').load('<?php echo site_url('services_wo/product_tmp');?>/2?r=1&id='+$(this).val());
+		$('div#technicalTMP').load('<?php echo site_url('services_wo/technical_tmp');?>/2?r=1&id='+$(this).val());
+		$('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp');?>/2?r=1&id='+$(this).val());
 	});
 });
 </script>

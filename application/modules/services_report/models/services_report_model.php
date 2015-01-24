@@ -11,12 +11,12 @@ class Services_report_model extends CI_Model {
 	}
 	
 	function __get_services_report_detail_print($id) {
-		$this -> db -> select('a.*,b.sno,b.sqty FROM services_report_tab a LEFT JOIN services_workorder_tab b ON a.ssid=b.sid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3) AND a.sid=' . $id);
+		$this -> db -> select('a.*,b.sno FROM services_report_tab a LEFT JOIN services_workorder_tab b ON a.ssid=b.sid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3) AND a.sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_services_report_detail($id) {
-		$this -> db -> select('a.*,b.sqty FROM services_report_tab a LEFT JOIN services_workorder_tab b ON a.ssid=b.sid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3) AND a.sid=' . $id);
+		$this -> db -> select('a.* FROM services_report_tab a WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3) AND a.sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -69,6 +69,14 @@ class Services_report_model extends CI_Model {
 		if ($bid != "") $bid = " AND b.sbid=" . $bid;
 		else $bid = "";
 		$this -> db -> select("a.*,b.sno,c.bname FROM services_report_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)".$bid." AND b.sno LIKE '%".$keyword."%' ORDER BY a.sid DESC");
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_qty($sid,$id,$type) {
+		if ($type == 1)
+			$this -> db -> select('sqty FROM services_report_product_tab WHERE sstatus=1 AND spid='.$id.' AND ssid=' . $sid);
+		else
+			$this -> db -> select('sqty FROM services_report_sparepart_tab WHERE sstatus=1 AND sssid='.$id.' AND ssid=' . $sid);
 		return $this -> db -> get() -> result();
 	}
 	
