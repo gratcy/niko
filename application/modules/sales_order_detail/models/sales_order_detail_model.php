@@ -26,7 +26,7 @@ class sales_order_detail_model extends CI_Model {
 
 	function __get_delivery_order_detail($id,$snodo) {
 	
-		$this -> db -> select("*,		
+		$this -> db -> select("*,sales_order_tab.ssid as ssid_sales, delivery_order_detail_tab.ssid as ssid_so,			
 		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
 		(select caddr from customers_tab where customers_tab.cid=sales_order_tab.scid)as caddr,
@@ -83,8 +83,12 @@ class sales_order_detail_model extends CI_Model {
 	}	
 
 	function __update_invoice_order($snodo, $data) {
+		
+		
         $this -> db -> where('snodo', $snodo);
         return $this -> db -> update('delivery_order_detail_tab', $data);
+		
+		//$sql="select sum(
 	}		
 	
 	function __delete_sales_order_detail($id) {
