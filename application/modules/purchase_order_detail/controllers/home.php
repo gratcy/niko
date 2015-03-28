@@ -113,7 +113,9 @@ class Home extends MY_Controller {
 		//print_r($_POST);die;
 			$pppid = $this -> input -> post('pppid', TRUE);
 			$pcurrency = $this -> input -> post('pcurrency', TRUE);
-			$pqty = $this -> input -> post('pqty', TRUE);
+			$pvol = $this -> input -> post('pvol', TRUE);
+			$pqtyz = $this -> input -> post('pqty', TRUE);
+			$pqty= $pvol * $pqtyz;
 			$pharga = $this -> input -> post('pharga', TRUE);
 			$pdisc = $this -> input -> post('pdisc', TRUE);
 			$pketerangan = $this -> input -> post('pketerangan', TRUE);
@@ -151,6 +153,7 @@ class Home extends MY_Controller {
 		$view['pbid'] = $this -> branch_lib -> __get_branch();
 		$view['psid'] = $this -> sales_lib -> __get_sales();
 		$view['pppid'] = $this -> products_lib -> __get_products();
+		
 		
 		// print_r($view['detailx']);die;
 			$this->load->view('purchase_order_detail_add',$view);
