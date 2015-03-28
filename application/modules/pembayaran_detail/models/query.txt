@@ -1,0 +1,40 @@
+SELECT a.pmid,a.pno_pm,b.sid,c.sno_invoice FROM pembayaran_tab a ,sales_order_tab b, delivery_order_detail_tab c
+where a.pcid=b.scid and b.sid=c.ssid and b.scid='2'
+
+
+select * from sales_order_tab a, delivery_order_detail_tab b where a.sid=b.ssid and a.scid=2
+
+SELECT a.pmid, a.pno_pm, b.sid, c.sno_invoice
+FROM pembayaran_tab a, sales_order_tab b, delivery_order_detail_tab c
+WHERE a.pcid = b.scid
+AND b.sid = c.ssid
+AND b.scid = '2'
+AND a.pno_pm = '1234'
+
+
+SELECT a.pmid, a.pno_pm, b.sid,c.snodo, c.sno_invoice,c.sqty,d.sid,d.sprice
+FROM pembayaran_tab a, sales_order_tab b, delivery_order_detail_tab c,sales_order_detail_tab d
+WHERE a.pcid = b.scid
+AND b.sid = c.ssid
+AND c.sid = d.sid
+AND b.scid = '2'
+AND a.pno_pm = '1234'
+
+SELECT sum(c.sqty), a.pmid, a.pno_pm, b.sid,c.snodo, c.sno_invoice,c.sqty,d.sid,d.sprice
+FROM pembayaran_tab a, sales_order_tab b, delivery_order_detail_tab c,sales_order_detail_tab d
+WHERE a.pcid = b.scid
+AND b.sid = c.ssid
+AND c.sid = d.sid
+AND b.scid = '2'
+AND a.pno_pm = '1234'
+group by (c.snodo)
+
+
+SELECT sum(c.sqty * d.sprice), a.pmid, a.pno_pm, b.sid,c.snodo, c.sno_invoice,c.sqty,d.sid,d.sprice
+FROM pembayaran_tab a, sales_order_tab b, delivery_order_detail_tab c,sales_order_detail_tab d
+WHERE a.pcid = b.scid
+AND b.sid = c.ssid
+AND c.sid = d.sid
+AND b.scid = '2'
+AND a.pno_pm = '1234'
+group by (c.snodo)
