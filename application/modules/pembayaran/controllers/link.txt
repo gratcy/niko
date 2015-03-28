@@ -1,0 +1,2 @@
+sales_order_detail/home/invoice_order_add/21/2/21-061214105618
+http://localhost/dist/pembayaran/home/pembayaran_add
