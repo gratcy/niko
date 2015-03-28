@@ -65,11 +65,13 @@ minLength: 1,
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <!--form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
+            <!--form class="form-horizontal" action="<?php //echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
 <?php //echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
 <?php  
+//echo "<pre>";
 //print_r($detailx);
 //print_r($detail);die;
+//echo "</pre>";
 ?>
 
 
@@ -87,6 +89,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">No DO</label>
 
                     <div class="col-lg-4">
+					
                        <input type=hidden name=id value="<?php echo $id; ?>">
 					   <input type=text value="<?php echo $detailx[0]->snodo; ?>" class="form-control" disabled>
                     </div>
@@ -200,9 +203,12 @@ minLength: 1,
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
 		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
-		  <?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice * $v -> sqty; ?>">
+		 
+		  <?php echo $v -> pcode; ?><input type=hidden name="sssid[]" 
+		  value="<?php echo $detailx[0]->ssid_sales; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> sqty; ?></td>
+          <td><?php echo $v -> sqty; ?>  </td>
 
 		  </tr>
         <?php 
@@ -237,7 +243,7 @@ minLength: 1,
 		if ($detailx[0]->dstatus==1){?>						
 		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type=submit value="EDIT DO" ></form>	
 		<?php }else{?>
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-danger" type=submit value="CETAK" ></form>	
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type=submit value="CETAK" ></form>	
 		<?php }?></td></tr></table>
 
                             </div>

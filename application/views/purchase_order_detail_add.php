@@ -23,7 +23,8 @@ minLength: 1,
     source: '<?php echo site_url('purchase_order_detail/home/source_po'); ?>',
      select: function(event, ui) { 
 	    $("#thePid").val(ui.item.pid),
-        $("#thePhpp").val(ui.item.phpp)
+        $("#thePhpp").val(ui.item.phpp),
+		$("#thePvolume").val(ui.item.pvolume)
 	
 		
     }
@@ -133,10 +134,11 @@ minLength: 1,
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Qty</label>
+                    <label for="text1" class="control-label col-lg-4">Qty Koli</label>
 
                     <div class="col-lg-4">
                         <input type="text" name="pqty" class="form-control" data-placeholder="Point" />
+						<input type="text" name="pvol" class="form-control" id="thePvolume" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -203,7 +205,8 @@ minLength: 1,
           
           <th>Nama Product</th>
           <th>Currency</th>
-          <th>Qty</th>
+		  <th>Qty Koli</th>
+          <th>Qty Pcs</th>
           <th>Harga</th>
        
 		  <th>Total </th>
@@ -223,6 +226,7 @@ minLength: 1,
           
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pcurrency; ?></td>
+		  <td><?php //echo $v -> pqtyz; ?></td>
           <td><?php echo $v -> pqty; ?></td>
           <td><?php echo $v -> pharga; ?></td>
           		  
