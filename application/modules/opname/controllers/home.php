@@ -43,6 +43,7 @@ class Home extends MY_Controller {
 			$stockbegining = (int) $this -> input -> post('stockbegining');
 			
 			$stock2 = (int) $this -> input -> post('stock2');
+			$desc = $this -> input -> post('desc', TRUE);
 			$stockout2 = (int) $this -> input -> post('stockout2');
 			$stockin2 = (int) $this -> input -> post('stockin2');
 			$stockbegining2 = (int) $this -> input -> post('stockbegining2');
@@ -51,7 +52,7 @@ class Home extends MY_Controller {
 			if ($id && $type) {
 				$arr = array('itype' => $type, 'istockbegining' => $stockbegining, 'istockin' => $stockin, 'istockout' => $stockout, 'istock' => $stock);
 				if ($this -> inventory_model -> __update_inventory($id, $arr, $type)) {
-					$oarr = array('oidid' => $id,'otype' => $type, 'odate' => time(), 'ostockbegining' => $stockbegining2, 'ostockin' => $stockin2, 'ostockout' => $stockout2, 'ostock' => $stock2);
+					$oarr = array('oidid' => $id,'otype' => $type, 'odate' => time(), 'ostockbegining' => $stockbegining2, 'ostockin' => $stockin2, 'ostockout' => $stockout2, 'ostock' => $stock2, 'odesc' => $desc);
 					$this -> opname_model -> __insert_opname($oarr);
 					
 					__set_error_msg(array('info' => 'Stock opname berhasil dilakukan.'));

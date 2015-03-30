@@ -6,7 +6,7 @@
 <!-- BEGIN HEAD -->
 <head>
      <meta charset="UTF-8" />
-    <title>PT. Niko Electronik Indonesia</title>
+    <title>PT. Niko Elektronik Indonesia</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -32,10 +32,10 @@
 
    <!-- PAGE CONTENT --> 
     <div class="container">
+    <div class="tab-content">
     <div class="text-center">
         <img src="<?php echo site_url('application/views/assets/img/logo.png'); ?>" id="logoimg" alt=" Logo" />
     </div>
-    <div class="tab-content">
         <div id="login" class="tab-pane active">
             <form action="<?php echo site_url('login/logging/'); ?>" class="form-signin" method="post">
                 <?php echo __get_error_msg(); ?>

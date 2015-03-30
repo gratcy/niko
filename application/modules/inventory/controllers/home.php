@@ -11,6 +11,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('products/products_lib');
 		$this -> load -> library('sparepart/sparepart_lib');
 		$this -> load -> model('inventory_model');
+		$this -> load -> model('products/products_model');
 	}
 
 	function index($type) {
@@ -21,25 +22,44 @@ class Home extends MY_Controller {
 		elseif ($type == 2)
 			$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 		elseif ($type == 3)
-			$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		else
+			$perm = (__get_roles('ExecuteAllBranchInventoryRejectProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 4)
 			$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		else
+			$perm = (__get_roles('ExecuteAllBranchInventoryRejectSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 			
 		$keyword = $this -> input -> post('keyword');
+		$view['type'] = $type;
 		
-		if ($keyword) {
-			$view['keyword'] = $keyword;
-			$view['inventory'] = $this -> inventory_model -> __get_search($keyword,$type,$perm);
-			$view['pages'] = '';
+		if ($this -> memcachedlib -> sesresult['ubid'] == 1) {
+			$view['branch'] = $this -> inventory_model -> __get_branch_inventory();
+			if ($keyword) {
+				$view['keyword'] = $keyword;
+				$view['inventory'] = $this -> inventory_model -> __get_search($keyword,$type,$perm,1);
+				$view['pages'] = '';
+			}
+			else {
+				$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory_main($type),3,10,site_url('inventory/' . $type));
+				$view['inventory'] = $this -> pagination_lib -> paginate();
+				$view['pages'] = $this -> pagination_lib -> pages();
+				$view['keyword'] = '';
+			}
+			$this->load->view('inventory_main', $view);
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory($type,$perm),3,10,site_url('inventory/' . $type));
-			$view['inventory'] = $this -> pagination_lib -> paginate();
-			$view['pages'] = $this -> pagination_lib -> pages();
-			$view['keyword'] = '';
+			if ($keyword) {
+				$view['keyword'] = $keyword;
+				$view['inventory'] = $this -> inventory_model -> __get_search($keyword,$type,$perm,2);
+				$view['pages'] = '';
+			}
+			else {
+				$pager = $this -> pagination_lib -> pagination($this -> inventory_model -> __get_inventory($type,$perm),3,10,site_url('inventory/' . $type));
+				$view['inventory'] = $this -> pagination_lib -> paginate();
+				$view['pages'] = $this -> pagination_lib -> pages();
+				$view['keyword'] = '';
+			}
+			$this->load->view('inventory', $view);
 		}
-		$view['type'] = $type;
-		$this->load->view('inventory', $view);
 	}
 	
 	function inventory_add($type) {
@@ -75,9 +95,11 @@ class Home extends MY_Controller {
 			else if ($type == 2)
 			$view['perm'] = 'ExecuteAllBranchInventorySparepart';
 			else if ($type == 3)
-			$view['perm'] = 'ExecuteAllBranchInventoryServices';
-			else
+			$view['perm'] = 'ExecuteAllBranchInventoryRejectProduct';
+			elseif ($type == 4)
 			$view['perm'] = 'ExecuteAllBranchInventoryReturn';
+			else
+			$view['perm'] = 'ExecuteAllBranchInventoryRejectSparepart';
 			
 			$view['type'] = $type;
 			$view['branch'] = $this -> branch_lib -> __get_branch();
@@ -129,18 +151,22 @@ class Home extends MY_Controller {
 			elseif ($type == 2)
 				$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 			elseif ($type == 3)
-				$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-			else
+				$perm = (__get_roles('ExecuteAllBranchInventoryRejectProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			elseif ($type == 4)
 				$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-			
+			else
+				$perm = (__get_roles('ExecuteAllBranchInventoryRejectSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+				
 			if ($type == 1)
 			$view['perm'] = 'ExecuteAllBranchInventoryProduct';
 			else if ($type == 2)
 			$view['perm'] = 'ExecuteAllBranchInventorySparepart';
 			else if ($type == 3)
-			$view['perm'] = 'ExecuteAllBranchInventoryServices';
-			else
+			$view['perm'] = 'ExecuteAllBranchInventoryRejectProduct';
+			else if ($type == 4)
 			$view['perm'] = 'ExecuteAllBranchInventoryReturn';
+			else
+			$view['perm'] = 'ExecuteAllBranchInventoryRejectSparepart';
 			
 			$view['id'] = $id;
 			$view['type'] = $type;
@@ -161,9 +187,11 @@ class Home extends MY_Controller {
 		elseif ($type == 2)
 			$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 		elseif ($type == 3)
-			$perm = (__get_roles('ExecuteAllBranchInventoryServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		else
+			$perm = (__get_roles('ExecuteAllBranchInventoryRejectProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		elseif ($type == 4)
 			$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		else
+			$perm = (__get_roles('ExecuteAllBranchInventoryRejectSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 			
 		if ($this -> inventory_model -> __delete_inventory($id,$perm)) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));

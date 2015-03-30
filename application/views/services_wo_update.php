@@ -31,15 +31,7 @@
                     <label for="text1" class="control-label col-lg-4">Product</label>
 
                     <div class="col-lg-4">
-						<select name="product" data-placeholder="Product" class="form-control chzn-select"><?php echo $products; ?></select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Quantity" name="qty" class="form-control" value="<?php echo $detail[0] -> sqty; ?>" />
+						<a href="<?php echo site_url('services_wo/product_add/2?id=' . $id); ?>" class="btn btn-info" id="addProduct">Add Product</a>
                     </div>
                 </div>
 
@@ -69,6 +61,9 @@
                                 <?php echo __get_status($detail[0] -> sstatus,2); ?>
                             </div>
 					</div>
+				</div>
+                <div class="form-group">
+                    <div class="col-lg-8" id="ProductTMP" style="margin:0 auto;float:none;"> </div>
 				</div>
                 <div class="form-group">
                     <div class="col-lg-8" id="TechnicalTMP" style="margin:0 auto;float:none;"> </div>
@@ -105,7 +100,8 @@ $('#pbranch').css('display','none');
 <?php endif; ?>
 $(function(){
 	$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
-	$("#addTechnical").fancybox({
+	$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
+	$("#addTechnical, #addProduct").fancybox({
 		'width'				: '65%',
 		'height'			: '100%',
 		'autoScale'			: false,
@@ -115,10 +111,12 @@ $(function(){
 	});
 	$('a#fancybox-close').click(function(){
 		$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
+		$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
 	});
 	$.fancybox.originalClose = $.fancybox.close;
 	$.fancybox.close = function() {
 		$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
+		$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
 		$.fancybox.originalClose();
 	}
 });

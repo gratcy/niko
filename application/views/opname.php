@@ -4,7 +4,7 @@ $add = 'Product';
 elseif ($type == 2)
 $add = 'Sparepart';
 elseif ($type == 3)
-$add = 'Services';
+$add = 'RejectProduct';
 else
 $add = 'Return';
 ?>        <!--PAGE CONTENT -->

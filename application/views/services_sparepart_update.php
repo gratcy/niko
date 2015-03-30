@@ -21,7 +21,7 @@
 <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Work Order</label>
-
+<input type="hidden" name="owo" value="<?php echo $detail[0] -> ssid; ?>">
                     <div class="col-lg-4">
 						<select name="wo" data-placeholder="Work Order" class="form-control chzn-select"><?php echo $wo; ?></select>
                     </div>

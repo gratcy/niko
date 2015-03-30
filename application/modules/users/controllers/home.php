@@ -43,6 +43,10 @@ class Home extends MY_Controller {
 					__set_error_msg(array('error' => 'Cabang harus dipilih salah satu !!!'));
 					redirect(site_url('users/users_add'));
 				}
+				else if ($this -> users_model -> __check_user($uemail) > 0) {
+					__set_error_msg(array('error' => 'Email sudah terdaftar !!!'));
+					redirect(site_url('users/users_add'));
+				}
 				else {
 					if ($this -> users_model -> __insert_users($uemail, md5(sha1($confpass, true)), $group, $division, $position, $branch, $status)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));

@@ -654,7 +654,8 @@ font-weight: bolder;
 .inner {
   position: relative;
   min-height: 1px;
-  margin-top:-18px;
+  margin-top:-16px;
+  padding-top:8px;
   /*padding-right: 10px;*/
   padding-right: 15px;
   padding-left: 10px;
@@ -2146,7 +2147,7 @@ fieldset[disabled] .btn-grad.btn-metis-6.active {
 /* horizontal rules */
 
 .inner hr {
-  margin-top: 10px;
+  margin-top: 3px;
   border-top-color: #ccc;
 }
 
@@ -2612,7 +2613,8 @@ fieldset[disabled] .btn-grad.btn-metis-6.active {
   padding: 5px 0;
 }
 
-div.searchTable{float: right;width: 230px;display: block;margin-top: -7px;}
-.sLeft{float: left;}
+div.searchTable{float: right;display: block;margin-top: -7px;width:190px;}
+.sLeft{float: left;padding-right:2px;width: 140px}
 .sRight{float: right;}
 /* END Pricing Table */
+

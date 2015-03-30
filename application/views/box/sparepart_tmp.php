@@ -1,24 +1,40 @@
+<h3>List Sparepart</h3>
 <table class="table table-bordered">
 <thead>
 <tr>
-<th>Product</th>
+<th>Group Product</th>
 <th>Code</th>
 <th>Name</th>
 <th>No Component</th>
-<th style="width:100px;">QTY</th>
+<th>QTY</th>
+<?php if ($report != 1) : ?>
 <th></th>
+<?php endif; ?>
+<?php if ($report == 1) : ?>
+<th>QTY Used</th>
+<?php endif; ?>
 </tr>
 </thead>
 <tbody>
 <?php foreach($sparepart as $k => $v) : ?>
 <tr id="sparepart_id_<?php echo $v -> sid?>">
 <input type="hidden" name="sid[]" value="<?php echo $v -> sid;?>">
-<td><?php echo $v -> pname; ?></td>
+<td><?php echo $v -> cname; ?></td>
 <td><?php echo $v -> scode; ?></td>
 <td><?php echo $v -> sname; ?></td>
 <td><?php echo $v -> snocomponent; ?></td>
-<td><input type="text" name="qty[<?php echo $v -> sid;?>]" value="<?php echo ($type == 2 ? $v -> sqty : 0); ?>" class="form-control"></td>
+<td><input type="text" style="width:60px!important;" name="qty[<?php echo $v -> sid;?>]" value="<?php echo ($type == 2 ? (int) $v -> sqty : 0); ?>" class="form-control"></td>
+<?php if ($report != 1) : ?>
 <td style="text-align:center;"><a href="javascript:void(0);" id="Delsparepart" sid="<?php echo $v -> sid; ?>"><i class="icon-remove"></i></a></td>
+<?php endif; ?>
+<?php if ($report == 1) : ?>
+<?php
+if ($sid) {
+$qty = $this -> services_report_model -> __get_qty($sid,$v -> sid, 2);
+}
+?>
+<td><input type="text" name="suqty[<?php echo $v -> sid; ?>]" value="<?php echo isset($qty[0] -> sqty) ? $qty[0] -> sqty : 0; ?>" style="width:60px!important;" class="form-control"></td>
+<?php endif; ?>
 </tr>
 <?php endforeach; ?>
 </tbody>

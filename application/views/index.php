@@ -32,9 +32,9 @@
                                 <i class="icon-male icon-2x"></i>
                                 <span>Customers</span>
                             </a>
-                            <a class="quick-btn" href="<?php echo site_url('services');?>">
+                            <a class="quick-btn" href="<?php echo site_url('services_wo');?>">
                                 <i class="icon-wrench icon-2x"></i>
-                                <span>Services</span>
+                                <span>Services WO</span>
                             </a>
                             <a class="quick-btn" href="<?php echo site_url('sparepart');?>">
                                 <i class="icon-cogs icon-2x"></i>
@@ -80,7 +80,6 @@
           <th>Packaging</th>
           <th>Category</th>
           <th>Name</th>
-          <th style="text-align:center;">Basic Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,7 +91,6 @@
           <td><?php echo $v -> ppname; ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pname; ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> phpp,4); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -118,7 +116,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Product</th>
+          <th>Group Product</th>
           <th>Code</th>
           <th>Name</th>
           <th>No Component</th>
@@ -129,7 +127,7 @@
 		  foreach($sparepart as $k => $v) :
 		  ?>
                                         <tr>
-          <td><?php echo $v -> pname; ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
@@ -190,8 +188,8 @@
 						<div class="btn-group pull-right" style="padding:7px 10px;">
                                 <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
                                 <ul class="dropdown-menu slidedown">
-                                    <li> <a href="<?php echo site_url('services/services_add');?>"> <i class="icon-pencil"></i> Add </a> </li>
-                                    <li> <a href="<?php echo site_url('services');?>"> <i class="icon-arrow-right"></i> Go to Services </a> </li>
+                                    <li> <a href="<?php echo site_url('services_wo/services_wo_add');?>"> <i class="icon-pencil"></i> Add </a> </li>
+                                    <li> <a href="<?php echo site_url('services_wo');?>"> <i class="icon-arrow-right"></i> Go to Services WO </a> </li>
                                 </ul>
                             </div>
                         <div class="panel-heading">
@@ -202,11 +200,9 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Branch</th>
+          <th>WO No.</th>
           <th>Date</th>
-          <th>Product</th>
-          <th>QTY</th>
-          <th>No Serial</th>
+          <th>Duration</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -214,11 +210,9 @@
 		  foreach($services as $k => $v) :
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
+          <td><?php echo $v -> sno; ?></td>
           <td><?php echo __get_date($v -> sdate); ?></td>
-          <td><?php echo $v -> pname; ?></td>
-          <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo $v -> snoseri; ?></td>
+          <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

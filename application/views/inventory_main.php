@@ -1,4 +1,16 @@
-<style type="text/css">
+<?php
+if ($type == 1)
+$add = 'Product';
+elseif ($type == 2)
+$add = 'Sparepart';
+elseif ($type == 3)
+$add = 'RejectProduct';
+elseif ($type == 4)
+$add = 'Return';
+else
+$add = 'RejectSparepart';
+
+?><style type="text/css">
 div#txtHint{position: absolute;
 width: 230px;
 top: 40px;
@@ -16,13 +28,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Sales Order </h2>
+                        <h2> Inventory <?php echo __get_inventory_type($type); ?></h2>
                     </div>
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesOrderAdd')) : ?>
-                <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add sales Order</a>
+				<?php if (__get_roles('Inventory'.$add.'Add') && $type >= 3) : ?>
+                <a href="<?php echo site_url('inventory/inventory_add/' . $type); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Stock <?php echo __get_inventory_type($type); ?></a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,7 +43,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Sales Order
+                            Inventory <?php echo __get_inventory_type($type); ?>
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
@@ -45,63 +57,26 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
-          <th>No so</th>
-    
-          <th>Tanggal</th>
-          <th>Sales</th>
-          <th>Customer </th>
-          <th>Status</th>
-		  <th style="width: 50px;"></th>
+          <th>Code</th>
+          <th>Name</th>
+          <?php foreach($branch as $k => $v) : ?>
+          <th><?php echo $v -> bname; ?></th>
+          <?php endforeach;?>
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
-		  foreach($sales_order as $k => $v) :
-			  // echo "<pre>";
-	// print_r($sales_order);
-	 // echo "</pre>";
+		  foreach($inventory as $k => $v) :
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
-          <td><?php echo $v -> snoso; ?></td>
-      
-          <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
-          <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> cname; ?></td>
-          <td><?php 
-		  $sstatus=$v -> sstatus;
-		  if($sstatus==0){
-		  $st="Pending";
-		  }elseif($sstatus==1){
-		  $st="Aktif";
-		  }if($sstatus==2){
-		  $st="Delete";
-		  }if($sstatus==3){
-		  $st="Approve";
-		  }if($sstatus==4){
-		  $st="Done";
-		  }
-		  echo $st; ?></td>
-		
-		
-		  <td>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
-				<?php if($sstatus<3){?>
-              <a href="<?php echo site_url('sales_order/home/sales_order_update/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-pencil"></i></a>
-			  <?php }?>
-                <?php endif; ?>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
-			  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
-                <?php endif; ?>
-				<?php if (__get_roles('SalesOrderDelete')) : ?>
-				<?php if($sstatus<3){?>
-              <a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-			  <?php } ?>
-                <?php endif; ?>
-          </td>		
-		
-		
+          <td><?php echo $v -> code; ?></td>
+          <td><?php echo $v -> name; ?></td>
+          <?php
+          foreach($branch as $key => $val) :
+          $r = $this -> inventory_model -> __get_total_inventory_branches($v -> id, $val -> bid, $type);
+          ?>
+          <td><?php echo (isset($r[0] -> istock) ? $r[0] -> istock : 0); ?></td>
+          <?php endforeach;?>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

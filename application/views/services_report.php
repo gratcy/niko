@@ -34,7 +34,7 @@ left:inherit!important;
                             Services Report
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="No. Work Order" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
+					<div class="sLeft"><input type="text" placeholder="No. Work Order" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>
@@ -49,7 +49,7 @@ left:inherit!important;
           <th>Date</th>
           <th>Desc</th>
           <th>Status</th>
-          <th style="width: 50px;"></th>
+          <th style="width: 80px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,6 +62,9 @@ left:inherit!important;
           <td><?php echo $v -> sdesc; ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
+			  <?php if ($v -> sstatus == 3) : ?>
+			  <a href="javascript:void(0);" onclick="print_data('<?php echo site_url('services_report/services_report_print/' . $v -> sid); ?>');" ><i class="icon-print"></i></a>
+			  <?php endif; ?>
 			  <?php if ($v -> sstatus <> 3) : ?>
 				<?php if (__get_roles('ServicesReportUpdate')) : ?>
               <a href="<?php echo site_url('services_report/services_report_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>

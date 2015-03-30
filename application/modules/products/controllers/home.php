@@ -12,6 +12,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('group_product/group_product_lib');
 		$this -> load -> library('products/products_lib');
 		$this -> load -> library('branch/branch_lib');
+		$this -> load -> model('inventory/inventory_model');
 		$this -> load -> model('products_model');
 	}
 
@@ -48,7 +49,6 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$code = $this -> input -> post('code', TRUE);
 			$moq = $this -> input -> post('moq', TRUE);
-			$disc = (int) $this -> input -> post('disc');
 			$isi = (int) $this -> input -> post('isi');
 			$status = (int) $this -> input -> post('status');
 
@@ -57,13 +57,17 @@ class Home extends MY_Controller {
 				redirect(site_url('products' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
+				$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pstatus' => $status);
 				if ($this -> products_model -> __insert_products($arr)) {
 					$pid = $this -> db-> insert_id();
 					
-					foreach($moq as $k => $v)
+					foreach($moq as $k => $v) :
+						$arr = array('ibid' => $k, 'iiid' => $pid, 'itype' => 1, 'istockbegining' => 0, 'istockin' => 0, 'istockout' => 0, 'istock' => 0, 'istatus' => 1);
+						$this -> inventory_model -> __insert_inventory($arr);
+						
 						$this -> products_model -> __insert_moq(array('mbid' => $k, 'mpid' => $pid, 'mqty' => str_replace(',','',$v)));
-
+					endforeach;
+					
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('products'));
 				}
@@ -97,7 +101,6 @@ class Home extends MY_Controller {
 			$packaging = (int) $this -> input -> post('packaging');
 			$category = (int) $this -> input -> post('category');
 			$status = (int) $this -> input -> post('status');
-			$disc = (int) $this -> input -> post('disc');
 			$id = (int) $this -> input -> post('id');
 			$group = (int) $this -> input -> post('group');
 			$type = (int) $this -> input -> post('type');
@@ -110,7 +113,7 @@ class Home extends MY_Controller {
 					redirect(site_url('products' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pdisc' => $disc, 'pstatus' => $status);
+					$arr = array('pcid' => $category, 'pgroup' => $group, 'ptype' => $type, 'ppid' => $packaging, 'pvolume' => $isi, 'pcode' => $code, 'pname' => $name, 'pdesc' => $desc, 'phpp' => $basic, 'pdist' => $dist, 'psemi' => $semi, 'pkey' => $key, 'pstore' => $store, 'pconsume' => $consume, 'ppoint' => $point, 'pstatus' => $status);
 					if ($this -> products_model -> __update_products($id, $arr)) {
 						foreach($moq as $k => $v)
 							if ($this -> products_model -> __check_moq($id, $k))

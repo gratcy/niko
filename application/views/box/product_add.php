@@ -18,7 +18,7 @@
 </section>
 	<?php echo __get_error_msg(); ?>
                     <div class="row">
-						<form action="<?php echo site_url('services_report/product_search/' . $type); ?>" method="post">
+						<form action="<?php echo site_url('services_wo/product_search/' . $type); ?>" method="post">
 						<input type="hidden" name="type" value="<?php echo $type; ?>">
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-1" style="float:left;">Name/Code</label>
@@ -32,7 +32,7 @@
 						</form>
 						</div>
 						<br />
-<form action="<?php echo site_url('services_report/product_add/'.$type.'?id=' . $id); ?>" method="post">
+<form action="<?php echo site_url('services_wo/product_add/'.$type.'?id=' . $id); ?>" method="post">
 <div class="box-body">
 <table class="table table-bordered">
 <thead>
@@ -40,7 +40,7 @@
 <th style="width:50px;"></th>
 <th>Code</th>
 <th>Name</th>
-<th>Description</th>
+<th>Group</th>
 </tr>
 </thead>
 <tbody>
@@ -49,7 +49,7 @@
 <td style="text-align:center;"><input type="checkbox" name="pid[]" value="<?php echo $v -> pid?>"></td>
 <td><?php echo $v -> pcode; ?></td>
 <td><?php echo $v -> pname; ?></td>
-<td><?php echo $v -> pdesc; ?></td>
+<td><?php echo $v -> cname; ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

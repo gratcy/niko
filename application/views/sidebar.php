@@ -24,7 +24,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">13</span>&nbsp;
+                       &nbsp; <span class="label label-danger">12</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
 						<?php if (__get_roles('BranchView') || __get_roles('BranchViewAsBranch')) : ?>
@@ -41,9 +41,6 @@
                          <?php endif; ?>
 						<?php if (__get_roles('GroupProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('group_product'); ?>"><i class="icon-angle-right"></i> Groups Product </a></li>
-                         <?php endif; ?>
-						<?php if (__get_roles('GroupSparepartView')) : ?>
-                        <li class=""><a href="<?php echo site_url('group_sparepart'); ?>"><i class="icon-angle-right"></i> Groups Sparepart </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('CategoriesProductView')) : ?>
                         <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Categories Product </a></li>
@@ -68,26 +65,29 @@
                          <?php endif; ?>
                     </ul>
                 </li>
-				<?php if (__get_roles('ServicesView')) : ?>
+				<?php if (__get_roles('ServicesWOView') || __get_roles('ServicesSparepartView') || __get_roles('ServicesReportView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#services">
                         <i class="icon-cogs"> </i> Services
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">4</span>&nbsp;
+                       &nbsp; <span class="label label-danger">3</span>&nbsp;
                     </a>
                     <ul class="collapse" id="services">
-						<?php if (__get_roles('ServicesView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services'); ?>"><i class="icon-angle-right"></i> Services </a></li>
-						<?php endif; ?>
+						<?php if (__get_roles('ServicesWOView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Services Workorder </a></li>
+                         <?php endif; ?>
+						<?php if (__get_roles('ServicesSparepartView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Services Sparepart </a></li>
-                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Report Sparepart </a></li>
+                         <?php endif; ?>
+						<?php if (__get_roles('ServicesReportView')) : ?>
+                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Services Report </a></li>
+                         <?php endif; ?>
                     </ul>
                 </li>
 			   <?php endif; ?>
-				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
+				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryRejectProductView') || __get_roles('InventoryRejectSparepartView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#inventory">
                         <i class="icon-barcode"> </i> Inventory
@@ -95,7 +95,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">4</span>&nbsp;
+                       &nbsp; <span class="label label-primary">6</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
@@ -106,6 +106,9 @@
 							<?php endif; ?>
 							<?php if (__get_roles('InventoryReturnView')) : ?>
 								<li class=""><a href="<?php echo site_url('inventory/4'); ?>"><i class="icon-angle-right"></i> Inventory Return </a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('InventoryRejectProductView')) : ?>
+								<li class=""><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Inventory Reject Product </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
 								<li class=""><a href="javascript:void(0);"><i class="icon-angle-down"></i> Inventory Opname </a>
@@ -119,6 +122,9 @@
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameReturnView')) : ?>
 								<li><a href="<?php echo site_url('opname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('OpnameRejectProductView')) : ?>
+								<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Reject Product Opname</a></li>
 							<?php endif; ?>
 								</ul>
 								</li>
@@ -210,8 +216,8 @@
                         <ul>
 								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product Opname</a></li>
 								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart Opname</a></li>
-								<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Services Opname</a></li>
 								<li><a href="<?php echo site_url('reportopname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>
+								<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Reject Product Opname</a></li>
                         </ul>
                         </li>
                     </ul>

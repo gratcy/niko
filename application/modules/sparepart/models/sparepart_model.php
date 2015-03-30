@@ -5,26 +5,26 @@ class Sparepart_model extends CI_Model {
     }
 	
 	function __get_sparepart() {
-		return 'SELECT a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sid DESC';
 	}
 	
 	function __get_sparepart_services($ids,$sid) {
 		if ($ids) {
 			if ($sid)
-				$this -> db -> select('a.sid,a.sname,a.scode,a.snocomponent,b.pname,c.sqty FROM sparepart_tab a left join products_tab b ON a.spid=b.pid LEFT JOIN services_sparepart_detail_tab c ON a.sid=c.sssid AND c.ssid='.$sid.' AND c.sstatus=1 WHERE (a.sstatus=1 or a.sstatus=0) AND a.sid IN ('.$ids.') ORDER BY a.sid DESC', FALSE);
+				$this -> db -> select('a.sid,a.sname,a.scode,a.snocomponent,b.cname,c.sqty FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid LEFT JOIN services_sparepart_detail_tab c ON a.sid=c.sssid AND c.ssid='.$sid.' AND c.sstatus=1 WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 AND a.sid IN ('.$ids.') ORDER BY a.sid DESC', FALSE);
 			else
-				$this -> db -> select('a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) AND a.sid IN ('.$ids.') ORDER BY a.sid DESC', FALSE);
+				$this -> db -> select('a.sid,a.sname,a.scode,a.snocomponent,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND a.sid IN ('.$ids.') AND b.ctype=4 ORDER BY a.sid DESC', FALSE);
 			return $this -> db -> get() -> result();
 		}
-		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC";
+		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sid DESC";
 	}
 	
 	function __get_sparepart_services_search($keyword) {
-		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') ORDER BY a.sid DESC";
+		return "SELECT a.sid,a.sname,a.scode,a.snocomponent,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') AND b.ctype=4 ORDER BY a.sid DESC";
 	}
 	
 	function __get_recent_sparepart() {
-		$this -> db -> select('a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) ORDER BY a.sid DESC LIMIT 0,5', FALSE);
+		$this -> db -> select('a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sid DESC LIMIT 0,5', FALSE);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -60,7 +60,7 @@ class Sparepart_model extends CI_Model {
 	}
 	
 	function __get_search($keyword) {
-		$this -> db -> select("a.*,b.pname FROM sparepart_tab a left join products_tab b ON a.spid=b.pid WHERE (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') ORDER BY a.sid DESC");
+		$this -> db -> select("a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') AND b.ctype=4 ORDER BY a.sid DESC");
 		return $this -> db -> get() -> result();
 	}
 }

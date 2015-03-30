@@ -34,7 +34,7 @@ left:inherit!important;
                             Sparepart
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>
@@ -45,11 +45,10 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Product</th>
+          <th>Group Product</th>
           <th>Code</th>
           <th>Name</th>
           <th>No Component</th>
-          <th>General Component</th>
           <th style="text-align:center;">Price Agent</th>
           <th style="text-align:center;">Price Retail</th>
           <th>Status</th>
@@ -61,11 +60,10 @@ left:inherit!important;
 		  foreach($sparepart as $k => $v) :
 		  ?>
                                         <tr>
-          <td><?php echo $v -> pname; ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
-          <td><?php echo __get_is_general($v -> sgeneral,1); ?></td>
           <td style="text-align:right;"><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
           <td style="text-align:right;"><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>

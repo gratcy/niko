@@ -135,13 +135,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cash Discount</label>
-
-                    <div class="input-group col-lg-4">
-                        <input type="text" style="text-align:right;" placeholder="Cash Discount" name="disc" class="form-control" /> <span class="input-group-addon">%</span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">

@@ -20,18 +20,20 @@
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Code</label>
+                    <label for="text1" class="control-label col-lg-4">Group Product</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Sparepart Code" name="code" class="form-control" value="<?php echo $detail[0] -> scode; ?>" />
+						<select name="groupproduct" data-placeholder="Group Product" class="form-control chzn-select">
+                                <?php echo $group_product; ?>
+                    </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Product</label>
+                    <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-						<select name="product" data-placeholder="Product" class="form-control chzn-select"><?php echo $products; ?></select>
+                        <input type="text" placeholder="Sparepart Code" name="code" class="form-control" value="<?php echo $detail[0] -> scode; ?>" />
                     </div>
                 </div>
 
@@ -43,31 +45,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Group</label>
-
-                    <div class="col-lg-4">
-						<select name="group" data-placeholder="Group Product" class="form-control chzn-select">
-                                <?php echo $group_sparepart; ?>
-                    </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">No Component</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="No Component" name="nocomp" class="form-control" value="<?php echo $detail[0] -> snocomponent; ?>" />
                     </div>
                 </div>
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">General</label>
-                    <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="success" data-off="default">
-                                <?php echo __get_is_general($detail[0] -> sgeneral,2); ?>
-                            </div>
-					</div>
-				</div>
-
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price Agent</label>
 
@@ -82,6 +65,15 @@
                         <input type="text" name="retail" class="form-control" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="<?php echo __get_rupiah($detail[0] -> spriceretail,2); ?>" />
                     </div>
                 </div>
+                <div class="form-group">
+							<label for="status" class="control-label col-lg-4">Special</label>
+                    <div class="col-lg-4">
+						
+                            <div class="make-switch has-switch" data-on="primary" data-off="default">
+                                <?php echo __get_customers_spec($detail[0] -> sspecial,2, 'special'); ?>
+                            </div>
+					</div>
+				</div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">

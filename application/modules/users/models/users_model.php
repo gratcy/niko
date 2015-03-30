@@ -18,13 +18,18 @@ class Users_model extends CI_Model {
 		return $this -> db -> query("update users_tab set uemail='".$uemail."',udivision='".$division."',uposition='".$position."',ugid=".$gid.", ubid=".$bid.", ustatus=".$ustatus." where uid=" . $id);
 	}
 	
+	function __check_user($email) {
+		$this -> db -> select("uemail FROM users_tab WHERE uemail='".$email."' AND (ustatus=1 or ustatus=0)");
+		return $this -> db -> get() -> num_rows();
+	}
+	
 	function __get_detail_users($id) {
 		$this -> db -> select('a.uemail,a.udivision,a.uposition,a.ustatus,a.ugid,a.ubid from users_tab a where (a.ustatus=1 or a.ustatus=0) and a.uid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
 	function __insert_users($uemail, $upass, $gid, $division,$position, $bid, $ustatus) {
-		return $this -> db -> query("insert into users_tab (uemail,upass,ugid,udivision,uposition,ubid,ustatus) values ('".$uemail."','".md5(sha1($upass, true))."',".$gid.",'".$division."','".$position."',".$bid.",".$ustatus.")");
+		return $this -> db -> query("insert into users_tab (uemail,upass,ugid,udivision,uposition,ubid,ustatus) values ('".$uemail."','".$upass."',".$gid.",'".$division."','".$position."',".$bid.",".$ustatus.")");
 	}
 	
 	function __get_groups() {
