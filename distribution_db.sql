@@ -1788,3 +1788,19 @@ INSERT INTO `users_tab` (`uid`, `ugid`, `ubid`, `uemail`, `udivision`, `upositio
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+ALTER TABLE  `coa_tab` DROP  `csaldo` ,
+DROP  `cdebet` ,
+DROP  `ccredit` ;
+
+CREATE TABLE `coa_detail_tab` (
+  `cid` int(10) NOT NULL AUTO_INCREMENT,
+  `cbid` int(10) NOT NULL,
+  `cidid` int(11) NOT NULL,
+  `csaldo` int(10) NOT NULL,
+  `cdebet` int(10) NOT NULL,
+  `ccredit` int(10) NOT NULL,
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
