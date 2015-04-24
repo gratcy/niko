@@ -224,6 +224,7 @@
             </div>
             
                     <div class="row">
+<!--
                         <div class="col-lg-6">
                             <div class="box">
                                 <header>
@@ -249,6 +250,7 @@
                                 </div>
                             </div>
                         </div>
+-->
                         <div class="col-lg-6">
                             <div class="box">
                                 <header>

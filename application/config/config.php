@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/dist/';
+$config['base_url']	= 'http://localhost:1111/';
 
 /*
 |--------------------------------------------------------------------------
