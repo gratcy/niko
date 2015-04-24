@@ -239,7 +239,7 @@
                 </li>
 				<?php if (__get_roles('UsersView') || __get_roles('UsersGroupView')) : ?>
                 <li class="panel">
-                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#chart-nav">
+                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#SUsers">
                         <i class="icon-group"></i> Users
 	   
                         <span class="pull-right">
@@ -247,7 +247,7 @@
                         </span>
                           &nbsp; <span class="label label-warning">2</span>&nbsp;
                     </a>
-                    <ul class="collapse" id="chart-nav">
+                    <ul class="collapse" id="SUsers">
 				<?php if (__get_roles('UsersView')) : ?>
                         <li><a href="<?php echo site_url('users'); ?>"><i class="icon-angle-right"></i> Users </a></li>
 			   <?php endif; ?>
@@ -262,3 +262,27 @@
 
         </div>
         <!--END MENU SECTION -->
+<script type="text/javascript">
+	$('ul#menu > li > ul').removeClass('in');
+	if (/\/users/.test(window.location.href) === true) {
+		$('ul#SUsers').addClass('in');
+	}
+	else if (/\/pm/.test(window.location.href) === true) {
+		$('ul#PM').addClass('in');
+	}
+	else if (/\/services/.test(window.location.href) === true) {
+		$('ul#services').addClass('in');
+	}
+	else if (/\/inventory|opname/.test(window.location.href) === true) {
+		$('ul#inventory').addClass('in');
+	}
+	else if (/\/purchase_order/.test(window.location.href) === true) {
+		$('ul#purchase').addClass('in');
+	}
+	else if (/\/sales_order|delivery_order|retur_order|pembayaran/.test(window.location.href) === true) {
+		$('ul#sales').addClass('in');
+	}
+	else if (/\/branch|customers|products|packaging|group_product|categories|sparepart|target|sales|sales_commision|technical|suplier/.test(window.location.href) === true) {
+		$('ul#component-nav').addClass('in');
+	}
+</script>
