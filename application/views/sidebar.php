@@ -283,6 +283,12 @@
 	else if (/\/sales_order|delivery_order|retur_order|pembayaran/.test(window.location.href) === true) {
 		$('ul#sales').addClass('in');
 	}
+	else if (/\/coa|journal|generalledger|closingperiod/.test(window.location.href) === true) {
+		$('ul#accounting').addClass('in');
+	}
+	else if (/\/sales_commision|technical_commision|reportopname/.test(window.location.href) === true) {
+		$('ul#Report').addClass('in');
+	}
 	else if (/\/branch|customers|products|packaging|group_product|categories|sparepart|target|sales|sales_commision|technical|suplier/.test(window.location.href) === true) {
 		$('ul#component-nav').addClass('in');
 	}

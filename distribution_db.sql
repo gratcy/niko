@@ -1803,4 +1803,3 @@ CREATE TABLE `coa_detail_tab` (
   `ccredit` int(10) NOT NULL,
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-

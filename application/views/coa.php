@@ -26,7 +26,7 @@
                                     <thead>
                                         <tr>
           <th>Account Type</th>
-          <th>Activa/Pasiva</th>
+          <th style="width:100px;">Activa/Pasiva</th>
           <th>Code</th>
           <th>Name</th>
           <th style="text-align:right;">Saldo</th>
