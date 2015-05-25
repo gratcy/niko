@@ -114,7 +114,11 @@ class Home extends MY_Controller {
 			$pppid = $this -> input -> post('pppid', TRUE);
 			$pcurrency = $this -> input -> post('pcurrency', TRUE);
 			$pvol = $this -> input -> post('pvol', TRUE);
+			if($pvol==0){
+			$pvol=1;
+			}
 			$pqtyz = $this -> input -> post('pqty', TRUE);
+			//echo $pqtyz.$pvol;die;
 			$pqty= $pvol * $pqtyz;
 			$pharga = $this -> input -> post('pharga', TRUE);
 			$pdisc = $this -> input -> post('pdisc', TRUE);

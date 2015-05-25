@@ -103,7 +103,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">No SO</label>
 
                     <div class="col-lg-4">
-                        <input type=text value="<?php echo $detailx[0]->snoso; ?>" class="form-control" disabled>
+                        <input type=text value="<?php echo $detailx[0]->snoro; ?>" class="form-control" disabled>
                     </div>
                 </div>
    

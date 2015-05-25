@@ -57,7 +57,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
 ?>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td rowspan=2 colspan=2 width="40%" align=center  ><h2>Retur Order</h2></td><td><b>No Retur</b></td><td><?php echo $detailx[0]->snoso; ?></td>
+<td rowspan=2 colspan=2 width="40%" align=center  ><h2>Retur Order</h2></td><td><b>No Retur</b></td><td><?php echo $detailx[0]->snoro; ?></td>
 </tr>
 <tr>
 <td><b>Tanggal</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>

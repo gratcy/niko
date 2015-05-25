@@ -264,7 +264,7 @@ class Home extends MY_Controller {
 			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";
 			$snomor = $this -> input -> post('snomor', TRUE);
 			
-					$arr = array('sid' => 0, 'ssid' => $id, 'spid' => 0, 'sqty' => 0, 
+					$arr = array('sid' => 0, 'ssid' => $id, 'spid' => 0, 'sqty' => 0, 'scid'=>$scid,
 					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'driver'=>$driver,'dstatus'=>1	);						
 					if ($this -> sales_order_detail_model -> __insert_delivery_order_detail($arr)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
@@ -341,8 +341,9 @@ function invoice_order_add($id,$scid,$snodo) {
 	
 	
 	function delivery_order_details_add($id,$scid,$snodo) {
+		
 		if ($_POST) {
-		//print_r($_POST);die;
+	//print_r($_POST);die;
 			$sbid = $this -> input -> post('sbid', TRUE);
 			$scid = $this -> input -> post('scid', TRUE);
 			$snodo = $this -> input -> post('snodo', TRUE);
@@ -353,22 +354,26 @@ function invoice_order_add($id,$scid,$snodo) {
 			$snomor = $this -> input -> post('snomor', TRUE);		
 			$jum=count($_POST['sqty']);
 
-		for($j=0;$j<$jum;$j++){		
+		for($j=0;$j<$jum;$j++){	
+			$did = $_POST['did'][$j];
 			$sid = $_POST['sid'][$j];
 			$spid = $_POST['spid'][$j];
 			$qty = $_POST['qty'][$j];
 			$sqty =$_POST['sqty'][$j];			
 			$sssid =$_POST['sssid'][$j];
 			$samount =$_POST['samount'][$j];
+			$tamount =$_POST['tamount'][$j];
 			$ssisa=$qty-$sqty;
 			
+		
 //echo "$qty - $sqty - $ssisa";//die;
-
-					$arrdo=array('dstatus'=>3,'sssid'=>$sssid,'samount'=>$samount);
+					$arrdos=array('dstatus'=>3);
+					$arrdo=array('dstatus'=>3,'sssid'=>$sssid,'samount'=>$samount,'tamount'=>$tamount);
 					$arrqty = array('ssisa' => $ssisa);
 					$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,
-					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>3,'sssid'=>$sssid,'samount'=>$samount	);	
-					if ($this -> sales_order_detail_model ->__update_do_status($snodo,$arrdo)) {
+					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>3,'sssid'=>$sssid,'tamount'=>$samount	);	
+					if ($this -> sales_order_detail_model ->__update_do_status($snodo,$arrdos)) {
+						$this -> sales_order_detail_model ->__update_amount_status($did,$arrdo);
 						$this -> sales_order_detail_model ->__update_sales_order_detail($sid,$arrqty);
 						$arrx = array('ibid' => $sbid, 'iiid' => $spid, 'itype' => 1, 'istockbegining' => '', 'istockin' => '', 'istockout' => $sqty, 'istock' => '', 'istatus' => 1 );
 						$this -> sales_order_detail_model -> __insert_inventory($arrx);						
@@ -400,7 +405,7 @@ function invoice_order_add($id,$scid,$snodo) {
 
 	function delivery_order_details_add_confirm($id,$scid,$snodo) {
 		if ($_POST) {
-
+//print_r($_POST);die;
 		    $sbid = $this -> input -> post('sbid', TRUE);
 			$scid = $this -> input -> post('scid', TRUE);
 			$snodo = $this -> input -> post('snodo', TRUE);
@@ -418,12 +423,12 @@ function invoice_order_add($id,$scid,$snodo) {
 				$qty = $_POST['qty'][$j];
 				$sqty =$_POST['sqty'][$j];			
 				$ssisa=$qty-$sqty;
-
+				$samount =$_POST['samount'][$j];
 
 						$arrdo=array('dstatus'=>1);
 						//$arrqty = array('ssisa' => $ssisa);
-						$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,
-						'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>1	);										
+						$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid, 'scid'=>$scid, 'sqty' => $sqty,
+						'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>1,'samount'=>$samount	);										
 				if ($this -> sales_order_detail_model -> __insert_delivery_order_detail($arr)) {
 						$this -> sales_order_detail_model ->__update_do_status($snodo,$arrdo);
 						//$this -> sales_order_detail_model ->__update_sales_order_detail($sid,$arrqty);

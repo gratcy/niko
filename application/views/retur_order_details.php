@@ -76,7 +76,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
-					   <input type=text value="<?php echo $detailx[0]->snoso; ?>" class="form-control" disabled>
+					   <input type=text value="<?php echo $detailx[0]->snoro; ?>" class="form-control" disabled>
                     </div>
                 </div>
 

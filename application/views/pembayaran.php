@@ -49,7 +49,7 @@ left:inherit!important;
           <th>No Pembayaran</th>
     
           <th>Tanggal Pembayran</th>
-          <th>Tanggal Giro</th>
+       
          
           <th>Status</th>
 		  <th style="width: 50px;"></th>
@@ -63,10 +63,10 @@ left:inherit!important;
 	 // echo "</pre>";
 		  ?>
                                         <tr>
-          <td><?php echo $v -> pno_pm; ?></td>
+          <td><?php echo $v -> pno_pm; ?>- <?php echo $v -> pcid; ?></td>
           <td><?php echo $v -> pm_tgl; ?></td>
       
-          <td><?php echo __get_date(strtotime($v -> ptgl_giro,2)); ?></td>
+       
 
           <td><?php 
 		  $sstatus=$v -> status;
@@ -86,6 +86,10 @@ left:inherit!important;
 		
 		  <td>
 		  <a href="<?php echo site_url('pembayaran/home/pembayaran_update/' . $v -> pno_pm ); ?>"><i class="icon-pencil"></i></a>
+		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_add/'.$v->pcid.'/' . $v -> pno_pm.'/'.$v->type_bayar ); ?>"><i class="icon-book"></i></a>
+		  
+		  
+		  
           </td>		
 		
 		

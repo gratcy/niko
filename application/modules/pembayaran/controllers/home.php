@@ -44,23 +44,25 @@ class Home extends MY_Controller {
 	}
 	function pembayaran_add() {
 		if ($_POST) {	
-			$snoso = $this -> input -> post('snoso', TRUE);
+			$pno_pm = $this -> input -> post('pno_pm', TRUE);
 			$sreff = $this -> input -> post('sreff', TRUE);				
 			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
 			$stgl="$stglx[2]-$stglx[1]-$stglx[0]";			
 			$scdate=date('Y-m-d');
 			$scid = $this -> input -> post('cid', TRUE);
+		
+			$type_bayar = $this -> input -> post('type_bayar', TRUE);
 			
 
-					$arr = array( 'pmid'=>'','pno_pm' => $snoso, 'pcid'=>$scid,'pm_tgl' => $stgl,  
+					$arr = array( 'pmid'=>'','pno_pm' => $pno_pm, 'pcid'=>$scid,'pm_tgl' => $stgl,  
 					'pcash'=>'','pgiro'=>'','piutang'=>'','ptgl_giro'=>'','pwrite_off'=>'',
 					'sreff' => $sreff,
-					'status' => '1' );	
+					'status' => '1',type_bayar=>$type_bayar);	
 				if ($this -> pembayaran_model -> __insert_pembayaran($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));					
 					 $lastid=$this->db->insert_id();						
-					 $this -> pembayaran_model -> __get_total_pembayaran_monthly($stglx[1],$stglx[2],$lastid);									
-					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $lastid .'/'. $scid .'/'.$snoso));
+					 //$this -> pembayaran_model -> __get_total_pembayaran_monthly($stglx[1],$stglx[2],$lastid);									
+					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm.'/'.$type_bayar));
 				}
 				else {
 					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
@@ -90,7 +92,7 @@ class Home extends MY_Controller {
 	function pembayaran_updatexx($id,$scid) {
 		if ($_POST) {
 			$sbid = $this -> input -> post('sbid', TRUE);
-			$snoso = $this -> input -> post('snoso', TRUE);			
+			$snoro = $this -> input -> post('snoro', TRUE);			
 			$stgl = $this -> input -> post('stgl', TRUE);
 			$stglx=explode("/",$stgl);
 			$stglin="$stglx[2]-$stglx[1]-$stglx[0]";
@@ -121,7 +123,7 @@ class Home extends MY_Controller {
 			
 			if ($id) {
 
-					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
+					$arr = array('sbid' => $sbid, 'snoro' => $snoro,  'snopo' => '',
 					'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,

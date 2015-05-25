@@ -73,7 +73,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Sales Order</h5>
+            <h5>Pembayaran</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -88,7 +88,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">No Pembayaran</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No Pembayaran" name="snoso" class="form-control" />
+                        <input type="text" placeholder="No Pembayaran" name="pno_pm" class="form-control" />
                     </div>
                 </div>
    
@@ -119,7 +119,7 @@ minLength: 1,
 					<input  name=ccredit type="hidden" id="theTopcredit" class="form-control"   />
 					<input  name=cdeliver type="hidden" id="theDeliver" class="form-control"   />
 					<input  name=ccat type="hidden" id="theCat" class="form-control"   />
-					<input  name=cid type="hidden" id="theCid" class="form-control"   />
+					<input  name=cid type="t" id="theCid" class="form-control"   />
 					<input  name=csid type="hidden" id="theSid" class="form-control"   />
 					<input  name=cpkp type="hidden" id="thePkp" class="form-control"   />
 					<input  name=stype type="hidden"  class="form-control"   />
@@ -134,7 +134,16 @@ minLength: 1,
                 </div>				
 				
 		
-
+            <div class="form-group">
+                <label for="text1" class="control-label col-lg-4">Type Pembayaran</label>
+					<div class="col-lg-4">
+						<select class="form-control"  name="type_bayar">
+						<option value= 1 >Tunai</option>
+						<option value= 2 >Cicilan</option>
+						<option value= 3 >Giro</option>
+						</select>
+					</div>
+       		</div>
 	
 				
 

@@ -58,13 +58,11 @@ left:inherit!important;
                                     <tbody>
 		  <?php
 		  foreach($retur_order as $k => $v) :
-			  // echo "<pre>";
-	// print_r($retur_order);
-	 // echo "</pre>";
+
 		  ?>
                                         <tr>
           <td><?php echo $v -> bname; ?></td>
-          <td><?php echo $v -> snoso; ?></td>
+          <td><?php echo $v -> snoro; ?></td>
       
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo $v -> sname; ?></td>

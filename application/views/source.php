@@ -14,7 +14,7 @@ $req = "SELECT cid,cbid,ccat, cname,caddr,cdeliver,cphone,csid,ccash,ccredit,cli
 	."FROM customers_tab a,branch_tab b,sales_tab c "
 	."WHERE a.cbid=b.bid  AND a.csid=c.sid  AND cname LIKE '%".$_REQUEST['term']."%'"; 
 
-	//echo "$req";
+	//echo "$req".$database;
 	
 $query = mysql_query($req);
 

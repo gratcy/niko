@@ -66,7 +66,7 @@ minLength: 1,
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
 
- <form  id="form1" class="form-horizontal"  method="post">
+ <form  id="form1" class="form-horizontal"  method="POST">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
@@ -188,10 +188,11 @@ minLength: 1,
     ?>
           <tr>
           
-          <td><?php echo $v -> pcode; ?>
+          <td><?php echo $v -> pcode; ?> 
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
 		  <input type=hidden name="qty[]" value="<?php echo $v -> sqty; ?>">
+		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
 		  </td>
 		  <td><?php echo $v -> pname; ?></td>
           <td><select name="sqty[]">

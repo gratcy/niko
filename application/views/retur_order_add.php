@@ -88,7 +88,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">No Retur</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No Retur" name="snoso" class="form-control" />
+                        <input type="text" placeholder="No Retur" name="snoro" class="form-control" />
                     </div>
                 </div>
    

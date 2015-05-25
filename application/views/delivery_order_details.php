@@ -200,10 +200,12 @@ minLength: 1,
           <tr>
           
           <td>
+		  <input type=hidden name="did[]" value="<?php echo $v -> did; ?>">
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
 		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
-		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice * $v -> sqty; ?>">
+		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
+		  <input type=hidden name="tamount[]" value="<?php echo $v -> sprice * $v -> sqty; ?>">
 		 
 		  <?php echo $v -> pcode; ?><input type=hidden name="sssid[]" 
 		  value="<?php echo $detailx[0]->ssid_sales; ?>"></td>
@@ -235,7 +237,9 @@ minLength: 1,
 		<table border=0>
         <tr><td>		
 								
-		<?php 	if ($detailx[0]->dstatus==1){?>						
+		<?php 	
+		//echo $detailx[0]->dstatus;
+		if ($detailx[0]->dstatus==1){?>						
 			<input class="btn text-muted text-center btn-danger" type=submit value="POSTING DO">
 		<?php }?>						
 			</form></td><td>

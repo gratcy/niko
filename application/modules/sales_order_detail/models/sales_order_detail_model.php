@@ -68,6 +68,11 @@ class sales_order_detail_model extends CI_Model {
         $this -> db -> where('snodo', $snodo);
         return $this -> db -> update('delivery_order_detail_tab', $data);
 	}	
+
+	function __update_amount_status($did,$data) {
+        $this -> db -> where('did', $did);
+        return $this -> db -> update('delivery_order_detail_tab', $data);
+	}
 	
 	function __update_delivery_order($id, $data) {
         $this -> db -> where('sid', $id);

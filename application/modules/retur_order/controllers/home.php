@@ -48,7 +48,7 @@ class Home extends MY_Controller {
 		
 		
 			$sbid = $this -> input -> post('sbid', TRUE);
-			$snoso = $this -> input -> post('snoso', TRUE);			
+			$snoro = $this -> input -> post('snoro', TRUE);			
 			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
 			$stgl="$stglx[2]-$stglx[1]-$stglx[0]";			
 			$ssid = $this -> input -> post('csid', TRUE);			
@@ -78,7 +78,7 @@ class Home extends MY_Controller {
 			$sppn = 0;
 			$stotal = 0;			
 
-					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
+					$arr = array('sbid' => $sbid, 'snoro' => $snoro,  'snopo' => '',
 					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
@@ -122,7 +122,7 @@ class Home extends MY_Controller {
 	function retur_order_update($id,$scid) {
 		if ($_POST) {
 			$sbid = $this -> input -> post('sbid', TRUE);
-			$snoso = $this -> input -> post('snoso', TRUE);			
+			$snoro = $this -> input -> post('snoro', TRUE);			
 			$stgl = $this -> input -> post('stgl', TRUE);
 			$stglx=explode("/",$stgl);
 			$stglin="$stglx[2]-$stglx[1]-$stglx[0]";
@@ -153,7 +153,7 @@ class Home extends MY_Controller {
 			
 			if ($id) {
 
-					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
+					$arr = array('sbid' => $sbid, 'snoro' => $snoro,  'snopo' => '',
 					'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,

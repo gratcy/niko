@@ -10,9 +10,12 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_pembayaran() {
-		return 'SELECT * from pembayaran_tab';
+		return 'SELECT pno_pm,pm_tgl,status,pcid,type_bayar from pembayaran_tab where no_invoice=""';
 	}
-	
+
+	function __get_pembayaranid($pno_pm) {
+		return "SELECT * from pembayaran_tab where pno_pm='".$pno_pm."'";
+	}	
 	function __get_total_pembayaran() {
 		$sql = $this -> db -> query('SELECT * FROM sales_order_tab WHERE sstatus=1');
 		return $sql -> num_rows();

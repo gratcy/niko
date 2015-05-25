@@ -48,17 +48,14 @@ class pembayaran_detail_model extends CI_Model {
 	
 	function __get_pembayaran_detail_inv($scid,$pno_pm) {
 	$pn="''";
-		$this -> db -> select("sum(c.sqty * d.sprice) as sum_inv, a.pmid, a.pno_pm, a.pm_tgl, b.sid,c.snodo, 
-		c.sno_invoice , c.sqty , d.sid , d.sprice,c.sdate_pay ,c.sdate_lunas FROM pembayaran_tab a, sales_order_tab b, delivery_order_detail_tab c,sales_order_detail_tab d
-		WHERE a.pcid = b.scid
-		AND b.sid = c.ssid
-		AND c.sid = d.sid
-		AND b.scid = '".$scid."'
-		AND a.pno_pm = '".$pno_pm."'
-	
-		group by (c.snodo)");
+		$this -> db -> select("c.* ,sum( c.tamount ) AS sum_inv, b.scid FROM sales_order_tab b, delivery_order_detail_tab c WHERE b.sid = c.ssid AND b.scid = '".$scid."' group by (c.snodo)");
 		return $this -> db -> get() -> result();
 	}		
+	
+	function __insert_pembayaran($data) {
+	
+        return $this -> db -> insert('pembayaran_tab', $data);
+	}	
 	
 	function __get_delivery_order_detail_prod($id,$snodo) {
 		$this -> db -> select("*,(select sprice FROM sales_order_detail_tab c where c.sid=a.sid) as sprice,
@@ -79,8 +76,8 @@ class pembayaran_detail_model extends CI_Model {
         $this -> db -> where('snodo', $snodo);
         return $this -> db -> update('delivery_order_detail_tab', $data);
 	}		
-	function __update_ro($snoso, $data) {
-        $this -> db -> where('snoso', $snoso);
+	function __update_ro($snoro, $data) {
+        $this -> db -> where('snoro', $snoro);
         return $this -> db -> update('retur_order_tab', $data);
 	}
 
@@ -94,6 +91,12 @@ class pembayaran_detail_model extends CI_Model {
         return $this -> db -> update('pembayaran_detail_tab', $data);
 	}
 	
+		function __update_pembayaranx($pmid, $data) {
+	
+        $this -> db -> where('pmid', $pmid);
+        return $this -> db -> update('pembayaran_tab', $data);
+	}
+	
 	function __update_ro_status($sid,$data) {
         $this -> db -> where('sid', $id);
         return $this -> db -> update('retur_order_tab', $data);
@@ -103,17 +106,17 @@ class pembayaran_detail_model extends CI_Model {
         $this -> db -> where('sid', $id);
         return $this -> db -> update('sales_order_tab', $data);
 	}	
-	function __insert_pembayaran_detail($data) {
+	// function __insert_pembayaran_detail($data) {
 	
-        return $this -> db -> insert('sales_order_detail_tab', $data);
-	}
+        // return $this -> db -> insert('sales_order_detail_tab', $data);
+	// }
 	function __insert_delivery_order_detail($data) {
 	
         return $this -> db -> insert('delivery_order_detail_tab', $data);
 	}	
 
-	function __update_invoice_order($snodo, $data) {
-        $this -> db -> where('snodo', $snodo);
+	function __update_invoice_order($snoinv, $data) {
+        $this -> db -> where('sno_invoice', $snoinv);
         return $this -> db -> update('delivery_order_detail_tab', $data);
 	}		
 	
