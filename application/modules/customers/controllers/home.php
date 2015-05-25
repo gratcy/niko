@@ -37,7 +37,7 @@ class Home extends MY_Controller {
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$cash = $this -> input -> post('cash', TRUE);
 			$credit = $this -> input -> post('credit', TRUE);
-			$limit = $this -> input -> post('limit', TRUE);
+			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
@@ -52,7 +52,7 @@ class Home extends MY_Controller {
 			$delivery = (int) $this -> input -> post('delivery');
 			$ctyperetur = (int) $this -> input -> post('ctyperetur');
 			$status = (int) $this -> input -> post('status');
-			
+
 			if (!$branch || !$name || !$sales) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('customers' . '/' . __FUNCTION__));
@@ -89,7 +89,7 @@ class Home extends MY_Controller {
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$cash = $this -> input -> post('cash', TRUE);
 			$credit = $this -> input -> post('credit', TRUE);
-			$limit = $this -> input -> post('limit', TRUE);
+			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);

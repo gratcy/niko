@@ -33,8 +33,8 @@ class Home extends MY_Controller {
 	function sparepart_add() {
 		if ($_POST) {
 			$code = $this -> input -> post('code', TRUE);
-			$agent = $this -> input -> post('agent', TRUE);
-			$retail = $this -> input -> post('retail', TRUE);
+			$agent = str_replace(',','',$this -> input -> post('agent', TRUE));
+			$retail = str_replace(',','',$this -> input -> post('retail', TRUE));
 			$name = $this -> input -> post('name', TRUE);
 			$nocomp = $this -> input -> post('nocomp', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
@@ -73,8 +73,8 @@ class Home extends MY_Controller {
 	function sparepart_update($id) {
 		if ($_POST) {
 			$code = $this -> input -> post('code', TRUE);
-			$agent = $this -> input -> post('agent', TRUE);
-			$retail = $this -> input -> post('retail', TRUE);
+			$agent = str_replace(',','',$this -> input -> post('agent', TRUE));
+			$retail = str_replace(',','',$this -> input -> post('retail', TRUE));
 			$name = $this -> input -> post('name', TRUE);
 			$nocomp = $this -> input -> post('nocomp', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');

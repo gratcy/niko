@@ -152,7 +152,7 @@ $addr = explode('*', $detail[0] -> caddr);
                     <label for="text1" class="control-label col-lg-4">TOP Credit Limit</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="limit" class="form-control" value="<?php echo $detail[0] -> climit; ?>" />
+                        <input type="text" name="limit" class="form-control" value="<?php echo __get_rupiah($detail[0] -> climit,2); ?>" onkeyup="formatharga(this.value,this)" style="text-align:right;" />
                     </div>
                 </div>
 

@@ -149,7 +149,7 @@
                     <label for="text1" class="control-label col-lg-4">TOP Credit Limit</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="limit" class="form-control" data-placeholder="TOP Credit Limit" />
+                        <input type="text" name="limit" class="form-control" data-placeholder="TOP Credit Limit" onkeyup="formatharga(this.value,this)" value="0" style="text-align:right;" />
                     </div>
                 </div>
 
