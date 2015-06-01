@@ -37,7 +37,13 @@ class Memcachedlib {
 		else
 			$this -> login = false;
         self::__check_login();
+        self::__save_post();
     }
+    
+    function __save_post() {
+		if (preg_match('/\_update/i',$_SERVER['REQUEST_URI'])) return false;
+		if ($_POST && count($_POST) > 0) self::set(__keyTMP($_SERVER['REQUEST_URI']), $_POST, 120);
+	}
 
 	function __check_login() {
 		if ($this -> _ci -> uri -> segment(1) !== 'login') {

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Inang: 127.0.0.1
--- Waktu pembuatan: 25 Mei 2015 pada 08.47
--- Versi Server: 5.5.32
--- Versi PHP: 5.4.16
+-- Inang: localhost
+-- Waktu pembuatan: 30 Mei 2015 pada 14.39
+-- Versi Server: 5.5.43-0ubuntu0.14.04.1
+-- Versi PHP: 5.5.9-1ubuntu4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Basis data: `distribution_db`
 --
-CREATE DATABASE IF NOT EXISTS `distribution_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `distribution_db`;
 
 -- --------------------------------------------------------
 
@@ -34,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `access_tab` (
   `apid` int(10) DEFAULT NULL,
   `aaccess` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`aid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=261 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=328 ;
 
 --
 -- Dumping data untuk tabel `access_tab`
@@ -169,36 +167,36 @@ INSERT INTO `access_tab` (`aid`, `agid`, `apid`, `aaccess`) VALUES
 (126, 1, 126, 1),
 (127, 1, 127, 1),
 (128, 1, 128, 1),
-(129, 1, 129, 1),
-(130, 1, 130, 1),
+(129, 1, 129, 0),
+(130, 1, 130, 0),
 (131, 2, 1, 1),
-(132, 2, 2, 1),
-(133, 2, 3, 1),
-(134, 2, 4, 1),
+(132, 2, 2, 0),
+(133, 2, 3, 0),
+(134, 2, 4, 0),
 (135, 2, 5, 1),
 (136, 2, 6, 1),
-(137, 2, 7, 1),
-(138, 2, 8, 1),
+(137, 2, 7, 0),
+(138, 2, 8, 0),
 (139, 2, 9, 1),
-(140, 2, 10, 1),
-(141, 2, 11, 1),
-(142, 2, 12, 1),
+(140, 2, 10, 0),
+(141, 2, 11, 0),
+(142, 2, 12, 0),
 (143, 2, 13, 1),
-(144, 2, 14, 1),
-(145, 2, 15, 1),
-(146, 2, 16, 1),
+(144, 2, 14, 0),
+(145, 2, 15, 0),
+(146, 2, 16, 0),
 (147, 2, 17, 1),
-(148, 2, 18, 1),
-(149, 2, 19, 1),
-(150, 2, 20, 1),
+(148, 2, 18, 0),
+(149, 2, 19, 0),
+(150, 2, 20, 0),
 (151, 2, 21, 1),
-(152, 2, 22, 1),
-(153, 2, 23, 1),
-(154, 2, 24, 1),
+(152, 2, 22, 0),
+(153, 2, 23, 0),
+(154, 2, 24, 0),
 (155, 2, 25, 1),
-(156, 2, 26, 1),
-(157, 2, 27, 1),
-(158, 2, 28, 1),
+(156, 2, 26, 0),
+(157, 2, 27, 0),
+(158, 2, 28, 0),
 (159, 2, 29, 1),
 (160, 2, 30, 1),
 (161, 2, 31, 1),
@@ -263,23 +261,23 @@ INSERT INTO `access_tab` (`aid`, `agid`, `apid`, `aaccess`) VALUES
 (220, 2, 90, 1),
 (221, 2, 91, 1),
 (222, 2, 92, 1),
-(223, 2, 93, 1),
-(224, 2, 94, 1),
-(225, 2, 95, 1),
-(226, 2, 96, 1),
-(227, 2, 97, 1),
-(228, 2, 98, 1),
-(229, 2, 99, 1),
-(230, 2, 100, 1),
-(231, 2, 101, 1),
-(232, 2, 102, 1),
-(233, 2, 103, 1),
-(234, 2, 104, 1),
-(235, 2, 105, 1),
-(236, 2, 106, 1),
-(237, 2, 107, 1),
-(238, 2, 108, 1),
-(239, 2, 109, 1),
+(223, 2, 93, 0),
+(224, 2, 94, 0),
+(225, 2, 95, 0),
+(226, 2, 96, 0),
+(227, 2, 97, 0),
+(228, 2, 98, 0),
+(229, 2, 99, 0),
+(230, 2, 100, 0),
+(231, 2, 101, 0),
+(232, 2, 102, 0),
+(233, 2, 103, 0),
+(234, 2, 104, 0),
+(235, 2, 105, 0),
+(236, 2, 106, 0),
+(237, 2, 107, 0),
+(238, 2, 108, 0),
+(239, 2, 109, 0),
 (240, 2, 110, 1),
 (241, 2, 111, 1),
 (242, 2, 112, 1),
@@ -300,7 +298,97 @@ INSERT INTO `access_tab` (`aid`, `agid`, `apid`, `aaccess`) VALUES
 (257, 2, 127, 1),
 (258, 2, 128, 1),
 (259, 2, 129, 1),
-(260, 2, 130, 1);
+(260, 2, 130, 1),
+(261, 1, 131, 1),
+(262, 1, 132, 1),
+(263, 1, 133, 1),
+(264, 1, 134, 1),
+(265, 1, 135, 1),
+(266, 1, 136, 1),
+(267, 1, 137, 1),
+(268, 1, 138, 1),
+(269, 1, 139, 1),
+(272, 2, 132, 0),
+(273, 2, 133, 0),
+(274, 2, 134, 0),
+(275, 2, 135, 0),
+(276, 2, 136, 1),
+(277, 2, 137, 1),
+(278, 2, 138, 1),
+(279, 2, 139, 1),
+(281, 2, 131, 0),
+(282, 1, 140, 1),
+(283, 1, 141, 1),
+(284, 1, 142, 1),
+(285, 1, 143, 1),
+(286, 1, 144, 1),
+(287, 2, 140, 1),
+(288, 2, 141, 1),
+(289, 2, 142, 1),
+(290, 2, 143, 1),
+(291, 2, 144, 1),
+(292, 1, 145, 1),
+(293, 1, 146, 1),
+(294, 1, 147, 1),
+(295, 1, 148, 1),
+(296, 1, 149, 1),
+(297, 2, 145, 1),
+(298, 2, 146, 1),
+(299, 2, 147, 1),
+(300, 2, 148, 1),
+(301, 2, 149, 1),
+(302, 1, 150, 1),
+(303, 2, 150, 1),
+(304, 1, 151, 1),
+(305, 1, 152, 1),
+(306, 1, 153, 1),
+(307, 1, 154, 1),
+(308, 1, 155, 1),
+(309, 2, 151, 1),
+(310, 2, 152, 1),
+(311, 2, 153, 1),
+(312, 2, 154, 1),
+(313, 2, 155, 1),
+(314, 1, 156, 1),
+(315, 2, 156, 1),
+(316, 1, 157, 1),
+(317, 2, 157, 1),
+(318, 1, 158, 1),
+(319, 1, 159, 0),
+(320, 1, 160, 0),
+(321, 1, 161, 0),
+(322, 1, 162, 0),
+(323, 2, 158, 1),
+(324, 2, 159, 0),
+(325, 2, 160, 0),
+(326, 2, 161, 0),
+(327, 2, 162, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `account_period_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `account_period_tab` (
+  `aid` int(10) NOT NULL AUTO_INCREMENT,
+  `auid` int(10) DEFAULT NULL,
+  `aname` varchar(50) DEFAULT NULL,
+  `astart` int(10) DEFAULT NULL,
+  `aend` int(10) DEFAULT NULL,
+  `adesc` varchar(350) DEFAULT NULL,
+  `astatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`aid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data untuk tabel `account_period_tab`
+--
+
+INSERT INTO `account_period_tab` (`aid`, `auid`, `aname`, `astart`, `aend`, `adesc`, `astatus`) VALUES
+(1, 1, '2013-2014', 1356969600, 1432611667, 'Period 2013-2014', 0),
+(8, 1, '2015 - 2016', 1432659600, 1432611686, 'Period 2015 - 2016', 0),
+(9, 1, '2015 - 2016', 1432659600, NULL, 'Period 2015 - 2016', 1);
 
 -- --------------------------------------------------------
 
@@ -320,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `branch_tab` (
   `bphone` varchar(50) DEFAULT NULL,
   `bstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data untuk tabel `branch_tab`
@@ -328,10 +416,13 @@ CREATE TABLE IF NOT EXISTS `branch_tab` (
 
 INSERT INTO `branch_tab` (`bid`, `buid`, `bluid`, `bname`, `bnpwp`, `baddr`, `bcity`, `bprovince`, `bphone`, `bstatus`) VALUES
 (1, 1, 1, 'Pusat', NULL, 'wew', 1, 1, '989898*121212', 1),
-(2, 1, 1, 'Semarang', 'aaaa', 'aasas*aw', 1, 2, '989898*121212', 1),
-(3, NULL, NULL, 'Bandung', '98987898', 'jakarta', 2, 2, '870900*080980980', 1),
-(4, NULL, NULL, 'Balikpapan', '97979879', 'Jl Kalimantan Balikpapan', 1, 1, '8799890*79890090', 1),
-(5, NULL, NULL, 'BALI', '86876799898', 'Bali satu*Bali Dua', 3, 3, '98798798789*8798797', 1);
+(2, 1, 1, 'SEMARANG', 'aaaa', 'aasas*aw', 1, 2, '989898*121212', 1),
+(3, NULL, NULL, 'Bandung', '98987898', 'jakarta', 2, 2, '870900*080980980', 2),
+(4, NULL, NULL, 'Balikpapan', '97979879', 'Jl Kalimantan Balikpapan', 1, 1, '8799890*79890090', 2),
+(5, NULL, NULL, 'SURABAYA', '86876799898', 'Bali satu*Bali Dua', 3, 3, '98798798789*8798797', 1),
+(6, NULL, NULL, 'BANDUNG', '1', 'JL. KOPO BANDUNG*JL KOPO 2', 175, 9, '083888233884*081300000000', 1),
+(7, NULL, NULL, 'sumbawa', '1', 'jl. ada lah*jl. ada lah', 4, 5, '5554484*444747474', 2),
+(8, NULL, NULL, 'JAKARTA', '12345', 'jl kamal raya*jl prancis dadap', 157, 7, '02129526260*02129526261', 1);
 
 -- --------------------------------------------------------
 
@@ -349,21 +440,124 @@ CREATE TABLE IF NOT EXISTS `categories_tab` (
   `cdiscount` varchar(45) DEFAULT NULL,
   `cstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data untuk tabel `categories_tab`
 --
 
 INSERT INTO `categories_tab` (`cid`, `cuid`, `cluid`, `ctype`, `cname`, `cdesc`, `cdiscount`, `cstatus`) VALUES
-(1, 1, 1, 1, 'k1', 'k1', '0', 1),
+(1, 1, 1, 1, 'K2', 'HOME APPLIANCE', '4', 1),
 (2, 1, 1, 2, 'qqww', 'qqww', '', 1),
 (3, 1, 1, 3, 'Pcs', 'Pcs', '', 1),
-(4, NULL, NULL, 4, 'palmaa', 'wewa', NULL, 1),
-(5, NULL, NULL, 5, 'Perwakilan C', 'aaaaaa', NULL, 1),
-(6, NULL, NULL, 4, 'admins', 'aaaaaaa', NULL, 1),
-(7, NULL, NULL, 1, 'k2', 'k2', '10', 1),
-(8, NULL, NULL, 3, 'koli', 'koli', NULL, 1);
+(4, NULL, NULL, 4, 'DVD MP4 PLAYER', 'ELECTRONIC', NULL, 1),
+(5, NULL, NULL, 5, 'IC', 'IC', NULL, 1),
+(6, NULL, NULL, 4, 'WASHING MACHINE', 'ELECTRONIC', NULL, 1),
+(7, NULL, NULL, 3, 'Koli', 'Koli', NULL, 1),
+(8, NULL, NULL, 5, 'Kabel', 'Kabel', NULL, 1),
+(9, NULL, NULL, 1, 'K1', 'ELECTRONIC', '3', 1),
+(10, NULL, NULL, 4, 'AIR CONDITIONER', 'ELECTRONIC', NULL, 1),
+(11, NULL, NULL, 4, 'antena', 'antena', NULL, 2),
+(12, NULL, NULL, 4, '2.1 SPEAKER', 'ELEKTRONIK', NULL, 1),
+(13, NULL, NULL, 4, 'ALLOY PREASURA COOKER', 'HOME APPLIANCE', NULL, 1),
+(14, NULL, NULL, 4, 'ANTENA', 'HOME APPLIANCE', NULL, 1),
+(15, NULL, NULL, 4, 'COLOR TELEVISION', 'ELECTRONIC', NULL, 1),
+(16, NULL, NULL, 4, 'DIGITAL SATELITE RECEIVER', 'ELECTRONIC', NULL, 1),
+(17, NULL, NULL, 4, 'BLENDER', 'HOME APPLIANCE', NULL, 1),
+(18, NULL, NULL, 4, 'COAXIAL CABLE', 'HOME APPLIANCE', NULL, 1),
+(19, NULL, NULL, 4, 'COOKWARE SET', 'HOME APPLIANCE', NULL, 1),
+(20, NULL, NULL, 4, 'FAN DESK', 'HOME APPLIANCE', NULL, 1),
+(21, NULL, NULL, 4, 'FAN BOX', 'HOME APPLIANCE', NULL, 1),
+(22, NULL, NULL, 4, 'FAN WALL', 'HOME APPLIANCE', NULL, 1),
+(23, NULL, NULL, 4, 'FAN AUTO', 'HOME APPLIANCE', NULL, 1),
+(24, NULL, NULL, 4, 'FAN STAND', 'HOME APPLIANCE', NULL, 1),
+(25, NULL, NULL, 4, 'FAN CEILING', 'HOME APPLIANCE', NULL, 1),
+(26, NULL, NULL, 4, 'FAN INDUSTRIAL', 'HOME APPLIANCE', NULL, 1),
+(27, NULL, NULL, 4, 'FAN FLOOR', 'HOME APPLIANCE', NULL, 1),
+(28, NULL, NULL, 4, 'GAS STOVE', 'HOME APPLIANCE', NULL, 1),
+(29, NULL, NULL, 4, 'GAS WATER HEATER', 'HOME APPLIANCE', NULL, 1),
+(30, NULL, NULL, 4, 'HAIR DRYER', 'HOME APPLIANCE', NULL, 1),
+(31, NULL, NULL, 4, 'IRON', 'HOME APPLIANCE', NULL, 1),
+(32, NULL, NULL, 4, 'LNB', 'HOME APPLIANCE', NULL, 1),
+(33, NULL, NULL, 4, 'LPG REGULATOR', 'HOME APPLIANCE', NULL, 1),
+(34, NULL, NULL, 4, 'MIXER', 'HOME APPLIANCE', NULL, 1),
+(35, NULL, NULL, 4, 'MOSQUITO KILLER', 'HOME APPLIANCE', NULL, 1),
+(36, NULL, NULL, 4, 'RICE COOKER', 'HOME APPLIANCE', NULL, 1),
+(37, NULL, NULL, 4, 'VOLTAGE STABILISER', 'HOME APPLIANCE', NULL, 1),
+(38, NULL, NULL, 4, 'WATER DISPENSER', 'HOME APPLIANCE', NULL, 1),
+(39, NULL, NULL, 1, '100000', 'weewewe', '0', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `coa_detail_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `coa_detail_tab` (
+  `cid` int(10) NOT NULL AUTO_INCREMENT,
+  `cbid` int(10) NOT NULL,
+  `cidid` int(11) NOT NULL,
+  `csaldo` double NOT NULL,
+  `cdebet` double NOT NULL,
+  `ccredit` double NOT NULL,
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data untuk tabel `coa_detail_tab`
+--
+
+INSERT INTO `coa_detail_tab` (`cid`, `cbid`, `cidid`, `csaldo`, `cdebet`, `ccredit`) VALUES
+(1, 1, 1, 0, 0, 0),
+(2, 1, 2, 0, 0, 0),
+(3, 1, 3, 0, 0, 0),
+(4, 1, 4, 0, 0, 0),
+(5, 1, 5, 0, 0, 0),
+(6, 1, 6, 0, 0, 0),
+(7, 1, 7, 0, 0, 0),
+(8, 1, 8, 0, 0, 0),
+(9, 1, 9, 0, 0, 0),
+(10, 1, 10, 0, 0, 0),
+(11, 1, 11, 0, 0, 0),
+(12, 1, 12, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `coa_group_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `coa_group_tab` (
+  `cid` int(10) NOT NULL AUTO_INCREMENT,
+  `cname` varchar(150) NOT NULL,
+  `cdesc` varchar(350) NOT NULL,
+  `cclass` tinyint(4) NOT NULL DEFAULT '0',
+  `cstatus` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+
+--
+-- Dumping data untuk tabel `coa_group_tab`
+--
+
+INSERT INTO `coa_group_tab` (`cid`, `cname`, `cdesc`, `cclass`, `cstatus`) VALUES
+(1, 'AKTIVA LANCAR', 'AKTIVA LANCAR', 0, 1),
+(2, 'AKTIVA TETAP', 'AKTIVA TETAP', 0, 1),
+(3, 'AKTIVA TETAP TAKBERWUJUD', 'AKTIVA TETAP TAKBERWUJUD', 0, 1),
+(4, 'AKTIVA LAIN-LAIN', 'AKTIVA LAIN-LAIN', 0, 1),
+(5, 'HUTANG NON BANK', 'HUTANG NON BANK', 1, 1),
+(6, 'HUTANG USAHA', 'HUTANG USAHA', 1, 1),
+(7, 'BIAYA YANG MASIH HARUS DIBAYAR', 'BIAYA YANG MASIH HARUS DIBAYAR', 1, 1),
+(8, 'HUTANG PAJAK', 'HUTANG PAJAK', 1, 1),
+(9, 'PENERIMAAN DI MUKA', 'PENERIMAAN DI MUKA', 1, 1),
+(10, 'HUTANG KEPADA PEMEGANG SAHAM', 'HUTANG KEPADA PEMEGANG SAHAM', 1, 1),
+(11, 'HUTANG LAIN-LAIN', 'HUTANG LAIN-LAIN', 1, 1),
+(12, 'MODAL DISETOR', 'MODAL DISETOR', 2, 1),
+(13, 'PENDAPATAN USAHA', 'PENDAPATAN USAHA', 3, 1),
+(14, 'PENDAPATAN LAIN-LAIN', 'PENDAPATAN LAIN-LAIN', 3, 1),
+(15, 'BEBAN POKOK PENJUALAN', 'BEBAN POKOK PENJUALAN', 4, 1),
+(16, 'BEBAN LAIN-LAIN', 'BEBAN LAIN-LAIN', 4, 1),
+(17, 'PAJAK PENGHASILAN', 'PAJAK PENGHASILAN', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -377,25 +571,29 @@ CREATE TABLE IF NOT EXISTS `coa_tab` (
   `ctype` tinyint(1) DEFAULT '0',
   `ccode` varchar(50) DEFAULT NULL,
   `cname` varchar(150) DEFAULT NULL,
-  `csaldo` int(10) DEFAULT NULL,
-  `cdebet` int(10) DEFAULT NULL,
-  `ccredit` int(10) DEFAULT NULL,
   `cdesc` varchar(300) DEFAULT NULL,
   `cparent` int(10) DEFAULT NULL,
   `cstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data untuk tabel `coa_tab`
 --
 
-INSERT INTO `coa_tab` (`cid`, `catype`, `ctype`, `ccode`, `cname`, `csaldo`, `cdebet`, `ccredit`, `cdesc`, `cparent`, `cstatus`) VALUES
-(1, 9, 0, 'XSA232', 'admins', 10000, NULL, NULL, '', 0, 1),
-(2, 2, 1, 'asas', 'BANK', 0, NULL, NULL, 'BANK', 0, 1),
-(3, 2, 0, 'MnDr', 'Mandiri', 1000, NULL, NULL, 'test', 2, 1),
-(4, 1, 0, 'bca', 'BCA', 1111, NULL, NULL, 'test', 2, 1),
-(5, 1, 0, 'AXAAS', 'wewe', 11111111, NULL, NULL, 'wewe', 2, 1);
+INSERT INTO `coa_tab` (`cid`, `catype`, `ctype`, `ccode`, `cname`, `cdesc`, `cparent`, `cstatus`) VALUES
+(1, 1, 0, '10000', 'ASET LANCAR', 'ASET LANCAR', 0, 1),
+(2, 4, 0, '10100', 'KAS', 'KAS', 1, 1),
+(3, 4, 0, '10101', 'KAS KANTOR', 'KAS KANTOR', 2, 1),
+(4, 4, 0, '10102', 'KAS GUDANG', 'KAS GUDANG', 2, 1),
+(5, 4, 0, '10103', 'KAS PABRIK', 'KAS PABRIK', 2, 1),
+(6, 4, 0, '10200', 'BANK', 'Kas Pabrik', 1, 1),
+(7, 4, 0, '10201', 'BANK A (IDR)', 'BANK A (IDR)', 6, 1),
+(8, 4, 0, '10202', 'BANK B (IDR)', 'BANK B (IDR)', 6, 1),
+(9, 4, 0, '10203', 'BANK C (USD)', 'BANK C (USD)', 6, 1),
+(10, 4, 0, '10300', 'SETARA DENGAN KAS', 'SETARA DENGAN KAS', 1, 1),
+(11, 4, 0, '10301', 'CEK', 'CEK', 10, 1),
+(12, 4, 0, '10302', 'BILYET GIRO', 'BILYET GIRO', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -420,24 +618,14 @@ CREATE TABLE IF NOT EXISTS `customers_tab` (
   `csid` int(10) DEFAULT NULL,
   `ccash` int(10) DEFAULT NULL,
   `ccredit` int(10) DEFAULT NULL,
-  `climit` int(10) DEFAULT NULL,
+  `climit` double DEFAULT NULL,
   `cnpwp` varchar(50) DEFAULT NULL,
   `cpkp` varchar(15) DEFAULT NULL,
   `cspecial` tinyint(1) DEFAULT '0',
   `ctyperetur` int(11) NOT NULL,
   `cstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data untuk tabel `customers_tab`
---
-
-INSERT INTO `customers_tab` (`cid`, `cuid`, `cluid`, `cbid`, `ccat`, `cname`, `caddr`, `ccity`, `cprov`, `cdeliver`, `cphone`, `cemail`, `ccontactname`, `csid`, `ccash`, `ccredit`, `climit`, `cnpwp`, `cpkp`, `cspecial`, `ctyperetur`, `cstatus`) VALUES
-(1, 1, 1, 2, 3, 'palma', '   jakarta*   semarang', 1, 1, 0, '909090*232323*1212', 'gratcypalma@gmail.com', 'asasa', 1, 10, 15, 4583692, '1212', '1aa', 1, 1, 1),
-(2, NULL, NULL, 2, 0, 'Bareksa Portal Investasi', '            jakarta*            bandung', 2, 3, 0, '8798798979*8799898798*2333', 'gratcypalma@gmail.com', 'asasa', 1, 5, 10, 2279286, '86788767', '1aa', 0, 1, 1),
-(3, NULL, NULL, 2, 2, 'Customer Semarang', '  JAKARTA*  JAKARTA', 1, 2, 0, '09900*566778*', 'ariessandi7@gmail.com', 'aaa', 1, 10, 20, 12000000, '877979879', '989809', 1, 1, 1),
-(4, NULL, NULL, 2, 0, 'SEMARANG JAYA', '    Semaran 1*    Semarang 2', 2, 2, 0, '987898979*78979890*89789790889', 'sandi@yahoo.com', 'sandi', 1, 10, 15, 10000000, '86876799898', '123', 0, 1, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -470,54 +658,93 @@ CREATE TABLE IF NOT EXISTS `delivery_order_detail_tab` (
   `pno_pm` varchar(25) NOT NULL,
   `tamount` double DEFAULT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data untuk tabel `delivery_order_detail_tab`
 --
 
 INSERT INTO `delivery_order_detail_tab` (`did`, `sid`, `ssid`, `spid`, `scid`, `sqty`, `snodo`, `snopol`, `stgldo`, `snomor`, `driver`, `dstatus`, `sno_invoice`, `stgl_invoice`, `sduedate_invoice`, `sssid`, `samount`, `sdate_pay`, `sdate_lunas`, `sduration`, `samount_com`, `pno_pm`, `tamount`) VALUES
-(1, 0, 1, 0, 2, 0, '1-230515035250', 'B 5678 X', '2015-05-23', '988', 'Driver A', 3, 'INV-1-230515035250', '2015-05-23', '2015-06-02', 0, 0, NULL, NULL, 0, 0, '', NULL),
+(1, 0, 1, 0, 2, 0, '1-230515035250', 'B 5678 X', '2015-05-23', '988', 'Driver A', 3, 'INV-1-230515035250', '2015-05-23', '2015-06-02', 1, 0, NULL, NULL, 0, 0, '', NULL),
 (2, 2, 1, 1, 2, 3, '1-230515035250', 'B 5678 X', '2015-05-23', '988', '', 3, 'INV-1-230515035250', '2015-05-23', '2015-06-02', 1, 100000, NULL, NULL, 0, 0, '', 300000),
 (3, 1, 1, 3, 2, 30, '1-230515035250', 'B 5678 X', '2015-05-23', '988', '', 3, 'INV-1-230515035250', '2015-05-23', '2015-06-02', 1, 1200, NULL, NULL, 0, 0, '', 36000),
-(4, 0, 1, 0, 2, 0, '1-230515035441', 'AB 6777 H', '2015-05-23', '876', 'Driver B', 3, 'INV-1-230515035441', '2015-05-23', '2015-06-02', 0, 0, NULL, NULL, 0, 0, '', NULL),
+(4, 0, 1, 0, 2, 0, '1-230515035441', 'AB 6777 H', '2015-05-23', '876', 'Driver B', 3, 'INV-1-230515035441', '2015-05-23', '2015-06-02', 1, 0, NULL, NULL, 0, 0, '', NULL),
 (5, 2, 1, 1, 2, 5, '1-230515035441', 'AB 6777 H', '2015-05-23', '876', '', 3, 'INV-1-230515035441', '2015-05-23', '2015-06-02', 1, 100000, NULL, NULL, 0, 0, '', 500000),
 (6, 1, 1, 3, 2, 15, '1-230515035441', 'AB 6777 H', '2015-05-23', '876', '', 3, 'INV-1-230515035441', '2015-05-23', '2015-06-02', 1, 1200, NULL, NULL, 0, 0, '', 18000),
-(7, 0, 3, 0, 2, 0, '3-230515062236', 'AB 6777', '2015-05-23', '1234', 'sss', 3, 'INV-3-230515062236', '2015-05-23', '2015-06-02', 0, 0, NULL, NULL, 0, 0, '', NULL),
+(7, 0, 3, 0, 2, 0, '3-230515062236', 'AB 6777', '2015-05-23', '1234', 'sss', 3, 'INV-3-230515062236', '2015-05-23', '2015-06-02', 1, 0, NULL, NULL, 0, 0, '', NULL),
 (8, 3, 3, 3, 2, 50, '3-230515062236', 'AB 6777', '2015-05-23', '1234', '', 3, 'INV-3-230515062236', '2015-05-23', '2015-06-02', 1, 1200, NULL, NULL, 0, 0, '', 60000),
 (9, 0, 3, 0, 2, 0, '3-230515062340', 'AB 6777', '2015-05-29', '1234', 'Driver B', 3, 'INV-3-230515062340', '2015-05-23', '2015-06-02', 0, 0, NULL, NULL, 0, 0, '', NULL),
-(10, 3, 3, 3, 2, 6, '3-230515062340', 'AB 6777', '2015-05-29', '1234', '', 3, 'INV-3-230515062340', '2015-05-23', '2015-06-02', 1, 1200, NULL, NULL, 0, 0, '', 7200);
+(10, 3, 3, 3, 2, 6, '3-230515062340', 'AB 6777', '2015-05-29', '1234', '', 3, 'INV-3-230515062340', '2015-05-23', '2015-06-02', 1, 1200, NULL, NULL, 0, 0, '', 7200),
+(11, 0, 25, 0, 4, 0, '25-250515053053', 'wewewe', '2015-05-25', '2323', 'wewew', 3, 'INV-25-250515053053', '2015-05-25', '3985-06-25', 0, 0, NULL, NULL, 0, 0, '', NULL),
+(13, 37, 25, 2, 4, 2, '25-250515053053', 'wewewe', '2015-05-25', '2323', '', 3, 'INV-25-250515053053', '2015-05-25', '3985-06-25', 1, 110, NULL, NULL, 0, 0, '', 220),
+(14, 42, 25, 2, 4, 6, '25-250515053053', 'wewewe', '2015-05-25', '2323', '', 3, 'INV-25-250515053053', '2015-05-25', '3985-06-25', 1, 110, NULL, NULL, 0, 0, '', 660);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `duration_com_tab`
+-- Struktur dari tabel `gl_detail_tab`
 --
 
-CREATE TABLE IF NOT EXISTS `duration_com_tab` (
-  `idd` int(11) NOT NULL AUTO_INCREMENT,
-  `dday_start` int(11) NOT NULL,
-  `dday_end` int(11) NOT NULL,
-  `dname` varchar(35) NOT NULL,
-  `dket` varchar(35) NOT NULL,
-  PRIMARY KEY (`idd`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+CREATE TABLE IF NOT EXISTS `gl_detail_tab` (
+  `gid` int(10) NOT NULL AUTO_INCREMENT,
+  `ggid` int(10) DEFAULT NULL,
+  `gcid` int(10) DEFAULT NULL,
+  `gdebet` double DEFAULT NULL,
+  `gcredit` double DEFAULT NULL,
+  `gdesc` varchar(350) NOT NULL,
+  `gstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`gid`),
+  KEY `fk_gl_detail_tab_1_idx` (`ggid`),
+  KEY `fk_gl_detail_tab_2_idx` (`gcid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Dumping data untuk tabel `duration_com_tab`
+-- Dumping data untuk tabel `gl_detail_tab`
 --
 
-INSERT INTO `duration_com_tab` (`idd`, `dday_start`, `dday_end`, `dname`, `dket`) VALUES
-(1, 0, 7, 'scoma', '0-7'),
-(2, 8, 14, 'scomb', '8-14'),
-(3, 15, 21, 'scomc', '15-21'),
-(4, 22, 30, 'scomd', '22-30'),
-(5, 31, 10000, 'scome', '>30'),
-(6, 0, 90, 'scredita', '0-90'),
-(7, 91, 100, 'screditb', '91-100'),
-(8, 101, 110, 'screditc', '101-110'),
-(9, 111, 120, 'screditd', '111-120'),
-(10, 121, 100000, 'scredite', '>120');
+INSERT INTO `gl_detail_tab` (`gid`, `ggid`, `gcid`, `gdebet`, `gcredit`, `gdesc`, `gstatus`) VALUES
+(1, 3, 7, 1000000, 0, 'test 1', 1),
+(2, 3, 8, 0, 500000, 'test 2', 1),
+(5, 4, 7, 1000000, 0, 'wew', 1),
+(6, 4, 4, 0, 50000, 'rerer', 1),
+(7, 4, 7, 5000, 0, 'ytyt', 1),
+(8, 4, 8, 10000, 0, 'wewew', 1),
+(9, 1, 7, 1000000, 0, 'wewew', 1),
+(10, 1, 12, 0, 10000000, 'wew', 1),
+(11, 2, 4, 500000, 0, 'test', 1),
+(12, 2, 3, 0, 500000, 'test', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `gl_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `gl_tab` (
+  `gid` int(10) NOT NULL AUTO_INCREMENT,
+  `gbid` int(10) DEFAULT NULL,
+  `guid` int(10) DEFAULT NULL,
+  `gaid` int(10) DEFAULT NULL,
+  `gtype` int(2) DEFAULT NULL,
+  `gtitle` varchar(200) DEFAULT NULL,
+  `gdesc` varchar(350) DEFAULT NULL,
+  `gdate` int(10) DEFAULT NULL,
+  `gpdate` int(10) DEFAULT NULL,
+  `grefid` int(10) DEFAULT NULL,
+  `gdocref` varchar(45) DEFAULT NULL,
+  `gstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`gid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data untuk tabel `gl_tab`
+--
+
+INSERT INTO `gl_tab` (`gid`, `gbid`, `guid`, `gaid`, `gtype`, `gtitle`, `gdesc`, `gdate`, `gpdate`, `grefid`, `gdocref`, `gstatus`) VALUES
+(1, 1, 1, 9, 1, 'Jurnal Test', 'Jurnal Test123', 1432720192, 1432720192, 1, 'weww', 1),
+(2, 1, 1, 9, 0, 'Streaming Bareksa Fund Academy', 'aaaaaaaaaaaaaaaaaaa', 1432720222, 1432720222, NULL, 'eeeeeee', 1),
+(3, 1, 1, 9, 0, 'Streaming Bareksa Fund Academy', 'aaaaaaaaaaaaaaaaaaa', 1432720227, 1432720227, NULL, '232323', 1),
+(4, 1, 1, 9, 5, 'palma', 'erere', 1432720233, 1432720233, NULL, 'trasf234', 1);
 
 -- --------------------------------------------------------
 
@@ -549,18 +776,18 @@ INSERT INTO `groups_tab` (`gid`, `gname`, `gdesc`, `gstatus`) VALUES
 
 CREATE TABLE IF NOT EXISTS `inventory_tab` (
   `iid` int(10) NOT NULL AUTO_INCREMENT,
-  `iuid` int(10) DEFAULT NULL,
-  `iluid` int(10) DEFAULT NULL,
-  `ibid` int(10) DEFAULT NULL,
-  `iiid` int(10) DEFAULT NULL,
-  `itype` tinyint(1) DEFAULT NULL,
-  `istockbegining` int(10) DEFAULT NULL,
-  `istockin` int(10) DEFAULT NULL,
-  `istockout` int(10) DEFAULT NULL,
-  `istock` int(10) DEFAULT NULL,
+  `iuid` int(10) DEFAULT '0',
+  `iluid` int(10) DEFAULT '0',
+  `ibid` int(10) DEFAULT '1',
+  `iiid` int(10) DEFAULT '0',
+  `itype` tinyint(1) DEFAULT '0',
+  `istockbegining` int(10) DEFAULT '0',
+  `istockin` int(10) DEFAULT '0',
+  `istockout` int(10) DEFAULT '0',
+  `istock` int(10) DEFAULT '0',
   `istatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`iid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data untuk tabel `inventory_tab`
@@ -568,9 +795,43 @@ CREATE TABLE IF NOT EXISTS `inventory_tab` (
 
 INSERT INTO `inventory_tab` (`iid`, `iuid`, `iluid`, `ibid`, `iiid`, `itype`, `istockbegining`, `istockin`, `istockout`, `istock`, `istatus`) VALUES
 (1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1),
-(2, 1, 1, 1, 1, 2, 10, 10, 10, 10, 1),
-(3, 1, 1, 1, 1, 3, NULL, NULL, NULL, 100, 1),
-(4, NULL, NULL, 2, 1, 1, 111, 111, 11, 11, 1);
+(3, 1, 1, 1, 1, 3, 0, 0, 0, 100, 1),
+(4, NULL, NULL, 2, 1, 1, 111, 111, 11, 11, 1),
+(5, NULL, NULL, 1, 1, 4, 0, 105, 0, 116, 1),
+(6, NULL, NULL, 1, 3, 4, 5, 5, 32, -27, 1),
+(7, NULL, NULL, 1, 3, 4, NULL, NULL, 0, NULL, 2),
+(13, NULL, NULL, 1, 3, 2, 10, 10, 33, -23, 1),
+(14, NULL, NULL, 1, 2, 2, 10, 10, 42, -32, 1),
+(15, NULL, NULL, 1, 1, 2, 10, 10, 41, -31, 1),
+(16, NULL, NULL, 1, 3, 1, 100, 131, 0, 123, 1),
+(17, NULL, NULL, 1, 2, 1, 1000, 1000, 0, 1000, 1),
+(18, NULL, NULL, 2, 3, 1, 1000, 90, 0, 1090, 0),
+(19, NULL, NULL, 2, 2, 1, 1000, 0, 0, 1000, 1),
+(20, NULL, NULL, 5, 5, 1, 0, 0, 0, 0, 1),
+(21, NULL, NULL, 4, 5, 1, 0, 0, 0, 0, 1),
+(22, NULL, NULL, 3, 5, 1, 0, 0, 0, 0, 1),
+(23, NULL, NULL, 2, 5, 1, 0, 100, 0, 100, 1),
+(24, NULL, NULL, 5, 4, 2, 0, 0, 0, 0, 1),
+(25, NULL, NULL, 4, 4, 2, 0, 0, 0, 0, 1),
+(26, NULL, NULL, 3, 4, 2, 0, 0, 0, 0, 1),
+(27, NULL, NULL, 1, 4, 2, 0, 0, 27, -27, 1),
+(28, NULL, NULL, 2, 4, 2, 0, 0, 0, 0, 1),
+(29, NULL, NULL, 1, 3, 3, 1, 5, 0, 13, 1),
+(30, 0, 0, 2, 5, 3, 1, 1, 0, 1, 1),
+(31, 0, 0, 2, 3, 3, 10, 10, 0, 10, 1),
+(32, 0, 0, 2, 5, 4, 100, 100, 0, 100, 1),
+(33, 0, 0, 2, 3, 4, 90, 90, 0, 90, 1),
+(34, 0, 0, 1, 5, 3, 0, 0, 0, 0, 1),
+(35, 0, 0, 1, 5, 4, 10, 10, 20, -10, 1),
+(36, 0, 0, 1, 5, 1, 0, 10, 0, 20, 1),
+(37, 0, 0, 5, 6, 1, 0, 0, 0, 0, 1),
+(38, 0, 0, 4, 6, 1, 0, 0, 0, 0, 1),
+(39, 0, 0, 6, 6, 1, 0, 0, 0, 0, 1),
+(40, 0, 0, 2, 6, 1, 0, 0, 0, 0, 1),
+(41, 0, 0, 5, 7, 1, 0, 0, 0, 0, 1),
+(42, 0, 0, 4, 7, 1, 0, 0, 0, 0, 1),
+(43, 0, 0, 6, 7, 1, 0, 0, 0, 0, 1),
+(44, 0, 0, 2, 7, 1, 0, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -592,337 +853,17 @@ CREATE TABLE IF NOT EXISTS `log_inventory_tab` (
   `istock` int(10) DEFAULT NULL,
   `istatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`lid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=325 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=329 ;
 
 --
 -- Dumping data untuk tabel `log_inventory_tab`
 --
 
 INSERT INTO `log_inventory_tab` (`lid`, `iid`, `iuid`, `iluid`, `ibid`, `iiid`, `itype`, `istockbegining`, `istockin`, `istockout`, `istock`, `istatus`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1),
-(2, 2, 1, 1, 1, 1, 2, 10, 10, 10, 10, 1),
-(3, 3, 1, 1, 1, 1, 3, NULL, NULL, NULL, 100, 1),
-(4, 4, NULL, NULL, 2, 1, 1, 111, 111, 11, 11, 1),
-(5, 5, NULL, NULL, 2, 1, 1, 0, 0, 8, 0, 0),
-(6, 0, NULL, NULL, 2, 12, 1, 0, 2, 0, 0, 1),
-(7, 0, NULL, NULL, 2, 14, 1, 0, 3, 0, 0, 1),
-(8, 0, NULL, NULL, 2, 12, 1, 0, 3, 0, 0, 1),
-(9, 0, NULL, NULL, 2, 14, 1, 0, 4, 0, 0, 1),
-(10, 0, NULL, NULL, 0, 1, 1, 0, 0, 9, 0, 1),
-(11, 0, NULL, NULL, 0, 1, 1, 0, 0, 6, 0, 1),
-(12, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(13, 0, NULL, NULL, 2, 9, 1, 0, 7, 0, 0, 1),
-(14, 0, NULL, NULL, 2, 10, 1, 0, 4, 0, 0, 1),
-(15, 0, NULL, NULL, 2, 14, 1, 0, 5, 0, 0, 1),
-(16, 0, NULL, NULL, 2, 15, 1, 0, 5, 0, 0, 1),
-(17, 0, NULL, NULL, 3, 9, 1, 0, 3, 0, 0, 1),
-(18, 0, NULL, NULL, 3, 10, 1, 0, 4, 0, 0, 1),
-(19, 0, NULL, NULL, 3, 9, 1, 0, 9, 0, 0, 1),
-(20, 0, NULL, NULL, 3, 10, 1, 0, 1, 0, 0, 1),
-(21, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(22, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(23, 0, NULL, NULL, 0, 1, 1, 0, 0, 8, 0, 1),
-(24, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(25, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(26, 0, NULL, NULL, 0, 1, 1, 0, 0, 8, 0, 1),
-(27, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(28, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(29, 0, NULL, NULL, 0, 1, 1, 0, 0, 8, 0, 1),
-(30, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(31, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(32, 0, NULL, NULL, 0, 1, 1, 0, 0, 0, 0, 1),
-(33, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(34, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(35, 0, NULL, NULL, 0, 1, 1, 0, 0, 0, 0, 1),
-(36, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(37, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(38, 0, NULL, NULL, 0, 1, 1, 0, 0, 0, 0, 1),
-(39, 0, NULL, NULL, 2, 11, 1, 0, 1, 0, 0, 1),
-(40, 0, NULL, NULL, 2, 12, 1, 0, 1, 0, 0, 1),
-(41, 0, NULL, NULL, 2, 11, 1, 0, 6, 0, 0, 1),
-(42, 0, NULL, NULL, 2, 12, 1, 0, 4, 0, 0, 1),
-(43, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(44, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(45, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(46, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(47, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(48, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(49, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(50, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(51, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(52, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(53, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(54, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(55, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(56, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(57, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(58, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(59, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(60, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(61, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(62, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(63, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(64, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(65, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(66, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(67, 0, NULL, NULL, 0, 1, 1, 0, 0, 8, 0, 1),
-(68, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(69, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(70, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(71, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(72, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(73, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(74, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(75, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(76, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(77, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(78, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(79, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(80, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(81, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(82, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(83, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(84, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(85, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(86, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(87, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(88, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(89, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(90, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(91, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(92, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(93, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(94, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(95, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(96, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(97, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(98, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(99, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(100, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(101, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(102, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(103, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(104, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(105, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(106, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(107, 0, NULL, NULL, 0, 1, 1, 0, 0, 7, 0, 1),
-(108, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(109, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(110, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(111, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(112, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(113, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(114, 0, NULL, NULL, 2, 13, 1, 0, 300, 0, 0, 1),
-(115, 0, NULL, NULL, 2, 14, 1, 0, 200, 0, 0, 1),
-(116, 0, NULL, NULL, 2, 13, 1, 0, 200, 0, 0, 1),
-(117, 0, NULL, NULL, 2, 14, 1, 0, 100, 0, 0, 1),
-(118, 0, NULL, NULL, 2, 15, 1, 0, 4983, 0, 0, 1),
-(119, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(120, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(121, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(122, 0, NULL, NULL, 0, 2, 1, 0, 0, 34, 0, 1),
-(123, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(124, 0, NULL, NULL, 0, 2, 1, 0, 0, 34, 0, 1),
-(125, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(126, 0, NULL, NULL, 0, 2, 1, 0, 0, 16, 0, 1),
-(127, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(128, 0, NULL, NULL, 0, 2, 1, 0, 0, 16, 0, 1),
-(129, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(130, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(131, 0, NULL, NULL, 0, 1, 1, 0, 0, 9, 0, 1),
-(132, 0, NULL, NULL, 0, 1, 1, 0, 0, 12, 0, 1),
-(133, 0, NULL, NULL, 0, 1, 1, 0, 0, 9, 0, 1),
-(134, 0, NULL, NULL, 0, 1, 1, 0, 0, 12, 0, 1),
-(135, 0, NULL, NULL, 2, 16, 1, 0, 5, 0, 0, 1),
-(136, 0, NULL, NULL, 2, 17, 1, 0, 3, 0, 0, 1),
-(137, 0, NULL, NULL, 2, 16, 1, 0, 10, 0, 0, 1),
-(138, 0, NULL, NULL, 2, 17, 1, 0, 5, 0, 0, 1),
-(139, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(140, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(141, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(142, 0, NULL, NULL, 0, 1, 1, 0, 0, 10, 0, 1),
-(143, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(144, 0, NULL, NULL, 0, 2, 1, 0, 0, 20, 0, 1),
-(145, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(146, 0, NULL, NULL, 0, 2, 1, 0, 0, 20, 0, 1),
-(147, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(148, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(149, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(150, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(151, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(152, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(153, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(154, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(155, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(156, 0, NULL, NULL, 0, 2, 1, 0, 0, 0, 0, 1),
-(157, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(158, 0, NULL, NULL, 0, 2, 1, 0, 0, 0, 0, 1),
-(159, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(160, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(161, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(162, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(163, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(164, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(165, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(166, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(167, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(168, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(169, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(170, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(171, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(172, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(173, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(174, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(175, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(176, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(177, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(178, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(179, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(180, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(181, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(182, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(183, 0, NULL, NULL, 0, 1, 1, 0, 0, 1, 0, 1),
-(184, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(185, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(186, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(187, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(188, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(189, 0, NULL, NULL, 0, 1, 1, 0, 0, 12, 0, 1),
-(190, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(191, 0, NULL, NULL, 0, 1, 1, 0, 0, 12, 0, 1),
-(192, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(193, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(194, 0, NULL, NULL, 0, 2, 1, 0, 0, 12, 0, 1),
-(195, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(196, 0, NULL, NULL, 0, 2, 1, 0, 0, 12, 0, 1),
-(197, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(198, 0, NULL, NULL, 0, 2, 1, 0, 0, 8, 0, 1),
-(199, 0, NULL, NULL, 0, 1, 1, 0, 0, 15, 0, 1),
-(200, 0, NULL, NULL, 0, 2, 1, 0, 0, 8, 0, 1),
-(201, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(202, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(203, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(204, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(205, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(206, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(207, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(208, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(209, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(210, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(211, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(212, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(213, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(214, 0, NULL, NULL, 0, 2, 1, 0, 0, 4, 0, 1),
-(215, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(216, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(217, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(218, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(219, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(220, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(221, 0, NULL, NULL, 2, 22, 1, 0, 8, 0, 0, 1),
-(222, 0, NULL, NULL, 2, 23, 1, 0, 5, 0, 0, 1),
-(223, 0, NULL, NULL, 2, 22, 1, 0, 2, 0, 0, 1),
-(224, 0, NULL, NULL, 2, 23, 1, 0, 10, 0, 0, 1),
-(225, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(226, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(227, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(228, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(229, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(230, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(231, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(232, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(233, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(234, 0, NULL, NULL, 0, 3, 1, 0, 0, 55, 0, 1),
-(235, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(236, 0, NULL, NULL, 0, 3, 1, 0, 0, 55, 0, 1),
-(237, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(238, 0, NULL, NULL, 0, 3, 1, 0, 0, 0, 0, 1),
-(239, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(240, 0, NULL, NULL, 0, 3, 1, 0, 0, 0, 0, 1),
-(241, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(242, 0, NULL, NULL, 0, 3, 1, 0, 0, 40, 0, 1),
-(243, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(244, 0, NULL, NULL, 0, 3, 1, 0, 0, 40, 0, 1),
-(245, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(246, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(247, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(248, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(249, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(250, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(251, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(252, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(253, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(254, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(255, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(256, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(257, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(258, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(259, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(260, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(261, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(262, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(263, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(264, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(265, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(266, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(267, 0, NULL, NULL, 0, 1, 1, 0, 0, 8, 0, 1),
-(268, 0, NULL, NULL, 0, 2, 1, 0, 0, 5, 0, 1),
-(269, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(270, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(271, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(272, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(273, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(274, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(275, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(276, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(277, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(278, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(279, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(280, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(281, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(282, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(283, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(284, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(285, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(286, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(287, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(288, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(289, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(290, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(291, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(292, 0, NULL, NULL, 0, 2, 1, 0, 0, 3, 0, 1),
-(293, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(294, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(295, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(296, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(297, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(298, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(299, 0, NULL, NULL, 0, 1, 1, 0, 0, 2, 0, 1),
-(300, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(301, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(302, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(303, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(304, 0, NULL, NULL, 0, 1, 1, 0, 0, 4, 0, 1),
-(305, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(306, 0, NULL, NULL, 0, 3, 1, 0, 0, 15, 0, 1),
-(307, 0, NULL, NULL, 0, 2, 1, 0, 0, 1, 0, 1),
-(308, 0, NULL, NULL, 0, 3, 1, 0, 0, 15, 0, 1),
-(309, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(310, 0, NULL, NULL, 0, 3, 1, 0, 0, 30, 0, 1),
-(311, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
-(312, 0, NULL, NULL, 0, 3, 1, 0, 0, 30, 0, 1),
-(313, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(314, 0, NULL, NULL, 0, 3, 1, 0, 0, 30, 0, 1),
-(315, 0, NULL, NULL, 0, 1, 1, 0, 0, 3, 0, 1),
-(316, 0, NULL, NULL, 0, 3, 1, 0, 0, 30, 0, 1),
-(317, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(318, 0, NULL, NULL, 0, 3, 1, 0, 0, 15, 0, 1),
-(319, 0, NULL, NULL, 0, 1, 1, 0, 0, 5, 0, 1),
-(320, 0, NULL, NULL, 0, 3, 1, 0, 0, 15, 0, 1),
-(321, 0, NULL, NULL, 0, 3, 1, 0, 0, 50, 0, 1),
-(322, 0, NULL, NULL, 0, 3, 1, 0, 0, 50, 0, 1),
-(323, 0, NULL, NULL, 0, 3, 1, 0, 0, 6, 0, 1),
-(324, 0, NULL, NULL, 0, 3, 1, 0, 0, 6, 0, 1);
+(325, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
+(326, 0, NULL, NULL, 0, 2, 1, 0, 0, 6, 0, 1),
+(327, 0, NULL, NULL, 0, 2, 1, 0, 0, 2, 0, 1),
+(328, 0, NULL, NULL, 0, 2, 1, 0, 0, 6, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -938,7 +879,7 @@ CREATE TABLE IF NOT EXISTS `moq_tab` (
   `mpid` int(10) DEFAULT NULL,
   `mqty` int(10) DEFAULT NULL,
   PRIMARY KEY (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data untuk tabel `moq_tab`
@@ -946,20 +887,33 @@ CREATE TABLE IF NOT EXISTS `moq_tab` (
 
 INSERT INTO `moq_tab` (`mid`, `muid`, `mluid`, `mbid`, `mpid`, `mqty`) VALUES
 (1, 1, 1, 1, 1, 7),
-(2, 1, 1, 2, 1, 9),
+(2, 1, 1, 2, 1, 150000),
 (3, NULL, NULL, 1, 2, 4),
 (4, NULL, NULL, 2, 2, 5),
-(5, NULL, NULL, 1, 3, 44),
-(6, NULL, NULL, 2, 3, 55),
-(10, NULL, NULL, 5, 3, 31),
-(11, NULL, NULL, 4, 3, 22),
-(12, NULL, NULL, 3, 3, 33),
+(5, NULL, NULL, 1, 3, 44444),
+(6, NULL, NULL, 2, 3, 55555),
+(10, NULL, NULL, 5, 3, 3111113),
+(11, NULL, NULL, 4, 3, 22222),
+(12, NULL, NULL, 3, 3, 33333),
 (13, NULL, NULL, 5, 2, 1),
 (14, NULL, NULL, 4, 2, 2),
 (15, NULL, NULL, 3, 2, 3),
-(16, NULL, NULL, 5, 1, 0),
-(17, NULL, NULL, 4, 1, 0),
-(18, NULL, NULL, 3, 1, 0);
+(16, NULL, NULL, 5, 1, 150000),
+(17, NULL, NULL, 4, 1, 150000),
+(18, NULL, NULL, 3, 1, 150000),
+(19, NULL, NULL, 5, 5, 50),
+(20, NULL, NULL, 4, 5, 50),
+(21, NULL, NULL, 3, 5, 300),
+(22, NULL, NULL, 2, 5, 50),
+(23, NULL, NULL, 6, 5, 50),
+(24, NULL, NULL, 5, 6, 100),
+(25, NULL, NULL, 4, 6, 20),
+(26, NULL, NULL, 6, 6, 60),
+(27, NULL, NULL, 2, 6, 30),
+(28, NULL, NULL, 5, 7, 0),
+(29, NULL, NULL, 4, 7, 0),
+(30, NULL, NULL, 6, 7, 0),
+(31, NULL, NULL, 2, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -976,18 +930,22 @@ CREATE TABLE IF NOT EXISTS `opname_tab` (
   `ostockin` int(10) DEFAULT NULL,
   `ostockout` int(10) DEFAULT NULL,
   `ostock` int(10) DEFAULT NULL,
+  `odesc` varchar(350) DEFAULT NULL,
   PRIMARY KEY (`oid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data untuk tabel `opname_tab`
 --
 
-INSERT INTO `opname_tab` (`oid`, `oidid`, `otype`, `odate`, `ostockbegining`, `ostockin`, `ostockout`, `ostock`) VALUES
-(2, 1, 1, 1397310166, 0, 0, 0, 0),
-(3, 2, 2, 1397310166, 0, 0, 0, 0),
-(4, 2, 2, 1397310166, 0, 0, 0, 0),
-(5, 2, 2, 1397310166, 10, 10, 10, 10);
+INSERT INTO `opname_tab` (`oid`, `oidid`, `otype`, `odate`, `ostockbegining`, `ostockin`, `ostockout`, `ostock`, `odesc`) VALUES
+(2, 1, 1, 1397310166, 0, 0, 0, 0, NULL),
+(3, 2, 2, 1397310166, 0, 0, 0, 0, NULL),
+(4, 2, 2, 1397310166, 0, 0, 0, 0, NULL),
+(5, 2, 2, 1397310166, 10, 10, 10, 10, NULL),
+(6, 29, 3, 1421480889, 1, 1, 0, 1, 'test'),
+(7, 3, 3, 1421667086, 0, 0, 0, 100, ''),
+(8, 29, 3, 1421667096, 1, 2, 0, 10, 'test doang');
 
 -- --------------------------------------------------------
 
@@ -997,12 +955,9 @@ INSERT INTO `opname_tab` (`oid`, `oidid`, `otype`, `odate`, `ostockbegining`, `o
 
 CREATE TABLE IF NOT EXISTS `pembayaran_detail_tab` (
   `pinid` int(11) NOT NULL AUTO_INCREMENT,
-  `pmid` int(11) NOT NULL,
+  `pbid` int(11) NOT NULL,
   `pno_inv` varchar(20) NOT NULL,
   `ptotal_inv` double NOT NULL,
-  `ptgl_bayar_inv` date NOT NULL,
-  `ptgl_lunas` date NOT NULL,
-  `pduration` int(11) NOT NULL,
   PRIMARY KEY (`pinid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -1037,27 +992,6 @@ CREATE TABLE IF NOT EXISTS `pembayaran_tab` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penerimaan_detail_tab`
---
-
-CREATE TABLE IF NOT EXISTS `penerimaan_detail_tab` (
-  `pnid` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) NOT NULL,
-  `ppid` int(11) NOT NULL,
-  `pppid` int(11) NOT NULL,
-  `pcurrency` varchar(15) NOT NULL,
-  `pqty` int(11) NOT NULL,
-  `pharga` int(11) NOT NULL,
-  `pdisc` double NOT NULL,
-  `pketerangan` text NOT NULL,
-  `pstatus` tinyint(1) NOT NULL DEFAULT '0',
-  `pno_penerimaan` varchar(20) NOT NULL,
-  PRIMARY KEY (`pnid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `penerimaan_tab`
 --
 
@@ -1087,7 +1021,7 @@ CREATE TABLE IF NOT EXISTS `permission_tab` (
   `purl` varchar(45) DEFAULT NULL,
   `pparent` int(10) DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=163 ;
 
 --
 -- Dumping data untuk tabel `permission_tab`
@@ -1150,30 +1084,22 @@ INSERT INTO `permission_tab` (`pid`, `pname`, `pdesc`, `purl`, `pparent`) VALUES
 (54, 'InventorySparepartAdd', 'Inventory Sparepart Add', 'inventory/inventory_add/2', 53),
 (55, 'InventorySparepartUpdate', 'Inventory Sparepart Update', 'inventory/inventory_update/2', 53),
 (56, 'InventorySparepartDelete', 'Inventory Sparepart Delete', 'inventory/inventory_delete/2', 53),
-(57, 'InventoryServicesView', 'Inventory Services View', 'inventory/3', 0),
-(58, 'InventoryServicesAdd', 'Inventory Services Add', 'inventory/inventory_add/3', 57),
-(59, 'InventoryServicesUpdate', 'Inventory Services Update', 'inventory/inventory_update/3', 57),
-(60, 'InventoryServicesDelete', 'Inventory Services Delete', 'inventory/inventory_delete/3', 57),
+(57, 'InventoryRejectProductView', 'Inventory Reject Product View', 'inventory/3', 0),
+(58, 'InventoryRejectProductAdd', 'Inventory Reject Product Add', 'inventory/inventory_add/3', 57),
+(59, 'InventoryRejectProductUpdate', 'Inventory Reject Product Update', 'inventory/inventory_update/3', 57),
+(60, 'InventoryRejectProductDelete', 'Inventory Reject Product Delete', 'inventory/inventory_delete/3', 57),
 (61, 'InventoryReturnView', 'Inventory Return View', 'inventory/4', 0),
 (62, 'InventoryReturnAdd', 'Inventory Return Add', 'inventory/inventory_add/4', 61),
 (63, 'InventoryReturnUpdate', 'Inventory Return Update', 'inventory/inventory_update/4', 61),
 (64, 'InventoryReturnDelete', 'Inventory Return Delete', 'inventory/inventory_delete/4', 61),
 (65, 'OpnameProductView', 'Opname Product View', 'opname/1', 0),
-(66, 'OpnameProductAdd', 'Opname Product Add', 'opname/opname_add/1', 65),
 (67, 'OpnameProductUpdate', 'Opname Product Update', 'opname/opname_update/1', 65),
-(68, 'OpnameProductDelete', 'Opname Product Delete', 'opname/opname_delete/1', 65),
 (69, 'OpnameSparepartView', 'Opname Sparepart View', 'opname/2', 0),
-(70, 'OpnameSparepartAdd', 'Opname Sparepart Add', 'opname/opname_add/2', 69),
 (71, 'OpnameSparepartUpdate', 'Opname Sparepart Update', 'opname/opname_update/2', 69),
-(72, 'OpnameSparepartDelete', 'Opname Sparepart Delete', 'opname/opname_delete/2', 69),
-(73, 'OpnameServicesView', 'Opname Services View', 'opname/3', 0),
-(74, 'OpnameServicesAdd', 'Opname Services Add', 'opname/opname_add/3', 73),
-(75, 'OpnameServicesUpdate', 'Opname Services Update', 'opname/opname_update/3', 73),
-(76, 'OpnameServicesDelete', 'Opname Services Delete', 'opname/opname_delete/3', 73),
+(73, 'OpnameRejectProductView', 'Opname Reject Product View', 'opname/3', 0),
+(75, 'OpnameRejectProductUpdate', 'Opname Reject Product Update', 'opname/opname_update/3', 73),
 (77, 'OpnameReturnView', 'Opname Return View', 'opname/4', 0),
-(78, 'OpnameReturnAdd', 'Opname Return Add', 'opname/opname_add/4', 77),
 (79, 'OpnameReturnUpdate', 'Opname Return Update', 'opname/opname_update/4', 77),
-(80, 'OpnameReturnDelete', 'Opname Return Delete', 'opname/opname_delete/4', 77),
 (81, 'PurchaseOrderView', 'Purchase Order View', 'purchase_order/home', 0),
 (82, 'PurchaseOrderAdd', 'Purchase Order Add', 'purchase_order/home/purchase_order_add', 81),
 (83, 'PurchaseOrderUpdate', 'Purchase Order Update', 'purchase_order/home/purchase_order_update', 81),
@@ -1194,11 +1120,11 @@ INSERT INTO `permission_tab` (`pid`, `pname`, `pdesc`, `purl`, `pparent`) VALUES
 (98, 'ExecuteAllBranchServices', 'Execute All Branch Services', 'services/*', 0),
 (99, 'ExecuteAllBranchInventoryProduct', 'Execute All Branch Inventory Product', 'inventory/1/*', 0),
 (100, 'ExecuteAllBranchInventorySparepart', 'Execute All Branch Inventory Sparepart', 'inventory/2/*', 0),
-(101, 'ExecuteAllBranchInventoryServices', 'Execute All Branch Inventory Services', 'inventory/3/*', 0),
+(101, 'ExecuteAllBranchInventoryRejectProduct', 'Execute All Branch Inventory Reject Product', 'inventory/3/*', 0),
 (102, 'ExecuteAllBranchInventoryReturn', 'Execute All Branch Inventory Return', 'inventory/4/*', 0),
 (103, 'ExecuteAllBranchOpnameProduct', 'Execute All Branch Opname Product', 'opname/1/*', 0),
 (104, 'ExecuteAllBranchOpnameSparepart', 'Execute All Branch Opname Sparepart', 'opname/2/*', 0),
-(105, 'ExecuteAllBranchOpnameServices', 'Execute All Branch Opname Services', 'opname/3/*', 0),
+(105, 'ExecuteAllBranchOpnameRejectProduct', 'Execute All Branch Opname Reject Product', 'opname/3/*', 0),
 (106, 'ExecuteAllBranchOpnameReturn', 'Execute All Branch Opname Return', 'opname/4/*', 0),
 (107, 'ExecuteAllBranchPurchaseOrder', 'Execute All Branch Purchase Order', 'purchase_order/home/*', 0),
 (108, 'ExecuteAllBranchSalesOrder', 'Execute All Branch Sales Order', 'sales_order/home/*', 0),
@@ -1223,7 +1149,39 @@ INSERT INTO `permission_tab` (`pid`, `pname`, `pdesc`, `purl`, `pparent`) VALUES
 (127, 'GroupSparepartDelete', 'Group Sparepart Delete', 'group_sparepart/group_sparepart_delete', 124),
 (128, 'ExecuteAllGroupSparepart', 'Execute All Group Sparepart', 'group_sparepart/*', 0),
 (129, 'BranchViewAsBranch', 'Branch View As Branch', 'branch', 1),
-(130, 'ProductViewAsBranch', 'Group Sparepart Add', 'product', 9);
+(130, 'ProductViewAsBranch', 'Group Sparepart Add', 'product', 9),
+(131, 'UsersView', 'Users View', 'users', 0),
+(132, 'UsersAdd', 'Users Add', 'users/users_add', 131),
+(133, 'UsersUpdate', 'Users Update', 'users/users_update', 131),
+(134, 'UsersDelete', 'Users Delete', 'users/users_delete', 131),
+(135, 'ExecuteAllBranchUsers', 'Execute All Branch Users', 'users/*', 0),
+(136, 'UsersGroupView', 'Users Group View', 'users/users_group', 0),
+(137, 'UsersGroupAdd', 'Users Group Add', 'users/users_group_add', 136),
+(138, 'UsersGroupUpdate', 'Users Group Update', 'users/users_group_update', 136),
+(139, 'UsersGroupDelete', 'Users Group Delete', 'users/users_group_delete', 136),
+(140, 'ServicesWOView', 'Services Work Order View', 'services_wo', 0),
+(141, 'ServicesWOAdd', 'Services Work Order Add', 'services_wo/services_wo_add', 140),
+(142, 'ServicesWOUpdate', 'Services Work Order Update', 'services_wo/services_wo_update', 140),
+(143, 'ServicesWODelete', 'Services Work Order Delete', 'services_wo/services_wo_delete', 140),
+(144, 'ExecuteAllBranchServicesWO', 'Execute All Branch Services Work Order', 'services_wo/*', 0),
+(145, 'ServicesSparepartView', 'Services Sparepart View', 'services_sparepart', 0),
+(146, 'ServicesSparepartAdd', 'Services Sparepart Add', 'services_sparepart/services_sparepart_add', 145),
+(147, 'ServicesSparepartUpdate', 'Services Sparepart Update', 'services_sparepart/services_sparepart_update', 145),
+(148, 'ServicesSparepartDelete', 'Services Sparepart Delete', 'services_sparepart/services_sparepart_delete', 145),
+(149, 'ExecuteAllBranchServicesSparepart', 'Execute All Branch Services Sparepart', 'services_sparepart/*', 0),
+(150, 'ServicesApproval', 'Services Approval', 'services/services_update', 45),
+(151, 'ServicesReportView', 'Services Report View', 'services_report', 0),
+(152, 'ServicesReportAdd', 'Services Report Add', 'services_report/services_report_add', 151),
+(153, 'ServicesReportUpdate', 'Services Report Update', 'services_report/services_report_update', 151),
+(154, 'ServicesReportDelete', 'Services Report Delete', 'services_report/services_report_delete', 151),
+(155, 'ExecuteAllBranchServicesReport', 'Execute All Branch Services Report', 'services_report/*', 0),
+(156, 'ServicesReportApproval', 'Services Report Approval', 'services_report/services_report_update', 151),
+(157, 'ServicesSparepartApproval', 'Services Sparepart Approval', 'services_sparepart/services_sparepart_update', 145),
+(158, 'InventoryRejectSparepartView', 'Inventory Reject Sparepart View', 'inventory/5', 0),
+(159, 'InventoryRejectSparepartAdd', 'Inventory Reject Sparepart Add', 'inventory/inventory_add/5', 158),
+(160, 'InventoryRejectSparepartUpdate', 'Inventory Reject Sparepart Update', 'inventory/inventory_update/5', 158),
+(161, 'InventoryRejectSparepartDelete', 'Inventory Reject Sparepart Delete', 'inventory/inventory_delete/5', 158),
+(162, 'ExecuteAllBranchInventoryRejectSparepart', 'Execute All Branch Inventory Reject Sparepart', 'inventory/5/*', 0);
 
 -- --------------------------------------------------------
 
@@ -1242,7 +1200,7 @@ CREATE TABLE IF NOT EXISTS `pm_tab` (
   `pfdelete` tinyint(1) DEFAULT '0',
   `ptdelete` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `pm_tab`
@@ -1253,7 +1211,8 @@ INSERT INTO `pm_tab` (`pid`, `pdate`, `pfrom`, `pto`, `psubject`, `pmsg`, `pstat
 (2, 1397310166, 1, 2, 'testw', 'papspasas as as ', 0, 0, 0),
 (3, 1402771900, 1, 2, 'aa', 'aaa', 0, 0, 0),
 (4, 1402773166, 1, 2, 'qqqqqq', 'qqqqqqqqqq\n\n-------\ntest\nasasaskaskansknaksnaks an ksnaksnaksna ks naks an skna                        ', 0, 0, 0),
-(5, 1403422074, 1, 1, 'qqqqqq', 'aaaaa', 1, 0, 0);
+(5, 1403422074, 1, 1, 'qqqqqq', 'aaaaa', 1, 0, 0),
+(6, 1417071429, 1, 1, 'wew', 'wew', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1283,16 +1242,20 @@ CREATE TABLE IF NOT EXISTS `products_tab` (
   `pdisc` int(10) DEFAULT NULL,
   `pstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data untuk tabel `products_tab`
 --
 
 INSERT INTO `products_tab` (`pid`, `puid`, `pluid`, `pcid`, `pvolume`, `pgroup`, `ptype`, `ppid`, `pcode`, `pname`, `pdesc`, `phpp`, `pdist`, `psemi`, `pkey`, `pstore`, `pconsume`, `ppoint`, `pdisc`, `pstatus`) VALUES
-(1, 1, 1, 7, 15, 0, 2, 8, 'prod002', 'Produk 2', 'ere', 10000, 100000, 200000, 300000, 400000, 500000, 0, 15, 1),
-(2, NULL, NULL, 1, 20, 4, 0, 3, 'prod001', 'Produk1', 'produk bagus', 111000, 110000, 111100, 101000, 100000, 105000, 1, 15, 1),
-(3, NULL, NULL, 7, 1000, 4, 2, 3, 'prod000', 'prod A', 'ok', 1000, 1200, 1400, 1500, 1800, 2000, 20, 11, 1);
+(1, 1, 1, 1, 1, 4, 2, 3, 'KG0281', 'Kompor Gas', 'testing', 10000, 100000, 200000, 300000, 400000, 500000, 1, NULL, 1),
+(2, NULL, NULL, 1, 20, 4, 0, 3, 'T21CH01', 'TV 21 Inch', '111', 111, 110, 11110, 101, 10, 10, 1, NULL, 1),
+(3, NULL, NULL, 1, 111111, 4, 2, 3, 'DP0102', 'DVD Player', '111111', 1111, 1111, 1011, 1011, 1011, 1011, 111, NULL, 1),
+(4, NULL, NULL, 1, 100, 4, 0, 3, 'AWA102', 'Kipas Angin', 'Kipas Angin', 100, 100, 100, 100, 100, 100, 2, NULL, 1),
+(5, NULL, NULL, 1, 1, 4, 0, 3, 'NK-1113SP', 'COOKWARE SET', 'Alat Rumah Tangga', 200000, 242500, 242500, 242500, 257500, 283250, 2, NULL, 1),
+(6, NULL, NULL, 1, 1, 10, 0, 3, 'nk18', 'magic com', 'magic com', 120000, 125000, 100500, 90000, 85000, 70500, 1, NULL, 1),
+(7, NULL, NULL, 9, 1, 6, 0, 7, 'NK-75LW/BS', 'AC', 'ELEKTRONIK', 0, 6850000, 6850000, 6850000, 6090000, 7590000, 5, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1312,7 +1275,23 @@ CREATE TABLE IF NOT EXISTS `purchase_order_detail_tab` (
   `pstatus` tinyint(1) NOT NULL DEFAULT '0',
   `psisa` int(11) NOT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data untuk tabel `purchase_order_detail_tab`
+--
+
+INSERT INTO `purchase_order_detail_tab` (`pid`, `ppid`, `pppid`, `pcurrency`, `pqty`, `pharga`, `pdisc`, `pketerangan`, `pstatus`, `psisa`) VALUES
+(6, 3, 1, 'IDR', 2, 10000, 0, 'ok', 1, 0),
+(7, 3, 2, 'IDR', 9, 111, 0, '', 1, 5),
+(8, 5, 1, 'IDR', 5, 10000, 0, '', 1, 5),
+(9, 6, 1, 'IDR', 12, 10000, 0, '', 1, 0),
+(10, 6, 2, 'IDR', 5, 111, 0, '', 1, 0),
+(11, 7, 1, 'IDR', 7, 10000, 0, '', 1, 0),
+(12, 7, 2, 'IDR', 5, 111, 0, '', 1, 0),
+(13, 8, 1, 'IDR', 500, 10000, 0, 'ok', 1, 0),
+(14, 8, 2, 'IDR', 300, 111, 0, 'ok', 1, 0),
+(15, 9, 1, 'IDR', 5000, 10000, 0, 'ok', 1, 17);
 
 -- --------------------------------------------------------
 
@@ -1338,7 +1317,20 @@ CREATE TABLE IF NOT EXISTS `purchase_order_tab` (
   `disc` double NOT NULL,
   `total` double NOT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data untuk tabel `purchase_order_tab`
+--
+
+INSERT INTO `purchase_order_tab` (`pid`, `pbid`, `pnobukti`, `pref`, `ptgl`, `psid`, `pgudang`, `pstatus`, `pcdate`, `pcid`, `ptype`, `pssid`, `dpp`, `ppn`, `disc`, `total`) VALUES
+(3, 2, '1', 'sandi', '2014-11-02', 0, 'aasas', 3, '2014-11-02', 0, 'in', 0, 0, 0, 0, 0),
+(4, 2, '2', 'vvv', '2014-11-04', 0, 'aasas', 1, '2014-11-03', 0, 'in', 0, 0, 0, 0, 0),
+(5, 2, '3', 'zzz', '2014-11-04', 0, 'aasas', 1, '2014-11-03', 0, 'in', 0, 0, 0, 0, 0),
+(6, 3, '4', 'sandi', '2014-11-15', 0, 'Jakarta', 3, '2014-11-15', 0, 'in', 0, 0, 0, 0, 0),
+(7, 2, '5', 'ok', '2014-11-20', 0, 'aw', 3, '2014-11-19', 0, 'in', 0, 0, 0, 0, 0),
+(8, 2, '6', 'sandi', '2014-11-24', 0, 'aw', 3, '2014-11-24', 0, 'in', 0, 0, 0, 0, 0),
+(9, 2, '7', 'sss', '2014-11-24', 0, 'aw', 3, '2014-11-24', 0, 'in', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1381,17 +1373,22 @@ CREATE TABLE IF NOT EXISTS `retur_order_detail_tab` (
   `saccept` int(11) NOT NULL,
   `sreject` int(11) NOT NULL,
   `ssisa` int(11) NOT NULL,
-  `sstatus` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data untuk tabel `retur_order_detail_tab`
 --
 
-INSERT INTO `retur_order_detail_tab` (`sid`, `ssid`, `spid`, `sqty`, `sprice`, `sdisc`, `saccept`, `sreject`, `ssisa`, `sstatus`) VALUES
-(1, 1, 3, 10, 1200, 0, 8, 2, 10, 1),
-(2, 3, 3, 12, 1000, 0, 10, 2, 12, 1);
+INSERT INTO `retur_order_detail_tab` (`sid`, `ssid`, `spid`, `sqty`, `sprice`, `sdisc`, `saccept`, `sreject`, `ssisa`) VALUES
+(3, 1, 1, 12, 110000, 0, 9, 3, 12),
+(4, 1, 2, 19, 120, 0, 16, 3, 19),
+(5, 2, 1, 12, 100000, 0, 9, 3, 12),
+(6, 3, 1, 12, 100500, 0, 7, 5, 12),
+(7, 5, 2, 8, 110, 0, 6, 2, 8),
+(8, 4, 1, 20, 100000, 0, 16, 4, 20),
+(9, 6, 1, 5, 110000, 0, 2, 3, 5),
+(10, 7, 1, 20, 110000, 0, 10, 10, 20);
 
 -- --------------------------------------------------------
 
@@ -1415,19 +1412,22 @@ CREATE TABLE IF NOT EXISTS `retur_order_tab` (
   `scdate` date DEFAULT NULL,
   `sketerangan` varchar(50) NOT NULL,
   `sduedate` date DEFAULT NULL,
-  `spotong` int(11) NOT NULL DEFAULT '0',
-  `status_potong` int(11) NOT NULL DEFAULT '0',
+  `spotong` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data untuk tabel `retur_order_tab`
 --
 
-INSERT INTO `retur_order_tab` (`sid`, `sbid`, `snoro`, `snopo`, `sreff`, `stgl`, `scid`, `stype`, `ssid`, `sppn`, `sfreeppn`, `sstatus`, `scdate`, `sketerangan`, `sduedate`, `spotong`, `status_potong`) VALUES
-(1, 0, '1', '', 'sandi', '2015-05-23', 2, '', 1, '0', 0, 4, '2015-05-23', 'ok', '2015-06-02', 9600, 1),
-(2, 0, '7777', '', 'sandi', '2015-05-23', 2, '', 1, '0', 0, 0, '2015-05-23', 'ok', '2015-06-02', 0, 1),
-(3, 0, '3', '', 'sandi', '2015-05-23', 2, '', 1, '0', 0, 4, '2015-05-23', 'ok', '2015-06-02', 10000, 1);
+INSERT INTO `retur_order_tab` (`sid`, `sbid`, `snoro`, `snopo`, `sreff`, `stgl`, `scid`, `stype`, `ssid`, `sppn`, `sfreeppn`, `sstatus`, `scdate`, `sketerangan`, `sduedate`, `spotong`) VALUES
+(1, 0, '1', '', 'aaa', '2014-12-05', 1, '', 3, '0', 0, 4, '2014-12-05', 'kkk', '2014-12-20', 0),
+(2, 0, '2', '', 'kkk', '2014-12-05', 2, '', 2, '0', 0, 3, '2014-12-05', 'koko', '2014-12-15', 0),
+(3, 0, '3', '', 'ddd', '2014-12-12', 2, '', 2, '0', 0, 4, '2014-12-12', 'ok', '2014-12-22', 0),
+(4, 0, '4', '', 'sss', '2014-12-12', 2, '', 2, '0', 0, 3, '2014-12-12', '                        okk                       ', '2014-12-22', 0),
+(5, 0, '5', '', 'jjjj', '2014-12-12', 2, '', 2, '0', 0, 3, '2014-12-12', 'koko', '2014-12-22', 0),
+(6, 0, '6', '', 'aaa', '2014-12-13', 2, '', 2, '0', 0, 4, '2014-12-13', '', '2014-12-23', 0),
+(7, 0, '7', '', 'sandi', '2014-12-13', 2, '', 2, '0', 0, 4, '2014-12-13', '', '2014-12-23', 0);
 
 -- --------------------------------------------------------
 
@@ -1480,15 +1480,14 @@ CREATE TABLE IF NOT EXISTS `sales_commision_tab` (
   `scredite` double(10,2) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data untuk tabel `sales_commision_tab`
 --
 
 INSERT INTO `sales_commision_tab` (`sid`, `suid`, `sluid`, `sbid`, `scid`, `scoma`, `scomb`, `scomc`, `scomd`, `scome`, `scredita`, `screditb`, `screditc`, `screditd`, `scredite`, `sstatus`) VALUES
-(1, 1, 1, 1, 1, 90.00, 90.00, 90.00, 0.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 1),
-(2, NULL, NULL, 2, 7, 90.00, 90.00, 90.00, 0.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 1);
+(1, 1, 1, 1, 1, -90.00, 90.00, 90.00, 0.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 1);
 
 -- --------------------------------------------------------
 
@@ -1505,16 +1504,33 @@ CREATE TABLE IF NOT EXISTS `sales_order_detail_tab` (
   `sdisc` double DEFAULT NULL,
   `ssisa` int(11) NOT NULL,
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data untuk tabel `sales_order_detail_tab`
 --
 
 INSERT INTO `sales_order_detail_tab` (`sid`, `ssid`, `spid`, `sqty`, `sprice`, `sdisc`, `ssisa`) VALUES
-(1, 1, 3, 45, 1200, 0, 0),
-(2, 1, 1, 8, 100000, 0, 0),
-(3, 3, 3, 56, 1200, 0, 0);
+(19, 16, 1, 9, 500000, 0, 9),
+(20, 16, 2, 3, 10, 0, 3),
+(22, 18, 1, 9, 100000, 0, 0),
+(23, 18, 1, 12, 100000, 0, 0),
+(24, 19, 1, 8, 100000, 0, 0),
+(25, 19, 2, 5, 110, 0, 0),
+(27, 19, 1, 8, 90000, 0, 0),
+(28, 20, 1, 8, 100000, 0, 0),
+(30, 20, 0, 0, 0, 0, 0),
+(31, 20, 0, 0, 0, 0, 0),
+(32, 21, 1, 8, 100000, 0, 0),
+(33, 22, 1, 8, 100000, 0, 0),
+(34, 22, 2, 50, 110, 0, 0),
+(35, 14, 0, 0, 0, 0, 0),
+(36, 14, 0, 0, 0, 0, 0),
+(37, 25, 2, 2, 110, 0, 0),
+(38, 25, 0, 0, 0, 0, 0),
+(39, 25, 0, 0, 0, 0, 0),
+(40, 25, 0, 0, 0, 0, 0),
+(42, 25, 2, 6, 110, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1540,16 +1556,22 @@ CREATE TABLE IF NOT EXISTS `sales_order_tab` (
   `sduedate` date DEFAULT NULL,
   `stypepay` enum('auto','cash','credit') NOT NULL,
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data untuk tabel `sales_order_tab`
 --
 
 INSERT INTO `sales_order_tab` (`sid`, `sbid`, `snoso`, `snopo`, `sreff`, `stgl`, `scid`, `stype`, `ssid`, `sppn`, `sfreeppn`, `sstatus`, `scdate`, `sketerangan`, `sduedate`, `stypepay`) VALUES
-(1, 1, '1', '', 'sandi', '2015-05-23', 2, '', 1, '0', 0, 3, '2015-05-23', 'ok', '2015-06-02', 'auto'),
-(2, 0, '2', '', 'sandi', '2015-05-23', 2, '', 1, '0', 0, 1, '2015-05-23', '', '2015-06-02', 'auto'),
-(3, 1, '3', '', 'gggg', '2015-05-23', 2, '', 1, '0', 0, 3, '2015-05-23', '', '2015-06-02', 'auto');
+(16, 2, '2', '', 'ggg', '2014-11-04', 2, '', 2, '1', 1, 3, '2014-11-04', 'ok', '2014-11-14', 'auto'),
+(18, 2, '2', '', 'sandi', '2014-11-05', 2, '', 2, '1', 1, 3, '2014-11-05', 'ok', '2014-11-15', 'auto'),
+(19, 2, '3', '', 'sandi aries', '2014-11-15', 2, '', 2, '1', 1, 3, '2014-11-15', 'ok', '2014-11-25', 'auto'),
+(20, 2, '4', '', 'sandii', '2014-11-15', 2, '', 2, '1', 1, 3, '2014-11-23', 'jkt      ok      ', '2014-12-03', 'auto'),
+(21, 2, '5', '', 'ssss', '2014-11-24', 2, '', 2, '0', 0, 3, '2014-11-24', 'ok', '2014-12-04', 'auto'),
+(22, 2, '6', '', 'sandi', '2014-11-27', 2, '', 2, '0', 0, 3, '2014-11-27', '', '2014-12-07', 'auto'),
+(23, 0, '1', '', 'zzz', '2014-12-07', 2, '', 2, '0', 0, 0, '2014-12-07', '0', '2014-12-17', ''),
+(24, 0, '2', '', 'sss', '2014-12-07', 2, '', 2, '0', 0, 0, '2014-12-07', '0', '2014-12-17', ''),
+(25, 1, '1', '', '', '0000-00-00', 4, '', 1, '0', 0, 3, '2015-05-25', '', '1970-01-01', 'auto');
 
 -- --------------------------------------------------------
 
@@ -1567,18 +1589,23 @@ CREATE TABLE IF NOT EXISTS `sales_tab` (
   `sphone` varchar(50) DEFAULT NULL,
   `semail` varchar(50) DEFAULT NULL,
   `sjoindate` int(10) DEFAULT NULL,
-  `sarea` tinyint(1) DEFAULT '0',
+  `sarea` varchar(10) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data untuk tabel `sales_tab`
 --
 
 INSERT INTO `sales_tab` (`sid`, `suid`, `sluid`, `sbid`, `scode`, `sname`, `sphone`, `semail`, `sjoindate`, `sarea`, `sstatus`) VALUES
-(1, NULL, NULL, 1, 'SA001', 'sales A', '08777778888*08777778787', 'sales@gmail.com', 1432332000, 0, 1),
-(2, NULL, NULL, 1, 'SA002', 'sales B', '08578999*08567878', 'sales2@gmail.com', 1432332000, 0, 1);
+(1, 1, 1, 1, 'wewe', 'Sales 001', '1212212*121212', 'admin@admin.com', -25200, NULL, 2),
+(2, 1, 1, 1, 'sales2', 'sales002', '1212212*121212', 'admin@admin.com', -25200, NULL, 2),
+(3, NULL, NULL, 2, '3', 'sales003', '9798798*989898798', 'sss@szss.com', -25200, '0,1', 2),
+(4, NULL, NULL, 8, 'leo', 'leony chandrawati', '08128068791*081905141732', 'leony@nikoelectronic.com', 1236099600, '0,1,2', 1),
+(5, NULL, NULL, 8, 'ir', 'irwan dermawan', '081380012255*00', 'irwandermawan333@yahoo.com', 0, '0,2', 1),
+(6, NULL, NULL, 8, 'al', 'alex soetoyo', '085213027599*08159648010', '-', 1131469200, '0,2', 1),
+(7, NULL, NULL, 1, 'PBS02', 'Gratcy Palma P Hutapea', '8909809*121212', 'admin@admin.com', 1432314000, '0', 1);
 
 -- --------------------------------------------------------
 
@@ -1618,48 +1645,161 @@ CREATE TABLE IF NOT EXISTS `sales_target_tab` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `services_sparepart_tab`
+-- Struktur dari tabel `services_products_tab`
 --
 
-CREATE TABLE IF NOT EXISTS `services_sparepart_tab` (
+CREATE TABLE IF NOT EXISTS `services_products_tab` (
   `sid` int(10) NOT NULL AUTO_INCREMENT,
-  `suid` int(10) DEFAULT NULL,
-  `sluid` int(10) DEFAULT NULL,
   `ssid` int(10) DEFAULT NULL,
-  `sssid` int(10) DEFAULT NULL,
-  `sstatus` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`sid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `services_tab`
---
-
-CREATE TABLE IF NOT EXISTS `services_tab` (
-  `sid` int(10) NOT NULL AUTO_INCREMENT,
-  `suid` int(10) DEFAULT NULL,
-  `sluid` int(10) DEFAULT NULL,
-  `sdate` int(10) DEFAULT NULL,
   `spid` int(10) DEFAULT NULL,
-  `sbid` int(10) DEFAULT NULL,
-  `sqty` int(3) DEFAULT NULL,
-  `snoseri` varchar(50) DEFAULT NULL,
-  `scondition` tinyint(1) DEFAULT '0',
-  `sdatefrom` int(10) DEFAULT NULL,
-  `sdateto` int(10) DEFAULT NULL,
+  `sqty` int(10) DEFAULT NULL,
   `sstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data untuk tabel `services_tab`
+-- Dumping data untuk tabel `services_products_tab`
 --
 
-INSERT INTO `services_tab` (`sid`, `suid`, `sluid`, `sdate`, `spid`, `sbid`, `sqty`, `snoseri`, `scondition`, `sdatefrom`, `sdateto`, `sstatus`) VALUES
-(1, 1, 1, 1397310166, 1, 1, 1, '1212asa', 1, 1397310166, 1397310166, 1),
-(2, NULL, NULL, 1411476990, 1, 2, 11, '2323aas', 1, 1388505600, 1420646400, 1);
+INSERT INTO `services_products_tab` (`sid`, `ssid`, `spid`, `sqty`, `sstatus`) VALUES
+(1, 1, 5, 10, 1),
+(2, 1, 3, 10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `services_report_product_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `services_report_product_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `ssid` int(10) DEFAULT NULL,
+  `spid` int(10) DEFAULT '0',
+  `sqty` int(10) DEFAULT '0',
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data untuk tabel `services_report_product_tab`
+--
+
+INSERT INTO `services_report_product_tab` (`sid`, `ssid`, `spid`, `sqty`, `sstatus`) VALUES
+(1, 1, 5, 10, 1),
+(2, 1, 3, 9, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `services_report_sparepart_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `services_report_sparepart_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `ssid` int(10) DEFAULT NULL,
+  `sssid` int(10) DEFAULT NULL,
+  `sqty` int(10) DEFAULT NULL,
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data untuk tabel `services_report_sparepart_tab`
+--
+
+INSERT INTO `services_report_sparepart_tab` (`sid`, `ssid`, `sssid`, `sqty`, `sstatus`) VALUES
+(1, 1, 4, 9, 1),
+(2, 1, 3, 8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `services_report_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `services_report_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `ssid` int(10) DEFAULT NULL,
+  `sdate` int(10) DEFAULT NULL,
+  `sdesc` varchar(300) DEFAULT NULL,
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `services_report_tab`
+--
+
+INSERT INTO `services_report_tab` (`sid`, `ssid`, `sdate`, `sdesc`, `sstatus`) VALUES
+(1, 1, 1422036408, 'wewewe', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `services_sparepart_detail_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `services_sparepart_detail_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `suid` int(10) DEFAULT NULL,
+  `sluid` int(10) DEFAULT NULL,
+  `ssid` int(10) DEFAULT NULL,
+  `sssid` int(10) DEFAULT NULL,
+  `sqty` int(10) DEFAULT NULL,
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data untuk tabel `services_sparepart_detail_tab`
+--
+
+INSERT INTO `services_sparepart_detail_tab` (`sid`, `suid`, `sluid`, `ssid`, `sssid`, `sqty`, `sstatus`) VALUES
+(1, NULL, NULL, 1, 4, 10, 1),
+(2, NULL, NULL, 1, 3, 10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `services_sparepart_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `services_sparepart_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `ssid` int(10) DEFAULT NULL,
+  `sdesc` varchar(350) DEFAULT NULL,
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `services_sparepart_tab`
+--
+
+INSERT INTO `services_sparepart_tab` (`sid`, `ssid`, `sdesc`, `sstatus`) VALUES
+(1, 1, 'wewewe', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `services_tecnical_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `services_tecnical_tab` (
+  `sid` int(10) NOT NULL AUTO_INCREMENT,
+  `ssid` int(10) DEFAULT NULL,
+  `stid` int(10) DEFAULT NULL,
+  `sstatus` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data untuk tabel `services_tecnical_tab`
+--
+
+INSERT INTO `services_tecnical_tab` (`sid`, `ssid`, `stid`, `sstatus`) VALUES
+(1, 1, 2, 1),
+(2, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1715,7 +1855,7 @@ INSERT INTO `sparepart_tab` (`sid`, `suid`, `sluid`, `sgroupproduct`, `scode`, `
 (1, 1, 1, 4, 'D018d', 'Dioda Penyearah', '1021902', 10, 10, 0, 1),
 (2, NULL, NULL, 4, 'LDV20', 'Lensa DVD', '34wsdsds', 2, 15, 0, 1),
 (3, NULL, NULL, 4, 'D018d1', 'SCR (Silicon Control Rectifier)', 'A21O90', 100, 200, 0, 1),
-(4, NULL, NULL, 6, 'CK102YZQ', 'Kapasitor', 'A21O90101', 100, 200, 1, 1);
+(4, NULL, NULL, 6, 'CK102YZQ', 'Kapasitor', 'A21O90101', 110000, 2000000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1763,7 +1903,7 @@ CREATE TABLE IF NOT EXISTS `target_tab` (
   `tpaytarget` int(10) DEFAULT NULL,
   `tstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `target_tab`
@@ -1771,9 +1911,7 @@ CREATE TABLE IF NOT EXISTS `target_tab` (
 
 INSERT INTO `target_tab` (`tid`, `tbid`, `tsid`, `tmy`, `ttarget`, `tpaytarget`, `tstatus`) VALUES
 (1, 1, 1, '06/2004', 1000, NULL, 1),
-(2, 2, 2, '02/2014', 222, 101, 1),
-(3, 1, 1, '01/2015', 10000, 10000, 1),
-(4, 1, 1, '02/2015', 9000, 9000, 1);
+(2, 2, 2, '02/2014', 222, 101, 1);
 
 -- --------------------------------------------------------
 
@@ -1793,17 +1931,16 @@ CREATE TABLE IF NOT EXISTS `technical_tab` (
   `tjoindate` int(10) DEFAULT NULL,
   `tstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `technical_tab`
 --
 
 INSERT INTO `technical_tab` (`tid`, `tuid`, `tluid`, `tbid`, `tcode`, `tname`, `tphone`, `temail`, `tjoindate`, `tstatus`) VALUES
-(1, 1, 1, 2, 'sasas', 'palma', '098128192*121212', 'palma@admin.com', 1391616000, 1),
-(2, NULL, NULL, 2, 'asasx', 'palma', '8909809*121212', 'palma@admin.com', 1415808000, 1),
-(3, NULL, NULL, 3, 'AB', 'ABABA', '978978*00', 'ss@ss.com', 1441317600, 1),
-(4, NULL, NULL, 4, 'AB', 'ABABA', '978978*00', '-', 1428616800, 1);
+(1, 1, 1, 1, 'D10A2', 'Gratcy Palma P Hutapea', '098128192*121212', 'palma@admin.com', 1391616000, 1),
+(2, NULL, NULL, 1, '01D21', 'Untung Ariesandi', '8909809*121212', 'untung@admin.com', 1356969600, 1),
+(3, NULL, NULL, 8, 'sm', 'suminto', '081511373055*00', '-', 1362758400, 1);
 
 -- --------------------------------------------------------
 
@@ -1822,15 +1959,29 @@ CREATE TABLE IF NOT EXISTS `users_tab` (
   `ulastlogin` varchar(21) DEFAULT NULL,
   `ustatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `users_tab`
 --
 
 INSERT INTO `users_tab` (`uid`, `ugid`, `ubid`, `uemail`, `udivision`, `uposition`, `upass`, `ulastlogin`, `ustatus`) VALUES
-(1, 1, 1, 'admin@admin.com', 'IT', 'Programmer', 'e89591ee9b8e7018511649a2146ae279', '*1432370818', 1),
-(2, 2, 2, 'admin@dluxor.com', 'web', 'programmer', 'e89591ee9b8e7018511649a2146ae279', '*1416437009', 1);
+(1, 1, 1, 'admin@admin.com', 'IT', 'Programmer', 'e89591ee9b8e7018511649a2146ae279', '2130706433*1432970203', 1),
+(2, 2, 2, 'admin@dluxor.com', 'web', 'programmer', 'e89591ee9b8e7018511649a2146ae279', '2130706433*1422075906', 1),
+(3, 2, 1, 'pusat@admin.com', 'Finance', 'Finance', 'e89591ee9b8e7018511649a2146ae279', '3232236145*1429952100', 1),
+(4, 2, 3, 'bandung@admin.com', 'Finance', 'Finance', '6f83286fce007c0cb22aa2beaae66165', NULL, 1),
+(5, 2, 4, 'bandung@admin.com', 'Finance', 'Finance', 'e89591ee9b8e7018511649a2146ae279', NULL, 2);
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `gl_detail_tab`
+--
+ALTER TABLE `gl_detail_tab`
+  ADD CONSTRAINT `fk_gl_detail_tab_1` FOREIGN KEY (`ggid`) REFERENCES `gl_tab` (`gid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_gl_detail_tab_2` FOREIGN KEY (`gcid`) REFERENCES `coa_tab` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

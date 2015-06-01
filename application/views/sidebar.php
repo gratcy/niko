@@ -95,7 +95,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">6</span>&nbsp;
+                       &nbsp; <span class="label label-primary">5</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
@@ -156,7 +156,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">2</span>&nbsp;
+                       &nbsp; <span class="label label-primary">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="sales">
 						<?php if (__get_roles('SalesOrderView')) : ?>
@@ -170,7 +170,6 @@
 						<?php endif; ?>
 						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Retur Order </a></li>
 						<li class=""><a href="<?php echo site_url('pembayaran/home'); ?>"><i class="icon-angle-right"></i> Pembayaran </a></li>
-						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Komisi </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>
@@ -190,6 +189,7 @@
                        
 				<?php if (__get_roles('COAView')) : ?>
                         <li class=""><a href="<?php echo site_url('coa'); ?>"><i class="icon-angle-right"></i> COA </a></li>
+                        <li class=""><a href="<?php echo site_url('coagroup'); ?>"><i class="icon-angle-right"></i> COA Group </a></li>
 			   <?php endif; ?>
 				<?php if (__get_roles('JournalView')) : ?>
                          <li class=""><a href="<?php echo site_url('journal'); ?>"><i class="icon-angle-right"></i> Journal </a></li>
@@ -210,7 +210,7 @@
                     </a>
                     <ul class="collapse" id="Report">
                        
-                        <li class=""><a href="<?php echo site_url('sales_commision'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
+						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
                         <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> Technical Commision </a></li>
                         <li class=""><a href="javascript:void(0);"><i class="icon-angle-right"></i> Stock Opname </a>
                         <ul>
@@ -283,10 +283,10 @@
 	else if (/\/sales_order|delivery_order|retur_order|pembayaran/.test(window.location.href) === true) {
 		$('ul#sales').addClass('in');
 	}
-	else if (/\/coa|journal|generalledger|closingperiod/.test(window.location.href) === true) {
+	else if (/\/coa|coagroup|journal|generalledger|closingperiod/.test(window.location.href) === true) {
 		$('ul#accounting').addClass('in');
 	}
-	else if (/\/sales_commision|technical_commision|reportopname/.test(window.location.href) === true) {
+	else if (/\/komisi\/home|technical_commision|reportopname/.test(window.location.href) === true) {
 		$('ul#Report').addClass('in');
 	}
 	else if (/\/branch|customers|products|packaging|group_product|categories|sparepart|target|sales|sales_commision|technical|suplier/.test(window.location.href) === true) {

@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+header('Content-type:application/javascript');
 $mysql_server = $hostname;
 $mysql_login = $username;
 $mysql_password = $password;
@@ -7,8 +9,8 @@ $mysql_database = $database;
 if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
 
 
-mysql_connect($mysql_server, $mysql_login, $mysql_password);
-mysql_select_db($mysql_database);
+$conn = mysql_connect($mysql_server, $mysql_login, $mysql_password);
+$db = mysql_select_db($mysql_database, $conn);
 
 $req = "SELECT cid,cbid,ccat, cname,caddr,cdeliver,cphone,csid,ccash,ccredit,climit, cnpwp,cpkp,cspecial,bname,sname "
 	."FROM customers_tab a,branch_tab b,sales_tab c "

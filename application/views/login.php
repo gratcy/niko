@@ -6,7 +6,7 @@
 <!-- BEGIN HEAD -->
 <head>
      <meta charset="UTF-8" />
-    <title>PT. Niko Elektronik Indonesia</title>
+    <title>PT. Niko Electronik Indonesia</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -24,6 +24,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+	<link rel="shortcut icon" href="<?php echo site_url('application/views/assets/img/favicon.ico'); ?>" />
 </head>
     <!-- END HEAD -->
 

@@ -23,7 +23,7 @@
                     <label for="text1" class="control-label col-lg-4">Account Type</label>
 
                     <div class="col-lg-4">
-                        <select name="atype" class="form-control"><?php echo __get_account_type($detail[0] -> catype,2); ?></select>
+                        <select name="atype" class="form-control"><?php echo $coagroup; ?></select>
                     </div>
                 </div>
 

@@ -293,7 +293,7 @@
             <div class="well well-small">
                 <button class="btn btn-success btn-block" onclick="location.href='<?php echo site_url('users');?>'"> Users </button>
                 <button class="btn btn-warning btn-block" onclick="location.href='<?php echo site_url('sales');?>'"> Sales </button>
-                <button class="btn btn-danger btn-block" onclick="location.href='<?php echo site_url('services');?>'"> Services </button>
+                <button class="btn btn-danger btn-block" onclick="location.href='<?php echo site_url('services_wo');?>'"> Services WO </button>
                 <button class="btn btn-inverse btn-block" onclick="location.href='<?php echo site_url('inventory/1');?>'"> Inventory Product </button>
                 <button class="btn btn-primary btn-block" onclick="location.href='<?php echo site_url('inventory/2');?>'"> Inventory Sparepart </button>
             </div>

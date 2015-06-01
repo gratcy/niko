@@ -44,10 +44,10 @@ $addr = explode('*', $detail[0] -> caddr);
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Address II</label>
+                    <label for="text1" class="control-label col-lg-4">Address I</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr" class="form-control" placeholder="Address II"> <?php echo $addr[0]; ?></textarea>
+                        <textarea name="addr" class="form-control" placeholder="Address I"> <?php echo $addr[0]; ?></textarea>
                     </div>
                 </div>
 

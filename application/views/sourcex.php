@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+header('Content-type:application/javascript');
 $mysql_server = $hostname;
 $mysql_login = $username;
 $mysql_password = $password;

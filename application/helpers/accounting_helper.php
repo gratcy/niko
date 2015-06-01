@@ -1,5 +1,4 @@
-<?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 function __get_account_type($id, $type) {
 	$res = '';
@@ -26,7 +25,7 @@ function __extract_coa(array $arr, $pass=0) {
 	$res = '';
 	foreach($arr as $k => $v) {
 		$res .= '<tr>';
-		$res .= '<td>'.__get_account_type($v -> catype,1).'</td>';
+		$res .= '<td>'.$v -> cgname.'</td>';
 		$res .= '<td>'.__get_acpas($v -> ctype,1).'</td>';
 		$res .= '<td>'.$v -> ccode.'</td>';
 		$res .= '<td>'.str_repeat("--", $pass).' '.$v -> cname.'</td>';
@@ -53,4 +52,17 @@ function __get_coa_arr(array $elements, $parentId=0) {
 		}
 	}
 	return $branch;
+}
+
+function __get_transaction_type($id, $type) {
+	$arr = array('Jurnal Penjualan','Jurnal Penerimaan Kas','Jurnal Pembelian','Jurnal Pengeluaran Kas','Jurnal Umum','Jurnal Penyesuaian','Jurnal Penutup','Jurnal Balik');
+	if ($type == 1) return (isset($arr[$id]) ? $arr[$id] : '');
+	$res = '';
+	foreach($arr as $k => $v) :
+		if ($k == $id)
+			$res .= '<option value="'.$k.'" selected>'.$v.'</option>';
+		else
+			$res .= '<option value="'.$k.'">'.$v.'</option>';
+	endforeach;
+	return $res;
 }

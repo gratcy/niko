@@ -288,3 +288,15 @@ function __get_sales_area($id, $type='') {
 		return $res;
 	}
 }
+
+function __keyTMP($str) {
+	return str_replace('/','PalMa',$str);
+}
+
+function __get_PTMP() {
+    $arr = array();
+    $CI =& get_instance();
+    $res = json_encode($CI -> memcachedlib -> get(__keyTMP($_SERVER['REQUEST_URI'])));
+    $CI -> memcachedlib -> delete(__keyTMP($_SERVER['REQUEST_URI']));
+    return $res;
+}
