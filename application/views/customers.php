@@ -45,11 +45,11 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Name</th>
           <th>Category</th>
+          <th>Name</th>
           <th>Address</th>
-          <th>Phone</th>
-          <th>Salesman</th>
+          <th>Sales</th>
+          <th>Top</th>
           <th>Limit</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
@@ -58,16 +58,15 @@ left:inherit!important;
                                     <tbody>
 		  <?php
 		  foreach($customers as $k => $v) :
-		  $phone = explode('*', $v -> cphone);
 		  $addr = explode('*', $v -> caddr);
 		  ?>
                                         <tr>
-          <td><?php echo $v -> cname; ?></td>
           <td><?php echo __get_customer_category($v -> ccat,1); ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $addr[0]. ', ' . __get_cities($v -> ccity,1). ', ' . __get_province($v -> cprov,1); ?></td>
-          <td><?php echo $phone[0] . '/' . $phone[1]; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> ccredit; ?></td>
+          <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
+          <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CustomersUpdate')) : ?>

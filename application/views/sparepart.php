@@ -16,7 +16,7 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Sparepart </h2>
+                        <h2> Spareparts </h2>
                     </div>
                 </div>
 
@@ -48,9 +48,9 @@ left:inherit!important;
           <th>Group Product</th>
           <th>Code</th>
           <th>Name</th>
-          <th>No Component</th>
-          <th style="text-align:center;">Price Agent</th>
-          <th style="text-align:center;">Price Retail</th>
+          <th>Component No.</th>
+          <th>Price Agent</th>
+          <th>Price Retail</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -64,8 +64,8 @@ left:inherit!important;
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
+          <td><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
+          <td><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('SparepartUpdate')) : ?>

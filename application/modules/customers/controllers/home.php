@@ -35,8 +35,8 @@ class Home extends MY_Controller {
 			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
 			$addr2 = $this -> input -> post('addr2', TRUE);
-			$cash = $this -> input -> post('cash', TRUE);
-			$credit = $this -> input -> post('credit', TRUE);
+			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
+			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
 			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
@@ -87,8 +87,8 @@ class Home extends MY_Controller {
 			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
 			$addr2 = $this -> input -> post('addr2', TRUE);
-			$cash = $this -> input -> post('cash', TRUE);
-			$credit = $this -> input -> post('credit', TRUE);
+			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
+			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
 			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);

@@ -259,9 +259,9 @@ function __get_product_type($cid,$type) {
 
 function __get_customer_retur($status, $type) {
 	if ($type == 1)
-		return ($status === 0 ? 'Tukar Barang' : 'Potong Hutang');
+		return ($status === 0 ? 'Tukar Guling' : 'Potong Nota');
 	else
-		return ($status === 0 ? '<label> Tukar Barang <input type="radio" class="uniform" name="ctyperetur" value="0" checked /></label> <label>Potong Hutang <input type="radio" class="uniform" name="ctyperetur" value="1" /></label>' : '<label> Tukar Barang <input type="radio" class="uniform" name="ctyperetur" value="0" /></label> <label>Potong Hutang <input type="radio" class="uniform" name="ctyperetur" value="1" checked /></label>');
+		return ($status === 0 ? '<label> Tukar Guling <input type="radio" class="uniform" name="ctyperetur" value="0" checked /></label> <label>Potong Nota <input type="radio" class="uniform" name="ctyperetur" value="1" /></label>' : '<label> Tukar Guling <input type="radio" class="uniform" name="ctyperetur" value="0" /></label> <label>Potong Nota <input type="radio" class="uniform" name="ctyperetur" value="1" checked /></label>');
 }
 
 function __get_sales_area($id, $type='') {

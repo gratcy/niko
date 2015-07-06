@@ -76,16 +76,6 @@ $addr = explode('*', $detail[0] -> caddr);
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Delivery</label>
-
-                    <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_customers_spec($detail[0] -> cdeliver,2); ?>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Phone I</label>
 
                     <div class="col-lg-4">
@@ -106,6 +96,16 @@ $addr = explode('*', $detail[0] -> caddr);
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="FAX" name="fax" class="form-control" value="<?php echo $phone[2]; ?>" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Delivery</label>
+
+                    <div class="col-lg-4">
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec($detail[0] -> cdeliver,2); ?>
+                    </div>
                     </div>
                 </div>
 
@@ -136,7 +136,7 @@ $addr = explode('*', $detail[0] -> caddr);
                     <label for="text1" class="control-label col-lg-4">TOP Cash</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="cash" class="form-control" value="<?php echo $detail[0] -> ccash; ?>" />
+                        <input type="text" name="cash" class="form-control" value="<?php echo __get_rupiah($detail[0] -> ccash,2); ?>" onkeyup="formatharga(this.value,this)" style="text-align:right;" />
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@ $addr = explode('*', $detail[0] -> caddr);
                     <label for="text1" class="control-label col-lg-4">TOP Credit</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="credit" class="form-control" value="<?php echo $detail[0] -> ccredit; ?>" />
+                        <input type="text" name="credit" class="form-control" value="<?php echo __get_rupiah($detail[0] -> ccredit,2); ?>" onkeyup="formatharga(this.value,this)" style="text-align:right;" />
                     </div>
                 </div>
 

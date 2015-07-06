@@ -41,21 +41,6 @@
                                 <?php echo __get_product_type(0,2); ?>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Packaging</label>
-
-                    <div class="col-lg-4">
-						<select name="packaging" data-placeholder="Product Packaging" class="form-control chzn-select"><?php echo $packaging; ?></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Isi / Volume</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Isi / Volume" name="isi" class="form-control" />
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
@@ -69,6 +54,21 @@
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="Product Name" name="name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Volume</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Isi / Volume" name="isi" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Packaging</label>
+
+                    <div class="col-lg-4">
+						<select name="packaging" data-placeholder="Product Packaging" class="form-control chzn-select"><?php echo $packaging; ?></select>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 ﻿    <style>
     #txtHint{width:94%!important;}
     </style>
- <link href="<?php echo site_url('application/views/assets/css/layout2.css');?>" rel="stylesheet" />
+ <link href="<?php echo site_url('application/views/assets/css/layout.css');?>" rel="stylesheet" />
  <link href="<?php echo site_url('application/views/assets/plugins/wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css');?>" rel="stylesheet" />
      <script src="<?php echo site_url('application/views/assets/plugins/wysihtml5/lib/js/wysihtml5-0.3.0.js');?>"></script>
     <script src="<?php echo site_url('application/views/assets/plugins/bootstrap-wysihtml5-hack.js');?>"></script>
@@ -34,12 +34,13 @@
                             </a>
                             <a class="quick-btn" href="<?php echo site_url('services_wo');?>">
                                 <i class="icon-wrench icon-2x"></i>
-                                <span>Services WO</span>
+                                <span>Services</span>
                             </a>
                             <a class="quick-btn" href="<?php echo site_url('sparepart');?>">
                                 <i class="icon-cogs icon-2x"></i>
-                                <span>Sparepart</span>
+                                <span>Spareparts</span>
                             </a>
+<!--
                             <a class="quick-btn" href="<?php echo site_url('journal');?>">
                                 <i class="icon-th icon-2x"></i>
                                 <span>Journal</span>
@@ -52,6 +53,7 @@
                                 <i class="icon-list-alt icon-2x"></i>
                                 <span>GL</span>
                             </a>
+-->
                         </div>
                     </div>
                 </div>
@@ -109,7 +111,7 @@
                                 </ul>
                             </div>
                         <div class="panel-heading">
-                            Sparepart
+                            Spareparts
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -159,10 +161,10 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Branch</th>
           <th>Name</th>
-          <th>NPWP</th>
-          <th>Phone</th>
+          <th>Sales</th>
+          <th>Top</th>
+          <th>Limit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -171,10 +173,10 @@
 		  $phone = explode('*', $v -> cphone);
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> cnpwp; ?></td>
-          <td><?php echo $phone[0]; ?></td>
+          <td><?php echo $v -> sname; ?></td>
+          <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
+          <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -251,6 +253,7 @@
                             </div>
                         </div>
 -->
+<!--
                         <div class="col-lg-6">
                             <div class="box">
                                 <header>
@@ -278,11 +281,13 @@
                                 </div>
                             </div>
                         </div>
+-->
                         </div>
             </div>
         </div>
         <!--END PAGE CONTENT -->
          <!-- RIGHT STRIP  SECTION -->
+<!--
         <div id="right">
             <div class="well well-small">
                 <ul class="list-unstyled">
@@ -298,6 +303,7 @@
                 <button class="btn btn-primary btn-block" onclick="location.href='<?php echo site_url('inventory/2');?>'"> Inventory Sparepart </button>
             </div>
         </div>
+-->
         </div>
          <!-- END RIGHT STRIP  SECTION -->
 <script type="text/javascript">

@@ -1,7 +1,7 @@
 ﻿
    <!-- FOOTER -->
     <div id="footer">
-        <p>&copy;  PT. Niko Electronik Indonesia 2014</p>
+        <p>&copy;  PT. Niko Elektronik Indonesia <?php date('Y'); ?></p>
     </div>
     <!--END FOOTER -->
 

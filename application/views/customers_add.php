@@ -73,16 +73,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Delivery</label>
-
-                    <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_customers_spec(0,2); ?>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Phone I</label>
 
                     <div class="col-lg-4">
@@ -107,10 +97,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Contact Name</label>
+                    <label for="text1" class="control-label col-lg-4">Delivery</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" />
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec(0,2); ?>
+                    </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -130,10 +122,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Contact Name</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">TOP Cash</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="cash" class="form-control" data-placeholder="TOP Sales" />
+                        <input type="text" name="cash" class="form-control" data-placeholder="TOP Sales" onkeyup="formatharga(this.value,this)" value="0" style="text-align:right;" />
                     </div>
                 </div>
 
@@ -141,7 +141,7 @@
                     <label for="text1" class="control-label col-lg-4">TOP Credit</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="credit" class="form-control" data-placeholder="TOP Credit" />
+                        <input type="text" name="credit" class="form-control" data-placeholder="TOP Credit" onkeyup="formatharga(this.value,this)" value="0" style="text-align:right;" />
                     </div>
                 </div>
 

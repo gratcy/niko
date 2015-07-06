@@ -47,10 +47,14 @@ left:inherit!important;
                                         <tr>
           <th>Code</th>
           <th>Name</th>
-          <th>Isi / Volume</th>
-          <th style="text-align:center;">Distributor Price</th>
-          <th style="text-align:center;">Semi Price</th>
-          <th style="text-align:center;">Key Price</th>
+          <th>Volume</th>
+          <th>Packaging</th>
+          <th>Price Distributor</th>
+          <th>Price Semi</th>
+          <th>Price Agent</th>
+          <th>Price Store</th>
+          <th>Price Consume</th>
+          <th>Status</th>
 		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
           <th style="width: 50px;"></th>
           <?php endif; ?>
@@ -64,9 +68,13 @@ left:inherit!important;
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
           <td style="text-align:right;"><?php echo $v -> pvolume; ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> pdist,1); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> psemi,1); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> pkey,1); ?></td>
+          <td><?php echo $v -> ppname; ?></td>
+          <td><?php echo __get_rupiah($v -> pdist,1); ?></td>
+          <td><?php echo __get_rupiah($v -> psemi,1); ?></td>
+          <td><?php echo __get_rupiah($v -> pkey,1); ?></td>
+          <td><?php echo __get_rupiah($v -> pstore,1); ?></td>
+          <td><?php echo __get_rupiah($v -> pconsume,1); ?></td>
+          <td><?php echo __get_status($v -> pstatus,1); ?></td>
 		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
 		  <td>
 				<?php if (__get_roles('ProductsUpdate')) : ?>

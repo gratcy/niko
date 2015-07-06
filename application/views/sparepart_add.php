@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Component</label>
+                    <label for="text1" class="control-label col-lg-4">Component No.</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="No Component" name="nocomp" class="form-control" />

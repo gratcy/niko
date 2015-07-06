@@ -5,7 +5,7 @@ class Products_model extends CI_Model {
     }
 	
 	function __get_products($bid) {
-		return 'SELECT a.*,b.cname,c.cname as ppname,d.cname as cnamegroup,e.mqty FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 LEFT JOIN moq_tab e ON a.pid=e.mpid AND e.mbid='.$bid.' WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid DESC';
+		return 'SELECT a.*,b.cname,c.cname as ppname,d.cname as cnamegroup,e.mqty FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 LEFT JOIN moq_tab e ON a.pid=e.mpid AND e.mbid='.$bid.' WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid ASC';
 	}
 	
 	function __get_products_services($ids, $type='', $sid='') {
@@ -25,7 +25,7 @@ class Products_model extends CI_Model {
 	}
 
 	function __get_recent_products() {
-		$this -> db -> select('a.*,b.cname,c.cname as ppname FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid DESC LIMIT 0,5', FALSE);
+		$this -> db -> select('a.*,b.cname,c.cname as ppname FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 WHERE (a.pstatus=1 or a.pstatus=0) ORDER BY a.pid ASC LIMIT 0,5', FALSE);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -81,7 +81,7 @@ class Products_model extends CI_Model {
 	}
 	
 	function __get_search($keyword, $bid) {
-		$this -> db -> select("a.*,b.cname,c.cname as ppname,d.cname as cnamegroup,e.mqty FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 LEFT JOIN moq_tab e ON a.pid=e.mpid AND e.mbid=".$bid." WHERE (a.pstatus=1 or a.pstatus=0) AND (a.pname LIKE '%".$keyword."%' OR a.pcode LIKE '%".$keyword."%') ORDER BY a.pid DESC", FALSE);
+		$this -> db -> select("a.*,b.cname,c.cname as ppname,d.cname as cnamegroup,e.mqty FROM products_tab a left join categories_tab b ON a.pcid=b.cid and b.ctype=1 left join categories_tab c ON a.ppid=c.cid and c.ctype=3 LEFT JOIN categories_tab d ON a.pgroup=d.cid and d.ctype=4 LEFT JOIN moq_tab e ON a.pid=e.mpid AND e.mbid=".$bid." WHERE (a.pstatus=1 or a.pstatus=0) AND (a.pname LIKE '%".$keyword."%' OR a.pcode LIKE '%".$keyword."%') ORDER BY a.pname ASC", FALSE);
 		return $this -> db -> get() -> result();
 	}
 }
