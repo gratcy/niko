@@ -84,8 +84,8 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          <th>Nama Product</th>
+          <th>Code Product</th>
+          <th>Name Product</th>
           <th>Qty</th>
           <th>Harga</th>
           <th>Discount </th>

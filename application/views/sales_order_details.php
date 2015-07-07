@@ -172,7 +172,7 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
+          <th>Code Product</th>
           
           <th>Qty</th>
           <th>Harga</th>

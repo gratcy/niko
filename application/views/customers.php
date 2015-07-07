@@ -47,7 +47,7 @@ left:inherit!important;
                                         <tr>
           <th>Category</th>
           <th>Name</th>
-          <th>Address</th>
+          <th>PIC</th>
           <th>Sales</th>
           <th>Top</th>
           <th>Limit</th>
@@ -63,7 +63,7 @@ left:inherit!important;
                                         <tr>
           <td><?php echo __get_customer_category($v -> ccat,1); ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $addr[0]. ', ' . __get_cities($v -> ccity,1). ', ' . __get_province($v -> cprov,1); ?></td>
+          <td><?php echo $v -> ccontactname; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>

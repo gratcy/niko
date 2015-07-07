@@ -213,5 +213,15 @@ $route['target/target_delete/(:num)'] = 'target/home/target_delete/$1';
 
 $route['reportopname/?(:num)?/?(:num)?'] = 'reportopname/home/index/$1/$2';
 $route['reportopname/sortreport/?(:num)?/?(:num)?/?(:num)?'] = 'reportopname/home/sortreport/$1/$2/$3';
+
+$route['city/?(:num)?'] = 'city/home/index/$1';
+$route['city/city_add'] = 'city/home/city_add';
+$route['city/city_update/?(:num)?'] = 'city/home/city_update/$1';
+$route['city/city_delete/(:num)'] = 'city/home/city_delete/$1';
+
+$route['province/?(:num)?'] = 'province/home/index/$1';
+$route['province/province_add'] = 'province/home/province_add';
+$route['province/province_update/?(:num)?'] = 'province/home/province_update/$1';
+$route['province/province_delete/(:num)'] = 'province/home/province_delete/$1';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

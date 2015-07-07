@@ -50,8 +50,7 @@ left:inherit!important;
           <th>Volume</th>
           <th>Packaging</th>
           <th>Price Distributor</th>
-          <th>Price Semi</th>
-          <th>Price Agent</th>
+          <th>Price Semi/Agent</th>
           <th>Price Store</th>
           <th>Price Consume</th>
           <th>Status</th>
@@ -67,11 +66,10 @@ left:inherit!important;
           <tr>
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
-          <td style="text-align:right;"><?php echo $v -> pvolume; ?></td>
+          <td><?php echo $v -> pvolume; ?></td>
           <td><?php echo $v -> ppname; ?></td>
           <td><?php echo __get_rupiah($v -> pdist,1); ?></td>
-          <td><?php echo __get_rupiah($v -> psemi,1); ?></td>
-          <td><?php echo __get_rupiah($v -> pkey,1); ?></td>
+          <td><?php echo __get_rupiah($v -> psemi,1); ?><br /><?php echo __get_rupiah($v -> pkey,1); ?></td>
           <td><?php echo __get_rupiah($v -> pstore,1); ?></td>
           <td><?php echo __get_rupiah($v -> pconsume,1); ?></td>
           <td><?php echo __get_status($v -> pstatus,1); ?></td>

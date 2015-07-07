@@ -24,7 +24,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">12</span>&nbsp;
+                       &nbsp; <span class="label label-danger">14</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
 						<?php if (__get_roles('BranchView') || __get_roles('BranchViewAsBranch')) : ?>
@@ -63,6 +63,8 @@
 						<?php if (__get_roles('SuplierView')) : ?>
                         <li class=""><a href="<?php echo site_url('suplier'); ?>"><i class="icon-angle-right"></i> Suplier </a></li>
                          <?php endif; ?>
+                        <li class=""><a href="<?php echo site_url('city'); ?>"><i class="icon-angle-right"></i> City </a></li>
+                        <li class=""><a href="<?php echo site_url('province'); ?>"><i class="icon-angle-right"></i> Province </a></li>
                     </ul>
                 </li>
 				<?php if (__get_roles('ServicesWOView') || __get_roles('ServicesSparepartView') || __get_roles('ServicesReportView')) : ?>
@@ -76,7 +78,7 @@
                     </a>
                     <ul class="collapse" id="services">
 						<?php if (__get_roles('ServicesWOView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Services Workorder </a></li>
+                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Services </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ServicesSparepartView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Services Sparepart </a></li>
@@ -145,7 +147,7 @@
 						<?php if (__get_roles('PurchaseOrderView')) : ?>
                         <li class=""><a href="<?php echo site_url('purchase_order/home/'); ?>"><i class="icon-angle-right"></i> Purchase Order </a></li>
 						<?php endif; ?>
-                         <li class=""><a href="<?php echo site_url('purchase_order/home/penerimaan'); ?>"><i class="icon-angle-right"></i> Penerimaan </a></li>
+                         <li class=""><a href="<?php echo site_url('purchase_order/home/penerimaan'); ?>"><i class="icon-angle-right"></i> Receivable </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>
@@ -168,8 +170,8 @@
 						<?php if (__get_roles('InvoiceOrderView')) : ?>
                          <li class=""><a href="<?php echo site_url('invoice_order/home/'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<?php endif; ?>
-						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Retur Order </a></li>
-						<li class=""><a href="<?php echo site_url('pembayaran/home'); ?>"><i class="icon-angle-right"></i> Pembayaran </a></li>
+						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Return Order </a></li>
+						<li class=""><a href="<?php echo site_url('pembayaran/home'); ?>"><i class="icon-angle-right"></i> Payments </a></li>
                     </ul>
                 </li>
 			   <?php endif; ?>

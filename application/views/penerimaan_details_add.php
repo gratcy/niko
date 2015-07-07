@@ -32,7 +32,7 @@
 <p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->ptgl; ?>" class="form-control" disabled>
@@ -88,7 +88,7 @@
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Alamat</label>
+                    <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
 						<input type=text value="<?php echo $detailx[0]->pgudang; ?>" class="form-control" disabled>
@@ -123,23 +123,23 @@
                                     <thead>
                                         <tr>
           
-          <th>Nama Product</th>
+          <th>Product</th>
           <th>Currency</th>
           <th>Qty</th>
-          <th>Harga</th>
+          <th>Price</th>
           <th>Discount </th>
 		  <th>Total</th>
-		  <th>Keterangan</th>
+		  <th>Description</th>
           <th>Status</th>
 	
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
-		  $totalharga=0;
+		  $totalPrice=0;
 		
 		  foreach($detail as $k => $v) :	
-		  $total= ($v -> pharga* $v -> pqty)-($v -> pharga * $v -> pdisc *0.01 * $v -> pqty );
+		  $total= ($v -> pPrice* $v -> pqty)-($v -> pPrice * $v -> pdisc *0.01 * $v -> pqty );
 		  ?>
           <tr>
           
@@ -151,9 +151,9 @@
 		  <input type=hidden name=ppid[] value="<?php echo $v -> ppid; ?>">
 		  <input type=hidden name=pppid[] value="<?php echo $v -> pppid; ?>">
 		  <input type=hidden name=pcurrency[] value="<?php echo $v -> pcurrency; ?>">
-		  <input type=hidden name=pharga[] value="<?php echo $v -> pharga; ?>">
+		  <input type=hidden name=pPrice[] value="<?php echo $v -> pPrice; ?>">
 		  <input type=hidden name=pdisc[] value="<?php echo $v -> pdisc; ?>">
-		  <input type=hidden name=pketerangan[] value="<?php echo $v -> pketerangan; ?>">
+		  <input type=hidden name=pDescription[] value="<?php echo $v -> pDescription; ?>">
 		  <input type=hidden name=pstatus[] value="<?php echo $v -> pstatus; ?>">
 		  <input type=hidden name=pqtyz[] value="<?php echo $v -> psisa; ?>">
 		  <input type=hidden name=pno_penerimaan[] value="<?php echo $pno; ?>">
@@ -165,10 +165,10 @@
 					echo "<option value=$i >$i</option>";
 				}		  
 		  ?></select></td>
-          <td><?php echo $v -> pharga; ?></td>
+          <td><?php echo $v -> pPrice; ?></td>
           <td><?php echo $v -> pdisc; ?></td>
 		  <td><?php echo $total; ?></td>
-		  <td><?php echo $v -> pketerangan; ?></td>
+		  <td><?php echo $v -> pDescription; ?></td>
           <td><?php echo $v -> pstatus; ?></td>
 		
 		
@@ -177,7 +177,7 @@
 		
 										</tr>
         <?php 
-		$totalharga=$totalharga+$total;
+		$totalPrice=$totalPrice+$total;
 		endforeach; ?>
 		
 		
@@ -219,7 +219,7 @@
           <td></td>
           <td></td>
           <td></td>
-		  <td><?php echo $totalharga;?></td>
+		  <td><?php echo $totalPrice;?></td>
           <td></td>
 		
 		

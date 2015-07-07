@@ -4,7 +4,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Services Work Order Add</h1>
+                    <h1 class="page-header">Service Add</h1>
                 </div>
             </div>
 <div class="row">
@@ -12,7 +12,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Services Work Order Add</h5>
+            <h5>Services Add</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>

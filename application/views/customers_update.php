@@ -42,6 +42,13 @@ $addr = explode('*', $detail[0] -> caddr);
                         <input type="text" placeholder="Customers Name" name="name" class="form-control" value="<?php echo $detail[0] -> cname; ?>" />
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">PIC</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" value="<?php echo $detail[0] -> ccontactname; ?>" />
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address I</label>
@@ -100,23 +107,6 @@ $addr = explode('*', $detail[0] -> caddr);
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Delivery</label>
-
-                    <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_customers_spec($detail[0] -> cdeliver,2); ?>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Contact Name</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" value="<?php echo $detail[0] -> ccontactname; ?>" />
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Email</label>
 
                     <div class="col-lg-4">
@@ -171,6 +161,23 @@ $addr = explode('*', $detail[0] -> caddr);
                         <input type="text" placeholder="PKP" name="pkp" class="form-control" value="<?php echo $detail[0] -> cpkp; ?>" />
                     </div>
                 </div>
+			    <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Return Type</label>
+
+                    <div class="col-lg-4">
+                        <?php echo __get_customer_retur($detail[0] -> ctyperetur,2);?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Delivery</label>
+
+                    <div class="col-lg-4">
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec($detail[0] -> cdeliver,2); ?>
+                    </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Special</label>
@@ -179,13 +186,6 @@ $addr = explode('*', $detail[0] -> caddr);
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
                                 <?php echo __get_customers_spec($detail[0] -> cspecial,2,'special'); ?>
                             </div>
-                    </div>
-                </div>
-			    <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Type Retur</label>
-
-                    <div class="col-lg-4">
-                        <?php echo __get_customer_retur($detail[0] -> ctyperetur,2);?>
                     </div>
                 </div>
 				

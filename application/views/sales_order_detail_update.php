@@ -243,7 +243,7 @@ minLength: 1,
                 </div>
                
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Type Pembayaran</label>
+                    <label for="text1" class="control-label col-lg-4">payment Type</label>
 
                     <div class="col-lg-4">
                        	<select name=stypepay class="form-control chzn-select">

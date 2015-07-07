@@ -24,13 +24,13 @@
                  <div class="row">
                     <div class="col-lg-12">
                         <div style="text-align: center;">
-                            <a class="quick-btn" href="<?php echo site_url('products');?>">
-                                <i class="icon-check icon-2x"></i>
-                                <span> Products</span>
-                            </a>
                             <a class="quick-btn" href="<?php echo site_url('customers');?>">
                                 <i class="icon-male icon-2x"></i>
                                 <span>Customers</span>
+                            </a>
+                            <a class="quick-btn" href="<?php echo site_url('products');?>">
+                                <i class="icon-check icon-2x"></i>
+                                <span> Products</span>
                             </a>
                             <a class="quick-btn" href="<?php echo site_url('services_wo');?>">
                                 <i class="icon-wrench icon-2x"></i>
@@ -60,7 +60,52 @@
                 <hr />
                 
 <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+						<div class="btn-group pull-right" style="padding:7px 10px;">
+                                <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
+                                <ul class="dropdown-menu slidedown">
+                                    <li> <a href="<?php echo site_url('customers/customers_add');?>"> <i class="icon-pencil"></i> Add </a> </li>
+                                    <li> <a href="<?php echo site_url('customers');?>"> <i class="icon-arrow-right"></i> Go to Customers </a> </li>
+                                </ul>
+                            </div>
+                        <div class="panel-heading">
+                            Customers
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+          <th>Category</th>
+          <th>Name</th>
+          <th>PIC</th>
+          <th>Sales</th>
+          <th>Top</th>
+          <th>Limit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+		  <?php
+		  foreach($customers as $k => $v) :
+		  $phone = explode('*', $v -> cphone);
+		  ?>
+                                        <tr>
+          <td><?php echo __get_customer_category($v -> ccat,1); ?></td>
+          <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> ccontactname; ?></td>
+          <td><?php echo $v -> sname; ?></td>
+          <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
+          <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
+										</tr>
+        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
                     <div class="panel panel-danger">
 						<div class="btn-group pull-right" style="padding:7px 10px;">
                                 <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
@@ -79,9 +124,13 @@
                                     <thead>
                                         <tr>
           <th>Code</th>
-          <th>Packaging</th>
-          <th>Category</th>
           <th>Name</th>
+          <th>Volume</th>
+          <th>Packaging</th>
+          <th>Price Distributor</th>
+          <th>Price Semi/Agent</th>
+          <th>Price Store</th>
+          <th>Price Consume</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,9 +139,13 @@
 		  ?>
                                         <tr>
           <td><?php echo $v -> pcode; ?></td>
-          <td><?php echo $v -> ppname; ?></td>
-          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pname; ?></td>
+          <td><?php echo $v -> pvolume; ?></td>
+          <td><?php echo $v -> ppname; ?></td>
+          <td><?php echo __get_rupiah($v -> pdist,1); ?></td>
+          <td><?php echo __get_rupiah($v -> psemi,1); ?><br /><?php echo __get_rupiah($v -> pkey,1); ?></td>
+          <td><?php echo __get_rupiah($v -> pstore,1); ?></td>
+          <td><?php echo __get_rupiah($v -> pconsume,1); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -101,7 +154,55 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+            
+                <div class="col-lg-12">
+                    <div class="panel panel-warning">
+						<div class="btn-group pull-right" style="padding:7px 10px;">
+                                <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
+                                <ul class="dropdown-menu slidedown">
+                                    <li> <a href="<?php echo site_url('services_wo/services_wo_add');?>"> <i class="icon-pencil"></i> Add </a> </li>
+                                    <li> <a href="<?php echo site_url('services_wo');?>"> <i class="icon-arrow-right"></i> Go to Services WO </a> </li>
+                                </ul>
+                            </div>
+                        <div class="panel-heading">
+                            Services
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+          <th>WO No.</th>
+<?php if (__get_roles('ExecuteAllBranchServices') <> 1) : ?>
+          <th>Branch</th>
+<?php endif; ?>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+		  <?php
+		  foreach($services as $k => $v) :
+		  ?>
+                                        <tr>
+          <td><?php echo $v -> sno; ?></td>
+<?php if (__get_roles('ExecuteAllBranchServices') <> 1) : ?>
+          <td><?php echo $v -> bname; ?></td>
+<?php endif; ?>
+          <td><?php echo __get_date($v -> sdate); ?></td>
+          <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
+          <td><?php echo __get_status($v -> sstatus,3); ?></td>
+										</tr>
+        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-lg-12">
                     <div class="panel panel-info">
 						<div class="btn-group pull-right" style="padding:7px 10px;">
                                 <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
@@ -121,7 +222,9 @@
           <th>Group Product</th>
           <th>Code</th>
           <th>Name</th>
-          <th>No Component</th>
+          <th>Component No.</th>
+          <th>Price Agent</th>
+          <th>Price Retail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -133,6 +236,8 @@
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
+          <td><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
+          <td><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -142,89 +247,6 @@
                     </div>
                 </div>
             </div>
-            
-                        <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-success">
-						<div class="btn-group pull-right" style="padding:7px 10px;">
-                                <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
-                                <ul class="dropdown-menu slidedown">
-                                    <li> <a href="<?php echo site_url('customers/customers_add');?>"> <i class="icon-pencil"></i> Add </a> </li>
-                                    <li> <a href="<?php echo site_url('customers');?>"> <i class="icon-arrow-right"></i> Go to Customers </a> </li>
-                                </ul>
-                            </div>
-                        <div class="panel-heading">
-                            Customers
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-          <th>Name</th>
-          <th>Sales</th>
-          <th>Top</th>
-          <th>Limit</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-		  <?php
-		  foreach($customers as $k => $v) :
-		  $phone = explode('*', $v -> cphone);
-		  ?>
-                                        <tr>
-          <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> sname; ?></td>
-          <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
-          <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
-										</tr>
-        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="panel panel-warning">
-						<div class="btn-group pull-right" style="padding:7px 10px;">
-                                <button type="button" data-toggle="dropdown"> <i class="icon-chevron-down"></i> </button>
-                                <ul class="dropdown-menu slidedown">
-                                    <li> <a href="<?php echo site_url('services_wo/services_wo_add');?>"> <i class="icon-pencil"></i> Add </a> </li>
-                                    <li> <a href="<?php echo site_url('services_wo');?>"> <i class="icon-arrow-right"></i> Go to Services WO </a> </li>
-                                </ul>
-                            </div>
-                        <div class="panel-heading">
-                            Services
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-          <th>WO No.</th>
-          <th>Date</th>
-          <th>Duration</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-		  <?php
-		  foreach($services as $k => $v) :
-		  ?>
-                                        <tr>
-          <td><?php echo $v -> sno; ?></td>
-          <td><?php echo __get_date($v -> sdate); ?></td>
-          <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
-										</tr>
-        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
                     <div class="row">
 <!--
                         <div class="col-lg-6">

@@ -41,6 +41,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">PIC</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address I</label>
 
                     <div class="col-lg-4">
@@ -97,15 +105,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Delivery</label>
-
-                    <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_customers_spec(0,2); ?>
-                    </div>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Email</label>
 
                     <div class="col-lg-4">
@@ -118,14 +117,6 @@
 
                     <div class="col-lg-4">
 						<select name="sales" data-placeholder="Sales" class="form-control chzn-select"><?php echo $sales; ?></select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Contact Name</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Contact Name" name="contactname" class="form-control" />
                     </div>
                 </div>
 
@@ -169,6 +160,23 @@
                     </div>
                 </div>
 
+				
+			    <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Return Type</label>
+
+                    <div class="col-lg-4">
+                        <?php echo __get_customer_retur(0,2);?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Delivery</label>
+
+                    <div class="col-lg-4">
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec(0,2); ?>
+                    </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Special</label>
 
@@ -176,14 +184,6 @@
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
                                 <?php echo __get_customers_spec(0,2,'special'); ?>
                             </div>
-                    </div>
-                </div>
-				
-			    <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Type Retur</label>
-
-                    <div class="col-lg-4">
-                        <?php echo __get_customer_retur(0,2);?>
                     </div>
                 </div>
 				
