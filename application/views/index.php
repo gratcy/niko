@@ -128,9 +128,10 @@
           <th>Volume</th>
           <th>Packaging</th>
           <th>Price Distributor</th>
-          <th>Price Semi/Agent</th>
+          <th>Price Semi</th>
+          <th>Price Agent</th>
           <th>Price Store</th>
-          <th>Price Consume</th>
+          <th>Price Consumer</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,7 +144,8 @@
           <td><?php echo $v -> pvolume; ?></td>
           <td><?php echo $v -> ppname; ?></td>
           <td><?php echo __get_rupiah($v -> pdist,1); ?></td>
-          <td><?php echo __get_rupiah($v -> psemi,1); ?><br /><?php echo __get_rupiah($v -> pkey,1); ?></td>
+          <td><?php echo __get_rupiah($v -> psemi,1); ?></td>
+          <td><?php echo __get_rupiah($v -> pkey,1); ?></td>
           <td><?php echo __get_rupiah($v -> pstore,1); ?></td>
           <td><?php echo __get_rupiah($v -> pconsume,1); ?></td>
 										</tr>

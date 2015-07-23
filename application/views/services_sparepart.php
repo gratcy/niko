@@ -46,7 +46,9 @@ left:inherit!important;
                                     <thead>
                                         <tr>
           <th>WO No.</th>
+<!--
           <th>Branch</th>
+-->
           <th>Description</th>
           <th>Status</th>
           <th style="width: 80px;"></th>
@@ -58,7 +60,9 @@ left:inherit!important;
 		  ?>
                                         <tr>
           <td><?php echo $v -> sno; ?></td>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <td><?php echo $v -> sdesc; ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>

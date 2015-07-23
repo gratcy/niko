@@ -82,12 +82,12 @@ minLength: 1,
 
 <table width=80% border=0><tr><td width=40% >
                 <div class="form-group" id="sbranch">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
                         <!--input type="text" placeholder="sales Order Code" name="sbid" class="form-control" /-->
 						
-						<select name="sbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $sbid; ?></select>						
+						<select name="sbid" data-placeholder="Branch" class="form-control chzn-select"><?php echo $sbid; ?></select>						
 						
                     </div>
                 </div>
@@ -113,7 +113,7 @@ minLength: 1,
 
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                <label for="text1" class="control-label col-lg-4">Date</label>
 					<div class="col-lg-4">
 						<input  name="stgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
 					</div>
@@ -189,7 +189,7 @@ minLength: 1,
 			
 		
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Telp</label>
+                    <label for="text1" class="control-label col-lg-4">Phone</label>
 
                     <div class="col-lg-4">
                         <input  name=cphone type="text" id="thePhone" class="form-control"   />
@@ -216,7 +216,7 @@ minLength: 1,
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sisa Plafon</label>
+                    <label for="text1" class="control-label col-lg-4">Current Plafon Limit</label>
 
                     <div class="col-lg-4">
                         <input  id="theClimitx"  type="text" placeholder="sisa plafon"  class="form-control" disabled/>
@@ -233,7 +233,7 @@ minLength: 1,
 				</div>	
                
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">payment Type</label>
+                    <label for="text1" class="control-label col-lg-4">Payment Type</label>
 
                     <div class="col-lg-4">
                        	<select name=stypepay class="form-control chzn-select">
@@ -249,7 +249,7 @@ minLength: 1,
 
 	
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="Keterangan" name="sketerangan" class="form-control" />

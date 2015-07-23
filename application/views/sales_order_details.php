@@ -72,7 +72,7 @@ minLength: 1,
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No SO</label>
+                    <label for="text1" class="control-label col-lg-4">Sales Order No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -122,7 +122,7 @@ minLength: 1,
                 </div>					
 	</td><td width=40%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
@@ -141,7 +141,7 @@ minLength: 1,
 
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
@@ -175,9 +175,9 @@ minLength: 1,
           <th>Code Product</th>
           
           <th>Qty</th>
-          <th>Harga</th>
+          <th>Price</th>
           <th>Discount </th>
-		  <th>Jumlah</th>
+		  <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>

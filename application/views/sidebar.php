@@ -154,7 +154,7 @@
 				<?php if (__get_roles('DeliveryOrderView') || __get_roles('SalesOrderView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#sales">
-                        <i class="icon-shopping-cart"> </i> Sales
+                        <i class="icon-shopping-cart"> </i> Transaction
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>

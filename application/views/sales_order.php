@@ -22,7 +22,7 @@ left:inherit!important;
 
                 <hr />
 				<?php if (__get_roles('SalesOrderAdd')) : ?>
-                <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add sales Order</a>
+                <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sales Order</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -45,10 +45,10 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
-          <th>No so</th>
+          <th>Branch</th>
+          <th>Sales Order No.</th>
     
-          <th>Tanggal</th>
+          <th>Date</th>
           <th>Sales</th>
           <th>Customer </th>
           <th>Status</th>

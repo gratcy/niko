@@ -158,7 +158,7 @@ var badColor = "#ff6666";
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang  </label>
+                    <label for="text1" class="control-label col-lg-4">Branch  </label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
@@ -166,7 +166,7 @@ var badColor = "#ff6666";
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No SO</label>
+                    <label for="text1" class="control-label col-lg-4">Sales Order No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -193,7 +193,7 @@ var badColor = "#ff6666";
 				
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
@@ -201,7 +201,7 @@ var badColor = "#ff6666";
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal Jatuh Tempo</label>
+                    <label for="text1" class="control-label col-lg-4">Due Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->sduedate; ?>" class="form-control" disabled>
@@ -220,7 +220,7 @@ var badColor = "#ff6666";
 
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sisa Plafon</label>
+                    <label for="text1" class="control-label col-lg-4">Current Plafon Limit</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->sisaplafon; ?>" class="form-control"  disabled >
@@ -257,7 +257,7 @@ var badColor = "#ff6666";
 		</td><td width=40%>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Type Pay</label>
+                    <label for="text1" class="control-label col-lg-4">Payment Type</label>
 
                     <div class="col-lg-4">           
 						<?php
@@ -294,7 +294,7 @@ var badColor = "#ff6666";
 		?>	
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga Distributor</label>
+                    <label for="text1" class="control-label col-lg-4">Price Distributor</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theDistt" class="form-control" disabled>
@@ -303,7 +303,7 @@ var badColor = "#ff6666";
                 </div>				
 		<?php }elseif($ccats==1){ ?>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga Kunci</label>
+                    <label for="text1" class="control-label col-lg-4">Price Kunci</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theKeyy" class="form-control" disabled>
@@ -312,7 +312,7 @@ var badColor = "#ff6666";
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga Toko</label>
+                    <label for="text1" class="control-label col-lg-4">Price Store</label>
                     <div class="col-lg-4">
                        	<input type=text  id="theStoree" class="form-control" disabled>						
                     </div>
@@ -320,7 +320,7 @@ var badColor = "#ff6666";
 <?php }elseif($ccats==2){ ?>			
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga Semi</label>
+                    <label for="text1" class="control-label col-lg-4">Price Semi</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theSemii" class="form-control" disabled>
@@ -333,7 +333,7 @@ var badColor = "#ff6666";
 <?php }elseif($ccats==3){ ?>					
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga Konsumen</label>
+                    <label for="text1" class="control-label col-lg-4">Price Consumer</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theConsumee" class="form-control" disabled>
@@ -345,7 +345,7 @@ var badColor = "#ff6666";
 				
 <?php }?>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Batas QTY</label>
+                    <label for="text1" class="control-label col-lg-4">Limit QTY</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theQty" class="form-control" disabled>
@@ -382,7 +382,7 @@ var badColor = "#ff6666";
                     </div>
                 </div>	
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga</label>
+                    <label for="text1" class="control-label col-lg-4">Price</label>
 
                     <div class="col-lg-4">
                        	<?php

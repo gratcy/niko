@@ -73,7 +73,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Pembayaran</h5>
+            <h5>Payment</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -85,7 +85,7 @@ minLength: 1,
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Pembayaran</label>
+                    <label for="text1" class="control-label col-lg-4">Payment No.</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="No Pembayaran" name="pno_pm" class="form-control" />
@@ -104,7 +104,7 @@ minLength: 1,
 
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                <label for="text1" class="control-label col-lg-4">Date</label>
 					<div class="col-lg-4">
 						<input  name="stgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
 					</div>
@@ -135,11 +135,11 @@ minLength: 1,
 				
 		
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Type Pembayaran</label>
+                <label for="text1" class="control-label col-lg-4">Payment Type</label>
 					<div class="col-lg-4">
 						<select class="form-control"  name="type_bayar">
-						<option value= 1 >Tunai</option>
-						<option value= 2 >Cicilan</option>
+						<option value= 1 >Cash</option>
+						<option value= 2 >Credit</option>
 						<option value= 3 >Giro</option>
 						</select>
 					</div>

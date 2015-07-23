@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Price Consume</label>
+                    <label for="text1" class="control-label col-lg-4">Price Consumer</label>
 
                     <div class="col-lg-4">
                         <input type="text" name="consume" class="form-control" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="0" />

@@ -207,7 +207,7 @@ function UpdateCost() {
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Pembayaran Detail Add <?php //echo "$id $scid";?></h5>
+            <h5>Payment Detail Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); 
@@ -223,7 +223,7 @@ function UpdateCost() {
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Pembayaran</label>
+                    <label for="text1" class="control-label col-lg-4">Payment No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $detailx[0]->pmid; ?>">
@@ -244,7 +244,7 @@ function UpdateCost() {
   
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->pm_tgl; ?>" class="form-control" disabled>
@@ -257,7 +257,7 @@ function UpdateCost() {
 
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Potongan Retur</label>
+                    <label for="text1" class="control-label col-lg-4">Discount Return</label>
 
                     <div class="col-lg-4">
 					<?php //if(!isset($potongan[0]->potongan)){ $potongan[0]->potongan=0;}?>
@@ -293,11 +293,11 @@ function UpdateCost() {
                                     <thead>
                                         <tr>
           
-          <th>No</th>
-          <th>No Invoice</th>
-          <th>Tgl Invoice</th>
-          <th>Harga</th>
-          <th>Kurang Bayar</th>
+          <th>No.</th>
+          <th>Invoice No.</th>
+          <th>Invoice Date</th>
+          <th>Price</th>
+          <th>Insufficient Payment</th>
 		  
 		  <th>Action</th>
                                         </tr>
@@ -365,14 +365,14 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 				  
 		
 	<!--POTONGAN-->
-		<tr><td colspan=5>POTONGAN RETUR</td></tr>
+		<tr><td colspan=5>Return Discount</td></tr>
                                     <thead>
                                         <tr>
           
-          <th>No</th>
-          <th>No Invoice</th>
-          <th>Tgl Invoice</th>
-          <th>Harga</th>
+          <th>No.</th>
+          <th>Invoice No.</th>
+          <th>Invoice Date</th>
+          <th>Price</th>
          
 		  
 		  <th>Action</th>
@@ -464,7 +464,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		
 	 <tr>
           
-          <th colspan=3>Total Pembayaran</th>
+          <th colspan=3>Total Payment</th>
           <th><input type="text" id="totalcost" name="total" value="" size="15" />
 		  
 		  </th><th></th>
@@ -473,7 +473,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 	  
 	 <tr>
           
-          <th colspan=3>Total Potongan</th>
+          <th colspan=3>Total Discount</th>
           <th><input type="text" id="totalcut" name="total" value="" size="15" />
 		  
 		  </th><th></th>
@@ -482,7 +482,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 	  
 	 <tr>
           
-          <th colspan=3>Total Setelah di Potong</th>
+          <th colspan=3>Total Payment After Discount</th>
           <th>
 		  <input type="text" id="totalz" name="totalz" value="" size="15" />
 		  </th><th></th>
@@ -491,7 +491,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
  	  
 	 <tr>
           
-          <th colspan=3>Total Pembayaran Sebelumnya</th>
+          <th colspan=3>Total Payment Before</th>
           <th>
 		  <input type="text" id="totalcashx" name="totalcashx" value="" size="15" onchange="UpdateCost()" />
 		  </th><th></th>
@@ -499,7 +499,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
       </tr>	 	  
 	 <tr>
           
-          <th colspan=3>Pembayaran Cash</th>
+          <th colspan=3>Payment Cash</th>
           <th>
 		  <input type="text" id="totalcash" name="totalcash" value="" size="15" onchange="UpdateCost()" />
 		  </th><th></th>
@@ -507,7 +507,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
       </tr>	 
 	 <tr>
           
-          <th colspan=3>Pembayaran Giro</th>
+          <th colspan=3>Payment Giro</th>
           <th>
 		  <input type="text" id="totalgiro" name="totalgiro" value="" size="15" onchange="UpdateCost()" />
 		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tanggal Giro
@@ -529,7 +529,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 	  
 	 <tr>
           
-          <th colspan=3>Sisa Pembayaran</th>
+          <th colspan=3>Remaining Payment</th>
           <th>
 		  <input type="text" id="totalsisa" name="totalsisa" value="" size="15" />
 		  </th><th></th>
@@ -559,14 +559,14 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
                                     <thead>
                                         <tr>
           
-          <th>No Pembayaran</th>
+          <th>Payment Date</th>
     
-          <th>Tanggal Pembayran</th>
+          <th>Date</th>
           
          <th>No Invoice</th>
-		 <th>Jum Cash</th>
-		 <th>Jum Giro</th>
-		 <th>Tanggal Giro</th>
+		 <th>Total Cash</th>
+		 <th>Total Giro</th>
+		 <th>Date Giro</th>
           <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>

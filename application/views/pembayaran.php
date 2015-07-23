@@ -16,13 +16,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Pembayaran </h2>
+                        <h2>Payment </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('SalesOrderAdd')) : ?>
-                <a href="<?php echo site_url('pembayaran/home/pembayaran_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Pembayaran</a>
+                <a href="<?php echo site_url('pembayaran/home/pembayaran_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Payment</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Pembayaran
+                            Payment
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
@@ -46,9 +46,9 @@ left:inherit!important;
                                     <thead>
                                         <tr>
           
-          <th>No Pembayaran</th>
+          <th>Payment No.</th>
     
-          <th>Tanggal Pembayran</th>
+          <th>Date</th>
        
          
           <th>Status</th>

@@ -16,13 +16,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Retur Order </h2>
+                        <h2>Return Order </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('SalesOrderAdd')) : ?>
-                <a href="<?php echo site_url('retur_order/home/retur_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add retur order</a>
+                <a href="<?php echo site_url('retur_order/home/retur_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Return Order</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            retur order
+                            Return Order
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
@@ -45,10 +45,10 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
-          <th>No Retur</th>
+          <th>Branch</th>
+          <th>Return No.</th>
     
-          <th>Tanggal</th>
+          <th>Date</th>
           <th>Sales</th>
           <th>Customer </th>
           <th>Status</th>

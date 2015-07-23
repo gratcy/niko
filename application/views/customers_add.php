@@ -97,10 +97,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">FAX</label>
+                    <label for="text1" class="control-label col-lg-4">Fax</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="FAX" name="fax" class="form-control" />
+                        <input type="text" placeholder="Fax" name="fax" class="form-control" />
                     </div>
                 </div>
 
