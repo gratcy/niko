@@ -74,10 +74,10 @@ left:inherit!important;
           <td><?php echo $phone[1]; ?></td>
           <td><?php echo __get_status($v -> bstatus,1); ?></td>
 		  <td>
+			<?php if (__get_roles('BranchUpdate')) : ?>
+		  <a href="<?php echo site_url('branch/branch_update/' . $v -> bid); ?>"><i class="icon-pencil"></i></a>
+			<?php endif; ?>
 	<?php if ($v -> bid <> 1) : ?>
-				<?php if (__get_roles('BranchUpdate')) : ?>
-              <a href="<?php echo site_url('branch/branch_update/' . $v -> bid); ?>"><i class="icon-pencil"></i></a>
-                <?php endif; ?>
 				<?php if (__get_roles('BranchDelete')) : ?>
               <a href="<?php echo site_url('branch/branch_delete/' . $v -> bid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
