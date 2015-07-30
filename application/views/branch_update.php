@@ -30,6 +30,7 @@ $phone = explode('*', $detail[0] -> bphone);
                 </div>
 
 
+<!--
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
@@ -37,6 +38,7 @@ $phone = explode('*', $detail[0] -> bphone);
                         <input type="text" placeholder="Branch NPWP" name="npwp" class="form-control" value="<?php echo $detail[0] -> bnpwp; ?>" />
                     </div>
                 </div>
+-->
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address</label>

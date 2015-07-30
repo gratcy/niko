@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Sparepart
+                            Spareparts
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>

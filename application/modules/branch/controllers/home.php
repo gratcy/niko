@@ -39,7 +39,7 @@ class Home extends MY_Controller {
 			$status = (int) $this -> input -> post('status');
 			$addr="$addr*$addr2";
 			
-			if (!$name || !$npwp || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
+			if (!$name || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('branch' . '/' . __FUNCTION__));
 			}
@@ -74,7 +74,7 @@ class Home extends MY_Controller {
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$name || !$npwp || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
+				if (!$name || !$addr || !$phone1 || !$phone2 || !$city || !$prov) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('branch' . '/' . __FUNCTION__ . '/' . $id));
 				}
