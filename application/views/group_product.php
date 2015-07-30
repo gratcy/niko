@@ -3,13 +3,13 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Groups Product </h2>
+                        <h2> Group Product </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('GroupProductAdd')) : ?>
-                <a href="<?php echo site_url('group_product/group_product_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Groups Product</a>
+                <a href="<?php echo site_url('group_product/group_product_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Group Product</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -18,7 +18,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Groups Product
+                            Group Product
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

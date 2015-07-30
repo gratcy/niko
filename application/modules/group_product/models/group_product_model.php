@@ -5,7 +5,7 @@ class Group_product_model extends CI_Model {
     }
 	
 	function __get_group_product() {
-		return 'SELECT * FROM categories_tab WHERE (cstatus=1 OR cstatus=0) AND ctype=4 ORDER BY cid DESC';
+		return 'SELECT * FROM categories_tab WHERE (cstatus=1 OR cstatus=0) AND ctype=4 ORDER BY cname ASC';
 	}
 	
 	function __get_group_product_select() {

@@ -204,7 +204,7 @@ function __get_new_pm($uid) {
 }
 
 function __get_customer_category($cid, $type) {
-	$data = array('DISTRIBUTOR', 'STORE', 'SEMI', 'CASH','AGENT', 'CONSUMER');
+	$data = array('DISTRIBUTOR', 'SEMI','AGENT', 'STORE', 'CONSUMER', 'CASH');
 	if ($type == 1) {
 		return $data[$cid];
 	}

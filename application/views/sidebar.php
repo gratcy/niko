@@ -40,13 +40,13 @@
                         <li class=""><a href="<?php echo site_url('packaging'); ?>"><i class="icon-angle-right"></i> Packaging </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('GroupProductView')) : ?>
-                        <li class=""><a href="<?php echo site_url('group_product'); ?>"><i class="icon-angle-right"></i> Groups Product </a></li>
+                        <li class=""><a href="<?php echo site_url('group_product'); ?>"><i class="icon-angle-right"></i> Group Product </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('CategoriesProductView')) : ?>
-                        <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Categories Product </a></li>
+                        <li class=""><a href="<?php echo site_url('categories'); ?>"><i class="icon-angle-right"></i> Category Product </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('SparepartView')) : ?>
-                         <li class=""><a href="<?php echo site_url('sparepart'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
+                         <li class=""><a href="<?php echo site_url('sparepart'); ?>"><i class="icon-angle-right"></i> Spareparts </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('TargetOmsetView')) : ?>
                         <li class=""><a href="<?php echo site_url('target'); ?>"><i class="icon-angle-right"></i> Target Omset </a></li>

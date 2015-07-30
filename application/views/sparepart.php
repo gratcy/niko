@@ -50,7 +50,7 @@ left:inherit!important;
           <th>Name</th>
           <th>Component No.</th>
           <th>Price Agent</th>
-          <th>Price Retail</th>
+          <th>Price Consumer</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>

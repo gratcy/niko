@@ -32,10 +32,12 @@
                                 <i class="icon-check icon-2x"></i>
                                 <span> Products</span>
                             </a>
+<!--
                             <a class="quick-btn" href="<?php echo site_url('services_wo');?>">
                                 <i class="icon-wrench icon-2x"></i>
                                 <span>Services</span>
                             </a>
+-->
                             <a class="quick-btn" href="<?php echo site_url('sparepart');?>">
                                 <i class="icon-cogs icon-2x"></i>
                                 <span>Spareparts</span>
@@ -120,7 +122,8 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+								<div style="overflow:auto;">
+                                <table class="table table-striped table-bordered table-hover" style="width: 1400px;">
                                     <thead>
                                         <tr>
           <th>Code</th>
@@ -153,10 +156,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            
+<!--            
                 <div class="col-lg-12">
                     <div class="panel panel-warning">
 						<div class="btn-group pull-right" style="padding:7px 10px;">
@@ -203,7 +207,7 @@
                         </div>
                     </div>
                 </div>
-            
+            -->
                 <div class="col-lg-12">
                     <div class="panel panel-info">
 						<div class="btn-group pull-right" style="padding:7px 10px;">

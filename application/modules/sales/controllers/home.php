@@ -35,7 +35,7 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
-			$joindate = strtotime($this -> input -> post('joindate', TRUE));
+			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
 			$sarea = implode(',',$this -> input -> post('sarea'));
 			$status = (int) $this -> input -> post('status');
 			
@@ -69,7 +69,7 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
-			$joindate = strtotime($this -> input -> post('joindate', TRUE));
+			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
 			$sarea = implode($this -> input -> post('sarea'),',');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');

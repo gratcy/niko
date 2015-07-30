@@ -146,6 +146,7 @@ $addr = explode('*', $detail[0] -> caddr);
                     </div>
                 </div>
 
+<!--
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
@@ -153,6 +154,7 @@ $addr = explode('*', $detail[0] -> caddr);
                         <input type="text" placeholder="NPWP" name="npwp" class="form-control" value="<?php echo $detail[0] -> cnpwp; ?>" />
                     </div>
                 </div>
+-->
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">PKP</label>

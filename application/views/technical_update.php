@@ -105,6 +105,6 @@ $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ub
 $('#pbranch').css('display','none');
 <?php endif; ?>
 $('input[name="joindate"]').datepicker({
-	dateFormat: 'dd/mm/yy'
+	format: 'dd/mm/yyyy'
 });
 </script>

@@ -35,7 +35,7 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
-			$joindate = strtotime($this -> input -> post('joindate', TRUE));
+			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
 			$status = (int) $this -> input -> post('status');
 			
 			if (!$name || !$branch || !$phone1 || !$phone2 || !$email || !$code) {
@@ -68,7 +68,7 @@ class Home extends MY_Controller {
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
-			$joindate = strtotime($this -> input -> post('joindate', TRUE));
+			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			

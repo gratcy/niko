@@ -144,6 +144,7 @@
                     </div>
                 </div>
 
+<!--
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
@@ -151,6 +152,7 @@
                         <input type="text" placeholder="NPWP" name="npwp" class="form-control" />
                     </div>
                 </div>
+-->
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">PKP</label>

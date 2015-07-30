@@ -42,7 +42,8 @@ left:inherit!important;
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+								<div style="overflow:auto;">
+                                <table class="table table-striped table-bordered table-hover" style="width: 1400px;">
                                     <thead>
                                         <tr>
           <th>Code</th>
@@ -89,6 +90,7 @@ left:inherit!important;
         <?php endforeach; ?>
                                     </tbody>
                                 </table>
+                                </div>
     <?php echo $pages; ?>
                             </div>
                         </div>

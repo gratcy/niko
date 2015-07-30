@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Categories Product </h2>
+                        <h2> Category Product </h2>
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Categories Product
+                            Category Product
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
