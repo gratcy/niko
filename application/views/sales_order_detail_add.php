@@ -12,14 +12,14 @@
             
             });
         </script>
-		
+		<?php $sbidx=$detailx[0]->sbid;?>
 <script>
 $(function() {
 $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-    source: '<?php echo site_url('sales_order_detail/home/sourcex/'.$scid); ?>',
+    source: '<?php echo site_url('sales_order_detail/home/sourcex/'.$scid.'/'.$sbidx); ?>',
      select: function(event, ui) { 
 	    $("#theId").val(ui.item.pid),
         $("#theCid").val(ui.item.pcid),
@@ -98,7 +98,9 @@ var badColor = "#ff6666";
 
 
 	if( k==0 || k== 2){  
-		if( c==null || c=="" || c <= b )
+	
+
+		if((c==null || c=="") || c < b )
 		  {
 		    
 		  messagec.style.color = badColor;
@@ -153,7 +155,9 @@ var badColor = "#ff6666";
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-
+								<a href="<?php echo site_url("sales_order/home/sales_order_update/$id/$scid"); ?>">
+					<button class="btn text-muted text-center btn-primary" >Edit Header</button>	
+					</a>
 
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
@@ -162,6 +166,7 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" class="form-control" disabled>
                     </div>
                 </div>
 
@@ -211,8 +216,8 @@ var badColor = "#ff6666";
                <div class="form-group">
 							<label for="status" class="control-label col-lg-4">FREE PPN</label>
                     <div class="col-lg-4">
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
+                            <div class="make-switch has-switch" data-on="danger" data-off="default"  >
+                                <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?> 
                             </div>
 					</div>
 				</div>	
@@ -405,14 +410,14 @@ var badColor = "#ff6666";
 		
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
-					<a href="<?php echo site_url("sales_order/home/sales_order_update/$id/$scid"); ?>">
-					<button class="btn text-muted text-center btn-primary" >Edit Header</button>	
-					</a>
+
                     
 				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>		
 				</div>
 				</td></tr></table>
             </form>
+			
+
         </div>
     </div>
 </div>

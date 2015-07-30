@@ -63,9 +63,13 @@ class Home extends MY_Controller {
 			$this->load->view('pembayaran_report',$view,FALSE);
 	}	
 
-	function pembayaran_update($pmid,$scid,$pno_pm,$type_pay) {
-	$arp=array('status_bayar'=>3);
+	function pembayaran_update($pmid,$scid,$pno_pm,$type_pay,$harga,$piutang,$noinv) {
+		$kurang_bayar=$piutang-$harga;
+		$datebyr=date('Y-m-d');
+	$arz=array('kurang_bayar'=>	$kurang_bayar);
+	$arp=array('status_bayar'=>3,'tgl_bayar'=>$datebyr,'pm_tgl'=>$datebyr);
 					if ($this -> pembayaran_detail_model -> __update_pembayaranx($pmid,$arp)) {	
+					$this -> pembayaran_detail_model -> __update_invoicez($noinv,$arz);
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 					$sdate_lunas=date('Y-m-d');	
 				
@@ -74,12 +78,9 @@ class Home extends MY_Controller {
 	}
 	
 	function pembayaran_detail_add($scid,$pno_pm,$type_pay) {
-		//echo "$type_pay xxx";die;
+
 		if ($_POST) {
-			//echo "$type_pay xxx";die;
-// echo '<pre>';
-// print_r($_POST);
-// echo "</pre>";//die;
+
 			if(!isset($_POST['b'])){ 
 				$_POST['b']="";$jum=0;
 				$jumr=count($_POST['d']);
@@ -116,17 +117,17 @@ class Home extends MY_Controller {
 				$piutang=$_POST['totalz'];
 				$pwrite_off=$_POST['wo'];
 				$kurang_bayar=$_POST['totalsisa'];
-				$arrg = array('ptgl_giro' => $pgirox,'pcash'=>$pcash,'pgiro'=>$pgiro,'piutang'=>$piutang,'pwrite_off'=>$pwrite_off,
-				'kurang_bayar'=>$kurang_bayar);
-				
-	$arr = array( 'pmid'=>'','pno_pm' => $pno_pm, 'pcid'=>$scid,  
+				$arrg = array('ptgl_giro' => $pgirox,'pcash'=>$pcash,'pgiro'=>$pgiro,'piutang'=>$piutang,'pwrite_off'=>$pwrite_off,'kurang_bayar'=>$kurang_bayar);				
+				$arr = array( 'pmid'=>'','pno_pm' => $pno_pm, 'pcid'=>$scid,  
 					'pcash'=>$pcash,'pgiro'=>$pgiro,'piutang'=>$piutang,'ptgl_giro'=>$pgirox,'pwrite_off'=>'',
 					'status' => '1','no_invoice'=>$no_invoice);	
 		//echo $type_pay;die;			
 				if($type_pay==1){
+					//echo "a";die;
 				$this -> pembayaran_detail_model -> __update_giro($pno_pm, $arrg);
 				}else{
 				//PRINT_R($arr);die;
+				//echo "b";die;
 				$this -> pembayaran_model -> __insert_pembayaran($arr);
 				}
 				//echo "bbb";die;
@@ -141,7 +142,7 @@ class Home extends MY_Controller {
 			$view['detailx'] = $this -> pembayaran_model -> __get_pembayaran_detail($pno_pm);
 			$view['potongan'] = $this -> pembayaran_detail_model -> __get_potongan($scid);
 			$view['detail'] =$this -> pembayaran_detail_model -> __get_pembayaran_detail_inv($scid,$pno_pm);
-			//print_r($view['detail']);
+				//print_r($view['detail']);
 			$view['detailr'] =$this -> retur_order_detail_model -> __get_retur_order_detail_by_cust($scid);
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();

@@ -12,6 +12,8 @@ class Home extends MY_Controller {
 		$this -> load -> library('products/products_lib');
 		$this -> load -> model('purchase_order/purchase_order_model');
 		$this -> load -> model('purchase_order_detail_model');
+		$this -> load -> model('sales_order/sales_order_model');
+		$this -> load -> model('sales_order_detail/sales_order_detail_model');
 	}
 
 	function index() {
@@ -50,6 +52,7 @@ class Home extends MY_Controller {
 
 	function penerimaan_details_add($id,$pno) {
 		if($_POST){
+			$pbid=$_POST['pbidx'];
 			$jum=count($_POST['pqty']);
 			echo count($_POST['pqty']);
 			//print_r($_POST);
@@ -67,12 +70,12 @@ class Home extends MY_Controller {
 					$pketerangan=$_POST['pketerangan'][$j];
 					$pstatus=$_POST['pstatus'][$j];
 					$pno_penerimaan=$_POST['pno_penerimaan'][$j];
-
+					
 					$arr = array('psisa' => $psisa );						
 					
 						$this -> purchase_order_detail_model ->  __update_purchase_order_detail($pid, $arr);
-
-
+					$arrp=array('istockin'=>$pqty);
+						$this -> sales_order_detail_model ->__update_inventoryin($pppid,$pbid,$arrp);
 					
 						 $arry = array( 'pid' => $pid ,'ppid' => $ppid ,'pppid' => $pppid, 'pcurrency' => $pcurrency , 'pqty' => $pqty , 'pharga' => $pharga , 'pdisc' => $pdisc ,'pketerangan' => $pketerangan,'pstatus' => $pstatus,'pno_penerimaan' => $pno_penerimaan );
 						 $this -> purchase_order_detail_model -> __insert_penerimaan_detail($arry);	

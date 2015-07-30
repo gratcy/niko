@@ -213,7 +213,7 @@ function UpdateCost() {
 	<?php echo __get_error_msg(); 
 	$pno_pm=$detailx[0]->pno_pm;
 	$type_pay=$detailx[0]->type_bayar;
-	//echo $type_pay;
+	
 	?>
 
 
@@ -293,13 +293,21 @@ function UpdateCost() {
                                     <thead>
                                         <tr>
           
+<<<<<<< Updated upstream
           <th>No.</th>
           <th>Invoice No.</th>
           <th>Invoice Date</th>
           <th>Price</th>
           <th>Insufficient Payment</th>
+=======
+          <th>No</th>
+          <th>No Invoice</th>
+          <th>Tgl Invoice</th>
+          <th>Total Invoice</th>
+          <th>Kurang Bayar</th>
+>>>>>>> Stashed changes
 		  
-		  <th>Action</th>
+		
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -325,6 +333,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <td>
 		  <?php 
 		  $sum_inv=$v -> sum_inv;
+		  $kurang_bayar=$v -> kurang_bayar;
 		  $snoinv=$v -> sno_invoice;
 		  $sdp= $v -> sdate_lunas; 
 		  if($sdp==""){
@@ -343,7 +352,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  
 		  ?>
 		  
-		  <input type="<?=$tipecek;?>" name="a[]" id='<?php echo "game".$k;?>' value= "<?=$sum_inv;?>" onchange="UpdateCost()" <?=$dsb;?> >
+		  <input type="<?=$tipecek;?>" name="a[]" id='<?php echo "game".$k;?>' value= "<?=$kurang_bayar;?>" onchange="UpdateCost()" <?=$dsb;?> >
 		  </td>
           <td> 
 		  <input type=checkbox name="b[]" id='<?php echo "gamezz".$k;?>' value= "<?=$snoinv;?>"  <?=$dsb;?> >
@@ -351,8 +360,8 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  <td><?php echo $v -> stgl_invoice; ?></td>
           <td><?php echo $v -> sum_inv; ?> </td>
           
-		  <td><?php //echo $v -> kurang_bayar; ?></td>
-		  <td><a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_delete/' . $v -> sid .'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
+		  <td><?php echo $v -> kurang_bayar; ?></td>
+
 		  </tr>
 		  
 		  
@@ -375,7 +384,6 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <th>Price</th>
          
 		  
-		  <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -403,6 +411,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  		  echo "<input type=hidden name=txtNuma id=txtNuma value=$numar >";
 	        $nomor=$nomor+1;
 		  ?>
+		  
 		  <input type=hidden name="c[]" id='<?php echo "ge".$mz;?>' value= "<?=$sum_invz;?>" onchange="UpdateCost()" disabled >
 		  </td>
           <td> 
@@ -450,7 +459,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <td><?php echo $sum_inv; ?></td>
         
 		  
-		  <td><a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
+		  <td></td>
 		  </tr>
         <?php 
 
@@ -575,7 +584,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  <?php
 		  foreach($pembayaran as $k => $v) :
 			  // echo "<pre>";
-	// print_r($sales_order);
+	// print_r($pembayaran);
 	 // echo "</pre>";
 		  ?>
                                         <tr>
@@ -590,6 +599,10 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  <td><?php echo $v -> pgiro; ?></td>
 		  <td><?php echo __get_date(strtotime($v -> ptgl_giro,2)); ?></td>
           <td><?php 
+		  $noinv=$v -> no_invoice;
+		  $byrcash=$v -> pcash;
+		  $byrgiro=$v -> pgiro;
+		  $piutang=$v -> piutang;
 		  $sstatus=$v -> status_bayar;
 		  if($sstatus==0){
 		  $st="Pending";
@@ -606,7 +619,8 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		
 		
 		  <td>
-		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_update/'. $v -> pmid.'/'. $v -> pcid.'/' . $v -> pno_pm.'/'. $type_pay ); ?>"><i class="icon-pencil"></i></a>
+		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_update/'. $v -> pmid.'/'. $v -> pcid.'/' . $v -> pno_pm.'/'. $type_pay.'/'. $byrcash.'/'. $piutang.'/'. $noinv ); ?>">App Cash</a>
+		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_update/'. $v -> pmid.'/'. $v -> pcid.'/' . $v -> pno_pm.'/'. $type_pay.'/'. $byrgiro.'/'. $piutang.'/'. $noinv ); ?>">App Giro</a>
           </td>		
 		
 		

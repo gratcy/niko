@@ -158,6 +158,7 @@ minLength: 1,
 
  <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add/$id/$scid/$snodo"); ?>" method="post">
 
+<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" name=sbid class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
 <input type=hidden value="<?php echo $stgldo; ?>" name=stgldo class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
@@ -183,7 +184,7 @@ minLength: 1,
 		$total=0;
 		$totalppn=0;
 		$totalall=0;
-		
+		 
 		foreach($details as $l => $m) :	
 		//print_r($m -> ssisa);
 		?>

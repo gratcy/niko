@@ -26,7 +26,7 @@ class sales_order_detail_model extends CI_Model {
 
 	function __get_delivery_order_detail($id,$snodo) {
 	
-		$this -> db -> select("*,sales_order_tab.ssid as ssid_sales, delivery_order_detail_tab.ssid as ssid_so,			
+		$this -> db -> select("*,sum(delivery_order_detail_tab.tamount)as juminv,sales_order_tab.ssid as ssid_sales, delivery_order_detail_tab.ssid as ssid_so,			
 		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
 		(select caddr from customers_tab where customers_tab.cid=sales_order_tab.scid)as caddr,
@@ -69,6 +69,25 @@ class sales_order_detail_model extends CI_Model {
         return $this -> db -> update('delivery_order_detail_tab', $data);
 	}	
 
+	function __update_inventory($spid,$sbid,$data) {
+		print_r($data);
+		$istockout=$data['istockout'];
+		// echo $istockout.$sbid.$spid;
+		// die;
+        return $this->db -> query("update inventory_tab set istockout='$istockout', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
+        
+	}	
+	function __update_inventoryin($spid,$sbid,$data) {
+		// print_r($data);
+		 // $istockin=$data['istockin'];
+		// echo $istockin.$sbid.$spid;		
+		// echo "update inventory_tab set istockin='$istockin', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid'";
+
+		// die;
+		$istockin=$data['istockin'];
+        return $this->db -> query("update inventory_tab set istockin='$istockin', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
+        
+	}	
 	function __update_amount_status($did,$data) {
         $this -> db -> where('did', $did);
         return $this -> db -> update('delivery_order_detail_tab', $data);
@@ -88,7 +107,7 @@ class sales_order_detail_model extends CI_Model {
 	}	
 
 	function __update_invoice_order($snodo, $data) {
-		
+		//print_r($data);die;
 		
         $this -> db -> where('snodo', $snodo);
         return $this -> db -> update('delivery_order_detail_tab', $data);

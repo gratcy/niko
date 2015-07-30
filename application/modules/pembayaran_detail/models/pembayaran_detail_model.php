@@ -18,7 +18,11 @@ class pembayaran_detail_model extends CI_Model {
 		return $sql -> num_rows();
 	}
 
-
+function __update_invoicez($noinv,$arr){
+        $this -> db -> where('sno_invoice', $noinv);
+        return $this -> db -> update('delivery_order_detail_tab', $arr);	
+	
+}
 	function __get_potongan($scid) {
 		$sql = $this -> db -> query("SELECT a.sid,sum(b.sqty * b.sprice)as potongan FROM retur_order_tab a, retur_order_detail_tab b 
 		WHERE a.sid=b.ssid and a.scid='".$scid."'   group by (b.ssid)");
@@ -91,8 +95,8 @@ class pembayaran_detail_model extends CI_Model {
         return $this -> db -> update('pembayaran_detail_tab', $data);
 	}
 	
-		function __update_pembayaranx($pmid, $data) {
-	
+	function __update_pembayaranx($pmid, $data) {
+	//print_r($data);die;
         $this -> db -> where('pmid', $pmid);
         return $this -> db -> update('pembayaran_tab', $data);
 	}

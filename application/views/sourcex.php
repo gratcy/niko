@@ -14,7 +14,7 @@ mysql_select_db($mysql_database);
 
 $req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pdisc,pstatus,mqty "
 	."FROM products_tab  a, moq_tab b "
-	." WHERE  a.pid=b.mpid and pname LIKE '%".$_REQUEST['term']."%'"; 
+	." WHERE  b.mbid='$bidx' and a.pid=b.mpid and pname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req";
 	
@@ -48,9 +48,9 @@ $namecat="cash";
 	$ddisc=$row['pdisc'];
 }
 
+$label=$row['pcode'].' - '.$row['pname'];
 
-
-	$results[] = array('label' => $row['pname'],'pid' => $row['pid'],'pcid' => $row['pcid'],
+	$results[] = array('label' => $label,'pid' => $row['pid'],'pcid' => $row['pcid'],
 	'ppid' => $row['ppid'],'pcode' =>$row['pcode'],'pdesc' => $row['pdesc'],'phpp' => $row['phpp'],
 	'pdist' => $row['pdist'],'psemi' => $row['psemi'],'pkey' => $row['pkey'],'pstore' => $row['pstore'],
 	'pconsume' => $row['pconsume'],'ppoint' => $row['ppoint'],'pdisc' => $row['pdisc'],'pstatus' => $row['pstatus'],

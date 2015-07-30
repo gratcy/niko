@@ -115,7 +115,7 @@
 
 
 <form class="form-horizontal" action="<?php echo site_url('purchase_order_detail/home/penerimaan_details_add/'.$id); ?>" method="post">
-
+<input type=hidden value="<?php echo $detailx[0]->pbid; ?>" class="form-control" name=pbidx >
 
   <div class="panel-body">
                             <div class="table-responsive">

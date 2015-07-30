@@ -203,12 +203,13 @@ class Home extends MY_Controller {
 
 //----END SO----
 
-	function sourcex($scid) {
+	function sourcex($scid,$bidx) {
 		$view['hostname']=$this->db->hostname;
 		$view['username']=$this->db->username;
 		$view['password']=$this->db->password;
 		$view['database']=$this->db->database;
 		$view['scid']=$scid;
+		$view['bidx']=$bidx;
 		$this->load->view('sourcex',$view,FALSE);
 	}
 //---BEGIN DO-----	
@@ -293,6 +294,19 @@ class Home extends MY_Controller {
 	
 	
 function invoice_order_add($id,$scid,$snodo) {
+	
+	
+	
+		    $view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['snodo'] = $snodo;
+			$view['detaily'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			//print_r($view['detailx']);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
 		if ($_POST) {
 
 		
@@ -300,6 +314,7 @@ function invoice_order_add($id,$scid,$snodo) {
 			$snodo = $snodo;
 			$durationx = $this -> input -> post('durationx', TRUE);
 			$sno_invoice = $this -> input -> post('sno_invoice', TRUE);
+			$juminv = $this -> input -> post('juminv', TRUE);
 			$stgl_invoicex = $this -> input -> post('stgl_invoice', TRUE);
 			$stglxp=explode("/",$stgl_invoicex);
 			$stgl_invoice=$stglxp[2]."-".$stglxp[1]."-".$stglxp[0];			
@@ -311,7 +326,7 @@ function invoice_order_add($id,$scid,$snodo) {
 
 
 					$arr = array('sno_invoice' => $sno_invoice, 'stgl_invoice' => $stgl_invoice,
-					'sduedate_invoice' => $sduedate_invoice	);						
+					'sduedate_invoice' => $sduedate_invoice,'kurang_bayar'=>$juminv	);						
 					if ($this -> sales_order_detail_model -> __update_invoice_order($snodo,$arr)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 						redirect(site_url('sales_order_detail/home/invoice_report/'. $id .'/'. $scid .'/'.$snodo));
@@ -324,15 +339,15 @@ function invoice_order_add($id,$scid,$snodo) {
 		}
 		else {
 		
-			$view['id'] = $id;
-			$view['scid'] = $scid;
-			$view['snodo'] = $snodo;
-			$view['detaily'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
-			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
-			$view['pbid'] = $this -> branch_lib -> __get_branch();
-			$view['psid'] = $this -> sales_lib -> __get_sales();
-			$view['pppid'] = $this -> products_lib -> __get_products();	
+			// $view['id'] = $id;
+			// $view['scid'] = $scid;
+			// $view['snodo'] = $snodo;
+			// $view['detaily'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			// $view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			// $view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			// $view['pbid'] = $this -> branch_lib -> __get_branch();
+			// $view['psid'] = $this -> sales_lib -> __get_sales();
+			// $view['pppid'] = $this -> products_lib -> __get_products();	
 	
 			$this->load->view('invoice_order_details_add',$view);
 		}
@@ -353,7 +368,7 @@ function invoice_order_add($id,$scid,$snodo) {
 			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";				
 			$snomor = $this -> input -> post('snomor', TRUE);		
 			$jum=count($_POST['sqty']);
-
+			$sbid=$this -> input -> post('sbid', TRUE);
 		for($j=0;$j<$jum;$j++){	
 			$did = $_POST['did'][$j];
 			$sid = $_POST['sid'][$j];
@@ -364,15 +379,19 @@ function invoice_order_add($id,$scid,$snodo) {
 			$samount =$_POST['samount'][$j];
 			$tamount =$_POST['tamount'][$j];
 			$ssisa=$qty-$sqty;
-			
+			//$istock=$istockbegining-istockout+istockin;
 		
-//echo "$qty - $sqty - $ssisa";//die;
+
+					$arrp=array('istockout'=>$sqty);
+
 					$arrdos=array('dstatus'=>3);
 					$arrdo=array('dstatus'=>3,'sssid'=>$sssid,'samount'=>$samount,'tamount'=>$tamount);
 					$arrqty = array('ssisa' => $ssisa);
 					$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,
 					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>3,'sssid'=>$sssid,'tamount'=>$samount	);	
 					if ($this -> sales_order_detail_model ->__update_do_status($snodo,$arrdos)) {
+						
+						$this -> sales_order_detail_model ->__update_inventory($spid,$sbid,$arrp);
 						$this -> sales_order_detail_model ->__update_amount_status($did,$arrdo);
 						$this -> sales_order_detail_model ->__update_sales_order_detail($sid,$arrqty);
 						$arrx = array('ibid' => $sbid, 'iiid' => $spid, 'itype' => 1, 'istockbegining' => '', 'istockin' => '', 'istockout' => $sqty, 'istock' => '', 'istatus' => 1 );
@@ -392,6 +411,7 @@ function invoice_order_add($id,$scid,$snodo) {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['snodo'] = $snodo;
+		
 			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
 			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();

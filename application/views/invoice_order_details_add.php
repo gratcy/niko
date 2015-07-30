@@ -104,6 +104,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
+						<input type=hidden value="<?php echo $detailx[0]->juminv; ?>" name=juminv class="form-control" >
                     </div>
                 </div>
 				
