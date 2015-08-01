@@ -90,7 +90,6 @@ class Home extends MY_Controller {
 			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
 			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
 			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
-			$ctop = str_replace(',','',$this -> input -> post('ctop', TRUE));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
@@ -117,7 +116,7 @@ class Home extends MY_Controller {
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status,'ctop'=>$ctop);
+					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
 					if ($this -> customers_model -> __update_customers($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));

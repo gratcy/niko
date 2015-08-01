@@ -292,20 +292,11 @@ function UpdateCost() {
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          
-<<<<<<< Updated upstream
           <th>No.</th>
           <th>Invoice No.</th>
           <th>Invoice Date</th>
           <th>Price</th>
           <th>Insufficient Payment</th>
-=======
-          <th>No</th>
-          <th>No Invoice</th>
-          <th>Tgl Invoice</th>
-          <th>Total Invoice</th>
-          <th>Kurang Bayar</th>
->>>>>>> Stashed changes
 		  
 		
                                         </tr>

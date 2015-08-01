@@ -70,8 +70,8 @@ left:inherit!important;
           <td><?php echo $v -> sssid; ?></td>
 		  <td><?php echo $v -> sname; ?></td>
 		  <td><?php echo $v -> sno_invoice; ?></td>
-		  <td><?php echo $v -> stgl_invoice; ?></td>
-		  <td><?php echo $v -> sdate_lunas; ?></td>
+		  <td><?php echo __get_date(strtotime($v -> stgl_invoice),1); ?></td>
+		  <td><?php echo __get_date(strtotime($v -> sdate_lunas),1); ?></td>
 		  
 		  <td><?php echo $v -> sduration; ?></td>
 		  <td><?php echo __get_rupiah($v -> samount); ?></td>

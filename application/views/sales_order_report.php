@@ -60,16 +60,16 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <td rowspan=2 colspan=2 width="40%" align=center  ><h2>SALES ORDER</h2></td><td><b>No SO</b></td><td><?php echo $detailx[0]->snoso; ?></td>
 </tr>
 <tr>
-<td><b>Tanggal</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
+<td><b>Date</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
 </tr>
 <tr>
 <td width="10%" align=left  ><b>Sales</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->sname; ?></td><td width="10%"><b>Alamat</b></td><td rowspan=3 valign=top width=30% ><?php echo $caddrx[1]; ?></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Kode Toko</b></td><td  ><?php echo $detailx[0]->scid; ?></td><td></td>
+<td width="10%" align=left  ><b>Code Store</b></td><td  ><?php echo $detailx[0]->scid; ?></td><td></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Nama Toko</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
+<td width="10%" align=left  ><b>Name Store</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
 </tr>
 </table>
 </p>
@@ -89,7 +89,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <th>Qty</th>
           <th>Harga</th>
           <th>Discount </th>
-		  <th>Jumlah</th>
+		  <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,7 +121,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
 		$total=$subtotal+$total;
 		$totalqty=$qtyx+$totalqty;
 		$totalppn=$total * 10/100;
-		if($freeppn==1){
+		if($freeppn==0){
 		$totalall= $total;
 		}else{
 		$totalall= $total + $totalppn;
@@ -139,12 +139,12 @@ $caddrx=explode("*",$detailx[0]->caddr);
 		 </tr>		
          <tr>          
           <td>PPN</td>
-          <td><?php if($freeppn==0){ echo 10;}else{echo 0;}?>%</td>
+          <td><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
           <td></td>
 		  <td></td>
           <td align=center ><?php 
-		  if($freeppn==0){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
+		  if($freeppn==1){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
 		  </td>
 		 </tr>			
          <tr>          
@@ -174,7 +174,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <td valign=top  align=left rowspan=2 width=40%><?php echo $detailx[0]->sketerangan; ?></td>
 </tr>
 <tr>
-<td  align=left  >JATUH TEMPO</td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
+<td  align=left  >DUE DATE</td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
 </tr>
 
 </table>

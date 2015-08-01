@@ -3,13 +3,13 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Sales Commision</h2>
+                        <h2> Sales Commission</h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('SalesCommisionAdd')) : ?>
-                <a href="<?php echo site_url('sales_commision/sales_commision_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sales Commision</a>
+                <a href="<?php echo site_url('sales_commision/sales_commision_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sales Commission</a>
                 <br />
                 <br />
                 <?php endif; ?>

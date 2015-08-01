@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Special</label>
+							<label for="status" class="control-label col-lg-4">Return</label>
                     <div class="col-lg-4">
 						
                             <div class="make-switch has-switch" data-on="primary" data-off="default">

@@ -4,7 +4,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Sales Commision Add</h1>
+                    <h1 class="page-header">Sales Commission Add</h1>
                 </div>
             </div>
 <div class="row">
@@ -12,7 +12,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Sales Commision Add</h5>
+            <h5>Sales Commission Add</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales Commision</label>
+                    <label for="text1" class="control-label col-lg-4">Sales Commission</label>
 
                     <div class="input-group col-lg-2">
                         <input type="text" style="text-align:right;" placeholder="Commision A" name="scoma" class="form-control" /> <span class="input-group-addon">%</span>

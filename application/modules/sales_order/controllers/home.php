@@ -59,12 +59,12 @@ class Home extends MY_Controller {
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
 			$sreff = $this -> input -> post('sreff', TRUE);
 			$scurrency = $this -> input -> post('scurrency', TRUE);
-			$sfreeppn = $this -> input -> post('climit', TRUE);
+			$climit = str_replace('',',',$this -> input -> post('climit', TRUE));
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
-			$topx = $this -> input -> post('topx', TRUE);			
-			$ccash = $this -> input -> post('ccash', TRUE);
-			$ccredit = $this -> input -> post('ccredit', TRUE);
+			$topx = str_replace('',',',$this -> input -> post('topx', TRUE));			
+			$ccash = str_replace('',',',$this -> input -> post('ccash', TRUE));
+			$ccredit = str_replace('',',',$this -> input -> post('ccredit', TRUE));
 			if($stypepay=="Cash"){
 
 			$sduedate = date("Y-m-d",strtotime("$stgl + $ccash days"));			
@@ -132,12 +132,12 @@ class Home extends MY_Controller {
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
 			//$scid = $this -> input -> post('scid', TRUE);
 			$stype = $this -> input -> post('stype', TRUE);
-			$climit = $this -> input -> post('climit', TRUE);
+			$climit = str_replace('',',',$this -> input -> post('climit', TRUE));
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
-						$stypepay = $this -> input -> post('stypepay', TRUE);
-			$topx = $this -> input -> post('topx', TRUE);			
-			$ccash = $this -> input -> post('ccash', TRUE);
-			$ccredit = $this -> input -> post('ccredit', TRUE);
+			$stypepay = $this -> input -> post('stypepay', TRUE);
+			$topx = str_replace('',',',$this -> input -> post('topx', TRUE));			
+			$ccash = str_replace('',',',$this -> input -> post('ccash', TRUE));
+			$ccredit = str_replace('',',',$this -> input -> post('ccredit', TRUE));
 			if($stypepay=="Cash"){
 
 			$sduedate = date("Y-m-d",strtotime("$stglin + $ccash days"));			

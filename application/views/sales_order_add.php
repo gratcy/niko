@@ -27,7 +27,7 @@ minLength: 1,
 	    $("#theCid").val(ui.item.cid),
         $("#theCat").val(ui.item.ccat),
 		$("#theClimit").val(ui.item.climit),
-		$("#theClimitx").val(ui.item.climit),
+		$("#theClimitx").val(formatharga2(ui.item.climit)),
 		$("#theNpwp").val(ui.item.cnpwp),
 		$("#theDeliver").val(ui.item.cdeliver),
 		$("#theTopcash").val(ui.item.ccash),
@@ -93,19 +93,19 @@ minLength: 1,
                 </div>
 				
 				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No SO</label>
+                <div class="form-group" style="display:none;">
+                    <label for="text1" class="control-label col-lg-4">SO No.</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No SO" name="snoso" class="form-control" />
+                        <input type="text" name="snoso" class="form-control" />
                     </div>
                 </div>
    
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Reff</label>
+                <label for="text1" class="control-label col-lg-4">Reff No.</label>
 					<div class="col-lg-4">
-						<input  name="sreff" type="text" placeholder="reff"  class="form-control"  >
+						<input  name="sreff" type="text" class="form-control"  >
 					</div>
        		</div>
    
@@ -115,7 +115,7 @@ minLength: 1,
             <div class="form-group">
                 <label for="text1" class="control-label col-lg-4">Date</label>
 					<div class="col-lg-4">
-						<input  name="stgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
+						<input  name="stgl" type="text" id="example1" class="form-control"  >
 					</div>
        		</div>
 				
@@ -141,11 +141,37 @@ minLength: 1,
 						
                     </div>
                 </div>				
-				
+					
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Address</label>
+
+                    <div class="col-lg-4">
+                        <textarea  name="caddr" id="theAddr" class="form-control" rows="4" disabled /></textarea>
+                    </div>
+                </div>	
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Phone</label>
+
+                    <div class="col-lg-4">
+                        <input  name=cphone type="text" id="thePhone" class="form-control" disabled />
+                    </div>
+                </div>			
+		
+		
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sales</label>
+
+                    <div class="col-lg-4">
+					<input  name=csname type="text" id="theSname" class="form-control" disabled />
+		
+                    </div>
+                </div>
 		
 
 	
 
+<!--
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Term Of Payment</label>
 
@@ -154,10 +180,14 @@ minLength: 1,
 						<input  name=topx type="hidden" id="theTopx" class="form-control"   />
                     </div>
                 </div>		
+-->
 	
-
+		
+	
+				
+		</td><td width=40% >
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Term Of Payment Cash</label>
+                    <label for="text1" class="control-label col-lg-4">TOP Cash</label>
 
                     <div class="col-lg-4">
                         <input  type="text" id="theTopcashx" class="form-control"   disabled/>
@@ -167,47 +197,15 @@ minLength: 1,
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Term Of Payment Credit</label>
+                    <label for="text1" class="control-label col-lg-4">TOP Credit</label>
 
                     <div class="col-lg-4">
                         <input   type="text" id="theTopcreditx" class="form-control"  disabled  />
 						
                     </div>
-                </div>					
+                </div>		
 
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Address</label>
-
-                    <div class="col-lg-4">
-                        <input  name=caddr type="text" id="theAddr" class="form-control"   />
-                    </div>
-                </div>	
-	
-				
-		</td><td width=40% >
-
-			
-		
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Phone</label>
-
-                    <div class="col-lg-4">
-                        <input  name=cphone type="text" id="thePhone" class="form-control"   />
-                    </div>
-                </div>			
-		
-		
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
-
-                    <div class="col-lg-4">
-					<input  name=csname type="text" id="theSname" class="form-control"   />
-		
-                    </div>
-                </div>
-
-				
-
+<!--
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
@@ -215,16 +213,17 @@ minLength: 1,
                         <input type="text" id="theNpwp" placeholder="Npwp" name="cnpwp" class="form-control" />
                     </div>
                 </div>
+-->
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Current Plafon Limit</label>
+                    <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
 
                     <div class="col-lg-4">
-                        <input  id="theClimitx"  type="text" placeholder="sisa plafon"  class="form-control" disabled/>
-						<input  id="theClimit" name="climit" type="hidden" placeholder="sisa plafon"  class="form-control" />
+                        <input  id="theClimitx"  type="text" class="form-control" disabled/>
+						<input  id="theClimit" name="climit" type="hidden" class="form-control" />
                     </div>
                 </div>
                     <div class="form-group">
-							<label for="status" class="control-label col-lg-4">FREE PPN</label>
+							<label for="status" class="control-label col-lg-4">PPN</label>
                     <div class="col-lg-4">
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
                                 <?php echo __get_ppn(0,2); ?>
@@ -252,7 +251,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Keterangan" name="sketerangan" class="form-control" />
+                        <textarea name="sketerangan" class="form-control" rows="4"></textarea>
 						<input type="hidden"  name="sstatus" value="1" />
                     </div>
                 </div>

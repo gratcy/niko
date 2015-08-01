@@ -29,10 +29,10 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
-          <th>No so</th>
+          <th>Branch</th>
+          <th>SO No.</th>
          
-          <th>Tanggal</th>
+          <th>Date</th>
           <th>Sales</th>
           <th>Customer </th>
          
@@ -48,7 +48,7 @@
           <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> snoso; ?></td>
          
-          <td><?php echo $v -> stgldo; ?></td>
+          <td><?php echo __get_date(strtotime($v -> stgldo),1); ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> cname; ?></td>
           

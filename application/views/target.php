@@ -3,13 +3,13 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Target Omset </h2>
+                        <h2> Revenue </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('TargetOmsetAdd')) : ?>
-                <a href="<?php echo site_url('target/target_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Target Omset</a>
+                <a href="<?php echo site_url('target/target_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Revenue</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -18,7 +18,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Target Omset
+                            Revenue
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

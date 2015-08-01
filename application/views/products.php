@@ -48,7 +48,7 @@ left:inherit!important;
                                         <tr>
           <th>Code</th>
           <th>Name</th>
-          <th>Volume</th>
+          <th>Volume/Pcs</th>
           <th>Packaging</th>
           <th>Price Distributor</th>
           <th>Price Semi</th>

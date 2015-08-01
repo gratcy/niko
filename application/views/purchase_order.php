@@ -45,10 +45,10 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Cabang</th>
-          <th>No Bukti</th>
+          <th>Branch</th>
+          <th>Bukti No.</th>
           <th>Reff</th>
-          <th>Tanggal</th>                   
+          <th>Date</th>                   
          <th>Status </th>
 		  <th style="width: 80px;"></th>
                                         </tr>

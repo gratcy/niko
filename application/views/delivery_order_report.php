@@ -53,22 +53,22 @@ table.gridtablex td {
 <p align=center>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td  colspan=4 width="40%" align=center  ><h1>DELIVERY ORDER</h1></td>
+<td  colspan=4 width="40%" align=center  ><h1>Delivery Order</h1></td>
 </tr>
 
 <tr>
-<td width="10%" align=left  >Kepada</td><td width="30%" ><?php echo $detailx[0]->cname; ?></td>
-<td width="10%">No DO</td><td  valign=top width=30% ><?php echo $detailx[0]->snodo; ?></td>
+<td width="10%" align=left  >To</td><td width="30%" ><?php echo $detailx[0]->cname; ?></td>
+<td width="10%">DO No.</td><td  valign=top width=30% ><?php echo $detailx[0]->snodo; ?></td>
 </tr>
 <tr>
-<td width="10%" align=left  >Alamat</td><td  ><?php 
+<td width="10%" align=left  >Description</td><td  ><?php 
 $caddr=explode("*",$detailx[0]->caddr);
 echo $caddr[1]; ?></td>
-<td width="10%">Tanggal</td><td  valign=top width=30% ><?php echo date('d-m-Y',strtotime($detailx[0]->stgldo)); ?></td>
+<td width="10%">Date</td><td  valign=top width=30% ><?php echo __get_date(strtotime($detailx[0]->stgldo)); ?></td>
 </tr>
 <tr>
-<td width="10%" align=left  >Kode</td><td ><?php echo $detailx[0]->snomor; ?></td>
-<td width="10%">No Pol</td><td  valign=top width=30% ><?php echo $detailx[0]->snopol; ?></td>
+<td width="10%" align=left  >Code</td><td ><?php echo $detailx[0]->snomor; ?></td>
+<td width="10%">Pol No.</td><td  valign=top width=30% ><?php echo $detailx[0]->snopol; ?></td>
 </tr>
 </table>
 
@@ -79,7 +79,7 @@ echo $caddr[1]; ?></td>
 <tr>
 <td width="10%" align=left  >Driver</td><td width="20%" ><?php echo $detailx[0]->driver; ?></td>
 <td width="10%">No </td><td  valign=top width=20% ><?php echo $detailx[0]->snodo; ?></td>
-<td width="10%">Tanggal </td><td  valign=top width=20% ><?php echo $detailx[0]->stgldo; ?></td>
+<td width="10%">Date </td><td  valign=top width=20% ><?php echo __get_date(strtotime($detailx[0]->stgldo),1); ?></td>
 </tr>
 </table>
 <br>
@@ -96,8 +96,8 @@ echo $caddr[1]; ?></td>
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          <th>Nama Product</th>
+          <th>Code Product</th>
+          <th>Name Product</th>
           <th>Qty</th>
 
                                         </tr>
@@ -157,7 +157,7 @@ echo $caddr[1]; ?></td>
 	<td></td><td></td><td>Nama</td><td>Nama</td>
 </tr>
 <tr>
-	<td></td><td></td><td>Tanggal</td><td>Tanggal</td>
+	<td></td><td></td><td>Date</td><td>Date</td>
 </tr>
 
 </table>

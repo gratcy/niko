@@ -16,7 +16,7 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Suplier </h2>
+                        <h2> Supplier </h2>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Suplier
+                            Supplier
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>

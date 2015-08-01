@@ -13,8 +13,8 @@ mysql_connect($mysql_server, $mysql_login, $mysql_password);
 mysql_select_db($mysql_database);
 
 $req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pdisc,pstatus,mqty "
-	."FROM products_tab  a, moq_tab b "
-	." WHERE  b.mbid='$bidx' and a.pid=b.mpid and pname LIKE '%".$_REQUEST['term']."%'"; 
+	."FROM products_tab  a LEFT JOIN moq_tab b ON a.pid=b.mpid"
+	." WHERE b.mbid='$bidx' and a.pname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req";
 	

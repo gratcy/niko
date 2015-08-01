@@ -38,7 +38,7 @@ function __get_status($status, $type) {
 
 function __get_ppn($status, $type) {
 	if ($type == 1)
-		return ($status == 1 ? 'Active' : 'Not Active');
+		return ($status == 1 ? 'On' : 'Off');
 	else
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="sfreeppn" value="1" />' : '<input type="checkbox" name="sfreeppn" value="1" />');
 }

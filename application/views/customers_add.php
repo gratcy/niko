@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Category</label>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-8">
                         <?php echo __get_customer_category(0,2); ?>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Special</label>
+                    <label for="text1" class="control-label col-lg-4">Special Attention</label>
 
                     <div class="col-lg-4">
                             <div class="make-switch has-switch" data-on="danger" data-off="default">

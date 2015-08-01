@@ -8,10 +8,12 @@
 
        <script src="<?php echo site_url('application/views/assets/js/formsInit.js');?>"></script>
         <script>
+			<?php if (!preg_match('/\/home\/sales_order_detail_add\/(\d+)\/(\d+)/i', $_SERVER['REQUEST_URI'])) : ?>
             $(function () {
 				$(this).postTMP('<?php echo __get_PTMP(); ?>');
 				formInit(); 
 			});
+			<?php endif; ?>
         </script>
         
      <!--END PAGE LEVEL SCRIPT-->

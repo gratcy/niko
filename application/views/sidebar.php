@@ -49,19 +49,19 @@
                          <li class=""><a href="<?php echo site_url('sparepart'); ?>"><i class="icon-angle-right"></i> Spareparts </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('TargetOmsetView')) : ?>
-                        <li class=""><a href="<?php echo site_url('target'); ?>"><i class="icon-angle-right"></i> Target Omset </a></li>
+                        <li class=""><a href="<?php echo site_url('target'); ?>"><i class="icon-angle-right"></i> Revenue </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('SalesView')) : ?>
                         <li class=""><a href="<?php echo site_url('sales'); ?>"><i class="icon-angle-right"></i> Sales </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('SalesCommisionView')) : ?>
-                        <li class=""><a href="<?php echo site_url('sales_commision'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
+                        <li class=""><a href="<?php echo site_url('sales_commision'); ?>"><i class="icon-angle-right"></i> Sales Commission </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('TechnicalView')) : ?>
                           <li class=""><a href="<?php echo site_url('technical'); ?>"><i class="icon-angle-right"></i> Technical </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('SuplierView')) : ?>
-                        <li class=""><a href="<?php echo site_url('suplier'); ?>"><i class="icon-angle-right"></i> Suplier </a></li>
+                        <li class=""><a href="<?php echo site_url('suplier'); ?>"><i class="icon-angle-right"></i> Supplier </a></li>
                          <?php endif; ?>
                         <li class=""><a href="<?php echo site_url('city'); ?>"><i class="icon-angle-right"></i> City </a></li>
                         <li class=""><a href="<?php echo site_url('province'); ?>"><i class="icon-angle-right"></i> Province </a></li>
@@ -97,7 +97,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">5</span>&nbsp;
+                       &nbsp; <span class="label label-danger">5</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
@@ -141,7 +141,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">2</span>&nbsp;
+                       &nbsp; <span class="label label-danger">2</span>&nbsp;
                     </a>
                     <ul class="collapse" id="purchase">
 						<?php if (__get_roles('PurchaseOrderView')) : ?>
@@ -158,7 +158,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-primary">4</span>&nbsp;
+                       &nbsp; <span class="label label-danger">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="sales">
 						<?php if (__get_roles('SalesOrderView')) : ?>
@@ -185,7 +185,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-info">5</span>&nbsp;
+                       &nbsp; <span class="label label-danger">5</span>&nbsp;
                     </a>
                     <ul class="collapse" id="accounting">
                        
@@ -208,7 +208,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-success">3</span>&nbsp;
+                       &nbsp; <span class="label label-danger">3</span>&nbsp;
                     </a>
                     <ul class="collapse" id="Report">
                        
@@ -231,7 +231,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-info">3</span>&nbsp;
+                       &nbsp; <span class="label label-danger">3</span>&nbsp;
                     </a>
                     <ul class="collapse" id="PM">
                        
@@ -248,7 +248,7 @@
                         <span class="pull-right">
                             <i class="icon-angle-left"></i>
                         </span>
-                          &nbsp; <span class="label label-warning">2</span>&nbsp;
+                          &nbsp; <span class="label label-danger">2</span>&nbsp;
                     </a>
                     <ul class="collapse" id="SUsers">
 				<?php if (__get_roles('UsersView')) : ?>

@@ -34,7 +34,7 @@
 
 
                 <div class="form-group" id="pbranch">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
                     <div class="col-lg-4">
 						<input type=hidden name=id value="<?php echo $id; ?>">						
 						<select name="pbid" data-placeholder="pbid" class="form-control chzn-select"><?php echo $pbid; ?></select>								
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No bukti</label>
+                    <label for="text1" class="control-label col-lg-4">Bukti No.</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="No Bukti" name="pnobukti" class="form-control"
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tgl</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
                   
@@ -71,7 +71,7 @@
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Gudang</label>
+                    <label for="text1" class="control-label col-lg-4">Warehouse</label>
 
                     <div class="col-lg-4">
 						<input type="text" name="pgudang" class="form-control" value="<?php echo $detail[0] -> pgudang; ?>"    />

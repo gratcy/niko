@@ -45,12 +45,14 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+<!--
           <th>Branch</th>
-          <th>Sales Order No.</th>
+-->
+          <th>SO No.</th>
     
           <th>Date</th>
-          <th>Sales</th>
           <th>Customer </th>
+          <th>Sales</th>
           <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
@@ -58,23 +60,22 @@ left:inherit!important;
                                     <tbody>
 		  <?php
 		  foreach($sales_order as $k => $v) :
-			  // echo "<pre>";
-	// print_r($sales_order);
-	 // echo "</pre>";
 		  ?>
                                         <tr>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <td><?php echo $v -> snoso; ?></td>
       
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
-          <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> sname; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
 		  if($sstatus==0){
 		  $st="Pending";
 		  }elseif($sstatus==1){
-		  $st="Aktif";
+		  $st="Active";
 		  }if($sstatus==2){
 		  $st="Delete";
 		  }if($sstatus==3){

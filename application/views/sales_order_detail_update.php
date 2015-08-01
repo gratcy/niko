@@ -100,7 +100,7 @@ minLength: 1,
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales Order No.</label>
+                    <label for="text1" class="control-label col-lg-4">SO No.</label>
 
                     <div class="col-lg-4">
                         <input type=text value="<?php echo $detailx[0]->snoso; ?>" class="form-control" disabled>
@@ -224,7 +224,7 @@ minLength: 1,
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Current Plafon Limit</label>
+                    <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
 
                     <div class="col-lg-4">
                         <input  id="theClimitx"  type="text" placeholder="sisa plafon"  class="form-control" disabled/>
@@ -232,7 +232,7 @@ minLength: 1,
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">FREE PPN</label>
+                    <label for="text1" class="control-label col-lg-4">PPN</label>
 
                     <div class="col-lg-4">
                         <select name="sfreeppn">

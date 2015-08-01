@@ -49,7 +49,7 @@ left:inherit!important;
           <th>No Bukti</th>
           <th>Reff</th>
           <th>Date</th>       
-          <th>Gudang </th>         
+          <th>Warehouse </th>         
 		  <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>

@@ -49,8 +49,9 @@ left:inherit!important;
           <th>Name</th>
           <th>PIC</th>
           <th>Sales</th>
-          <th>Top</th>
-          <th>Limit</th>
+          <th>Top Cash</th>
+          <th>Top Credit</th>
+          <th>Top Credit Limit</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -67,6 +68,7 @@ left:inherit!important;
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
+          <td><?php echo __get_rupiah($v -> climit,2); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CustomersUpdate')) : ?>

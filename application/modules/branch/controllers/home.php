@@ -34,6 +34,8 @@ class Home extends MY_Controller {
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
+			$fax = $this -> input -> post('fax', TRUE);
+			$email = $this -> input -> post('email', TRUE);
 			$city = (int) $this -> input -> post('city');
 			$prov = (int) $this -> input -> post('prov');
 			$status = (int) $this -> input -> post('status');
@@ -44,7 +46,7 @@ class Home extends MY_Controller {
 				redirect(site_url('branch' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('bname' => $name, 'bnpwp' => $npwp, 'baddr' => $addr, 'bcity' => $city, 'bprovince' => $prov, 'bphone' => $phone1 . '*' . $phone2, 'bstatus' => $status);
+				$arr = array('bname' => $name, 'bnpwp' => $npwp, 'baddr' => $addr, 'bcity' => $city, 'bprovince' => $prov, 'bphone' => $phone1 . '*' . $phone2 . '*' . $fax , 'bemail' => $email, 'bstatus' => $status);
 				if ($this -> branch_model -> __insert_branch($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('branch'));
@@ -68,6 +70,8 @@ class Home extends MY_Controller {
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
+			$fax = $this -> input -> post('fax', TRUE);
+			$email = $this -> input -> post('email', TRUE);
 			$city = (int) $this -> input -> post('city');
 			$prov = (int) $this -> input -> post('prov');
 			$status = (int) $this -> input -> post('status');
@@ -79,7 +83,7 @@ class Home extends MY_Controller {
 					redirect(site_url('branch' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('bname' => $name, 'bnpwp' => $npwp, 'baddr' => $addr . '*' . $addr2, 'bcity' => $city, 'bprovince' => $prov, 'bphone' => $phone1 . '*' . $phone2, 'bstatus' => $status);
+					$arr = array('bname' => $name, 'bnpwp' => $npwp, 'baddr' => $addr . '*' . $addr2, 'bcity' => $city, 'bprovince' => $prov, 'bphone' => $phone1 . '*' . $phone2 . '*' . $fax , 'bemail' => $email, 'bstatus' => $status);
 					if ($this -> branch_model -> __update_branch($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('branch'));

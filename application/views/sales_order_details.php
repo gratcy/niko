@@ -72,7 +72,7 @@ minLength: 1,
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales Order No.</label>
+                    <label for="text1" class="control-label col-lg-4">SO No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -81,7 +81,14 @@ minLength: 1,
                 </div>
 
 				
-				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Date</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->stgl),1); ?>" class="form-control" disabled>
+                    </div>   							
+                </div>
+
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
@@ -99,7 +106,8 @@ minLength: 1,
                        	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
                     </div>
                 </div>				
-
+			
+	</td><td width=40%>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Status</label>
 
@@ -119,22 +127,17 @@ minLength: 1,
 					?>
                        	<input type=text value="<?php echo $sstatuss; ?>" class="form-control" disabled>
                     </div>
-                </div>					
-	</td><td width=40%>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Date</label>
-
-                    <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
-                    </div>   							
-                </div>
-
+                </div>		
                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">FREE PPN</label>
+							<label for="status" class="control-label col-lg-4">PPN</label>
                     <div class="col-lg-4">
+						<?php if ($stat == 3) : ?>
+                               <input type=text value="<?php echo __get_ppn($detailx[0] -> sfreeppn,1); ?>" class="form-control" disabled>
+						<?php else :?>
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
                                 <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
                             </div>
+                            <?php endif; ?>
 					</div>
 				</div>	
 
@@ -200,15 +203,15 @@ minLength: 1,
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
           <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo $v -> sprice; ?></td>
+          <td><?php echo __get_rupiah($v -> sprice,2); ?></td>
           <td><?php echo $v -> sdisc; ?></td>
-		  <td> <?php echo $subtotal; ?> </td>		
+		  <td> <?php echo __get_rupiah($subtotal,2); ?> </td>		
 		  </tr>
         <?php 
 		$total=$subtotal+$total;
 		$totalqty=$qtyx+$totalqty;
 		$totalppn=$total * 10/100;
-		if($freeppn==1){
+		if($freeppn==0){
 		$totalall= $total;
 		}else{
 		$totalall= $total + $totalppn;
@@ -220,22 +223,22 @@ minLength: 1,
           <td><?php echo $totalqty; ?></td>
           <td></td>
           <td></td>
-          <td><?php echo $total; ?></td>
+          <td><?php echo __get_rupiah($total,2); ?></td>
 		 </tr>		
          <tr>          
           <td>PPN</td>
-          <td><?php if($freeppn==0){ echo 10;}else{echo 0;}?>%</td>
+          <td><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
           <td></td>
           <td><?php 
-		  if($freeppn==0){ echo $totalppn; }else{echo 0;}?></td>
+		  if($freeppn==1){ echo __get_rupiah($totalppn,2); }else{echo 0;}?></td>
 		 </tr>			
          <tr>          
           <td>TOTAL</td>
           <td></td>
           <td></td>
           <td></td>
-          <td><?php echo $totalall; ?></td>
+          <td><?php echo __get_rupiah($totalall,2); ?></td>
 		 </tr>		 
                                     </tbody>
                                 </table>

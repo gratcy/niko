@@ -42,7 +42,7 @@
 
 
 				<div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No bukti</label>
+                    <label for="text1" class="control-label col-lg-4">Bukti No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -51,7 +51,7 @@
                 </div>
 	
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Penerimaan</label>
+                    <label for="text1" class="control-label col-lg-4">Receiving No.</label>
 
                     <div class="col-lg-4">	
 					<input type=text  class="form-control" name=pno_penerimaan  value="<?php echo $pno; ?>" >

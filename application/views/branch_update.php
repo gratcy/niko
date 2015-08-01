@@ -87,6 +87,21 @@ $phone = explode('*', $detail[0] -> bphone);
                         <input type="text" placeholder="Phone II" name="phone2" class="form-control" value="<?php echo $phone[1]; ?>" />
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Fax</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Fax" name="fax" class="form-control" value="<?php echo $phone[2]; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Email</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" placeholder="Email" name="email" class="form-control" value="<?php echo $detail -> bemail; ?>" />
+                    </div>
+                </div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">

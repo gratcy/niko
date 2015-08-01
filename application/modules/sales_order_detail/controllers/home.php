@@ -78,17 +78,17 @@ class Home extends MY_Controller {
 		}
 
 	
-			$pricex = $this -> input -> post('pricex', TRUE);
-			$pricedist = $this -> input -> post('pricedist', TRUE);
-			$pricesemi = $this -> input -> post('pricesemi', TRUE);
-			$pricekey = $this -> input -> post('pricekey', TRUE);			
-			$pricestore = $this -> input -> post('pricestore', TRUE);
-			$priceconsume = $this -> input -> post('priceconsume', TRUE);
+			$pricex = str_replace(',','',$this -> input -> post('pricex', TRUE));
+			$pricedist = str_replace(',','',$this -> input -> post('pricedist', TRUE));
+			$pricesemi = str_replace(',','',$this -> input -> post('pricesemi', TRUE));
+			$pricekey = str_replace(',','',$this -> input -> post('pricekey', TRUE));			
+			$pricestore = str_replace(',','',$this -> input -> post('pricestore', TRUE));
+			$priceconsume = str_replace(',','',$this -> input -> post('priceconsume', TRUE));
 			$qtyx = $this -> input -> post('qtyx', TRUE);
 		    $ssid = $this -> input -> post('id', TRUE);
 			$spid = $this -> input -> post('spid', TRUE);
 			$sqty = $this -> input -> post('sqty', TRUE);
-			$sprice = $this -> input -> post('price', TRUE);
+			$sprice = str_replace(',','',$this -> input -> post('price', TRUE));
 			$sdisc = $this -> input -> post('ddisc', TRUE);
 			$ccat = $this -> input -> post('ccat', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
@@ -146,7 +146,6 @@ class Home extends MY_Controller {
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
-			
 			$this->load->view('sales_order_detail_add',$view);
 		}
 	}

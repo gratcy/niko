@@ -48,12 +48,16 @@ left:inherit!important;
                                     <thead>
                                         <tr>
           <th>Branch</th>
+<!--
           <th>NPWP</th>
+-->
           <th>Address</th>
           <th>City</th>
           <th>Province</th>
           <th>Phone I</th>
           <th>Phone II</th>
+          <th>Fax</th>
+          <th>Email</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -66,12 +70,16 @@ left:inherit!important;
 		  ?>
                                         <tr>
           <td><?php echo $v -> bname; ?></td>
+<!--
           <td><?php echo $v -> bnpwp; ?></td>
+-->
           <td><?php echo $baddr[0]; ?></td>
           <td><?php echo __get_cities($v -> bcity,1); ?></td>
           <td><?php echo __get_province($v -> bprovince,1); ?></td>
           <td><?php echo $phone[0]; ?></td>
           <td><?php echo $phone[1]; ?></td>
+          <td><?php echo $phone[2]; ?></td>
+          <td><?php echo $v -> bemail ?></td>
           <td><?php echo __get_status($v -> bstatus,1); ?></td>
 		  <td>
 			<?php if (__get_roles('BranchUpdate')) : ?>

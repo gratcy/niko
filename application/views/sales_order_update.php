@@ -26,7 +26,7 @@ minLength: 1,
 	    $("#theCid").val(ui.item.cid),
         $("#theCat").val(ui.item.ccat),
 		$("#theClimit").val(ui.item.climit),
-		$("#theClimitx").val(ui.item.climit),
+		$("#theClimitx").val(formatharga2(ui.item.climit)),
 		$("#theNpwp").val(ui.item.cnpwp),
 		$("#theDeliver").val(ui.item.cdeliver),
 		$("#theTopcash").val(ui.item.ccash),
@@ -90,25 +90,25 @@ minLength: 1,
                     <div class="col-lg-4">
                         <!--input type="text" placeholder="sales Order Code" name="sbid" class="form-control" /-->
 						
-						<select name="sbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $sbid; ?></select>						
+						<select name="sbid" class="form-control chzn-select"><?php echo $sbid; ?></select>						
 						
                     </div>
                 </div>
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No SO</label>
+                    <label for="text1" class="control-label col-lg-4">SO No.</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No SO" name="snoso" value="<?php echo $detailx[0]->snoso; ?>"  class="form-control" />
+                        <input type="text" name="snoso" value="<?php echo $detailx[0]->snoso; ?>"  class="form-control" />
                     </div>
                 </div>
    
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Reff</label>
+                <label for="text1" class="control-label col-lg-4">Reff No.</label>
 					<div class="col-lg-4">
-						<input  name="sreff" type="text" placeholder="reff"  value="<?php echo $detailx[0]->sreff; ?>" class="form-control"  >
+						<input  name="sreff" type="text" value="<?php echo $detailx[0]->sreff; ?>" class="form-control"  >
 					</div>
        		</div>
    
@@ -145,19 +145,54 @@ minLength: 1,
 						
                     </div>
                 </div>				
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Address</label>
+                    <div class="col-lg-4">					
+                   <textarea  name=caddr type="text" id="theAddr" class="form-control" rows="4" disabled><?php echo trim($caddrx[1]);?></textarea>
+                    </div>
+                </div>	
+
+			
+		
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Phone</label>
+
+                    <div class="col-lg-4">
+                        <input  name=cphone type="text" id="thePhone" value="<?php echo $cphonex[0]; ?>" class="form-control" disabled />
+                    </div>
+                </div>			
+		
+		
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sales</label>
+
+                    <div class="col-lg-4">
+					<input  name=csname type="text" id="theSname" class="form-control"  value="<?php echo $detailc[0]->sname; ?>" disabled />
+	
+                    </div>
+                </div>
+
+			
 				
 		
 
 	
 
+<!--
 
                         <input  type="hidden" id="theTopxx" class="form-control"   disabled />
 						<input  name=topx type="hidden" id="theTopx" class="form-control"   />
+-->
       	
 	
+	
+				
+		</td><td width=40% >
+				
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Term Of Payment Cash</label>
+                    <label for="text1" class="control-label col-lg-4">TOP Cash</label>
 
                     <div class="col-lg-4">
                         <input  type="text" id="theTopcashx" class="form-control" value="<?php echo $detailc[0]->ccash; ?>"  disabled/>
@@ -167,46 +202,14 @@ minLength: 1,
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Term Of Payment Credit</label>
+                    <label for="text1" class="control-label col-lg-4">TOP Credit</label>
 
                     <div class="col-lg-4">
                         <input   type="text" id="theTopcreditx" class="form-control"  value="<?php echo $detailc[0]->ccredit; ?>" disabled  />
 						
                     </div>
-                </div>					
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Address</label>
-                    <div class="col-lg-4">					
-                   <textarea  name=caddr type="text" id="theAddr" class="form-control" ><?php echo $caddrx[1];?></textarea>
-                    </div>
-                </div>	
-	
-				
-		</td><td width=40% >
-
-			
-		
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Telp</label>
-
-                    <div class="col-lg-4">
-                        <input  name=cphone type="text" id="thePhone" value="<?php echo $cphonex[1]; ?>" class="form-control"   />
-                    </div>
-                </div>			
-		
-		
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
-
-                    <div class="col-lg-4">
-					<input  name=csname type="text" id="theSname" class="form-control"  value="<?php echo $detailc[0]->sname; ?>"  />
-	
-                    </div>
-                </div>
-
-				
-
+                </div>		
+<!--
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
@@ -214,17 +217,18 @@ minLength: 1,
                         <input type="text" id="theNpwp" placeholder="Npwp" name="cnpwp" value="<?php echo $detailc[0]->cnpwp; ?>" class="form-control" />
                     </div>
                 </div>
+-->
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sisa Plafon</label>
+                    <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
 
                     <div class="col-lg-4">
                         <input  id="theClimitx"  type="text" placeholder="sisa plafon"  class="form-control" 
-						value="<?php echo $detailc[0]->climit; ?>" disabled/>
-						<input  id="theClimit" name="climit" type="hidden" placeholder="sisa plafon"  value="<?php echo $detailc[0]->climit; ?>"			class="form-control" />
+						value="<?php echo __get_rupiah($detailc[0]->climit,2); ?>" disabled />
+						<input  id="theClimit" name="climit" type="hidden" value="<?php echo $detailc[0]->climit; ?>"			class="form-control" />
                     </div>
                 </div>
                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">FREE PPN</label>
+							<label for="status" class="control-label col-lg-4">PPN</label>
                     <div class="col-lg-4">
                             <div class="make-switch has-switch" data-on="danger" data-off="default">
                                 <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
@@ -233,14 +237,20 @@ minLength: 1,
 				</div>	
                
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">payment Type</label>
+                    <label for="text1" class="control-label col-lg-4">Payment Type</label>
 
                     <div class="col-lg-4">
                        	<select name=stypepay class="form-control chzn-select">
-						<?php echo "<option>".$detailx[0]->stypepay."</option>"; ?>
-						<option>Auto</option>
+						<?php echo "<option>".ucfirst($detailx[0]->stypepay)."</option>"; ?>
+						<?php if (strtolower($detailx[0]->stypepay) <> 'credit') : ?>
 						<option>Credit</option>
+						<?php endif; ?>
+						<?php if (strtolower($detailx[0]->stypepay) <> 'auto') : ?>
+						<option>Auto</option>
+						<?php endif; ?>
+						<?php if (strtolower($detailx[0]->stypepay) <> 'cash') : ?>
 						<option>Cash</option>						
+						<?php endif; ?>
 						</select>
 
                     </div>
@@ -250,10 +260,10 @@ minLength: 1,
 
 	
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea placeholder="Keterangan" name="sketerangan" class="form-control" />
+                        <textarea name="sketerangan" rows="4" class="form-control" />
 						<?php echo $detailx[0]->sketerangan;?>
 						</textarea>						
                     </div>
