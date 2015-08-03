@@ -56,7 +56,7 @@ minLength: 1,
 <p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
@@ -75,7 +75,7 @@ minLength: 1,
 
 
 				<div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No bukti</label>
+                    <label for="text1" class="control-label col-lg-4">Bukti No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -92,7 +92,7 @@ minLength: 1,
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo date('d/m/Y',strtotime($detailx[0]->ptgl)); ?>" class="form-control" disabled>
@@ -106,7 +106,7 @@ minLength: 1,
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Alamat</label>
+                    <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
 						<input type=text value="<?php echo $detailx[0]->pgudang; ?>" class="form-control" disabled>
@@ -126,7 +126,7 @@ minLength: 1,
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Mata Uang</label>
+                    <label for="text1" class="control-label col-lg-4">Currency</label>
 
                     <div class="col-lg-4">
                         <input type="text" name="pcurrency" class="form-control"  value="IDR"   />
@@ -142,7 +142,7 @@ minLength: 1,
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga</label>
+                    <label for="text1" class="control-label col-lg-4">Price</label>
 
                     <div class="col-lg-4">
 <input  name=pharga type="text" id="thePhpp" class="form-control"   />
@@ -151,7 +151,7 @@ minLength: 1,
 				
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <textarea name="pketerangan" class="form-control" placeholder="Description"></textarea>
@@ -179,7 +179,7 @@ minLength: 1,
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
 				<a href= "<?php echo site_url('purchase_order/home/purchase_order_update/' . $id); ?>" ><button class="btn text-muted text-center btn-primary" type="button">EDIT</button></a>	
-				<button class="btn text-muted text-center btn-danger" type="submit">ADD ITEM</button>
+				<button class="btn text-muted text-center btn-danger" type="submit">Add Item</button>
 				
 					</div>
 				</div>
@@ -203,14 +203,14 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Nama Product</th>
+          <th>Product Name</th>
           <th>Currency</th>
 		  <th>Qty Koli</th>
           <th>Qty Pcs</th>
-          <th>Harga</th>
+          <th>Price</th>
        
 		  <th>Total </th>
-		  <th>Keterangan</th>
+		  <th>Description</th>
           <th>Status</th>
 		  <th>Action</th>
                                         </tr>

@@ -72,7 +72,7 @@ minLength: 1,
 
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
@@ -81,7 +81,7 @@ minLength: 1,
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No DO</label>
+                    <label for="text1" class="control-label col-lg-4">DO No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -104,7 +104,7 @@ minLength: 1,
 				
 </td><td width=40%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php 
@@ -118,7 +118,7 @@ minLength: 1,
 
               
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Pol</label>
+                    <label for="text1" class="control-label col-lg-4">Pol No.</label>
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->snopol; ?>" class="form-control" disabled>
@@ -128,7 +128,7 @@ minLength: 1,
 
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
@@ -171,7 +171,7 @@ minLength: 1,
                                         <tr>
           
           <th>Kode Product</th>
-          <th>Nama Product</th>
+          <th>Name Product</th>
           <th>Qty</th>
 
                                         </tr>

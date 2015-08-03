@@ -76,7 +76,7 @@ minLength: 1,
  <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No DO</label>
+                    <label for="text1" class="control-label col-lg-4">DO No.</label>
 
                     <div class="col-lg-4">	
 					<input type=text name=snodo class="form-control" >
@@ -84,7 +84,7 @@ minLength: 1,
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Pol</label>
+                    <label for="text1" class="control-label col-lg-4">Pol No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -98,7 +98,7 @@ minLength: 1,
 				
 			</td><td width=40%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
 					<div class="col-lg-4">
 						<input  name="stgldo" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
@@ -106,7 +106,7 @@ minLength: 1,
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Nomor</label>
+                    <label for="text1" class="control-label col-lg-4">Number</label>
 
                       <div class="col-lg-4">
 					<input type=text name=snomor  class="form-control" >

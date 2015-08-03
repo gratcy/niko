@@ -34,7 +34,7 @@ $pbadd = explode('*',$pbadd);
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('purchase_order/home/purchase_order_add'); ?>" method="post">
                 <div class="form-group" id="pbranch">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
                         <select name="pbid" data-placeholder="Cabang" class="form-control chzn-select"><?php echo $pbid; ?></select>						
@@ -54,7 +54,7 @@ $pbadd = explode('*',$pbadd);
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
                     <div class="col-lg-4">                
 					<input  name="ptgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
 				</div>				
@@ -63,7 +63,7 @@ $pbadd = explode('*',$pbadd);
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Alamat</label>
+                    <label for="text1" class="control-label col-lg-4">Warehouse</label>
 
                     <div class="col-lg-4">
 						<input type="text" name="pgudang" class="form-control" value="<?php echo $pbadd[1]; ?>" />

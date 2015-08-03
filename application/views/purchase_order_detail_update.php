@@ -40,7 +40,7 @@
    <input type="hidden" name="ppid" class="form-control"  value="<?php echo $detail[0] -> ppid; ?>"   />		                 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Mata Uang</label>
+                    <label for="text1" class="control-label col-lg-4">Currency</label>
 
                     <div class="col-lg-4">
                         <input type="text" name="pcurrency" class="form-control"  value="<?php echo $detail[0] -> pcurrency; ?>"   />
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Harga</label>
+                    <label for="text1" class="control-label col-lg-4">Price</label>
 
                     <div class="col-lg-4">
                         <input type="text" name="pharga" class="form-control" data-placeholder="Point" 
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <textarea name="pketerangan" class="form-control" placeholder="Description" ><?php echo $detail[0] -> pketerangan; ?></textarea>

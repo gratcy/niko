@@ -32,7 +32,7 @@
 <p align=center><table width=800 ><tr><td>
 <?php  //print_r($detailx);?>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">	
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
@@ -49,7 +49,7 @@
 				
  
 				<div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No bukti</label>
+                    <label for="text1" class="control-label col-lg-4">Bukti No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->ptgl; ?>" class="form-control" disabled>
@@ -85,7 +85,7 @@
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Alamat</label>
+                    <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
 						<input type=text value="<?php echo $detailx[0]->pgudang; ?>" class="form-control" disabled>
@@ -165,12 +165,12 @@
                                     <thead>
                                         <tr>
           
-          <th>Nama Product</th>
+          <th>Product Name</th>
           <th>Currency</th>
           <th>Qty</th>
-          <th>Harga</th>
+          <th>Price</th>
           <th>Discount </th>
-		  <th>Keterangan</th>
+		  <th>Description</th>
           <th>Status</th>
 		  <th>Action</th>
                                         </tr>
