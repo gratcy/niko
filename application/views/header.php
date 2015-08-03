@@ -101,6 +101,7 @@
                     <!--ADMIN SETTINGS SECTIONS -->
 
                     <!-- MESSAGES SECTION -->
+<!--
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <?php echo (__get_total_new_pm($this -> memcachedlib -> sesresult['uid']) > 0 ? '<span class="label label-success">'.__get_total_new_pm($this -> memcachedlib -> sesresult['uid']).'</span>' : ''); ?>    <i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
@@ -117,6 +118,7 @@
                         </ul>
 
                     </li>
+-->
                     <!--END MESSAGES SECTION -->
 
                     <li class="dropdown">

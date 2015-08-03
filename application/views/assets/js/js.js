@@ -31,17 +31,27 @@
 		if( $('form').length == 0 ) return false;
 		var obj = jQuery.parseJSON( obj );
 		var target = '';
-		console.log(obj);
 		$.each( obj, function( key, value ) {
-			target = $('[name="'+key+'"]');
-			if ( target.is( 'input[type="text"]' ) ) {
-				$('form input[name="'+key+'"]').val(value);
+			if ($.isArray(value)) {
+				obj2 = value;
+				for(i=0;i<obj2.length;++i) {
+					target = $('[name="'+key+'['+obj2[i]+']"]');
+					if ( target.is( ':checkbox' ) ) {
+						$('[name="'+key+'['+obj2[i]+']"]').prop('checked', true);
+					}
+				}
 			}
-			else if ( target.is( 'select' ) ) {
-				$('form select[name="'+key+'"]').val(value);
-			}
-			else if ( target.is( 'textarea' ) ) {
-				$('form textarea[name="'+key+'"]').val(value);
+			else {
+				target = $('[name="'+key+'"]');
+				if ( target.is( 'input[type="text"]' ) ) {
+					$('form input[name="'+key+'"]').val(value);
+				}
+				else if ( target.is( 'select' ) ) {
+					$('form select[name="'+key+'"]').val(value);
+				}
+				else if ( target.is( 'textarea' ) ) {
+					$('form textarea[name="'+key+'"]').val(value);
+				}
 			}
 		});
 	};

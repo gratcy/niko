@@ -224,6 +224,7 @@
                         </li>
                     </ul>
                 </li>
+<!--
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#PM">
                         <i class="icon-envelope"> </i> Private Messages
@@ -240,6 +241,7 @@
                         <li class=""><a href="<?php echo site_url('pm/outbox'); ?>"><i class="icon-angle-right"></i> Outbox </a></li>
                     </ul>
                 </li>
+-->
 				<?php if (__get_roles('UsersView') || __get_roles('UsersGroupView')) : ?>
                 <li class="panel">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#SUsers">
