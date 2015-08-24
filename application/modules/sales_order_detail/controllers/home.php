@@ -87,7 +87,16 @@ class Home extends MY_Controller {
 			$qtyx = $this -> input -> post('qtyx', TRUE);
 		    $ssid = $this -> input -> post('id', TRUE);
 			$spid = $this -> input -> post('spid', TRUE);
-			$sqty = $this -> input -> post('sqty', TRUE);
+			$ppid = $this -> input -> post('ppid', TRUE);
+			$sqtykol= $this -> input -> post('sqtykol', TRUE);
+			$sqtykoli= $this -> input -> post('sqtykoli', TRUE);
+			$sqtypcs= $this -> input -> post('sqtypcs', TRUE);
+			if($sqtykoli==''){
+			$sqty= $this -> input -> post('sqtypcs', TRUE);
+			}else{
+			$sqty= $this -> input -> post('sqtykoli', TRUE)* $sqtykol;
+			}
+			//$sqty = $this -> input -> post('sqty', TRUE);
 			$sprice = str_replace(',','',$this -> input -> post('price', TRUE));
 			$sdisc = $this -> input -> post('ddisc', TRUE);
 			$ccat = $this -> input -> post('ccat', TRUE);

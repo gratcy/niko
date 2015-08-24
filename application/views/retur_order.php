@@ -45,12 +45,13 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Branch</th>
+          
           <th>Return No.</th>
     
           <th>Date</th>
+		  <th>Customer </th>
           <th>Sales</th>
-          <th>Customer </th>
+          
           <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
@@ -65,8 +66,8 @@ left:inherit!important;
           <td><?php echo $v -> snoro; ?></td>
       
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
-          <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> sname; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
 		  if($sstatus==0){

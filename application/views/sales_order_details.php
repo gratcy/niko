@@ -134,9 +134,10 @@ minLength: 1,
 						<?php if ($stat == 3) : ?>
                                <input type=text value="<?php echo __get_ppn($detailx[0] -> sfreeppn,1); ?>" class="form-control" disabled>
 						<?php else :?>
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
-                            </div>
+                            <!--div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php //echo __get_ppn($detailx[0] -> sfreeppn,2); ?>
+                            </div-->
+							<input type=text value="<?php echo __get_ppn($detailx[0] -> sfreeppn,1); ?>" class="form-control" disabled>
                             <?php endif; ?>
 					</div>
 				</div>	
@@ -175,9 +176,9 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Code Product</th>
-          
-          <th>Qty</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
           <th>Price</th>
           <th>Discount </th>
 		  <th>Total</th>
@@ -193,7 +194,11 @@ minLength: 1,
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;
-			$spricex=$v -> sprice;
+			if($freeppn==0){
+				$spricex=$v -> sprice;
+			}else{
+			$spricex=$v -> sprice/1.1;
+			}
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;			
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
@@ -202,8 +207,9 @@ minLength: 1,
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+		  <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo __get_rupiah($v -> sprice,2); ?></td>
+          <td><?php echo __get_rupiah($spricex,2); ?></td>
           <td><?php echo $v -> sdisc; ?></td>
 		  <td> <?php echo __get_rupiah($subtotal,2); ?> </td>		
 		  </tr>
@@ -220,6 +226,7 @@ minLength: 1,
 		
          <tr>          
           <td>SUB TOTAL</td>
+		  <td>&nbsp;</td>
           <td><?php echo $totalqty; ?></td>
           <td></td>
           <td></td>
@@ -227,6 +234,7 @@ minLength: 1,
 		 </tr>		
          <tr>          
           <td>PPN</td>
+		  <td>&nbsp;</td>
           <td><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
           <td></td>
@@ -235,6 +243,7 @@ minLength: 1,
 		 </tr>			
          <tr>          
           <td>TOTAL</td>
+		  <td>&nbsp;</td>
           <td></td>
           <td></td>
           <td></td>

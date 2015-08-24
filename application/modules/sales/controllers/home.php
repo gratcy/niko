@@ -63,6 +63,7 @@ class Home extends MY_Controller {
 	
 	function sales_update($id) {
 		if ($_POST) {
+			print_r($_POST);die;
 			$branch = (int) $this -> input -> post('branch');
 			$code = $this -> input -> post('code', TRUE);
 			$name = $this -> input -> post('name', TRUE);
@@ -70,7 +71,7 @@ class Home extends MY_Controller {
 			$phone2 = $this -> input -> post('phone2', TRUE);
 			$email = $this -> input -> post('email', TRUE);
 			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
-			$sarea = implode($this -> input -> post('sarea'),',');
+			$sarea = implode(',',$this -> input -> post('sarea'));
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 

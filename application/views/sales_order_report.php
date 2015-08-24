@@ -55,22 +55,32 @@ table.gridtablex td {
 $caddrx=explode("*",$detailx[0]->caddr);
 
 ?>
-<table class="gridtablex" border=0 width=800px >
+<table class="gridtablex" border=0 width=90% align=center >
 <tr>
-<td rowspan=2 colspan=2 width="40%" align=center  ><h2>SALES ORDER</h2></td><td><b>No SO</b></td><td><?php echo $detailx[0]->snoso; ?></td>
+<td rowspan=2 colspan=6  align=center  >
+<h2>SALES ORDER</h2></td>
 </tr>
 <tr>
-<td><b>Date</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
+<td></td><td></td>
+</tr>
+
+<tr>
+<td width="10%" align=left  ><b>SO No.</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->snoso; ?></td><td width="10%"></td><td rowspan=3 valign=top width=30% ></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Sales</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->sname; ?></td><td width="10%"><b>Alamat</b></td><td rowspan=3 valign=top width=30% ><?php echo $caddrx[1]; ?></td>
+
+<tr>
+<td width="10%" align=left  ><b>Date</b></td><td width="30%" ><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?><?php //echo $detailx[0]->sname; ?></td><td width="10%"></td><td rowspan=3 valign=top width=30% ></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Code Store</b></td><td  ><?php echo $detailx[0]->scid; ?></td><td></td>
+<tr>
+<td width="10%" align=left  ><b>Customer</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
+</tr>
+<td width="10%" align=left  ><b>Sales</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->sname; ?></td><td width="10%"></td><td rowspan=3 valign=top width=30% ></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Name Store</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
-</tr>
+
+
 </table>
 </p>
 
@@ -84,10 +94,10 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                     <thead>
                                         <tr>
           
-          <th>Code Product</th>
-          <th>Name Product</th>
-          <th>Qty</th>
-          <th>Harga</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
+          <th>Price</th>
           <th>Discount </th>
 		  <th>Total</th>
                                         </tr>
@@ -102,7 +112,11 @@ $caddrx=explode("*",$detailx[0]->caddr);
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;
-			$spricex=$v -> sprice;
+			if($freeppn==1){
+			$spricex=$v -> sprice/1.1;
+			}else{
+			$spricex=$v -> sprice;	
+			}	
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
@@ -113,9 +127,9 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
           <td><?php echo $v -> pname; ?></td>
 		  <td align=center ><?php echo $v -> sqty; ?></td>
-          <td align=center ><?php echo __get_rupiah($v -> sprice); ?></td>
+          <td align=right ><?php echo __get_rupiah($spricex); ?></td>
           <td align=center ><?php echo $v -> sdisc; ?></td>
-		  <td align=center > <?php echo __get_rupiah($subtotal); ?> </td>		
+		  <td align=right > <?php echo __get_rupiah($subtotal); ?> </td>		
 		  </tr>
         <?php 
 		$total=$subtotal+$total;
@@ -131,19 +145,19 @@ $caddrx=explode("*",$detailx[0]->caddr);
          <tr>          
           <th>SUB TOTAL</th>
 		  <th></th>
-          <th><?php echo $totalqty; ?></th>
+          <th ><?php echo $totalqty; ?></th>
           <th></th>
           <th></th>
 		  
-          <th><?php echo __get_rupiah($total); ?></th>
+          <th align=right ><?php echo __get_rupiah($total); ?></th>
 		 </tr>		
          <tr>          
-          <td>PPN</td>
-          <td><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
+          <td align=center >PPN</td>
+          <td align=center ><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
           <td></td>
 		  <td></td>
-          <td align=center ><?php 
+          <td align=right ><?php 
 		  if($freeppn==1){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
 		  </td>
 		 </tr>			
@@ -153,7 +167,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <th></th>
           <th></th>
 		  <th></th>
-          <th><?php echo __get_rupiah($totalall); ?></th>
+          <th align=right ><?php echo __get_rupiah($totalall); ?></th>
 		 </tr>		 
                                     </tbody>
                                 </table>
@@ -161,20 +175,20 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <p align=center>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td  width=20% align=left  >CARA BAYAR</td><td align=left width=20%>
+<td  width=20% align=left  ><b>TERM OF PAYMENT</b></td><td align=left width=20%>
 						<?php
 						$ccats= $detailx[0]->ccat; 
 						$stypepay=$detailx[0]->stypepay;
 						if($stypepay == "auto"){
-						if($ccats==3){ 	$stype="cash";	}else{ $stype="credit";}
+						if($ccats==3){ 	$stype="CASH";	}else{ $stype="CREDIT";}
 						}else{ $stype=$stypepay ;}
 						?>
 
-<?php echo $stype; ?></td><td width=20% align=right >CATATAN</td>
+<?php echo strtoupper($stype); ?></td><td width=20% align=right ><b>NOTES</b></td>
 <td valign=top  align=left rowspan=2 width=40%><?php echo $detailx[0]->sketerangan; ?></td>
 </tr>
 <tr>
-<td  align=left  >DUE DATE</td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
+<td  align=left  ><b>DUE DATE</b></td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
 </tr>
 
 </table>
@@ -183,13 +197,13 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <p align=center>
 <table class="gridtable" width=800px >
 <tr>
-	<th>Admin </th><th>Manager</th><th>Salesman</th><th>Pemesan</th>
+	<th width="25%">SALES </th><th width="25%">ADMIN 1</th><th width="25%">ADMIN 2</th><th width="25%" >CUSTOMER</th>
 </tr>
 <tr>
 	<td><br><br></td><td></td><td></td><td></td>
 </tr>
 <tr>
-	<td>Admin</td><td>Manager</td><td>Salesman</td><td>Pemesan</td>
+	<td></td><td></td><td></td><td></td>
 </tr>
 
 

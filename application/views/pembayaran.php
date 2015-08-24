@@ -50,7 +50,8 @@ left:inherit!important;
     
           <th>Date</th>
        
-         
+            <th>Customer</th>
+          <th>Sales </th>       
           <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
@@ -59,14 +60,15 @@ left:inherit!important;
 		  <?php
 		  foreach($pembayaran as $k => $v) :
 			  // echo "<pre>";
-	// print_r($sales_order);
+	 //print_r($pembayaran);
 	 // echo "</pre>";
 		  ?>
                                         <tr>
           <td><?php echo $v -> pno_pm; ?>- <?php echo $v -> pcid; ?></td>
           <td><?php echo $v -> pm_tgl; ?></td>
       
-       
+                 <td>Customer</td>
+          <td>Sales </td>
 
           <td><?php 
 		  $sstatus=$v -> status;

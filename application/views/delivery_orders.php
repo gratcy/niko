@@ -22,12 +22,11 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Branch</th>
+        
           <th>SO No.</th>
           <th>Date</th>
-          <th>Sales</th>
-          <th>Customer </th>
-          <th>Description</th>
+          <th>Customer</th>
+          <th>Sales </th>      
 		  <th>Status</th>
 		  <th></th>
                                         </tr>
@@ -39,12 +38,12 @@
 		  if($sisa==0){ $statt="DONE";}else{ $statt="AKTIF"; }
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
+         
           <td><?php echo $v -> snoso; ?></td>
           <td><?php echo __get_date(strtotime($v -> stgl),1); ?></td>
-          <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> sketerangan; ?></td>
+          <td><?php echo $v -> sname; ?></td>
+         
 		  <td><?php echo $statt; ?></td>
 		
 		  <td>

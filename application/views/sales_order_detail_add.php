@@ -4,12 +4,10 @@
         <script src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript">
             // When the document is ready
-            $(document).ready(function () {
-                 
+            $(document).ready(function () {                 
                 $('#example1').datepicker({
                     format: "dd/mm/yyyy"
-                });  
-            
+                });              
             });
         </script>
 		<?php $sbidx=$detailx[0]->sbid;?>
@@ -23,6 +21,7 @@ minLength: 1,
      select: function(event, ui) { 
 	    $("#theId").val(ui.item.pid),
         $("#theCid").val(ui.item.pcid),
+		$("#thePpid").val(ui.item.ppid),
 		$("#theCode").val(ui.item.pcode),
 		$("#theHpp").val(ui.item.phpp),
 		$("#theDist").val(ui.item.pdist),
@@ -50,7 +49,9 @@ minLength: 1,
 		$("#thePriceqq").val(ui.item.priceq),
 		$("#theCcat").val(ui.item.ccat),
 		$("#theCcatt").val(ui.item.ccat),
-		$("#theNamecat").val(ui.item.namecat)
+		$("#theNamecat").val(ui.item.namecat),
+		$("#thePvolumePcs").val(ui.item.pvolumepcs),
+		$("#thePvolumePck").val(ui.item.pvolumepck)
 	
 		
     }
@@ -98,20 +99,18 @@ var badColor = "#ff6666";
 
 
 	if( k==0 || k== 2){  
-	
-
-		if((c==null || c=="") || c < b )
-		  {
-		    
-		  messagec.style.color = badColor;
-		  messagec.innerHTML  = "Qty masih kosong atau dibawah batas qty";  
-		  }else{
-		   messagec.innerHTML = "";  
-		  }  
+	//alert( c );
+	//if((c==null || c=="") || c < b )
+		if(c=='' || c== 0 )	
+		{		    
+			  messagec.style.color = badColor;
+			  messagec.innerHTML  = "Qty masih kosong atau dibawah batas qty";  
+		}else{
+			   messagec.innerHTML = "";  
+		}  
 	}else{
 		   messagec.innerHTML = "";  
 		  } 
-
  
 	if(e==null || e=="" || e <= d )
 	  {
@@ -179,22 +178,7 @@ var badColor = "#ff6666";
                     </div>
                 </div>
 				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Customer</label>
-
-                    <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
-                    </div>
-                </div>
-				
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales</label>
-
-                    <div class="col-lg-4">
-                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
-                    </div>
-                </div>				
+		
 				
 
                 <div class="form-group">
@@ -213,26 +197,18 @@ var badColor = "#ff6666";
                     </div>   							
                 </div>				
 				
-               <div class="form-group">
-							<label for="status" class="control-label col-lg-4">PPN</label>
-                    <div class="col-lg-4">
-					<input type=text value="<?php echo __get_ppn($detailx[0] -> sfreeppn,1); ?>" class="form-control" disabled>
-					</div>
-				</div>	
-
-
+				
+				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
+                    <label for="text1" class="control-label col-lg-4">Customer</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo __get_rupiah($detailx[0]->sisaplafon,2); ?>" class="form-control"  disabled >
-                        <input type=hidden value="<?php echo $detailx[0]->sisaplafon; ?>" class="form-control" name="sisaplafon" >
+                       	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
                     </div>
-                </div>			
+                </div>
 				
 
-				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Category Customer</label>
 		<?php 
@@ -247,10 +223,32 @@ var badColor = "#ff6666";
                     </div>
                 </div>					
 				
-		
-		</td><td width=40%>
-
+				
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sales</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
+                    </div>
+                </div>						
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo __get_rupiah($detailx[0]->sisaplafon,2); ?>" class="form-control"  disabled >
+                        <input type=hidden value="<?php echo $detailx[0]->sisaplafon; ?>" class="form-control" name="sisaplafon" >
+                    </div>
+                </div>		
+
+               <div class="form-group">
+							<label for="status" class="control-label col-lg-4">PPN</label>
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo __get_ppn($detailx[0] -> sfreeppn,1); ?>" class="form-control" disabled>
+					</div>
+				</div>	
+
+				<div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Payment Type</label>
 
                     <div class="col-lg-4">           
@@ -265,6 +263,16 @@ var badColor = "#ff6666";
                     </div>
                 </div>
 
+				
+				
+
+				
+				
+				
+		
+		</td><td width=40%>
+
+               
 
                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Product</label>
@@ -282,6 +290,7 @@ var badColor = "#ff6666";
 						<input type=hidden  id="thePricex" class="form-control" name="pricex" >
 						<input type=hidden  id="theSemi" class="form-control" name="pricesemi" >
 						<input type=hidden  id="theConsume" class="form-control" name="priceconsume" >
+						<input type=hidden  id="thePpid" class="form-control" name="ppid" >
 		<?php 
 		$ccats= $detailx[0]->ccat; 
 		if($ccats==0){
@@ -367,14 +376,38 @@ var badColor = "#ff6666";
 								
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY</label>
+                    <label for="text1" class="control-label col-lg-4">QTY/KOLI</label>
 
                     <div class="col-lg-4">
-                       	<input type=text   class="form-control" name=sqty  >
+                       	<input type=text   id="thePvolumePck" class="form-control" name=sqtykol  >
 						<input type=hidden  value=0 name="add_plafon" >
 						&nbsp;&nbsp;<span id="confirmMessagec"></span>
                     </div>
                 </div>	
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">QTY KOLI</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text    class="form-control" name=sqtykoli  >
+						<input type=hidden  value=0 name="add_plafon" >
+						&nbsp;&nbsp;<span id="confirmMessagec"></span>
+                    </div>
+                </div>					
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">QTY PCS</label>
+
+                    <div class="col-lg-4">
+                       	<input type=hidden  id="thePvolumePcs" class="form-control"   >
+						<input type=text   class="form-control" name=sqtypcs  >
+						<input type=hidden  value=0 name="add_plafon" >
+						&nbsp;&nbsp;<span id="confirmMessagec"></span>
+                    </div>
+                </div>					
+				
+				
+				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price</label>
 
@@ -421,12 +454,12 @@ var badColor = "#ff6666";
                                     <thead>
                                         <tr>
           
-          <th>Code Product</th>
-          
-          <th>Qty</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
           <th>Price</th>
           <th>Discount </th>
-		  <th>Jumlah</th>
+		  <th>Total</th>
 		  <th style="width:50px;">Action</th>
                                         </tr>
                                     </thead>
@@ -440,7 +473,11 @@ var badColor = "#ff6666";
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;
-			$spricex=$v -> sprice;
+			if($freeppn==0){
+				$spricex=$v -> sprice;
+			}else{
+			$spricex=$v -> sprice/1.1;
+			}
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
@@ -449,8 +486,11 @@ var badColor = "#ff6666";
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+		  <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo __get_rupiah($v -> sprice,2); ?></td>
+          <td><?php 
+		  
+		  echo __get_rupiah($spricex,2); ?></td>
           <td><?php echo $v -> sdisc; ?></td>
 		  <td> <?php echo __get_rupiah($subtotal,2); ?> </td>		
 		  <td><a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
@@ -471,6 +511,7 @@ var badColor = "#ff6666";
 		
          <tr>          
           <td>SUB TOTAL</td>
+		  <td>&nbsp;</td>
           <td><?php echo $totalqty; ?></td>
           <td></td>
           <td></td>
@@ -479,6 +520,7 @@ var badColor = "#ff6666";
 		 </tr>		
          <tr>          
           <td>PPN</td>
+		  <td>&nbsp;</td>
           <td><?php echo $persen;?> % </td>
           <td></td>
           <td></td>
@@ -487,6 +529,7 @@ var badColor = "#ff6666";
 		 </tr>			
          <tr>          
           <td>TOTAL</td>
+		  <td>&nbsp;</td>
           <td></td>
           <td></td>
           <td></td>
