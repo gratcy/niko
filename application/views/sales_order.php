@@ -67,7 +67,7 @@ left:inherit!important;
 -->
           <td><?php echo $v -> snoso; ?></td>
       
-          <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
+          <td><?php echo __get_date(strtotime($v -> stgl),2); ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php 

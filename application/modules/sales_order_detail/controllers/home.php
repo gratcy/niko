@@ -268,7 +268,9 @@ class Home extends MY_Controller {
 			$snodo = $this -> input -> post('snodo', TRUE);
 			$snopol = $this -> input -> post('snopol', TRUE);
 			$stgldos = $this -> input -> post('stgldo', TRUE);
-			$driver = $this -> input -> post('driver', TRUE);			
+			$drivera = $this -> input -> post('driver', TRUE);
+			$driverb = $this -> input -> post('adriver', TRUE);
+			$driver=$drivera.'-'.$driverb;
 			$stgldox = explode("/",$stgldos);			
 			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";
 			$snomor = $this -> input -> post('snomor', TRUE);

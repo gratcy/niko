@@ -259,9 +259,11 @@ minLength: 1,
 				
 
                 <div class="form-group">
-					<label for="status" class="control-label col-lg-4"></label>                 
+					<label for="status" class="control-label col-lg-4">&nbsp;&nbsp;</label>  
+				<div align=center class="col-lg-4">
 					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-					<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+				</div>	
+					<!--button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button-->
 					
 				</div>				
 				</td></tr></table>

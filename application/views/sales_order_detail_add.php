@@ -51,7 +51,8 @@ minLength: 1,
 		$("#theCcatt").val(ui.item.ccat),
 		$("#theNamecat").val(ui.item.namecat),
 		$("#thePvolumePcs").val(ui.item.pvolumepcs),
-		$("#thePvolumePck").val(ui.item.pvolumepck)
+		$("#thePvolumePck").val(ui.item.pvolumepck),
+		$("#thePvolumePckk").val(ui.item.pvolumepck)
 	
 		
     }
@@ -154,9 +155,7 @@ var badColor = "#ff6666";
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-								<a href="<?php echo site_url("sales_order/home/sales_order_update/$id/$scid"); ?>">
-					<button class="btn text-muted text-center btn-primary" >Edit Header</button>	
-					</a>
+							
 
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>
@@ -379,7 +378,9 @@ var badColor = "#ff6666";
                     <label for="text1" class="control-label col-lg-4">QTY/KOLI</label>
 
                     <div class="col-lg-4">
-                       	<input type=text   id="thePvolumePck" class="form-control" name=sqtykol  >
+					<input type=text   id="thePvolumePckk" class="form-control" disabled  >
+					<input type=hidden   id="thePvolumePck" class="form-control" name=sqtykol   >
+                       	
 						<input type=hidden  value=0 name="add_plafon" >
 						&nbsp;&nbsp;<span id="confirmMessagec"></span>
                     </div>
@@ -429,15 +430,34 @@ var badColor = "#ff6666";
 						&nbsp;&nbsp;<span id="confirmMessagee"></span>
                     </div>
                 </div>					
-		
+	
+<?php $z= site_url("sales_order/home/sales_order_update/$id/$scid"); ?>
+	
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
 
                     
-				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>		
+				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+				<a href="<?php echo $z; ?>" class="btn text-muted text-center btn-primary">Edit Header</a>
+				<!--a href="<?php //echo site_url("sales_order/home/sales_order_update/$id/$scid"); ?>"   -->
+					<!--/a-->				
 				</div>
 				</td></tr></table>
             </form>
+			
+			<?php //echo $z;die;?>
+			
+			<script language = "javascript" type = "text/javascript">
+ 
+function dLoad()
+{
+location.href = "<?php echo $z; ?>" // file to download
+ 
+//window.setTimeout("", 60000) // wait 60 seconds
+ 
+location.reload() //reload the doc (should happen whether download is in progress or not)
+}
+</script>
 			
 
         </div>
@@ -551,9 +571,10 @@ var badColor = "#ff6666";
 		<input type=hidden  value=1 name="approve" >
 		<input type=hidden  value=0 name="add_plafon" >		
 		<input class="btn text-muted text-center btn-danger" type=submit value="Complete Approval" >
+			
 		</form>	
 		<?php }else{ ?>
-		Sisa Plafon Anda Kurang <br> 
+		<font color=red >Credit Limit!</font> <br> 
 		<!--Silahkan Edit Item atau Tambah Plafon<br>
 		<form method="POST"  >
 		<input type=hidden  value="<?php //echo $scid;?>" name="scid" >

@@ -253,9 +253,16 @@ minLength: 1,
                                 </table>
 	<?php if($stat==3){?>				
 
-			<a href="javascript:void(0);" onclick="print_data('<?php echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>', 'Print SO');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
+			<!--a href="javascript:void(0);" onclick="print_data('<?php //echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>', 'Print SO');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a-->
+			
+			<a href="<?php echo site_url('sales_order_detail/home/sales_order_report/'.$id.'/'.$scid); ?>"  target=blank ><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
+			
+			
+			
+			
+			
 			   <?php }else{?>
-			<a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_add/'.$id.'/'.$scid); ?>"><input type=button class="btn text-muted text-center btn-danger" value="APPROVE / EDIT SO"></a>		
+			<a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_add/'.$id.'/'.$scid); ?>"><input type=button class="btn text-muted text-center btn-danger" value="APPROVE / EDIT"></a>		
     <?php } ?>
                             </div>
                         </div>

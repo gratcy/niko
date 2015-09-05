@@ -55,7 +55,7 @@ table.gridtablex td {
 $caddrx=explode("*",$detailx[0]->caddr);
 
 ?>
-<table class="gridtablex" border=0 width=90% align=center >
+<table class="gridtablex" border=0 width=800 align=center >
 <tr>
 <td rowspan=2 colspan=6  align=center  >
 <h2>SALES ORDER</h2></td>

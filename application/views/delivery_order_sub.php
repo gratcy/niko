@@ -13,7 +13,7 @@
 				if($ssisa >'0'){
 				$statusdo="Aktif";
 				?>
-                <a href="<?php 	echo site_url('sales_order_detail/home/delivery_order_add/'.$id.'/'.$sbid); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Delivery Order</a>
+                <a href="<?php 	echo site_url('sales_order_detail/home/delivery_order_add/'.$id.'/'.$sbid); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Delivery Order</a>
 				<?php  }else{$statusdo="DONE";} ?>
                 <br />
                 <br />
@@ -29,7 +29,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-          <th>Branch</th>
+          <!--th>Branch</th-->
           <th>SO No.</th>
          
           <th>Date</th>
@@ -45,7 +45,7 @@
 	
 		  ?>
                                         <tr>
-          <td><?php echo $v -> bname; ?></td>
+          <!--td><?php //echo $v -> bname; ?></td-->
           <td><?php echo $v -> snoso; ?></td>
          
           <td><?php echo __get_date(strtotime($v -> stgldo),1); ?></td>

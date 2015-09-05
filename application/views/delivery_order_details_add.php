@@ -68,14 +68,14 @@ minLength: 1,
 
  <form  id="form1" class="form-horizontal"  method="POST">
 <table border=0 width=90% ><tr><td width=50%>
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
-					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" class="form-control" name=sbid >
+					<input type=text value="<?php //echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=hidden value="<?php //echo $detailx[0]->sbid; ?>" class="form-control" name=sbid >
                     </div>
-                </div>
+                </div-->
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">DO No.</label>
@@ -86,7 +86,19 @@ minLength: 1,
                     </div>
                 </div>
 
-				
+		<?php 
+ 			$stgldos=$detailx[0]->stgldo;
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";	
+		?>			
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Date</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo $stgldo; ?>" class="form-control" disabled>
+                    </div>   							
+                </div>				
 				
 				
                 <div class="form-group">
@@ -97,27 +109,42 @@ minLength: 1,
                     </div>
                 </div>
 				
-			
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sales</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
+                    </div>
+                </div>			
 				
 </td><td width=40%>
 
- <?php 
- 			$stgldos=$detailx[0]->stgldo;
-			$stgldox = explode("-",$stgldos);			
-			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";	
-?>			
+<?php
+$drv=explode("-",$detailx[0]->driver);
+?> 
 
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Date</label>
+
+
+				<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Driver</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo $stgldo; ?>" class="form-control" disabled>
-                    </div>   							
+                       	<input type=text value="<?php echo $drv[0]; ?>" class="form-control" disabled>
+                    </div>
                 </div>
+
+
+				<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Assistant Driver</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo $drv[1]; ?>" class="form-control" disabled>
+                    </div>
+                </div>					
 
               
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Pol No.</label>
+                    <label for="text1" class="control-label col-lg-4">Car No.</label>
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->snopol; ?>" class="form-control" disabled>
@@ -126,13 +153,13 @@ minLength: 1,
 
 
 				
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
+                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php //echo $detailx[0]->sketerangan; ?></textarea>
                     </div>
-                </div>				
+                </div-->				
 		
 
 
@@ -164,8 +191,8 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          <th>Name Product</th>
+          <th>Code</th>
+          <th>Name</th>
           <th>Qty</th>
 
                                         </tr>
