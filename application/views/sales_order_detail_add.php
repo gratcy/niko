@@ -37,6 +37,9 @@ minLength: 1,
 		$("#theConsume").val(ui.item.pconsume),
 		$("#theConsumee").val(ui.item.pconsume),
 		$("#theConsumeee").val(ui.item.pconsume),
+		$("#theConsumeeee").val(ui.item.pconsume),
+		$("#theCash").val(ui.item.pcash),
+		$("#theCashh").val(ui.item.pcash),
 		$("#thePoint").val(ui.item.ppoint),
 		$("#thePdisc").val(ui.item.pdisc),
 		$("#theDisc").val(ui.item.ddisc),
@@ -283,13 +286,14 @@ var badColor = "#ff6666";
                 </div>	
 		
 
-						<input type=hidden  id="theStore" class="form-control" name="pricestore" >
-						<input type=hidden  id="theKey" class="form-control" name="pricekey" >
+						<!--input type=hidden  id="theStoree" class="form-control" name="pricestore" >
+						<input type=hidden  id="theKeyy" class="form-control" name="pricekey" >
 						<input type=hidden  id="theDist" class="form-control" name="pricedist" >
 						<input type=hidden  id="thePricex" class="form-control" name="pricex" >
 						<input type=hidden  id="theSemi" class="form-control" name="pricesemi" >
 						<input type=hidden  id="theConsume" class="form-control" name="priceconsume" >
-						<input type=hidden  id="thePpid" class="form-control" name="ppid" >
+						<input type=hidden  id="thePpid" class="form-control" name="ppid" -->
+						<input type=hidden  id="thePricex" class="form-control" name="pricex" >
 		<?php 
 		$ccats= $detailx[0]->ccat; 
 		if($ccats==0){
@@ -300,47 +304,71 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">
                        	<input type=text  id="theDistt" class="form-control" disabled>
-
+				<?php $prc="<input type=text  id='theDist' class='form-control' name='price'>";?>
                     </div>
                 </div>				
 		<?php }elseif($ccats==1){ ?>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Price Key</label>
-
-                    <div class="col-lg-4">
-                       	<input type=text  id="theKeyy" class="form-control" disabled>
-                    </div>
-                </div>	
-				
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Price Store</label>
-                    <div class="col-lg-4">
-                       	<input type=text  id="theStoree" class="form-control" disabled>						
-                    </div>
-                </div>	
-<?php }elseif($ccats==2){ ?>			
-				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price Semi</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theSemii" class="form-control" disabled>
-						
-				
+				<?php $prc="<input type=text  id='theSemi' class='form-control' name='price'>";?>
 						
                     </div>
-                </div>	
+                </div>
+				
+<?php }elseif($ccats==2){ ?>			
+				
+	
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Price Agent</label>
+                    <div class="col-lg-4">
+                       	<input type=text  id="theKey" class="form-control" disabled><?php $prc="<input type=text  id='theKeyy' class='form-control' name='price'>";?>						
+                    </div>
+                </div>					
+				
 
 <?php }elseif($ccats==3){ ?>					
+
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Price Store</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text  id="theStore" class="form-control" disabled>
+						
+					<?php $prc="<input type=text  id='theStoree' class='form-control' name='price'>";?>	
+						
+                    </div>
+                </div>					
+				
+
+<?php }elseif($ccats==4){ ?>					
+
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price Consumer</label>
 
                     <div class="col-lg-4">
                        	<input type=text  id="theConsumee" class="form-control" disabled>
+					<?php $prc="<input type=text  id='theConsume' class='form-control' name='price'>";?>	
 						
 						
+                    </div>
+                </div>					
+				
+
+<?php }elseif($ccats==5){ ?>					
+
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Price Cash</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text  id="theCash" class="form-control" disabled>
+						
+					<?php $prc="<input type=text  id='theCashh' class='form-control' name='price'>";?>	
 						
                     </div>
                 </div>					
@@ -414,6 +442,7 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">
                        	<?php
+						/*
 						if($detailx[0]->stypepay=="cash"){ ?>  
                        	<input type=text  id="theConsumeee" name=price  class="form-control" >						
 						<?php }elseif($ccats==1){ ?> 
@@ -423,10 +452,13 @@ var badColor = "#ff6666";
 						<?php }elseif($ccats==2){ ?>
 						<input type=text  id="theSemiii" name=price  class="form-control" >
 						<?php } elseif(($ccats==3) and ($detailx[0]->stypepay=="auto")){ ?>
-						<input type=text  id="theConsumeee" name=price  class="form-control" >
+						<input type=text  id="theConsumeeee" name=price  class="form-control" >
 						<?php } elseif(($ccats==3) and ($detailx[0]->stypepay=="credit")){ ?>
 						<input type=hidden   name=price  class="form-control" >
-						<?php } ?>
+						<?php } 
+						*/
+						echo $prc;
+						?>
 						&nbsp;&nbsp;<span id="confirmMessagee"></span>
                     </div>
                 </div>					

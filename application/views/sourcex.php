@@ -12,8 +12,10 @@ if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
 mysql_connect($mysql_server, $mysql_login, $mysql_password);
 mysql_select_db($mysql_database);
 
-$req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pdisc,pstatus,mqty,pvolume "
-	."FROM products_tab  a LEFT JOIN moq_tab b ON a.pid=b.mpid"
+$req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pstatus,mqty,pvolume,
+(select g.cdiscount from categories_tab g where g.cid= a.pcid) as pdisc
+ "
+	." FROM products_tab  a LEFT JOIN moq_tab b ON a.pid=b.mpid"
 	." WHERE b.mbid='$bidx' and a.pname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req";
@@ -35,14 +37,22 @@ $namecat="dist";
 	$price=$row['pdist'];
 	$ddisc=0;
 }elseif($ccat==1){
-$namecat="reg";
-	$price=$row['pkey'];
-	$ddisc=0;
-}elseif($ccat==2){
 $namecat="semi";
 	$price=$row['psemi'];
 	$ddisc=0;
+}elseif($ccat==2){
+$namecat="agent";
+	$price=$row['pkey'];
+	$ddisc=0;
 }elseif($ccat==3){
+$namecat="store";
+	$price=$row['pstore'];
+	$ddisc=$row['pdisc'];
+}elseif($ccat==4){
+$namecat="consumer";
+	$price=$row['pconsume'];
+	$ddisc=$row['pdisc'];
+}elseif($ccat==5){
 $namecat="cash";
 	$price=$row['pconsume'];
 	$ddisc=$row['pdisc'];
@@ -50,7 +60,7 @@ $namecat="cash";
 
 $label=$row['pcode'].' - '.$row['pname'];
 
-if($row['ppid']=='7'){
+if($row['ppid']=='3'){
 	$pvolpcs= $row['pvolume'];
 	$pvolpck= "";
 }else{

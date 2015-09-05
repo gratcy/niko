@@ -66,7 +66,7 @@ class Home extends MY_Controller {
 	
 	function sales_order_detail_add($id,$scid) {
 		if ($_POST) {
-		
+		//print_r($_POST);die;
 		if($_POST['add_plafon']==1){
 		//echo $scid;
 				$limit=$_POST['sisa']+$_POST['plafon'];
@@ -98,25 +98,28 @@ class Home extends MY_Controller {
 			}
 			//$sqty = $this -> input -> post('sqty', TRUE);
 			$sprice = str_replace(',','',$this -> input -> post('price', TRUE));
+			$price = $this -> input -> post('price', TRUE);
 			$sdisc = $this -> input -> post('ddisc', TRUE);
 			$ccat = $this -> input -> post('ccat', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
 		
 		if($stypepay=="auto"){	
 		$stypepay="credit";
-			if($ccat=='1'){			
-				if($qtyx>$sqty){
-					$sprice=$pricestore;
+			// if($ccat=='1'){			
+				// if($qtyx>$sqty){
+					// $sprice=$pricestore;
 					
-				}else if($qtyx==$sqty){
-					$sprice=$pricekey;
-				}
-			}
+				// }else if($qtyx==$sqty){
+					// $sprice=$pricekey;
+				// }
+			// }
 			if($ccat=='3'){
-				$sprice=$priceconsume;
+				//$sprice=$priceconsume;
 				$stypepay="cash";
 			}
-		}elseif($stypepay=="cash"){
+		}
+		/*
+		elseif($stypepay=="cash"){
 		
 			$sprice=$priceconsume;
 			
@@ -132,6 +135,8 @@ class Home extends MY_Controller {
 				}
 			}
 		}
+		*/
+		$sprice=$price;
 
 					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'ssisa'=>$sqty);					
 //print_r($arr);die;
