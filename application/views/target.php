@@ -25,7 +25,9 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+<!--
           <th>Branch</th>
+-->
           <th style="width: 250px;">Sales</th>
           <th>Sales Target</th>
           <th>Target Month/Year</th>
@@ -38,7 +40,9 @@
 		  foreach($target as $k => $v) :
 		  ?>
                                         <tr>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <td><?php echo $v -> sname; ?></td>
           <td style="text-align:right;"><?php echo __get_rupiah($v -> ttarget,1); ?></td>
           <td><?php echo $v -> tmy; ?></td>

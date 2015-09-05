@@ -45,7 +45,9 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+<!--
           <th>Branch</th>
+-->
           <th>Code</th>
           <th>Name</th>
           <th>Phone I</th>
@@ -62,7 +64,9 @@ left:inherit!important;
 		  $phone = explode('*', $v -> tphone);
 		  ?>
                                         <tr>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <td><?php echo $v -> tcode; ?></td>
           <td><?php echo $v -> tname; ?></td>
           <td><?php echo $phone[0]; ?></td>

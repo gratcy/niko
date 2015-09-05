@@ -25,7 +25,9 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+<!--
           <th>Branch</th>
+-->
           <th>Category</th>
           <th>Cash Com A (%)</th>
           <th>Cash Com B (%)</th>
@@ -46,7 +48,9 @@
 		  foreach($sales_commision as $k => $v) :
 		  ?>
           <tr>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <td><?php echo $v -> cname; ?></td>
           <td style="text-align:right;"><?php echo $v -> scoma; ?></td>
           <td style="text-align:right;"><?php echo $v -> scomb; ?></td>

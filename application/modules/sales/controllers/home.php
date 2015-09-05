@@ -63,7 +63,6 @@ class Home extends MY_Controller {
 	
 	function sales_update($id) {
 		if ($_POST) {
-			print_r($_POST);die;
 			$branch = (int) $this -> input -> post('branch');
 			$code = $this -> input -> post('code', TRUE);
 			$name = $this -> input -> post('name', TRUE);

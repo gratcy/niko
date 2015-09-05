@@ -258,6 +258,15 @@ function __get_customer_retur($status, $type) {
 		return ($status === 0 ? '<label> Tukar Guling <input type="radio" class="uniform" name="ctyperetur" value="0" checked /></label> <label>Potong Nota <input type="radio" class="uniform" name="ctyperetur" value="1" /></label>' : '<label> Tukar Guling <input type="radio" class="uniform" name="ctyperetur" value="0" /></label> <label>Potong Nota <input type="radio" class="uniform" name="ctyperetur" value="1" checked /></label>');
 }
 
+function __reverse_key($arr) {
+	$arr = explode(',',$arr);
+	$drr = array();
+	foreach($arr as $v) {
+		$drr[$v] = $v;
+	}
+	return $drr;
+}
+
 function __get_sales_area($id, $type='') {
 	$area = array('Dalam Kota', 'Luar Kota', 'Luar Pulau');
 	$res = '';
@@ -271,7 +280,7 @@ function __get_sales_area($id, $type='') {
 		return $res;
 	}
 	else {
-		if ($id) $id = explode(',',$id);
+		if ($id !== '') $id = __reverse_key($id);
 		else $id = array();
 		
 		foreach($area as $k => $v)
