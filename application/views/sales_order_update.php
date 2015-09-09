@@ -245,9 +245,9 @@ minLength: 1,
 						<?php if (strtolower($detailx[0]->stypepay) <> 'credit') : ?>
 						<option>Credit</option>
 						<?php endif; ?>
-						<?php if (strtolower($detailx[0]->stypepay) <> 'auto') : ?>
-						<option>Auto</option>
-						<?php endif; ?>
+						<?php //if (strtolower($detailx[0]->stypepay) <> 'auto') : ?>
+						<!--option>Auto</option-->
+						<?php //endif; ?>
 						<?php if (strtolower($detailx[0]->stypepay) <> 'cash') : ?>
 						<option>Cash</option>						
 						<?php endif; ?>

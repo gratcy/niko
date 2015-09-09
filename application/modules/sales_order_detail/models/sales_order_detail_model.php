@@ -30,6 +30,9 @@ class sales_order_detail_model extends CI_Model {
 		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
 		(select caddr from customers_tab where customers_tab.cid=sales_order_tab.scid)as caddr,
+		(select 
+		(select cname from city_tab where city_tab.cid=customers_tab.ccity)
+		from customers_tab where customers_tab.cid=sales_order_tab.scid)as ccity,
 		(select ccat from customers_tab where customers_tab.cid=sales_order_tab.scid)as ccat,
 		(select climit from customers_tab where customers_tab.cid=sales_order_tab.scid)as sisaplafon,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,

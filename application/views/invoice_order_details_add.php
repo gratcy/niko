@@ -78,17 +78,10 @@ minLength: 1,
  <input type=hidden name=durationx value="<?php echo $duedate; ?>">
  
 <table border=0 width=90% ><tr><td width=50%>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cabang</label>
-
-                    <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
 					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" class="form-control" name=sbid >
-                    </div>
-                </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No DO</label>
+                    <label for="text1" class="control-label col-lg-4">DO No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -96,7 +89,19 @@ minLength: 1,
                     </div>
                 </div>
 
-				
+		<?php 
+			$stgldos=$detailx[0]->stgldo;			
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";
+			
+		?>	
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Date</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo $stgldo; ?>" class="form-control" disabled>
+                    </div> 
+                </div>				
 				
 				
                 <div class="form-group">
@@ -108,9 +113,18 @@ minLength: 1,
                     </div>
                 </div>
 				
-			
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Address</label>
+
+                    <div class="col-lg-4">
+					<?php 
+$caddr=explode("*",$detailx[0]->caddr);
+ ?>
+                       	<input type=text value="<?php echo trim($caddr[1].' , '.$detailx[0]->ccity); ?>" class="form-control" disabled>
+                    </div>
+                </div>				
 				
-</td><td width=40%>
+</td><td width=40% valign=top >
 
  <?php 
  			$stgldos=$detailx[0]->stgldo;
@@ -118,17 +132,8 @@ minLength: 1,
 			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";	
 ?>			
 
-          <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal Invoice</label>
-
-					<div class="col-lg-4">
-						<input  name="stgl_invoice" value="<?php echo date('d/m/Y');?>" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
-					</div> 							
-                </div>
-
-              
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No INVOICE</label>
+                    <label for="text1" class="control-label col-lg-4">Invoice No</label>
 
                     <div class="col-lg-4">	
 					<?php
@@ -140,14 +145,36 @@ minLength: 1,
                 </div>	
 
 
+
+
+		 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Invoice Date</label>
+
+					<div class="col-lg-4">
+						<input  name="stgl_invoice" value="<?php echo date('d/m/Y');?>" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
+					</div> 							
+                </div>
+				
+				
+				
 				
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">&nbsp;</label>
+
+                    <div class="col-lg-4">
+                       <input class="btn text-muted text-center btn-primary" type=submit value ="Create" > 
+                    </div>
+                </div>					
+				
+				
+				
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Keterangan</label>
 
                     <div class="col-lg-4">
-                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
+                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php //echo $detailx[0]->sketerangan; ?></textarea>
                     </div>
-                </div>				
+                </div-->				
 		
 
 
@@ -155,7 +182,7 @@ minLength: 1,
 				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input class="btn text-muted text-center btn-primary" type=submit value ="Create Invoice" >
+				
             </form>
         </div>
     </div>

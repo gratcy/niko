@@ -33,7 +33,7 @@ $topx=$row['ccredit'];
 $phone=explode('*',$row['cphone']);
 $addr=explode('*',$row['caddr']);
 	$results[] = array('label' => $row['cname'],'cid' => $row['cid'],'cbid' => $row['cbid'],
-	'ccat' => $row['ccat'],'caddr' => $addr[0],'cdeliver' => $row['cdeliver'],'cphone' => $phone[0],
+	'ccat' => $row['ccat'],'caddr' => trim($addr[0]),'cdeliver' => $row['cdeliver'],'cphone' => $phone[0],
 	'csid' => $row['csid'],'ccash' => $row['ccash'],'ccredit' => $row['ccredit'],'climit' => $row['climit'],'cnpwp' => $row['cnpwp'],'cpkp' => $row['cpkp'],'cspecial' => $row['cspecial'],'bname' => $row['bname'],
 	'csname' => $row['sname'],'topx'=>$topx );
 }

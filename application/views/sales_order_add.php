@@ -236,7 +236,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
                        	<select name=stypepay class="form-control chzn-select">
-						<option>Auto</option>
+						<!--option>Auto</option-->
 						<option>Credit</option>
 						<option>Cash</option>						
 						</select>

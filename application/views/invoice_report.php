@@ -95,33 +95,54 @@ $tgll=$detailx[0]->stgl_invoice;
 </tr>
 
 <tr>
-<td width="10%" align=left  >Kepada</td><td width="30%" ><?php echo $detailx[0]->cname; ?></td>
-<td width="10%">No INVOICE</td><td  valign=top width=30% ><?php echo $detailx[0]->sno_invoice; ?></td>
+<td width="10%" align=left><b>DO No.</b></td><td width=50% ><?php echo $detailx[0]->snodo; ?></td>
+<td width="20%"><b>Invoice No.</b></td>
+<td  valign=top width=20% ><?php echo $detailx[0]->sno_invoice; ?></td>
+</tr>
+		<?php 
+			$stgldos=$detailx[0]->stgldo;			
+			$stgldox = explode("-",$stgldos);			
+			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";
+			
+		?>
+<tr>
+<td width="10%" align=left  ><b>DO Date</b></td><td ><?php echo $stgldo; ?></td>
+<td width="10%"><b>Invoice Date</b></td><td  valign=top width=30% ><?php echo date('d-m-Y',strtotime($detailx[0]->stgl_invoice)); ?></td>
+</tr>
+
+
+<tr>
+<td width="10%" align=left  ><b>Customer</b></td><td  ><?php echo $detailx[0]->cname; ?></td>
+<td width="10%"><b>Term Of Payment</b></td><td  valign=top width=30% ><?php
+						$ccats= $detailx[0]->ccat; 
+						$stypepay=$detailx[0]->stypepay;
+						if($stypepay == "auto"){
+						if($ccats==3){ 	$stype="Cash";	}else{ $stype="Credit";}
+						}else{ $stype=$stypepay ;}
+						echo ucwords($stype);
+						?></td>
 </tr>
 <tr>
-<td width="10%" align=left  >Alamat</td><td  ><?php 
+<td width="10%" align=left  ><b>Address</b></td><td  ><?php 
 $caddr=explode("*",$detailx[0]->caddr);
-echo $caddr[1]; ?></td>
-<td width="10%">Tanggal</td><td  valign=top width=30% ><?php echo date('d-m-Y',strtotime($detailx[0]->stgl_invoice)); ?></td>
+echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
+<td width="10%"><b>Due Date</b></td><td  valign=top width=30% ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate_invoice)); ?></td>
 </tr>
-<tr>
-<td width="10%" align=left  >Kode</td><td ><?php echo $detailx[0]->snomor; ?></td>
-<td width="10%">No Pol</td><td  valign=top width=30% ><?php echo $detailx[0]->snopol; ?></td>
-</tr>
+
 </table>
 
 
-<table class="gridtablex" border=1 width=800px >
+<!--table class="gridtablex" border=1 width=800px >
 
 
 <tr>
 <td width="10%" align=left  >Driver</td><td width="20%" ><?php echo $detailx[0]->driver; ?></td>
 <td width="10%">No </td><td  valign=top width=20% ><?php echo $detailx[0]->snodo; ?></td>
-<td width="10%">Tanggal </td><td  valign=top width=20% ><?php //echo date('d-m-Y',strtotime($nextdate)); ?>
-<?php echo date('d-m-Y',strtotime($detailx[0]->sduedate_invoice)); ?>
+<td width="10%">Due Date </td><td  valign=top width=20% ><?php //echo date('d-m-Y',strtotime($nextdate)); ?>
+<?php //echo date('d-m-Y',strtotime($detailx[0]->sduedate_invoice)); ?>
 </td>
 </tr>
-</table>
+</table-->
 <br>
 </p>
 <p align=center>
@@ -136,12 +157,12 @@ echo $caddr[1]; ?></td>
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          <th>Nama Product</th>
-          <th>Qty</th>
-		  <th>Discount</th>
-		  <th>Harga</th>
-		  <th>Total Harga</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
+		  <th>Price</th>
+		  <th>Discount</th>		  
+		  <th>Total</th>
 
                                         </tr>
                                     </thead>
@@ -167,8 +188,9 @@ echo $caddr[1]; ?></td>
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
           <td align=center ><?php echo $v -> sqty; ?></td>
-		  <td align=center ><?php echo $v -> sdisc; ?></td>
 		  <td align=center ><?php echo __get_rupiah($v -> sprice); ?></td>
+		  <td align=center ><?php echo $v -> sdisc; ?></td>
+		  
 		<td align=center ><?php echo __get_rupiah($totalharga); ?></td>
 		  </tr>
         <?php 
@@ -179,7 +201,7 @@ echo $caddr[1]; ?></td>
 		
 
 		$totalppn=$total * 10/100;
-		if($freeppn==1){
+		if($freeppn==0){
 		$totalall= $subtotal;
 		}else{
 		$totalall= $subtotal + $totalppn;
@@ -199,13 +221,13 @@ echo $caddr[1]; ?></td>
 		 </tr>	
 
 <tr>          
-          <td>PPN</td>
-          <td><?php if($freeppn==0){ echo 10;}else{echo 0;}?>%</td>
+          <td align=center >PPN</td>
+          <td align=center ><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
 		<td></td>
 		<td></td>
           <td align=center ><?php 
-		  if($freeppn==0){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
+		  if($freeppn==1){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
 		  </td>
 		 </tr>			
          <tr>          
@@ -239,17 +261,17 @@ echo $caddr[1]; ?></td>
 
 
 
-<p align=center>
+<p align=center><br>
 <table  width=800px border=0 >
 <tr>
-	<td width=25% ><font  face="arial" size="2px">Tanda Terima</font></td><td colspan=2 rowspan=3 width=50% ></td><td width=25% ><font  face="arial" size="2px">Hormat kami, <br> PT Niko Elektronik</font></td>
+	<td width=25% ><font  face="arial" size="2px">Tanda Terima</font></td><td colspan=2 rowspan=3 width=50% ></td><td width=25% ><font  face="arial" size="2px">Hormat Kami, <br> PT Niko Elektronik Indonesia</font></td>
 </tr>
 <tr>
 	<td><br><br><br></td><td></td>
 </tr>
 
 <tr>
-	<td><font  face="arial" size="2px">Nama</font></td><td><font  face="arial" size="2px">Admin</font></td>
+	<td><font  face="arial" size="2px"><br><b>CUSTOMER</b></font></td><td><font  face="arial" size="2px"><br><b>ADMIN</b></font></td>
 </tr>
 
 

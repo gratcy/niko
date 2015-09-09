@@ -79,7 +79,7 @@ left:inherit!important;
 		  }if($sstatus==2){
 		  $st="Delete";
 		  }if($sstatus==3){
-		  $st="Approve";
+		  $st="Approved";
 		  }if($sstatus==4){
 		  $st="Done";
 		  }

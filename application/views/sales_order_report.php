@@ -58,7 +58,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <table class="gridtablex" border=0 width=800 align=center >
 <tr>
 <td rowspan=2 colspan=6  align=center  >
-<h2>SALES ORDER</h2></td>
+<h1>SALES ORDER</h1></td>
 </tr>
 <tr>
 <td></td><td></td>
@@ -66,11 +66,25 @@ $caddrx=explode("*",$detailx[0]->caddr);
 
 <tr>
 <td width="10%" align=left  ><b>SO No.</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->snoso; ?></td><td width="10%"></td><td rowspan=3 valign=top width=30% ></td>
+
+
+<td  width=20% align=left  ><b>Term Of Payment</b></td><td align=left width=20%>
+						<?php
+						$ccats= $detailx[0]->ccat; 
+						$stypepay=$detailx[0]->stypepay;
+						if($stypepay == "auto"){
+						if($ccats==3){ 	$stype="Cash";	}else{ $stype="Credit";}
+						}else{ $stype=$stypepay ;}
+						?>
+
+<?php echo ucwords($stype); ?></td>
+
 </tr>
 <tr>
 
 <tr>
-<td width="10%" align=left  ><b>Date</b></td><td width="30%" ><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?><?php //echo $detailx[0]->sname; ?></td><td width="10%"></td><td rowspan=3 valign=top width=30% ></td>
+<td width="10%" align=left  ><b>Date</b></td><td width="30%" ><?php echo date('d/m/Y',strtotime($detailx[0]->stgl)); ?></td><td width="10%"></td>
+<td  align=left  ><b>Due Date</b></td><td align=left ><?php echo date('d/m/Y',strtotime($detailx[0]->sduedate)); ?></td>
 </tr>
 <tr>
 <tr>
@@ -173,25 +187,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                 </table>
 </p>	
 <p align=center>
-<table class="gridtablex" border=0 width=800px >
-<tr>
-<td  width=20% align=left  ><b>TERM OF PAYMENT</b></td><td align=left width=20%>
-						<?php
-						$ccats= $detailx[0]->ccat; 
-						$stypepay=$detailx[0]->stypepay;
-						if($stypepay == "auto"){
-						if($ccats==3){ 	$stype="CASH";	}else{ $stype="CREDIT";}
-						}else{ $stype=$stypepay ;}
-						?>
-
-<?php echo strtoupper($stype); ?></td><td width=20% align=right ><b>NOTES</b></td>
-<td valign=top  align=left rowspan=2 width=40%><?php echo $detailx[0]->sketerangan; ?></td>
-</tr>
-<tr>
-<td  align=left  ><b>DUE DATE</b></td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
-</tr>
-
-</table>
+<br>
 </p>
 
 <p align=center>
