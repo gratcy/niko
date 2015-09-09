@@ -49,42 +49,34 @@ table.gridtablex td {
 }
 </style>
 <!-- Table goes in the document BODY -->
-<?php //print_r($detailx);?>
+<?php
+$caddr=explode("*",$detailx[0]->caddr);
+$drv=explode("-",$detailx[0]->driver);
+?>
 <p align=center>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td  colspan=4 width="40%" align=center  ><h1>Delivery Order</h1></td>
-</tr>
-
-<tr>
-<td width="10%" align=left  >To</td><td width="30%" ><?php echo $detailx[0]->cname; ?></td>
-<td width="10%">DO No.</td><td  valign=top width=30% ><?php echo $detailx[0]->snodo; ?></td>
-</tr>
-<tr>
-<td width="10%" align=left  >Description</td><td  ><?php 
-$caddr=explode("*",$detailx[0]->caddr);
-echo $caddr[1]; ?></td>
-<td width="10%">Date</td><td  valign=top width=30% ><?php echo __get_date(strtotime($detailx[0]->stgldo)); ?></td>
-</tr>
-<tr>
-<td width="10%" align=left  >Code</td><td ><?php echo $detailx[0]->snomor; ?></td>
-<td width="10%">Pol No.</td><td  valign=top width=30% ><?php echo $detailx[0]->snopol; ?></td>
+<td colspan="4" width="40%" align="center"><h1>DELIVERY ORDER</h1></td>
 </tr>
 </table>
-
-
-<table class="gridtablex" border=1 width=800px >
-
-
-<tr>
-<td width="10%" align=left  >Driver</td><td width="20%" ><?php echo $detailx[0]->driver; ?></td>
-<td width="10%">No </td><td  valign=top width=20% ><?php echo $detailx[0]->snodo; ?></td>
-<td width="10%">Date </td><td  valign=top width=20% ><?php echo __get_date(strtotime($detailx[0]->stgldo),1); ?></td>
-</tr>
+<div style="width:800px;margin:0 auto;">
+<table class="gridtablex" border=0 width="500px" style="float:left;">
+<tr><td><b>DO No.</b></td><td><?php echo $detailx[0]->snodo; ?></td></tr>
+<tr><td><b>Date</b></td><td><?php echo __get_date(strtotime($detailx[0]->stgldo)); ?></td></tr>
+<tr><td><b>Customer</b></td><td><?php echo $detailx[0]->cname; ?></td></tr>
+<tr><td><b>Address</b></td><td><?php echo trim($caddr[0]).' , '.$detailx[0]->ccity; ?></td></tr>
 </table>
-<br>
+
+<table class="gridtablex" border=0 width="300px" style="float:right;">
+<tr><td><b>Sales</b></td><td><?php echo $detailx[0]->sname; ?></td></tr>
+<tr><td><b>Driver</b></td><td><?php echo $drv[0]; ?></td></tr>
+<tr><td><b>A. Driver</b></td><td><?php echo $drv[1]; ?></td></tr>
+<tr><td><b>Car No.</b></td><td><?php echo $detailx[0]->snopol; ?></td></tr>
+</table>
+</div>
+<div style="clear:both;"></div>
 </p>
-<p align=center>
+<p align="center" style="padding-top:10px;">
 
 
 
@@ -96,9 +88,9 @@ echo $caddr[1]; ?></td>
                                     <thead>
                                         <tr>
           
-          <th>Code Product</th>
-          <th>Name Product</th>
-          <th>Qty</th>
+          <th width="20%">Code</th>
+          <th>Name</th>
+          <th width="20%">Qty/Pcs</th>
 
                                         </tr>
                                     </thead>
@@ -130,7 +122,7 @@ echo $caddr[1]; ?></td>
 
 		endforeach; ?>
 		
-         <tr>          <th>SUB TOTAL</th>
+         <tr>          <th>TOTAL</th>
           <th></th>
           <th><?php echo $totalqty; ?></th>
 
@@ -141,23 +133,18 @@ echo $caddr[1]; ?></td>
 
 </p>	
 
-
-
-
+<br />
 <p align=center>
 <table class="gridtable" width=800px >
 <tr>
-	<th width=25% >Kepala Gudang </th><th width=25% >Security</th><th width=25% >Pengirim</th><th width=25% >Penerima</th>
+	<th width=20% >H. WAREHOUSE </th><th width=20% >A. WAREHOUSE</th><th width=20% >DRIVER</th><th width=20% >A. DRIVER</th><th width=20% >CUSTOMER</th>
 </tr>
 <tr>
-	<td><br><br></td><td></td><td></td><td></td>
+	<td><br><br></td><td></td><td></td><td></td><td></td>
 </tr>
 
 <tr>
-	<td></td><td></td><td>Nama</td><td>Nama</td>
-</tr>
-<tr>
-	<td></td><td></td><td>Date</td><td>Date</td>
+	<td></td><td></td><td></td><td></td><td></td>
 </tr>
 
 </table>

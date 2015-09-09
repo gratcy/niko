@@ -43,11 +43,7 @@ class detail_komisi_model extends CI_Model {
 	}	
 
 	function __get_detail_komisi($sno_invoice) {
-		
-	$sql = $this -> db -> query("SELECT sssid,
-		(select sname from sales_tab where sales_tab.sid=delivery_order_detail_tab.sssid)as sname,sno_invoice,tamount,stgl_invoice,sdate_lunas,sduration,samount,samount_com FROM delivery_order_detail_tab where sno_invoice= '$sno_invoice' ");	
-		
-		//$this -> db -> select('sssid, tamount FROM delivery_order_detail_tab '  );
+		$sql = $this -> db -> query("SELECT sssid, (select sname from sales_tab where sales_tab.sid=delivery_order_detail_tab.sssid)as sname,sno_invoice,tamount,stgl_invoice,sdate_lunas,sduration,samount,samount_com FROM delivery_order_detail_tab where sno_invoice= '$sno_invoice' ");
 		return $sql -> result();
 	}		
 	

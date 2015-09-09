@@ -51,6 +51,7 @@ left:inherit!important;
           <th>Component No.</th>
           <th>Price Agent</th>
           <th>Price Consumer</th>
+          <th>Return</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -66,6 +67,7 @@ left:inherit!important;
           <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
           <td><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
+          <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('SparepartUpdate')) : ?>

@@ -64,8 +64,6 @@ return $this -> db -> get() -> result();
 	
 	
 	function __get_total_sales_order_monthly($month,$year,$id) {
-	//$year=date('Y');
-	
 	$sql = $this -> db -> query("SELECT * FROM sales_order_tab WHERE YEAR(stgl) = '$year' AND MONTH(stgl) = '$month' ");
 	$jum= $sql -> num_rows();
 	$sqlx=$this -> db -> query("UPDATE sales_order_tab set snoso='$jum' WHERE sid='$id' ");
