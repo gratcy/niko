@@ -35,7 +35,7 @@
 		  <?php
 		  foreach($sales_order as $k => $v) :
 	      $sisa= $v->sisa;
-		  if($sisa==0){ $statt="DONE";}else{ $statt="AKTIF"; }
+		  if($sisa==0){ $statt="Done";}else{ $statt="Active"; }
 		  ?>
                                         <tr>
          

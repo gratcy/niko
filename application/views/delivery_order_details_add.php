@@ -193,7 +193,7 @@ $drv=explode("-",$detailx[0]->driver);
           
           <th>Code</th>
           <th>Name</th>
-          <th>Qty</th>
+          <th>Qty/Pcs</th>
 
                                         </tr>
                                     </thead>
@@ -205,7 +205,6 @@ $drv=explode("-",$detailx[0]->driver);
 		$totalall=0;
 		
 		foreach($detail as $k => $v) :	
-			//print_r($v);
 			$sqtyx=$v -> sqty;
 			$spricex=$v -> sprice;
 			$sdiscx=$v -> sdisc;
@@ -222,7 +221,7 @@ $drv=explode("-",$detailx[0]->driver);
 		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
 		  </td>
 		  <td><?php echo $v -> pname; ?></td>
-          <td><select name="sqty[]">
+          <td><select name="sqty[]" class="form-control chzn-select">
 		  
 		  <?php $ssisa= $v -> ssisa; 
 		  for($k=$ssisa;$k>=0;$k--){
@@ -248,7 +247,7 @@ $drv=explode("-",$detailx[0]->driver);
                                 </table>
 								
 							
-		<br><input class="btn text-muted text-center btn-primary" type=submit value ="Create DO" >						
+		<input class="btn text-muted text-center btn-danger" type=submit value ="Create" >						
 		</form>						
 
                             </div>

@@ -62,7 +62,9 @@ left:inherit!important;
 
 		  ?>
                                         <tr>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <td><?php echo $v -> snoro; ?></td>
       
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>

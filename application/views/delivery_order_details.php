@@ -99,6 +99,7 @@ minLength: 1,
 			$stgldos=$detailx[0]->stgldo;			
 			$stgldox = explode("-",$stgldos);			
 			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";
+			$caddr=explode("*",$detailx[0]->caddr);
 			
 		?>				
                 <div class="form-group">
@@ -118,18 +119,25 @@ minLength: 1,
                 </div>
 				
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Address</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo trim($caddr[0]). ' , '.$detailx[0]->ccity; ?>" class="form-control" disabled>
+                    </div>
+                </div>			
+</td><td width=40%>
+
+<?php
+$drv=explode("-",$detailx[0]->driver);
+?> 
+				
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
                     </div>
                 </div>			
-				
-</td><td width=40%>
-
-<?php
-$drv=explode("-",$detailx[0]->driver);
-?> 
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Driver</label>
@@ -197,7 +205,7 @@ $drv=explode("-",$detailx[0]->driver);
           
           <th>Code</th>
           <th>Name</th>
-          <th>Qty</th>
+          <th>Qty/Pcs</th>
 
                                         </tr>
                                     </thead>
@@ -264,12 +272,12 @@ $drv=explode("-",$detailx[0]->driver);
 		<?php 	
 		//echo $detailx[0]->dstatus;
 		if ($detailx[0]->dstatus==1){?>						
-			<input class="btn text-muted text-center btn-danger" type=submit value="POSTING">
+			<input class="btn text-muted text-center btn-danger" type=submit value="Posting">
 		<?php }?>						
 			</form></td><td>
 		<?php 
 		if ($detailx[0]->dstatus==1){?>						
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type=submit value="EDIT" ></form>	
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type=submit value="Edit" ></form>	
 		<?php }else{?>
 		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type=submit value="PRINT" ></form>	
 		<?php }?></td></tr></table>
