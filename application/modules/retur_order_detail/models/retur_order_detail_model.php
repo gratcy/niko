@@ -19,11 +19,19 @@ class retur_order_detail_model extends CI_Model {
 	}
 	
 	function __get_retur_order_detail($id) {
+
 	
-		$this -> db -> select('*,(select sbid from retur_order_tab where retur_order_tab.sid=retur_order_detail_tab.ssid)as sbid FROM retur_order_detail_tab WHERE  ssid=' . $id);
+		$this -> db -> select(" *, retur_order_tab.sbid AS sbid,
+		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid ) as cname
+FROM retur_order_detail_tab, retur_order_tab 
+
+ WHERE 
+retur_order_tab.sid = retur_order_detail_tab.ssid
+AND retur_order_detail_tab.ssid ='". $id."'");
 		return $this -> db -> get() -> result();
 	}
 
+	
 
 	function __get_retur_order_detail_by_cust($scid) {
 		$this -> db -> select(' *,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
@@ -84,7 +92,7 @@ class retur_order_detail_model extends CI_Model {
         return $this -> db -> update('retur_order_tab', $data);
 	}	
 	function __insert_retur_order_detail($data) {
-	
+	//print_r($data);die;
         return $this -> db -> insert('retur_order_detail_tab', $data);
 	}
 	function __insert_delivery_order_detail($data) {

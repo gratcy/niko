@@ -73,7 +73,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>retur order</h5>
+            <h5>Return Order</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -81,22 +81,31 @@ minLength: 1,
 <form id="form1" class="form-horizontal" action="<?php echo site_url('retur_order/home/retur_order_add'); ?>" method="post">
 
 
-
-				
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Retur</label>
+                <div class="form-group" id="sbranch">
+                    <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No Retur" name="snoro" class="form-control" />
+                        <!--input type="text" placeholder="sales Order Code" name="sbid" class="form-control" /-->
+						
+						<select name="sbid" data-placeholder="Branch" class="form-control chzn-select"><?php echo $sbid; ?></select>						
+						
                     </div>
                 </div>
-   
+				
+				
+                <!--div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Return No. </label>
 
+                    <div class="col-lg-4">
+                        <input  type="text" name="snoro" class="form-control" />
+                    </div>
+                </div-->
+   
+			<input type="hidden"  name="snoro" class="form-control" />
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Reff</label>
+                <label for="text1" class="control-label col-lg-4">Reff No.</label>
 					<div class="col-lg-4">
-						<input  name="sreff" type="text" placeholder="reff"  class="form-control"  >
+						<input  name="sreff" type="text"   class="form-control"  >
 					</div>
        		</div>
    
@@ -104,9 +113,9 @@ minLength: 1,
 
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                <label for="text1" class="control-label col-lg-4">Date</label>
 					<div class="col-lg-4">
-						<input  name="stgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
+						<input  name="stgl" type="text"   id="example1" class="form-control"  >
 					</div>
        		</div>
 				
@@ -139,10 +148,10 @@ minLength: 1,
 
 	
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Keterangan" name="sketerangan" class="form-control" />
+                        <input type="text"  name="sketerangan" class="form-control" />
 						<input type="hidden"  name="sstatus" value="1" />
                     </div>
                 </div>
@@ -150,9 +159,11 @@ minLength: 1,
 				
 
                 <div class="form-group">
-					<label for="status" class="control-label col-lg-4"></label>                 
-					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-					<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+					<label for="status" class="control-label col-lg-4"></label> 
+					<div class="col-lg-4">                
+						<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+						<!--button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button-->
+					</div>
 					
 				</div>				
 	
@@ -172,3 +183,5 @@ $('select[name="sbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid
 $('#sbranch').css('display','none');
 <?php endif; ?>
 </script>
+
+

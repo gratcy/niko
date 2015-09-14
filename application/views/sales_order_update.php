@@ -83,7 +83,7 @@ minLength: 1,
 
 <form id="form1" class="form-horizontal"  method="post">
 
-<table width=80% border=0><tr><td width=40% >
+<table width=80% border=0><tr><td width=40% valign=top >
                 <div class="form-group" id="sbranch">
                     <label for="text1" class="control-label col-lg-4">Cabang</label>
 
@@ -173,20 +173,7 @@ minLength: 1,
                     </div>
                 </div>
 
-			
-				
-		
 
-	
-
-<!--
-
-                        <input  type="hidden" id="theTopxx" class="form-control"   disabled />
-						<input  name=topx type="hidden" id="theTopx" class="form-control"   />
--->
-      	
-	
-	
 				
 		</td><td width=40% >
 				
@@ -214,7 +201,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
                     <div class="col-lg-4">
-                        <input type="text" id="theNpwp" placeholder="Npwp" name="cnpwp" value="<?php echo $detailc[0]->cnpwp; ?>" class="form-control" />
+                        <input type="text" id="theNpwp" placeholder="Npwp" name="cnpwp" value="<?php //echo $detailc[0]->cnpwp; ?>" class="form-control" />
                     </div>
                 </div>
 -->
@@ -279,9 +266,11 @@ minLength: 1,
 				</div>				
 
                 <div class="form-group">
-					<label for="status" class="control-label col-lg-4"></label>                 
-					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-					<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+					<label for="status" class="control-label col-lg-4"></label>
+					<div class="col-lg-4">
+						<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+						<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+					</div>
 					
 				</div>				
 				</td></tr></table>

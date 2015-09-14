@@ -39,11 +39,12 @@ class Home extends MY_Controller {
 			$sid = $_POST['sid'][$j];
 			
 			$sreject = $_POST['sreject'][$j];
-			$sqty =$_POST['sqty'][$j];			
+			$sqty =$_POST['sqty'][$j];
+			$note =$_POST['note'][$j];			
 			$saccept=$sqty-$sreject;
 
 					
-					$arrqty = array('sreject'=>$sreject,'saccept' => $saccept);
+					$arrqty = array('sreject'=>$sreject,'saccept' => $saccept,'note'=>$note);
 			//print_r($arrqty);die;		
 					if ($this -> retur_order_detail_model ->__update_retur_order_detail($sid,$arrqty)){
 						// $arrx = array('ibid' => $sbid, 'iiid' => $spid, 'itype' => 1, 'istockbegining' => '', 'istockin' => '', 'istockout' => $sqty, 'istock' => '', 'istatus' => 1 );
@@ -107,7 +108,8 @@ function retur_order_details_approve($id,$scid) {
 		}
 			$view['id'] = $id;
 			$view['scid'] = $scid;
-			$view['detailx'] = $this -> retur_order_model -> __get_retur_order_detail_approve($id);			
+			$view['detailx'] = $this -> retur_order_detail_model -> __get_retur_order_detail($id);
+		
 			$view['detail'] =$this -> retur_order_detail_model -> __get_retur_order_detail_prod($id);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
@@ -147,7 +149,7 @@ $view['id'] = $id;
 		if ($_POST) {
 		
 
-
+			$note = $this -> input -> post('note', TRUE);
 			$sreject = $this -> input -> post('sreject', TRUE);
 			$pricex = $this -> input -> post('pricex', TRUE);
 			$pricedist = $this -> input -> post('pricedist', TRUE);
@@ -195,8 +197,8 @@ $view['id'] = $id;
 			}
 		}
 
-					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'sreject'=>$sreject,'ssisa'=>$sqty);					
-
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'sreject'=>$sreject,'ssisa'=>$sqty,'note'=>$note);					
+//print_r($arr);die;
 					if ($this -> retur_order_detail_model -> __insert_retur_order_detail($arr)) {
 
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
@@ -273,12 +275,13 @@ $view['id'] = $id;
 
 //----END SO----
 
-	function sourcex($scid) {
+	function sourcex($scid,$bidx) {
 		$view['hostname']=$this->db->hostname;
 		$view['username']=$this->db->username;
 		$view['password']=$this->db->password;
 		$view['database']=$this->db->database;
 		$view['scid']=$scid;
+		$view['bidx']=$bidx;
 		$this->load->view('sourcex',$view,FALSE);
 	}
 //---BEGIN DO-----	

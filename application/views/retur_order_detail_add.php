@@ -12,14 +12,15 @@
             
             });
         </script>
-		
+<?php 
+$sbidx=$detailx[0]->sbid;?>		
 <script>
 $(function() {
 $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-    source: '<?php echo site_url('retur_order_detail/home/sourcex/'.$scid); ?>',
+    source: '<?php echo site_url('retur_order_detail/home/sourcex/'.$scid.'/'.$sbidx); ?>',
      select: function(event, ui) { 
 	    $("#theId").val(ui.item.pid),
         $("#theCid").val(ui.item.pcid),
@@ -61,18 +62,10 @@ minLength: 1,
 });
 </script>
 
-
-
-
-
-
-
 	
 </head>		
 		
-	
-		
-    
+
        <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">
@@ -84,18 +77,19 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Retur Order Detail Add <?php //echo "$id $scid";?></h5>
+            <h5>Return Order Detail Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
 
 
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("retur_order_detail/home/retur_order_detail_add/$id/$scid"); ?>" method="post">
-<table border=0 width=90% ><tr><td width=50%>
+<table border=0 width=1100 >
+<tr><td width="500" valign=top >
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Retur</label>
+                    <label for="text1" class="control-label col-lg-4">Return No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -103,14 +97,27 @@ minLength: 1,
                     </div>
                 </div>
 
-                <div class="form-group">
+				
+				<input type=hidden name=id value="<?php echo $id; ?>">
+				<input type=hidden value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>				
+				
+				
+				
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Reff</label>
 
                     <div class="col-lg-4">
-                       <input type=hidden name=id value="<?php echo $id; ?>">
-					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
+                       <input type=hidden name=id value="<?php //echo $id; ?>">
+					   <input type=text value="<?php //echo $detailx[0]->sreff; ?>" class="form-control" disabled>
                     </div>
-                </div>
+                </div-->
+				<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Date</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->stgl),1); ?>" class="form-control" disabled>
+                    </div>   							
+                </div>	
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
@@ -118,24 +125,10 @@ minLength: 1,
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
                     </div>
-                </div>
-				
-
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
-
-                    <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
-                    </div>   							
-                </div>
-
-   		
-				
-              
+                </div>  
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Type Retur</label>
+                    <label for="text1" class="control-label col-lg-4">Return Type</label>
 		<?php 
 		
 		$ccats= $detailx[0]->ctyperetur; 
@@ -155,7 +148,7 @@ minLength: 1,
                 </div>					
 				
 		
-		</td><td width=40%>
+		</td><td align=left width=600 >
 
 
                <div class="form-group">
@@ -178,7 +171,7 @@ minLength: 1,
 
     
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY</label>
+                    <label for="text1" class="control-label col-lg-4">Qty/Pcs</label>
 
                     <div class="col-lg-4">
                        	<input type=text   class="form-control" name=sqty  >
@@ -186,10 +179,10 @@ minLength: 1,
 						&nbsp;&nbsp;<span id="confirmMessagec"></span>
                     </div>
                 </div>	
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4"></label>
+                <!--div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"></label-->
 
-                    <div class="col-lg-4">
+                    <!--div class="col-lg-4"-->
                        	<?php
 						if($ccats==1){ ?> 
 						<input type=hidden   name=price  class="form-control" >
@@ -200,17 +193,19 @@ minLength: 1,
 						<?php } else{ ?>
 						<input type=text  id="theConsumeee" name=price  class="form-control" >
 						<?php }  ?>
-						&nbsp;&nbsp;<span id="confirmMessagee"></span>
-                    </div>
-                </div>					
+						<span id="confirmMessagee"></span>
+                    <!--/div>
+                </div-->					
 		
                 <div class="form-group">
-							<label for="status" class="control-label col-lg-4"></label>
-					<a href="<?php echo site_url("retur_order/home/retur_order_update/$id/$scid"); ?>">
-					<button class="btn text-muted text-center btn-primary" >Edit Header</button>	
+					<label for="status" class="control-label col-lg-4"></label>
+					<div class="col-lg-4">
+					<a class="btn text-muted text-center btn-primary" href="<?php echo site_url("retur_order/home/retur_order_update/$id/$scid"); ?>">
+					Edit Header	
 					</a>
                     
-				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>		
+				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>	
+				</div>
 				</div>
 				</td></tr></table>
             </form>
@@ -237,10 +232,11 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          
-          <th>Qty</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
           <th>Reject</th>
+		  <th>Notes</th>
 		  <th>Action</th>
                                         </tr>
                                     </thead>
@@ -266,16 +262,17 @@ minLength: 1,
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
 		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
 		  </td>
+		  <td width=50% ><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> sqty; ?></td>
           <td><select name="sreject[]" >
 		  <?php 
 		  echo "<option>" .$v -> sreject."</option>";
-			for($i=$qtyx;$i>=0;$i--){
+			for($i=1;$i<=$qtyx;$i++){
 			echo "<option>$i</option>";
 			}
 
 		  ?></select></td>
-		
+		<td><input width=50% type=text size=50 name="note[]" ></td>
 		  <td><a href="<?php echo site_url('retur_order_detail/home/retur_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
         <?php 

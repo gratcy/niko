@@ -97,16 +97,16 @@ minLength: 1,
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Retur Order</label>
+                    <label for="text1" class="control-label col-lg-4">Return Order No.</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No SO" name="snoso" value="<?php echo $detailx[0]->snoso; ?>"  class="form-control" />
+                        <input type="text" placeholder="No SO" name="snoro" value="<?php echo $detailx[0]->snoro; ?>"  class="form-control" />
                     </div>
                 </div>
    
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Reff</label>
+                <label for="text1" class="control-label col-lg-4">Reff No.</label>
 					<div class="col-lg-4">
 						<input  name="sreff" type="text" placeholder="reff"  value="<?php echo $detailx[0]->sreff; ?>" class="form-control"  >
 					</div>
@@ -116,25 +116,26 @@ minLength: 1,
 
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                <label for="text1" class="control-label col-lg-4">Date</label>
 					<div class="col-lg-4">
 						<input  name="stgl" type="text" placeholder="click to show datepicker"  
 						value="<?php echo date('d/m/Y',strtotime($detailx[0]->stgl)); ?>" 
 						id="example1" class="form-control"  >
 					</div>
        		</div>
-				
+				<?php //print_r($detailx);?>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
 
                     <div class="col-lg-4">
+					<input  name=cid type="hidden" id="theCid" class="form-control"  value="<?=$scid;?>" />
 					<input  name=cname type="text" id="search" class="form-control"  
 					value="<?php echo $detailx[0]->cname; ?>" />
 					<input  name=ccash type="hidden" id="theTopcash" class="form-control"  value="<?php echo $detailc[0]->ccash; ?>" />
 					<input  name=ccredit type="hidden" id="theTopcredit" class="form-control"  value="<?php echo $detailc[0]->ccredit; ?>" />
 					<input  name=cdeliver type="hidden" id="theDeliver" class="form-control"   />
 					<input  name=ccat type="hidden" id="theCat" class="form-control" value="<?php echo $detailc[0]->ccat; ?>"  />
-					<input  name=cid type="hidden" id="theCid" class="form-control"  value="<?php echo $detailc[0]->cid; ?>" />
+					
 					<input  name=csid type="hidden" id="theSid" class="form-control"  value="<?php echo $detailc[0]->csid; ?>" />
 					<input  name=cpkp type="hidden" id="thePkp" class="form-control" value="<?php echo $detailc[0]->cpkp; ?>"  />
 					<input  name=stype type="hidden"  class="form-control"   />
@@ -156,11 +157,11 @@ minLength: 1,
       	
 	
 
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Term Of Payment Cash</label>
 
                     <div class="col-lg-4">
-                        <input  type="text" id="theTopcashx" class="form-control" value="<?php echo $detailc[0]->ccash; ?>"  disabled/>
+                        <input  type="text" id="theTopcashx" class="form-control" value="<?php //echo $detailc[0]->ccash; ?>"  disabled/>
 						
                     </div>
                 </div>			
@@ -170,15 +171,15 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Term Of Payment Credit</label>
 
                     <div class="col-lg-4">
-                        <input   type="text" id="theTopcreditx" class="form-control"  value="<?php echo $detailc[0]->ccredit; ?>" disabled  />
+                        <input   type="text" id="theTopcreditx" class="form-control"  value="<?php //echo $detailc[0]->ccredit; ?>" disabled  />
 						
                     </div>
-                </div>					
+                </div-->					
 
 
 	
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <textarea placeholder="Keterangan" name="sketerangan" class="form-control" />

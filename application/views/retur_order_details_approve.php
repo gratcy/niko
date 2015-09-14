@@ -72,7 +72,7 @@ minLength: 1,
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Retur</label>
+                    <label for="text1" class="control-label col-lg-4">Return No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -117,7 +117,7 @@ minLength: 1,
                 </div>					
 	</td><td width=40%>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
+                    <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
@@ -129,7 +129,7 @@ minLength: 1,
 
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
+                    <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
                         <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
@@ -159,9 +159,9 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          
-          <th>Qty</th>
+          <th>Code </th>
+          <th>Name </th>
+          <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
 		   <th>Price / pcs </th>
@@ -201,7 +201,8 @@ minLength: 1,
           <tr>
           <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
-          <td><?php echo $v -> sqty; ?></td>
+          <td><?php echo $v -> pname; ?></td>
+		  <td><?php echo $v -> sqty; ?></td>
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>
           <td><?php echo $v -> sreject; ?></td>
@@ -221,7 +222,7 @@ minLength: 1,
 		endforeach; ?>
           <tr>
           
-          <td colspan=5>TOTAL</td>
+          <td colspan=6>TOTAL</td>
           <td><?php echo $total;?>
 		  <input type=hidden name="spotong" value="<?php echo $total; ?>">
 		  

@@ -131,7 +131,7 @@ class Home extends MY_Controller {
 			$sstatus = (int)$this ->input -> post('status', TRUE);
 			$scdate=date('Y-m-d');
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
-			//$scid = $this -> input -> post('scid', TRUE);
+			$scidx = $this -> input -> post('cid', TRUE);
 			$stype = $this -> input -> post('stype', TRUE);
 			$climit = $this -> input -> post('climit', TRUE);
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
@@ -150,11 +150,11 @@ class Home extends MY_Controller {
 			$stotalsubppn = 0;
 			$sppn = 0;
 			$stotal = 0;				
-			
+			//echo $scidx;die;
 			if ($id) {
 
 					$arr = array('sbid' => $sbid, 'snoro' => $snoro,  'snopo' => '',
-					'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scid,'stype' => $stype,
+					'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scidx,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
 					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay
@@ -166,7 +166,7 @@ class Home extends MY_Controller {
 					redirect(site_url('retur_order_detail/home/retur_order_detail_add/'. $id .'/'. $scid .''));						
 					}
 					else {
-					print_r($arr);die;
+					//print_r($arr);die;
 						__set_error_msg(array('error' => 'Gagal mengubah data !!!'));
 						redirect(site_url('retur_order/home'));
 					}

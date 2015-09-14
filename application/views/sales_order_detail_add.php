@@ -161,15 +161,15 @@ var badColor = "#ff6666";
 							
 
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
-<table border=0 width=90% ><tr><td width=50%>
-                <div class="form-group" style="display:none">
+<table border=0 width=100% ><tr><td width=40% valign=top >
+                <!--div class="form-group" style="display:none">
                     <label for="text1" class="control-label col-lg-4">Branch  </label>
 
                     <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
-					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" class="form-control" disabled>
+					<input type=text value="<?php //echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=hidden value="<?php //echo $detailx[0]->sbid; ?>" class="form-control" disabled>
                     </div>
-                </div>
+                </div-->
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">SO No.</label>
@@ -187,7 +187,7 @@ var badColor = "#ff6666";
                     <label for="text1" class="control-label col-lg-4">Date</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo __get_date($detailx[0]->stgl,1); ?>" class="form-control" disabled>
+					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->stgl),1); ?>" class="form-control" disabled>
                     </div>   							
                 </div>
 
@@ -195,7 +195,7 @@ var badColor = "#ff6666";
                     <label for="text1" class="control-label col-lg-4">Due Date</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo __get_date($detailx[0]->sduedate,1); ?>" class="form-control" disabled>
+					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->sduedate),1); ?>" class="form-control" disabled>
                     </div>   							
                 </div>				
 				
@@ -265,23 +265,15 @@ var badColor = "#ff6666";
                     </div>
                 </div>
 
-				
-				
-
-				
-				
-				
 		
-		</td><td width=40%>
-
-               
+		</td><td width=70% >              
 
                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Product</label>
 
                     <div class="col-lg-4">
                         <input  name=pname type="text" id="search" class="form-control"   />
-						&nbsp;&nbsp;<span id="confirmMessagea"></span>
+						<span id="confirmMessagea"></span>
                     </div>
                 </div>	
 		
@@ -403,7 +395,7 @@ var badColor = "#ff6666";
 								
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY/KOLI</label>
+                    <label for="text1" class="control-label col-lg-4">Qty/Coly</label>
 
                     <div class="col-lg-4">
 					<input type=text   id="thePvolumePckk" class="form-control" disabled  >
@@ -415,7 +407,7 @@ var badColor = "#ff6666";
                 </div>	
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY KOLI</label>
+                    <label for="text1" class="control-label col-lg-4">Qty Coly</label>
 
                     <div class="col-lg-4">
                        	<input type=text    class="form-control" name=sqtykoli  >
@@ -425,7 +417,7 @@ var badColor = "#ff6666";
                 </div>					
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">QTY PCS</label>
+                    <label for="text1" class="control-label col-lg-4">Qty Pcs</label>
 
                     <div class="col-lg-4">
                        	<input type=hidden  id="thePvolumePcs" class="form-control"   >
@@ -468,9 +460,10 @@ var badColor = "#ff6666";
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
 
-                    
+                 <div class="col-lg-4">   
 				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<a href="<?php echo $z; ?>" class="btn text-muted text-center btn-primary">Edit Header</a>
+				</div>
 				<!--a href="<?php //echo site_url("sales_order/home/sales_order_update/$id/$scid"); ?>"   -->
 					<!--/a-->				
 				</div>
