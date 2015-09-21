@@ -19,6 +19,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
+		echo "xx";die;
 		$pager = $this -> pagination_lib -> pagination($this -> pembayaran_detail_model -> __get_pembayaran_detail(),3,10,site_url('pembayaran_detail'));
 		$view['pembayaran_detail'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
@@ -142,7 +143,8 @@ class Home extends MY_Controller {
 			$view['detailx'] = $this -> pembayaran_model -> __get_pembayaran_detail($pno_pm);
 			$view['potongan'] = $this -> pembayaran_detail_model -> __get_potongan($scid);
 			$view['detail'] =$this -> pembayaran_detail_model -> __get_pembayaran_detail_inv($scid,$pno_pm);
-				//print_r($view['detail']);
+			// echo $scid.'-'.$pno_pm;
+				// print_r($view['detail']);die;
 			$view['detailr'] =$this -> retur_order_detail_model -> __get_retur_order_detail_by_cust($scid);
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();

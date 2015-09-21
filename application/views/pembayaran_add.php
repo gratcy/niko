@@ -88,15 +88,15 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Payment No.</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No Pembayaran" name="pno_pm" class="form-control" />
+                        <input type="text"  name="pno_pm" class="form-control" />
                     </div>
                 </div>
    
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Reff</label>
+                <label for="text1" class="control-label col-lg-4">Reff No.</label>
 					<div class="col-lg-4">
-						<input  name="sreff" type="text" placeholder="reff"  class="form-control"  >
+						<input  name="sreff" type="text"   class="form-control"  >
 					</div>
        		</div>
    
@@ -106,7 +106,7 @@ minLength: 1,
             <div class="form-group">
                 <label for="text1" class="control-label col-lg-4">Date</label>
 					<div class="col-lg-4">
-						<input  name="stgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control"  >
+						<input  name="stgl" type="text"   id="example1" class="form-control"  >
 					</div>
        		</div>
 				
@@ -119,7 +119,7 @@ minLength: 1,
 					<input  name=ccredit type="hidden" id="theTopcredit" class="form-control"   />
 					<input  name=cdeliver type="hidden" id="theDeliver" class="form-control"   />
 					<input  name=ccat type="hidden" id="theCat" class="form-control"   />
-					<input  name=cid type="t" id="theCid" class="form-control"   />
+					<input  name=cid type="hidden" id="theCid" class="form-control"   />
 					<input  name=csid type="hidden" id="theSid" class="form-control"   />
 					<input  name=cpkp type="hidden" id="thePkp" class="form-control"   />
 					<input  name=stype type="hidden"  class="form-control"   />
@@ -148,11 +148,22 @@ minLength: 1,
 				
 
                 <div class="form-group">
-					<label for="status" class="control-label col-lg-4"></label>                 
+					<label for="status" class="control-label col-lg-4"></label>
+					<div class="col-lg-4">                 
 					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 					<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-					
-				</div>				
+					</div>
+				</div>		
+
+
+
+
+
+
+
+
+
+				
 				</td></tr></table>
             </form>
         </div>
