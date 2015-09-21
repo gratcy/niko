@@ -202,7 +202,7 @@ $view['id'] = $id;
 					if ($this -> retur_order_detail_model -> __insert_retur_order_detail($arr)) {
 
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-						redirect(site_url('retur_order_detail/home/retur_order_detail_add/'. $id .'/'. $scid .''));
+						redirect(site_url('retur_order_detail/home/retur_order_detail_add/'. $id .'/'. $scid .'?'));
 					}
 					else {
 						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));

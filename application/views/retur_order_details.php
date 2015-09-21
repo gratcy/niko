@@ -81,7 +81,13 @@ minLength: 1,
                 </div>
 
 				
-				
+				<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Date</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
+                    </div>   							
+                </div>				
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
@@ -91,14 +97,29 @@ minLength: 1,
                     </div>
                 </div>
 				
-			
+			<?php 			
+				$ccats= $detailx[0]->ctyperetur; 
+				if($ccats==0){
+					$cname="Tukar Barang";
+				}elseif($ccats==1){
+					$cname="Potong Piutang";
+				}
+			?>	
+			<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Return Type</label>
 
-                <div class="form-group">
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo $cname; ?>" class="form-control" disabled>
+                    </div>   							
+                </div>			
+
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Status</label>
 
                     <div class="col-lg-4">
 					<?php
 					//print_r($detailx);
+					
 					$stat=$detailx[0]->sstatus;
 					if($stat==0){
 					$sstatuss="Not Active";					
@@ -113,29 +134,23 @@ minLength: 1,
 					}
 					
 					?>
-                       	<input type=text value="<?php echo $sstatuss; ?>" class="form-control" disabled>
+                       	<input type=text value="<?php //echo $sstatuss; ?>" class="form-control" disabled>
                     </div>
-                </div>					
-	</td><td width=40%>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Date</label>
-
-                    <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
-                    </div>   							
-                </div>
+                </div-->					
+	</td><td width=50%>
+               
 
 
 
 
 				
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
+                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php //echo $detailx[0]->sketerangan; ?></textarea>
                     </div>
-                </div>				
+                </div-->				
 		
 
 

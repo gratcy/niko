@@ -294,7 +294,7 @@ minLength: 1,
                                 </table>
 	
 
-		<input class="btn text-muted text-center btn-danger" type=submit value="Complete Approval" >
+		<input class="btn text-muted text-center btn-danger" type=submit value="Submit" >
 		</form>	
 		
                             </div>
