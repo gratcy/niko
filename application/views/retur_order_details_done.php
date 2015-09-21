@@ -205,8 +205,8 @@ minLength: 1,
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>
           <td><?php echo $v -> sreject; ?></td>
-		  <td><?php echo $sprice; ?></td>
-		  <td><?php echo $sum_sprice;?></td>	
+		  <td><?php echo __get_rupiah($sprice,2); ?></td>
+		  <td><?php echo __get_rupiah($sum_sprice,2);?></td>	
 		  </tr>
         <?php 
 		
@@ -222,14 +222,14 @@ minLength: 1,
           <tr>
           
           <td colspan=5>TOTAL</td>
-          <td><?php echo $total;?></td>	
+          <td><?php echo __get_rupiah($total,2);?></td>	
 		  </tr>		
         
                                     </tbody>
                                 </table>
 
 	 </form>
-			<a href="javascript:void(0);" onclick="print_data('<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>', 'Print SO');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
+			<a href="<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>" target="_blank"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
 			  
                             </div>
                         </div>

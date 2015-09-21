@@ -98,11 +98,11 @@ class Home extends MY_Controller {
 			}
 			//$sqty = $this -> input -> post('sqty', TRUE);
 			$sprice = str_replace(',','',$this -> input -> post('price', TRUE));
-			$price = $this -> input -> post('price', TRUE);
+			$price = str_replace(',','',$this -> input -> post('price', TRUE));
 			$sdisc = $this -> input -> post('ddisc', TRUE);
 			$ccat = $this -> input -> post('ccat', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
-		
+			
 		if($stypepay=="auto"){	
 		$stypepay="credit";
 			// if($ccat=='1'){			

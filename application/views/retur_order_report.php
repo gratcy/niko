@@ -57,19 +57,16 @@ $caddrx=explode("*",$detailx[0]->caddr);
 ?>
 <table class="gridtablex" border=0 width=800px >
 <tr>
-<td rowspan=2 colspan=2 width="40%" align=center  ><h2>Retur Order</h2></td><td><b>No Retur</b></td><td><?php echo $detailx[0]->snoro; ?></td>
+<td rowspan=1 colspan=6 width="40%" align="center"><h1>RETURN ORDER</h1></td>
 </tr>
 <tr>
-<td><b>Tanggal</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
+	<td><b>Return No.</b></td><td><?php echo $detailx[0]->snoro; ?></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Sales</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->sname; ?></td><td width="10%"><b>Alamat</b></td><td rowspan=3 valign=top width=30% ><?php echo $caddrx[1]; ?></td>
+<td><b>Date</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
 </tr>
 <tr>
-<td width="10%" align=left  ><b>Kode Toko</b></td><td  ><?php echo $detailx[0]->scid; ?></td><td></td>
-</tr>
-<tr>
-<td width="10%" align=left  ><b>Nama Toko</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
+<td width="10%" align=left><b>Customer</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
 </tr>
 </table>
 </p>
@@ -84,12 +81,14 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          <th>Nama Product</th>
-          <th>Qty</th>
-          <th>Harga</th>
-          <th>Discount </th>
-		  <th>Jumlah</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
+          <th>Accept</th>
+          <th>Reject</th>
+          <th>Price</th>
+          <th>Total </th>
+		  <th>Notes</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -112,85 +111,44 @@ $caddrx=explode("*",$detailx[0]->caddr);
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
           <td><?php echo $v -> pname; ?></td>
+		  <td align=center ><?php echo $v -> sqty; ?></td>
 		  <td align=center ><?php echo $v -> saccept; ?></td>
+		  <td align=center ><?php echo $v -> sreject; ?></td>
           <td align=center ><?php echo __get_rupiah($v -> sprice); ?></td>
-          <td align=center ><?php echo $v -> sdisc; ?></td>
-		  <td align=center > <?php echo __get_rupiah($subtotal); ?> </td>		
+          <td align=center ><?php echo __get_rupiah($v -> sprice*$v -> saccept); ?></td>
+		  <td align=center > <?php echo $v -> note; ?> </td>		
 		  </tr>
         <?php 
 		$accepted= $v -> saccept;
 		$total=$subtotal+$total;
 		$totalqty=$accepted+$totalqty;
 		$totalppn=$total * 10/100;
-		if($freeppn==1){
-		$totalall= $total;
-		}else{
-		$totalall= $total + $totalppn;
-		}
+		$totalall += ($v -> sprice*$v -> saccept);
 		endforeach; ?>
-		
-         <tr>          
-          <th>SUB TOTAL</th>
-		  <th></th>
-          <th><?php echo $totalqty; ?></th>
-          <th></th>
-          <th></th>
-		  
-          <th><?php echo __get_rupiah($total); ?></th>
-		 </tr>		
-         <tr>          
-          <td>PPN</td>
-          <td><?php if($freeppn==0){ echo 10;}else{echo 0;}?>%</td>
-          <td></td>
-          <td></td>
-		  <td></td>
-          <td align=center ><?php 
-		  if($freeppn==0){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
-		  </td>
-		 </tr>			
+			
          <tr>          
           <th>TOTAL</th>
           <th></th>
           <th></th>
           <th></th>
 		  <th></th>
+		  <th></th>
           <th><?php echo __get_rupiah($totalall); ?></th>
+		  <th></th>
 		 </tr>		 
                                     </tbody>
                                 </table>
 </p>	
 <p align=center>
-<table class="gridtablex" border=0 width=800px >
-<tr>
-<td  width=20% align=left  >CARA BAYAR</td><td align=left width=20%>
-						<?php
-						// $ccats= $detailx[0]->ccat; 
-						// $stypepay=$detailx[0]->stypepay;
-						// if($stypepay == "auto"){
-						// if($ccats==3){ 	$stype="cash";	}else{ $stype="credit";}
-						// }else{ $stype=$stypepay ;}
-						?>
-
-<?php //echo $stype; ?></td><td width=20% align=right >CATATAN</td>
-<td valign=top  align=left rowspan=2 width=40%><?php echo $detailx[0]->sketerangan; ?></td>
-</tr>
-<tr>
-<td  align=left  >JATUH TEMPO</td><td align=left ><?php echo date('d-m-Y',strtotime($detailx[0]->sduedate)); ?></td><td></td>
-</tr>
-
-</table>
-</p>
-
-<p align=center>
 <table class="gridtable" width=800px >
 <tr>
-	<th>Admin </th><th>Manager</th><th>Salesman</th><th>Pemesan</th>
+	<th>Customer</th><th>Sales</th><th>Admin II</th><th>Admin I</th>
 </tr>
 <tr>
 	<td><br><br></td><td></td><td></td><td></td>
 </tr>
 <tr>
-	<td>Admin</td><td>Manager</td><td>Salesman</td><td>Pemesan</td>
+	<td></td><td></td><td></td><td></td>
 </tr>
 
 

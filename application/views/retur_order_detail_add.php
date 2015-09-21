@@ -1,4 +1,3 @@
-<head>
         <!-- Load jQuery and bootstrap datepicker scripts -->
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
@@ -63,9 +62,6 @@ minLength: 1,
 </script>
 
 	
-</head>		
-		
-
        <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">
@@ -103,14 +99,6 @@ minLength: 1,
 				
 				
 				
-                <!--div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Reff</label>
-
-                    <div class="col-lg-4">
-                       <input type=hidden name=id value="<?php //echo $id; ?>">
-					   <input type=text value="<?php //echo $detailx[0]->sreff; ?>" class="form-control" disabled>
-                    </div>
-                </div-->
 				<div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Date</label>
 
@@ -156,7 +144,7 @@ minLength: 1,
 
                     <div class="col-lg-4">
                         <input  name=pname type="text" id="search" class="form-control"   />
-						&nbsp;&nbsp;<span id="confirmMessagea"></span>
+						<span id="confirmMessagea" style="float:left;"></span>
                     </div>
                 </div>	
 		
@@ -174,26 +162,30 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Qty/Pcs</label>
 
                     <div class="col-lg-4">
-                       	<input type=text   class="form-control" name=sqty  >
-						<input type=hidden  value=0 name="add_plafon" >
-						&nbsp;&nbsp;<span id="confirmMessagec"></span>
+                       	<input type="number" class="form-control" name=sqty  >
+						<input type="hidden"  value="0" name="add_plafon" >
+						<span id="confirmMessagec" style="float:left;"></span>
                     </div>
                 </div>	
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Reject</label>
+                    
+                    <div class="col-lg-4">
+						<input type="number" class="form-control" name="reject" >
+                </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Notes</label>
+                    <div class="col-lg-4">
+						<textarea name="notes" class="form-control"></textarea>
+                </div>
+                    
+                    </div>
                 <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label-->
 
                     <!--div class="col-lg-4"-->
-                       	<?php
-						if($ccats==1){ ?> 
-						<input type=hidden   name=price  class="form-control" >
-						<?php }elseif($ccats==0){ ?>
-						<input type=text  id="theDisttt" name=price  class="form-control" >
-						<?php }elseif($ccats==2){ ?>
-						<input type=text  id="theSemiii" name=price  class="form-control" >
-						<?php } else{ ?>
-						<input type=text  id="theConsumeee" name=price  class="form-control" >
-						<?php }  ?>
-						<span id="confirmMessagee"></span>
+
                     <!--/div>
                 </div-->					
 		
@@ -236,8 +228,8 @@ minLength: 1,
           <th>Name</th>
           <th>Qty/Pcs</th>
           <th>Reject</th>
-		  <th>Notes</th>
-		  <th>Action</th>
+          <th>Notes</th>
+		  <th style="width:50px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -264,15 +256,8 @@ minLength: 1,
 		  </td>
 		  <td width=50% ><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> sqty; ?></td>
-          <td><select name="sreject[]" >
-		  <?php 
-		  echo "<option>" .$v -> sreject."</option>";
-			for($i=1;$i<=$qtyx;$i++){
-			echo "<option>$i</option>";
-			}
-
-		  ?></select></td>
-		<td><input width=50% type=text size=50 name="note[]" ></td>
+          <td><?php echo $v -> sreject; ?></td>
+          <td><?php echo $v -> note; ?></td>
 		  <td><a href="<?php echo site_url('retur_order_detail/home/retur_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
         <?php 
@@ -295,6 +280,7 @@ minLength: 1,
 	
 
 		<input class="btn text-muted text-center btn-danger" type=submit value="Submit" >
+		<input class="btn text-muted text-center btn-primary" type=button value="Back" onclick="location.href='javascript:history.go(-1);'">
 		</form>	
 		
                             </div>
@@ -303,6 +289,4 @@ minLength: 1,
     </div>
                     </div>
                   </div>
-        </div>
-        </div>
         <!-- END PAGE CONTENT -->

@@ -151,7 +151,7 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <input type="text"  name="sketerangan" class="form-control" />
+                        <textarea placeholder="Keterangan" name="sketerangan" class="form-control" /></textarea>
 						<input type="hidden"  name="sstatus" value="1" />
                     </div>
                 </div>

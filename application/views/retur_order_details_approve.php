@@ -1,5 +1,4 @@
-<head>
-        <!-- Load jQuery and bootstrap datepicker scripts -->
+       <!-- Load jQuery and bootstrap datepicker scripts -->
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript">
@@ -43,13 +42,7 @@ minLength: 1,
 })
 
 });
-</script>		
-		
-</head>		
-		
-	
-		
-    
+</script>
        <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">
@@ -67,12 +60,12 @@ minLength: 1,
 	<?php echo __get_error_msg(); ?>
 
 	 <form  id="form1" class="form-horizontal" action="<?php echo site_url("retur_order_detail/home/retur_order_detail_add/$id/$scid"); ?>" method="post">
-	<table border=0 width=90% ><tr><td width=50%>
+
 	<input type=hidden name=sbid value="<?php echo $detailx[0]->sbid; ?>">
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Return No.</label>
+                    <label for="text1" class="control-label col-lg-2" style="text-align:left!important;">Return No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -84,7 +77,7 @@ minLength: 1,
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Customer</label>
+                    <label for="text1" class="control-label col-lg-2" style="text-align:left!important;">Customer</label>
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
@@ -92,53 +85,13 @@ minLength: 1,
                 </div>
 				
 			
-
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Status</label>
-
-                    <div class="col-lg-4">
-					<?php
-					$stat=$detailx[0]->sstatus;
-					if($stat==0){
-					$sstatuss="Not Active";					
-					}elseif($stat==1){
-					$sstatuss="Active";					
-					}elseif($stat==2){
-					$sstatuss="Remove";					
-					}elseif($stat==3){
-					$sstatuss="Approve";					
-					}elseif($stat==4){
-					$sstatuss="Done";					
-					}
-					
-					?>
-                       	<input type=text value="<?php echo $sstatuss; ?>" class="form-control" disabled>
-                    </div>
-                </div>					
-	</td><td width=40%>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Date</label>
+                    <label for="text1" class="control-label col-lg-2" style="text-align:left!important;">Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
                     </div>   							
                 </div>
-
-
-
-
-				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Description</label>
-
-                    <div class="col-lg-4">
-                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
-                    </div>
-                </div>				
-		
-
-
-				</td></tr></table>
             </form>
         </div>
     </div>
@@ -160,12 +113,12 @@ minLength: 1,
                                         <tr>
           
           <th>Code </th>
-          <th>Name </th>
+          <th style="width:250px;">Name </th>
           <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
-		   <th>Price / pcs </th>
-		   <th>Total Price  </th>
+		   <th style="width:150px;">Price / pcs </th>
+		   <th style="width:150px;">Total Price  </th>
 		 
                                         </tr>
                                     </thead>
@@ -206,11 +159,11 @@ minLength: 1,
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>
           <td><?php echo $v -> sreject; ?></td>
-		  <td><input type=text name="sprice[]" value="<?php echo $sprice; ?>"></td>
-		  <td><input type=text name="sum_sprice[]" value="<?php echo $sum_sprice;?>" disabled ></td>	
+		  <td><input type="text" name="sprice[]" value="<?php echo __get_rupiah($sprice,2); ?>" class="form-control" onkeyup="formatharga(this.value,this)"></td>
+		  <td><input type="text" name="sum_sprice[]" value="<?php echo __get_rupiah($sum_sprice,2);?>" class="form-control" disabled ></td>	
 		  </tr>
         <?php 
-		
+		$stat = $detailx[0] -> sstatus;
 		$total=$sum_sprice+$total;
 		$totalqty=$qtyx+$totalqty;
 		$totalppn=$total * 10/100;
@@ -223,7 +176,7 @@ minLength: 1,
           <tr>
           
           <td colspan=6>TOTAL</td>
-          <td><?php echo $total;?>
+          <td><?php echo __get_rupiah($total,2);?>
 		  <input type=hidden name="spotong" value="<?php echo $total; ?>">
 		  
 		  </td>	
@@ -233,8 +186,8 @@ minLength: 1,
                                 </table>
 	<?php if($stat==3){?>			
     <?php if($_POST['input']<>""){ ?>
-	<input type=submit name="approve" value="APPROVE" class="btn text-muted text-center btn-danger">
-	<input type=submit value="CANCEL" class="btn text-muted text-center btn-danger">
+	<input type=submit name="approve" value="Complete Approval" class="btn text-muted text-center btn-danger">
+	<input type=submit value="EDIT" class="btn text-muted text-center btn-primary">
      <?php }else{ ?>	
      <input type=submit name=input value="INPUT" class="btn text-muted text-center btn-danger">
 	 <?php } ?>

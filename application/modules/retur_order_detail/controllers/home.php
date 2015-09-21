@@ -32,31 +32,10 @@ class Home extends MY_Controller {
 	
 		if($_POST['approve']=='1'){
 			$id=$this -> input -> post('id', TRUE);
-			$arr=array('sstatus' => '3');
+			$arr=array('sstatus' => '1');
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			$jum=count($_POST['sqty']);
-		for($j=0;$j<$jum;$j++){		
-			$sid = $_POST['sid'][$j];
-			
-			$sreject = $_POST['sreject'][$j];
-			$sqty =$_POST['sqty'][$j];
-			$note =$_POST['note'][$j];			
-			$saccept=$sqty-$sreject;
-
-					
-					$arrqty = array('sreject'=>$sreject,'saccept' => $saccept,'note'=>$note);
-			//print_r($arrqty);die;		
-					if ($this -> retur_order_detail_model ->__update_retur_order_detail($sid,$arrqty)){
-						// $arrx = array('ibid' => $sbid, 'iiid' => $spid, 'itype' => 1, 'istockbegining' => '', 'istockin' => '', 'istockout' => $sqty, 'istock' => '', 'istatus' => 1 );
-						// $this -> retur_order_detail_model -> __insert_inventory($arrx);						
-					}
-					else {
-						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
-						redirect(site_url('retur_order_detail/home/delivery_order_details_add/'. $id .'/'. $scid .''));
-					}
-			}				
-		
-		
+			redirect(site_url('retur_order/home'));	
 		}
 			$view['id'] = $id;
 			$view['scid'] = $scid;
@@ -71,30 +50,27 @@ class Home extends MY_Controller {
 
 	
 function retur_order_details_approve($id,$scid) {
-	
 	if(!isset($_POST['approve'])){$_POST['approve']="";}
 	
 		if($_POST['approve']<>""){
 			//$id=$this -> input -> post('id', TRUE);
 			$spotong=(int)$_POST['spotong'];	
 			//echo $spotong;die;
-			$arr=array('sstatus' => '4','spotong'=>$spotong);
+			$arr=array('sstatus' => '3','spotong'=>$spotong);
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			//die;
 			$jum=count($_POST['sprice']);
 		for($j=0;$j<$jum;$j++){		
 			$sid = $_POST['sid'][$j];
 			
-			$sprice = $_POST['sprice'][$j];
+			$sprice = str_replace(',','',$_POST['sprice'][$j]);
 			$saccept =$_POST['saccept'][$j];	
             		
 			
-
 					
 					$arrqty = array('sprice'=>$sprice);
 		//	print_r($arrqty);die;		
 					if ($this -> retur_order_detail_model ->__update_retur_order_detail($sid,$arrqty)){
-											
 					}
 					else {
 						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
@@ -165,7 +141,9 @@ $view['id'] = $id;
 			$sdisc = $this -> input -> post('pdisc', TRUE);
 			$ccat = $this -> input -> post('ccat', TRUE);
 			$stypepay = $this -> input -> post('stypepay', TRUE);
-		
+			$notes = $this -> input -> post('notes', TRUE);
+			$price = str_replace(',','',$this -> input -> post('price', TRUE));
+			$reject = $this -> input -> post('reject', TRUE);
 		if($stypepay=="auto"){	
 		$stypepay="credit";
 			if($ccat=='1'){			
@@ -195,10 +173,10 @@ $view['id'] = $id;
 					
 				}
 			}
-		}
+		}	
+			$saccept=$sqty-$reject;
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc, 'saccept' => $saccept,'sreject'=>$reject,'ssisa'=>$sqty,'note'=>$notes);					
 
-					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'sreject'=>$sreject,'ssisa'=>$sqty,'note'=>$note);					
-//print_r($arr);die;
 					if ($this -> retur_order_detail_model -> __insert_retur_order_detail($arr)) {
 
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
@@ -275,7 +253,7 @@ $view['id'] = $id;
 
 //----END SO----
 
-	function sourcex($scid,$bidx) {
+	function sourcex($bidx,$scid) {
 		$view['hostname']=$this->db->hostname;
 		$view['username']=$this->db->username;
 		$view['password']=$this->db->password;

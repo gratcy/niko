@@ -296,7 +296,7 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">
                        	<input type=text  id="theDistt" class="form-control" disabled>
-				<?php $prc="<input type=text  id='theDist' class='form-control' name='price'>";?>
+				<?php $prc="<input type=text  id='theDist' class='form-control' name='price' onkeyup=\"formatharga(this.value,this)\">";?>
                     </div>
                 </div>				
 		<?php }elseif($ccats==1){ ?>
