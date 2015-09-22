@@ -32,7 +32,7 @@ class Home extends MY_Controller {
 	
 		if($_POST['approve']=='1'){
 			$id=$this -> input -> post('id', TRUE);
-			$arr=array('sstatus' => '1');
+			$arr=array('sstatus' => '3');
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			$jum=count($_POST['sqty']);
 			redirect(site_url('retur_order/home'));	
@@ -123,7 +123,7 @@ $view['id'] = $id;
 	
 	function retur_order_detail_add($id,$scid) {
 		if ($_POST) {
-		
+		//echo "sss";die;
 
 			$note = $this -> input -> post('note', TRUE);
 			$sreject = $this -> input -> post('sreject', TRUE);
@@ -178,7 +178,9 @@ $view['id'] = $id;
 					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc, 'saccept' => $saccept,'sreject'=>$reject,'ssisa'=>$sqty,'note'=>$notes);					
 
 					if ($this -> retur_order_detail_model -> __insert_retur_order_detail($arr)) {
-
+						$arrz=array('sstatus' => '1');
+						$this -> retur_order_model -> __update_retur_order($id, $arrz);
+						//echo "xxx";die;
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 						redirect(site_url('retur_order_detail/home/retur_order_detail_add/'. $id .'/'. $scid .'?'));
 					}
@@ -456,6 +458,7 @@ $view['id'] = $id;
 	}
 	
 	function delivery_order_details($id,$scid,$snodo) {
+		
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['snodo'] = $snodo;

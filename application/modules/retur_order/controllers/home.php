@@ -82,7 +82,7 @@ class Home extends MY_Controller {
 					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
-					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'spotong'=>0
+					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'status_potong'=>0
 					 );	
 				if ($this -> retur_order_model -> __insert_retur_order($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
