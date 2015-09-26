@@ -437,7 +437,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <td>
 		  <?php
 		  echo $m;
-		  $sum_inv=$v -> spotong;
+		  $sum_inv=$v -> status_potong;
 		  $snoro=$v -> snoro;
 		
 		  ?>

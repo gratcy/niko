@@ -10,8 +10,7 @@ class retur_order_model extends CI_Model {
 	}
 	
 	function __get_retur_order() {
-		return 'SELECT retur_order_tab.*,
-	
+		return 'SELECT retur_order_tab.*,	
 		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,
 		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur,
@@ -42,8 +41,7 @@ class retur_order_model extends CI_Model {
 		(select caddr from customers_tab where customers_tab.cid=retur_order_tab.scid)as caddr,
 		(select ccat from customers_tab where customers_tab.cid=retur_order_tab.scid)as ccat,
 		(select climit from customers_tab where customers_tab.cid=retur_order_tab.scid)as sisaplafon,
-		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid)as ctyperetur,
-		
+		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid)as ctyperetur,		
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid)as sname
 		FROM retur_order_tab WHERE retur_order_tab.sstatus<=4 AND retur_order_tab.sid=' . $id);
 		return $this -> db -> get() -> result();

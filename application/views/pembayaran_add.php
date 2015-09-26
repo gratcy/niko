@@ -84,14 +84,14 @@ minLength: 1,
 
 				
 				
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Payment No.</label>
 
                     <div class="col-lg-4">
-                        <input type="text"  name="pno_pm" class="form-control" />
+                        
                     </div>
-                </div>
-   
+                </div-->
+   <input type="hidden"  name="pno_pm" class="form-control" />
 
             <div class="form-group">
                 <label for="text1" class="control-label col-lg-4">Reff No.</label>
@@ -139,8 +139,7 @@ minLength: 1,
 					<div class="col-lg-4">
 						<select class="form-control"  name="type_bayar">
 						<option value= 1 >Cash</option>
-						<option value= 2 >Credit</option>
-						<option value= 3 >Giro</option>
+						<option value= 2 >Credit</option>						
 						</select>
 					</div>
        		</div>
@@ -151,7 +150,7 @@ minLength: 1,
 					<label for="status" class="control-label col-lg-4"></label>
 					<div class="col-lg-4">                 
 					<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
-					<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+					<!--button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button-->
 					</div>
 				</div>		
 

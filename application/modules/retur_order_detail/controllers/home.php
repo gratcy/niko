@@ -53,35 +53,34 @@ function retur_order_details_approve($id,$scid) {
 	if(!isset($_POST['approve'])){$_POST['approve']="";}
 	
 		if($_POST['approve']<>""){
+			
+			
+		//if($_POST){	
 			//$id=$this -> input -> post('id', TRUE);
 			$spotong=(int)$_POST['spotong'];	
 			//echo $spotong;die;
-			$arr=array('sstatus' => '3','spotong'=>$spotong);
+			$arr=array('sstatus' => '4','status_potong'=>$spotong);
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			//die;
 			$jum=count($_POST['sprice']);
 		for($j=0;$j<$jum;$j++){		
-			$sid = $_POST['sid'][$j];
-			
+			$sid = $_POST['sid'][$j];			
 			$sprice = str_replace(',','',$_POST['sprice'][$j]);
 			$saccept =$_POST['saccept'][$j];	
-            		
-			
-					
-					$arrqty = array('sprice'=>$sprice);
-		//	print_r($arrqty);die;		
-					if ($this -> retur_order_detail_model ->__update_retur_order_detail($sid,$arrqty)){
-					}
-					else {
-						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
-						redirect(site_url('retur_order_detail/home/retur_order_details_add/'. $id .'/'. $scid .''));
-					}
+			$arrqty = array('sprice'=>$sprice);
+			if ($this -> retur_order_detail_model ->__update_retur_order_detail($sid,$arrqty)){
+			}
+			else {
+				__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+				redirect(site_url('retur_order_detail/home/retur_order_details_add/'. $id .'/'. $scid .''));
+			}
 			}	
 
-		//print_r($arrqty);die;	
-		redirect(site_url('retur_order_detail/home/retur_order_details_done/'. $id .'/'. $scid .''));
+				redirect(site_url('retur_order_detail/home/retur_order_details_done/'. $id .'/'. $scid .''));
 		
 		}
+		
+		//print_r($_POST);
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> retur_order_detail_model -> __get_retur_order_detail($id);

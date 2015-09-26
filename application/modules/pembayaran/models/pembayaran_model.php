@@ -25,11 +25,16 @@ class pembayaran_model extends CI_Model {
 	
 	function __get_total_pembayaran_monthly($month,$year,$id) {
 	
-	$sql = $this -> db -> query("SELECT * FROM sales_order_tab WHERE YEAR(stgl) = '$year' AND MONTH(stgl) = '$month' ");
+	$sql = $this -> db -> query("SELECT * FROM pembayaran_tab WHERE YEAR(pm_tgl) = '$year' AND MONTH(pm_tgl) = '$month' ");
 	$jum= $sql -> num_rows();
-	$sqlx=$this -> db -> query("UPDATE sales_order_tab set snoso='$jum' WHERE sid='$id' ");
+	$sqlx=$this -> db -> query("UPDATE pembayaran_tab set pno_pm='$jum' WHERE pmid='$id' ");
 	}	
+
+	function __get_pno_pm($id) {
 	
+	$this -> db -> select(" * FROM pembayaran_tab where pmid='$id'");
+	return $this -> db -> get() -> result();
+	}		
 	
 	function __get_pembayaran_detail($id) {
 		$this -> db -> select("*,

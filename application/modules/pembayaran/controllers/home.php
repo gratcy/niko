@@ -44,7 +44,7 @@ class Home extends MY_Controller {
 	}
 	function pembayaran_add() {
 		if ($_POST) {	
-			$pno_pm = $this -> input -> post('pno_pm', TRUE);
+			//$pno_pm = $this -> input -> post('pno_pm', TRUE);
 			$sreff = $this -> input -> post('sreff', TRUE);				
 			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
 			$stgl="$stglx[2]-$stglx[1]-$stglx[0]";			
@@ -54,14 +54,15 @@ class Home extends MY_Controller {
 			$type_bayar = $this -> input -> post('type_bayar', TRUE);
 			
 
-					$arr = array( 'pmid'=>'','pno_pm' => $pno_pm, 'pcid'=>$scid,'pm_tgl' => $stgl,  
-					'pcash'=>'','pgiro'=>'','piutang'=>'','ptgl_giro'=>'','pwrite_off'=>'',
-					'sreff' => $sreff,
-					'status' => '1',type_bayar=>$type_bayar);	
+					$arr = array( 'pmid'=>'', 'pcid'=>$scid,'pm_tgl' => $stgl,  
+					'pcash'=>'','pgiro'=>'','piutang'=>'','ptgl_giro'=>'','pwrite_off'=>'','sreff' => $sreff,'status' => 1,'type_bayar'=>$type_bayar);	
 				if ($this -> pembayaran_model -> __insert_pembayaran($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));					
 					 $lastid=$this->db->insert_id();						
-					 //$this -> pembayaran_model -> __get_total_pembayaran_monthly($stglx[1],$stglx[2],$lastid);									
+					 $this -> pembayaran_model -> __get_total_pembayaran_monthly($stglx[1],$stglx[2],$lastid);	
+					$pno_pmx=$this -> pembayaran_model -> __get_pno_pm($lastid);
+					$pno_pm=$pno_pmx[0]->pno_pm;
+					//echo $pno_pm;die;
 					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm.'/'.$type_bayar));
 				}
 				else {

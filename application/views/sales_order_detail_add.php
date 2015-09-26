@@ -296,7 +296,7 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">
                        	<input type=text  id="theDistt" class="form-control" disabled>
-				<?php $prc="<input type=text  id='theDist' class='form-control' name='price' onkeyup=\"formatharga(this.value,this)\">";?>
+				<?php $prc="<input type=text onkeyup=\"formatharga(this.value,this)\" id='theDist' class='form-control' name='price' onkeyup=\"formatharga(this.value,this)\">";?>
                     </div>
                 </div>				
 		<?php }elseif($ccats==1){ ?>
@@ -305,7 +305,7 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">
                        	<input type=text  id="theSemii" class="form-control" disabled>
-				<?php $prc="<input type=text  id='theSemi' class='form-control' name='price'>";?>
+				<?php $prc="<input onkeyup=\"formatharga(this.value,this)\" type=text  id='theSemi' class='form-control' name='price'>";?>
 						
                     </div>
                 </div>
@@ -316,7 +316,7 @@ var badColor = "#ff6666";
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price Agent</label>
                     <div class="col-lg-4">
-                       	<input type=text  id="theKey" class="form-control" disabled><?php $prc="<input type=text  id='theKeyy' class='form-control' name='price'>";?>						
+                       	<input type=text  id="theKey" class="form-control" disabled><?php $prc="<input onkeyup=\"formatharga(this.value,this)\" type=text  id='theKeyy' class='form-control' name='price'>";?>						
                     </div>
                 </div>					
 				
@@ -330,7 +330,7 @@ var badColor = "#ff6666";
                     <div class="col-lg-4">
                        	<input type=text  id="theStore" class="form-control" disabled>
 						
-					<?php $prc="<input type=text  id='theStoree' class='form-control' name='price'>";?>	
+					<?php $prc="<input onkeyup=\"formatharga(this.value,this)\" type=text  id='theStoree' class='form-control' name='price'>";?>	
 						
                     </div>
                 </div>					
@@ -344,7 +344,7 @@ var badColor = "#ff6666";
 
                     <div class="col-lg-4">
                        	<input type=text  id="theConsumee" class="form-control" disabled>
-					<?php $prc="<input type=text  id='theConsume' class='form-control' name='price'>";?>	
+					<?php $prc="<input onkeyup=\"formatharga(this.value,this)\" type=text  id='theConsume' class='form-control' name='price'>";?>	
 						
 						
                     </div>
@@ -360,7 +360,7 @@ var badColor = "#ff6666";
                     <div class="col-lg-4">
                        	<input type=text  id="theCash" class="form-control" disabled>
 						
-					<?php $prc="<input type=text  id='theCashh' class='form-control' name='price'>";?>	
+					<?php $prc="<input onkeyup=\"formatharga(this.value,this)\" type=text  id='theCashh' class='form-control' name='price'>";?>	
 						
                     </div>
                 </div>					
@@ -430,25 +430,12 @@ var badColor = "#ff6666";
 				
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Price</label>
+                    <label for="text1" class="control-label col-lg-4"  >Price</label>
 
                     <div class="col-lg-4">
+					<!--input type="text" name="price[]" value="" class="form-control" onkeyup="formatharga(this.value,this)" -->
                        	<?php
-						/*
-						if($detailx[0]->stypepay=="cash"){ ?>  
-                       	<input type=text  id="theConsumeee" name=price  class="form-control" >						
-						<?php }elseif($ccats==1){ ?> 
-						<input type=hidden   name=price  class="form-control" >
-						<?php }elseif($ccats==0){ ?>
-						<input type=text  id="theDisttt" name=price  class="form-control" >
-						<?php }elseif($ccats==2){ ?>
-						<input type=text  id="theSemiii" name=price  class="form-control" >
-						<?php } elseif(($ccats==3) and ($detailx[0]->stypepay=="auto")){ ?>
-						<input type=text  id="theConsumeeee" name=price  class="form-control" >
-						<?php } elseif(($ccats==3) and ($detailx[0]->stypepay=="credit")){ ?>
-						<input type=hidden   name=price  class="form-control" >
-						<?php } 
-						*/
+					
 						echo $prc;
 						?>
 						&nbsp;&nbsp;<span id="confirmMessagee"></span>

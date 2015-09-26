@@ -50,6 +50,7 @@ left:inherit!important;
     
           <th>Date</th>
 		  <th>Customer </th>
+		  <th>Sales </th>
           <th>Return Type</th>
           
           <th>Status</th>
@@ -69,9 +70,10 @@ left:inherit!important;
       
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo $v -> cname; ?></td>
+		  <td><?php echo $v -> sname; ?></td>
 <?php 
 		
-		$ccats= $detailx[0]->ctyperetur; 
+		$ccats= $v ->ctyperetur; 
 		if($ccats==0){
 			$cname="Tukar Barang";
 		}elseif($ccats==1){
@@ -105,16 +107,21 @@ left:inherit!important;
 			  <?php }?>
                 <?php endif; ?>
 				<?php if (__get_roles('SalesOrderUpdate')) : ?>
-			  <a href="<?php echo site_url('retur_order_detail/home/retur_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
+			  <!--a href="<?php echo site_url('retur_order_detail/home/retur_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a-->
                 <?php endif; ?>
 				<?php if (__get_roles('SalesOrderDelete')) : ?>
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('retur_order/home/retur_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
 			  <?php } ?>
                 <?php endif; ?>
-			<?php if($sstatus<4){	?>
-				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_approve/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-pencil"></i> </a>
-			<?php }?>	
+			<?php if($sstatus==3){	?>
+				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_approve/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
+			<?php }?>
+
+			<?php if($sstatus==4){	?>
+				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_done/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
+			<?php }?>
+			
           </td>		
 		
 		

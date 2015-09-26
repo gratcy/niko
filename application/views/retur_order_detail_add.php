@@ -114,6 +114,15 @@ minLength: 1,
                        	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
                     </div>
                 </div>  
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sales</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
+                    </div>
+                </div>  
+
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Return Type</label>
@@ -280,7 +289,7 @@ minLength: 1,
 	
 
 		<input class="btn text-muted text-center btn-danger" type=submit value="Submit" >
-		<input class="btn text-muted text-center btn-primary" type=button value="Back" onclick="location.href='javascript:history.go(-1);'">
+		<!--input class="btn text-muted text-center btn-primary" type=button value="Back" onclick="location.href='javascript:history.go(-1);'"-->
 		</form>	
 		
                             </div>

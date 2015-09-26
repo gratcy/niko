@@ -68,13 +68,13 @@ if($row['ppid']=='3'){
 	$pvolpck= $row['pvolume'];
 	
 }
-
+$pricess= __get_rupiah($price,2); 
 
 	$results[] = array('label' => $label,'pid' => $row['pid'],'pcid' => $row['pcid'],
 	'ppid' => $row['ppid'],'pcode' =>$row['pcode'],'pdesc' => $row['pdesc'],'phpp' => $row['phpp'],
-	'pdist' => $row['pdist'],'psemi' => $row['psemi'],'pkey' => $row['pkey'],'pstore' => $row['pstore'],
-	'pconsume' => $row['pconsume'],'ppoint' => $row['ppoint'],'pdisc' => $row['pdisc'],'pstatus' => $row['pstatus'],
-	'price'=>$price, 'mqty'=>$row['mqty'],'ddisc'=>$ddisc ,'ccat'=>$ccat,'namecat'=>$namecat , 'pvolumepcs' => $pvolpcs,'pvolumepck' => $pvolpck);
+	'pdist' => __get_rupiah($row['pdist'],2),'psemi' => __get_rupiah($row['psemi'],2),'pkey' => __get_rupiah($row['pkey'],2),'pstore' => __get_rupiah($row['pstore'],2),
+	'pconsume' => __get_rupiah($row['pconsume'],2),'ppoint' => $row['ppoint'],'pdisc' => $row['pdisc'],'pstatus' => $row['pstatus'],
+	'price'=>__get_rupiah($price,2), 'mqty'=>$row['mqty'],'ddisc'=>$ddisc ,'ccat'=>$ccat,'namecat'=>$namecat , 'pvolumepcs' => $pvolpcs,'pvolumepck' => $pvolpck);
 }
 
 echo json_encode($results);

@@ -61,7 +61,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>retur order <?php //echo "$id $scid";?></h5>
+            <h5>Return Order <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -71,8 +71,9 @@ minLength: 1,
 	<input type=hidden name=sbid value="<?php echo $detailx[0]->sbid; ?>">
 
 
+
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">No Retur</label>
+                    <label for="text1" class="control-label col-lg-4">Return No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -80,7 +81,14 @@ minLength: 1,
                     </div>
                 </div>
 
-				
+	<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Date.</label>
+
+                    <div class="col-lg-4">
+                       <input type=hidden name=id value="<?php echo $id; ?>">
+					   <input type=text value="<?php echo __get_date(strtotime($detailx[0]->stgl),1); ?>" class="form-control" disabled>
+                    </div>
+                </div>				
 				
 				
                 <div class="form-group">
@@ -91,9 +99,17 @@ minLength: 1,
                     </div>
                 </div>
 				
-			
-
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sales</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
+                    </div>
+                </div>			
+
+                	
+	</td><td width=40% valign=top >
+              <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Status</label>
 
                     <div class="col-lg-4">
@@ -114,27 +130,12 @@ minLength: 1,
 					?>
                        	<input type=text value="<?php echo $sstatuss; ?>" class="form-control" disabled>
                     </div>
-                </div>					
-	</td><td width=40%>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tanggal</label>
-
-                    <div class="col-lg-4">
-					<input type=text value="<?php echo $detailx[0]->stgl; ?>" class="form-control" disabled>
-                    </div>   							
-                </div>
-
+                </div>				
 
 
 
 				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Keterangan</label>
-
-                    <div class="col-lg-4">
-                        <textarea name="sketerangan" class="form-control" placeholder="Description" disabled ><?php echo $detailx[0]->sketerangan; ?></textarea>
-                    </div>
-                </div>				
+                		
 		
 
 
@@ -159,13 +160,13 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Kode Product</th>
-          
-          <th>Qty</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
-		   <th>Price / pcs </th>
-		   <th>Total Price  </th>
+		   <th>Price</th>
+		   <th>Total </th>
 		 
                                         </tr>
                                     </thead>
@@ -201,6 +202,7 @@ minLength: 1,
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
+		  <td><?php echo $v -> pname; ?><input type=hidden name="pname[]" value="<?php echo $v -> pname; ?>"></td>
           <td><?php echo $v -> sqty; ?></td>
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>

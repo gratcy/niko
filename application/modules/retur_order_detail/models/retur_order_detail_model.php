@@ -22,7 +22,8 @@ class retur_order_detail_model extends CI_Model {
 
 	
 		$this -> db -> select(" *, retur_order_tab.sbid AS sbid,
-		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid ) as cname
+		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid ) as cname,
+		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid)as sname
 FROM retur_order_detail_tab, retur_order_tab 
 
  WHERE 

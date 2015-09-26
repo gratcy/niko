@@ -59,14 +59,33 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <tr>
 <td rowspan=1 colspan=6 width="40%" align="center"><h1>RETURN ORDER</h1></td>
 </tr>
+</table>
+<table class="gridtablex" width=800px >
 <tr>
-	<td><b>Return No.</b></td><td><?php echo $detailx[0]->snoro; ?></td>
+	<td width=20% ><b>Return No.</b></td><td width=90% align=left ><?php echo $detailx[0]->snoro; ?></td><td width=50%>&nbsp;</td>
 </tr>
 <tr>
-<td><b>Date</b></td><td><?php echo date('d-m-Y',strtotime($detailx[0]->stgl)); ?></td>
+<td><b>Date</b></td><td><?php echo date('d/m/Y',strtotime($detailx[0]->stgl)); ?></td>
 </tr>
 <tr>
 <td width="10%" align=left><b>Customer</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
+</tr>
+
+<tr>
+<td width="10%" align=left><b>Sales</b></td><td  ><?php echo $detailx[0]->sname; ?></td><td></td>
+</tr>
+	<?php 
+		
+		$ccats= $detailx[0] ->ctyperetur; 
+		if($ccats==0){
+			$cname="Tukar Barang";
+		}elseif($ccats==1){
+			$cname="Potong Piutang";
+		}
+
+		?>	
+<tr>
+<td width="10%" align=left><b>Return Type</b></td><td  ><?php echo $cname; ?></td><td></td>
 </tr>
 </table>
 </p>
@@ -81,7 +100,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                     <thead>
                                         <tr>
           
-          <th>Code</th>
+          <th width=15% >Code</th>
           <th>Name</th>
           <th>Qty/Pcs</th>
           <th>Accept</th>
@@ -139,10 +158,11 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                     </tbody>
                                 </table>
 </p>	
-<p align=center>
+
+<p align=center><br>
 <table class="gridtable" width=800px >
 <tr>
-	<th>Customer</th><th>Sales</th><th>Admin II</th><th>Admin I</th>
+	<th width="25%">SALES </th><th width="25%">ADMIN 1</th><th width="25%">ADMIN 2</th><th width="25%" >CUSTOMER</th>
 </tr>
 <tr>
 	<td><br><br></td><td></td><td></td><td></td>

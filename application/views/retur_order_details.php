@@ -61,7 +61,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>retur order <?php //echo "$id $scid";?></h5>
+            <h5>Return Order <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -72,7 +72,7 @@ minLength: 1,
 
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Retur No.</label>
+                    <label for="text1" class="control-label col-lg-4">Return No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -181,7 +181,9 @@ minLength: 1,
           <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
-		  <th>Note </th>
+		  <th>Price </th>
+		  <th>Total </th>
+		  <th>Notes </th>
 		 
                                         </tr>
                                     </thead>
@@ -196,6 +198,7 @@ minLength: 1,
 			//print_r($v);
 			$sqtyx=$v -> sqty;
 			$spricex=$v -> sprice;
+			$spricexx=$v -> sprice * $v -> saccept;
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;			
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
@@ -208,6 +211,8 @@ minLength: 1,
           <td><?php echo $v -> sqty; ?></td>
           <td><?php echo $v -> saccept; ?></td>
           <td><?php echo $v -> sreject; ?></td>
+		  <td><?php echo __get_rupiah($v -> sprice,2); ?></td>
+		  <td><?php echo __get_rupiah($spricexx,2); ?></td>
 		  <td><?php echo $v -> note; ?></td>
 		  	
 		  </tr>

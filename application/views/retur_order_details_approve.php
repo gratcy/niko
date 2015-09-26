@@ -54,7 +54,7 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Retur Order <?php //echo "$id $scid";?></h5>
+            <h5>Return Order <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -83,6 +83,15 @@ minLength: 1,
                        	<input type=text value="<?php echo $detailx[0]->cname; ?>" class="form-control" disabled>
                     </div>
                 </div>
+				
+				
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-2" style="text-align:left!important;">Sales</label>
+
+                    <div class="col-lg-4">
+                       	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
+                    </div>
+                </div>				
 				
 			
                 <div class="form-group">
@@ -117,7 +126,7 @@ minLength: 1,
           <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
-		   <th style="width:150px;">Price / pcs </th>
+		   <th style="width:150px;">Price </th>
 		   <th style="width:150px;">Total Price  </th>
 		 
                                         </tr>
@@ -134,15 +143,16 @@ minLength: 1,
 			if(!isset($_POST['input'])){$_POST['input']="";}			
 			if(!isset($_POST['sprice'][$k])){$_POST['sprice'][$k]="";}
 			if($_POST){
+			$spricez = str_replace(',','',$_POST['sprice'][$k]);	
 			//print_r($_POST);
-			$sprice=$_POST['sprice'][$k];
-			if($sprice==""){$sprice=$v -> sprice;}
+			$sprice=$spricez;
+			if($sprice==""){$sprice=str_replace(',','',$v -> sprice);}
 			}else{
-			$sprice=$v -> sprice;
+			$sprice=str_replace(',','',$v -> sprice);
 			}
 			
 			$sqtyx=$v -> sqty;
-			$spricex=$v -> sprice;
+			$spricex=str_replace(',','',$v -> sprice);
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;			
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
@@ -184,17 +194,19 @@ minLength: 1,
         
                                     </tbody>
                                 </table>
-	<?php if($stat==3){?>			
+							
+	<?php if($stat==3){?>		
+		
     <?php if($_POST['input']<>""){ ?>
 	<input type=submit name="approve" value="Complete Approval" class="btn text-muted text-center btn-danger">
-	<input type=submit value="EDIT" class="btn text-muted text-center btn-primary">
+	<input type=submit value="Edit" class="btn text-muted text-center btn-primary">
      <?php }else{ ?>	
-     <input type=submit name=input value="INPUT" class="btn text-muted text-center btn-danger">
+     <input type=submit name=input value="Input" class="btn text-muted text-center btn-primary">
 	 <?php } ?>
 	 </form>
 			<!--a href="javascript:void(0);" onclick="print_data('<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>', 'Print SO');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a-->
 			   <?php }else{?>
-				<a href="javascript:void(0);" onclick="print_data('<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>', 'Print Retur Order');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>		
+				<!--a href="javascript:void(0);" onclick="print_data('<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>', 'Print Retur Order');"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a-->		
     <?php } ?>
                             </div>
                         </div>
