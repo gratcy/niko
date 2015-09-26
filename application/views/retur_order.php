@@ -50,7 +50,7 @@ left:inherit!important;
     
           <th>Date</th>
 		  <th>Customer </th>
-          <th>Sales</th>
+          <th>Return Type</th>
           
           <th>Status</th>
 		  <th style="width: 50px;"></th>
@@ -69,13 +69,25 @@ left:inherit!important;
       
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> sname; ?></td>
+<?php 
+		
+		$ccats= $detailx[0]->ctyperetur; 
+		if($ccats==0){
+			$cname="Tukar Barang";
+		}elseif($ccats==1){
+			$cname="Potong Piutang";
+		}
+
+		?>		  
+		  
+		  
+          <td><?php echo $cname; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
 		  if($sstatus==0){
 		  $st="Pending";
 		  }elseif($sstatus==1){
-		  $st="Aktif";
+		  $st="Active";
 		  }if($sstatus==2){
 		  $st="Delete";
 		  }if($sstatus==3){

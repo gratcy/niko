@@ -262,7 +262,7 @@ $view['id'] = $id;
 		$view['database']=$this->db->database;
 		$view['scid']=$scid;
 		$view['bidx']=$bidx;
-		$this->load->view('sourcex',$view,FALSE);
+		$this->load->view('sourcexx',$view,FALSE);
 	}
 //---BEGIN DO-----	
 	
