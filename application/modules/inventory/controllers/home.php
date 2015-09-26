@@ -29,6 +29,7 @@ class Home extends MY_Controller {
 			$perm = (__get_roles('ExecuteAllBranchInventoryRejectSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 			
 		$keyword = $this -> input -> post('keyword');
+		$view['perm'] = $perm;
 		$view['type'] = $type;
 		
 		if ($this -> memcachedlib -> sesresult['ubid'] == 1) {

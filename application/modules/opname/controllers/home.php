@@ -10,6 +10,8 @@ class Home extends MY_Controller {
 		$this -> load -> library('branch/branch_lib');
 		$this -> load -> library('products/products_lib');
 		$this -> load -> library('sparepart/sparepart_lib');
+		$this -> load -> model('products/products_model');
+		$this -> load -> model('sparepart/sparepart_model');
 		$this -> load -> model('inventory/inventory_model');
 		$this -> load -> model('opname_model');
 	}
@@ -25,9 +27,9 @@ class Home extends MY_Controller {
 			$perm = (__get_roles('ExecuteAllBranchOpnameServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 		else
 			$perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		
 		$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type,$perm),3,10,site_url('opname/' . $type));
 		$view['opname'] = $this -> pagination_lib -> paginate();
+		$view['perm'] = $perm;
 		$view['type'] = $type;
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('opname', $view);
@@ -37,10 +39,9 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$id = (int) $this -> input -> post('id');
 			$type = (int) $this -> input -> post('type');
-			$stock = (int) $this -> input -> post('stock');
-			$stockout = (int) $this -> input -> post('stockout');
-			$stockin = (int) $this -> input -> post('stockin');
-			$stockbegining = (int) $this -> input -> post('stockbegining');
+			
+			$aplus = (int) $this -> input -> post('aplus');
+			$amin = (int) $this -> input -> post('amin');
 			
 			$stock2 = (int) $this -> input -> post('stock2');
 			$desc = $this -> input -> post('desc', TRUE);
@@ -50,17 +51,31 @@ class Home extends MY_Controller {
 			
 			
 			if ($id && $type) {
-				$arr = array('itype' => $type, 'istockbegining' => $stockbegining, 'istockin' => $stockin, 'istockout' => $stockout, 'istock' => $stock);
-				if ($this -> inventory_model -> __update_inventory($id, $arr, $type)) {
-					$oarr = array('oidid' => $id,'otype' => $type, 'odate' => time(), 'ostockbegining' => $stockbegining2, 'ostockin' => $stockin2, 'ostockout' => $stockout2, 'ostock' => $stock2, 'odesc' => $desc);
-					$this -> opname_model -> __insert_opname($oarr);
-					
-					__set_error_msg(array('info' => 'Stock opname berhasil dilakukan.'));
-					redirect(site_url('opname/' . $type));
+				if ($aplus && $amin) {
+					__set_error_msg(array('error' => 'Harus isi salah satu plus dan min !!!'));
+					redirect(site_url('opname/opname_update/' . $type.'/' . $id));
+				}
+				else if ($amin && ($stock2 - $amin) < 0) {
+					__set_error_msg(array('error' => 'Stock tidak bisa minus !!!'));
+					redirect(site_url('opname/opname_update/' . $type.'/' . $id));
 				}
 				else {
-					__set_error_msg(array('error' => 'Gagal mengubah stock !!!'));
-					redirect(site_url('opname/' . $type));
+					if ($aplus)
+						$arr = array('istock' => $stock2 + $aplus);
+					else
+						$arr = array('istock' => $stock2 - $amin);
+					
+					if ($this -> inventory_model -> __update_inventory($id, $arr, $type)) {
+						$oarr = array('oidid' => $id,'otype' => $type, 'odate' => time(), 'ostockbegining' => $stockbegining2, 'ostockin' => $stockin2, 'ostockout' => $stockout2, 'ostock' => $stock2, 'oadjustmin' => $amin, 'oadjustplus' => $aplus, 'odesc' => $desc);
+						$this -> opname_model -> __insert_opname($oarr);
+						
+						__set_error_msg(array('info' => 'Stock opname berhasil dilakukan.'));
+						redirect(site_url('opname/' . $type));
+					}
+					else {
+						__set_error_msg(array('error' => 'Gagal mengubah stock !!!'));
+						redirect(site_url('opname/' . $type));
+					}
 				}
 			}
 			else {
@@ -83,9 +98,10 @@ class Home extends MY_Controller {
 			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type, $id, $perm);
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> ibid);
 			if ($type == 1 || $type == 3 || $type == 4)
-				$view['items'] = $this -> products_lib -> __get_products($view['detail'][0] -> iiid);
+				$view['items'] = $this -> products_model -> __get_products_detail($view['detail'][0] -> iiid);
 			else
-				$view['items'] = $this -> sparepart_lib -> __get_sparepart($view['detail'][0] -> iiid);
+				$view['items'] = $this -> sparepart_model -> __get_sparepart_detail($view['detail'][0] -> iiid);
+				
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

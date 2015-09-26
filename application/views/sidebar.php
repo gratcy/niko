@@ -278,7 +278,7 @@
 	else if (/\/services/.test(window.location.href) === true) {
 		$('ul#services').addClass('in');
 	}
-	else if (/\/inventory|opname/.test(window.location.href) === true) {
+	else if (/\/inventory|\/opname/.test(window.location.href) === true) {
 		$('ul#inventory').addClass('in');
 	}
 	else if (/\/purchase_order/.test(window.location.href) === true) {

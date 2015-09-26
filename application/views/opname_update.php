@@ -13,6 +13,32 @@
             <div class="icons"><i class="icon-edit"></i></div>
             <h5>Stock <?php echo __get_inventory_type($type); ?> Update</h5>
         </header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+          <th>Code</th>
+          <th>Product</th>
+          <th>Stock Begining</th>
+          <th>Stock In</th>
+          <th>Stock Out</th>
+          <th>Stock Final</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+          <td><?php echo ($type == 2 ? $items[0] -> scode : $items[0] -> pcode); ?></td>
+          <td><?php echo ($type == 2 ? $items[0] -> sname : $items[0] -> pname); ?></td>
+          <td style="text-align:right;"><?php echo $detail[0] -> istockbegining; ?></td>
+          <td style="text-align:right;"><?php echo $detail[0] -> istockin; ?></td>
+          <td style="text-align:right;"><?php echo $detail[0] -> istockout; ?></td>
+          <td style="text-align:right;"><?php echo $detail[0] -> istock; ?></td>
+										</tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                </div>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('opname/opname_update'); ?>" method="post">
@@ -31,44 +57,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Item</label>
+                    <label for="text1" class="control-label col-lg-4">Adjust Min (-)</label>
 
                     <div class="col-lg-4">
-						<select name="item" data-placeholder="Stock Item" class="form-control chzn-select"><?php echo $items; ?></select>
+                        <input type="text" placeholder="Adjust Plus (-)" name="amin" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Stock Begining</label>
+                    <label for="text1" class="control-label col-lg-4">Adjust Plus (+)</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Stock Begining" name="stockbegining" class="form-control" value="<?php echo $detail[0] -> istockbegining; ?>" />
+                        <input type="text" placeholder="Adjust Plus (+)" name="aplus" class="form-control" />
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Stock In</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Stock In" name="stockin" class="form-control" value="<?php echo $detail[0] -> istockin; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Stock Out</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Stock Out" name="stockout" class="form-control" value="<?php echo $detail[0] -> istockout; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Stock Final</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Stock Final" name="stock" class="form-control" value="<?php echo $detail[0] -> istock; ?>" />
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
@@ -76,15 +79,6 @@
                         <textarea name="desc" class="form-control" placeholder="Description"></textarea>
                     </div>
                 </div>
-                <div class="form-group">
-							<label for="status" class="control-label col-lg-4">Status</label>
-                    <div class="col-lg-4">
-						
-                            <div class="make-switch has-switch" data-on="danger" data-off="default">
-                                <?php echo __get_status($detail[0] -> istatus,2); ?>
-                            </div>
-					</div>
-				</div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">

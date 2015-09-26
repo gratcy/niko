@@ -29,7 +29,9 @@ $add = 'Return';
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+		  <?php if (!$perm) : ?>
           <th>Branch</th>
+          <?php endif; ?>
           <th>Code</th>
           <th>Name</th>
           <th>Stock Begining</th>
@@ -44,7 +46,9 @@ $add = 'Return';
 		  foreach($opname as $k => $v) :
 		  ?>
                                         <tr>
+		  <?php if (!$perm) : ?>
           <td><?php echo $v -> bname; ?></td>
+          <?php endif; ?>
           <td><?php echo $v -> code; ?></td>
           <td><?php echo $v -> name; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockbegining; ?></td>
