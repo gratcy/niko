@@ -76,7 +76,7 @@ class Home extends MY_Controller {
 			$sid = $this -> input -> post('sid');
 			$id = (int) $this -> input -> post('id');
 			$appsev = (int) $this -> input -> post('appsev');
-			//~ var_dump($_POST);die;
+
 			if ($id) {
 				if (!$wo || !$sid || !$qty) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));

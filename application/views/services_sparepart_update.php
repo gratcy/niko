@@ -50,10 +50,8 @@
 				<div style="clear:both;"></div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
-                    <div class="col-lg-4">
-				<?php if (__get_roles('ServicesSparepartApproval')) : ?>
+                    <div class="col-lg-4">\
 				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
-				<?php endif; ?>
 				<a href="<?php echo site_url('services_sparepart/sparepart_add/2?id=' . $id); ?>" class="btn text-muted text-center btn-info" id="sparepart">Add Sparepart</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>

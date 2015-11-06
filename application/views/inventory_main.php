@@ -33,11 +33,6 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('Inventory'.$add.'Add') && $type >= 3) : ?>
-                <a href="<?php echo site_url('inventory/inventory_add/' . $type); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Stock <?php echo __get_inventory_type($type); ?></a>
-                <br />
-                <br />
-                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

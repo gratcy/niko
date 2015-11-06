@@ -78,13 +78,13 @@
                     </a>
                     <ul class="collapse" id="services">
 						<?php if (__get_roles('ServicesWOView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Services </a></li>
+                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Service </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ServicesSparepartView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Services Sparepart </a></li>
+                         <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Service Sparepart </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ServicesReportView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Services Report </a></li>
+                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Service Report </a></li>
                          <?php endif; ?>
                     </ul>
                 </li>
@@ -97,36 +97,55 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">5</span>&nbsp;
+                       &nbsp; <span class="label label-danger">6</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/1'); ?>"><i class="icon-angle-right"></i> Inventory Product </a></li>
+								<li class=""><a href="<?php echo site_url('inventory/1'); ?>"><i class="icon-angle-right"></i> Product </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('InventorySparepartView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/2'); ?>"><i class="icon-angle-right"></i> Inventory Sparepart </a></li>
+								<li class=""><a href="<?php echo site_url('inventory/2'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('InventoryReturnView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/4'); ?>"><i class="icon-angle-right"></i> Inventory Return </a></li>
+								<li class=""><a href="<?php echo site_url('inventory/4'); ?>"><i class="icon-angle-right"></i> Return </a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('InventoryReturnView')) : ?>
+								<li class=""><a href="<?php echo site_url('inventory/6'); ?>"><i class="icon-angle-right"></i> Service </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('InventoryRejectProductView')) : ?>
-								<li class=""><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Inventory Reject Product </a></li>
+								<li class="">
+									<a href="javascript:void(0);"><i class="icon-angle-down"></i> Reject </a>
+									
+									<ul>
+									<li><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Product</a></li>
+									<li><a href="<?php echo site_url('inventory/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
+									</ul>
+									</li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
-								<li class=""><a href="javascript:void(0);"><i class="icon-angle-down"></i> Inventory Opname </a>
+								<li class=""><a href="javascript:void(0);"><i class="icon-angle-down"></i> Opname </a>
 							<?php endif; ?>
 								<ul>
 							<?php if (__get_roles('OpnameProductView')) : ?>
-								<li><a href="<?php echo site_url('opname/1'); ?>"><i class="icon-angle-right"></i> Product Opname</a></li>
+								<li><a href="<?php echo site_url('opname/1'); ?>"><i class="icon-angle-right"></i> Product </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameSparepartView')) : ?>
-								<li><a href="<?php echo site_url('opname/2'); ?>"><i class="icon-angle-right"></i> Sparepart Opname</a></li>
+								<li><a href="<?php echo site_url('opname/2'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameReturnView')) : ?>
-								<li><a href="<?php echo site_url('opname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>
+								<li><a href="<?php echo site_url('opname/4'); ?>"><i class="icon-angle-right"></i> Return </a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('OpnameReturnView')) : ?>
+								<li><a href="<?php echo site_url('opname/6'); ?>"><i class="icon-angle-right"></i> Service </a></li>
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameRejectProductView')) : ?>
-								<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Reject Product Opname</a></li>
+								<li>
+									<a href="javascript:void(0);"><i class="icon-angle-down"></i> Reject </a>
+									<ul>
+									<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Product</a></li>
+									<li><a href="<?php echo site_url('opname/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
+									</ul>
+								</li>
 							<?php endif; ?>
 								</ul>
 								</li>
@@ -216,10 +235,17 @@
                         <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> Technical Commision </a></li>
                         <li class=""><a href="javascript:void(0);"><i class="icon-angle-right"></i> Stock Opname </a>
                         <ul>
-								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product Opname</a></li>
-								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart Opname</a></li>
-								<li><a href="<?php echo site_url('reportopname/4'); ?>"><i class="icon-angle-right"></i> Return Opname</a></li>
-								<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Reject Product Opname</a></li>
+								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product</a></li>
+								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
+								<li><a href="<?php echo site_url('reportopname/4'); ?>"><i class="icon-angle-right"></i> Return</a></li>
+								<li><a href="<?php echo site_url('reportopname/6'); ?>"><i class="icon-angle-right"></i> Services</a></li>
+								<li class="">
+									<a href="javascript:void(0);"><i class="icon-angle-down"></i> Reject </a>
+									<ul>
+									<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Product</a></li>
+									<li><a href="<?php echo site_url('reportopname/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
+									</ul>
+								</li>
                         </ul>
                         </li>
                     </ul>

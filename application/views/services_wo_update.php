@@ -72,7 +72,8 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-										<a href="<?php echo site_url('services_wo/technical_add/2?id=' . $id); ?>" class="btn btn-info" id="addTechnical">Add Technical</a>
+				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
+				<a href="<?php echo site_url('services_wo/technical_add/2?id=' . $id); ?>" class="btn btn-info" id="addTechnical">Add Technical</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
@@ -99,6 +100,11 @@ $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ub
 $('#pbranch').css('display','none');
 <?php endif; ?>
 $(function(){
+		$('#approve').click(function(){
+		$('form.form-horizontal').append('<input type="hidden" name="appsev" value="3">');
+		$('form.form-horizontal').submit();
+	});
+	
 	$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
 	$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
 	$("#addTechnical, #addProduct").fancybox({

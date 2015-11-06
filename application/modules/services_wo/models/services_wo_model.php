@@ -34,7 +34,7 @@ class Services_wo_model extends CI_Model {
 	function __get_services_wo_select($bid="") {
 		if ($bid != "") $bid = " AND sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('sid,sno FROM services_workorder_tab WHERE sstatus=1'.$bid);
+		$this -> db -> select('sid,sno FROM services_workorder_tab WHERE sstatus=3'.$bid);
 		return $this -> db -> get() -> result();
 	}
 	

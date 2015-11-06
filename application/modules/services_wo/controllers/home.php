@@ -12,6 +12,7 @@ class Home extends MY_Controller {
 		$this -> load -> model('technical/technical_model');
 		$this -> load -> model('products/products_model');
 		$this -> load -> model('services_wo_model');
+		$this -> load -> model('inventory/inventory_model');
 		$this -> load -> model('services_report/services_report_model');
 	}
 
@@ -59,8 +60,10 @@ class Home extends MY_Controller {
 					$this -> services_wo_model -> __update_services_wo($lastID, array('sno' => $nowo));
 					
 					for($i=0;$i<count($tid);++$i) $this -> services_wo_model -> __insert_services_wo_technical(array('ssid' => $lastID, 'stid' => $tid[$i], 'sstatus' => 1));
-					for($i=0;$i<count($pid);++$i) $this -> services_wo_model -> __insert_services_wo_product(array('ssid' => $lastID, 'spid' => $pid[$i], 'sqty' => $tqty[$pid[$i]], 'sstatus' => 1));
 					
+					for($i=0;$i<count($pid);++$i) {
+						$this -> services_wo_model -> __insert_services_wo_product(array('ssid' => $lastID, 'spid' => $pid[$i], 'sqty' => $tqty[$pid[$i]], 'sstatus' => 1));
+					}
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('services_wo'));
 				}
@@ -78,6 +81,7 @@ class Home extends MY_Controller {
 	
 	function services_wo_update($id) {
 		if ($_POST) {
+			$appsev = (int) $this -> input -> post('appsev', TRUE);
 			$dfrom = $this -> input -> post('dfrom', TRUE);
 			$dto = $this -> input -> post('dto', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
@@ -87,6 +91,8 @@ class Home extends MY_Controller {
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 
+			if ($appsev == 3) $status = 3;
+			
 			if ($id) {
 				if (!$dfrom || !$dto || !$branch) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
@@ -96,7 +102,16 @@ class Home extends MY_Controller {
 					$dfrom = strtotime(str_replace('/','-',$dfrom));
 					$dto = strtotime(str_replace('/','-',$dto));
 
-					for($i=0;$i<count($pid);++$i) $this -> services_wo_model -> __update_services_wo_product($id,$pid[$i],array('sqty' => $tqty[$pid[$i]]));
+					for($i=0;$i<count($pid);++$i) {
+						$this -> services_wo_model -> __update_services_wo_product($id,$pid[$i],array('sqty' => $tqty[$pid[$i]]));
+						if ($appsev == 3) {
+							$r2 = $this -> inventory_model -> __check_inventory(6,$branch,$pid[$i]);
+							if ($r2[0])
+								$this -> inventory_model -> __update_inventory($r2[0] -> iid, array('istockin' => ($r2[0] -> istockin + $tqty[$pid[$i]]), 'istock' => ($r2[0] -> istock + $tqty[$pid[$i]])), 6);
+							else
+								$this -> inventory_model -> __insert_inventory(array('ibid' => $branch, 'iiid' => $pid[$i], 'itype' => 6, 'istockbegining' => $tqty[$pid[$i]], 'istock' => $tqty[$pid[$i]], 'istatus' => 1));
+						}
+					}
 					
 					$arr = array('sbid' => $branch, 'sdate' => time(), 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sdesc' => $desc, 'sstatus' => $status);
 					if ($this -> services_wo_model -> __update_services_wo($id, $arr)) {	
@@ -227,7 +242,10 @@ class Home extends MY_Controller {
 		$view['report'] = $rep;
 		
 		if ($ids) {
-			$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
+			$iw = '';
+			foreach($ids as $k => $v) $iw .= ($v ? $v.',' : '');
+
+			$view['technical'] = $this -> technical_model -> __get_technical_services(rtrim($iw,','));
 			$this -> load -> view('box/technical_tmp', $view, false);
 		}
 	}
@@ -313,7 +331,9 @@ class Home extends MY_Controller {
 	function services_wo_print($id) {
 		$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail_print($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 		$arr = $this -> services_wo_model -> __get_technical_services($id);
-		foreach($arr as $k => $v) $ids[] = $v -> stid;
+		foreach($arr as $k => $v) {
+			if ($v -> stid) $ids[] = $v -> stid;
+		}
 		$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
 		
 		$ids = array();

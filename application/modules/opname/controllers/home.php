@@ -97,6 +97,7 @@ class Home extends MY_Controller {
 			$view['type'] = $type;
 			$view['detail'] = $this -> inventory_model -> __get_inventory_detail($type, $id, $perm);
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> ibid);
+			
 			if ($type == 1 || $type == 3 || $type == 4)
 				$view['items'] = $this -> products_model -> __get_products_detail($view['detail'][0] -> iiid);
 			else

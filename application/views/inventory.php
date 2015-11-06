@@ -31,11 +31,6 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('Inventory'.$add.'Add')) : ?>
-                <a href="<?php echo site_url('inventory/inventory_add/' . $type); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Stock <?php echo __get_inventory_type($type); ?></a>
-                <br />
-                <br />
-                <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -56,7 +51,9 @@ left:inherit!important;
                                     <thead>
                                         <tr>
 		  <?php if (!$perm) : ?>
+<!--
           <th>Branch</th>
+-->
           <?php endif; ?>
           <th>Code</th>
           <th>Name</th>
@@ -65,7 +62,6 @@ left:inherit!important;
           <th>Stock Out</th>
           <th>Stock Final</th>
           <th>Status</th>
-          <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -74,7 +70,9 @@ left:inherit!important;
 		  ?>
                                         <tr>
 		  <?php if (!$perm) : ?>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <?php endif; ?>
           <td><?php echo $v -> code; ?></td>
           <td><?php echo $v -> name; ?></td>
@@ -83,14 +81,6 @@ left:inherit!important;
           <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
           <td><?php echo __get_status($v -> istatus,1); ?></td>
-		  <td>
-				<?php if (__get_roles('Inventory'.$add.'Update')) : ?>
-              <a href="<?php echo site_url('inventory/inventory_update/' . $type.'/' . $v -> iid); ?>"><i class="icon-pencil"></i></a>
-                <?php endif; ?>
-				<?php if (__get_roles('Inventory'.$add.'Delete')) : ?>
-              <a href="<?php echo site_url('inventory/inventory_delete/' . $type.'/' . $v -> iid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-                <?php endif; ?>
-          </td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

@@ -30,7 +30,9 @@ $add = 'Return';
                                     <thead>
                                         <tr>
 		  <?php if (!$perm) : ?>
+<!--
           <th>Branch</th>
+-->
           <?php endif; ?>
           <th>Code</th>
           <th>Name</th>
@@ -47,7 +49,9 @@ $add = 'Return';
 		  ?>
                                         <tr>
 		  <?php if (!$perm) : ?>
+<!--
           <td><?php echo $v -> bname; ?></td>
+-->
           <?php endif; ?>
           <td><?php echo $v -> code; ?></td>
           <td><?php echo $v -> name; ?></td>

@@ -98,10 +98,7 @@ class Home extends MY_Controller {
 					redirect(site_url('services_report' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					if ($appsev == 3) {
-						$status = 3;
-						$this -> services_wo_model -> __update_services_wo($swo, array('sstatus' => 3));
-					}
+					if ($appsev == 3) $status = 3;
 
 					$arr = array('sdesc' => $desc, 'sstatus' => $status);
 					if ($this -> services_report_model -> __update_services_report($id, $arr)) {
@@ -111,6 +108,16 @@ class Home extends MY_Controller {
 								$r = $this -> inventory_model -> __check_inventory(2,$dwo[0] -> sbid,$sid[$i]);
 								$arr = array('istockout' => ($r[0] -> istockout + $suqty[$sid[$i]]), 'istock' => ($r[0] -> istock - $suqty[$sid[$i]]));
 								$this -> inventory_model -> __update_inventory($r[0] -> iid, $arr, 2);
+								
+								$d = $this -> inventory_model -> __check_inventory(5,$dwo[0] -> sbid,$sid[$i]);
+								if ($d) {
+									$arr = array('istockin' => ($d[0] -> istockin + ($qty[$sid[$i]] - $qty[$sid[$i]])), 'istock' => ($d[0] -> istock + ($qty[$sid[$i]] - $qty[$sid[$i]])));
+									$this -> inventory_model -> __update_inventory($d[0] -> iid, $arr, 5);
+								}
+								else {
+									$arr = array('ibid' => $dwo[0] -> sbid, 'iiid' => $sid[$i], 'itype' => 5, 'istockbegining' => ($qty[$sid[$i]] - $qty[$sid[$i]]), 'istockin' => ($qty[$sid[$i]] - $qty[$sid[$i]]), 'istockout' => 0, 'istock' => ($qty[$sid[$i]] - $qty[$sid[$i]]), 'istatus' => 1);
+									$this -> inventory_model -> __insert_inventory($arr);	
+								}
 							endfor;
 							
 							for($i=0;$i<count($pid);++$i) :
@@ -131,17 +138,17 @@ class Home extends MY_Controller {
 								}
 							endfor;
 							
-							for($i=0;$i<count($pid);++$i) :
-								$r3 = $this -> inventory_model -> __check_inventory(4,$dwo[0] -> sbid,$pid[$i]);
-								if (!$r3[0]) {
-									$arr3 = array('ibid' => $dwo[0] -> sbid, 'iiid' => $pid[$i], 'itype' => 4, 'istockbegining' => $fpqty[$pid[$i]], 'istockin' => $fpqty[$pid[$i]], 'istockout' => 0, 'istock' => $fpqty[$pid[$i]], 'istatus' => 1);
-									$this -> inventory_model -> __insert_inventory($arr3);
-								}
-								else {
-									$arr3 = array('istockout' => ($r3[0] -> istockout + $fpqty[$pid[$i]]), 'istock' => ($r3[0] -> istock - $fpqty[$pid[$i]]));
-									$this -> inventory_model -> __update_inventory($r3[0] -> iid, $arr3, 4);
-								}
-							endfor;
+							//~ for($i=0;$i<count($pid);++$i) :
+								//~ $r3 = $this -> inventory_model -> __check_inventory(4,$dwo[0] -> sbid,$pid[$i]);
+								//~ if (!$r3[0]) {
+									//~ $arr3 = array('ibid' => $dwo[0] -> sbid, 'iiid' => $pid[$i], 'itype' => 4, 'istockbegining' => $fpqty[$pid[$i]], 'istockin' => $fpqty[$pid[$i]], 'istockout' => 0, 'istock' => $fpqty[$pid[$i]], 'istatus' => 1);
+									//~ $this -> inventory_model -> __insert_inventory($arr3);
+								//~ }
+								//~ else {
+									//~ $arr3 = array('istockout' => ($r3[0] -> istockout + $fpqty[$pid[$i]]), 'istock' => ($r3[0] -> istock - $fpqty[$pid[$i]]));
+									//~ $this -> inventory_model -> __update_inventory($r3[0] -> iid, $arr3, 4);
+								//~ }
+							//~ endfor;
 						}
 						
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));

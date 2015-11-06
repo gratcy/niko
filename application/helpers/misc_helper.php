@@ -180,7 +180,9 @@ function __get_inventory_type($type) {
 	if ($type == 1) return 'Product';
 	elseif ($type == 2) return 'Sparepart';
 	elseif ($type == 3) return 'Reject Product';
-	else return 'Return';
+	elseif ($type == 4) return 'Return';
+	elseif ($type == 5) return 'Reject Sparepart';
+	else return 'Service';
 }
 
 function __get_price_type($type) {
