@@ -31,7 +31,16 @@ class Home extends MY_Controller {
 	if(!isset($_POST['approve'])){$_POST['approve']="";}
 	
 		if($_POST['approve']=='1'){
+			$jp=count($_POST['pid']);
+			$sbidx=$this -> input -> post('sbidx', TRUE);
 			$id=$this -> input -> post('id', TRUE);
+			for($i=0;$i<$jp;$i++){
+				$pcode=$_POST['pid'][$i];
+				$sqty=$_POST['sqty'][$i];
+				$itype=4;
+				//echo $sbidx;die;
+				$this -> retur_order_detail_model -> __update_invoice($pid, $sqty,$itype,$sbidx);
+			}
 			$arr=array('sstatus' => '3');
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			$jum=count($_POST['sqty']);
@@ -59,7 +68,7 @@ function retur_order_details_approve($id,$scid) {
 			//$id=$this -> input -> post('id', TRUE);
 			$spotong=(int)$_POST['spotong'];	
 			//echo $spotong;die;
-			$arr=array('sstatus' => '4','status_potong'=>$spotong);
+			$arr=array('sstatus' => '4','status_potong'=>0);
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			//die;
 			$jum=count($_POST['sprice']);

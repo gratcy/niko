@@ -17,6 +17,8 @@ class retur_order_detail_model extends CI_Model {
 		$sql = $this -> db -> query('SELECT * FROM retur_order_tab WHERE sstatus=1');
 		return $sql -> num_rows();
 	}
+
+
 	
 	function __get_retur_order_detail($id) {
 
@@ -35,10 +37,13 @@ AND retur_order_detail_tab.ssid ='". $id."'");
 	
 
 	function __get_retur_order_detail_by_cust($scid) {
+		
 		$this -> db -> select(' *,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,
-		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname
-		FROM retur_order_tab WHERE sstatus<>2 AND scid='.$scid.' and status_potong=0 ORDER BY sid DESC');
+		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname,
+		(select sum(sprice) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid) as rpotong
+		FROM retur_order_tab WHERE sstatus<>2 AND scid='.$scid.' and (status_potong=0 or status_potong is NULL) ORDER BY sid DESC');
+
 		return $this -> db -> get() -> result();
 	}	
 	
@@ -62,7 +67,11 @@ AND retur_order_detail_tab.ssid ='". $id."'");
 		$this -> db -> select('* FROM retur_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=' . $id);
 		return $this -> db -> get() -> result();
 	}		
-	
+	function __update_invoice($pid, $sqty,$itype,$sbidx){
+		$this -> db-> query("update inventory_tab 
+	set itype=$itype,istockin=(istockin + $sqty ),istock=(istockbegining+istockin-istockout) where iiid='$pid'");
+		
+	}
 	function __get_delivery_order_detail_prod($id,$snodo) {
 		$this -> db -> select("*,(select sprice FROM retur_order_detail_tab c where c.sid=a.sid) as sprice,
 		(select sdisc FROM retur_order_detail_tab c where c.sid=a.sid) as sdisc	FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'");

@@ -363,6 +363,26 @@ function invoice_order_add($id,$scid,$snodo) {
 			// $view['pbid'] = $this -> branch_lib -> __get_branch();
 			// $view['psid'] = $this -> sales_lib -> __get_sales();
 			// $view['pppid'] = $this -> products_lib -> __get_products();	
+			
+			
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['snodo'] = $snodo;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);	
+			
+			$view['details'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);	
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();			
+			
+			
+			
+			
+			
+			
+			
+			
 	
 			$this->load->view('invoice_order_details_add',$view);
 		}

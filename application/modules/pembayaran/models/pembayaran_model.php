@@ -10,7 +10,7 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_pembayaran() {
-		return 'SELECT pno_pm,pm_tgl,status,pcid,type_bayar from pembayaran_tab where no_invoice=""';
+		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab';
 	}
 
 	function __get_pembayaranid($pno_pm) {
@@ -25,7 +25,7 @@ class pembayaran_model extends CI_Model {
 	
 	function __get_total_pembayaran_monthly($month,$year,$id) {
 	
-	$sql = $this -> db -> query("SELECT * FROM pembayaran_tab WHERE YEAR(pm_tgl) = '$year' AND MONTH(pm_tgl) = '$month' ");
+	$sql = $this -> db -> query("SELECT * FROM pembayaran_tab WHERE YEAR(pdate) = '$year' AND MONTH(pdate) = '$month' ");
 	$jum= $sql -> num_rows();
 	$sqlx=$this -> db -> query("UPDATE pembayaran_tab set pno_pm='$jum' WHERE pmid='$id' ");
 	}	
@@ -39,7 +39,7 @@ class pembayaran_model extends CI_Model {
 	function __get_pembayaran_detail($id) {
 		$this -> db -> select("*,
 		(select cname from customers_tab where customers_tab.cid=pembayaran_tab.pcid)as cname
-		FROM pembayaran_tab WHERE (status<=3) AND pno_pm='" . $id ."'");
+		FROM pembayaran_tab WHERE (pstatus<=3) AND pno_pm='" . $id ."'");
 		return $this -> db -> get() -> result();
 	}
 	function __get_customers_detail($id) {

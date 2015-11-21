@@ -44,6 +44,7 @@ class Home extends MY_Controller {
 	}
 	function pembayaran_add() {
 		if ($_POST) {	
+		
 			//$pno_pm = $this -> input -> post('pno_pm', TRUE);
 			$sreff = $this -> input -> post('sreff', TRUE);				
 			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
@@ -51,11 +52,12 @@ class Home extends MY_Controller {
 			$scdate=date('Y-m-d');
 			$scid = $this -> input -> post('cid', TRUE);
 		
-			$type_bayar = $this -> input -> post('type_bayar', TRUE);
+			//$type_bayar = $this -> input -> post('type_bayar', TRUE);
 			
 
-					$arr = array( 'pmid'=>'', 'pcid'=>$scid,'pm_tgl' => $stgl,  
-					'pcash'=>'','pgiro'=>'','piutang'=>'','ptgl_giro'=>'','pwrite_off'=>'','sreff' => $sreff,'status' => 1,'type_bayar'=>$type_bayar);	
+					$arr = array( 'pmid'=>'', 'pno_pm'=>'','preff'=>$sreff,'pcid'=>$scid,'pdate' => $stgl,  
+					'pduedate'=>'','ptotal_inv'=>'','ptotal_retur'=>'','ptotal_terima'=>'0','ptotal_pending' => '0','pduration'=>'','pstatus' => 1,
+					'pnote'=>'');	
 				if ($this -> pembayaran_model -> __insert_pembayaran($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));					
 					 $lastid=$this->db->insert_id();						
@@ -63,7 +65,7 @@ class Home extends MY_Controller {
 					$pno_pmx=$this -> pembayaran_model -> __get_pno_pm($lastid);
 					$pno_pm=$pno_pmx[0]->pno_pm;
 					//echo $pno_pm;die;
-					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm.'/'.$type_bayar));
+					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm));
 				}
 				else {
 					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));

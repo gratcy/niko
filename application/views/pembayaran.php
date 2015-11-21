@@ -49,9 +49,14 @@ left:inherit!important;
           <th>Payment No.</th>
     
           <th>Date</th>
-       
+          
             <th>Customer</th>
-          <th>Sales </th>       
+			<th>Total Invoice </th> 
+          <th>Total Return </th> 		
+		<th>Total Tagihan </th>
+		<th>Total Terima </th>
+		<th>Pembayaran Pending </th>
+		<th>Sisa Tagihan </th>
           <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
@@ -59,37 +64,44 @@ left:inherit!important;
                                     <tbody>
 		  <?php
 		  foreach($pembayaran as $k => $v) :
-			  // echo "<pre>";
-	 //print_r($pembayaran);
-	 // echo "</pre>";
+
 		  ?>
                                         <tr>
           <td><?php echo $v -> pno_pm; ?>- <?php echo $v -> pcid; ?></td>
-          <td><?php echo $v -> pm_tgl; ?></td>
-      
-                 <td>Customer</td>
-          <td>Sales </td>
+          <td><?php echo __get_date(strtotime($v -> pdate),1); ?></td>
+         
+          <td><?php echo $v -> pcname; ?></td>
+		  <td><?php echo __get_rupiah($v -> ptotal_inv); ?> </td>
+          <td><?php echo __get_rupiah($v -> ptotal_retur); ?> </td>		  
+		  <td><?php echo __get_rupiah($v -> ptotal_tagihan); ?></td>
+		  <td><?php echo __get_rupiah($v -> ptotal_terima); ?> </td>
+		  <td><?php echo __get_rupiah($v -> ptotal_pending); ?> </td>
+		  <td><?php $sisa=$v -> ptotal_tagihan-$v -> ptotal_terima;
+		  echo __get_rupiah($sisa); ?></td>
 
           <td><?php 
-		  $sstatus=$v -> status;
+		  $sstatus=$v -> pstatus;
 		  if($sstatus==0){
 		  $st="Pending";
 		  }elseif($sstatus==1){
-		  $st="Aktif";
+		  $st="Active";
 		  }if($sstatus==2){
 		  $st="Delete";
 		  }if($sstatus==3){
-		  $st="Approve";
-		  }if($sstatus==4){
 		  $st="Done";
 		  }
-		  echo $st; ?></td>
+		  // if($sstatus==4){
+		  // $st="Done";
+		  // }
+		  echo $st; 
+		  ?></td>
 		
 		
 		  <td>
-		  <a href="<?php echo site_url('pembayaran/home/pembayaran_update/' . $v -> pno_pm ); ?>"><i class="icon-pencil"></i></a>
-		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_add/'.$v->pcid.'/' . $v -> pno_pm.'/'.$v->type_bayar ); ?>"><i class="icon-book"></i></a>
-		  
+		  <?php if($sstatus!=3){ ?>
+		  <!--a href="<?php echo site_url('pembayaran/home/pembayaran_update/' . $v -> pno_pm ); ?>"><i class="icon-pencil"></i></a-->
+		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$v->pcid.'/' . $v -> pno_pm ); ?>"><i class="icon-book"></i></a>
+		  <?php } ?>
 		  
 		  
           </td>		

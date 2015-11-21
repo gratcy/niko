@@ -11,7 +11,7 @@ function __get_date($str, $type=1) {
 
 function __get_month($id) {
 	$month = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-	return $month[($id + 1)];
+	return $month[($id-1)];
 }
 
 function __get_tahun_labarugi($tahun) {

@@ -19,10 +19,10 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		echo "xx";die;
-		$pager = $this -> pagination_lib -> pagination($this -> pembayaran_detail_model -> __get_pembayaran_detail(),3,10,site_url('pembayaran_detail'));
-		$view['pembayaran_detail'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		//echo "xx";die;
+		// $pager = $this -> pagination_lib -> pagination($this -> pembayaran_detail_model -> __get_pembayaran_detail(),3,10,site_url('pembayaran_detail'));
+		// $view['pembayaran_detail'] = $this -> pagination_lib -> paginate();
+		// $view['pages'] = $this -> pagination_lib -> pages();
 		$this->load->view('pembayaran_detail', $view);
 	}
 
@@ -74,20 +74,27 @@ class Home extends MY_Controller {
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 					$sdate_lunas=date('Y-m-d');	
 				
-			redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'.$scid.'/'.$pno_pm.'/'.$type_pay));					
+			redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$scid.'/'.$pno_pm.'/'.$type_pay));					
 					}	
 	}
 	
-	function pembayaran_detail_add($scid,$pno_pm,$type_pay) {
+	function pembayaran_detail_add($scid,$pno_pm) {
 
 		if ($_POST) {
+			echo '<pre>';
+			print_r($_POST);
+			echo '</pre>';
+
+			$totinv=$_POST['a'][0];
+			$totret=$_POST['c'][0];
+			$tottag=$totinv-$totret;
 
 			if(!isset($_POST['b'])){ 
 				$_POST['b']="";$jum=0;
 				$jumr=count($_POST['d']);
 				for($t=0;$t<$jumr;$t++){	
 					$snoro = $_POST['d'][$t];
-					$arrr = array('status_potong' => '1' );	
+					$arrr = array('status_potong' => '1' ,'pno_pm'=>$pno_pm);	
 				$this -> pembayaran_detail_model -> __update_ro($snoro, $arrr);
 				}
 			}else{
@@ -96,9 +103,10 @@ class Home extends MY_Controller {
 			for($j=0;$j<$jum;$j++){		
 				$snoinv = $_POST['b'][$j];
 				$snoro = $_POST['d'][$j];
+	
 				$sdate_pay=date('Y-m-d');			
 						$arr = array('sdate_pay' => $sdate_pay,'pno_pm'=>$pno_pm );	
-						$arrr = array('status_potong' => '1' );						
+						$arrr = array('status_potong' => '1' ,'pno_pm'=>$pno_pm);						
 						$this -> pembayaran_detail_model -> __update_invoice($snoinv, $arr);
 						$this -> pembayaran_detail_model -> __update_ro($snoro, $arrr);
 					
@@ -110,56 +118,239 @@ class Home extends MY_Controller {
 				}else{
 					$pgirox="";
 				}
-				
-		
+
 				$no_invoice=$_POST['b'][0];
-				$pcash=$_POST['totalcash'];
-				$pgiro=$_POST['totalgiro'];
 				$piutang=$_POST['totalz'];
+				
+				//echo $piutang;die;
+				
 				$pwrite_off=$_POST['wo'];
 				$kurang_bayar=$_POST['totalsisa'];
-				$arrg = array('ptgl_giro' => $pgirox,'pcash'=>$pcash,'pgiro'=>$pgiro,'piutang'=>$piutang,'pwrite_off'=>$pwrite_off,'kurang_bayar'=>$kurang_bayar);				
-				$arr = array( 'pmid'=>'','pno_pm' => $pno_pm, 'pcid'=>$scid,  
-					'pcash'=>$pcash,'pgiro'=>$pgiro,'piutang'=>$piutang,'ptgl_giro'=>$pgirox,'pwrite_off'=>'',
-					'status' => '1','no_invoice'=>$no_invoice);	
-		//echo $type_pay;die;			
-				if($type_pay==1){
-					//echo "a";die;
-				$this -> pembayaran_detail_model -> __update_giro($pno_pm, $arrg);
-				}else{
-				//PRINT_R($arr);die;
-				//echo "b";die;
-				$this -> pembayaran_model -> __insert_pembayaran($arr);
+				$pm=0;
+				$ptype=array('','cash','transfer','credit');
+				//print_r($_POST);
+		        $jumpay=count($_POST['payment']);
+				//echo $jumpay;die;
+				for($p=0;$p<$jumpay;$p++){
+					
+				$pamount=$_POST['payment'][$p];
+				$pm=$pm+$pamount;
+				$ard = array( 'pmdid'=>'','pno_pm' => $pno_pm,  
+					'pm_tgl'=>'','ptype'=>$ptype[$p],'ptgl_trans'=>'',
+					'pgirono'=>'','ptgl_giro'=>$pgirox,'pgiroacc'=>'',
+					'pbank'=>'','pbankacc'=>'','prek'=>'','prekto'=>'',
+					'pamount' => $pamount,'pwrite_off'=>'','pstatus'=>'1');	
+				//print_r($ard);die;	
+				if($pamount>0){
+					$this -> pembayaran_detail_model -> __insert_pembayaran_detail($ard);
 				}
-				//echo "bbb";die;
+				}		
+					$suminv=$this -> pembayaran_detail_model -> __sum_inv($pno_pm);
+					$sumret=$this -> pembayaran_detail_model -> __sum_ret($pno_pm);
+					$sinv=$suminv[0]->tamount;
+					$sret=$sumret[0]->sprice;
+
+				$sumpending=$this -> pembayaran_detail_model -> __sum_bayar_pending($pno_pm);
+				$sumterima=$this -> pembayaran_detail_model -> __sum_bayar_terima($pno_pm);
 				
-				redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'.$scid.'/'.$pno_pm.'/'.$type_pay));
+				$spending=$sumpending[0]->spamount;
+				$sterima=$sumterima[0]->spamount;
+				
+				$arp = array( 'ptotal_inv'=>$sinv,'ptotal_retur'=>$sret,'ptotal_tagihan'=>$piutang,
+				'ptotal_terima'=>$sterima,'ptotal_pending'=>$spending,'pstatus'=>'1','pnote'=>'');					
+				
+				$this -> pembayaran_model -> __update_pembayaran($pno_pm, $arp);				
+				redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$scid.'/'.$pno_pm));
 		}
 		else {
 		
-			//$view['id'] = $id;
 			$view['scid'] = $scid;
-			$view['pno_pm'] = $pno_pm;
+			$view['pno_pm'] = $pno_pm;			
+			$view['inv']=$this -> pembayaran_detail_model ->__get_pembayaran_inv($pno_pm);
+			$view['ro']=$this -> pembayaran_detail_model ->__get_pembayaran_ro($pno_pm);
 			$view['detailx'] = $this -> pembayaran_model -> __get_pembayaran_detail($pno_pm);
+			$view['pembayaran'] = $this -> pembayaran_detail_model -> __get_pembayaran_detail($pno_pm);
 			$view['potongan'] = $this -> pembayaran_detail_model -> __get_potongan($scid);
 			$view['detail'] =$this -> pembayaran_detail_model -> __get_pembayaran_detail_inv($scid,$pno_pm);
-			// echo $scid.'-'.$pno_pm;
-				// print_r($view['detail']);die;
 			$view['detailr'] =$this -> retur_order_detail_model -> __get_retur_order_detail_by_cust($scid);
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
 
-
-$pager = $this -> pagination_lib -> pagination($this -> pembayaran_model -> __get_pembayaranid($pno_pm),3,10,site_url('pembayaran'));
-			$view['pembayaran'] = $this -> pagination_lib -> paginate();
-
-			
 			$this->load->view('pembayaran_detail_add',$view);
 		}
 	}
 	
+	
+function pembayaran_lunas($scid,$pno_pm) {
+	$scid=$_POST['scid'];
+	$tots=$_POST['tots'];
+	if($_POST['sisaz']>0){
+		__set_error_msg(array('info' => 'Pelunasan gagal, Sisa tagihan masih ada'));
+redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$scid.'/'.$pno_pm));		
+	}
+	
+$this -> pembayaran_detail_model -> __bayar_lunas($pno_pm,$tots,$scid);
 
+redirect(site_url('pembayaran/home'));
+}
+function pembayaran_detail_addz($scid,$pno_pm) {
+
+		if($_POST) {
+			
+if(!isset($_POST['rekto'])){$_POST['rekto']="";}
+if(!isset($_POST['accgiro'])){$_POST['accgiro']="";}
+if(!isset($_POST['nogiro'])){$_POST['nogiro']="";}		
+			
+$rekto=$_POST['rekto'];
+$accgiro=$_POST['accgiro'];
+$nogiro=$_POST['nogiro'];
+if(!isset($_POST['date_transfer'])){$_POST['date_transfer']="";}
+if($_POST['date_transfer']!=""){
+$date_tr=explode("/",$_POST['date_transfer']);
+$date_trans=$date_tr[2].'-'.$date_tr[1].'-'.$date_tr[0];
+}else{
+	$date_trans="";
+}
+			$totinv=$_POST['a'][0];
+			$totret=$_POST['c'][0];
+			$tottag=$totinv-$totret;
+
+			if(!isset($_POST['b'])){ 
+				$_POST['b']="";$jum=0;
+				$jumr=count($_POST['d']);
+				for($t=0;$t<$jumr;$t++){	
+					$snoro = $_POST['d'][$t];
+					$arrr = array('status_potong' => '1' ,'pno_pm'=>$pno_pm);	
+				$this -> pembayaran_detail_model -> __update_ro($snoro, $arrr);
+				}
+			}else{
+				$jum=count($_POST['b']);
+			}
+			for($j=0;$j<$jum;$j++){		
+				$snoinv = $_POST['b'][$j];
+				$snoro = $_POST['d'][$j];
+	
+				$sdate_pay=date('Y-m-d');			
+						$arr = array('sdate_pay' => $sdate_pay,'pno_pm'=>$pno_pm );	
+						$arrr = array('status_potong' => '1' ,'pno_pm'=>$pno_pm);						
+						$this -> pembayaran_detail_model -> __update_invoice($snoinv, $arr);
+						$this -> pembayaran_detail_model -> __update_ro($snoro, $arrr);
+					
+			}
+			if($_POST['tglgiro']<>""){
+				$ptgl_giro=explode("/",$_POST['tglgiro']);
+				
+				$pgirox="$ptgl_giro[2]-$ptgl_giro[1]-$ptgl_giro[0]";
+				}else{
+					$pgirox="";
+				}
+
+				$no_invoice=$_POST['b'][0];
+				$piutang=$_POST['totalz'];
+				
+				//echo $piutang;die;
+				
+				$pwrite_off=$_POST['wo'];
+				$kurang_bayar=$_POST['totalsisa'];
+				$pm=0;
+				$ptype=array('cash','transfer','giro','write off');
+				//print_r($_POST);
+		        $jumpay=count($_POST['payment']);
+				//echo $jumpay;die;
+				for($p=0;$p<4;$p++){
+
+
+					$nogirox=$nogiro;
+					$pgiroxx=$pgirox;
+					$accgirox=$accgiro;
+					$date_transx=$date_trans;
+					$rektox=$rekto;
+
+				
+				$pamount=$_POST['payment'][$p];
+				echo $ptype[$p].'-'.$p.'-'.$pamount.'<br>';
+				if(($pamount!=0) or ($pamount!='')){
+					echo $ptype[$p];
+					if(($p==0) or ($p==3)){ 
+					$nogirox="";
+					$pgiroxx="";
+					$accgirox="";
+					$date_transx="";
+					$rektox="";
+					}elseif($p==1){ 
+					$nogirox="";
+					$pgiroxx="";
+					$accgirox="";
+					// $date_trans="";
+					// $rekto="";
+					}elseif($p==2){ 
+					// $nogiro="";
+					// $pgirox="";
+					// $accgiro="";
+					$date_transx="";
+					$rektox="";
+					}
+				$pm=$pm+$pamount;
+				$ard = array( 'pmdid'=>'','pno_pm' => $pno_pm,  
+					'pm_tgl'=>date('Y-m-d'),'ptype'=>$ptype[$p],'ptgl_trans'=>$date_transx,
+					'pgirono'=>$nogirox,'ptgl_giro'=>$pgiroxx,'pgiroacc'=>$accgirox,
+					'pbank'=>'','pbankacc'=>'','prek'=>'','prekto'=>$rektox,
+					'pamount' => $pamount,'pwrite_off'=>'','pstatus'=>'1');	
+				//print_r($ard);die;	
+				if($pamount>0){
+					$this -> pembayaran_detail_model -> __insert_pembayaran_detail($ard);
+				}
+				}
+				}
+
+//die;				
+					$suminv=$this -> pembayaran_detail_model -> __sum_inv($pno_pm);
+					$sumret=$this -> pembayaran_detail_model -> __sum_ret($pno_pm);
+					$sinv=$suminv[0]->tamount;
+					$sret=$sumret[0]->sprice;
+
+				$sumpending=$this -> pembayaran_detail_model -> __sum_bayar_pending($pno_pm);
+				$sumterima=$this -> pembayaran_detail_model -> __sum_bayar_terima($pno_pm);
+				
+				$spending=$sumpending[0]->spamount;
+				$sterima=$sumterima[0]->spamount;
+				
+				$arp = array( 'ptotal_inv'=>$sinv,'ptotal_retur'=>$sret,'ptotal_tagihan'=>$piutang,
+				'ptotal_terima'=>$sterima,'ptotal_pending'=>$spending,'pstatus'=>'1','pnote'=>'');					
+				
+				$this -> pembayaran_model -> __update_pembayaran($pno_pm, $arp);				
+				redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$scid.'/'.$pno_pm));
+		}
+		else {
+		//echo "cd";die;
+			$view['scid'] = $scid;
+			$view['pno_pm'] = $pno_pm;			
+			$view['inv']=$this -> pembayaran_detail_model ->__get_pembayaran_inv($pno_pm);
+			$view['ro']=$this -> pembayaran_detail_model ->__get_pembayaran_ro($pno_pm);
+			$view['detailx'] = $this -> pembayaran_model -> __get_pembayaran_detail($pno_pm);
+			$view['pembayaran'] = $this -> pembayaran_detail_model -> __get_pembayaran_detail($pno_pm);
+			$view['potongan'] = $this -> pembayaran_detail_model -> __get_potongan($scid);
+			$view['detail'] =$this -> pembayaran_detail_model -> __get_pembayaran_detail_inv($scid,$pno_pm);
+			$view['detailr'] =$this -> retur_order_detail_model -> __get_retur_order_detail_by_cust($scid);
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+
+			$this->load->view('pembayaran_detail_addz',$view);
+		}
+	}	
+	
+	
+function pembayaran_terima($pno_pm,$cid,$pmdid,$amount){
+	$this -> pembayaran_detail_model -> __update_terima($pno_pm, $amount);
+	$ar=array('pstatus'=>3);
+	if($this -> pembayaran_detail_model -> __update_statd($pmdid, $ar)){
+		//home/pembayaran_detail_add/2/1
+		__set_error_msg(array('info' => 'Data berhasil diubah.'));
+						redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$cid.'/'.$pno_pm));
+	}
+}
 	function pembayaran_detail_update($id,$scid) {
 
 		if ($_POST) {
@@ -201,7 +392,7 @@ $pager = $this -> pagination_lib -> pagination($this -> pembayaran_model -> __ge
 	function pembayaran_detail_delete($id,$sid,$scid) {
 		if ($this -> pembayaran_detail_model -> __delete_pembayaran_detail($id)) {
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
-			redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'.$sid.'/'.$scid));
+			redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$sid.'/'.$scid));
 		}
 		else {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
