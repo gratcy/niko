@@ -29,8 +29,9 @@
           <th>Branch</th>
 -->
           <th style="width: 250px;">Sales</th>
-          <th>Sales Target</th>
           <th>Target Month/Year</th>
+          <th>Revenue Target</th>
+          <th>Payment Target</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -44,8 +45,9 @@
           <td><?php echo $v -> bname; ?></td>
 -->
           <td><?php echo $v -> sname; ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> ttarget,1); ?></td>
           <td><?php echo $v -> tmy; ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> ttarget,1); ?></td>
+          <td style="text-align:right;"><?php echo __get_rupiah($v -> tpaytarget,1); ?></td>
           <td><?php echo __get_status($v -> tstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('TargetOmsetUpdate')) : ?>
