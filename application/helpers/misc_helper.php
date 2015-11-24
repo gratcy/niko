@@ -305,3 +305,24 @@ function __get_PTMP() {
     $CI -> memcachedlib -> delete(__keyTMP($_SERVER['REQUEST_URI']));
     return $res;
 }
+
+function __get_receiving_name($id, $type) {
+	if ($type == 2)
+		return $id;
+	else
+		return 'R'.str_pad($id, 4, "0", STR_PAD_LEFT);
+}
+
+function __get_request_type($id, $type) {
+	if ($type == 1)
+		return ($id == 2 ? 'Retur' : 'Transfer');
+	else
+		return ($id == 2 ? '<option value="1">Transfer</option><option value="2" selected>Retur</option>' : '<option value="1" selected>Transfer</option><option value="2">Retur</option>');
+}
+
+function __get_receiving_type($id, $type) {
+	if ($type == 1)
+		return ($id == 1 ? 'Branches' : 'Vendor');
+	else
+		return ($id == 1 ? '<option value="1" selected>Branches</option><option value="2">Vendor</option>' : '<option value="1">Branches</option><option value="2" selected>Vendor</option>');
+}

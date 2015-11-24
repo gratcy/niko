@@ -71,6 +71,21 @@
                     </ul>
                 </li>
 				
+                <li class="panel ">
+                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#distribution">
+                        <i class="icon-link"> </i> Distribution
+                        <span class="pull-right">
+                          <i class="icon-angle-left"></i>
+                        </span>
+                       &nbsp; <span class="label label-danger">3</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="distribution">
+                         <li class=""><a href="<?php echo site_url('request'); ?>"><i class="icon-angle-right"></i> Request </a></li>
+                         <li class=""><a href="<?php echo site_url('transfer'); ?>"><i class="icon-angle-right"></i> Transfer </a></li>
+                         <li class=""><a href="<?php echo site_url('receiving'); ?>"><i class="icon-angle-right"></i> Receiving </a></li>
+                    </ul>
+                </li>
+				
 				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryRejectProductView') || __get_roles('InventoryRejectSparepartView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#inventory">
@@ -323,6 +338,11 @@
 	}
 	else if (/\/komisi\/home|technical_commision|reportopname/.test(window.location.href) === true) {
 		$('ul#Report').addClass('in');
+	}
+	else if (/\/request|transfer|receiving/.test(window.location.href) === true) {
+		$('ul#distribution').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#distribution').parent().addClass('active');
 	}
 	else if (/\/branch|customers|products|packaging|group_product|categories|sparepart|target|sales|sales_commision|technical|suplier/.test(window.location.href) === true) {
 		$('ul#component-nav').addClass('in');
