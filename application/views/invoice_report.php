@@ -188,10 +188,10 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
           <td align=center ><?php echo $v -> sqty; ?></td>
-		  <td align=center ><?php echo __get_rupiah($v -> sprice); ?></td>
-		  <td align=center ><?php echo $v -> sdisc; ?></td>
+		  <td align=right ><?php echo __get_rupiah($v -> sprice); ?></td>
+		  <td align=center ><?php echo $v -> sdisc; ?> %</td>
 		  
-		<td align=center ><?php echo __get_rupiah($totalharga); ?></td>
+		<td align=right ><?php echo __get_rupiah($totalharga); ?></td>
 		  </tr>
         <?php 
 	
@@ -216,7 +216,7 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
         <th><?php echo $totalqty; ?></th>
 		<th></th>
 		<th></th>
-		<th><?php echo __get_rupiah($subtotal); ?></th>
+		<th align=right ><?php echo __get_rupiah($subtotal); ?></th>
 
 		 </tr>	
 
@@ -226,7 +226,7 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
           <td></td>
 		<td></td>
 		<td></td>
-          <td align=center ><?php 
+          <td align=right ><?php 
 		  if($freeppn==1){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
 		  </td>
 		 </tr>			
@@ -236,7 +236,7 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
           <th></th>
 		  <th></th>
 		  <th></th>
-          <th><?php echo __get_rupiah($totalall); 
+          <th align=right ><?php echo __get_rupiah($totalall); 
 		  
 		 
 		  

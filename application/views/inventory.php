@@ -61,7 +61,9 @@ left:inherit!important;
           <th>Stock In</th>
           <th>Stock Out</th>
           <th>Stock Final</th>
+<!--
           <th>Status</th>
+-->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -80,7 +82,9 @@ left:inherit!important;
           <td style="text-align:right;"><?php echo $v -> istockin; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
+<!--
           <td><?php echo __get_status($v -> istatus,1); ?></td>
+-->
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

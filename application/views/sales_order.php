@@ -54,7 +54,7 @@ left:inherit!important;
           <th>Customer </th>
           <th>Sales</th>
           <th>Status</th>
-		  <th style="width: 80px;"></th>
+		  <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>

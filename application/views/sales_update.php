@@ -74,11 +74,8 @@ $phone = explode('*', $detail[0] -> sphone);
                 </div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Sales Area</label>
-							
                     <div class="col-lg-4">
-					
-						<?php 
-						echo __get_sales_area($detail[0] -> sarea,2); ?>
+						<?php echo __get_sales_area($detail[0] -> sarea,2); ?>
 					</div>
 				</div>
                 <div class="form-group">

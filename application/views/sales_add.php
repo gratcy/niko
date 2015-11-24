@@ -67,7 +67,7 @@
                     <label for="text1" class="control-label col-lg-4">Join Date</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Join Date" name="joindate" class="form-control" autocomplete="off" />
+                        <input type="text" placeholder="Join Date" id="joindate" name="joindate" class="form-control" autocomplete="off" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -108,7 +108,7 @@
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
 <?php endif; ?>
-$('input[name="joindate"]').datepicker({
+$('#joindate').datepicker({
 	format: 'dd/mm/yyyy'
 });
 </script>

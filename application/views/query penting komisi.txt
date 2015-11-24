@@ -1,0 +1,44 @@
+SELECT *,
+(SELECT sduration FROM delivery_order_detail_tab WHERE did='17')AS dday 
+FROM duration_com_tab WHERE 
+dday_start<= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17') AND 
+dday_end >= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17') AND idd<='5'
+
+
+SELECT *,
+(SELECT sduration FROM delivery_order_detail_tab WHERE did='17')AS dday 
+FROM duration_com_tab WHERE dday_start<= '100' AND 
+dday_end >= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17')
+
+
+(SELECT dname
+FROM duration_com_tab WHERE 
+dday_start<= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17') AND 
+dday_end >= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17') AND 
+idd<='5')
+
+
+SELECT 
+(SELECT dname
+FROM duration_com_tab WHERE 
+dday_start<= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17') AND 
+dday_end >= (SELECT sduration FROM delivery_order_detail_tab WHERE did='17') AND 
+idd<='5')AS 'col' FROM sales_commision_tab
+
+
+SELECT `sssid`, (SELECT sname FROM sales_tab WHERE sales_tab.sid=delivery_order_detail_tab.sssid)AS sname, `tmount ` 
+FROM delivery_order_detail_tab GROUP BY sno_invoice
+
+
+SELECT sssid,sno_invoice,
+		(SELECT sname FROM sales_tab WHERE sales_tab.sid=delivery_order_detail_tab.sssid)AS sname,SUM(tamount) AS tamount
+		FROM delivery_order_detail_tab GROUP BY sno_invoice
+		
+		
+SELECT sssid,
+		(SELECT sname FROM sales_tab WHERE sales_tab.sid=delivery_order_detail_tab.sssid)AS sname,sno_invoice,SUM(tamount) AS tamount
+		FROM delivery_order_detail_tab GROUP BY sno_invoice	
+		
+		
+		
+		SELECT `sssid`, `tamount` FROM delivery_order_detail_tab	

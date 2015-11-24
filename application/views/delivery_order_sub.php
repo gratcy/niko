@@ -30,7 +30,7 @@
                                     <thead>
                                         <tr>
           <!--th>Branch</th-->
-          <th>SO No.</th>
+          <th>DO No.</th>
          
           <th>Date</th>
           <th>Sales</th>
@@ -46,7 +46,7 @@
 		  ?>
                                         <tr>
           <!--td><?php //echo $v -> bname; ?></td-->
-          <td><?php echo $v -> snoso; ?></td>
+          <td><?php echo $v -> snodo; ?></td>
          
           <td><?php echo __get_date(strtotime($v -> stgldo),1); ?></td>
           <td><?php echo $v -> sname; ?></td>
@@ -54,12 +54,13 @@
           
 		
 		
-		  <td style="text-align:center;"> <?php 
+		  <td> <?php 
 		  if($v -> sno_invoice <>""){
 		  ?>
-		  <a href="javascript:void(0);" onclick="print_data('<?php echo site_url('sales_order_detail/home/invoice_report/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>', 'Print Invoice');" title="Invoice"><i class="icon-list-alt"></i></a>
+		  <a href="<?php echo site_url('sales_order_detail/home/invoice_report/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>" target="blank" >
+		  <i class="icon-print"></i></a>
 		  &nbsp;
-		  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>" title="Delivery Order"><i class="icon-book"></i></a>
+		  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
 		  <?php
 		  }else{
 			if($statusdo=="DONE"){ ?>
@@ -74,9 +75,7 @@
 			<a href="<?php echo site_url('sales_order_detail/home/invoice_order_add/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-pencil"></i></a>
 			   
 			  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
-<!--
               <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
--->
 			  <?php } ?>		  
 			  
 

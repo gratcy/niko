@@ -133,8 +133,8 @@ $caddrx=explode("*",$detailx[0]->caddr);
 		  <td align=center ><?php echo $v -> sqty; ?></td>
 		  <td align=center ><?php echo $v -> saccept; ?></td>
 		  <td align=center ><?php echo $v -> sreject; ?></td>
-          <td align=center ><?php echo __get_rupiah($v -> sprice); ?></td>
-          <td align=center ><?php echo __get_rupiah($v -> sprice*$v -> saccept); ?></td>
+          <td align=right ><?php echo __get_rupiah($v -> sprice); ?></td>
+          <td align=right ><?php echo __get_rupiah($v -> sprice*$v -> saccept); ?></td>
 		  <td align=center > <?php echo $v -> note; ?> </td>		
 		  </tr>
         <?php 
@@ -152,7 +152,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <th></th>
 		  <th></th>
 		  <th></th>
-          <th><?php echo __get_rupiah($totalall); ?></th>
+          <th align=right ><?php echo __get_rupiah($totalall); ?></th>
 		  <th></th>
 		 </tr>		 
                                     </tbody>

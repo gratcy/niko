@@ -1,0 +1,4 @@
+http://localhost/dist/purchase_order/home/sub_penerimaan/3 -->list sub penerimaan
+http://localhost/dist/purchase_order/home/penerimaan_add/3 -->add penerimaan
+http://localhost/dist/purchase_order_detail/home/penerimaan_details_add/3
+http://localhost/dist/purchase_order_detail/home/penerimaan_details/3  -->cetak penerimaaan

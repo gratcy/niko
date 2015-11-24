@@ -259,7 +259,8 @@ minLength: 1,
     ?>
           <tr>
           
-          <td><?php echo $v -> pcode; ?>
+          <td><?php echo $v -> pcode; ?><input type=hidden name="sbidx" value="<?=$sbidx;?>">
+		  <input type=hidden name="pid[]" value="<?php echo $v -> pid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
 		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
 		  </td>

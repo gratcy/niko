@@ -142,7 +142,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <td><?php echo $v -> pname; ?></td>
 		  <td align=center ><?php echo $v -> sqty; ?></td>
           <td align=right ><?php echo __get_rupiah($spricex); ?></td>
-          <td align=center ><?php echo $v -> sdisc; ?></td>
+          <td align=center ><?php echo $v -> sdisc; ?> %</td>
 		  <td align=right > <?php echo __get_rupiah($subtotal); ?> </td>		
 		  </tr>
         <?php 

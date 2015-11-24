@@ -205,6 +205,7 @@ $drv=explode("-",$detailx[0]->driver);
 		$totalall=0;
 		
 		foreach($detail as $k => $v) :	
+			//print_r($v);
 			$sqtyx=$v -> sqty;
 			$spricex=$v -> sprice;
 			$sdiscx=$v -> sdisc;
