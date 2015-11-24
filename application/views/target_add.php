@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Sales Target</label>
+                    <label for="text1" class="control-label col-lg-4">Revenue Target</label>
 
                     <div class="col-lg-4">
                         <input type="text" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="0" placeholder="Total Target" name="target" class="form-control" />

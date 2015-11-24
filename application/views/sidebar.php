@@ -89,6 +89,20 @@
                     </ul>
                 </li>
 			   <?php endif; ?>
+                <li class="panel ">
+                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#distribution">
+                        <i class="icon-link"> </i> Distribution
+                        <span class="pull-right">
+                          <i class="icon-angle-left"></i>
+                        </span>
+                       &nbsp; <span class="label label-danger">3</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="distribution">
+                         <li class=""><a href="<?php echo site_url('request'); ?>"><i class="icon-angle-right"></i> Request </a></li>
+                         <li class=""><a href="<?php echo site_url('transfer'); ?>"><i class="icon-angle-right"></i> Transfer </a></li>
+                         <li class=""><a href="<?php echo site_url('receiving'); ?>"><i class="icon-angle-right"></i> Receiving </a></li>
+                    </ul>
+                </li>
 				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryRejectProductView') || __get_roles('InventoryRejectSparepartView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#inventory">
@@ -153,23 +167,6 @@
                 </li>
 			   <?php endif; ?>
 				
-				<?php if (__get_roles('PurchaseOrderView')) : ?>
-                <li class="panel ">
-                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#purchase">
-                        <i class="icon-money"> </i> Purchase
-                        <span class="pull-right">
-                          <i class="icon-angle-left"></i>
-                        </span>
-                       &nbsp; <span class="label label-danger">2</span>&nbsp;
-                    </a>
-                    <ul class="collapse" id="purchase">
-						<?php if (__get_roles('PurchaseOrderView')) : ?>
-                        <li class=""><a href="<?php echo site_url('purchase_order/home/'); ?>"><i class="icon-angle-right"></i> Purchase Order </a></li>
-						<?php endif; ?>
-                         <li class=""><a href="<?php echo site_url('purchase_order/home/penerimaan'); ?>"><i class="icon-angle-right"></i> Receivable </a></li>
-                    </ul>
-                </li>
-			   <?php endif; ?>
 				<?php if (__get_roles('DeliveryOrderView') || __get_roles('SalesOrderView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#sales">
@@ -297,29 +294,45 @@
 	$('ul#menu > li > ul').removeClass('in');
 	if (/\/users/.test(window.location.href) === true) {
 		$('ul#SUsers').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#SUsers').parent().addClass('active');
 	}
 	else if (/\/pm/.test(window.location.href) === true) {
 		$('ul#PM').addClass('in');
 	}
 	else if (/\/services/.test(window.location.href) === true) {
 		$('ul#services').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#services').parent().addClass('active');
 	}
 	else if (/\/inventory|\/opname/.test(window.location.href) === true) {
 		$('ul#inventory').addClass('in');
-	}
-	else if (/\/purchase_order/.test(window.location.href) === true) {
-		$('ul#purchase').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#inventory').parent().addClass('active');
 	}
 	else if (/\/sales_order|delivery_order|retur_order|pembayaran/.test(window.location.href) === true) {
 		$('ul#sales').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#sales').parent().addClass('active');
 	}
 	else if (/\/coa|coagroup|journal|generalledger|closingperiod/.test(window.location.href) === true) {
 		$('ul#accounting').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#accounting').parent().addClass('active');
 	}
 	else if (/\/komisi\/home|technical_commision|reportopname/.test(window.location.href) === true) {
 		$('ul#Report').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#Report').parent().addClass('active');
+	}
+	else if (/\/request|transfer|receiving/.test(window.location.href) === true) {
+		$('ul#distribution').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#distribution').parent().addClass('active');
 	}
 	else if (/\/branch|customers|products|packaging|group_product|categories|sparepart|target|sales|sales_commision|technical|suplier/.test(window.location.href) === true) {
 		$('ul#component-nav').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#component-nav').parent().addClass('active');
 	}
 </script>

@@ -111,6 +111,43 @@ $route['sales_commision/sales_commision_add'] = 'sales_commision/home/sales_comm
 $route['sales_commision/sales_commision_update/?(:num)?'] = 'sales_commision/home/sales_commision_update/$1';
 $route['sales_commision/sales_commision_delete/(:num)'] = 'sales_commision/home/sales_commision_delete/$1';
 
+$route['request/?(:num)?'] = 'request/home/index/$1';
+$route['request/request_add'] = 'request/home/request_add';
+$route['request/request_update/?(:num)?'] = 'request/home/request_update/$1';
+$route['request/request_delete/(:num)'] = 'request/home/request_delete/$1';
+$route['request/request_detail/(:num)'] = 'request/home/request_detail/$1';
+$route['request/request_items/?(:num)?'] = 'request/home/request_items/$1';
+$route['request/request_list_items/(:num)/?(:num)?/?(:num)?'] = 'request/home/request_list_items/$1/$2/$3';
+$route['request/request_items_delete/(:num)'] = 'request/home/request_items_delete/$1';
+$route['request/request_items_add/(:num)'] = 'request/home/request_items_add/$1';
+$route['request/export/(excel|excel_detail)/?(:num)?'] = 'request/home/export/$1/$2';
+$route['request/request_search'] = 'request/home/request_search';
+$route['request/request_search_result/(:any)'] = 'request/home/request_search_result/$1';
+$route['request/get_suggestion'] = 'request/home/get_suggestion';
+
+$route['receiving/?(:num)?'] = 'receiving/home/index/$1';
+$route['receiving/receiving_add'] = 'receiving/home/receiving_add';
+$route['receiving/receiving_update/?(:num)?'] = 'receiving/home/receiving_update/$1';
+$route['receiving/receiving_delete/(:num)'] = 'receiving/home/receiving_delete/$1';
+$route['receiving/receiving_detail/(:num)'] = 'receiving/home/receiving_detail/$1';
+$route['receiving/receiving_types/(:num)/?(:num)?'] = 'receiving/home/receiving_types/$1/$2';
+$route['receiving/receiving_items/?(:num)?'] = 'receiving/home/receiving_items/$1';
+$route['receiving/receiving_list_items/(:num)/?(:num)?'] = 'receiving/home/receiving_list_items/$1/$2';
+$route['receiving/receiving_items_add/(:num)'] = 'receiving/home/receiving_items_add/$1';
+$route['receiving/receiving_items_delete/(:num)'] = 'receiving/home/receiving_items_delete/$1';
+$route['receiving/export/(excel|excel_detail)/?(:num)?'] = 'receiving/home/export/$1/$2';
+
+$route['transfer/?(:num)?'] = 'transfer/home/index/$1';
+$route['transfer/transfer_add'] = 'transfer/home/transfer_add';
+$route['transfer/transfer_update/?(:num)?'] = 'transfer/home/transfer_update/$1';
+$route['transfer/transfer_delete/(:num)'] = 'transfer/home/transfer_delete/$1';
+$route['transfer/transfer_detail/(:num)'] = 'transfer/home/transfer_detail/$1';
+$route['transfer/transfer_request_items/(:num)'] = 'transfer/home/transfer_request_items/$1';
+$route['transfer/export/(excel|excel_detail)/?(:num)?'] = 'transfer/home/export/$1/$2';
+$route['transfer/transfer_search'] = 'transfer/home/transfer_search';
+$route['transfer/transfer_search_result/(:any)'] = 'transfer/home/transfer_search_result/$1';
+$route['transfer/get_suggestion'] = 'transfer/home/get_suggestion';
+
 $route['services_wo/?(:num)?'] = 'services_wo/home/index/$1';
 $route['services_wo/get_suggestion'] = 'services_wo/home/get_suggestion';
 $route['services_wo/services_wo_print/?(:num)?'] = 'services_wo/home/services_wo_print/$1';
@@ -205,6 +242,8 @@ $route['pm/pm_delete/(:num)/(:num)'] = 'pm/home/pm_delete/$1/$2';
 
 $route['opname/?(:num)?/?(:num)?'] = 'opname/home/index/$1/$2';
 $route['opname/opname_update/?(:num)?/?(:num)?'] = 'opname/home/opname_update/$1/$2';
+
+$route['printpage/(receiving|dist_request|dist_transfer)/(:num)'] = 'printpage/home/$1/$2';
 
 $route['target/?(:num)?'] = 'target/home/index/$1';
 $route['target/target_add'] = 'target/home/target_add';

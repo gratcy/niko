@@ -29,7 +29,7 @@ function __get_error_msg() {
 
 function __get_status($status, $type) {
 	if ($type == 1)
-		return ($status == 1 ? 'Active' : 'Not Active');
+		return ($status == 1 ? 'Active' : 'Inactive');
 	elseif ($type == 2)
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="status" value="1" />' : '<input type="checkbox" name="status" value="1" />');
 	else
@@ -298,10 +298,31 @@ function __keyTMP($str) {
 	return str_replace('/','PalMa',$str);
 }
 
+function __get_receiving_name($id, $type) {
+	if ($type == 2)
+		return $id;
+	else
+		return 'R'.str_pad($id, 4, "0", STR_PAD_LEFT);
+}
+
 function __get_PTMP() {
     $arr = array();
     $CI =& get_instance();
     $res = json_encode($CI -> memcachedlib -> get(__keyTMP($_SERVER['REQUEST_URI'])));
     $CI -> memcachedlib -> delete(__keyTMP($_SERVER['REQUEST_URI']));
     return $res;
+}
+
+function __get_request_type($id, $type) {
+	if ($type == 1)
+		return ($id == 2 ? 'Retur' : 'Transfer');
+	else
+		return ($id == 2 ? '<option value="1">Transfer</option><option value="2" selected>Retur</option>' : '<option value="1" selected>Transfer</option><option value="2">Retur</option>');
+}
+
+function __get_receiving_type($id, $type) {
+	if ($type == 1)
+		return ($id == 1 ? 'Branches' : 'Vendor');
+	else
+		return ($id == 1 ? '<option value="1" selected>Branches</option><option value="2">Vendor</option>' : '<option value="1">Branches</option><option value="2" selected>Vendor</option>');
 }
