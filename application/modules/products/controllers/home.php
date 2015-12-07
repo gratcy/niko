@@ -65,6 +65,12 @@ class Home extends MY_Controller {
 						$arr = array('ibid' => $k, 'iiid' => $pid, 'itype' => 1, 'istockbegining' => 0, 'istockin' => 0, 'istockout' => 0, 'istock' => 0, 'istatus' => 1);
 						$this -> inventory_model -> __insert_inventory($arr);
 						
+						$arr = array('ibid' => $k, 'iiid' => $pid, 'itype' => 3, 'istockbegining' => 0, 'istockin' => 0, 'istockout' => 0, 'istock' => 0, 'istatus' => 1);
+						$this -> inventory_model -> __insert_inventory($arr);
+						
+						$arr = array('ibid' => $k, 'iiid' => $pid, 'itype' => 4, 'istockbegining' => 0, 'istockin' => 0, 'istockout' => 0, 'istock' => 0, 'istatus' => 1);
+						$this -> inventory_model -> __insert_inventory($arr);
+						
 						$this -> products_model -> __insert_moq(array('mbid' => $k, 'mpid' => $pid, 'mqty' => str_replace(',','',$v)));
 					endforeach;
 					

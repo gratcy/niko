@@ -54,6 +54,9 @@ class Home extends MY_Controller {
 					foreach($branch as $k => $v) {
 						$arr = array('ibid' => $v -> bid, 'iiid' => $sid, 'itype' => 2, 'istockbegining' => 0, 'istockin' => 0, 'istockout' => 0, 'istock' => 0, 'istatus' => 1);
 						$this -> inventory_model -> __insert_inventory($arr);
+						
+						$arr = array('ibid' => $v -> bid, 'iiid' => $sid, 'itype' => 5, 'istockbegining' => 0, 'istockin' => 0, 'istockout' => 0, 'istock' => 0, 'istatus' => 1);
+						$this -> inventory_model -> __insert_inventory($arr);
 					}
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('sparepart'));

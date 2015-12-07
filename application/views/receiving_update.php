@@ -68,7 +68,7 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-   <a class="btn btn-info" href="<?php echo site_url('receiving/receiving_list_books/2/' . $id); ?>" id="addBook">Add Book</a>
+   <a class="btn btn-info" href="<?php echo site_url('receiving/receiving_list_items/2/' . $id); ?>" id="addItem">Add Item</a>
    <button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approved</button>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
@@ -86,6 +86,15 @@
         <!-- END PAGE CONTENT -->
 
 <script type="text/javascript">
+$(document).ajaxComplete(function(){
+	$('select[name="rid"]').change(function(){
+		$('input[name="docno"]').val($('option:selected', this).text());
+	});
+});
+
+$('select[name="rtype"]').change(function(){
+	$('input[name="docno"]').val('');
+});
 $(function(){
 	$('div#Items').load('<?php echo site_url('receiving/receiving_items/' . $id); ?>');
 	$("#addItem").fancybox({

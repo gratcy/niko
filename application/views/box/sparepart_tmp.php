@@ -40,20 +40,18 @@ $qty = $this -> services_report_model -> __get_qty($sid,$v -> sid, 2);
 </tbody>
 </table>
 <script type="text/javascript">
-$(function(){
-	$('a#Delsparepart').click(function() {
-		<?php if ($type == 1) : ?>
-		var data = {'ssid' : $(this).attr('sid')};
-		<?php else : ?>
-		var data = {'sid' : <?php echo $id; ?>,'ssid' : $(this).attr('sid')};
-		<?php endif; ?>
-		$.post('<?php echo site_url('services_sparepart/sparepart_delete/' . $type); ?>', data,
-		function(datas) {
-			if (datas != '-1') {
-				$('tr#sparepart_id_' + $(this).attr('sid')).remove();
-				$('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/' . $type . '?id=' . $id);?>');
-			}
-		});
+$('a#Delsparepart').click(function() {
+	<?php if ($type == 1) : ?>
+	var data = {'ssid' : $(this).attr('sid')};
+	<?php else : ?>
+	var data = {'sid' : <?php echo $id; ?>,'ssid' : $(this).attr('sid')};
+	<?php endif; ?>
+	$.post('<?php echo site_url('services_sparepart/sparepart_delete/' . $type); ?>', data,
+	function(datas) {
+		if (datas != '-1') {
+			$('tr#sparepart_id_' + $(this).attr('sid')).remove();
+			$('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/' . $type . '?id=' . $id);?>');
+		}
 	});
 });
 </script>

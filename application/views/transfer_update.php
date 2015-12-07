@@ -95,6 +95,9 @@
 
 <script type="text/javascript">
 $(function(){
+	$('select[name="rno"],select[name="rno2"]').change(function(){
+		$('input[name="title"]').val($('option:selected', this).attr('dtitle'));
+	});
 	$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/' . $detail[0] -> ddrid); ?>');
 	$('select[name="rno"]').change(function(){
 		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());

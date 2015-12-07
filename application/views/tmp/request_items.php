@@ -48,7 +48,7 @@
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pvolume; ?></td>
 			<td><input type="number" value="<?php echo ($type == 1 ? '' : $v -> dqty); ?>" name="items[<?php echo $v -> did; ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo $v -> did; ?>"><i class="icon-remove"></i></a></td>
+			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo $v -> did; ?>" mid="<?php echo $v -> pid; ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -78,7 +78,7 @@
           <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
 			<td><input type="number" value="<?php echo ($type == 1 ? '' : $v -> dqty); ?>" name="items2[<?php echo $v -> did; ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo $v -> did; ?>"><i class="icon-remove"></i></a></td>
+			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo $v -> did; ?>" mid2="<?php echo $v -> sid; ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -102,10 +102,12 @@ $('ul.tabList > li > a').click(function(){
 $('a.dellist').click(function(){
 	var idnya = $(this).attr('idnya');
 	var idnya2 = $(this).attr('idnya2');
+	var mid = $(this).attr('mid');
+	var mid2 = $(this).attr('mid2');
 	$('tr[idnya='+idnya+']').remove();
 	$('tr[idnya2='+idnya2+']').remove();
 	<?php if ($type == 2) : ?>
-	var data = {'pid' : idnya, 'sid' : idnya2, 'did' : <?php echo $did; ?>};
+	var data = {'pid' : mid, 'sid' : mid2, 'did' : <?php echo $did; ?>};
 	<?php else : ?>
 	var data = {'pid' : idnya, 'sid' : idnya2};
 	<?php endif; ?>

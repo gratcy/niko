@@ -10,7 +10,7 @@ class City_model extends CI_Model {
 	}
     
 	function __get_city() {
-		return 'SELECT * FROM city_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY cid DESC';
+		return 'SELECT * FROM city_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY cname DESC';
 	}
 	
 	function __get_city_detail($id) {

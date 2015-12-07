@@ -22,7 +22,7 @@ class Request_model extends CI_Model {
 			else $type = '';
 		}
 		
-		$this -> db -> select('did,dtype FROM distribution_request_tab WHERE dstatus=3'.$bid.$type.' order by did desc');
+		$this -> db -> select('did,dtype,dtitle FROM distribution_request_tab WHERE dstatus=3'.$bid.$type.' order by did desc');
 		return $this -> db -> get() -> result();
 	}
 	
@@ -33,6 +33,11 @@ class Request_model extends CI_Model {
 	
 	function __get_request_detail($id) {
 		$this -> db -> select('* FROM distribution_request_tab WHERE (dstatus=1 OR dstatus=0 OR dstatus=3) AND did=' . $id);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_request_status($id) {
+		$this -> db -> select('dstatus FROM distribution_request_tab WHERE did=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -50,8 +55,8 @@ class Request_model extends CI_Model {
         return $this -> db -> update('distribution_item_tab', $data);
 	}
 	
-	function __delete_request_item($did, $iid) {
-		return $this -> db -> query('update distribution_item_tab set dstatus=2 where ddrid='.$did.' and diid=' . $iid);
+	function __delete_request_item($did, $iid, $type) {
+		return $this -> db -> query('update distribution_item_tab set dstatus=2 WHERE ditype='.$type.' AND ddrid='.$did.' and diid=' . $iid);
 	}
 	
 	function __insert_request($data) {
@@ -73,8 +78,8 @@ class Request_model extends CI_Model {
 			else $this -> db -> select('sid as did,scode,sname,snocomponent,sspecial FROM sparepart_tab WHERE sstatus=1 and sid IN ('.$id.')', false);
 		}
 		else {
-			if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname,c.dqty,c.did FROM distribution_item_tab c LEFT JOIN products_tab  a ON a.pid=c.diid LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE c.ditype=1 AND b.ctype=3 AND a.pstatus=1 AND c.ddrid=' . $id, false);
-			else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,c.dqty,c.did FROM distribution_item_tab c LEFT JOIN sparepart_tab a ON a.sid=c.diid WHERE c.ditype=2 AND a.sstatus=1 AND c.ddrid=' . $id, false);
+			if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname,c.dqty,c.did FROM distribution_item_tab c LEFT JOIN products_tab  a ON a.pid=c.diid LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE c.dstatus=1 AND c.ditype=1 AND b.ctype=3 AND a.pstatus=1 AND c.ddrid=' . $id, false);
+			else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,c.dqty,c.did FROM distribution_item_tab c LEFT JOIN sparepart_tab a ON a.sid=c.diid WHERE c.dstatus=1 AND c.ditype=2 AND a.sstatus=1 AND c.ddrid=' . $id, false);
 		}
 		return $this -> db -> get() -> result();
 	}

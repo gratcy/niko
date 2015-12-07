@@ -84,6 +84,15 @@
         <!-- END PAGE CONTENT -->
 
 <script type="text/javascript">
+$(document).ajaxComplete(function(){
+	$('select[name="rid"]').change(function(){
+		$('input[name="docno"]').val($('option:selected', this).text());
+	});
+});
+
+$('select[name="rtype"]').change(function(){
+	$('input[name="docno"]').val('');
+});
 $(function(){
 	$('div#Items').load('<?php echo site_url('receiving/receiving_items'); ?>');
 	$("#addItem").fancybox({

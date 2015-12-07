@@ -149,7 +149,7 @@ class Home extends MY_Controller {
 				if ($DidN['pid'] || $DidN['sid']) {
 					$arr = array_unique(array_merge((!$DidN['pid'] ? array() : $DidN['pid']),(!$pid ? array() : $pid)));
 					$arr2 = array_unique(array_merge((!$DidN['sid'] ? array() : $DidN['sid']),(!$sid ? array() : $sid)));
-					$this -> memcachedlib -> set('__receiving_items', array_merge(array('pid' => $arr),array('sid' => $arr2)), 900);
+					$this -> memcachedlib -> set('__request_items', array_merge(array('pid' => $arr),array('sid' => $arr2)), 900);
 				}
 				else
 					$this -> memcachedlib -> set('__request_items', array_merge(array('pid' => $pid),array('sid' => $sid)), 900);
@@ -157,10 +157,10 @@ class Home extends MY_Controller {
 			else {
 				$drid = (int) $this -> input -> post('did');
 				foreach($pid as $k => $v)
-					$this -> request_model -> __insert_request_items(array('ddrid' => $drid,'diid' => $v,'dstatus' => 1, 'ditype' => 1));
+					$this -> request_model -> __insert_request_item(array('ddrid' => $drid,'diid' => $v,'dstatus' => 1, 'ditype' => 1));
 
 				foreach($sid as $k => $v)
-					$this -> request_model -> __insert_request_items(array('ddrid' => $drid,'diid' => $v,'dstatus' => 1, 'ditype' => 2));
+					$this -> request_model -> __insert_request_item(array('ddrid' => $drid,'diid' => $v,'dstatus' => 1, 'ditype' => 2));
 			}
 
 			__set_error_msg(array('info' => 'Item berhasil ditambahkan.'));
@@ -176,10 +176,12 @@ class Home extends MY_Controller {
 			$view['items'][1] = $this -> request_model -> __get_items($did, 2, 2);
 		}
 		else {
+			$view['items'] = array(array(),array());
+			$view['did'] = 0;
 			$iid = $this -> memcachedlib -> get('__request_items');
 			if (!$iid) return false;
-			$pid = implode(',',$iid['pid']);
-			$sid = implode(',',$iid['sid']);
+			$pid = ($iid['pid'] ? implode(',',$iid['pid']) : '');
+			$sid = ($iid['sid'] ? implode(',',$iid['sid']) : '');
 
 			$view['type'] = 1;
 			if ($pid) $view['items'][0] = $this -> request_model -> __get_items($pid, 1, 1);
@@ -205,8 +207,11 @@ class Home extends MY_Controller {
 			}
 			else {
 				if ($did) {
-					if ($pid) $this -> request_model -> __delete_request_item($did,$pid);
-					if ($sid) $this -> request_model -> __delete_request_item($did,$sid);
+					if ($pid) $this -> request_model -> __delete_request_item($did,$pid,1);
+					if ($sid) {
+						if ($this -> request_model -> __delete_request_item($did,$sid,2)) echo 'berhasil';
+						else echo 'gagal';
+					}
 				}
 			}
 		}
@@ -258,7 +263,9 @@ class Home extends MY_Controller {
 			$view['items'][1] = $this -> request_model -> __get_items($id, 2, 2);
 			$view['detail'] = $this -> request_model -> __get_request_items_detail($id);
 			$view['id'] = $id;
+			
 			if ($view['detail'][0] -> dstatus != 3) redirect(site_url('request'));
+			
 			$this->load->view('print/dist_request', $view, false);
 		}
 	}

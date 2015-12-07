@@ -38,16 +38,14 @@ $qty = $this -> services_report_model -> __get_qty($sid,$v -> pid, 1);
 </tbody>
 </table>
 <script type="text/javascript">
-$(function(){
-	$('a#Delproduct').click(function() {
-		<?php if ($type == 1) : ?>
-		var data = {'pid' : $(this).attr('pid')};
-		<?php else : ?>
-		var data = {'sid' : <?php echo $id; ?>,'pid' : $(this).attr('pid')};
-		<?php endif; ?>
-		$.post('<?php echo site_url('services_wo/product_delete/' . $type); ?>', data).done(function(datas){
-				$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/' . $type . '?id=' . $id);?>');
-		});
+$('a#Delproduct').click(function() {
+	<?php if ($type == 1) : ?>
+	var data = {'pid' : $(this).attr('pid')};
+	<?php else : ?>
+	var data = {'sid' : <?php echo $id; ?>,'pid' : $(this).attr('pid')};
+	<?php endif; ?>
+	$.post('<?php echo site_url('services_wo/product_delete/' . $type); ?>', data).done(function(datas){
+			$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/' . $type . '?id=' . $id);?>');
 	});
 });
 </script>

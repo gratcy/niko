@@ -39,9 +39,15 @@ class Home extends MY_Controller {
 			}
 			else if (!$rtype) {
 				__set_error_msg(array('error' => 'Jenis Request harus di isi !!!'));
-				redirect(site_url('request' . '/' . __FUNCTION__));
+				redirect(site_url('transfer' . '/' . __FUNCTION__));
 			}
 			else {
+				$ckr = $this -> request_model -> __get_request_status($rno);
+				if ($ckr[0] -> dstatus <> 3) {
+					__set_error_msg(array('error' => 'Request belum di approved !!!'));
+					redirect(site_url('transfer' . '/' . __FUNCTION__));
+				}
+				
 				$maxid = $this -> transfer_model -> ___get_maxid_transfer();
 				$docno = 'T'.date('m', strtotime($waktu)).date('y', strtotime($waktu)).($maxid[0] -> maxid+1).str_pad($rno, 2, "0", STR_PAD_LEFT);
 				
@@ -87,7 +93,7 @@ class Home extends MY_Controller {
 				}
 				else if (!$rtype) {
 					__set_error_msg(array('error' => 'Jenis Request harus di isi !!!'));
-					redirect(site_url('request' . '/' . __FUNCTION__ . '/' . $id));
+					redirect(site_url('transfer' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
 					$st = false;
@@ -156,6 +162,7 @@ class Home extends MY_Controller {
 	}
 	
 	function transfer_request_items($did) {
+		$view['did'] = $did;
 		$view['items'][0] = $this -> request_model -> __get_items($did, 1, 2);
 		$view['items'][1] = $this -> request_model -> __get_items($did, 2, 2);
 		$this->load->view('tmp/' . __FUNCTION__, $view, FALSE);

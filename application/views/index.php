@@ -86,6 +86,7 @@
           <th>Top Cash</th>
 		  <th>Top Credit</th>
 		  <th>Top Credit Limit</th>
+		  <th>Credit Current</th>
           
                                         </tr>
                                     </thead>
@@ -102,6 +103,7 @@
           <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> climit,2); ?></td>
+		  <td><?php echo __get_rupiah($v -> ctop,2); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

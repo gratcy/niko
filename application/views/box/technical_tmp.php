@@ -25,16 +25,14 @@
 </tbody>
 </table>
 <script type="text/javascript">
-$(function(){
-	$('a#DelTechnical').click(function() {
-		<?php if ($type == 1) : ?>
-		var data = {'tid' : $(this).attr('tid')};
-		<?php else : ?>
-		var data = {'sid' : <?php echo $id; ?>,'tid' : $(this).attr('tid')};
-		<?php endif; ?>
-		$.post('<?php echo site_url('services_wo/technical_delete/' . $type); ?>', data).done(function(datas){
-			$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/' . $type . '?id=' . $id);?>');
-		});
+$('a#DelTechnical').click(function() {
+	<?php if ($type == 1) : ?>
+	var data = {'tid' : $(this).attr('tid')};
+	<?php else : ?>
+	var data = {'sid' : <?php echo $id; ?>,'tid' : $(this).attr('tid')};
+	<?php endif; ?>
+	$.post('<?php echo site_url('services_wo/technical_delete/' . $type); ?>', data).done(function(datas){
+		$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/' . $type . '?id=' . $id);?>');
 	});
 });
 </script>

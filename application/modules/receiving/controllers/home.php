@@ -188,6 +188,7 @@ class Home extends MY_Controller {
 			$pid = implode(',',$iid['pid']);
 			$sid = implode(',',$iid['sid']);
 
+			$view['did'] = 0;
 			$view['type'] = 1;
 			if ($pid) $view['items'][0] = $this -> receiving_model -> __get_items($pid, 1, 1);
 			if ($sid) $view['items'][1] = $this -> receiving_model -> __get_items($sid, 2, 1);

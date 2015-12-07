@@ -5,7 +5,7 @@ class Sparepart_model extends CI_Model {
     }
 	
 	function __get_sparepart() {
-		return 'SELECT a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sname DESC';
 	}
 	
 	function __get_sparepart_services($ids,$sid) {
@@ -24,7 +24,7 @@ class Sparepart_model extends CI_Model {
 	}
 	
 	function __get_recent_sparepart() {
-		$this -> db -> select('a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sid DESC LIMIT 0,5', FALSE);
+		$this -> db -> select('a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY a.sname DESC LIMIT 0,5', FALSE);
 		return $this -> db -> get() -> result();
 	}
 	

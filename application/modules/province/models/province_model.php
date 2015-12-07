@@ -10,7 +10,7 @@ class Province_model extends CI_Model {
 	}
     
 	function __get_province() {
-		return 'SELECT * FROM province_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY pid DESC';
+		return 'SELECT * FROM province_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY pname DESC';
 	}
 	
 	function __get_province_detail($id) {

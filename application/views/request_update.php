@@ -71,7 +71,7 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-   <a class="btn btn-info" href="<?php echo site_url('request/request_list_item/2/' . $id); ?>" id="addItem">Add Item</a>
+   <a class="btn btn-info" href="<?php echo site_url('request/request_list_items/2/' . $id); ?>" id="addItem">Add Item</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 				<button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approved</button>
@@ -116,7 +116,7 @@ $(function(){
 	});
 	
 	$('select[name="rtype"]').chosen({disable_search_threshold: 10});
-	$('select[name="bfrom"]').val(<?php echo $detail[0] -> dfrom; ?>);
+	$('select[name="bfrom"]').val(<?php echo $detail[0] -> dbfrom; ?>);
 	$('#pbranch').css('display','none');
 });
 </script>

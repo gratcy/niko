@@ -72,8 +72,8 @@ class Receiving_model extends CI_Model {
 			else $this -> db -> select('sid as did,scode,sname,snocomponent,sspecial FROM sparepart_tab WHERE sstatus=1 and sid IN ('.$id.')', false);
 		}
 		else {
-			if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname,c.rqty,c.rid FROM receiving_item_tab c LEFT JOIN products_tab a ON a.pid=c.riid LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE c.ritype=1 AND b.ctype=3 AND a.pstatus=1 AND c.rrid=' . $id, false);
-			else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,c.rqty,c.rid FROM receiving_item_tab c LEFT JOIN sparepart_tab a ON a.sid=c.riid WHERE c.ritype=2 AND a.sstatus=1 AND c.rrid=' . $id, false);
+			if ($type == 1) $this -> db -> select('a.pid as did,a.pcode,a.pname,a.pvolume,b.cname,c.rqty,c.rid FROM receiving_item_tab c LEFT JOIN products_tab a ON a.pid=c.riid LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE c.ritype=1 AND c.rstatus=1 AND b.ctype=3 AND a.pstatus=1 AND c.rrid=' . $id, false);
+			else $this -> db -> select('a.sid as did,a.scode,a.sname,a.snocomponent,a.sspecial,c.rqty,c.rid FROM receiving_item_tab c LEFT JOIN sparepart_tab a ON a.sid=c.riid WHERE c.ritype=2 AND a.sstatus=1 AND c.rstatus=1 AND c.rrid=' . $id, false);
 		}
 		return $this -> db -> get() -> result();
 	}

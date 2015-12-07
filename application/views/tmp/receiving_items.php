@@ -40,14 +40,14 @@
 		  <?php
 		  foreach($items[0] as $k => $v) :
 		  ?>
-          <tr idnya="<?php echo $v -> rid; ?>">
-          <td><input type="checkbox" value="<?php echo $v -> rid; ?>" name="pid[]"></td>
+          <tr idnya="<?php echo (isset($v -> did) ? $v -> did : 0); ?>">
+          <td><input type="checkbox" value="<?php echo (isset($v -> did) ? $v -> did : 0); ?>" name="pid[]"></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pvolume; ?></td>
-			<td><input type="number" value="<?php echo ($type == 1 ? '' : $v -> rqty); ?>" name="items[<?php echo $v -> rid; ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo $v -> rid; ?>"><i class="icon-remove"></i></a></td>
+			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items[<?php echo (isset($v -> did) ? $v -> did : 0); ?>]" class="form-control" style="width:100px;"></td>
+			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo (isset($v -> did) ? $v -> did : 0); ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -70,14 +70,14 @@
 		  <?php
 		  foreach($items[1] as $k => $v) :
 		  ?>
-          <tr idnya2="<?php echo $v -> rid; ?>">
-          <td><input type="checkbox" value="<?php echo $v -> rid; ?>" name="sid[]"></td>
+          <tr idnya2="<?php echo (isset($v -> did) ? $v -> did : 0); ?>">
+          <td><input type="checkbox" value="<?php echo (isset($v -> did) ? $v -> did : 0); ?>" name="sid[]"></td>
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
-			<td><input type="number" value="<?php echo ($type == 1 ? '' : $v -> rqty); ?>" name="items2[<?php echo $v -> rid; ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo $v -> rid; ?>"><i class="icon-remove"></i></a></td>
+			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items2[<?php echo (isset($v -> did) ? $v -> did : 0); ?>]" class="form-control" style="width:100px;"></td>
+			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo (isset($v -> did) ? $v -> did : 0); ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
