@@ -151,6 +151,7 @@
 			   <?php endif; ?>
 				
 				<?php if (__get_roles('PurchaseOrderView')) : ?>
+<!--
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#purchase">
                         <i class="icon-money"> </i> Purchase
@@ -166,6 +167,7 @@
                          <li class=""><a href="<?php echo site_url('purchase_order/home/penerimaan'); ?>"><i class="icon-angle-right"></i> Receivable </a></li>
                     </ul>
                 </li>
+-->
 			   <?php endif; ?>
 				<?php if (__get_roles('DeliveryOrderView') || __get_roles('SalesOrderView')) : ?>
                 <li class="panel ">
