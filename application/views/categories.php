@@ -27,7 +27,9 @@
                                         <tr>
           <th>Name</th>
           <th>Description</th>
-          <th>Discount</th>
+          <th>Discount Cash</th>
+          <th>Discount Transfer</th>
+          <th>Discount Early Date</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -40,6 +42,8 @@
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td style="text-align:right;width:100px;"><?php echo $v -> cdiscount; ?>%</td>
+          <td style="text-align:right;width:100px;"><?php echo $v -> cdiscounttrans; ?>%</td>
+          <td style="text-align:right;width:100px;"><?php echo $v -> cdiscountdate; ?>%</td>
           <td style="width:150px;"><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CategoriesProductUpdate')) : ?>

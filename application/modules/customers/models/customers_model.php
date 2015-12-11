@@ -69,7 +69,7 @@ class Customers_model extends CI_Model {
 	function __get_search($keyword, $bid="") {
 		if ($bid != "") $bid = " AND a.cbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select("a.*,b.bname FROM customers_tab a left join branch_tab b ON a.cbid=b.bid WHERE (a.cstatus=1 or a.cstatus=0)".$bid." AND (a.cname LIKE '%".$keyword."%' OR a.caddr LIKE '%".$keyword."%' OR a.ccontactname LIKE '%".$keyword."%') ORDER BY cid DESC");
+		$this -> db -> select("a.*,b.bname,c.sname FROM customers_tab a left join branch_tab b ON a.cbid=b.bid LEFT JOIN sales_tab c ON a.csid=c.sid WHERE (a.cstatus=1 or a.cstatus=0)".$bid." AND (a.cname LIKE '%".$keyword."%' OR a.caddr LIKE '%".$keyword."%' OR a.ccontactname LIKE '%".$keyword."%') ORDER BY cid DESC");
 		return $this -> db -> get() -> result();
 	}
 }

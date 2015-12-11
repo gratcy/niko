@@ -83,9 +83,9 @@
           <th>Name</th>
           <th>PIC</th>
           <th>Sales</th>
-          <th>Top Cash</th>
-		  <th>Top Credit</th>
-		  <th>Top Credit Limit</th>
+          <th>TOP Cash</th>
+		  <th>TOP Credit</th>
+		  <th>TOP Credit Limit</th>
 		  <th>Credit Current</th>
           
                                         </tr>

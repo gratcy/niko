@@ -21,6 +21,8 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$name = $this -> input -> post('name', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
+			$discearly = (int) $this -> input -> post('discearly');
+			$disctrans = (int) $this -> input -> post('disctrans');
 			$disc = (int) $this -> input -> post('disc');
 			$status = (int) $this -> input -> post('status');
 			
@@ -29,7 +31,7 @@ class Home extends MY_Controller {
 				redirect(site_url('categories' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cname' => $name, 'cdesc' => $desc, 'cdiscount' => $disc, 'ctype' => 1, 'cstatus' => $status);
+				$arr = array('cname' => $name, 'cdesc' => $desc, 'cdiscount' => $disc, 'cdiscounttrans' => $discearly, 'cdiscountdate' => $disctrans, 'ctype' => 1, 'cstatus' => $status);
 				if ($this -> categories_model -> __insert_categories($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('categories'));
@@ -50,6 +52,8 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$disc = (int) $this -> input -> post('disc');
+			$discearly = (int) $this -> input -> post('discearly');
+			$disctrans = (int) $this -> input -> post('disctrans');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			
@@ -59,7 +63,7 @@ class Home extends MY_Controller {
 					redirect(site_url('categories' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cname' => $name, 'cdesc' => $desc, 'cdiscount' => $disc, 'ctype' => 1, 'cstatus' => $status);
+					$arr = array('cname' => $name, 'cdesc' => $desc, 'cdiscount' => $disc, 'cdiscounttrans' => $discearly, 'cdiscountdate' => $disctrans, 'ctype' => 1, 'cstatus' => $status);
 					if ($this -> categories_model -> __update_categories($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('categories'));

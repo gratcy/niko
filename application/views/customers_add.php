@@ -49,6 +49,24 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">FKP</label>
+
+                    <div class="col-lg-4">
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_customers_spec(0,2,'fkp'); ?>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Join Date</label>
+
+                    <div class="col-lg-4">
+                        <input data-date-format="dd/mm/yyyy" type="text" placeholder="Join Date" name="joindate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address I</label>
 
                     <div class="col-lg-4">
@@ -124,7 +142,7 @@
                     <label for="text1" class="control-label col-lg-4">TOP Cash</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="cash" class="form-control" data-placeholder="TOP Sales" onkeyup="formatharga(this.value,this)" value="0" style="text-align:right;" />
+                        <input type="text" name="cash" class="form-control" data-placeholder="TOP Cash" onkeyup="formatharga(this.value,this)" value="0" style="text-align:right;" />
                     </div>
                 </div>
 
@@ -133,6 +151,22 @@
 
                     <div class="col-lg-4">
                         <input type="text" name="credit" class="form-control" data-placeholder="TOP Credit" onkeyup="formatharga(this.value,this)" value="0" style="text-align:right;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">TOP Cash Nico</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" name="cashnico" class="form-control" data-placeholder="TOP Cash Nico" value="0" style="text-align:right;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">TOP Credit Nico</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" name="creditnico" class="form-control" data-placeholder="TOP Credit Nico" value="0" style="text-align:right;" />
                     </div>
                 </div>
 
@@ -221,3 +255,9 @@ $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ub
 $('#pbranch').css('display','none');
 </script>
 <?php endif; ?>
+
+<script type="text/javascript">
+	$('input[name="joindate"]').datepicker({
+		dateFormat: 'dd/mm/yy'
+	});
+</script>

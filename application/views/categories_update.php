@@ -35,6 +35,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Discount Transfer</label>
+
+                    <div class="input-group col-lg-4">
+                        <input type="text" style="text-align:right;" placeholder="Discount Transfer" name="disctrans" class="form-control" value="<?php echo $detail[0] -> cdiscounttrans; ?>" /> <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Discount Early Date</label>
+
+                    <div class="input-group col-lg-4">
+                        <input type="text" style="text-align:right;" placeholder="Discount Early Date" name="discearly" class="form-control" value="<?php echo $detail[0] -> cdiscountdate; ?>" /> <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">

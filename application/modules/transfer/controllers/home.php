@@ -26,6 +26,7 @@ class Home extends MY_Controller {
 			$title = $this -> input -> post('title', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$waktu = str_replace('/','-',$this -> input -> post('waktu', TRUE));
+			$qty = $this -> input -> post('qty', TRUE);
 			$rno = (int) $this -> input -> post('rno');
 			$rno2 = (int) $this -> input -> post('rno2');
 			$status = (int) $this -> input -> post('status');
@@ -48,6 +49,12 @@ class Home extends MY_Controller {
 					redirect(site_url('transfer' . '/' . __FUNCTION__));
 				}
 				
+				foreach($qty[1] as $k => $v)
+					$this -> request_model -> __update_request_item($k,array('dqty' => $v));
+					
+				foreach($qty[2] as $k => $v)
+					$this -> request_model -> __update_request_item($k,array('dqty' => $v));
+					
 				$maxid = $this -> transfer_model -> ___get_maxid_transfer();
 				$docno = 'T'.date('m', strtotime($waktu)).date('y', strtotime($waktu)).($maxid[0] -> maxid+1).str_pad($rno, 2, "0", STR_PAD_LEFT);
 				
@@ -75,12 +82,13 @@ class Home extends MY_Controller {
 			$title = $this -> input -> post('title', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$items = $this -> input -> post('items', TRUE);
+			$qty = $this -> input -> post('qty', TRUE);
 			$waktu = str_replace('/','-',$this -> input -> post('waktu', TRUE));
 			$rno = (int) $this -> input -> post('rno');
 			$rno2 = (int) $this -> input -> post('rno2');
 			$app = (int) $this -> input -> post('app');
 			$rtype = (int) $this -> input -> post('rtype');
-			
+
 			if ($app == 1) $status = 3;
 			else $status = (int) $this -> input -> post('status');
 			
@@ -98,6 +106,12 @@ class Home extends MY_Controller {
 				else {
 					$st = false;
 					$cd = array();
+					
+					foreach($qty[1] as $k => $v)
+						$this -> request_model -> __update_request_item($k,array('dqty' => $v));
+						
+					foreach($qty[2] as $k => $v)
+						$this -> request_model -> __update_request_item($k,array('dqty' => $v));
 					
 					if ($status == 3) {
 						$req = $this -> request_model -> __get_items($rno,1,2);

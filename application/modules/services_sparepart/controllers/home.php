@@ -177,9 +177,10 @@ class Home extends MY_Controller {
 			$sid = $this -> input -> post('sid');
 			if ($type == 1) {
 				$ids = $this -> memcachedlib -> get('__services_sparepart_sparepart_add');
-				if ($ids) $sid = array_unique(array_merge($sid, $ids));
+				if ($ids) $arr = array_unique(array_merge($sid, $ids));
+				else $arr = $sid;
 				
-				$this -> memcachedlib -> set('__services_sparepart_sparepart_add', $sid, 3600);
+				$this -> memcachedlib -> set('__services_sparepart_sparepart_add', $arr, 3600);
 			}
 			else {
 				for($i=0;$i<count($sid);++$i) {

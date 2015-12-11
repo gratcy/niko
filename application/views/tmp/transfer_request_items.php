@@ -44,7 +44,7 @@
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pvolume; ?></td>
-			<td><?php echo $v -> dqty; ?></td>
+			<td style="width:100px"><input type="text" name="qty[1][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -70,7 +70,7 @@
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
-			<td><?php echo $v -> dqty; ?></td>
+			<td style="width:100px"><input type="text" name="qty[2][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>

@@ -193,9 +193,10 @@ class Home extends MY_Controller {
 			$tid = $this -> input -> post('tid');
 			if ($type == 1) {
 				$ids = $this -> memcachedlib -> get('__services_wo_technical_add');
-				if ($ids) $tid = array_unique(array_merge($tid, $ids));
+				if ($ids) $arr = array_unique(array_merge($tid, $ids));
+				else $arr = $tid;
 				
-				$this -> memcachedlib -> set('__services_wo_technical_add', $tid, 3600);
+				$this -> memcachedlib -> set('__services_wo_technical_add', $arr, 3600);
 			}
 			else {
 				for($i=0;$i<count($tid);++$i) {
@@ -272,9 +273,11 @@ class Home extends MY_Controller {
 			$pid = $this -> input -> post('pid');
 			if ($type == 1) {
 				$ids = $this -> memcachedlib -> get('__services_wo_product_add');
-				if ($ids) $tid = array_unique(array_merge($pid, $ids));
 				
-				$this -> memcachedlib -> set('__services_wo_product_add', $pid, 3600);
+				if ($ids) $tid = array_unique(array_merge($pid, $ids));
+				else $tid = $pid;
+				
+				$this -> memcachedlib -> set('__services_wo_product_add', $tid, 3600);
 			}
 			else {
 				for($i=0;$i<count($pid);++$i) {

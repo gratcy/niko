@@ -49,9 +49,9 @@ left:inherit!important;
           <th>Name</th>
           <th>PIC</th>
           <th>Sales</th>
-          <th>Top Cash</th>
-          <th>Top Credit</th>
-          <th>Top Credit Current</th>
+          <th>TOP Cash</th>
+          <th>TOP Credit</th>
+          <th>TOP Credit Limit</th>
           <th>Credit Current</th>
           <th>Status</th>
           <th style="width: 50px;"></th>

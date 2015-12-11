@@ -37,11 +37,15 @@ class Home extends MY_Controller {
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
 			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
+			$fkp = (int) $this -> input -> post('fkp', TRUE);
+			$creditnico = (int) $this -> input -> post('creditnico', TRUE);
+			$cashnico = (int) $this -> input -> post('cashnico', TRUE);
 			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
 			$ctop = str_replace(',','',$this -> input -> post('ctop', TRUE));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
+			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
 			$fax = $this -> input -> post('fax', TRUE);
 			$branch = (int) $this -> input -> post('branch');
 			$city = (int) $this -> input -> post('city');
@@ -63,7 +67,7 @@ class Home extends MY_Controller {
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
+				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
 				if ($this -> customers_model -> __insert_customers($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('customers'));
@@ -88,10 +92,14 @@ class Home extends MY_Controller {
 			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
 			$addr2 = $this -> input -> post('addr2', TRUE);
+			$fkp = (int) $this -> input -> post('fkp', TRUE);
 			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
 			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
+			$creditnico = (int) $this -> input -> post('creditnico', TRUE);
+			$cashnico = (int) $this -> input -> post('cashnico', TRUE);
 			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
 			$ctop = str_replace(',','',$this -> input -> post('ctop', TRUE));
+			$joindate = strtotime(str_replace('/','-',$this -> input -> post('joindate', TRUE)));
 			$npwp = $this -> input -> post('npwp', TRUE);
 			$phone1 = $this -> input -> post('phone1', TRUE);
 			$phone2 = $this -> input -> post('phone2', TRUE);
@@ -118,7 +126,7 @@ class Home extends MY_Controller {
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
+					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
 					if ($this -> customers_model -> __update_customers($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));

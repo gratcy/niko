@@ -35,13 +35,15 @@
                 <div class="form-group" id="rno">
                     <label for="text1" class="control-label col-lg-4">Request No.</label>
                     <div class="input-group col-lg-4">
-                         <select name="rno" class="form-control"><?php echo $rno; ?></select>
+                         <select name="rno232" class="form-control" disabled><?php echo $rno; ?></select>
+                         <input type="hidden" name="rno" value="<?php echo $detail[0] -> ddrid?>">
                     </div>
                 </div>
                 <div class="form-group" id="rno2">
                     <label for="text1" class="control-label col-lg-4">Request No.</label>
                     <div class="input-group col-lg-4">
-                         <select name="rno2" class="form-control chzn-select"><?php echo $rno2; ?></select>
+                         <select name="rno233" class="form-control chzn-select" disabled><?php echo $rno2; ?></select>
+                         <input type="hidden" name="rno2" value="<?php echo $detail[0] -> ddrid?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -95,13 +97,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('select[name="rno"],select[name="rno2"]').change(function(){
-		$('input[name="title"]').val($('option:selected', this).attr('dtitle'));
-	});
 	$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/' . $detail[0] -> ddrid); ?>');
-	$('select[name="rno"]').change(function(){
-		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());
-	});
 	
 	$('#approve').click(function(){
 		$('form.form-horizontal').append('<input type="hidden" name="app" value="1">');
