@@ -13,6 +13,7 @@ mysql_connect($mysql_server, $mysql_login, $mysql_password);
 mysql_select_db($mysql_database);
 
 $req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pstatus,mqty,pvolume,
+(select g.cdiscountdate from categories_tab g where g.cid= a.pcid) as pdiscdate,
 (select g.cdiscount from categories_tab g where g.cid= a.pcid) as pdisc
  "
 	." FROM products_tab  a LEFT JOIN moq_tab b ON a.pid=b.mpid"
@@ -47,11 +48,11 @@ $namecat="agent";
 }elseif($ccat==3){
 $namecat="store";
 	$price=$row['pstore'];
-	$ddisc=$row['pdisc'];
+	$ddisc=0;
 }elseif($ccat==4){
 $namecat="consumer";
 	$price=$row['pconsume'];
-	$ddisc=$row['pdisc'];
+	$ddisc=0;
 }elseif($ccat==5){
 $namecat="cash";
 	$price=$row['pconsume'];
@@ -68,12 +69,13 @@ if($row['ppid']=='3'){
 	$pvolpck= $row['pvolume'];
 	
 }
+
 $pricess= __get_rupiah($price,2); 
 
 	$results[] = array('label' => $label,'pid' => $row['pid'],'pcid' => $row['pcid'],
 	'ppid' => $row['ppid'],'pcode' =>$row['pcode'],'pdesc' => $row['pdesc'],'phpp' => $row['phpp'],
 	'pdist' => __get_rupiah($row['pdist'],2),'psemi' => __get_rupiah($row['psemi'],2),'pkey' => __get_rupiah($row['pkey'],2),'pstore' => __get_rupiah($row['pstore'],2),
-	'pconsume' => __get_rupiah($row['pconsume'],2),'ppoint' => $row['ppoint'],'pdisc' => $row['pdisc'],'pstatus' => $row['pstatus'],
+	'pconsume' => __get_rupiah($row['pconsume'],2),'ppoint' => $row['ppoint'],'pdisc' => $row['pdisc'],'cdiscdate' => $row['pdiscdate'],'pstatus' => $row['pstatus'],
 	'price'=>__get_rupiah($price,2), 'mqty'=>$row['mqty'],'ddisc'=>$ddisc ,'ccat'=>$ccat,'namecat'=>$namecat , 'pvolumepcs' => $pvolpcs,'pvolumepck' => $pvolpck);
 }
 

@@ -173,7 +173,16 @@ minLength: 1,
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Product Type</label>
 
+                   <div class="col-lg-4">
+                        <select name="product_type" class="form-control chzn-select" >
+						<option value="niko">Niko</option>
+						<option value="nico">Nico</option>
+						</select>
+					</div>
+                </div>
 				
 		</td><td width=40% >
 				
@@ -244,7 +253,16 @@ minLength: 1,
                 </div>					
 	
 
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"></label>
 
+                    <div class="col-lg-4">
+                       	<input type=checkbox value=1 name="discdate">&nbsp;&nbsp;Early Date Discount
+
+                    </div>
+                </div>	
+	
+	
 	
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>

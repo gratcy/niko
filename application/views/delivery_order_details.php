@@ -96,6 +96,7 @@ minLength: 1,
                 </div>
 
 		<?php 
+		//print_r($detailx);die;
 			$stgldos=$detailx[0]->stgldo;			
 			$stgldox = explode("-",$stgldos);			
 			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";
@@ -205,6 +206,7 @@ $drv=explode("-",$detailx[0]->driver);
           
           <th>Code</th>
           <th>Name</th>
+		  <th>Qty/Coly</th>
           <th>Qty/Pcs</th>
 
                                         </tr>
@@ -227,7 +229,7 @@ $drv=explode("-",$detailx[0]->driver);
 			$sqtyx=$v -> sqty;
 			$qtyx=$v -> sqty;
 			$subtotal=$sqtyx;
-	
+	    if($v -> sqty > 0){
     ?>
           <tr>
           
@@ -242,10 +244,12 @@ $drv=explode("-",$detailx[0]->driver);
 		  <?php echo $v -> pcode; ?><input type=hidden name="sssid[]" 
 		  value="<?php echo $detailx[0]->ssid_sales; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
+		  <td><?php echo $v -> sqty/$v -> pvolume; ?>  </td>
           <td><?php echo $v -> sqty; ?>  </td>
 
 		  </tr>
         <?php 
+		}
 		$total=$subtotal+$total;
 		$totalqty=$qtyx+$totalqty;
 		$totalppn=$total * 10/100;
@@ -258,6 +262,7 @@ $drv=explode("-",$detailx[0]->driver);
 		
          <tr>          
           <td>TOTAL</td>
+		  <td></td>
 		  <td></td>
           <td><?php echo $totalqty; ?></td>
           

@@ -42,6 +42,7 @@ minLength: 1,
 		$("#theCashh").val(ui.item.pcash),
 		$("#thePoint").val(ui.item.ppoint),
 		$("#thePdisc").val(ui.item.pdisc),
+		$("#thePdiscDate").val(ui.item.cdiscdate),
 		$("#theDisc").val(ui.item.ddisc),
 		$("#thePrice").val(ui.item.price),
 		$("#thePricex").val(ui.item.price),
@@ -365,7 +366,10 @@ var badColor = "#ff6666";
                     </div>
                 </div>					
 				
-<?php }?>
+<?php }
+
+$discdate= $this->uri->segment(6);
+?>
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Cash Discount</label>
@@ -374,8 +378,10 @@ var badColor = "#ff6666";
                        	<?php
 						if($detailx[0]->stypepay=="cash"){ ?>  
 							<input type=text  id="thePdisc" class="form-control" name=ddisc  >
-						<?php }elseif($detailx[0]->stypepay=="credit"){ ?>  
-							<input type=text   class="form-control" name=ddisc value="0" >
+						<?php }elseif(($detailx[0]->stypepay=="credit")AND($discdate==1)){ ?>  
+							<!--input type=text   class="form-control" name=ddisc value="0" -->
+							
+							<input type=text  id="thePdiscDate" class="form-control" name=ddisc  >
 						<?php }else{?>	
 						<input type=text  id="theDisc" class="form-control" name=ddisc  >
 						<?php }?>
@@ -440,6 +446,16 @@ var badColor = "#ff6666";
 						?>
 						&nbsp;&nbsp;<span id="confirmMessagee"></span>
                     </div>
+                </div>	
+
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"  >Promo Discount</label>
+
+                    <div class="col-lg-4">
+					<input type="text" name="promodisc" value="" class="form-control" onkeyup="formatharga(this.value,this)" >
+                       	
+                    </div>
                 </div>					
 	
 <?php $z= site_url("sales_order/home/sales_order_update/$id/$scid"); ?>
@@ -488,9 +504,12 @@ location.reload() //reload the doc (should happen whether download is in progres
           
           <th>Code</th>
           <th>Name</th>
-          <th>Qty/Pcs</th>
-          <th>Price</th>
-          <th>Discount </th>
+          <th>Qty/Coly</th>
+		  <th>Qty/Pcs</th>
+          <th>Normal Price</th>
+          <th>Promo Discount </th>
+		  <th>Payment Discount </th>
+		  <th>Net Price </th>
 		  <th>Total</th>
 		  <th style="width:50px;">Action</th>
                                         </tr>
@@ -505,26 +524,47 @@ location.reload() //reload the doc (should happen whether download is in progres
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;
-			if($freeppn==0){
-				$spricex=$v -> sprice;
-			}else{
-			$spricex=$v -> sprice/1.1;
-			}
+			$spricex=$v -> sprice;
+			// if($freeppn==0){
+				// $spricex=$v -> sprice;
+			// }else{
+			// $spricex=$v -> sprice/1.1;
+			// }
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
-			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+			
 	
     ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
+		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
           <td><?php echo $v -> sqty; ?></td>
-          <td><?php 
+          <td><?php echo __get_rupiah($spricex,2); ?></td>
+          <td><?php echo __get_rupiah($v -> spromodisc,2); ?></td>
+		  <td><?php 
+		  $promod=$v -> sdisc*($spricex -$v -> spromodisc)/100;
+		  echo __get_rupiah($promod,2); ?></td>
+		  <td><?php 
+		  $netprice=$spricex-($v -> spromodisc + $promod);
 		  
-		  echo __get_rupiah($spricex,2); ?></td>
-          <td><?php echo $v -> sdisc; ?></td>
-		  <td> <?php echo __get_rupiah($subtotal,2); ?> </td>		
+			if($freeppn==0){
+				$netprice=$netprice;
+			}else{
+			$netprice=$netprice/1.1;
+			}	  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  echo __get_rupiah($netprice,2); ?></td>
+		  <td> <?php 
+		  $subtotal=$sqtyx * $netprice;
+		  echo __get_rupiah($subtotal,2); ?> </td>		
 		  <td><a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
         <?php 
@@ -572,6 +612,9 @@ location.reload() //reload the doc (should happen whether download is in progres
                                 </table>
 		<?php 
 		$sisaplafon=$detailx[0]->sisaplafon;
+		
+		// print_r($detailx);
+		
 		if($totalall <=	$sisaplafon	){	
 		$sisaplafon_after= $sisaplafon -$totalall;
 
@@ -587,14 +630,7 @@ location.reload() //reload the doc (should happen whether download is in progres
 		</form>	
 		<?php }else{ ?>
 		<font color=red >Credit Limit!</font> <br> 
-		<!--Silahkan Edit Item atau Tambah Plafon<br>
-		<form method="POST"  >
-		<input type=hidden  value="<?php //echo $scid;?>" name="scid" >
-		<input type=hidden  value="<?php //echo $sisaplafon;?>" name="sisa" >
-		<input type=text   name="plafon" >
-		<input type=hidden  value=1 name="add_plafon" >
-		<input class="btn text-muted text-center btn-danger" type=submit value="TAMBAH PLAFON"  >
-		</form-->		
+	
 		
     <?php } ?>
                             </div>

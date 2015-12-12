@@ -65,10 +65,17 @@ class Home extends MY_Controller {
 
 	
 	function sales_order_detail_add($id,$scid) {
+		
+		$promodisc=0;
+		$sqtykoli=0;
 		if ($_POST) {
-		//print_r($_POST);die;
+			
+			$sqtykoli= $this -> input -> post('sqtykoli', TRUE);
+			
+		
 		if($_POST['add_plafon']==1){
 		//echo $scid;
+		
 				$limit=$_POST['sisa']+$_POST['plafon'];
 				$arr = array('climit' => $limit);
 					$this -> customers_model -> __update_customers($scid, $arr);
@@ -77,7 +84,7 @@ class Home extends MY_Controller {
 		
 		}
 
-	
+			$promodisc = str_replace(',','',$this -> input -> post('promodisc', TRUE));
 			$pricex = str_replace(',','',$this -> input -> post('pricex', TRUE));
 			$pricedist = str_replace(',','',$this -> input -> post('pricedist', TRUE));
 			$pricesemi = str_replace(',','',$this -> input -> post('pricesemi', TRUE));
@@ -89,7 +96,9 @@ class Home extends MY_Controller {
 			$spid = $this -> input -> post('spid', TRUE);
 			$ppid = $this -> input -> post('ppid', TRUE);
 			$sqtykol= $this -> input -> post('sqtykol', TRUE);
-			$sqtykoli= $this -> input -> post('sqtykoli', TRUE);
+			//$sqtykoli= $this -> input -> post('sqtykoli', TRUE);
+			
+			//echo $sqtykoli;die;
 			$sqtypcs= $this -> input -> post('sqtypcs', TRUE);
 			if($sqtykoli==''){
 			$sqty= $this -> input -> post('sqtypcs', TRUE);
@@ -104,41 +113,15 @@ class Home extends MY_Controller {
 			$stypepay = $this -> input -> post('stypepay', TRUE);
 			
 		if($stypepay=="auto"){	
-		$stypepay="credit";
-			// if($ccat=='1'){			
-				// if($qtyx>$sqty){
-					// $sprice=$pricestore;
-					
-				// }else if($qtyx==$sqty){
-					// $sprice=$pricekey;
-				// }
-			// }
-			if($ccat=='3'){
-				//$sprice=$priceconsume;
-				$stypepay="cash";
+			$stypepay="credit";
+			if($ccat=='3'){				
+			$stypepay="cash";
 			}
 		}
-		/*
-		elseif($stypepay=="cash"){
-		
-			$sprice=$priceconsume;
-			
-		}elseif($stypepay=="credit"){
-			if(($ccat=='1')or($ccat=='3')){	
-		
-				if($qtyx>$sqty){
-					$sprice=$pricestore;
-					
-				}else if($sqty >=$qtyx){
-					$sprice=$pricekey;
-					
-				}
-			}
-		}
-		*/
+
 		$sprice=$price;
 
-					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'ssisa'=>$sqty);					
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc,'spromodisc'=>$promodisc,'ssisa'=>$sqty);					
 //print_r($arr);die;
 					if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr)) {
 
@@ -152,11 +135,13 @@ class Home extends MY_Controller {
 
 		}
 		else {
-		
+			
+
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);$view['sqtykoli']=$sqtykoli;
+			$view['promodisc']=$promodisc;			
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
@@ -418,14 +403,14 @@ function invoice_order_add($id,$scid,$snodo) {
 		
 
 					$arrp=array('istockout'=>$sqty);
-
+					$arrqx = array('sstatus'=>3);
 					$arrdos=array('dstatus'=>3);
 					$arrdo=array('dstatus'=>3,'sssid'=>$sssid,'samount'=>$samount,'tamount'=>$tamount);
 					$arrqty = array('ssisa' => $ssisa);
 					$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,
 					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>3,'sssid'=>$sssid,'tamount'=>$samount	);	
 					if ($this -> sales_order_detail_model ->__update_do_status($snodo,$arrdos)) {
-						
+						$this -> sales_order_model ->__update_sales_order($id,$arrqx);
 						$this -> sales_order_detail_model ->__update_inventory($spid,$sbid,$arrp);
 						$this -> sales_order_detail_model ->__update_amount_status($did,$arrdo);
 						$this -> sales_order_detail_model ->__update_sales_order_detail($sid,$arrqty);

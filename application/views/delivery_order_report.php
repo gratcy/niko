@@ -90,6 +90,7 @@ $drv=explode("-",$detailx[0]->driver);
           
           <th width="20%">Code</th>
           <th>Name</th>
+		  <th width="20%">Qty/Coly</th>
           <th width="20%">Qty/Pcs</th>
 
                                         </tr>
@@ -106,24 +107,26 @@ $drv=explode("-",$detailx[0]->driver);
 			$sqtyx=$v -> sqty;
 
 			$qtyx=$v -> sqty;
-
+           if($v -> sqty>0){
 	
     ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
+		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
           <td align=center ><?php echo $v -> sqty; ?></td>
 	
 		  </tr>
         <?php 
-	
+		   }
 		$totalqty=$qtyx+$totalqty;
 
 		endforeach; ?>
 		
          <tr>          <th>TOTAL</th>
           <th></th>
+		  <th></th>
           <th><?php echo $totalqty; ?></th>
 
 		 </tr>		

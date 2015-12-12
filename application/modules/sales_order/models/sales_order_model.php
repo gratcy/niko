@@ -10,7 +10,9 @@ class sales_order_model extends CI_Model {
 	}
 	
 	function __get_sales_order() {
-		return 'SELECT *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
+		return 'SELECT *,
+		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,
+		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname
 		FROM sales_order_tab WHERE sstatus<>2 ORDER BY sid DESC';

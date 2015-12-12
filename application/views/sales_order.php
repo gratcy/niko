@@ -47,13 +47,15 @@ left:inherit!important;
                                         <tr>
 <!--
           <th>Branch</th>
--->
-          <th>SO No.</th>
-    
+-->			
+		  <th>Reff. No.</th>
+          <th>SO No.</th>    
           <th>Date</th>
+		  <th>Expired Date</th>
           <th>Customer </th>
           <th>Sales</th>
-          <th>Status</th>
+          <th>Payment Type</th>
+		  <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
@@ -65,11 +67,13 @@ left:inherit!important;
 <!--
           <td><?php echo $v -> bname; ?></td>
 -->
-          <td><?php echo $v -> snoso; ?></td>
-      
-          <td><?php echo __get_date(strtotime($v -> stgl),2); ?></td>
+          <td><?php echo $v -> sreff; ?></td>
+		  <td><?php echo $v -> snoso; ?></td>      
+          <td><?php echo date('d F Y',strtotime($v -> stgl)); ?></td>
+		  <td><?php echo date('d F Y',strtotime($v -> sduedate)); ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
+		  <td><?php echo $v -> stypepay; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
 		  if($sstatus==0){
@@ -80,7 +84,7 @@ left:inherit!important;
 		  $st="Delete";
 		  }if($sstatus==3){
 		  $st="Approved";
-		  }if($sstatus==4){
+		  }if($v -> dstatus==3){
 		  $st="Done";
 		  }
 		  echo $st; ?></td>

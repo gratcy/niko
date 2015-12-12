@@ -46,7 +46,7 @@ class Home extends MY_Controller {
 	function sales_order_add() {
 		if ($_POST) {
 		
-		
+			$discdate = $this -> input -> post('discdate', TRUE);
 			$sbid = $this -> input -> post('sbid', TRUE);
 			$snoso = $this -> input -> post('snoso', TRUE);			
 			$stglx = explode("/",$this -> input -> post('stgl', TRUE));			
@@ -67,9 +67,10 @@ class Home extends MY_Controller {
 			$ccredit = str_replace('',',',$this -> input -> post('ccredit', TRUE));
 			if($stypepay=="Cash"){
 
-			$sduedate = date("Y-m-d",strtotime("$stgl + $ccash days"));			
+			//$sduedate = date("Y-m-d",strtotime("$stgl + $ccash days"));	
+			$sduedate = date("Y-m-d",strtotime("$stgl + 30 days"));	
 			}else{			
-			$sduedate = date("Y-m-d",strtotime("$stgl +$ccredit days"));
+			$sduedate = date("Y-m-d",strtotime("$stgl +30 days"));
 			}
 			$ssubtotal = 0;
 			$sppnnpwp = 0;
@@ -91,7 +92,7 @@ class Home extends MY_Controller {
 					 $this -> sales_order_model -> __get_total_sales_order_monthly($stglx[1],$stglx[2],$lastid);
 					
 									
-					redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $lastid .'/'. $scid .''));
+					redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $lastid .'/'. $scid .'/'.$discdate));
 				}
 				else {
 					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));

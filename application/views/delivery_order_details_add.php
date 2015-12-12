@@ -193,6 +193,7 @@ $drv=explode("-",$detailx[0]->driver);
           
           <th>Code</th>
           <th>Name</th>
+		  <th>Qty/Coly</th>
           <th>Qty/Pcs</th>
 
                                         </tr>
@@ -222,6 +223,7 @@ $drv=explode("-",$detailx[0]->driver);
 		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
 		  </td>
 		  <td><?php echo $v -> pname; ?></td>
+		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
           <td><select name="sqty[]" class="form-control chzn-select">
 		  
 		  <?php $ssisa= $v -> ssisa; 

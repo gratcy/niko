@@ -23,7 +23,8 @@
                                     <thead>
                                         <tr>
         
-          <th>SO No.</th>
+          <th>Reff. No.</th>
+		  <th>SO No.</th>
           <th>Date</th>
           <th>Customer</th>
           <th>Sales </th>      
@@ -39,7 +40,8 @@
 		  ?>
                                         <tr>
          
-          <td><?php echo $v -> snoso; ?></td>
+          <td><?php echo $v -> sreff; ?></td>
+		  <td><?php echo $v -> snoso; ?></td>
           <td><?php echo __get_date(strtotime($v -> stgl),1); ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
