@@ -51,8 +51,8 @@ left:inherit!important;
           <th>Sales</th>
           <th>TOP Cash</th>
           <th>TOP Credit</th>
-          <th>TOP Credit Limit</th>
           <th>Credit Current</th>
+          <th>TOP Credit Limit</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
