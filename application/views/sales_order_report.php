@@ -110,9 +110,12 @@ $caddrx=explode("*",$detailx[0]->caddr);
           
           <th>Code</th>
           <th>Name</th>
-          <th>Qty/Pcs</th>
-          <th>Price</th>
-          <th>Discount </th>
+          <th>Qty/Coly</th>
+		  <th>Qty/Pcs</th>
+          <th>Normal Price</th>
+          <th>Promo Discount </th>
+		  <th>Payment Discount </th>
+		  <th>Net Price </th>
 		  <th>Total</th>
                                         </tr>
                                     </thead>
@@ -140,10 +143,27 @@ $caddrx=explode("*",$detailx[0]->caddr);
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
           <td><?php echo $v -> pname; ?></td>
-		  <td align=center ><?php echo $v -> sqty; ?></td>
-          <td align=right ><?php echo __get_rupiah($spricex); ?></td>
-          <td align=center ><?php echo $v -> sdisc; ?> %</td>
-		  <td align=right > <?php echo __get_rupiah($subtotal); ?> </td>		
+		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
+          <td><?php echo $v -> sqty; ?></td>
+          <td align=right ><?php echo __get_rupiah($spricex,2); ?></td>
+          <td align=right ><?php echo __get_rupiah($v -> spromodisc,2); ?></td>
+		  <td align=right ><?php 
+		  $promod=$v -> sdisc*($spricex -$v -> spromodisc)/100;
+		  echo __get_rupiah($promod,2); ?></td>
+		  <td align=right ><?php 
+		  $netprice=$spricex-($v -> spromodisc + $promod);
+		  
+			if($freeppn==0){
+				$netprice=$netprice;
+			}else{
+			$netprice=$netprice/1.1;
+			}	  
+
+		  
+		  echo __get_rupiah($netprice,2); ?></td>
+		  <td align=right> <?php 
+		  $subtotal=$sqtyx * $netprice;
+		  echo __get_rupiah($subtotal,2); ?> </td>		
 		  </tr>
         <?php 
 		$total=$subtotal+$total;
@@ -159,10 +179,12 @@ $caddrx=explode("*",$detailx[0]->caddr);
          <tr>          
           <th>SUB TOTAL</th>
 		  <th></th>
+		  <th></th>
           <th ><?php echo $totalqty; ?></th>
           <th></th>
           <th></th>
-		  
+		  <th></th>
+		  <th></th>		  
           <th align=right ><?php echo __get_rupiah($total); ?></th>
 		 </tr>		
          <tr>          
@@ -170,6 +192,9 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <td align=center ><?php if($freeppn==1){ echo 10;}else{echo 0;}?>%</td>
           <td></td>
           <td></td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
 		  <td></td>
           <td align=right ><?php 
 		  if($freeppn==1){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
@@ -180,6 +205,9 @@ $caddrx=explode("*",$detailx[0]->caddr);
           <th></th>
           <th></th>
           <th></th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
 		  <th></th>
           <th align=right ><?php echo __get_rupiah($totalall); ?></th>
 		 </tr>		 

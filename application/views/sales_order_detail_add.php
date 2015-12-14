@@ -541,12 +541,12 @@ location.reload() //reload the doc (should happen whether download is in progres
 		  <td><?php echo $v -> pname; ?></td>
 		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
           <td><?php echo $v -> sqty; ?></td>
-          <td><?php echo __get_rupiah($spricex,2); ?></td>
-          <td><?php echo __get_rupiah($v -> spromodisc,2); ?></td>
-		  <td><?php 
+          <td align=right ><?php echo __get_rupiah($spricex,2); ?></td>
+          <td align=right ><?php echo __get_rupiah($v -> spromodisc,2); ?></td>
+		  <td align=right ><?php 
 		  $promod=$v -> sdisc*($spricex -$v -> spromodisc)/100;
 		  echo __get_rupiah($promod,2); ?></td>
-		  <td><?php 
+		  <td align=right ><?php 
 		  $netprice=$spricex-($v -> spromodisc + $promod);
 		  
 			if($freeppn==0){
@@ -554,17 +554,12 @@ location.reload() //reload the doc (should happen whether download is in progres
 			}else{
 			$netprice=$netprice/1.1;
 			}	  
-		  
-		  
-		  
-		  
-		  
-		  
+
 		  
 		  echo __get_rupiah($netprice,2); ?></td>
-		  <td> <?php 
+		  <td align=right> <?php 
 		  $subtotal=$sqtyx * $netprice;
-		  echo __get_rupiah($subtotal,2); ?> </td>		
+		  echo __get_rupiah($subtotal,2); ?> </td>			  	
 		  <td><a href="<?php echo site_url('sales_order_detail/home/sales_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
         <?php 
@@ -584,19 +579,25 @@ location.reload() //reload the doc (should happen whether download is in progres
          <tr>          
           <td>SUB TOTAL</td>
 		  <td>&nbsp;</td>
-          <td><?php echo $totalqty; ?></td>
+		  <td>&nbsp;</td>
+          <td><?php echo $totalqty; ?></td>          
           <td></td>
-          <td></td>
-          <td><?php echo __get_rupiah($total,2); ?></td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+          <td align=right ><?php echo __get_rupiah($total,2); ?></td>
           <td></td>
 		 </tr>		
          <tr>          
-          <td>PPN</td>
-		  <td>&nbsp;</td>
+          <td>PPN</td>		  
           <td><?php echo $persen;?> % </td>
+          <td>&nbsp;</td>
+		  <td></td>
           <td></td>
-          <td></td>
-          <td><?php echo __get_rupiah($totalppn,2); ?></td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+          <td align=right  ><?php echo __get_rupiah($totalppn,2); ?></td>
           <td></td>
 		 </tr>			
          <tr>          
@@ -605,7 +606,10 @@ location.reload() //reload the doc (should happen whether download is in progres
           <td></td>
           <td></td>
           <td></td>
-          <td><?php echo __get_rupiah($totalall,2); ?></td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+          <td align=right ><?php echo __get_rupiah($totalall,2); ?></td>
           <td></td>
 		 </tr>		 
                                     </tbody>

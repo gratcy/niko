@@ -44,8 +44,8 @@ class Home extends MY_Controller {
 	}
 
 	function invoice_order($sbid) {	
-
-			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list($id),3,10,site_url('delivery_order/home/delivery_order_details'));
+            
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list(),3,10,site_url('delivery_order/home/invoice_order/'.$sbid));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			//$view['id'] = $id;

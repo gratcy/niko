@@ -3,6 +3,7 @@
             <div class="media user-media well-small">
                 <div class="media-body">
                     <h5 class="media-heading" style="color:#ed9c28;"> Branch, <?php echo $this -> memcachedlib -> sesresult['ubranch']; ?></h5>
+					<?php $bid= $this -> memcachedlib -> sesresult['ubid']; ?>
                     <h5 class="media-heading"> <?php echo $this -> memcachedlib -> sesresult['uemail']; ?></h5>
                     <ul class="list-unstyled user-info">
                         <li>
@@ -70,7 +71,6 @@
                         <li class=""><a href="<?php echo site_url('province'); ?>"><i class="icon-angle-right"></i> Province </a></li>
                     </ul>
                 </li>
-				
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#distribution">
                         <i class="icon-link"> </i> Distribution
@@ -149,26 +149,6 @@
                     </ul>
                 </li>
 			   <?php endif; ?>
-				
-				<?php if (__get_roles('PurchaseOrderView')) : ?>
-<!--
-                <li class="panel ">
-                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#purchase">
-                        <i class="icon-money"> </i> Purchase
-                        <span class="pull-right">
-                          <i class="icon-angle-left"></i>
-                        </span>
-                       &nbsp; <span class="label label-danger">2</span>&nbsp;
-                    </a>
-                    <ul class="collapse" id="purchase">
-						<?php if (__get_roles('PurchaseOrderView')) : ?>
-                        <li class=""><a href="<?php echo site_url('purchase_order/home/'); ?>"><i class="icon-angle-right"></i> Purchase Order </a></li>
-						<?php endif; ?>
-                         <li class=""><a href="<?php echo site_url('purchase_order/home/penerimaan'); ?>"><i class="icon-angle-right"></i> Receivable </a></li>
-                    </ul>
-                </li>
--->
-			   <?php endif; ?>
 				<?php if (__get_roles('DeliveryOrderView') || __get_roles('SalesOrderView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#sales">
@@ -189,6 +169,7 @@
                          <li class=""><a href="<?php echo site_url('invoice_order/home/'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<?php endif; ?>
 						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Return Order </a></li>
+						<li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order/'.$bid); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<li class=""><a href="<?php echo site_url('pembayaran/home'); ?>"><i class="icon-angle-right"></i> Payment </a></li>
                     </ul>
                 </li>
@@ -319,27 +300,36 @@
 	$('ul#menu > li > ul').removeClass('in');
 	if (/\/users/.test(window.location.href) === true) {
 		$('ul#SUsers').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#SUsers').parent().addClass('active');
 	}
 	else if (/\/pm/.test(window.location.href) === true) {
 		$('ul#PM').addClass('in');
 	}
 	else if (/\/services/.test(window.location.href) === true) {
 		$('ul#services').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#services').parent().addClass('active');
 	}
 	else if (/\/inventory|\/opname/.test(window.location.href) === true) {
 		$('ul#inventory').addClass('in');
-	}
-	else if (/\/purchase_order/.test(window.location.href) === true) {
-		$('ul#purchase').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#inventory').parent().addClass('active');
 	}
 	else if (/\/sales_order|delivery_order|retur_order|pembayaran/.test(window.location.href) === true) {
 		$('ul#sales').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#sales').parent().addClass('active');
 	}
 	else if (/\/coa|coagroup|journal|generalledger|closingperiod/.test(window.location.href) === true) {
 		$('ul#accounting').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#accounting').parent().addClass('active');
 	}
 	else if (/\/komisi\/home|technical_commision|reportopname/.test(window.location.href) === true) {
 		$('ul#Report').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#Report').parent().addClass('active');
 	}
 	else if (/\/request|transfer|receiving/.test(window.location.href) === true) {
 		$('ul#distribution').addClass('in');
@@ -348,5 +338,7 @@
 	}
 	else if (/\/branch|customers|products|packaging|group_product|categories|sparepart|target|sales|sales_commision|technical|suplier/.test(window.location.href) === true) {
 		$('ul#component-nav').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#component-nav').parent().addClass('active');
 	}
 </script>

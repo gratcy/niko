@@ -533,7 +533,12 @@ function invoice_order_add($id,$scid,$snodo) {
 			$view['id'] = $id;
 			$view['sbid'] = $sbid;
 			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);						
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);				
+
+// echo '<pre>';
+			// print_r($view['detail']);
+			// echo '</pre>';
+			
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	

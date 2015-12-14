@@ -45,13 +45,14 @@ return $this -> db -> get() -> result();
 	}		
 
 	function __get_inv_list() {
-		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
+		return 'SELECT *,(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
+		(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
 		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
 		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
-		FROM delivery_order_detail_tab WHERE (sid=0)  ORDER BY did DESC';
+		FROM delivery_order_detail_tab WHERE (delivery_order_detail_tab.sid=0)  ORDER BY did DESC';
 	}
 
 	

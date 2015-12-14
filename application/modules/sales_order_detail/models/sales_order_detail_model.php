@@ -49,6 +49,7 @@ class sales_order_detail_model extends CI_Model {
 	
 	function __get_delivery_order_detail_prod($id,$snodo) {
 		$this -> db -> select("*,(select sprice FROM sales_order_detail_tab c where c.sid=a.sid) as sprice,
+		(select spromodisc FROM sales_order_detail_tab c where c.sid=a.sid) as spromodisc,
 		(select sdisc FROM sales_order_detail_tab c where c.sid=a.sid) as sdisc	FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'");
 		
 		//echo "select * FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.sid= $id";die;

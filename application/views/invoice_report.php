@@ -159,9 +159,12 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
           
           <th>Code</th>
           <th>Name</th>
-          <th>Qty/Pcs</th>
-		  <th>Price</th>
-		  <th>Discount</th>		  
+          <th>Qty/Coly</th>
+		  <th>Qty/Pcs</th>
+          <th>Normal Price</th>
+          <th>Promo Discount </th>
+		  <th>Payment Discount </th>
+		  <th>Net Price </th>
 		  <th>Total</th>
 
                                         </tr>
@@ -176,22 +179,49 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 		$subtotal=0;
 		
 		foreach($detail as $k => $v) :	
-			//print_r($v);
+			
+			// $sqtyx=$v -> sqty;
+			// $sdiscx=$v -> sdisc;
+			// $harga=$v -> sprice;
+			
 			$sqtyx=$v -> sqty;
+			if($freeppn==1){
+			$spricex=$v -> sprice/1.1;
+			}else{
+			$spricex=$v -> sprice;	
+			}	
 			$sdiscx=$v -> sdisc;
-			$harga=$v -> sprice;
-			$totalharga=$sqtyx * ($harga - ($harga * $sdiscx/100));
-	
+			$qtyx=$v -> sqty;			
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+			
+			//$totalharga=$sqtyx * ($harga - ($harga * $sdiscx/100));
+			
     ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
-          <td align=center ><?php echo $v -> sqty; ?></td>
-		  <td align=right ><?php echo __get_rupiah($v -> sprice); ?></td>
-		  <td align=center ><?php echo $v -> sdisc; ?> %</td>
+          		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
+          <td><?php echo $v -> sqty; ?></td>
+          <td align=right ><?php echo __get_rupiah($spricex,2); ?></td>
+          <td align=right ><?php echo __get_rupiah($v -> spromodisc,2); ?></td>
+		  <td align=right ><?php 
+		  $promod=$v -> sdisc*($spricex -$v -> spromodisc)/100;
+		  echo __get_rupiah($promod,2); ?></td>
+		  <td align=right ><?php 
+		  $netprice=$spricex-($v -> spromodisc + $promod);
 		  
-		<td align=right ><?php echo __get_rupiah($totalharga); ?></td>
+			if($freeppn==0){
+				$netprice=$netprice;
+			}else{
+			$netprice=$netprice/1.1;
+			}	  
+
+		  
+		  echo __get_rupiah($netprice,2); ?></td>
+		  <td align=right> <?php 
+		  $subtotal=$sqtyx * $netprice;
+		  echo __get_rupiah($subtotal,2); ?> </td>
 		  </tr>
         <?php 
 	
@@ -213,7 +243,10 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
         <tr>          
 		<th>SUB TOTAL</th>
         <th></th>
+		<th></th>
         <th><?php echo $totalqty; ?></th>
+		<th></th>
+		<th></th>
 		<th></th>
 		<th></th>
 		<th align=right ><?php echo __get_rupiah($subtotal); ?></th>
@@ -226,6 +259,9 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
           <td></td>
 		<td></td>
 		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
           <td align=right ><?php 
 		  if($freeppn==1){ echo __get_rupiah($totalppn); }else{echo __get_rupiah(0);}?>
 		  </td>
@@ -234,6 +270,9 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
           <th>TOTAL</th>
           <th></th>
           <th></th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
 		  <th></th>
 		  <th></th>
           <th align=right ><?php echo __get_rupiah($totalall); 
@@ -250,7 +289,7 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
          <tr>          
           <th>Terbilang</th>
 
-          <td align=center colspan=5 ><b><?php echo terbilang($totalall). 'rupiah'; ?></b></td>
+          <td align=center colspan=8 ><b><?php echo terbilang($totalall). 'rupiah'; ?></b></td>
 		 </tr>			 
          
                                     </tbody>
