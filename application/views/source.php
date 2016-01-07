@@ -12,7 +12,7 @@ if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
 $conn = mysql_connect($mysql_server, $mysql_login, $mysql_password);
 $db = mysql_select_db($mysql_database, $conn);
 
-$req = "SELECT cid,cbid,ccat, cname,caddr,cdeliver,cphone,csid,ccash,ccredit,climit, cnpwp,cpkp,cspecial,bname,sname "
+$req = "SELECT cid,cbid,ccat, cname,caddr,cdeliver,cphone,csid,ccash,ccredit,climit, cnpwp,cpkp,cspecial,bname,sname,ccashnico,ccreditnico "
 	."FROM customers_tab a,branch_tab b,sales_tab c "
 	."WHERE a.cbid=b.bid  AND a.csid=c.sid  AND cname LIKE '%".$_REQUEST['term']."%'"; 
 
@@ -34,7 +34,7 @@ $phone=explode('*',$row['cphone']);
 $addr=explode('*',$row['caddr']);
 	$results[] = array('label' => $row['cname'],'cid' => $row['cid'],'cbid' => $row['cbid'],
 	'ccat' => $row['ccat'],'caddr' => trim($addr[0]),'cdeliver' => $row['cdeliver'],'cphone' => $phone[0],
-	'csid' => $row['csid'],'ccash' => $row['ccash'],'ccredit' => $row['ccredit'],'climit' => $row['climit'],'cnpwp' => $row['cnpwp'],'cpkp' => $row['cpkp'],'cspecial' => $row['cspecial'],'bname' => $row['bname'],
+	'csid' => $row['csid'],'ccash' => $row['ccash'],'ccashnico' => $row['ccashnico'],'ccredit' => $row['ccredit'],'ccreditnico' => $row['ccreditnico'],'climit' => $row['climit'],'cnpwp' => $row['cnpwp'],'cpkp' => $row['cpkp'],'cspecial' => $row['cspecial'],'bname' => $row['bname'],
 	'csname' => $row['sname'],'topx'=>$topx );
 }
 

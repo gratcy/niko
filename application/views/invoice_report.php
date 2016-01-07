@@ -312,8 +312,21 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 <tr>
 	<td><font  face="arial" size="2px"><br><b>CUSTOMER</b></font></td><td><font  face="arial" size="2px"><br><b>ADMIN</b></font></td>
 </tr>
+<?php 
+if(!isset($_GET['ox'])){ $_GET['ox']="";}
+if($_GET['ox']==1){?>
+<form method=POST >
 
-
+<tr>
+	<td>
+	<input type=hidden name="dototal" value="<?php echo $totalall; ?>">
+	<input type=hidden name="snodo" value="<?php echo $detailx[0]->snodo; ?>">
+	<input type=hidden name="scid" value="<?php echo $detailx[0]->scid; ?>">
+	<input type=submit name="pst" value="POSTING" ></td>
+	<td></td>
+</tr>
+</form>
+<?php } ?>
 </table>
 
 </p>	

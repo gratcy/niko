@@ -15,7 +15,26 @@
         </script>
   
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/jqjason/jquery-ui-1.css'); ?>">  
-  
+<script> 
+function togle(){
+	//alert(1);
+var pt=document.getElementById('ptx').value;	
+if(pt==1){
+	document.getElementById('niko').style.display = 'none';	
+	document.getElementById('nico').style.display = 'block';
+	document.getElementById('crniko').style.display = 'none';	
+	document.getElementById('crnico').style.display = 'block';	
+}else {
+	document.getElementById('niko').style.display = 'block';	
+	document.getElementById('nico').style.display = 'none';
+	document.getElementById('crniko').style.display = 'block';	
+	document.getElementById('crnico').style.display = 'none';	
+}
+
+
+
+}
+</script> 
 <script>
 $(function() {
 $("#search").autocomplete({
@@ -33,7 +52,9 @@ minLength: 1,
 		$("#theTopcash").val(ui.item.ccash),
 		$("#theTopcredit").val(ui.item.ccredit),
 		$("#theTopcashx").val(ui.item.ccash),
-		$("#theTopcreditx").val(ui.item.ccredit),		
+		$("#theTopcashxnico").val(ui.item.ccashnico),
+		$("#theTopcreditx").val(ui.item.ccredit),
+		$("#theTopcreditxnico").val(ui.item.ccreditnico),
 		$("#theAddr").val(ui.item.caddr),
 		$("#thePkp").val(ui.item.cpkp),
 		$("#theSid").val(ui.item.csid),
@@ -130,8 +151,7 @@ minLength: 1,
 					<input  name=ccat type="hidden" id="theCat" class="form-control"   />
 					<input  name=cid type="hidden" id="theCid" class="form-control"   />
 					<input  name=csid type="hidden" id="theSid" class="form-control"   />
-					<input  name=cpkp type="hidden" id="thePkp" class="form-control"   />
-					<input  name=stype type="hidden"  class="form-control"   />
+					<input  name=cpkp type="hidden" id="thePkp" class="form-control"   />				
 					<input  name=scurrency type="hidden"  class="form-control"   />
 					<input  name=skurs type="hidden"  class="form-control"   />
 					<input  name=snopo type="hidden"  class="form-control"   />
@@ -197,9 +217,9 @@ function displayDiv(id,sel){
                     <label for="text1" class="control-label col-lg-4">Product Type</label>
 
                    <div class="col-lg-4">
-                        <select name="product_type" class="form-control chzn-select" >
-						<option value="niko">Niko</option>
-						<option value="nico">Nico</option>
+                        <select id="ptx" name="product_type" class="form-control chzn-select" onchange="togle()">
+						<option value="0">Niko</option>
+						<option value="1">Nico</option>
 						</select>
 					</div>
                 </div>
@@ -209,8 +229,14 @@ function displayDiv(id,sel){
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">TOP Cash</label>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" id="niko" >
                         <input  type="text" id="theTopcashx" class="form-control"   disabled/>
+						
+						
+                    </div>
+					<div class="col-lg-4" id="nico" style="display:none;" >
+                        
+						<input  type="text" id="theTopcashxnico" class="form-control"   disabled/>
 						
                     </div>
                 </div>			
@@ -221,10 +247,15 @@ function displayDiv(id,sel){
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">TOP Credit</label>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" id="crniko" >
                         <input   type="text" id="theTopcreditx" class="form-control"  disabled  />
+					</div>
+					
+					<div class="col-lg-4" id="crnico" style="display:none;" >
+                        <input   type="text" id="theTopcreditxnico" class="form-control"  disabled  />
 						
-                    </div>
+                    </div>					
+					
                 </div>		
 
 <!--

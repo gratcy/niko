@@ -11,13 +11,17 @@
             });
         </script>
 		<?php $sbidx=$detailx[0]->sbid;?>
+		<?php $stypid=$detailx[0]->stype;
+		//print_r($detailx[0]);
+		//echo $sbidx.'-'.$stypid;die;
+		?>
 <script>
 $(function() {
 $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-    source: '<?php echo site_url('sales_order_detail/home/sourcex/'.$scid.'/'.$sbidx); ?>',
+    source: '<?php echo site_url('sales_order_detail/home/sourcex/'.$scid.'/'.$sbidx.'/'.$stypid); ?>',
      select: function(event, ui) { 
 	    $("#theId").val(ui.item.pid),
         $("#theCid").val(ui.item.pcid),
@@ -42,8 +46,10 @@ minLength: 1,
 		$("#theCashh").val(ui.item.pcash),
 		$("#thePoint").val(ui.item.ppoint),
 		$("#thePdisc").val(ui.item.pdisc),
-		$("#thePdiscDate").val(ui.item.cdiscdate),
+		$("#thePdiscnew").val(ui.item.pdisc),
+		$("#thePdiscDatenew").val(ui.item.cdiscdate),
 		$("#theDisc").val(ui.item.ddisc),
+		$("#theDiscnew").val(ui.item.ddisc),
 		$("#thePrice").val(ui.item.price),
 		$("#thePricex").val(ui.item.price),
 		$("#theQty").val(ui.item.mqty),
@@ -372,18 +378,20 @@ $discdate= $this->uri->segment(6);
 ?>
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Cash Discount</label>
+                    <label for="text1" class="control-label col-lg-4">Discount</label>
 
                     <div class="col-lg-4">
                        	<?php
-						if($detailx[0]->stypepay=="cash"){ ?>  
-							<input type=text  id="thePdisc" class="form-control" name=ddisc  >
+						if($detailx[0]->stypepay=="cash"){ ?>
+							<input type=text  id="thePdiscnew" class="form-control" disabled  >
+							<input type=hidden  id="thePdisc" class="form-control" name=ddisc  >
 						<?php }elseif(($detailx[0]->stypepay=="credit")AND($discdate==1)){ ?>  
 							<!--input type=text   class="form-control" name=ddisc value="0" -->
-							
-							<input type=text  id="thePdiscDate" class="form-control" name=ddisc  >
-						<?php }else{?>	
-						<input type=text  id="theDisc" class="form-control" name=ddisc  >
+							<input type=text  id="thePdiscDatenew" class="form-control" disabled  >
+							<input type=hidden  id="thePdiscDate" class="form-control" name=ddisc  >
+						<?php }else{?>
+						<input type=text  id="theDiscnew" class="form-control" disabled  >				
+						<input type=hidden  id="theDisc" class="form-control" name=ddisc  >
 						<?php }?>
                     </div>
                 </div>	
@@ -624,6 +632,7 @@ location.reload() //reload the doc (should happen whether download is in progres
 
 		?>	
 		<form method="POST" action="<?php echo site_url('sales_order_detail/home/sales_order_details/'.$id.'/'.$scid); ?>" >
+		<input type=hidden name="totalso" value="<?=$totalall;?>" >
 		<input type=hidden  value="<?php echo $id;?>" name="id" >
 		<input type=hidden  value="<?php echo $scid;?>" name="scid" >
 		<input type=hidden  value="<?php echo $sisaplafon_after;?>" name="sisaplafon_after" >

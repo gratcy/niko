@@ -11,13 +11,13 @@ if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
 
 mysql_connect($mysql_server, $mysql_login, $mysql_password);
 mysql_select_db($mysql_database);
-
+if($stype==1){ $wpcid= " AND pcid='40' "; }else{ $wpcid= " AND pcid<>'40' ";}
 $req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pstatus,mqty,pvolume,
 (select g.cdiscountdate from categories_tab g where g.cid= a.pcid) as pdiscdate,
 (select g.cdiscount from categories_tab g where g.cid= a.pcid) as pdisc
  "
 	." FROM products_tab  a LEFT JOIN moq_tab b ON a.pid=b.mpid"
-	." WHERE b.mbid='$bidx' and a.pname LIKE '%".$_REQUEST['term']."%'"; 
+	." WHERE b.mbid='$bidx' $wpcid and a.pname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req";
 	

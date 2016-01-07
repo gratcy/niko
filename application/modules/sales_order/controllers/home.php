@@ -21,7 +21,7 @@ class Home extends MY_Controller {
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order'));
+			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order/home/'));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
@@ -46,6 +46,7 @@ class Home extends MY_Controller {
 	function sales_order_add() {
 		if ($_POST) {
 		
+			$stype = $this -> input -> post('product_type', TRUE);
 			$discdate = $this -> input -> post('discdate', TRUE);
 			$sbid = $this -> input -> post('sbid', TRUE);
 			$snoso = $this -> input -> post('snoso', TRUE);			
@@ -55,7 +56,7 @@ class Home extends MY_Controller {
 			$sstatus = (int)$this ->input -> post('sstatus', TRUE);
 			$scdate=date('Y-m-d');
 			$scid = $this -> input -> post('cid', TRUE);
-			$stype = $this -> input -> post('stype', TRUE);
+			
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
 			$sreff = $this -> input -> post('sreff', TRUE);
 			$scurrency = $this -> input -> post('scurrency', TRUE);
@@ -77,13 +78,16 @@ class Home extends MY_Controller {
 			$stotalsubppn = 0;
 			$sppn = 0;
 			$stotal = 0;			
-
+					$sduration=$this -> sales_order_model -> __get_duration($stype,$stypepay,$scid);
+					$sduration=$sduration[0]->sduration;
 					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
 					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
-					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay
-					 );	
+					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay,
+					'sduration'=>$sduration );	
+				 
+					 
 				if ($this -> sales_order_model -> __insert_sales_order($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					

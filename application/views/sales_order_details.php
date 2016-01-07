@@ -113,14 +113,24 @@ minLength: 1,
 
                     <div class="col-lg-4">
 					<?php
+					// echo '<pre>';
+					// print_r($detailx[0]);
+					// echo '</pre>';
 					$stat=$detailx[0]->sstatus;
 					if($stat==0){
 					$sstatuss="Not Active";					
-					}elseif($stat==1){
+					}
+					if($stat==1){
 					$sstatuss="Active";					
-					}elseif($stat==2){
+					}
+					if($stat==2){
 					$sstatuss="Remove";					
-					}elseif($stat==3){
+					}
+					if($stat==3){
+					$sstatuss="Approved";					
+					}
+					
+					if($detailx[0]->dstatus==3){
 					$sstatuss="Done";					
 					}
 					

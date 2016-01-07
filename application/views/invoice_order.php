@@ -50,8 +50,10 @@
 		  <td><?php echo $v -> sname; ?></td>
           <td><?php echo __get_date(strtotime($v -> sduedate_invoice),1); ?></td>
           <td><?php echo $v ->stypepay;?></td>
-		  <td>total</td>
-		  <td>Status</td>
+		  <td><?php echo $v ->dototal;?></td>
+		  <td><?php 
+		  if($v ->pstatus == '3'){ $stt="Paid";}else{ $stt="Pending";}
+		  echo $stt;?></td>
 		
 		
 		  <td> <?php 

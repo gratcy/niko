@@ -84,7 +84,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
 
 <tr>
 <td width="10%" align=left  ><b>Date</b></td><td width="30%" ><?php echo date('d/m/Y',strtotime($detailx[0]->stgl)); ?></td><td width="10%"></td>
-<td  align=left  ><b>Due Date</b></td><td align=left ><?php echo date('d/m/Y',strtotime($detailx[0]->sduedate)); ?></td>
+<td  align=left  ><b>Expired Date</b></td><td align=left ><?php echo date('d/m/Y',strtotime($detailx[0]->sduedate)); ?></td>
 </tr>
 <tr>
 <tr>

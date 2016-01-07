@@ -53,6 +53,19 @@ class Home extends MY_Controller {
 			$view['sbid'] = $sbid;			
 			//$view['headerx'] = $this->delivery_order_model -> __get_do_select($id);
 			$this->load->view('invoice_order', $view);
+	}
+
+	function invoice_order_report($sbid) {	
+            
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list_detail(),3,10,site_url('delivery_order/home/invoice_order/'.$sbid));
+			$view['sales_order'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			//$view['id'] = $id;
+			//$view['ssisa']=$this -> delivery_order_model -> __get_sisa_so($id);
+			$view['sbid'] = $sbid;	
+			$view['sales'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
+			//$view['headerx'] = $this->delivery_order_model -> __get_do_select($id);
+			$this->load->view('invoice_order_report', $view);
 	}	
 	
 }

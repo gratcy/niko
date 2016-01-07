@@ -41,7 +41,8 @@ class sales_order_model extends CI_Model {
 		(select ccat from customers_tab where customers_tab.cid=sales_order_tab.scid)as ccat,
 		(select ctop from customers_tab where customers_tab.cid=sales_order_tab.scid)as toplimit,
 		(select climit from customers_tab where customers_tab.cid=sales_order_tab.scid)as sisaplafon,
-		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname
+		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
+		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.spid=0 limit 1 )as dstatus 
 		FROM sales_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=3) AND sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
@@ -52,6 +53,21 @@ class sales_order_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}	
 	
+	function __get_duration($stype,$stypepay,$cid) {
+		if(($stype==0)AND ($stypepay=="Credit")){
+			$stp='ccredit';
+		}elseif(($stype==0)AND ($stypepay=="Cash")){
+			$stp='ccash';
+		}else if(($stype==1)AND ($stypepay=="Credit")){
+			$stp='ccreditnico';
+		}else if(($stype==1)AND ($stypepay=="Cash")){
+			$stp='ccashnico';
+		}
+		$this -> db -> select(" $stp as sduration
+		FROM customers_tab WHERE  cid=" . $cid );
+		return $this -> db -> get() -> result();
+	}
+
 	
 	function __insert_sales_order($data) {
 	

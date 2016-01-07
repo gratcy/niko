@@ -29,8 +29,9 @@ class Home extends MY_Controller {
 	function sales_order_details($id,$scid) {
 	if(!isset($_POST['approve'])){$_POST['approve']="";}
 		if($_POST['approve']=='1'){
+			$totalso=$this -> input -> post('totalso', TRUE);
 			$id=$this -> input -> post('id', TRUE);
-			$arr=array('sstatus' => '3');
+			$arr=array('sstatus' => '3','sototal'=>$totalso);
 			$this -> sales_order_model -> __update_sales_order($id, $arr);
 			
 			   $scid=$_POST['scid'];
@@ -201,13 +202,14 @@ class Home extends MY_Controller {
 
 //----END SO----
 
-	function sourcex($scid,$bidx) {
+	function sourcex($scid,$bidx,$stypid) {
 		$view['hostname']=$this->db->hostname;
 		$view['username']=$this->db->username;
 		$view['password']=$this->db->password;
 		$view['database']=$this->db->database;
 		$view['scid']=$scid;
 		$view['bidx']=$bidx;
+		$view['stype']=$stypid;
 		$this->load->view('sourcex',$view,FALSE);
 	}
 //---BEGIN DO-----	
@@ -329,7 +331,7 @@ function invoice_order_add($id,$scid,$snodo) {
 					'sduedate_invoice' => $sduedate_invoice,'kurang_bayar'=>$juminv	);						
 					if ($this -> sales_order_detail_model -> __update_invoice_order($snodo,$arr)) {
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-						redirect(site_url('sales_order_detail/home/invoice_report/'. $id .'/'. $scid .'/'.$snodo));
+						redirect(site_url('sales_order_detail/home/invoice_report/'. $id .'/'. $scid .'/'.$snodo.'?ox=1'));
 					}
 					else {
 						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
@@ -530,10 +532,22 @@ function invoice_order_add($id,$scid,$snodo) {
 	
 	
 	function invoice_report($id,$sbid,$snodo) {
+		
+		if($_POST){
+			$scid=$this -> input -> post('scid', TRUE);
+			$dototal=$this -> input -> post('dototal', TRUE);
+			$snodo=$this -> input -> post('snodo', TRUE);
+			$arp=array('dototal'=>$dototal);
+			$this -> sales_order_detail_model -> __update_invoice_order($snodo,$arp);
+			redirect(site_url('sales_order_detail/home/invoice_report/'. $id .'/'. $scid .'/'.$snodo));
+			
+		}
 			$view['id'] = $id;
 			$view['sbid'] = $sbid;
 			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
-			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);				
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);		
+
+			
 
 // echo '<pre>';
 			// print_r($view['detail']);
