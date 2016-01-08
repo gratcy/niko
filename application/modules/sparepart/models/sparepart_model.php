@@ -52,9 +52,9 @@ class Sparepart_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('sname as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$this -> db -> select('sid as id,sname as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
-		$this -> db -> select('scode as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$this -> db -> select('sid as id,scode as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		$code = $this -> db -> get() -> result();
 		return array_merge($name, $code);
 	}

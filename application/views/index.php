@@ -231,11 +231,10 @@
                                     <thead>
                                         <tr>
           <th>Group Product</th>
-          <th>Code</th>
           <th>Name</th>
-          <th>Component No.</th>
           <th>Price Agent</th>
           <th>Price Retail</th>
+          <th>Return</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -244,11 +243,10 @@
 		  ?>
                                         <tr>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
           <td><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
+          <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

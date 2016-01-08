@@ -17,7 +17,7 @@ function __get_roles($key) {
 function __get_error_msg() {
 	$CI =& get_instance();
 	$css = (isset($CI -> memcachedlib -> get('__msg')['error']) == '' ? 'success' : 'danger');
-	
+	if (isset($CI -> memcachedlib -> get('__msg')['info'])) $CI -> memcachedlib -> set('__msg_tmp', array('info' => true), '60');
 	if (isset($CI -> memcachedlib -> get('__msg')['error']) || isset($CI -> memcachedlib -> get('__msg')['info'])) {
 		$res = '<div class="alert alert-'.$css.' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		$res .= (isset($CI -> memcachedlib -> get('__msg')['error']) ? $CI -> memcachedlib -> get('__msg')['error'] : $CI -> memcachedlib -> get('__msg')['info']);
@@ -299,8 +299,11 @@ function __keyTMP($str) {
 }
 
 function __get_PTMP() {
-    $arr = array();
     $CI =& get_instance();
+    if (isset($CI -> memcachedlib -> get('__msg_tmp')['info'])) {
+		$CI -> memcachedlib -> delete(__keyTMP($_SERVER['HTTP_REFERER']));
+		return json_encode(array());
+	}
     $res = json_encode($CI -> memcachedlib -> get(__keyTMP($_SERVER['REQUEST_URI'])));
     $CI -> memcachedlib -> delete(__keyTMP($_SERVER['REQUEST_URI']));
     return $res;

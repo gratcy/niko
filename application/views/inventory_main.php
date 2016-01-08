@@ -52,7 +52,9 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+          <?php if ($type != 2 && $type != 5) : ?>
           <th>Code</th>
+          <?php endif; ?>
           <th>Name</th>
           <?php foreach($branch as $k => $v) : ?>
           <th><?php echo $v -> bname; ?></th>
@@ -64,7 +66,9 @@ left:inherit!important;
 		  foreach($inventory as $k => $v) :
 		  ?>
                                         <tr>
+          <?php if ($type != 2 && $type != 5) : ?>
           <td><?php echo $v -> code; ?></td>
+          <?php endif; ?>
           <td><?php echo $v -> name; ?></td>
           <?php
           foreach($branch as $key => $val) :

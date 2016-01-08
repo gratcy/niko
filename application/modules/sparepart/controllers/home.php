@@ -32,21 +32,19 @@ class Home extends MY_Controller {
 	
 	function sparepart_add() {
 		if ($_POST) {
-			$code = $this -> input -> post('code', TRUE);
 			$agent = str_replace(',','',$this -> input -> post('agent', TRUE));
 			$retail = str_replace(',','',$this -> input -> post('retail', TRUE));
 			$name = $this -> input -> post('name', TRUE);
-			$nocomp = $this -> input -> post('nocomp', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
 			$status = (int) $this -> input -> post('status');
 			$special = (int) $this -> input -> post('special');
 			
-			if (!$code || !$agent || !$retail || !$name || !$nocomp) {
+			if (!$agent || !$retail || !$name) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('sparepart' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'snocomponent' => $nocomp, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
+				$arr = array('sgroupproduct' => $groupproduct, 'sname' => $name, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
 				if ($this -> sparepart_model -> __insert_sparepart($arr)) {
 					$sid = $this -> db -> insert_id();
 					$branch = $this -> branch_model -> __get_branch_select('');
@@ -75,23 +73,21 @@ class Home extends MY_Controller {
 	
 	function sparepart_update($id) {
 		if ($_POST) {
-			$code = $this -> input -> post('code', TRUE);
 			$agent = str_replace(',','',$this -> input -> post('agent', TRUE));
 			$retail = str_replace(',','',$this -> input -> post('retail', TRUE));
 			$name = $this -> input -> post('name', TRUE);
-			$nocomp = $this -> input -> post('nocomp', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			$special = (int) $this -> input -> post('special');
 			
 			if ($id) {
-				if (!$code || !$agent || !$retail || !$name || !$nocomp) {
+				if (!$agent || !$retail || !$name) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('sparepart' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'snocomponent' => $nocomp, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
+					$arr = array('sgroupproduct' => $groupproduct, 'sname' => $name, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
 					if ($this -> sparepart_model -> __update_sparepart($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('sparepart'));
@@ -127,24 +123,41 @@ class Home extends MY_Controller {
 	}
 	
 	function get_suggestion() {
+		header('Content-type: application/javascript');
 		$hint = '';
 		$a = array();
 		$q = $_SERVER['QUERY_STRING'];
 		$arr = $this -> sparepart_model -> __get_suggestion();
+		if (strlen($q) < 2) return false;
 		
-		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
-		
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name, 'id' => $v -> id);
 		if (strlen($q) > 0) {
 			for($i=0; $i<count($a); $i++) {
-				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
-					if ($hint == '')
-						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+				$a[$i]['name'] = trim($a[$i]['name']);
+				$num_words = substr_count($a[$i]['name'],' ')+1;
+				$pos = array();
+				$is_suggestion_added = false;
+				
+				for ($cnt_pos=0; $cnt_pos<$num_words; $cnt_pos++) {
+					if ($cnt_pos==0)
+						$pos[$cnt_pos] = 0;
 					else
-						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+						$pos[$cnt_pos] = strpos($a[$i]['name'],' ', $pos[$cnt_pos-1])+1;
+				}
+				
+				if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+					$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+					$is_suggestion_added = true;
+				}
+				for ($j=0;$j<$num_words && !$is_suggestion_added;$j++) {
+					if(strtolower($q)==strtolower(substr($a[$i]['name'],$pos[$j],strlen($q)))){
+						$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+						$is_suggestion_added = true;                                        
+					}
 				}
 			}
 		}
 		
-		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
+		echo json_encode($hint);
 	}
 }

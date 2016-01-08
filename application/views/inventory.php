@@ -55,7 +55,9 @@ left:inherit!important;
           <th>Branch</th>
 -->
           <?php endif; ?>
+          <?php if ($type != 2 && $type != 5) : ?>
           <th>Code</th>
+          <?php endif; ?>
           <th>Name</th>
           <th>Stock Begining</th>
           <th>Stock In</th>
@@ -76,7 +78,9 @@ left:inherit!important;
           <td><?php echo $v -> bname; ?></td>
 -->
           <?php endif; ?>
+          <?php if ($type != 2 && $type != 5) : ?>
           <td><?php echo $v -> code; ?></td>
+          <?php endif; ?>
           <td><?php echo $v -> name; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockbegining; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockin; ?></td>

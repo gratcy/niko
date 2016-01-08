@@ -75,18 +75,18 @@ class Request_model extends CI_Model {
 	function __get_items($id,$type,$rtype) {
 		if ($rtype == 1) {
 			if ($type == 1) $this -> db -> select('a.pid as did,a.pcode,a.pname,a.pvolume,b.cname FROM products_tab a LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE b.ctype=3 AND a.pstatus=1 AND a.pid IN ('.$id.')', false);
-			else $this -> db -> select('sid as did,scode,sname,snocomponent,sspecial FROM sparepart_tab WHERE sstatus=1 and sid IN ('.$id.')', false);
+			else $this -> db -> select('a.sid as did,a.scode,a.sname,a.snocomponent,a.sspecial,b.cname FROM sparepart_tab a LEFT JOIN categories_tab b ON a.sgroupproduct=b.cid WHERE a.sstatus=1 and a.sid IN ('.$id.')', false);
 		}
 		else {
 			if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname,c.dqty,c.did FROM distribution_item_tab c LEFT JOIN products_tab  a ON a.pid=c.diid LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE c.dstatus=1 AND c.ditype=1 AND b.ctype=3 AND a.pstatus=1 AND c.ddrid=' . $id, false);
-			else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,c.dqty,c.did FROM distribution_item_tab c LEFT JOIN sparepart_tab a ON a.sid=c.diid WHERE c.dstatus=1 AND c.ditype=2 AND a.sstatus=1 AND c.ddrid=' . $id, false);
+			else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,c.dqty,c.did,d.cname FROM distribution_item_tab c LEFT JOIN sparepart_tab a ON a.sid=c.diid LEFT JOIN categories_tab d ON a.sgroupproduct=d.cid WHERE c.dstatus=1 AND c.ditype=2 AND a.sstatus=1 AND c.ddrid=' . $id, false);
 		}
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_request_items($type) {
 		if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname FROM products_tab a LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE b.ctype=3 AND a.pstatus=1');
-		else $this -> db -> select('sid,scode,sname,snocomponent,sspecial FROM sparepart_tab WHERE sstatus=1');
+		else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,b.cname FROM sparepart_tab a LEFT JOIN categories_tab b ON a.sgroupproduct=b.cid WHERE a.sstatus=1');
 		return $this -> db -> get() -> result();
 	}
 }

@@ -54,9 +54,8 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-          <th>Code</th>
+          <th>Group Product</th>
           <th>Name</th>
-          <th>No. Component</th>
           <th>Return</th>
           <th>QTY</th>
                                         </tr>
@@ -66,9 +65,8 @@
 		  foreach($items[1] as $k => $v) :
 		  ?>
           <tr idnya2="<?php echo $v -> did; ?>">
-          <td><?php echo $v -> scode; ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
 			<td style="width:100px"><input type="text" name="qty[2][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
 			</tr>

@@ -40,7 +40,7 @@ class Sales_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('sname as name FROM sales_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$this -> db -> select('sid as id,sname as name FROM sales_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		return $this -> db -> get() -> result();
 	}
 	

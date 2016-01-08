@@ -73,9 +73,9 @@ class Products_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('pname as name FROM products_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY name ASC');
+		$this -> db -> select('pid as id,pname as name FROM products_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
-		$this -> db -> select('pcode as name FROM products_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY name ASC');
+		$this -> db -> select('pid as id,pcode as name FROM products_tab WHERE (pstatus=1 OR pstatus=0) ORDER BY name ASC');
 		$code = $this -> db -> get() -> result();
 		return array_merge($name, $code);
 	}

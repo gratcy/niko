@@ -35,9 +35,9 @@ class Technical_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('tname as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY name ASC');
+		$this -> db -> select('tid as id,tname as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
-		$this -> db -> select('tcode as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY name ASC');
+		$this -> db -> select('tid as id,tcode as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY name ASC');
 		$code = $this -> db -> get() -> result();
 		return array_merge($name, $code);
 	}

@@ -45,9 +45,8 @@
                                     <thead>
                                         <tr>
           <th></th>
-          <th>Code</th>
+          <th>Group Product</th>
           <th>Name</th>
-          <th>No. Component</th>
           <th>Return</th>
                                         </tr>
                                     </thead>
@@ -57,9 +56,8 @@
 		  ?>
           <tr>
           <td><input type="checkbox" value="<?php echo $v -> sid; ?>" name="sid[]"></td>
-          <td><?php echo $v -> scode; ?></td>
+          <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo $v -> snocomponent; ?></td>
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
 			</tr>
         <?php endforeach; ?>

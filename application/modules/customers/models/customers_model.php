@@ -50,17 +50,17 @@ class Customers_model extends CI_Model {
 	function __get_suggestion() {
 		$data = array();
 		$d = array();
-		$this -> db -> select('cname as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
+		$this -> db -> select('cid as id,cname as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
-		$this -> db -> select('caddr as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
+		$this -> db -> select('cid as id,caddr as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
 		$addr = $this -> db -> get() -> result();
-		$this -> db -> select('ccontactname as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
+		$this -> db -> select('cid as id,ccontactname as name FROM customers_tab WHERE (cstatus=1 OR cstatus=0) ORDER BY name ASC');
 		$cp = $this -> db -> get() -> result();
 		
 		foreach($addr as $k => $v) :
 			$d = explode('*',$v -> name);
-			$data[] = (object) array('name' => $d[0]);
-			$data[] = (object) array('name' => $d[1]);
+			$data[] = (object) array('id' => $v -> id, 'name' => $d[0]);
+			$data[] = (object) array('id' => $v -> id, 'name' => $d[1]);
 		endforeach;
 		
 		return array_merge($name, $data, $cp);

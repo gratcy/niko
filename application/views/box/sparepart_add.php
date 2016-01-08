@@ -39,9 +39,7 @@
 <tr>
 <th style="width:50px;"></th>
 <th>Group Product</th>
-<th>Code</th>
 <th>Name</th>
-<th>No Component</th>
 </tr>
 </thead>
 <tbody>
@@ -49,9 +47,7 @@
 <tr>
 <td style="text-align:center;"><input type="checkbox" name="sid[]" value="<?php echo $v -> sid?>"></td>
 <td><?php echo $v -> cname; ?></td>
-<td><?php echo $v -> scode; ?></td>
 <td><?php echo $v -> sname; ?></td>
-<td><?php echo $v -> snocomponent; ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

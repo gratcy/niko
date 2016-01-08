@@ -30,25 +30,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Code</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="Sparepart Code" name="code" class="form-control" value="<?php echo $detail[0] -> scode; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
                         <input type="text" placeholder="Sparepart Name" name="name" class="form-control" value="<?php echo $detail[0] -> sname; ?>" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Component No.</label>
-
-                    <div class="col-lg-4">
-                        <input type="text" placeholder="No Component" name="nocomp" class="form-control" value="<?php echo $detail[0] -> snocomponent; ?>" />
                     </div>
                 </div>
                 <div class="form-group">
