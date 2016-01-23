@@ -10,7 +10,7 @@ $add = 'Return';
 
 ?><style type="text/css">
 div#txtHint{position: absolute;
-width: 230px;
+width: 200px;
 top: 40px;
 max-height: 300px;
 z-index: 9999;
@@ -106,6 +106,6 @@ left:inherit!important;
 
 <script type="text/javascript">
 $(function(){
-	$('div.searchTable > form > div.sLeft > input[name="keyword"]').sSuggestion('span#sg1','<?php echo current_url();?>/get_suggestion', 'keyword');
+	$('div.searchTable > form > div.sLeft > input[name="keyword"]').sSuggestion('span#sg1','<?php echo site_url('inventory/get_suggestion/' . $type);?>', 'keyword');
 });
 </script>

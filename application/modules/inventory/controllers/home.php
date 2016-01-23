@@ -17,17 +17,18 @@ class Home extends MY_Controller {
 	function index($type) {
 		if (!$type) $type = 1;
 		
-		if ($type == 1)
-			$perm = (__get_roles('ExecuteAllBranchInventoryProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		elseif ($type == 2)
-			$perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		elseif ($type == 3)
-			$perm = (__get_roles('ExecuteAllBranchInventoryRejectProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		elseif ($type == 4)
-			$perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		else
-			$perm = (__get_roles('ExecuteAllBranchInventoryRejectSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-			
+		//~ if ($type == 1)
+			//~ $perm = (__get_roles('ExecuteAllBranchInventoryProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		//~ elseif ($type == 2)
+			//~ $perm = (__get_roles('ExecuteAllBranchInventorySparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		//~ elseif ($type == 3)
+			//~ $perm = (__get_roles('ExecuteAllBranchInventoryRejectProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		//~ elseif ($type == 4)
+			//~ $perm = (__get_roles('ExecuteAllBranchInventoryReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		//~ else
+			//~ $perm = (__get_roles('ExecuteAllBranchInventoryRejectSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+		$perm = $this -> memcachedlib -> sesresult['ubid'];
+		
 		$keyword = $this -> input -> post('keyword');
 		$view['perm'] = $perm;
 		$view['type'] = $type;
@@ -205,30 +206,43 @@ class Home extends MY_Controller {
 	}
 	
 	function get_suggestion($type) {
+		header('Content-type: application/javascript');
 		$hint = '';
 		$a = array();
-		$q = $_SERVER['QUERY_STRING'];
-		$this -> load -> model('products/products_model');
-		$this -> load -> model('sparepart/sparepart_model');
+		$q = urldecode($_SERVER['QUERY_STRING']);
 		
-		if ($type == 1 || $type == 3 || $type == 4)
-			$arr = $this -> products_model -> __get_suggestion();
-		else
-			$arr = $this -> sparepart_model -> __get_suggestion();
+		if ($type == 2 || $type == 5) $arr = $this -> sparepart_model -> __get_suggestion();
+		else $arr = $this -> products_model -> __get_suggestion();
 		
-		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
+		if (strlen($q) < 2) return false;
 		
-		if (strlen($q) > 0) {
-			for($i=0; $i<count($a); $i++) {
-				if (strtolower($q) == strtolower(substr($a[$i]['name'],0,strlen($q)))) {
-					if ($hint == '')
-						$hint .='<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
-					else
-						$hint .= '<div class="autocomplete-suggestion" data-index="'.$i.'">'.$a[$i]['name'].'</div>';
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name, 'id' => $v -> id);
+		
+		for($i=0; $i<count($a); $i++) {
+			$a[$i]['name'] = trim($a[$i]['name']);
+			$num_words = substr_count($a[$i]['name'],' ')+1;
+			$pos = array();
+			$is_suggestion_added = false;
+			
+			for ($cnt_pos=0; $cnt_pos<$num_words; $cnt_pos++) {
+				if ($cnt_pos==0)
+					$pos[$cnt_pos] = 0;
+				else
+					$pos[$cnt_pos] = strpos($a[$i]['name'],' ', $pos[$cnt_pos-1])+1;
+			}
+			
+			if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q))) || stripos($a[$i]['name'],$q)) {
+				$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+				$is_suggestion_added = true;
+			}
+			for ($j=0;$j<$num_words && !$is_suggestion_added;$j++) {
+				if(strtolower($q)==strtolower(substr($a[$i]['name'],$pos[$j],strlen($q)))){
+					$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+					$is_suggestion_added = true;                                        
 				}
 			}
 		}
 		
-		echo ($hint == '' ? '<div class="autocomplete-suggestion">No Suggestion</div>' : $hint);
+		echo json_encode($hint);
 	}
 }

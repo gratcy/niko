@@ -22,7 +22,7 @@
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Suplier Code" name="code" class="form-control" />
+                        <input type="text"  name="code" class="form-control" />
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Suplier Name" name="name" class="form-control" />
+                        <input type="text"  name="name" class="form-control" />
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
                     <label for="text1" class="control-label col-lg-4">Contact Person</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Suplier Contact Person" name="cp" class="form-control" />
+                        <input type="text"  name="cp" class="form-control" />
                     </div>
                 </div>
 
@@ -47,7 +47,7 @@
                     <label for="text1" class="control-label col-lg-4">Address I</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr" class="form-control" placeholder="Address I"></textarea>
+                        <textarea name="addr" class="form-control" ></textarea>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     <label for="text1" class="control-label col-lg-4">Address II</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr2" class="form-control" placeholder="Address II"></textarea>
+                        <textarea name="addr2" class="form-control" ></textarea>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                     <label for="text1" class="control-label col-lg-4">City</label>
 
                     <div class="col-lg-4">
-                        <select name="city" data-placeholder="City" class="form-control chzn-select"><?php echo __get_cities('',2); ?></select>
+                        <select name="city"  class="form-control chzn-select"><?php echo __get_cities('',2); ?></select>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                     <label for="text1" class="control-label col-lg-4">Province</label>
 
                     <div class="col-lg-4">
-                        <select name="prov" data-placeholder="Province" class="form-control chzn-select"><?php echo __get_province('',2); ?></select>
+                        <select name="prov"  class="form-control chzn-select"><?php echo __get_province('',2); ?></select>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
                     <label for="text1" class="control-label col-lg-4">Phone I</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone I" name="phone1" class="form-control" />
+                        <input type="text"  name="phone1" class="form-control" />
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                     <label for="text1" class="control-label col-lg-4">Phone II</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone II" name="phone2" class="form-control" />
+                        <input type="text"  name="phone2" class="form-control" />
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="NPWP" name="npwp" class="form-control" />
+                        <input type="text"  name="npwp" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">

@@ -22,7 +22,7 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="desc" class="form-control" ></textarea>
                     </div>
                 </div>
 

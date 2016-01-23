@@ -22,7 +22,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Branch Name" name="name" class="form-control" />
+                        <input type="text"  name="name" class="form-control" />
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Branch NPWP" name="npwp" class="form-control" />
+                        <input type="text"  name="npwp" class="form-control" />
                     </div>
                 </div>
 -->
@@ -40,21 +40,21 @@
                     <label for="text1" class="control-label col-lg-4">Address</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr" class="form-control" placeholder="Address"></textarea>
+                        <textarea name="addr" class="form-control" ></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Address II</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr2" class="form-control" placeholder="Address"></textarea>
+                        <textarea name="addr2" class="form-control" ></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">City</label>
 
                     <div class="col-lg-4">
-                        <select name="city" data-placeholder="City" class="form-control chzn-select"><?php echo __get_cities('',2); ?></select>
+                        <select name="city"  class="form-control chzn-select"><?php echo __get_cities('',2); ?></select>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     <label for="text1" class="control-label col-lg-4">Province</label>
 
                     <div class="col-lg-4">
-                        <select name="prov" data-placeholder="Province" class="form-control chzn-select"><?php echo __get_province('',2); ?></select>
+                        <select name="prov"  class="form-control chzn-select"><?php echo __get_province('',2); ?></select>
                     </div>
                 </div>
 
@@ -70,7 +70,7 @@
                     <label for="text1" class="control-label col-lg-4">Phone I</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone I" name="phone1" class="form-control" />
+                        <input type="text"  name="phone1" class="form-control" />
                     </div>
                 </div>
 
@@ -78,21 +78,21 @@
                     <label for="text1" class="control-label col-lg-4">Phone II</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone II" name="phone2" class="form-control" />
+                        <input type="text"  name="phone2" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Fax</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Fax" name="fax" class="form-control" />
+                        <input type="text"  name="fax" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Email</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Email" name="email" class="form-control" />
+                        <input type="text"  name="email" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">

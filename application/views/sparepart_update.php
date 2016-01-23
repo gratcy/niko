@@ -23,7 +23,7 @@
                     <label for="text1" class="control-label col-lg-4">Group Product</label>
 
                     <div class="col-lg-4">
-						<select name="groupproduct" data-placeholder="Group Product" class="form-control chzn-select">
+						<select name="groupproduct" class="form-control chzn-select">
                                 <?php echo $group_product; ?>
                     </select>
                     </div>
@@ -33,7 +33,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Sparepart Name" name="name" class="form-control" value="<?php echo $detail[0] -> sname; ?>" />
+                        <input type="text" name="name" class="form-control" value="<?php echo $detail[0] -> sname; ?>" />
                     </div>
                 </div>
                 <div class="form-group">

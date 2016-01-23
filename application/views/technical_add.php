@@ -22,7 +22,7 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Technical Code" name="code" class="form-control" />
+                        <input type="text"  name="code" class="form-control" />
                     </div>
                 </div>
 
@@ -38,14 +38,14 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Technical Name" name="name" class="form-control" />
+                        <input type="text"  name="name" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Phone I</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone I" name="phone1" class="form-control" />
+                        <input type="text"  name="phone1" class="form-control" />
                     </div>
                 </div>
 
@@ -53,21 +53,21 @@
                     <label for="text1" class="control-label col-lg-4">Phone II</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone II" name="phone2" class="form-control" />
+                        <input type="text"  name="phone2" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Email</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Email" name="email" class="form-control" />
+                        <input type="text"  name="email" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Join Date</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Join Date" name="joindate" class="form-control" autocomplete="off" />
+                        <input type="text"  name="joindate" class="form-control" autocomplete="off" />
                     </div>
                 </div>
                 <div class="form-group">

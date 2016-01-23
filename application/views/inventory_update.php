@@ -22,7 +22,7 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label for="text1" class="control-label col-lg-4">Item</label>
 
                     <div class="col-lg-4">
-						<select name="item" data-placeholder="Stock Item" class="form-control chzn-select"><?php echo $items; ?></select>
+						<select name="item"  class="form-control chzn-select"><?php echo $items; ?></select>
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
                     <label for="text1" class="control-label col-lg-4">Stock Begining</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Stock Begining" name="stockbegining" class="form-control" value="<?php echo $detail[0] -> istockbegining; ?>" readonly />
+                        <input type="text"  name="stockbegining" class="form-control" value="<?php echo $detail[0] -> istockbegining; ?>" readonly />
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                     <label for="text1" class="control-label col-lg-4">Stock In</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Stock In" name="stockin" class="form-control" value="<?php echo $detail[0] -> istockin; ?>" readonly />
+                        <input type="text"  name="stockin" class="form-control" value="<?php echo $detail[0] -> istockin; ?>" readonly />
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                     <label for="text1" class="control-label col-lg-4">Stock Out</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Stock Out" name="stockout" class="form-control" value="<?php echo $detail[0] -> istockout; ?>" readonly />
+                        <input type="text"  name="stockout" class="form-control" value="<?php echo $detail[0] -> istockout; ?>" readonly />
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     <label for="text1" class="control-label col-lg-4">Stock Final</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Stock Final" name="stock" class="form-control" value="<?php echo $detail[0] -> istock; ?>" readonly />
+                        <input type="text"  name="stock" class="form-control" value="<?php echo $detail[0] -> istock; ?>" readonly />
                     </div>
                 </div>
                 <div class="form-group">

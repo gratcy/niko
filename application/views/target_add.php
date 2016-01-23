@@ -22,14 +22,14 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
-						<select name="sales" data-placeholder="Sales" class="form-control chzn-select"><?php echo $sales; ?></select>
+						<select name="sales"  class="form-control chzn-select"><?php echo $sales; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,14 +43,14 @@
                     <label for="text1" class="control-label col-lg-4">Revenue Target</label>
 
                     <div class="col-lg-4">
-                        <input type="text" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="0" placeholder="Total Target" name="target" class="form-control" />
+                        <input type="text" style="text-align:right;" onkeyup="formatharga(this.value,this)" value="0"  name="target" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Payment Target</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Payment Target" onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="0" />
+                        <input type="text"  onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="0" />
                     </div>
                 </div>
                 <div class="form-group">

@@ -23,14 +23,14 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
-						<select name="sales" data-placeholder="Sales" class="form-control chzn-select"><?php echo $sales; ?></select>
+						<select name="sales"  class="form-control chzn-select"><?php echo $sales; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,14 +44,14 @@
                     <label for="text1" class="control-label col-lg-4">Revenue Target</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Total Target" onkeyup="formatharga(this.value,this)" name="target" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> ttarget,2); ?>" />
+                        <input type="text"  onkeyup="formatharga(this.value,this)" name="target" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> ttarget,2); ?>" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Payment Target</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Payment Target" onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> tpaytarget,2); ?>" />
+                        <input type="text"  onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> tpaytarget,2); ?>" />
                     </div>
                 </div>
                 <div class="form-group">

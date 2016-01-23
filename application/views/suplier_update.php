@@ -26,7 +26,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Suplier Code" name="code" class="form-control" value="<?php echo $detail[0] -> scode; ?>" />
+                        <input type="text"  name="code" class="form-control" value="<?php echo $detail[0] -> scode; ?>" />
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Suplier Name" name="name" class="form-control" value="<?php echo $detail[0] -> sname; ?>" />
+                        <input type="text"  name="name" class="form-control" value="<?php echo $detail[0] -> sname; ?>" />
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Contact Person</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Suplier Contact Person" name="cp" class="form-control" value="<?php echo $detail[0] -> scp; ?>" />
+                        <input type="text"  name="cp" class="form-control" value="<?php echo $detail[0] -> scp; ?>" />
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Address I</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr" class="form-control" placeholder="Address I"><?php echo $addr[0]; ?></textarea>
+                        <textarea name="addr" class="form-control" ><?php echo $addr[0]; ?></textarea>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Address II</label>
 
                     <div class="col-lg-4">
-                        <textarea name="addr2" class="form-control" placeholder="Address II"><?php echo $addr[1]; ?></textarea>
+                        <textarea name="addr2" class="form-control" ><?php echo $addr[1]; ?></textarea>
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">City</label>
 
                     <div class="col-lg-4">
-                        <select name="city" data-placeholder="City" class="form-control chzn-select"><?php echo __get_cities($detail[0] -> scity,2); ?></select>
+                        <select name="city"  class="form-control chzn-select"><?php echo __get_cities($detail[0] -> scity,2); ?></select>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Province</label>
 
                     <div class="col-lg-4">
-                        <select name="prov" data-placeholder="Province" class="form-control chzn-select"><?php echo __get_province($detail[0] -> sprov,2); ?></select>
+                        <select name="prov"  class="form-control chzn-select"><?php echo __get_province($detail[0] -> sprov,2); ?></select>
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Phone I</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone I" name="phone1" class="form-control" value="<?php echo $phone[0]; ?>" />
+                        <input type="text"  name="phone1" class="form-control" value="<?php echo $phone[0]; ?>" />
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">Phone II</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Phone II" name="phone2" class="form-control" value="<?php echo $phone[1]; ?>" />
+                        <input type="text"  name="phone2" class="form-control" value="<?php echo $phone[1]; ?>" />
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@ $addr = explode('*', $detail[0] -> saddr);
                     <label for="text1" class="control-label col-lg-4">NPWP</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="NPWP" name="npwp" class="form-control" value="<?php echo $detail[0] -> snpwp; ?>" />
+                        <input type="text"  name="npwp" class="form-control" value="<?php echo $detail[0] -> snpwp; ?>" />
                     </div>
                 </div>
                 <div class="form-group">

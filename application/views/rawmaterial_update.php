@@ -22,21 +22,21 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Material Type</label>
 
                     <div class="col-lg-4">
-						<select name="typematerial" data-placeholder="Material Type" class="form-control chzn-select"><?php echo $typematerial; ?></select>
+						<select name="typematerial"  class="form-control chzn-select"><?php echo $typematerial; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Material Code" name="code" class="form-control" value="<?php echo $detail[0] -> rcode; ?>" />
+                        <input type="text"  name="code" class="form-control" value="<?php echo $detail[0] -> rcode; ?>" />
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Material Name" name="name" class="form-control" value="<?php echo $detail[0] -> rname; ?>" />
+                        <input type="text"  name="name" class="form-control" value="<?php echo $detail[0] -> rname; ?>" />
                     </div>
                 </div>
                 <div class="form-group">

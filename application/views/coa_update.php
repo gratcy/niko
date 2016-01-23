@@ -47,7 +47,7 @@
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Code" name="code" class="form-control" value="<?php echo $detail[0] -> ccode; ?>" />
+                        <input type="text"  name="code" class="form-control" value="<?php echo $detail[0] -> ccode; ?>" />
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Name" name="name" class="form-control" value="<?php echo $detail[0] -> cname; ?>" />
+                        <input type="text"  name="name" class="form-control" value="<?php echo $detail[0] -> cname; ?>" />
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                     <label for="text1" class="control-label col-lg-4">Saldo</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Saldo" name="saldo" style="text-align:right;" value="<?php echo __get_rupiah($detail[0] -> csaldo,2); ?>" onkeyup="formatharga(this.value,this)" class="form-control" />
+                        <input type="text"  name="saldo" style="text-align:right;" value="<?php echo __get_rupiah($detail[0] -> csaldo,2); ?>" onkeyup="formatharga(this.value,this)" class="form-control" />
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-						<textarea name="desc" class="form-control" placeholder="Description"><?php echo $detail[0] -> cdesc; ?></textarea>
+						<textarea name="desc" class="form-control" ><?php echo $detail[0] -> cdesc; ?></textarea>
                     </div>
                 </div>
 

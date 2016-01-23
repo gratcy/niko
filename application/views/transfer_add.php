@@ -40,13 +40,13 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Date</label>
                     <div class="input-group col-lg-4">
-                        <input type="text" placeholder="Date Transfer" name="waktu" class="form-control" autocomplete="off" />
+                        <input type="text"  name="waktu" class="form-control" autocomplete="off" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Title</label>
                     <div class="input-group col-lg-4">
-                        <input type="text" placeholder="Transfer Title" name="title" class="form-control" />
+                        <input type="text"  name="title" class="form-control" />
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="desc" class="form-control" ></textarea>
                     </div>
                 </div>
                 <div class="form-group">

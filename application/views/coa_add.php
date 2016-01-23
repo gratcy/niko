@@ -46,7 +46,7 @@
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Code" name="code" class="form-control" />
+                        <input type="text"  name="code" class="form-control" />
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Name" name="name" class="form-control" />
+                        <input type="text"  name="name" class="form-control" />
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     <label for="text1" class="control-label col-lg-4">Saldo</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Saldo" name="saldo" style="text-align:right;" value="0" onkeyup="formatharga(this.value,this)" class="form-control" />
+                        <input type="text"  name="saldo" style="text-align:right;" value="0" onkeyup="formatharga(this.value,this)" class="form-control" />
                     </div>
                 </div>
 
@@ -70,7 +70,7 @@
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-						<textarea name="desc" class="form-control" placeholder="Description"></textarea>
+						<textarea name="desc" class="form-control" ></textarea>
                     </div>
                 </div>
 

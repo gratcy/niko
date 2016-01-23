@@ -21,7 +21,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Category Name" name="name" class="form-control" />
+                        <input type="text"  name="name" class="form-control" />
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@
                     <label for="text1" class="control-label col-lg-4">Discount</label>
 
                     <div class="input-group col-lg-4">
-                        <input type="text" style="text-align:right;" placeholder="Discount" name="disc" class="form-control" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="disc" class="form-control" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
 
@@ -37,21 +37,21 @@
                     <label for="text1" class="control-label col-lg-4">Discount Transfer</label>
 
                     <div class="input-group col-lg-4">
-                        <input type="text" style="text-align:right;" placeholder="Discount Transfer" name="disctrans" class="form-control" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="disctrans" class="form-control" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Discount Early Date</label>
 
                     <div class="input-group col-lg-4">
-                        <input type="text" style="text-align:right;" placeholder="Discount Early Date" name="discearly" class="form-control" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="discearly" class="form-control" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="desc" class="form-control" ></textarea>
                     </div>
                 </div>
                 <div class="form-group">

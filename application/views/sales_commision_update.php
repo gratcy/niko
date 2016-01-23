@@ -22,27 +22,27 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-6">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Category</label>
 
                     <div class="col-lg-6">
-						<select name="category" data-placeholder="Product Category" class="form-control chzn-select"><?php echo $category; ?></select>
+						<select name="category"  class="form-control chzn-select"><?php echo $category; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales Commission</label>
 
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Commision A" name="scoma" class="form-control" value="<?php echo $detail[0] -> scoma; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scoma" class="form-control" value="<?php echo $detail[0] -> scoma; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Commision B" name="scomb" class="form-control" value="<?php echo $detail[0] -> scomb; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scomb" class="form-control" value="<?php echo $detail[0] -> scomb; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Commision C" name="scomc" class="form-control" value="<?php echo $detail[0] -> scomc; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scomc" class="form-control" value="<?php echo $detail[0] -> scomc; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
 
@@ -50,33 +50,33 @@
                     <label for="text1" class="control-label col-lg-4"> </label>
 
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Commision D" name="scomd" class="form-control" value="<?php echo $detail[0] -> scomd; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scomd" class="form-control" value="<?php echo $detail[0] -> scomd; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Commision E" name="scome" class="form-control" value="<?php echo $detail[0] -> scome; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scome" class="form-control" value="<?php echo $detail[0] -> scome; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales Credit</label>
 
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Credit A" name="scredita" class="form-control" value="<?php echo $detail[0] -> scredita; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scredita" class="form-control" value="<?php echo $detail[0] -> scredita; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Credit B" name="screditb" class="form-control" value="<?php echo $detail[0] -> screditb; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="screditb" class="form-control" value="<?php echo $detail[0] -> screditb; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Credit C" name="screditc" class="form-control" value="<?php echo $detail[0] -> screditc; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="screditc" class="form-control" value="<?php echo $detail[0] -> screditc; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Credit D" name="screditd" class="form-control" value="<?php echo $detail[0] -> screditd; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="screditd" class="form-control" value="<?php echo $detail[0] -> screditd; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                     <div class="input-group col-lg-2">
-                        <input type="text" style="text-align:right;" placeholder="Credit E" name="scredite" class="form-control" value="<?php echo $detail[0] -> scredite; ?>" /> <span class="input-group-addon">%</span>
+                        <input type="text" style="text-align:right;"  name="scredite" class="form-control" value="<?php echo $detail[0] -> scredite; ?>" /> <span class="input-group-addon">%</span>
                     </div>
                 </div>
 

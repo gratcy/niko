@@ -36,6 +36,23 @@ function __get_status($status, $type) {
 		return ($status == 3 ? '<span style="font-weight:bold;color:#5cb85c;">Approved</span>' : ($status == 1 ? 'Active' : 'No Active'));
 }
 
+function __get_fkp_sp($str) {
+	if ($str) $fp = explode('*', $str);
+	else $fp = array(0,0);
+
+	$res = '';
+	if ($fp[0] == 1)
+		$res .= 'FKP <input type="checkbox" checked="checked" name="fkp" value="1" /> ';
+	else
+		$res .= 'FKP <input type="checkbox" name="fkp" value="1" /> ';
+	
+	if ($fp[1] == 1)
+		$res .= 'SP <input type="checkbox" checked="checked" name="sp" value="1" />';
+	else
+		$res .= 'SP <input type="checkbox" name="sp" value="1" />';
+	return $res;
+}
+
 function __get_ppn($status, $type) {
 	if ($type == 1)
 		return ($status == 1 ? 'On' : 'Off');

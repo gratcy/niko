@@ -21,7 +21,7 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@
                     <label for="text1" class="control-label col-lg-4">Product</label>
 
                     <div class="col-lg-4">
-						<select name="product" data-placeholder="Product" class="form-control chzn-select"><?php echo $products; ?></select>
+						<select name="product"  class="form-control chzn-select"><?php echo $products; ?></select>
                     </div>
                 </div>
 

@@ -51,14 +51,14 @@
                     <label for="text1" class="control-label col-lg-4">Qty</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="pqty" class="form-control" data-placeholder="Point" value="<?php echo $detail[0] -> pqty; ?>" />
+                        <input type="text" name="pqty" class="form-control"  value="<?php echo $detail[0] -> pqty; ?>" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Price</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="pharga" class="form-control" data-placeholder="Point" 
+                        <input type="text" name="pharga" class="form-control"  
 						 value="<?php echo $detail[0] -> pharga; ?>" />
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Discount</label>
                     <div class="col-lg-4">
-                        <input type="text" name="pdisc" class="form-control" data-placeholder="Point" 
+                        <input type="text" name="pdisc" class="form-control"  
 						value="<?php echo $detail[0] -> pdisc; ?>" />
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="pketerangan" class="form-control" placeholder="Description" ><?php echo $detail[0] -> pketerangan; ?></textarea>
+                        <textarea name="pketerangan" class="form-control"  ><?php echo $detail[0] -> pketerangan; ?></textarea>
                     </div>
                 </div>				
 				
@@ -83,7 +83,7 @@
 							<label for="status" class="control-label col-lg-4">Status</label>
                     
                     <div class="col-lg-4">
-						<select name="pstatus" data-placeholder="gudang" class="form-control chzn-select">
+						<select name="pstatus"  class="form-control chzn-select">
 						<option value=0>Pending</option>
 						<option value=1>Ok</option>
 						</select>

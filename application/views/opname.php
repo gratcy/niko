@@ -7,7 +7,21 @@ elseif ($type == 3)
 $add = 'RejectProduct';
 else
 $add = 'Return';
-?>        <!--PAGE CONTENT -->
+?>
+<style type="text/css">
+div#txtHint{position: absolute;
+width: 200px;
+top: 40px;
+max-height: 300px;
+z-index: 9999;
+border: 1px solid #999;
+background: #fff;
+cursor: default;
+overflow: auto;
+left:inherit!important;
+}
+</style>
+        <!--PAGE CONTENT -->
         <div id="content">
             <div class="inner">
                 <div class="row">
@@ -23,6 +37,13 @@ $add = 'Return';
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Opname <?php echo __get_inventory_type($type); ?>
+                <div class="searchTable">
+                <form action="<?php echo current_url();?>" method="post">
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
+                        <span id="sg1"></span>
+                </form>
+                </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -82,3 +103,9 @@ $add = 'Return';
         </div>
         </div>
        <!--END PAGE CONTENT -->
+
+<script type="text/javascript">
+$(function(){
+	$('div.searchTable > form > div.sLeft > input[name="keyword"]').sSuggestion('span#sg1','<?php echo site_url('opname');?>/get_suggestion/<?php echo $type; ?>', 'keyword');
+});
+</script>

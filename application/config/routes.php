@@ -205,6 +205,7 @@ $route['pm/pm_delete/(:num)/(:num)'] = 'pm/home/pm_delete/$1/$2';
 
 $route['opname/?(:num)?/?(:num)?'] = 'opname/home/index/$1/$2';
 $route['opname/opname_update/?(:num)?/?(:num)?'] = 'opname/home/opname_update/$1/$2';
+$route['opname/get_suggestion/(:num)'] = 'opname/home/get_suggestion/$1';
 
 $route['target/?(:num)?'] = 'target/home/index/$1';
 $route['target/target_add'] = 'target/home/target_add';

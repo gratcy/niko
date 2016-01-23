@@ -168,34 +168,32 @@ class Home extends MY_Controller {
 		header('Content-type: application/javascript');
 		$hint = '';
 		$a = array();
-		$q = $_SERVER['QUERY_STRING'];
+		$q = urldecode($_SERVER['QUERY_STRING']);
 		$arr = $this -> products_model -> __get_suggestion();
 		if (strlen($q) < 2) return false;
-		
-		foreach($arr as $k => $v) $a[] = array('name' => $v -> name, 'id' => $v -> id);
-		if (strlen($q) > 0) {
-			for($i=0; $i<count($a); $i++) {
-				$a[$i]['name'] = trim($a[$i]['name']);
-				$num_words = substr_count($a[$i]['name'],' ')+1;
-				$pos = array();
-				$is_suggestion_added = false;
-				
-				for ($cnt_pos=0; $cnt_pos<$num_words; $cnt_pos++) {
-					if ($cnt_pos==0)
-						$pos[$cnt_pos] = 0;
-					else
-						$pos[$cnt_pos] = strpos($a[$i]['name'],' ', $pos[$cnt_pos-1])+1;
-				}
-				
-				if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+		foreach($arr as $k => $v) $a[] = array('name' => trim($v -> name), 'id' => $v -> id);
+
+		for($i=0; $i<count($a); $i++) {
+			$a[$i]['name'] = trim($a[$i]['name']);
+			$num_words = substr_count($a[$i]['name'],' ')+1;
+			$pos = array();
+			$is_suggestion_added = false;
+			
+			for ($cnt_pos=0; $cnt_pos<$num_words; $cnt_pos++) {
+				if ($cnt_pos==0)
+					$pos[$cnt_pos] = 0;
+				else
+					$pos[$cnt_pos] = strpos($a[$i]['name'],' ', $pos[$cnt_pos-1])+1;
+			}
+			
+			if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q))) || stripos($a[$i]['name'],$q)) {
+				$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+				$is_suggestion_added = true;
+			}
+			for ($j=0;$j<$num_words && !$is_suggestion_added;$j++) {
+				if(strtolower($q)==strtolower(substr($a[$i]['name'],$pos[$j],strlen($q)))){
 					$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
-					$is_suggestion_added = true;
-				}
-				for ($j=0;$j<$num_words && !$is_suggestion_added;$j++) {
-					if(strtolower($q)==strtolower(substr($a[$i]['name'],$pos[$j],strlen($q)))){
-						$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
-						$is_suggestion_added = true;                                        
-					}
+					$is_suggestion_added = true;                                        
 				}
 			}
 		}

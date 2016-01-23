@@ -38,6 +38,7 @@ class Home extends MY_Controller {
 			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
 			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
 			$fkp = (int) $this -> input -> post('fkp', TRUE);
+			$sp = (int) $this -> input -> post('sp', TRUE);
 			$creditnico = (int) $this -> input -> post('creditnico', TRUE);
 			$cashnico = (int) $this -> input -> post('cashnico', TRUE);
 			$limit = str_replace(',','',$this -> input -> post('limit', TRUE));
@@ -67,7 +68,7 @@ class Home extends MY_Controller {
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
+				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
 				if ($this -> customers_model -> __insert_customers($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('customers'));
@@ -93,6 +94,7 @@ class Home extends MY_Controller {
 			$addr = $this -> input -> post('addr', TRUE);
 			$addr2 = $this -> input -> post('addr2', TRUE);
 			$fkp = (int) $this -> input -> post('fkp', TRUE);
+			$sp = (int) $this -> input -> post('sp', TRUE);
 			$credit = str_replace(',','',$this -> input -> post('credit', TRUE));
 			$cash = str_replace(',','',$this -> input -> post('cash', TRUE));
 			$creditnico = (int) $this -> input -> post('creditnico', TRUE);
@@ -126,7 +128,7 @@ class Home extends MY_Controller {
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
+					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
 					if ($this -> customers_model -> __update_customers($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));
@@ -166,8 +168,8 @@ class Home extends MY_Controller {
 		header('Content-type: application/javascript');
 		$hint = '';
 		$a = array();
-		$q = $_SERVER['QUERY_STRING'];
-		$arr = $this -> customers_model -> __get_suggestion();
+		$q = urldecode($_SERVER['QUERY_STRING']);
+		$arr = $this -> customers_model -> __get_suggestion((__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 		if (strlen($q) < 2) return false;
 		
 		foreach($arr as $k => $v) $a[] = array('name' => $v -> name, 'id' => $v -> id);
@@ -185,7 +187,7 @@ class Home extends MY_Controller {
 						$pos[$cnt_pos] = strpos($a[$i]['name'],' ', $pos[$cnt_pos-1])+1;
 				}
 				
-				if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q)))) {
+				if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q))) || stripos($a[$i]['name'],$q)) {
 					$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
 					$is_suggestion_added = true;
 				}

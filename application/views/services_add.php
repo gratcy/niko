@@ -22,7 +22,7 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label for="text1" class="control-label col-lg-4">Customer</label>
 
                     <div class="col-lg-4">
-						<select name="scid" data-placeholder="Customer" class="form-control chzn-select"><?php echo $customers; ?></select>
+						<select name="scid"  class="form-control chzn-select"><?php echo $customers; ?></select>
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
                     <label for="text1" class="control-label col-lg-4">Product</label>
 
                     <div class="col-lg-4">
-						<select name="product" data-placeholder="Product" class="form-control chzn-select"><?php echo $products; ?></select>
+						<select name="product"  class="form-control chzn-select"><?php echo $products; ?></select>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                     <label for="text1" class="control-label col-lg-4">QTY</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Quantity" name="qty" class="form-control" />
+                        <input type="text"  name="qty" class="form-control" />
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                     <label for="text1" class="control-label col-lg-4">No Seri</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No Seri" name="noseri" class="form-control" />
+                        <input type="text"  name="noseri" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">

@@ -102,8 +102,8 @@
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
-		  <td><?php echo __get_rupiah($v -> climit,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> ctop,2); ?></td>
+		  <td><?php echo __get_rupiah($v -> climit,2); ?></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

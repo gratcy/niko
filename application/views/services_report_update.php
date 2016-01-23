@@ -24,14 +24,14 @@
                     <label for="text1" class="control-label col-lg-4">Work Order</label>
 
                     <div class="col-lg-4">
-						<select name="wo" data-placeholder="Work Order" class="form-control chzn-select"><?php echo $wo; ?></select>
+						<select name="wo"  class="form-control chzn-select"><?php echo $wo; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="desc" class="form-control" placeholder="Description"><?php echo $detail[0] -> sdesc; ?></textarea>
+                        <textarea name="desc" class="form-control" ><?php echo $detail[0] -> sdesc; ?></textarea>
                     </div>
                 </div>
 

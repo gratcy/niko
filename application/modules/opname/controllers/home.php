@@ -17,21 +17,32 @@ class Home extends MY_Controller {
 	}
 
 	function index($type=1) {
-		if (!$type) $type = 1;
-		
-		if ($type == 1)
-			$perm = (__get_roles('ExecuteAllBranchOpnameProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		elseif ($type == 2)
-			$perm = (__get_roles('ExecuteAllBranchOpnameSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		elseif ($type == 3)
-			$perm = (__get_roles('ExecuteAllBranchOpnameServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		else
-			$perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
-		$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type,$perm),3,10,site_url('opname/' . $type));
-		$view['opname'] = $this -> pagination_lib -> paginate();
-		$view['perm'] = $perm;
-		$view['type'] = $type;
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['pages'] = '';
+		}
+		else {
+			if (!$type) $type = 1;
+			
+			//~ if ($type == 1)
+				//~ $perm = (__get_roles('ExecuteAllBranchOpnameProduct') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			//~ elseif ($type == 2)
+				//~ $perm = (__get_roles('ExecuteAllBranchOpnameSparepart') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			//~ elseif ($type == 3)
+				//~ $perm = (__get_roles('ExecuteAllBranchOpnameServices') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			//~ else
+				//~ $perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
+			//~ 
+			$perm = $this -> memcachedlib -> sesresult['ubid'];
+			
+			$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type,$perm),3,10,site_url('opname/' . $type));
+			$view['opname'] = $this -> pagination_lib -> paginate();
+			$view['perm'] = $perm;
+			$view['type'] = $type;
+			$view['keyword'] = '';
+			$view['pages'] = $this -> pagination_lib -> pages();
+		}
 		$this->load->view('opname', $view);
 	}
 
@@ -105,5 +116,46 @@ class Home extends MY_Controller {
 				
 			$this->load->view(__FUNCTION__, $view);
 		}
+	}
+	
+	function get_suggestion($type) {
+		header('Content-type: application/javascript');
+		$hint = '';
+		$a = array();
+		$q = urldecode($_SERVER['QUERY_STRING']);
+		
+		if ($type == 2 || $type == 5) $arr = $this -> sparepart_model -> __get_suggestion();
+		else $arr = $this -> products_model -> __get_suggestion();
+		
+		if (strlen($q) < 2) return false;
+		
+		foreach($arr as $k => $v) $a[] = array('name' => $v -> name, 'id' => $v -> id);
+		
+		for($i=0; $i<count($a); $i++) {
+			$a[$i]['name'] = trim($a[$i]['name']);
+			$num_words = substr_count($a[$i]['name'],' ')+1;
+			$pos = array();
+			$is_suggestion_added = false;
+			
+			for ($cnt_pos=0; $cnt_pos<$num_words; $cnt_pos++) {
+				if ($cnt_pos==0)
+					$pos[$cnt_pos] = 0;
+				else
+					$pos[$cnt_pos] = strpos($a[$i]['name'],' ', $pos[$cnt_pos-1])+1;
+			}
+			
+			if (strtolower($q)==strtolower(substr($a[$i]['name'],0,strlen($q))) || stripos($a[$i]['name'],$q)) {
+				$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+				$is_suggestion_added = true;
+			}
+			for ($j=0;$j<$num_words && !$is_suggestion_added;$j++) {
+				if(strtolower($q)==strtolower(substr($a[$i]['name'],$pos[$j],strlen($q)))){
+					$hint[] = array('d' => $i, 'i' => $a[$i]['id'], 'n' => $a[$i]['name']);
+					$is_suggestion_added = true;                                        
+				}
+			}
+		}
+		
+		echo json_encode($hint);
 	}
 }

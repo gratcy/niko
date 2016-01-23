@@ -37,7 +37,7 @@
                     <label for="text1" class="control-label col-lg-4">Branch</label>
                     <div class="col-lg-4">
 						<input type=hidden name=id value="<?php echo $id; ?>">						
-						<select name="pbid" data-placeholder="pbid" class="form-control chzn-select"><?php echo $pbid; ?></select>								
+						<select name="pbid"  class="form-control chzn-select"><?php echo $pbid; ?></select>								
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                     <label for="text1" class="control-label col-lg-4">Bukti No.</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="No Bukti" name="pnobukti" class="form-control"
+                        <input type="text"  name="pnobukti" class="form-control"
 						 value="<?php echo $detail[0] -> pnobukti; ?>" />
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     <div class="col-lg-4">
                   
 
-                <input  name="ptgl" type="text" placeholder="click to show datepicker"  id="example1" class="form-control" value="<?php echo date('d/m/Y',strtotime($detail[0] -> ptgl)); ?>" >
+                <input  name="ptgl" type="text"   id="example1" class="form-control" value="<?php echo date('d/m/Y',strtotime($detail[0] -> ptgl)); ?>" >
             </div>
        		</div>
 

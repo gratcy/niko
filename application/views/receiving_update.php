@@ -20,7 +20,7 @@
                 <div class="form-group" id="pbranch">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
                     <div class="col-lg-4">
-						<select name="branch" data-placeholder="Branch" class="form-control chzn-select"><?php echo $branch; ?></select>
+						<select name="branch"  class="form-control chzn-select"><?php echo $branch; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,14 +45,14 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Date</label>
                     <div class="input-group col-lg-4">
-                        <input type="text" placeholder="Date Transfer" name="waktu" class="form-control" autocomplete="off" value="<?php echo date('d/m/Y',$detail[0] -> rdate);?>" />
+                        <input type="text"  name="waktu" class="form-control" autocomplete="off" value="<?php echo date('d/m/Y',$detail[0] -> rdate);?>" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="desc" class="form-control" placeholder="Description"><?php echo $detail[0] -> rdesc;?></textarea>
+                        <textarea name="desc" class="form-control" ><?php echo $detail[0] -> rdesc;?></textarea>
                     </div>
                 </div>
                 <div class="form-group">

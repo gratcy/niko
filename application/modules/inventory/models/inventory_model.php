@@ -6,9 +6,9 @@ class Inventory_model extends CI_Model {
     
     function __get_inventory_main($type) {
 		if ($type == 1 || $type == 3 || $type == 4 || $type == 6)
-			return 'SELECT pid as id,pcode as code,pname as name FROM products_tab WHERE pstatus=1';
+			return 'SELECT pid as id,pcode as code,pname as name FROM products_tab WHERE (pstatus=1 OR pstatus=0)';
 		else
-			return 'SELECT sid as id, scode as code,sname as name FROM sparepart_tab WHERE sstatus=1';
+			return 'SELECT sid as id, scode as code,sname as name FROM sparepart_tab WHERE (sstatus=1 OR sstatus=0)';
 	}
 	
 	function __get_branch_inventory() {
@@ -17,12 +17,11 @@ class Inventory_model extends CI_Model {
 	}
 	
 	function __get_inventory($type, $bid) {
-		if ($bid != "") $bid = " AND ibid=" . $bid;
-		else $bid = "";
+		$bid = " AND ibid=" . $bid;
 		if ($type == 1 || $type == 3 || $type == 4 || $type == 6)
-			return 'SELECT a.*,b.bname,c.pname as name,c.pcode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join products_tab c on a.iiid=c.pid WHERE (a.istatus=1 or a.istatus=0)'.$bid.' and a.itype='.$type.' ORDER BY a.iid DESC';
+			return 'SELECT a.*,b.bname,c.pname as name,c.pcode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join products_tab c on a.iiid=c.pid WHERE (c.pstatus=1 or c.pstatus=0) AND a.istatus=1'.$bid.' and a.itype='.$type.' ORDER BY a.iid DESC';
 		else
-			return 'SELECT a.*,b.bname,c.sname as name,c.scode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join sparepart_tab c on a.iiid=c.sid WHERE (a.istatus=1 or a.istatus=0)'.$bid.' and a.itype='.$type.' ORDER BY a.iid DESC';
+			return 'SELECT a.*,b.bname,c.sname as name,c.scode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join sparepart_tab c on a.iiid=c.sid WHERE (c.sstatus=1 or c.sstatus=0) AND a.istatus=1'.$bid.' and a.itype='.$type.' ORDER BY a.iid DESC';
 	}
 	
 	function __get_total_inventory_branches($id,$bid,$type) {
@@ -56,17 +55,17 @@ class Inventory_model extends CI_Model {
 	function __get_search($keyword, $type, $bid,$main) {
 		if ($main == 1) {
 			if ($type == 1 || $type == 3 || $type == 4 || $type == 6)
-				$this -> db -> select("pid as id,pcode as code,pname as name FROM products_tab WHERE (pname LIKE '%".$keyword."%' OR pcode LIKE '%".$keyword."%') AND pstatus=1", FALSE);
+				$this -> db -> select("pid as id,pcode as code,pname as name FROM products_tab WHERE (pname LIKE '%".$keyword."%' OR pcode LIKE '%".$keyword."%') AND (pstatus=1 OR pstatus=0)", FALSE);
 			else
-				$this -> db -> select("sid as id, scode as code,sname as name FROM sparepart_tab WHERE (sname LIKE '%".$keyword."%' OR scode LIKE '%".$keyword."%') AND sstatus=1", FALSE);
+				$this -> db -> select("sid as id, scode as code,sname as name FROM sparepart_tab WHERE (sname LIKE '%".$keyword."%' OR scode LIKE '%".$keyword."%') AND (sstatus=1 OR sstatus=0)", FALSE);
 		}
 		else {
 			if ($bid != "") $bid = " AND ibid=" . $bid;
 			else $bid = "";
 			if ($type == 1 || $type == 3 || $type == 4 || $type == 6)
-				$this -> db -> select("a.*,b.bname,c.pname as name,c.pcode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join products_tab c on a.iiid=c.pid WHERE (a.istatus=1 or a.istatus=0)".$bid." and a.itype=".$type." AND (c.pname LIKE '%".$keyword."%' OR c.pcode LIKE '%".$keyword."%') ORDER BY a.iid DESC", FALSE);
+				$this -> db -> select("a.*,b.bname,c.pname as name,c.pcode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join products_tab c on a.iiid=c.pid WHERE (c.pstatus=1 or c.pstatus=0) AND a.istatus=1".$bid." and a.itype=".$type." AND (c.pname LIKE '%".$keyword."%' OR c.pcode LIKE '%".$keyword."%') ORDER BY a.iid DESC", FALSE);
 			else
-				$this -> db -> select("a.*,b.bname,c.sname as name,c.scode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join sparepart_tab c on a.iiid=c.sid WHERE (a.istatus=1 or a.istatus=0)".$bid." and a.itype=".$type." AND (c.sname LIKE '%".$keyword."%' OR c.scode LIKE '%".$keyword."%') ORDER BY a.iid DESC", FALSE);
+				$this -> db -> select("a.*,b.bname,c.sname as name,c.scode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join sparepart_tab c on a.iiid=c.sid WHERE (c.sstatus=1 or c.sstatus=0) AND a.istatus=1".$bid." and a.itype=".$type." AND (c.sname LIKE '%".$keyword."%' OR c.scode LIKE '%".$keyword."%') ORDER BY a.iid DESC", FALSE);
 		}
 		return $this -> db -> get() -> result();
 	}

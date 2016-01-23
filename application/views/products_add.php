@@ -22,14 +22,14 @@
                     <label for="text1" class="control-label col-lg-4">Category</label>
 
                     <div class="col-lg-4">
-						<select name="category" data-placeholder="Product Category" class="form-control chzn-select"><?php echo $category; ?></select>
+						<select name="category"  class="form-control chzn-select"><?php echo $category; ?></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Group</label>
 
                     <div class="col-lg-4">
-						<select name="group" data-placeholder="Group" class="form-control chzn-select">
+						<select name="group"  class="form-control chzn-select">
                                 <?php echo $group_product; ?>
                                 </select>
                     </div>
@@ -47,7 +47,7 @@
                     <label for="text1" class="control-label col-lg-4">Code</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Product Code" name="code" class="form-control" />
+                        <input type="text"  name="code" class="form-control" />
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Product Name" name="name" class="form-control" />
+                        <input type="text"  name="name" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -70,7 +70,7 @@
                     <label for="text1" class="control-label col-lg-4">Packaging</label>
 
                     <div class="col-lg-4">
-						<select name="packaging" data-placeholder="Product Packaging" class="form-control chzn-select"><?php echo $packaging; ?></select>
+						<select name="packaging"  class="form-control chzn-select"><?php echo $packaging; ?></select>
                     </div>
                 </div>
 
@@ -133,14 +133,14 @@
                     <label for="text1" class="control-label col-lg-4">Point</label>
 
                     <div class="col-lg-4">
-                        <input type="text" name="point" class="form-control" data-placeholder="Point" />
+                        <input type="text" name="point" class="form-control"  />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="desc" class="form-control" ></textarea>
                     </div>
                 </div>
                 <div class="form-group">
