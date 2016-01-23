@@ -164,11 +164,14 @@ var badColor = "#ff6666";
             <h5>Sales Order Detail Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
-	<?php echo __get_error_msg(); ?>
+	<?php echo __get_error_msg();
+$discdate= $this->uri->segment(6);
+	?>
 							
 
- <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
+ <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid/$discdate"); ?>" method="post">
 <table border=0 width=100% ><tr><td width=40% valign=top >
+<input type=hidden name="discdate" value="<?=$discdate;?>">
                 <!--div class="form-group" style="display:none">
                     <label for="text1" class="control-label col-lg-4">Branch  </label>
 
@@ -177,7 +180,14 @@ var badColor = "#ff6666";
 					<input type=hidden value="<?php //echo $detailx[0]->sbid; ?>" class="form-control" disabled>
                     </div>
                 </div-->
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Reff No.</label>
 
+                    <div class="col-lg-4">
+                       <input type=hidden name=id value="<?php echo $id; ?>">
+					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">SO No.</label>
 
@@ -374,7 +384,7 @@ var badColor = "#ff6666";
 				
 <?php }
 
-$discdate= $this->uri->segment(6);
+
 ?>
 				
                 <div class="form-group">
@@ -387,11 +397,11 @@ $discdate= $this->uri->segment(6);
 							<input type=hidden  id="thePdisc" class="form-control" name=ddisc  >
 						<?php }elseif(($detailx[0]->stypepay=="credit")AND($discdate==1)){ ?>  
 							<!--input type=text   class="form-control" name=ddisc value="0" -->
-							<input type=text  id="thePdiscDatenew" class="form-control" disabled  >
-							<input type=hidden  id="thePdiscDate" class="form-control" name=ddisc  >
+							<input type=text  id="thePdiscDatenew" class="form-control" name=ddisc  >
+							<input type=hidden  id="thePdiscDate" class="form-control"   >
 						<?php }else{?>
-						<input type=text  id="theDiscnew" class="form-control" disabled  >				
-						<input type=hidden  id="theDisc" class="form-control" name=ddisc  >
+						<input type=text  id="theDiscnew" class="form-control"  name=ddisc  >				
+						<input type=hidden  id="theDisc" class="form-control"  >
 						<?php }?>
                     </div>
                 </div>	
@@ -502,13 +512,13 @@ location.reload() //reload the doc (should happen whether download is in progres
 
 
   <div class="panel-body">
-                            <div class="table-responsive">
-							<?php 
-							$freeppn=$detailx[0]->sfreeppn;
-							?>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
+    <div class="table-responsive">
+		<?php 
+		$freeppn=$detailx[0]->sfreeppn;
+		?>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
           
           <th>Code</th>
           <th>Name</th>

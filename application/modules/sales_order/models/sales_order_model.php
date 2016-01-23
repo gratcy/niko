@@ -9,6 +9,20 @@ class sales_order_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 	
+	function __get_limit_before($sid,$scid) {
+		$this -> db -> select("sototal,scid,
+(SELECT climit FROM customers_tab WHERE scid=cid) AS climit
+ FROM sales_order_tab WHERE sid='".$sid."' AND scid='".$scid."'");
+
+		$sql= $this -> db -> get() -> result();
+		 print_r($sql);
+		 $sototal=$sql[0]->sototal;
+		 $climit=$sql[0]->climit;
+		 $limitx=$sototal+$climit;
+		 return $limitx;
+		 //die;
+	}
+	
 	function __get_sales_order() {
 		return 'SELECT *,
 		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,

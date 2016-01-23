@@ -22,7 +22,7 @@ class Home extends MY_Controller {
 			$view['sales_order'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_sales_order(),3,10,site_url('sales_order'));
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_sales_order(),3,10,site_url('delivery_order/home/index/'));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
@@ -43,9 +43,10 @@ class Home extends MY_Controller {
 		$this->load->view('delivery_order_sub', $view);
 	}
 
-	function invoice_order($sbid) {	
-            
-			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list(),3,10,site_url('delivery_order/home/invoice_order/'.$sbid));
+	function invoice_order() {	
+            $sbid= $this -> memcachedlib -> sesresult['ubid'];
+			//die;
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list(),3,5,site_url('delivery_order/home/invoice_order/'));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			//$view['id'] = $id;
@@ -55,9 +56,9 @@ class Home extends MY_Controller {
 			$this->load->view('invoice_order', $view);
 	}
 
-	function invoice_order_report($sbid) {	
-            
-			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list_detail(),3,10,site_url('delivery_order/home/invoice_order/'.$sbid));
+	function invoice_order_report() {	
+            $sbid= $this -> memcachedlib -> sesresult['ubid'];
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list_detail(),3,5,site_url('delivery_order/home/invoice_order_report/'));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			//$view['id'] = $id;

@@ -51,10 +51,11 @@ left:inherit!important;
 		  <th>Reff. No.</th>
           <th>SO No.</th>    
           <th>Date</th>
-		  <th>Expired Date</th>
+		  <th>Expiry Date</th>
           <th>Customer </th>
           <th>Sales</th>
           <th>Payment Type</th>
+		  <th>PPN</th>
 		  <th>Status</th>
 		  <th style="width: 50px;"></th>
                                         </tr>
@@ -69,11 +70,13 @@ left:inherit!important;
 -->
           <td><?php echo $v -> sreff; ?></td>
 		  <td><?php echo $v -> snoso; ?></td>      
-          <td><?php echo date('d F Y',strtotime($v -> stgl)); ?></td>
-		  <td><?php echo date('d F Y',strtotime($v -> sduedate)); ?></td>
+          <td><?php echo date('d/m/Y',strtotime($v -> stgl)); ?></td>
+		  <td><?php $stgl_invoice= $v -> stgl; 
+		  echo date( "d/m/Y", strtotime( "$stgl_invoice + 30 day" ) ); ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
-		  <td><?php echo $v -> stypepay; ?></td>
+		  <td><?php echo ucfirst($v -> stypepay); ?></td>
+		  <td><?php if($v -> sfreeppn ==1){ echo 'Yes';}else{ echo 'No';} ; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
 		  if($sstatus==0){
@@ -102,6 +105,10 @@ left:inherit!important;
 				<?php if (__get_roles('SalesOrderDelete')) : ?>
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+			  <?php } ?>
+			  
+			  <?php if(($sstatus==3)and ($v -> dstatus<>3)){?>
+              <a href="<?php echo site_url('sales_order/home/sales_order_cancel/' . $v -> sid.'/'.$v ->scid); ?>" onclick="return confirm('Are you sure you want to cancel this item?');"><i class="icon-remove"></i></a>
 			  <?php } ?>
                 <?php endif; ?>
           </td>		

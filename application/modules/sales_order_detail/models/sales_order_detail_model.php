@@ -37,7 +37,7 @@ class sales_order_detail_model extends CI_Model {
 		(select climit from customers_tab where customers_tab.cid=sales_order_tab.scid)as sisaplafon,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
 		delivery_order_detail_tab.snodo as snodo
-		FROM sales_order_tab,delivery_order_detail_tab WHERE  sales_order_tab.sid=delivery_order_detail_tab.ssid AND (sstatus=1 OR sstatus=3) AND sales_order_tab.sid='" . $id . "' AND delivery_order_detail_tab.snodo='" .$snodo ."'");
+		FROM sales_order_tab,delivery_order_detail_tab WHERE  sales_order_tab.sid=delivery_order_detail_tab.ssid AND (sstatus=1 OR sstatus=3)  AND delivery_order_detail_tab.snodo='" .$snodo ."'");
 		return $this -> db -> get() -> result();
 	}	
 	

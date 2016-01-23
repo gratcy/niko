@@ -17,9 +17,9 @@ $req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pc
 (select g.cdiscount from categories_tab g where g.cid= a.pcid) as pdisc
  "
 	." FROM products_tab  a LEFT JOIN moq_tab b ON a.pid=b.mpid"
-	." WHERE b.mbid='$bidx' $wpcid and a.pname LIKE '%".$_REQUEST['term']."%'"; 
+	." WHERE b.mbid='$bidx' $wpcid and (a.pname LIKE '%".$_REQUEST['term']."%'   OR a.pcode LIKE '%".$_REQUEST['term']."%' )"; 
 
-	//echo "$req";
+	//echo "$req";die;
 	
 $qq="select * from customers_tab where cid= '$scid'";
 $qr=mysql_query($qq);

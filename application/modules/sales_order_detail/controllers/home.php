@@ -73,7 +73,8 @@ class Home extends MY_Controller {
 			
 			$sqtykoli= $this -> input -> post('sqtykoli', TRUE);
 			
-		
+		$discdate=$_POST['discdate'];
+		//echo $discdate;die;
 		if($_POST['add_plafon']==1){
 		//echo $scid;
 		
@@ -81,7 +82,7 @@ class Home extends MY_Controller {
 				$arr = array('climit' => $limit);
 					$this -> customers_model -> __update_customers($scid, $arr);
 						__set_error_msg(array('info' => 'Plafon berhasil ditambahkan.'));
-						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));
+						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .'/'.$discdate));
 		
 		}
 
@@ -127,11 +128,11 @@ class Home extends MY_Controller {
 					if ($this -> sales_order_detail_model -> __insert_sales_order_detail($arr)) {
 
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
-						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));
+						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .'/'.$discdate));
 					}
 					else {
 						__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
-						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));
+						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .'/'.$discdate));
 					}
 
 		}

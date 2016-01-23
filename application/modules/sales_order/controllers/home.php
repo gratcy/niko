@@ -21,7 +21,7 @@ class Home extends MY_Controller {
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order/home/'));
+			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order/home/index'));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
@@ -191,6 +191,22 @@ class Home extends MY_Controller {
 		$this->load->view('sales_order_update',$view);
 		}
 	}
+	
+	
+	function sales_order_cancel($id,$scid) {
+		
+			//update limit + limit so berdasarkan id so dan id cust
+			$limitx=$this -> sales_order_model -> __get_limit_before($id,$scid);
+				
+				$arrl = array('climit' => $limitx);
+				$this -> customers_model -> __update_customers($scid, $arrl);
+				$this -> sales_order_model -> __delete_sales_order($id);
+			redirect ('sales_order/home');		
+	
+
+	}	
+	
+	
 	
 	function sales_order_delete($id) {
 		if ($this -> sales_order_model -> __delete_sales_order($id)) {

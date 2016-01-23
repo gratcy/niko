@@ -75,6 +75,16 @@ minLength: 1,
 
  <form  id="form1" class="form-horizontal"  method="post">
 <table border=0 width=90% ><tr><td width=50%>
+
+<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Reff No.</label>
+
+                    <div class="col-lg-4">
+                       <input type=hidden name=id value="<?php echo $id; ?>">
+					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">DO No.</label>
 

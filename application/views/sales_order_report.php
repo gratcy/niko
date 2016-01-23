@@ -64,6 +64,17 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <td></td><td></td>
 </tr>
 
+
+
+
+
+
+
+<tr>
+<td width="10%" align=left  ><b>Reff No.</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->sreff; ?></td><td width="10%"></td><td valign=top width=30% ></td>
+</tr>
+
+
 <tr>
 <td width="10%" align=left  ><b>SO No.</b></td><td width="30%" ><?php //echo $detailx[0]->ssid; ?><?php echo $detailx[0]->snoso; ?></td><td width="10%"></td><td rowspan=3 valign=top width=30% ></td>
 
@@ -84,7 +95,7 @@ $caddrx=explode("*",$detailx[0]->caddr);
 
 <tr>
 <td width="10%" align=left  ><b>Date</b></td><td width="30%" ><?php echo date('d/m/Y',strtotime($detailx[0]->stgl)); ?></td><td width="10%"></td>
-<td  align=left  ><b>Expired Date</b></td><td align=left ><?php echo date('d/m/Y',strtotime($detailx[0]->sduedate)); ?></td>
+<td  align=left  ><b>Expiry Date</b></td><td align=left ><?php echo date('d/m/Y',strtotime($detailx[0]->sduedate)); ?></td>
 </tr>
 <tr>
 <tr>

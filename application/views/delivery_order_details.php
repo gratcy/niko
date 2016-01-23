@@ -84,6 +84,16 @@ minLength: 1,
 					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
                     </div>
                 </div-->
+				
+                <div class="form-group">
+				<br>
+                    <label for="text1" class="control-label col-lg-4">Reff No.</label>
+
+                    <div class="col-lg-4">
+                       <input type=hidden name=id value="<?php echo $id; ?>">
+					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
+                    </div>
+                </div>					
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">DO No.</label>

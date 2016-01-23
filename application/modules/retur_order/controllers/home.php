@@ -21,7 +21,7 @@ class Home extends MY_Controller {
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> retur_order_model -> __get_retur_order(),3,10,site_url('retur_order'));
+			$pager = $this -> pagination_lib -> pagination($this -> retur_order_model -> __get_retur_order(),3,10,site_url('retur_order/home/index/'));
 			$view['retur_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';

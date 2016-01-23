@@ -302,7 +302,7 @@ function displayDiv(id,sel){
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-8">
                        	<input type=checkbox value=1 name="discdate">&nbsp;&nbsp;Early Date Discount
 
                     </div>

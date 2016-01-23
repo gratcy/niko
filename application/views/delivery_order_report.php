@@ -61,6 +61,7 @@ $drv=explode("-",$detailx[0]->driver);
 </table>
 <div style="width:800px;margin:0 auto;">
 <table class="gridtablex" border=0 width="500px" style="float:left;">
+<tr><td><b>Reff No.</b></td><td><?php echo $detailx[0]->sreff; ?></td></tr>
 <tr><td><b>DO No.</b></td><td><?php echo $detailx[0]->snodo; ?></td></tr>
 <tr><td><b>Date</b></td><td><?php echo __get_date(strtotime($detailx[0]->stgldo)); ?></td></tr>
 <tr><td><b>Customer</b></td><td><?php echo $detailx[0]->cname; ?></td></tr>

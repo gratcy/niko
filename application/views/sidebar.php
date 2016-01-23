@@ -175,7 +175,18 @@
                 </li>
 			   <?php endif; ?>
 											
-	
+                <!--li class="panel ">
+                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#report">
+                        <i class="icon-link"> </i> Report
+                        <span class="pull-right">
+                          <i class="icon-angle-left"></i>
+                        </span>
+                       &nbsp; <span class="label label-danger">3</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="report">
+                         <li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order_report/'.$bid); ?>"><i class="icon-angle-right"></i> Invoice Report </a></li>
+                    </ul>
+                </li-->	
 
 <?php if (__get_roles('ServicesWOView') || __get_roles('ServicesSparepartView') || __get_roles('ServicesReportView')) : ?>
                 <li class="panel ">
@@ -234,8 +245,9 @@
                        &nbsp; <span class="label label-danger">3</span>&nbsp;
                     </a>
                     <ul class="collapse" id="Report">
-                       
+                       <li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order_report/'.$bid); ?>"><i class="icon-angle-right"></i> Invoice Report </a></li>
 						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
+						
                         <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> Technical Commision </a></li>
                         <li class=""><a href="javascript:void(0);"><i class="icon-angle-right"></i> Stock Opname </a>
                         <ul>

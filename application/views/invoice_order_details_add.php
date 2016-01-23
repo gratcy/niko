@@ -162,7 +162,7 @@ $caddr=explode("*",$detailx[0]->caddr);
                     <label for="text1" class="control-label col-lg-4">&nbsp;</label>
 
                     <div class="col-lg-4">
-                       <input class="btn text-muted text-center btn-danger" type=submit value ="PRINT" > 
+                       <input class="btn text-muted text-center btn-danger" type=submit value ="CREATE" > 
                     </div>
                 </div>					
 				
