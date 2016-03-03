@@ -39,7 +39,7 @@ class Home extends MY_Controller {
 		
 		}
 		
-		
+		//print_r($view);die;
 		$this->load->view('sales_order', $view);
 	}
 	
@@ -77,14 +77,16 @@ class Home extends MY_Controller {
 			$sppnnpwp = 0;
 			$stotalsubppn = 0;
 			$sppn = 0;
-			$stotal = 0;			
+			$stotal = 0;
+			$sket=$sketerangan.'**'.$discdate;	
 					$sduration=$this -> sales_order_model -> __get_duration($stype,$stypepay,$scid);
-					$sduration=$sduration[0]->sduration;
+					
+					if($discdate==1){ $sduration=($sduration[0]->sduration) - 30;}else{ $sduration=$sduration[0]->sduration; }
 					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
 					'sreff' => $sreff,'stgl' => $stgl, 'scid'=>$scid,'stype' => $stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
-					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay,
+					'sketerangan' => $sket,'sduedate'=>$sduedate,'stypepay'=>$stypepay,
 					'sduration'=>$sduration );	
 				 
 					 
@@ -125,6 +127,7 @@ class Home extends MY_Controller {
 	
 	function sales_order_update($id,$scid) {
 		if ($_POST) {
+			$scid=$this -> input -> post('cid', TRUE);
 			$sbid = $this -> input -> post('sbid', TRUE);
 			$snoso = $this -> input -> post('snoso', TRUE);			
 			$stgl = $this -> input -> post('stgl', TRUE);

@@ -1,8 +1,8 @@
-<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+ <!-- CSS goes in the document HEAD or added to your external stylesheet -->
 <style type="text/css">
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:12px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -10,14 +10,14 @@ table.gridtable {
 }
 table.gridtable th {
 	border-width: 1px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtable td {
 	border-width: 1px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -27,7 +27,7 @@ table.gridtable td {
 <style type="text/css">
 table.gridtablex {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:12px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -35,14 +35,14 @@ table.gridtablex {
 }
 table.gridtablex th {
 	border-width: 0px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtablex td {
 	border-width: 0px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -54,12 +54,12 @@ $caddr=explode("*",$detailx[0]->caddr);
 $drv=explode("-",$detailx[0]->driver);
 ?>
 <p align=center>
-<table class="gridtablex" border=0 width=800px >
+<table class="gridtablex" border=0 width=900px >
 <tr>
 <td colspan="4" width="40%" align="center"><h1>DELIVERY ORDER</h1></td>
 </tr>
 </table>
-<div style="width:800px;margin:0 auto;">
+<div style="width:900px;margin:0 auto;">
 <table class="gridtablex" border=0 width="500px" style="float:left;">
 <tr><td><b>Reff No.</b></td><td><?php echo $detailx[0]->sreff; ?></td></tr>
 <tr><td><b>DO No.</b></td><td><?php echo $detailx[0]->snodo; ?></td></tr>
@@ -85,7 +85,7 @@ $drv=explode("-",$detailx[0]->driver);
 							$freeppn=$detailx[0]->sfreeppn;
 							//echo $freeppn; 
 							?>
-                                <table class="gridtable" width=800 >
+                                <table class="gridtable" width=900 >
                                     <thead>
                                         <tr>
           
@@ -137,19 +137,13 @@ $drv=explode("-",$detailx[0]->driver);
 
 </p>	
 
-<br />
+
 <p align=center>
-<table class="gridtable" width=800px >
+<table class="gridtable" width=900px >
 <tr>
-	<th width=20% >H. WAREHOUSE </th><th width=20% >A. WAREHOUSE</th><th width=20% >DRIVER</th><th width=20% >A. DRIVER</th><th width=20% >CUSTOMER</th>
-</tr>
-<tr>
-	<td><br><br></td><td></td><td></td><td></td><td></td>
+	<th width=20%  valign=top >H. WAREHOUSE <br><br><br><br><br></th><th width=20% valign=top >A. WAREHOUSE</th><th width=20% valign=top >DRIVER</th><th width=20% valign=top >A. DRIVER</th><th width=20% valign=top >CUSTOMER</th>
 </tr>
 
-<tr>
-	<td></td><td></td><td></td><td></td><td></td>
-</tr>
 
 </table>
 </p>	

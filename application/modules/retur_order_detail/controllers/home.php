@@ -29,20 +29,27 @@ class Home extends MY_Controller {
 	function retur_order_details($id,$scid) {
 	
 	if(!isset($_POST['approve'])){$_POST['approve']="";}
-	
+	//echo "a";die;
 		if($_POST['approve']=='1'){
+			
+			//echo "b";die;
 			$jp=count($_POST['pid']);
 			$sbidx=$this -> input -> post('sbidx', TRUE);
+			$sbidx= $this -> memcachedlib -> sesresult['ubid'];
 			$id=$this -> input -> post('id', TRUE);
 			for($i=0;$i<$jp;$i++){
-				$pcode=$_POST['pid'][$i];
+				$pid=$_POST['pid'][$i];
 				$sqty=$_POST['sqty'][$i];
 				$itype=4;
+				$arrp=array('istockin'=>$sqty);
 				//echo $sbidx;die;
-				$this -> retur_order_detail_model -> __update_invoice($pid, $sqty,$itype,$sbidx);
+				$this -> retur_order_detail_model -> __update_inventory_retur($pid, $sqty,$itype,$sbidx);
+				//$this -> retur_order_detail_model ->__update_inventory_retur($pid,$sbidx,$arrp);
 			}
+			
 			$arr=array('sstatus' => '3');
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
+			
 			$jum=count($_POST['sqty']);
 			redirect(site_url('retur_order/home'));	
 		}

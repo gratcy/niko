@@ -14,7 +14,7 @@ mysql_select_db($mysql_database);
 
 $req = "SELECT pid,pcid,ppid, pcode,pname,pdesc,phpp,pdist,psemi,pkey,pstore, pconsume,ppoint,pstatus,pvolume,
 (select g.cdiscount from categories_tab g where g.cid= a.pcid) as pdisc
-  FROM products_tab  a  WHERE  a.pname LIKE '%".$_REQUEST['term']."%'"; 
+  FROM products_tab  a  WHERE  a.pcode LIKE '%".$_REQUEST['term']."%' OR a.pname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req";
 	

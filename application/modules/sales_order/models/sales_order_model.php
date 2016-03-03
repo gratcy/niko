@@ -106,7 +106,13 @@ class sales_order_model extends CI_Model {
 	}
 	
 	function __get_search($keyword) {
-		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname, (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname FROM sales_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) AND (sref LIKE '%".$keyword."%' OR snoso LIKE '%".$keyword."%') ORDER BY sid DESC");
+		
+		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname, 
+		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,
+		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname, 
+		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname FROM sales_order_tab,customers_tab WHERE 
+		(sstatus<>2 ) AND (sreff LIKE '%".$keyword."%' OR snoso LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
+		AND customers_tab.cid=sales_order_tab.scid ORDER BY sid DESC");
 		return $this -> db -> get() -> result();
 	}
 }

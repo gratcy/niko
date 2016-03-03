@@ -27,6 +27,8 @@ class sales_order_detail_model extends CI_Model {
 	function __get_delivery_order_detail($id,$snodo) {
 	
 		$this -> db -> select("*,sum(delivery_order_detail_tab.tamount)as juminv,sales_order_tab.ssid as ssid_sales, delivery_order_detail_tab.ssid as ssid_so,			
+		(select sduration from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sdurationx,
+		
 		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
 		(select caddr from customers_tab where customers_tab.cid=sales_order_tab.scid)as caddr,
@@ -78,7 +80,7 @@ class sales_order_detail_model extends CI_Model {
 		$istockout=$data['istockout'];
 		// echo $istockout.$sbid.$spid;
 		// die;
-        return $this->db -> query("update inventory_tab set istockout='$istockout', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
+        return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
         
 	}	
 	function __update_inventoryin($spid,$sbid,$data) {

@@ -62,7 +62,7 @@
                     <label for="text1" class="control-label col-lg-4">Volume/Pcs</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Volume / Pcs" name="isi" class="form-control" value="<?php echo $detail[0] -> pvolume; ?>" />
+                        <input type="text" name="isi" class="form-control" value="<?php echo $detail[0] -> pvolume; ?>" />
                     </div>
                 </div>
                 <div class="form-group">

@@ -2,7 +2,7 @@
 <style type="text/css">
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:12px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -10,14 +10,14 @@ table.gridtable {
 }
 table.gridtable th {
 	border-width: 1px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtable td {
 	border-width: 1px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -27,7 +27,7 @@ table.gridtable td {
 <style type="text/css">
 table.gridtablex {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:12px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -35,14 +35,14 @@ table.gridtablex {
 }
 table.gridtablex th {
 	border-width: 0px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtablex td {
 	border-width: 0px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -55,7 +55,7 @@ table.gridtablex td {
 $caddrx=explode("*",$detailx[0]->caddr);
 
 ?>
-<table class="gridtablex" border=0 width=800 align=center >
+<table class="gridtablex" border=0 width=900 align=center >
 <tr>
 <td rowspan=2 colspan=6  align=center  >
 <h1>SALES ORDER</h1></td>
@@ -115,19 +115,19 @@ $caddrx=explode("*",$detailx[0]->caddr);
 							$freeppn=$detailx[0]->sfreeppn;
 							//echo $freeppn; 
 							?>
-                                <table class="gridtable" width=800 border=1 >
+                                <table class="gridtable" width=900 border=1 >
                                     <thead>
                                         <tr>
           
-          <th>Code</th>
-          <th>Name</th>
-          <th>Qty/Coly</th>
-		  <th>Qty/Pcs</th>
-          <th>Normal Price</th>
+          <th width=11% >Code</th>
+          <th width=35% >Name</th>
+          <th width=10 >Qty/ Coly</th>
+	  <th width=10 >Qty/ Pcs</th>
+          <th width=9% >Normal Price</th>
           <th>Promo Discount </th>
 		  <th>Payment Discount </th>
-		  <th>Net Price </th>
-		  <th>Total</th>
+		  <th width=10% >Net Price </th>
+		  <th width=16% >Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -141,20 +141,28 @@ $caddrx=explode("*",$detailx[0]->caddr);
 			//print_r($v);
 			$sqtyx=$v -> sqty;
 			if($freeppn==1){
-			$spricex=$v -> sprice/1.1;
+			$spricex=$v -> sprice;
 			}else{
 			$spricex=$v -> sprice;	
 			}	
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+			
+			$colyy=number_format(($v -> sqty/$v -> pvolume),2);
 	
+			$colyyx= str_replace('.00','',$colyy);
+				
+
+			
     ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
           <td><?php echo $v -> pname; ?></td>
-		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
+		  <td><?php echo $colyyx; ?></td>
           <td><?php echo $v -> sqty; ?></td>
           <td align=right ><?php echo __get_rupiah($spricex,2); ?></td>
           <td align=right ><?php echo __get_rupiah($v -> spromodisc,2); ?></td>
@@ -225,21 +233,15 @@ $caddrx=explode("*",$detailx[0]->caddr);
                                     </tbody>
                                 </table>
 </p>	
-<p align=center>
-<br>
-</p>
+
 
 <p align=center>
-<table class="gridtable" width=800px >
+<table class="gridtable" width=900px >
 <tr>
-	<th width="25%">SALES </th><th width="25%">ADMIN 1</th><th width="25%">ADMIN 2</th><th width="25%" >CUSTOMER</th>
+	<th width="25%" valign=top >SALES <br><br><br><br><br></th><th width="25%" valign=top >ADMIN 1</th><th width="25%" valign=top  >ADMIN 2</th><th width="25%" valign=top  >CUSTOMER</th>
 </tr>
-<tr>
-	<td><br><br></td><td></td><td></td><td></td>
-</tr>
-<tr>
-	<td></td><td></td><td></td><td></td>
-</tr>
+
+
 
 
 </table>

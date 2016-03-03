@@ -59,8 +59,15 @@ class Home extends MY_Controller {
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
+
+		$view['hostname']=$this->db->hostname;
+		$view['username']=$this->db->username;
+		$view['password']=$this->db->password;
+		$view['database']=$this->db->database;		
+
 	
-			$this->load->view('sales_order_report',$view,FALSE);
+			//$this->load->view('sales_order_report',$view,FALSE);
+			$this->load->view('print_so',$view,FALSE);
 	}	
 
 
@@ -521,14 +528,21 @@ function invoice_order_add($id,$scid,$snodo) {
 
 	function delivery_order_report($id,$sbid,$snodo) {
 			$view['id'] = $id;
+			$view['snodo'] = $snodo;
 			$view['sbid'] = $sbid;
 			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
 			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);						
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
-	
-			$this->load->view('delivery_order_report',$view,FALSE);
+			$view['hostname']=$this->db->hostname;
+			$view['username']=$this->db->username;
+			$view['password']=$this->db->password;
+			$view['database']=$this->db->database;		
+			
+			//$this->load->view('delivery_order_report',$view,FALSE);
+			$this->load->view('print_do',$view,FALSE);
+
 	}	
 	
 	
@@ -550,16 +564,18 @@ function invoice_order_add($id,$scid,$snodo) {
 
 			
 
-// echo '<pre>';
-			// print_r($view['detail']);
-			// echo '</pre>';
 			
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
+
+			$view['hostname']=$this->db->hostname;
+			$view['username']=$this->db->username;
+			$view['password']=$this->db->password;
+			$view['database']=$this->db->database;	
 			
-	        //$this -> sales_order_detail_model -> __update_invoice_order($snodo,$arr);
-			$this->load->view('invoice_report',$view,FALSE);
+			//$this->load->view('invoice_report',$view,FALSE);
+			$this->load->view('print_invoice',$view,FALSE);
 	}		
 	
 	

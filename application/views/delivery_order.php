@@ -54,7 +54,7 @@ minLength: 1,
         <div id="content">
                 <div class="inner">
                     <div class="row">
-               
+
             </div>
 <div class="row">
 <div class="col-lg-12">

@@ -52,7 +52,9 @@ left:inherit!important;
           <th>TOP Cash</th>
           <th>TOP Credit</th>
           <th>Credit Current</th>
+		  <th>Receivable</th>
           <th>TOP Credit Limit</th>
+		  <th>Special Attention</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -70,7 +72,14 @@ left:inherit!important;
           <td><?php echo __get_rupiah($v -> ccash,2); ?></td>
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
           <td><?php echo __get_rupiah($v -> climit,2); ?></td>
+		   <td><?php 
+		   $rec=$v -> ctop-$v -> climit;
+		   echo __get_rupiah($rec,2); ?></td>
           <td><?php echo __get_rupiah($v -> ctop,2); ?></td>
+		  <td><?php 
+		  if($v -> cspecial==0){$spc="NO";}else{$spc="YES";}
+		  
+		  echo  $spc ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CustomersUpdate')) : ?>

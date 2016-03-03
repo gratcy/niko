@@ -18,18 +18,38 @@
 <script> 
 function togle(){
 	//alert(1);
-var pt=document.getElementById('ptx').value;	
-if(pt==1){
-	document.getElementById('niko').style.display = 'none';	
-	document.getElementById('nico').style.display = 'block';
-	document.getElementById('crniko').style.display = 'none';	
-	document.getElementById('crnico').style.display = 'block';	
-}else {
-	document.getElementById('niko').style.display = 'block';	
-	document.getElementById('nico').style.display = 'none';
-	document.getElementById('crniko').style.display = 'block';	
-	document.getElementById('crnico').style.display = 'none';	
+	var pt=document.getElementById('ptx').value;	
+	if(pt==1){
+		document.getElementById('niko').style.display = 'none';	
+		document.getElementById('nico').style.display = 'block';
+		document.getElementById('crniko').style.display = 'none';	
+		document.getElementById('crnico').style.display = 'block';
+                document.getElementById('pcrd').style.display = 'none';		
+	}else {
+		document.getElementById('niko').style.display = 'block';	
+		document.getElementById('nico').style.display = 'none';
+		document.getElementById('crniko').style.display = 'block';	
+		document.getElementById('crnico').style.display = 'none';
+                document.getElementById('pcrd').style.display = 'block';		
+	}
+
+
+
 }
+</script> 
+
+<script> 
+function toglex(){
+	
+	var pty=document.getElementById('ptype').value;
+	
+	if(pty=="Cash"){
+		document.getElementById('pcrd').style.display = 'none';	
+	
+	}else if(pty=="Credit"){
+		document.getElementById('pcrd').style.display = 'block';	
+	
+	}
 
 
 
@@ -289,7 +309,7 @@ function displayDiv(id,sel){
                     <label for="text1" class="control-label col-lg-4">Payment Type</label>
 
                     <div class="col-lg-4">
-                       	<select name=stypepay class="form-control chzn-select">
+<select id="ptype" name="stypepay" class="form-control chzn-select" onchange="toglex()">                       	
 						<!--option>Auto</option-->
 						<option>Credit</option>
 						<option>Cash</option>						
@@ -302,7 +322,7 @@ function displayDiv(id,sel){
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label>
 
-                    <div class="col-lg-8">
+                 <div class="col-lg-8" id="pcrd"  >
                        	<input type=checkbox value=1 name="discdate">&nbsp;&nbsp;Early Date Discount
 
                     </div>

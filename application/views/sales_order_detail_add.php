@@ -48,6 +48,7 @@ minLength: 1,
 		$("#thePdisc").val(ui.item.pdisc),
 		$("#thePdiscnew").val(ui.item.pdisc),
 		$("#thePdiscDatenew").val(ui.item.cdiscdate),
+                $("#thePdiscDate").val(ui.item.cdiscdate),
 		$("#theDisc").val(ui.item.ddisc),
 		$("#theDiscnew").val(ui.item.ddisc),
 		$("#thePrice").val(ui.item.price),
@@ -144,6 +145,7 @@ var badColor = "#ff6666";
   }
 </script>
 
+
 	
 </head>		
 		
@@ -209,7 +211,7 @@ $discdate= $this->uri->segment(6);
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Due Date</label>
+                    <label for="text1" class="control-label col-lg-4">Expire Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->sduedate),1); ?>" class="form-control" disabled>
@@ -233,6 +235,7 @@ $discdate= $this->uri->segment(6);
 		<?php 
 		$ccats= $detailx[0]->ccat; 
 		$cname = __get_customer_category($ccats,1);
+		//print_r($detailx[0]);
 		?>
                     <div class="col-lg-4">
                        	<!--input type=text  id="theNamecat" class="form-control" disabled-->
@@ -255,7 +258,10 @@ $discdate= $this->uri->segment(6);
                     <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
 
                     <div class="col-lg-4">
-					<input type=text value="<?php echo __get_rupiah($detailx[0]->sisaplafon,2); ?>" class="form-control"  disabled >
+					<input type=text value="<?php 
+					
+					$curlimit=$detailx[0]->toplimit - $detailx[0]->sisaplafon;
+					echo __get_rupiah($curlimit,2); ?>" class="form-control"  disabled >
                         <input type=hidden value="<?php echo $detailx[0]->sisaplafon; ?>" class="form-control" name="sisaplafon" >
                     </div>
                 </div>		
@@ -396,12 +402,15 @@ $discdate= $this->uri->segment(6);
 							<input type=text  id="thePdiscnew" class="form-control" disabled  >
 							<input type=hidden  id="thePdisc" class="form-control" name=ddisc  >
 						<?php }elseif(($detailx[0]->stypepay=="credit")AND($discdate==1)){ ?>  
-							<!--input type=text   class="form-control" name=ddisc value="0" -->
-							<input type=text  id="thePdiscDatenew" class="form-control" name=ddisc  >
-							<input type=hidden  id="thePdiscDate" class="form-control"   >
+							<div style="display:none">
+							<input type=text  id="thePdiscDatenew" class="form-control" name="ddisc"  >
+                                                        </div>
+							<input type=text  id="thePdiscDate" class="form-control"  disabled >
 						<?php }else{?>
-						<input type=text  id="theDiscnew" class="form-control"  name=ddisc  >				
-						<input type=hidden  id="theDisc" class="form-control"  >
+						<input type=text  id="theDiscnew" class="form-control"   disabled  >	
+			                         <div style="display:none">
+						<input type=text   id="theDisc" class="form-control" name=ddisc >
+                                                 </div>
 						<?php }?>
                     </div>
                 </div>	
@@ -551,13 +560,19 @@ location.reload() //reload the doc (should happen whether download is in progres
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
 			
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+			
+			$colyy=number_format(($v -> sqty/$v -> pvolume),2);
+	
+			$colyyx= str_replace('.00','',$colyy);
+				
 	
     ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
-		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
+		  <td><?php echo $colyyx; ?></td>
           <td><?php echo $v -> sqty; ?></td>
           <td align=right ><?php echo __get_rupiah($spricex,2); ?></td>
           <td align=right ><?php echo __get_rupiah($v -> spromodisc,2); ?></td>

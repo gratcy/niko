@@ -88,7 +88,7 @@ class retur_order_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('sref as name FROM retur_order_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$this -> db -> select('sreff as name FROM retur_order_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
 		$this -> db -> select('snoro as name FROM retur_order_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		$pnobukti = $this -> db -> get() -> result();
@@ -96,7 +96,7 @@ class retur_order_model extends CI_Model {
 	}
 	
 	function __get_search($keyword) {
-		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname FROM retur_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) AND (sref LIKE '%".$keyword."%' OR snoro LIKE '%".$keyword."%') ORDER BY sid DESC");
+		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname FROM retur_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) AND (sreff LIKE '%".$keyword."%' OR snoro LIKE '%".$keyword."%') ORDER BY sid DESC");
 		return $this -> db -> get() -> result();
 	}
 }

@@ -37,9 +37,12 @@
                                     </thead>
                                     <tbody>
 		  <?php
+		  // echo '<pre>';
+		  // print_r($sales_order);
+		  // echo '</pre>';
 		  foreach($sales_order as $k => $v) :
 	$id=$v -> ssid;
-	if($v -> sno_invoice <>""){
+	//if($v -> sno_invoice <>""){
 		  ?>
                                         <tr>
           <!--td><?php //echo $v -> bname; ?></td-->
@@ -50,7 +53,7 @@
 		  <td><?php echo $v -> sname; ?></td>
           <td><?php echo __get_date(strtotime($v -> sduedate_invoice),1); ?></td>
           <td><?php echo $v ->stypepay;?></td>
-		  <td><?php echo $v ->dototal;?></td>
+		  <td><?php echo number_format($v ->dototal);?></td>
 		  <td><?php 
 		  if($v ->pstatus == '3'){ $stt="Paid";}else{ $stt="Pending";}
 		  echo $stt;?></td>
@@ -70,7 +73,7 @@
 		</tr>
 										
     <?php 
-	}
+//	}
 		endforeach; ?>
                                     </tbody>
                                 </table>

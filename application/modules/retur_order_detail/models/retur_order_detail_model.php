@@ -67,9 +67,14 @@ AND retur_order_detail_tab.ssid ='". $id."'");
 		$this -> db -> select('* FROM retur_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=' . $id);
 		return $this -> db -> get() -> result();
 	}		
-	function __update_invoice($pid, $sqty,$itype,$sbidx){
+	function __update_inventory_retur($pid, $sqty,$itype,$sbidx){
+		$sbidx= $this -> memcachedlib -> sesresult['ubid'];
+		// echo "update inventory_tab 
+	// set itype=$itype,istockin=(istockin + $sqty ),istock=(istockbegining+istockin-istockout) where iiid='$pid'  AND ibid='$sbidx' and itype='4'";die;
+		
 		$this -> db-> query("update inventory_tab 
-	set itype=$itype,istockin=(istockin + $sqty ),istock=(istockbegining+istockin-istockout) where iiid='$pid'");
+	set itype=$itype,istockin=(istockin + $sqty ),istock=(istockbegining+istockin-istockout) where iiid='$pid'  AND ibid='$sbidx' and itype='4'");
+		
 		
 	}
 	function __get_delivery_order_detail_prod($id,$snodo) {

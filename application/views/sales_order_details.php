@@ -223,18 +223,24 @@ minLength: 1,
 			if($freeppn==0){
 				$spricex=$v -> sprice;
 			}else{
-			$spricex=$v -> sprice/1.1;
+			$spricex=$v -> sprice;
 			}
 			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;			
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+			
+			$colyy=number_format(($v -> sqty/$v -> pvolume),2);
+	
+			$colyyx= str_replace('.00','',$colyy);
+				
+	
 	
     ?>
           <tr>
           
           <td><?php echo $v -> pcode; ?><input type=hidden name="id[]" value="<?php echo $id; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
-		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
+		  <td><?php echo $colyyx; ?></td>
           <td><?php echo $v -> sqty; ?></td>
           <td align=right ><?php echo __get_rupiah($spricex,2); ?></td>
           <td align=right ><?php echo __get_rupiah($v -> spromodisc,2); ?></td>

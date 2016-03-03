@@ -59,7 +59,8 @@ class Home extends MY_Controller {
 	function invoice_order_report() {	
             $sbid= $this -> memcachedlib -> sesresult['ubid'];
 			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list_detail(),3,5,site_url('delivery_order/home/invoice_order_report/'));
-			$view['sales_order'] = $this -> pagination_lib -> paginate();
+			//$view['sales_order'] = $this -> pagination_lib -> paginate();
+			$view['sales_order'] =$this -> delivery_order_model -> __get_inv_list_detailk();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			//$view['id'] = $id;
 			//$view['ssisa']=$this -> delivery_order_model -> __get_sisa_so($id);

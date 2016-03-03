@@ -2,7 +2,7 @@
 <style type="text/css">
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:12px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -10,14 +10,14 @@ table.gridtable {
 }
 table.gridtable th {
 	border-width: 1px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtable td {
 	border-width: 1px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -27,7 +27,7 @@ table.gridtable td {
 <style type="text/css">
 table.gridtablex {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:12px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -35,14 +35,14 @@ table.gridtablex {
 }
 table.gridtablex th {
 	border-width: 0px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtablex td {
 	border-width: 0px;
-	padding: 8px;
+	padding: 4px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -89,9 +89,9 @@ $tgll=$detailx[0]->stgl_invoice;
 //echo $nextdate;
 
 ?>
-<table class="gridtablex" border=0 width=800px >
+<table class="gridtablex" border=0 width=900px >
 <tr>
-<td  colspan=4 width="40%" align=center  ><h1>INVOICE</h1></td>
+<td  colspan=4 width="40%" align=center  ><h2>INVOICE</h2></td>
 </tr>
 
 <tr>
@@ -132,7 +132,7 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 </table>
 
 
-<!--table class="gridtablex" border=1 width=800px >
+<!--table class="gridtablex" border=1 width=900px >
 
 
 <tr>
@@ -143,7 +143,7 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 </td>
 </tr>
 </table-->
-<br>
+
 </p>
 <p align=center>
 
@@ -153,19 +153,19 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 							$freeppn=$detailx[0]->sfreeppn;
 							//echo $freeppn; 
 							?>
-                                <table class="gridtable" width=800 >
+                                <table class="gridtable" width=900 >
                                     <thead>
                                         <tr>
           
-          <th>Code</th>
-          <th>Name</th>
-          <th>Qty/Coly</th>
-		  <th>Qty/Pcs</th>
-          <th>Normal Price</th>
+          <th width=11% >Code</th>
+          <th width=35% >Name</th>
+          <th width=10 >Qty/ Coly</th>
+          <th width=10 >Qty/ Pcs</th>
+          <th width=9% >Normal Price</th>
           <th>Promo Discount </th>
 		  <th>Payment Discount </th>
-		  <th>Net Price </th>
-		  <th>Total</th>
+		  <th width=10% >Net Price </th>
+		  <th width=16% >Total</th>
 
                                         </tr>
                                     </thead>
@@ -300,17 +300,32 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 
 
 
-<p align=center><br>
-<table  width=800px border=0 >
+<p align=center>
+<table  width=900px border=0 >
 <tr>
-	<td width=25% ><font  face="arial" size="2px">Tanda Terima</font></td><td colspan=2 rowspan=3 width=50% ></td><td width=25% ><font  face="arial" size="2px">Hormat Kami, <br> PT Niko Elektronik Indonesia</font></td>
+	<td width=20% valign=top ><font  face="arial" size="2px">Tanda Terima</font></td>
+
+<td colspan=2 rowspan=3 width=50%  valign=top >
+<font  face="arial" size="2px">
+Notes:<br><br>
+ -Pembayaran dengan giro / cheque yang tidak diatas namakan rekening perusahaan kami, BUKAN TANGGUNG JAWAB KAMI.
+<br>
+
+-Barang yang belum terbayar sewaktu-waktu dapat ditarik kembali (titip jual).
+</font>
+</td>
+<td rowspan=3 width=5% valign=top  ></td>
+
+<td width=35% valign=top ><font  face="arial" size="2px">Hormat Kami, <br> PT Niko Elektronik Indonesia</font></td>
 </tr>
 <tr>
-	<td><br><br><br></td><td></td>
+	<td><br></td><td></td>
 </tr>
 
 <tr>
-	<td><font  face="arial" size="2px"><br><b>CUSTOMER</b></font></td><td><font  face="arial" size="2px"><br><b>ADMIN</b></font></td>
+	<td><font  face="arial" size="2px"><br><b>CUSTOMER</b></font></td>
+
+<td><font  face="arial" size="2px"><br>&nbsp;&nbsp;&nbsp;<b>ADMIN</b></font></td>
 </tr>
 <?php 
 if(!isset($_GET['ox'])){ $_GET['ox']="";}

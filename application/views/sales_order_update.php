@@ -50,7 +50,23 @@ minLength: 1,
 });
 </script>
 
+<script> 
+function toglex(){
+	
+	var pty=document.getElementById('ptype').value;
+	
+	if(pty=="Cash"){
+		document.getElementById('pcrd').style.display = 'none';	
+	
+	}else if(pty=="Credit"){
+		document.getElementById('pcrd').style.display = 'block';	
+	
+	}
 
+
+
+}
+</script> 
 
 </head>
 
@@ -232,35 +248,28 @@ minLength: 1,
 					</div>
 				</div>	
                
-                <div class="form-group">
+<div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Payment Type</label>
 
                     <div class="col-lg-4">
-                       	<select name=stypepay class="form-control chzn-select">
-						<?php echo "<option>".ucfirst($detailx[0]->stypepay)."</option>"; ?>
-						<?php if (strtolower($detailx[0]->stypepay) <> 'credit') : ?>
-						<option>Credit</option>
-						<?php endif; ?>
-						<?php //if (strtolower($detailx[0]->stypepay) <> 'auto') : ?>
+<select id="ptype" name="stypepay" class="form-control chzn-select" onchange="toglex()">                       	
 						<!--option>Auto</option-->
-						<?php //endif; ?>
-						<?php if (strtolower($detailx[0]->stypepay) <> 'cash') : ?>
+						<option>Credit</option>
 						<option>Cash</option>						
-						<?php endif; ?>
 						</select>
 
                     </div>
-                </div>					
-	
+                </div>		
+
 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label>
 
-                    <div class="col-lg-8">
+                 <div class="col-lg-8" id="pcrd"  >
                        	<input type=checkbox value=1 name="discdate">&nbsp;&nbsp;Early Date Discount
 
                     </div>
-                </div>	
+                </div>			
 	
 	
 	
