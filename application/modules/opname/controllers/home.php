@@ -18,8 +18,10 @@ class Home extends MY_Controller {
 
 	function index($type=1) {
 		$keyword = $this -> input -> post('keyword');
+		$perm = $this -> memcachedlib -> sesresult['ubid'];
 		if ($keyword) {
 			$view['keyword'] = $keyword;
+			$view['opname'] = $this -> opname_model -> __get_opname_inventory_search($keyword,$type,$perm);
 			$view['pages'] = '';
 		}
 		else {
@@ -34,7 +36,6 @@ class Home extends MY_Controller {
 			//~ else
 				//~ $perm = (__get_roles('ExecuteAllBranchOpnameReturn') == 1 ? "" : $this -> memcachedlib -> sesresult['ubid']);
 			//~ 
-			$perm = $this -> memcachedlib -> sesresult['ubid'];
 			
 			$pager = $this -> pagination_lib -> pagination($this -> opname_model -> __get_opname_inventory($type,$perm),3,10,site_url('opname/' . $type));
 			$view['opname'] = $this -> pagination_lib -> paginate();
