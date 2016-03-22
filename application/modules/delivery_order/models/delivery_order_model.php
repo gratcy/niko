@@ -10,29 +10,29 @@ class delivery_order_model extends CI_Model {
 	}
 	
 	function __get_sales_order() {
-if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
-if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
-if(!isset($_POST['cid'])){ $_POST['cid']="";}
+		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
 
-if($_POST['cid']==""){ 
-	$wcid="";
-}else{
-	$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
-}
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+		}
 
-if($_POST['sreff']==""){ 
-	$wsreff="";
-}else{
-	$wsreff=" and sreff = '".$_POST['sreff']."' ";
-}
-if($_POST['sisa']=="x"){ 
-	$wsisa="";
-}elseif($_POST['sisa']=='0'){
-	$wsisa=" and ssisa = '0' ";
-}elseif($_POST['sisa']=='1'){
-	
-	$wsisa=" and ssisa > '0' ";
-}
+		if($_POST['sreff']==""){ 
+			$wsreff="";
+		}else{
+			$wsreff=" and sreff = '".$_POST['sreff']."' ";
+		}
+		if($_POST['sisa']=="x"){ 
+			$wsisa="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and ssisa = '0' ";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and ssisa > '0' ";
+		}
 		return 'SELECT *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
         (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
@@ -42,6 +42,43 @@ if($_POST['sisa']=="x"){
 
 	}
 
+	
+	function __get_sales_orderz() {
+		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+		}
+
+		if($_POST['sreff']==""){ 
+			$wsreff="";
+		}else{
+			$wsreff=" and sreff = '".$_POST['sreff']."' ";
+		}
+		if($_POST['sisa']=="x"){ 
+			$wsisa="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and ssisa = '0' ";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and ssisa > '0' ";
+		}
+		$this -> db ->SELECT (' *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
+		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
+        (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
+        (select sum(ssisa) from sales_order_detail_tab where sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa. ')as sisa
+		FROM sales_order_tab, sales_order_detail_tab WHERE (sales_order_tab.sstatus=3) AND 
+		sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY sales_order_detail_tab.ssid ORDER BY sales_order_tab.sid  DESC');
+		return $this -> db -> get() -> result();
+	}
+	
+	
+	
+	
 	function __get_do($snodo) {
 		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
@@ -71,10 +108,10 @@ return $this -> db -> get() -> result();
 
 	function __get_inv_list() {
 		$sbid= $this -> memcachedlib -> sesresult['ubid'];
-		$sbid=2;
+		//$sbid=2;
 
 		
-		return "SELECT *,delivery_order_detail_tab.sid as sid,delivery_order_detail_tab.ssid as ssid,(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
+		return "SELECT *,sales_order_tab.sduration as sdur, delivery_order_detail_tab.sid as sid,delivery_order_detail_tab.ssid as ssid,(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
 		(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
 		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
@@ -91,6 +128,7 @@ return $this -> db -> get() -> result();
 		$sbid= $this -> memcachedlib -> sesresult['ubid'];
 		//$sbid=2;
 		//print_r($_POST);
+		
 		$sno_invoice=$this->input->post('sno_invoice');
 		$scid=$this->input->post('scid');
 		$ssid=$this->input->post('ssid');
@@ -130,7 +168,8 @@ return $this -> db -> get() -> result();
 			$wstatus="";
 		}		
 		
-		return "SELECT *,(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
+		return "SELECT *,sales_order_tab.sduration as sdur,
+		(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
 		(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
 		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid ".$wsales.")as sname,		
@@ -147,14 +186,15 @@ return $this -> db -> get() -> result();
 	function __get_inv_list_detailk() {
 		$sbid= $this -> memcachedlib -> sesresult['ubid'];
 		//$sbid=2;
-		//print_r($_POST);
+		//print_r($_POST);die;
 		$sno_invoice=$this->input->post('sno_invoice');
 		$scid=$this->input->post('scid');
+		$scidx=$this->input->post('scidx');
 		$ssid=$this->input->post('ssid');
 		$pstatus=$this->input->post('pstatus');
 		$astgl=$this->input->post('astgl_invoice');
 		$bstgl=$this->input->post('bstgl_invoice');
-		
+		$tsales="";
 
 		if (($astgl<>"")OR($bstgl<>"")){
 			$wstgl=" and delivery_order_detail_tab.stgldo between '".$astgl."' AND '".$bstgl."' ";
@@ -168,16 +208,18 @@ return $this -> db -> get() -> result();
 			$winv="";
 		}
 		
-		if ($scid<>""){
+		if ($scidx<>""){
 			$wcust=" and delivery_order_detail_tab.scid='".$scid."' ";
 		}else{
 			$wcust="";
 		}
 		
 		if ($ssid<>""){
-			$wsales=" and sales_order_tab.ssid='".$ssid."' ";
+			$wsales=" and sales_order_tab.ssid='".$ssid."' AND sales_tab.sid=sales_order_tab.ssid";
+			$tsales=" , sales_tab ";
 		}else{
-			$wsales="";
+			$wsales=" AND sales_tab.sid=sales_order_tab.ssid";
+			$tsales=" , sales_tab ";
 		}
 		
 		if($pstatus==0){ $pstatus="";}
@@ -187,15 +229,19 @@ return $this -> db -> get() -> result();
 			$wstatus="";
 		}		
 		
-		$this -> db -> select(" *,(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
+
+		
+		$this -> db -> select(" *,sales_order_tab.sduration as sdur,delivery_order_detail_tab.ssid as ssidx,
+		(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
 		(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
-		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid ".$wsales.")as sname,		
+		
 		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
-		FROM delivery_order_detail_tab,sales_order_tab WHERE (delivery_order_detail_tab.sid=0) ".$winv.$wcust.$wstatus.$wstgl." AND sales_order_tab.sid=delivery_order_detail_tab.ssid	and sales_order_tab.sbid='".$sbid."' ORDER BY did DESC");
-	return $this -> db -> get() -> result();
+		FROM delivery_order_detail_tab,sales_order_tab ".$tsales." WHERE (delivery_order_detail_tab.sid=0) ".$winv.$wcust.$wstatus.$wstgl.$wsales." AND sales_order_tab.sid=delivery_order_detail_tab.ssid	
+		and sales_order_tab.sbid='".$sbid."' ORDER BY did DESC");
+		return $this -> db -> get() -> result();
 	}	
 		
 	

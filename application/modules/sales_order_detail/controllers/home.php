@@ -81,17 +81,16 @@ class Home extends MY_Controller {
 			$sqtykoli= $this -> input -> post('sqtykoli', TRUE);
 			
 		$discdate=$_POST['discdate'];
-		//echo $discdate;die;
-		if($_POST['add_plafon']==1){
-		//echo $scid;
-		
-				$limit=$_POST['sisa']+$_POST['plafon'];
-				$arr = array('climit' => $limit);
-					$this -> customers_model -> __update_customers($scid, $arr);
-						__set_error_msg(array('info' => 'Plafon berhasil ditambahkan.'));
-						redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .'/'.$discdate));
-		
-		}
+
+			if($_POST['add_plafon']==1){
+
+					$limit=$_POST['sisa']+$_POST['plafon'];
+					$arr = array('climit' => $limit);
+						$this -> customers_model -> __update_customers($scid, $arr);
+							__set_error_msg(array('info' => 'Plafon berhasil ditambahkan.'));
+							redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .'/'.$discdate));
+			
+			}
 
 			$promodisc = str_replace(',','',$this -> input -> post('promodisc', TRUE));
 			$pricex = str_replace(',','',$this -> input -> post('pricex', TRUE));
@@ -408,15 +407,15 @@ function invoice_order_add($id,$scid,$snodo) {
 			$sssid =$_POST['sssid'][$j];
 			$samount =$_POST['samount'][$j];
 			$tamount =$_POST['tamount'][$j];
-			$ssisa=$qty-$sqty;
+			$ssisa[$j]=$qty-$sqty;
 			//$istock=$istockbegining-istockout+istockin;
 		
-
+//echo $sisa[$j].'<br>';
 					$arrp=array('istockout'=>$sqty);
 					$arrqx = array('sstatus'=>3);
 					$arrdos=array('dstatus'=>3);
 					$arrdo=array('dstatus'=>3,'sssid'=>$sssid,'samount'=>$samount,'tamount'=>$tamount);
-					$arrqty = array('ssisa' => $ssisa);
+					$arrqty = array('ssisa' => $ssisa[$j]);
 					$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,
 					'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>3,'sssid'=>$sssid,'tamount'=>$samount	);	
 					if ($this -> sales_order_detail_model ->__update_do_status($snodo,$arrdos)) {
@@ -432,6 +431,8 @@ function invoice_order_add($id,$scid,$snodo) {
 						redirect(site_url('sales_order_detail/home/delivery_order_details_add/'. $id .'/'. $scid .''));
 					}
 			}		
+			
+			//die;
 						__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 						redirect(site_url('sales_order_detail/home/delivery_order_details/'. $id .'/'. $scid .'/'.$snodo));	
 
@@ -559,8 +560,14 @@ function invoice_order_add($id,$scid,$snodo) {
 		}
 			$view['id'] = $id;
 			$view['sbid'] = $sbid;
+			$view['snodo'] = $snodo;
 			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
 			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);		
+
+
+			//$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			//$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);	
+			$view['details'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);	
 
 			
 

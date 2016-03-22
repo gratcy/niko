@@ -24,13 +24,101 @@ class sales_order_model extends CI_Model {
 	}
 	
 	function __get_sales_order() {
-		return 'SELECT *,
-		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,
+		
+		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+		}
+
+		if($_POST['sreff']==""){ 
+			$wsreff="";
+		}else{
+			$wsreff=" and sreff = '".$_POST['sreff']."' ";
+		}
+		if($_POST['sisa']=="x"){ 
+			$wsisa="";
+			$wdo ="";
+			$wtabdo="";
+			$seldo="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and sales_order_tab.sstatus = '3' ";
+			$wtabdo="";
+			$seldo="";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and sales_order_tab.sstatus = '3' and delivery_order_detail_tab.dstatus='3' 
+			and delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 ";
+			$wtabdo=" ,delivery_order_detail_tab ";
+			$seldo="(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,";
+		}elseif($_POST['sisa']=='2'){
+			$seldo="";
+			$wsisa=" and sales_order_tab.sstatus = '1' ";
+			$wtabdo="";
+		}
+		return "SELECT *,
+		" .$seldo. "
 		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname
-		FROM sales_order_tab WHERE sstatus<>2 ORDER BY sid DESC';
+		FROM sales_order_tab ".$wtabdo." WHERE sstatus<>2 " .$wsreff.$wcid.$wsisa. " 
+		
+		ORDER BY sales_order_tab.sid DESC";
 	}
+
+
+
+	function __get_sales_orderz() {
+		
+		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+		}
+
+		if($_POST['sreff']==""){ 
+			$wsreff="";
+		}else{
+			$wsreff=" and sreff = '".$_POST['sreff']."' ";
+		}
+		if($_POST['sisa']=="x"){ 
+			$wsisa="";
+			$wdo ="";
+			$wtabdo="";
+			$seldo="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and sales_order_tab.sstatus = '3' ";
+			$wtabdo="";
+			$seldo="";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and sales_order_tab.sstatus = '3' and delivery_order_detail_tab.dstatus='3' 
+			and delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 ";
+			$wtabdo=" ,delivery_order_detail_tab ";
+			$seldo="(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,";
+		}elseif($_POST['sisa']=='2'){
+			$seldo="";
+			$wsisa=" and sales_order_tab.sstatus = '1' ";
+			$wtabdo="";
+		}
+		$this -> db ->SELECT (" *,
+		" .$seldo. "
+		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
+        (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname,
+		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname
+		FROM sales_order_tab ".$wtabdo." WHERE sstatus<>2 " .$wsreff.$wcid.$wsisa. " ORDER BY sales_order_tab.sid DESC");
+		return $this -> db -> get() -> result();
+	}
+
+
 	
 	function __get_total_sales_order() {
 		$sql = $this -> db -> query('SELECT * FROM sales_order_tab WHERE sstatus=1');

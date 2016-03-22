@@ -45,14 +45,18 @@ class sales_order_detail_model extends CI_Model {
 	
 	
 	function __get_sales_order_detail_prod($id) {
-		$this -> db -> select('* FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=' . $id);
+		$this -> db -> select('* FROM sales_order_detail_tab a,products_tab b WHERE   
+		a.spid=b.pid AND a.ssid=' . $id);
 		return $this -> db -> get() -> result();
 	}		
 	
 	function __get_delivery_order_detail_prod($id,$snodo) {
-		$this -> db -> select("*,(select sprice FROM sales_order_detail_tab c where c.sid=a.sid) as sprice,
+		$this -> db -> select("*,
+(SELECT o.ssisa	FROM sales_order_detail_tab o WHERE o.sid=a.sid)AS hqty,		
+		(select sprice FROM sales_order_detail_tab c where c.sid=a.sid) as sprice,
 		(select spromodisc FROM sales_order_detail_tab c where c.sid=a.sid) as spromodisc,
-		(select sdisc FROM sales_order_detail_tab c where c.sid=a.sid) as sdisc	FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'");
+		(select sdisc FROM sales_order_detail_tab c where c.sid=a.sid) as sdisc	FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'
+		 AND a.sqty!=0 ");
 		
 		//echo "select * FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.sid= $id";die;
 		return $this -> db -> get() -> result();
@@ -66,6 +70,7 @@ class sales_order_detail_model extends CI_Model {
 	}
 	
 	function __update_sales_order_detail($id, $data) {
+		//print_r($data);
         $this -> db -> where('sid', $id);
         return $this -> db -> update('sales_order_detail_tab', $data);
 	}
@@ -76,7 +81,7 @@ class sales_order_detail_model extends CI_Model {
 	}	
 
 	function __update_inventory($spid,$sbid,$data) {
-		print_r($data);
+		//print_r($data);
 		$istockout=$data['istockout'];
 		// echo $istockout.$sbid.$spid;
 		// die;

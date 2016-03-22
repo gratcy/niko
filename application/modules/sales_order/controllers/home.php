@@ -14,6 +14,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
+		if(!isset($_GET['search'])){ $_GET['search']="";}
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
 			$view['keyword'] = $keyword;
@@ -22,7 +23,11 @@ class Home extends MY_Controller {
 		}
 		else {
 			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order/home/index'));
+						if($_GET['search']=='1'){
+			$view['sales_order'] = $this -> sales_order_model -> __get_sales_orderz();	
+			}else{			
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
+			}
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
 		}
@@ -35,7 +40,7 @@ class Home extends MY_Controller {
 			   $scid=$_POST['scid'];
 				$limit=$_POST['sisaplafon_after'];
 				$arrl = array('climit' => $limit);
-					$this -> customers_model -> __update_customers($scid, $arrl);			
+				$this -> customers_model -> __update_customers($scid, $arrl);			
 		
 		}
 		
