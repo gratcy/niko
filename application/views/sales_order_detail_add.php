@@ -255,7 +255,7 @@ $discdate= $this->uri->segment(6);
                 </div>						
 				
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Current Credit Limit</label>
+                    <label for="text1" class="control-label col-lg-4">Receivable</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php 

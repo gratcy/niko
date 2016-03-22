@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('PurchaseOrderAdd')) : ?>
+				<?php if (__get_roles('PurchaseOrderExecute')) : ?>
   
                
                 <br />

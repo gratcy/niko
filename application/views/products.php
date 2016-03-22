@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('ProductsAdd')) : ?>
+				<?php if (__get_roles('ProductsExecute')) : ?>
                 <a href="<?php echo site_url('products/products_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Product</a>
                 <br />
                 <br />
@@ -56,7 +56,7 @@ left:inherit!important;
           <th>Price Store</th>
           <th>Price Consumer</th>
           <th>Status</th>
-		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
+		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsExecute')) : ?>
           <th style="width: 50px;"></th>
           <?php endif; ?>
                                         </tr>
@@ -76,12 +76,12 @@ left:inherit!important;
           <td><?php echo __get_rupiah($v -> pstore,1); ?></td>
           <td><?php echo __get_rupiah($v -> pconsume,1); ?></td>
           <td><?php echo __get_status($v -> pstatus,1); ?></td>
-		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsDelete')) : ?>
+		  <?php if (__get_roles('ProductsUpdate') || __get_roles('ProductsExecute')) : ?>
 		  <td>
-				<?php if (__get_roles('ProductsUpdate')) : ?>
+				<?php if (__get_roles('ProductsExecute')) : ?>
               <a href="<?php echo site_url('products/products_update/' . $v -> pid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('ProductsDelete')) : ?>
+				<?php if (__get_roles('ProductsExecute')) : ?>
               <a href="<?php echo site_url('products/products_delete/' . $v -> pid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

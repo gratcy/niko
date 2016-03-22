@@ -11,6 +11,43 @@ overflow: auto;
 left:inherit!important;
 }
 </style>
+
+<script>
+$(function() {
+$("#search").autocomplete({
+delay:0, 
+cacheLength: 0,
+minLength: 1,
+    source: '<?php echo site_url('sales_order/home/source'); ?>',
+     select: function(event, ui) { 
+	    $("#theCid").val(ui.item.cid),
+        $("#theCat").val(ui.item.ccat),
+		$("#theClimit").val(ui.item.climit),
+		$("#theClimitx").val(formatharga2(ui.item.climit)),
+		$("#theNpwp").val(ui.item.cnpwp),
+		$("#theDeliver").val(ui.item.cdeliver),
+		$("#theTopcash").val(ui.item.ccash),
+		$("#theTopcredit").val(ui.item.ccredit),
+		$("#theTopcashx").val(ui.item.ccash),
+		$("#theTopcashxnico").val(ui.item.ccashnico),
+		$("#theTopcreditx").val(ui.item.ccredit),
+		$("#theTopcreditxnico").val(ui.item.ccreditnico),
+		$("#theAddr").val(ui.item.caddr),
+		$("#thePkp").val(ui.item.cpkp),
+		$("#theSid").val(ui.item.csid),
+		$("#theSname").val(ui.item.csname),
+		$("#thePhone").val(ui.item.cphone),
+		$("#theTopx").val(ui.item.topx),
+		$("#theTopxx").val(ui.item.topx)
+	
+		
+    }
+	
+
+})
+
+});
+</script>
         <!--PAGE CONTENT -->
         <div id="content">
             <div class="inner">
@@ -21,11 +58,55 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesOrderAdd')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
                 <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sales Order</a>
                 <br />
                 <br />
                 <?php endif; ?>
+				
+				
+				
+				
+				
+				<div class="row">
+			<div class="col-lg-12">
+				<form method="POST">
+			   Customer					<input  name=cname type="text" id="search"   />
+
+					<input  name=cid type="hidden" id="theCid"    />
+			   <input type=submit value=cari >
+			   </form>
+			   </div>
+            </div><br>
+
+			<div class="row">
+			<div class="col-lg-12">
+				<form method="POST">
+			   Reff No.<input type=text name="sreff"  >
+			   <input type=submit value=cari >
+			   </form>
+			   </div>
+            </div><br>
+
+			<div class="row">
+			<div class="col-lg-12">
+				<form method=POST >
+			   Status<select name=sisa >
+			   <option value="x">ALL</option>
+			   <option value="2">Active</option>			   
+			   <option value="0">Approve</option>
+			   <option value="1">Done</option>
+			   <input type=submit value=cari >
+			   </form>
+			   </div>
+            </div><br>			
+				
+				
+				
+				
+				
+				
+				
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -79,6 +160,7 @@ left:inherit!important;
 		  <td><?php if($v -> sfreeppn ==1){ echo 'Yes';}else{ echo 'No';} ; ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;
+		  if(!isset($v -> dstatus)){$v -> dstatus="";}
 		  if($sstatus==0){
 		  $st="Pending";
 		  }elseif($sstatus==1){
@@ -94,15 +176,15 @@ left:inherit!important;
 		
 		
 		  <td>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('sales_order/home/sales_order_update/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-pencil"></i></a>
 			  <?php }?>
                 <?php endif; ?>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
 			  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SalesOrderDelete')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
 			  <?php } ?>

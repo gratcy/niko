@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SuplierAdd')) : ?>
+				<?php if (__get_roles('SuplierExecute')) : ?>
                 <a href="<?php echo site_url('suplier/suplier_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Suplier</a>
                 <br />
                 <br />
@@ -72,10 +72,10 @@ left:inherit!important;
           <td><?php echo $phone[1]; ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('SuplierUpdate')) : ?>
+				<?php if (__get_roles('SuplierExecute')) : ?>
               <a href="<?php echo site_url('suplier/suplier_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SuplierDelete')) : ?>
+				<?php if (__get_roles('SuplierExecute')) : ?>
               <a href="<?php echo site_url('suplier/suplier_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

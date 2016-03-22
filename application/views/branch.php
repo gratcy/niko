@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('BranchAdd')) : ?>
+				<?php if (__get_roles('BranchExecute')) : ?>
                 <a href="<?php echo site_url('branch/branch_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Branch</a>
                 <br />
                 <br />
@@ -82,11 +82,11 @@ left:inherit!important;
           <td><?php echo $v -> bemail ?></td>
           <td><?php echo __get_status($v -> bstatus,1); ?></td>
 		  <td>
-			<?php if (__get_roles('BranchUpdate')) : ?>
+			<?php if (__get_roles('BranchExecute')) : ?>
 		  <a href="<?php echo site_url('branch/branch_update/' . $v -> bid); ?>"><i class="icon-pencil"></i></a>
 			<?php endif; ?>
 	<?php if ($v -> bid <> 1) : ?>
-				<?php if (__get_roles('BranchDelete')) : ?>
+				<?php if (__get_roles('BranchExecute')) : ?>
               <a href="<?php echo site_url('branch/branch_delete/' . $v -> bid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
 		<?php endif; ?>

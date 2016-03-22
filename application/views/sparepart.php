@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SparepartAdd')) : ?>
+				<?php if (__get_roles('SparepartExecute')) : ?>
                 <a href="<?php echo site_url('sparepart/sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sparepart</a>
                 <br />
                 <br />
@@ -66,10 +66,10 @@ left:inherit!important;
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('SparepartUpdate')) : ?>
+				<?php if (__get_roles('SparepartExecute')) : ?>
               <a href="<?php echo site_url('sparepart/sparepart_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SparepartDelete')) : ?>
+				<?php if (__get_roles('SparepartExecute')) : ?>
               <a href="<?php echo site_url('sparepart/sparepart_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

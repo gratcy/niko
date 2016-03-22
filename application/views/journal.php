@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('JournalAdd')) : ?>
+				<?php if (__get_roles('JournalExecute')) : ?>
                 <a href="<?php echo site_url('journal/journal_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Journal</a>
                 <br />
                 <br />
@@ -49,10 +49,10 @@
 			  <?php if ($v -> gpdate) : ?>
 			  <a href="#"><i class="icon-ok"></i></a>
 			  <?php else : ?>
-			<?php if (__get_roles('JournalUpdate')) : ?>
+			<?php if (__get_roles('JournalExecute')) : ?>
 		  <a href="<?php echo site_url('journal/journal_update/' . $v -> gid); ?>"><i class="icon-pencil"></i></a>
 			<?php endif; ?>
-			<?php if (__get_roles('JournalDelete')) : ?>
+			<?php if (__get_roles('JournalExecute')) : ?>
 		  <a href="<?php echo site_url('journal/journal_delete/' . $v -> gid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
 			<?php endif; ?>
 			<?php endif; ?>

@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesCommisionAdd')) : ?>
+				<?php if (__get_roles('SalesCommisionExecute')) : ?>
                 <a href="<?php echo site_url('sales_commision/sales_commision_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sales Commission</a>
                 <br />
                 <br />
@@ -64,10 +64,10 @@
           <td style="text-align:right;"><?php echo $v -> scredite; ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('SalesCommisionUpdate')) : ?>
+				<?php if (__get_roles('SalesCommisionExecute')) : ?>
               <a href="<?php echo site_url('sales_commision/sales_commision_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SalesCommisionDelete')) : ?>
+				<?php if (__get_roles('SalesCommisionExecute')) : ?>
               <a href="<?php echo site_url('sales_commision/sales_commision_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

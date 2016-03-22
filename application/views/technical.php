@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('TechnicalAdd')) : ?>
+				<?php if (__get_roles('TechnicalExecute')) : ?>
                 <a href="<?php echo site_url('technical/technical_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Technical</a>
                 <br />
                 <br />
@@ -75,10 +75,10 @@ left:inherit!important;
           <td><?php echo __get_date($v -> tjoindate,1); ?></td>
           <td><?php echo __get_status($v -> tstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('TechnicalUpdate')) : ?>
+				<?php if (__get_roles('TechnicalExecute')) : ?>
               <a href="<?php echo site_url('technical/technical_update/' . $v -> tid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('TechnicalDelete')) : ?>
+				<?php if (__get_roles('TechnicalExecute')) : ?>
               <a href="<?php echo site_url('technical/technical_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

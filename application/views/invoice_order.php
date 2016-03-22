@@ -48,10 +48,26 @@
           <!--td><?php //echo $v -> bname; ?></td-->
           <td><?php echo $v -> snodo; ?></td>
           <td><?php echo $v -> sno_invoice; ?></td>
-          <td><?php echo __get_date(strtotime($v -> stgldo),1); ?></td>
+          <td><?php echo __get_date(strtotime($v -> stgl_invoice),1); ?></td>
           <td><?php echo $v -> cname; ?></td>
 		  <td><?php echo $v -> sname; ?></td>
-          <td><?php echo __get_date(strtotime($v -> sduedate_invoice),1); ?></td>
+          <td><?php 
+		   $dy=$v->sdur;
+		  //echo __get_date(strtotime($v -> stgl_invoice),1); 
+		  echo date('d/m/Y',strtotime($v -> stgl_invoice ." + $dy day"));
+		  ?>
+		  
+		  
+		  
+  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  </td>
           <td><?php echo $v ->stypepay;?></td>
 		  <td><?php echo number_format($v ->dototal);?></td>
 		  <td><?php 

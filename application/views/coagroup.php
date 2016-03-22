@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('COAAdd')) : ?>
+				<?php if (__get_roles('COAExecute')) : ?>
                 <a href="<?php echo site_url('coagroup/coagroup_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Chart of Account Group</a>
                 <br />
                 <br />

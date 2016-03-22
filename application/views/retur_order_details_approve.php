@@ -63,7 +63,15 @@ minLength: 1,
 
 	<input type=hidden name=sbid value="<?php echo $detailx[0]->sbid; ?>">
 
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-2" style="text-align:left!important;">Reff No.</label>
 
+                    <div class="col-lg-4">
+                      
+					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
+                    </div>
+                </div>
+				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-2" style="text-align:left!important;">Return No.</label>
 

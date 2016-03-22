@@ -17,9 +17,11 @@ class Home extends MY_Controller {
 	}
 
 	function index($type=1) {
-		$keyword = $this -> input -> post('keyword');
+		$keyword = trim($this -> input -> post('keyword'));
 		$perm = $this -> memcachedlib -> sesresult['ubid'];
 		if ($keyword) {
+			$view['perm'] = $perm;
+			$view['type'] = $type;
 			$view['keyword'] = $keyword;
 			$view['opname'] = $this -> opname_model -> __get_opname_inventory_search($keyword,$type,$perm);
 			$view['pages'] = '';

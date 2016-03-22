@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesAdd')) : ?>
+				<?php if (__get_roles('SalesExecute')) : ?>
                 <a href="<?php echo site_url('sales/sales_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sales</a>
                 <br />
                 <br />
@@ -75,10 +75,10 @@ left:inherit!important;
           <td><?php echo __get_date($v -> sjoindate,1); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('SalesUpdate')) : ?>
+				<?php if (__get_roles('SalesExecute')) : ?>
               <a href="<?php echo site_url('sales/sales_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SalesDelete')) : ?>
+				<?php if (__get_roles('SalesExecute')) : ?>
               <a href="<?php echo site_url('sales/sales_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesOrderAdd')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
                 <a href="<?php echo site_url('pembayaran/home/pembayaran_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Payment</a>
                 <br />
                 <br />

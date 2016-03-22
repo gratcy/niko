@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('TargetOmsetAdd')) : ?>
+				<?php if (__get_roles('TargetOmsetExecute')) : ?>
                 <a href="<?php echo site_url('target/target_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Revenue</a>
                 <br />
                 <br />
@@ -50,10 +50,10 @@
           <td style="text-align:right;"><?php echo __get_rupiah($v -> tpaytarget,1); ?></td>
           <td><?php echo __get_status($v -> tstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('TargetOmsetUpdate')) : ?>
+				<?php if (__get_roles('TargetOmsetExecute')) : ?>
               <a href="<?php echo site_url('target/target_update/' . $v -> tid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('TargetOmsetDelete')) : ?>
+				<?php if (__get_roles('TargetOmsetExecute')) : ?>
               <a href="<?php echo site_url('target/target_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

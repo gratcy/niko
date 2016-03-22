@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('UsersAdd')) : ?>
+				<?php if (__get_roles('UsersExecute')) : ?>
                 <a href="<?php echo site_url('users/users_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add User</a>
                 <br />
                 <br />

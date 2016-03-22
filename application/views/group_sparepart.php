@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('GroupSparepartAdd')) : ?>
+				<?php if (__get_roles('GroupSparepartExecute')) : ?>
                 <a href="<?php echo site_url('group_sparepart/group_sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Groups Sparepart</a>
                 <br />
                 <br />
@@ -40,10 +40,10 @@
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('GroupSparepartUpdate')) : ?>
+				<?php if (__get_roles('GroupSparepartExecute')) : ?>
               <a href="<?php echo site_url('group_sparepart/group_sparepart_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('GroupSparepartDelete')) : ?>
+				<?php if (__get_roles('GroupSparepartExecute')) : ?>
               <a href="<?php echo site_url('group_sparepart/group_sparepart_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

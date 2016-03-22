@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('GroupProductAdd')) : ?>
+				<?php if (__get_roles('GroupProductExecute')) : ?>
                 <a href="<?php echo site_url('group_product/group_product_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Group Product</a>
                 <br />
                 <br />
@@ -40,10 +40,10 @@
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('CategoriesProductUpdate')) : ?>
+				<?php if (__get_roles('CategoriesProductExecute')) : ?>
               <a href="<?php echo site_url('group_product/group_product_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('CategoriesProductDelete')) : ?>
+				<?php if (__get_roles('CategoriesProductExecute')) : ?>
               <a href="<?php echo site_url('group_product/group_product_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

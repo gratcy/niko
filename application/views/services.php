@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('ServicesAdd')) : ?>
+				<?php if (__get_roles('ServicesExecute')) : ?>
                 <a href="<?php echo site_url('services/services_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Service</a>
                 <br />
                 <br />
@@ -73,10 +73,10 @@ left:inherit!important;
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
 			  <?php if ($v -> sstatus <> 3) : ?>
-				<?php if (__get_roles('ServicesUpdate')) : ?>
+				<?php if (__get_roles('ServicesExecute')) : ?>
               <a href="<?php echo site_url('services/services_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('ServicesDelete')) : ?>
+				<?php if (__get_roles('ServicesExecute')) : ?>
               <a href="<?php echo site_url('services/services_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
                 <?php endif; ?>

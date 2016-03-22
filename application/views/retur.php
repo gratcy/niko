@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesOrderAdd')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
                 <a href="<?php echo site_url('sales_order/home/sales_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Retur</a>
                 <br />
                 <br />
@@ -82,13 +82,13 @@ left:inherit!important;
 		
 		
 		  <td>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
               <a href="<?php //echo site_url('sales_order/home/sales_order_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
 			  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('SalesOrderDelete')) : ?>
+				<?php if (__get_roles('SalesOrderExecute')) : ?>
               <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>		

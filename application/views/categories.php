@@ -8,7 +8,7 @@
                 </div>
 
                 <hr />
-				<?php if (__get_roles('CategoriesProductAdd')) : ?>
+				<?php if (__get_roles('CategoriesProductExecute')) : ?>
                 <a href="<?php echo site_url('categories/categories_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Category Product</a>
                 <br />
                 <br />
@@ -46,10 +46,10 @@
           <td style="text-align:right;width:100px;"><?php echo $v -> cdiscountdate; ?>%</td>
           <td style="width:150px;"><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
-				<?php if (__get_roles('CategoriesProductUpdate')) : ?>
+				<?php if (__get_roles('CategoriesProductExecute')) : ?>
               <a href="<?php echo site_url('categories/categories_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('CategoriesProductDelete')) : ?>
+				<?php if (__get_roles('CategoriesProductExecute')) : ?>
               <a href="<?php echo site_url('categories/categories_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
           </td>

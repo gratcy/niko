@@ -3,11 +3,11 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Users </h2>
+                        <h2> User Group</h2>
                     </div>
                 </div>
                 <hr />
-				<?php if (__get_roles('UsersGroupAdd')) : ?>
+				<?php if (__get_roles('UsersGroupExecute')) : ?>
                 <a href="<?php echo site_url('users/users_group_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add User Group</a>
                 <br />
                 <br />

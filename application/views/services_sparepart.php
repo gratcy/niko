@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('ServicesSparepartAdd')) : ?>
+				<?php if (__get_roles('ServicesSparepartExecute')) : ?>
                 <a href="<?php echo site_url('services_sparepart/services_sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Service Sparepart</a>
                 <br />
                 <br />
@@ -70,10 +70,10 @@ left:inherit!important;
 			  <a href="javascript:void(0);" onclick="print_data('<?php echo site_url('services_sparepart/services_sparepart_print/' . $v -> sid); ?>');"><i class="icon-print"></i></a>
 			  <?php endif; ?>
 			  <?php if ($v -> sstatus <> 3) : ?>
-				<?php if (__get_roles('ServicesSparepartUpdate')) : ?>
+				<?php if (__get_roles('ServicesSparepartExecute')) : ?>
               <a href="<?php echo site_url('services_sparepart/services_sparepart_update/' . $v -> sid); ?>"><i class="icon-pencil"></i></a>
                 <?php endif; ?>
-				<?php if (__get_roles('ServicesSparepartDelete')) : ?>
+				<?php if (__get_roles('ServicesSparepartExecute')) : ?>
               <a href="<?php echo site_url('services_sparepart/services_sparepart_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
                 <?php endif; ?>
                 <?php endif; ?>

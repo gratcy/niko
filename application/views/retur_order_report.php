@@ -55,24 +55,32 @@ table.gridtablex td {
 $caddrx=explode("*",$detailx[0]->caddr);
 
 ?>
-<table class="gridtablex" border=0 width=800px >
+<table class="gridtablex" border=0 width=300px >
 <tr>
-<td rowspan=1 colspan=6 width="40%" align="center"><h1>RETURN ORDER</h1></td>
+<td rowspan=1 colspan=6  ><h1>RETURN ORDER</h1></td>
 </tr>
 </table>
-<table class="gridtablex" width=800px >
+<table class="gridtablex" width=800px border=0 >
+<tr><td align=right>
+<table class="gridtablex" width=480px border=0 >
 <tr>
-	<td width=20% ><b>Return No.</b></td><td width=90% align=left ><?php echo $detailx[0]->snoro; ?></td><td width=50%>&nbsp;</td>
+	<td width=20% ><b>Reff No.</b></td><td width=90% align=left ><?php echo $detailx[0]->sreff; ?></td><td width=50%>&nbsp;</td>
 </tr>
 <tr>
 <td><b>Date</b></td><td><?php echo date('d/m/Y',strtotime($detailx[0]->stgl)); ?></td>
 </tr>
 <tr>
-<td width="10%" align=left><b>Customer</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
+	<td width=20% ><b>Return No.</b></td><td width=90% align=left ><?php echo $detailx[0]->snoro; ?></td><td width=50%>&nbsp;</td>
+</tr>
+</table>
+</td><td>
+<table class="gridtablex" width=300px >
+<tr>
+<td width="20%" align=left><b>Customer</b></td><td  ><?php echo $detailx[0]->cname; ?></td><td></td>
 </tr>
 
 <tr>
-<td width="10%" align=left><b>Sales</b></td><td  ><?php echo $detailx[0]->sname; ?></td><td></td>
+<td width="20%" align=left><b>Salesman</b></td><td  ><?php echo $detailx[0]->sname; ?></td><td></td>
 </tr>
 	<?php 
 		
@@ -85,8 +93,11 @@ $caddrx=explode("*",$detailx[0]->caddr);
 
 		?>	
 <tr>
-<td width="10%" align=left><b>Return Type</b></td><td  ><?php echo $cname; ?></td><td></td>
+<td width="40%" align=left><b>Return Type</b></td><td  ><?php echo $cname; ?></td><td></td>
 </tr>
+</table>
+</td></tr>
+
 </table>
 </p>
 

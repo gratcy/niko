@@ -79,7 +79,7 @@ class Home extends MY_Controller {
 
 			if ($app == 1) $status = 3;
 			else $status = (int) $this -> input -> post('status');
-			
+
 			if ($id) {
 				if (!$docno) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
@@ -95,8 +95,8 @@ class Home extends MY_Controller {
 							if ($app == 1) {
 								$iid = $this -> receiving_model -> __get_receiving_item_detail($k);
 								
-								$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,1,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],1,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+								$iv = $this -> receiving_model -> __get_inventory_detail($k,1,$this -> memcachedlib -> sesresult['ubid']);
+								$this -> receiving_model -> __update_inventory($k,$this -> memcachedlib -> sesresult['ubid'],1,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
 							}
 						}
 						
@@ -106,11 +106,11 @@ class Home extends MY_Controller {
 							if ($app == 1) {
 								$iid = $this -> receiving_model -> __get_receiving_item_detail($k);
 								
-								$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,2,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+								$iv = $this -> receiving_model -> __get_inventory_detail($k,2,$this -> memcachedlib -> sesresult['ubid']);
+								$this -> receiving_model -> __update_inventory($k,$this -> memcachedlib -> sesresult['ubid'],2,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
 							}
 						}
-						
+
 						__set_error_msg(array('info' => 'Data berhasil diubah'.($upa == true ? ' dan buku berhasil di import' : '').'.'));
 						redirect(site_url('receiving'));
 					}

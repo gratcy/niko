@@ -83,7 +83,14 @@ minLength: 1,
 <table border=0 width=1100 >
 <tr><td width="500" valign=top >
 
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Reff No.</label>
 
+                    <div class="col-lg-4">
+                       <input type=hidden name=id value="<?php echo $id; ?>">
+					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Return No.</label>
 
