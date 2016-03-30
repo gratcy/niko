@@ -98,9 +98,7 @@
         </div>
         <!-- END PAGE CONTENT -->
 
-<?php if (__get_roles('ExecuteAllBranchPurchaseOrder') <> 1) : ?>
 <script type="text/javascript">
 $('select[name="pbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
 </script>
-<?php endif; ?>

@@ -184,9 +184,6 @@
                                     <thead>
                                         <tr>
           <th>WO No.</th>
-<?php if (__get_roles('ExecuteAllBranchServices') <> 1) : ?>
-          <th>Branch</th>
-<?php endif; ?>
           <th>Date</th>
           <th>Duration</th>
           <th>Status</th>
@@ -198,9 +195,6 @@
 		  ?>
                                         <tr>
           <td><?php echo $v -> sno; ?></td>
-<?php if (__get_roles('ExecuteAllBranchServices') <> 1) : ?>
-          <td><?php echo $v -> bname; ?></td>
-<?php endif; ?>
           <td><?php echo __get_date($v -> sdate); ?></td>
           <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>

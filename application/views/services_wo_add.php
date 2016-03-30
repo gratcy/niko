@@ -93,10 +93,8 @@
 </script>
 
 <script type="text/javascript">
-<?php if (__get_roles('ExecuteAllBranchServices') <> 1) : ?>
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
-<?php endif; ?>
 $(function(){
 	$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/1');?>');
 	$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/1');?>');

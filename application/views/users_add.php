@@ -97,9 +97,3 @@
         </div>
         <!-- END PAGE CONTENT -->
 
-<script type="text/javascript">
-<?php if (__get_roles('ExecuteAllBranchUsers') <> 1) : ?>
-$('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
-$('#pbranch').css('display','none');
-<?php endif; ?>
-</script>

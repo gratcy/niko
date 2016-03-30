@@ -95,10 +95,8 @@
 </script>
 
 <script type="text/javascript">
-<?php if (__get_roles('ExecuteAllBranchServices') <> 1) : ?>
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
-<?php endif; ?>
 $(function(){
 		$('#approve').click(function(){
 		$('form.form-horizontal').append('<input type="hidden" name="appsev" value="3">');

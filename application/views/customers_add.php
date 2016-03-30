@@ -247,12 +247,10 @@
         </div>
         </div>
         <!-- END PAGE CONTENT -->
-<?php if (__get_roles('ExecuteAllBranchCustomers') <> 1) : ?>
 <script type="text/javascript">
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
 </script>
-<?php endif; ?>
 
 <script type="text/javascript">
 	$('input[name="joindate"]').datepicker({

@@ -105,10 +105,8 @@ $phone = explode('*', $detail[0] -> sphone);
         </div>
         <!-- END PAGE CONTENT -->
 <script type="text/javascript">
-<?php if (__get_roles('ExecuteAllBranchSales') <> 1) : ?>
 $('select[name="branch"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
-<?php endif; ?>
 $('input[name="joindate"]').datepicker({
 	format: 'dd/mm/yyyy'
 });
