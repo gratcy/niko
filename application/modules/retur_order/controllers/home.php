@@ -14,6 +14,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
+		if(!isset($_GET['search'])){ $_GET['search']="";}
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
 			$view['keyword'] = $keyword;
@@ -22,7 +23,14 @@ class Home extends MY_Controller {
 		}
 		else {
 			$pager = $this -> pagination_lib -> pagination($this -> retur_order_model -> __get_retur_order(),3,10,site_url('retur_order/home/index/'));
+			if($_GET['search']=='1'){
+			$view['retur_order'] = $this -> retur_order_model -> __get_retur_orderz();	
+			}else{			
 			$view['retur_order'] = $this -> pagination_lib -> paginate();
+			}			
+			
+			
+			
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
 		}

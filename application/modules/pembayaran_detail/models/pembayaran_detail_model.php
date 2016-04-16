@@ -73,7 +73,7 @@ function __update_invoicez($noinv,$arr){
 		$ndate=date('Y-m-d');
 		
 		
-		$que= $this->db->query("SELECT pm_tgl,ptgl_trans,ptgl_giro FROM pembayaran_detail_tab WHERE pno_pm='$pno_pm'");
+		$que= $this->db->query("SELECT pm_tgl,ptgl_trans,ptgl_giro FROM pembayaran_detail_tab WHERE pno_pm='$pno_pm' AND pstatus=3");
 		$que = $que-> result();
 		$sj= count($que);
 		for($s=0;$s<$sj;$s++){

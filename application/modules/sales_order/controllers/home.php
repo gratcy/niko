@@ -132,11 +132,14 @@ class Home extends MY_Controller {
 	
 	function sales_order_update($id,$scid) {
 		if ($_POST) {
+			$stype = $this -> input -> post('product_type', TRUE);
+			$discdate = $this -> input -> post('discdate', TRUE);
 			$scid=$this -> input -> post('cid', TRUE);
 			$sbid = $this -> input -> post('sbid', TRUE);
 			$snoso = $this -> input -> post('snoso', TRUE);			
 			$stgl = $this -> input -> post('stgl', TRUE);
 			$stglx=explode("/",$stgl);
+			//print_r($stglx);die;
 			$stglin="$stglx[2]-$stglx[1]-$stglx[0]";
 			$sreff = $this -> input -> post('sreff', TRUE);			
 			$ssid = $this -> input -> post('csid', TRUE);			
@@ -144,36 +147,49 @@ class Home extends MY_Controller {
 			$scdate=date('Y-m-d');
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);
 			//$scid = $this -> input -> post('scid', TRUE);
-			$stype = $this -> input -> post('stype', TRUE);
+			//$stype = $this -> input -> post('stype', TRUE);
 			$climit = str_replace('',',',$this -> input -> post('climit', TRUE));
 			$sfreeppn = $this -> input -> post('sfreeppn', TRUE);
+
+
+
 			$stypepay = $this -> input -> post('stypepay', TRUE);
 			$topx = str_replace('',',',$this -> input -> post('topx', TRUE));			
 			$ccash = str_replace('',',',$this -> input -> post('ccash', TRUE));
 			$ccredit = str_replace('',',',$this -> input -> post('ccredit', TRUE));
-			//echo $stypepay;die;
 			if($stypepay=="Cash"){
 
-			$sduedate = date("Y-m-d",strtotime("$stglin + $ccash days"));			
-			}else{			
-			$sduedate = date("Y-m-d",strtotime("$stglin + $ccredit days"));
-			}
-			
+			//$sduedate = date("Y-m-d",strtotime("$stgl + $ccash days"));	
 			$sduedate = date("Y-m-d",strtotime("$stgl + 30 days"));	
+			}else{			
+			$sduedate = date("Y-m-d",strtotime("$stgl +30 days"));
+			}
 			$ssubtotal = 0;
 			$sppnnpwp = 0;
 			$stotalsubppn = 0;
 			$sppn = 0;
-			$stotal = 0;				
+			$stotal = 0;
+			$sket=$sketerangan.'**'.$discdate;	
+					$sduration=$this -> sales_order_model -> __get_duration($stype,$stypepay,$scid);
+					
+					if($discdate==1){ $sduration=($sduration[0]->sduration) - 30;}else{ $sduration=$sduration[0]->sduration; }
+			
 			
 			if ($id) {
-
 					$arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
-					'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scid,'stype' => $stype,
+					'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scid,'stype'=>$stype,
 					'ssid' => $ssid,'sppn' => $sfreeppn, 
 					'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
-					'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay
-					 );		
+					'sketerangan' => $sket,'sduedate'=>$sduedate,'stypepay'=>$stypepay,
+					'sduration'=>$sduration );	
+					
+					//print_r($arr);die;
+					// $arr = array('sbid' => $sbid, 'snoso' => $snoso,  'snopo' => '',
+					// 'sreff' => $sreff,'stgl' => $stglin, 'scid'=>$scid,'stype' => $stype,
+					// 'ssid' => $ssid,'sppn' => $sfreeppn, 
+					// 'sfreeppn' => $sfreeppn, 'sstatus' => $sstatus,'scdate' => $scdate,
+					// 'sketerangan' => $sketerangan,'sduedate'=>$sduedate,'stypepay'=>$stypepay
+					 // );		
 
 					if ($this -> sales_order_model -> __update_sales_order($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
@@ -181,7 +197,7 @@ class Home extends MY_Controller {
 					redirect(site_url('sales_order_detail/home/sales_order_detail_add/'. $id .'/'. $scid .''));						
 					}
 					else {
-					print_r($arr);die;
+					//print_r($arr);die;
 						__set_error_msg(array('error' => 'Gagal mengubah data !!!'));
 						redirect(site_url('sales_order/home'));
 					}

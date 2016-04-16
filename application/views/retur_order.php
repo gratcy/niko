@@ -70,7 +70,7 @@ minLength: 1,
 				
 					<div class="row">
 			<div class="col-lg-12">
-				<form method="POST">
+				<form method="POST" action="?search=1" >
 			   Customer					<input  name=cname type="text" id="search"   />
 
 					<input  name=cid type="hidden" id="theCid"    />
@@ -81,7 +81,7 @@ minLength: 1,
 
 			<div class="row">
 			<div class="col-lg-12">
-				<form method="POST">
+				<form method="POST"  action="?search=1" >
 			   Reff No.<input type=text name="sreff"  >
 			   <input type=submit value=cari >
 			   </form>
@@ -90,11 +90,12 @@ minLength: 1,
 
 			<div class="row">
 			<div class="col-lg-12">
-				<form method=POST >
-			   Status<select name=sisa >
-			   <option value="x">ALL</option>
-			   <option value="1">Done</option>
+				<form method=POST action="?search=1" >
+			   Status<select name=status >
+			   <option value="x">ALL</option>			   
 			   <option value="0">Approve</option>
+			   <option value="1">Done</option>
+			   <option value="2">Paid</option>
 			   <input type=submit value=cari >
 			   </form>
 			   </div>
@@ -127,6 +128,7 @@ minLength: 1,
 		  <th>Customer </th>
 		  <th>Sales </th>
           <th>Return Type</th>
+		  <th>Total</th>
           
           <th>Status</th>
 		  <th style="width: 50px;"></th>
@@ -146,7 +148,7 @@ minLength: 1,
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo $v -> cname; ?></td>
 		  <td><?php echo $v -> sname; ?></td>
-<?php 
+		<?php 
 		
 		$ccats= $v ->ctyperetur; 
 		if($ccats==0){
@@ -157,10 +159,11 @@ minLength: 1,
 
 		?>		  
 		  
-		  
+		<?php if($v -> pno_pm   > 0){ $sbyr=" - Paid";}else{$sbyr="";}?> 
           <td><?php echo $cname; ?></td>
+		  <td><?php echo __get_rupiah($v ->totretur,2); ?></td>
           <td><?php 
-		  $sstatus=$v -> sstatus;
+		  $sstatus=$v -> sstatus;		  
 		  if($sstatus==0){
 		  $st="Pending";
 		  }elseif($sstatus==1){
@@ -172,7 +175,7 @@ minLength: 1,
 		  }if($sstatus==4){
 		  $st="Done";
 		  }
-		  echo $st; ?></td>
+		  echo $st.$sbyr; ?></td>
 		
 		
 		  <td>

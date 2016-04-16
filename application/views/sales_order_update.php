@@ -193,9 +193,13 @@ function toglex(){
                     <label for="text1" class="control-label col-lg-4">Product Type</label>
 
                    <div class="col-lg-4">
-                        <select name="product_type" class="form-control chzn-select" >
-						<option value="niko">Niko</option>
-						<option value="nico">Nico</option>
+				  
+				   <?php $stype=$detailx[0]->stype; if($stype==1){$stypename="Nico";}else{$stypename="Niko";} ?>
+				    <input type=hidden   name="product_type" value="<?=$stype;?>" >
+                        <select name="product_typex" class="form-control chzn-select"  disabled >
+						<option value="<?=$stype;?>" ><?=$stypename;?></option>
+						<option value="0">Niko</option>
+						<option value="1">Nico</option>
 						</select>
 					</div>
                 </div>
@@ -277,9 +281,9 @@ function toglex(){
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">
-                        <textarea name="sketerangan" rows="4" class="form-control" />
-						<?php echo $detailx[0]->sketerangan;?>
-						</textarea>						
+                        <textarea name="sketerangan" rows="4" class="form-control" /><?php 
+						$sket=explode('*',$detailx[0]->sketerangan);
+						echo ltrim($sket[0]);?></textarea>						
                     </div>
                 </div>
                 		

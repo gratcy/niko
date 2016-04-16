@@ -214,6 +214,28 @@ function pembayaran_detail_addz($scid,$pno_pm) {
 			}else{
 				$date_trans="";
 			}
+			
+			
+			if($_POST['date_cash']!=""){
+			$date_cs=explode("/",$_POST['date_cash']);
+			$date_cash=$date_cs[2].'-'.$date_cs[1].'-'.$date_cs[0];
+			}else{
+				$date_cash="";
+			}
+			if($_POST['date_custom']!=""){
+			$date_cst=explode("/",$_POST['date_custom']);
+			$date_custom=$date_cst[2].'-'.$date_cst[1].'-'.$date_cst[0];
+			}else{
+				$date_custom="";
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 			// $totinv=$_POST['a'][0];
 			// $totret=$_POST['c'][0];
 			// $tottag=$totinv-$totret;
@@ -297,16 +319,19 @@ echo $snoro;
 				//echo $ptype[$p].'-'.$p.'-'.$pamount.'<br>';
 				if(($pamount!=0) or ($pamount!='')){
 					//echo $ptype[$p];
-					if(($p==0) or ($p==3)){ 
+					if($p==0){ 
 					$nogirox="";
 					$pgiroxx="";
 					$accgirox="";
 					$date_transx="";
 					$rektox="";
+					$date_custom="";
 					}elseif($p==1){ 
 					$nogirox="";
 					$pgiroxx="";
 					$accgirox="";
+					$date_cash="";
+					$date_custom="";					
 					// $date_trans="";
 					// $rekto="";
 					}elseif($p==2){ 
@@ -315,14 +340,24 @@ echo $snoro;
 					// $accgiro="";
 					$date_transx="";
 					$rektox="";
+					$date_cash="";
+					$date_custom="";
+					}elseif($p==3){ 
+					$nogiro="";
+					$pgirox="";
+					$accgiro="";
+					$date_transx="";
+					$rektox="";
+					$date_cash="";					
 					}
 				$pm=$pm+$pamount;
 				// if($date_transx="0000-00-00"){$date_transx="";}
 				// if($pgiroxx="0000-00-00"){$pgiroxx="";}
 				//PNO_PM = PMID dr tabel pembayaran_tab
-				$pmtgll=str_replace('0000-00-00','',$pgiroxx.$date_transx);
-				if($pmtgll==""){$pmtgll=date('Y-m-d');}
-				echo $pmtgll;//die;
+				$pmtgll=str_replace('0000-00-00','',$pgiroxx.$date_transx.$date_custom.$date_cash);
+				//if($pmtgll==""){$pmtgll=date('Y-m-d');}
+				echo $pmtgll.'<br>';
+				//die;
 				$ard = array( 'pmdid'=>'','pno_pm' => $pmid,  
 					'pm_tgl'=>$pmtgll,'ptype'=>$ptype[$p],'ptgl_trans'=>$date_transx,
 					'pgirono'=>$nogirox,'ptgl_giro'=>$pgiroxx,'pgiroacc'=>$accgirox,
@@ -334,6 +369,7 @@ echo $snoro;
 				}
 				}
 				}
+				//die;
 
 //die;				
 					$suminv=$this -> pembayaran_detail_model -> __sum_inv($pno_pm);

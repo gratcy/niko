@@ -23,6 +23,29 @@
             
             });
         </script>		
+
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                 
+                $('#tglcash').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+            
+            });
+        </script>
+
+
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                 
+                $('#tglcustom').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+            
+            });
+        </script>
 		
 </head>		
 		
@@ -379,7 +402,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <th colspan=3>Cash</th>
           <th>
 		  <input type="text" id="totalcash" name="payment[0]" value="" size="15" onchange="UpdateCost()" />
-		  </th><th></th>
+		  </th><th>Date Cash</th><th><input type=text id="tglcash" name="date_cash" value="" size="15" ></th>
 		  
       </tr>	
 
@@ -406,7 +429,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <th>
 	&nbsp;
 		 
-		  </th><th> Tanggal Transfer</th><th><input type="text" id="example2" name="date_transfer" value="" size="15"  /></th>
+		  </th><th> Date Transfer</th><th><input type="text" id="example2" name="date_transfer" value="" size="15"  /></th>
 		  
       </tr>
 
@@ -432,11 +455,9 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
       </tr>
 	  <tr>
           
-          <th colspan=3></th>
-          <th >
-		  
-		  &nbsp;&nbsp;</th><th>
-		   Tanggal Giro</th><th><input  name="tglgiro" type="text"   id="example1" size="15"  >
+          <th colspan=3 >Date Custom</th>
+          <th ><input  name="date_custom" type="text"   id="tglcustom" size="15"  ></th><th>
+		   Date Giro</th><th><input  name="tglgiro" type="text"   id="example1" size="15"  >
 		   </th>
 		  
       </tr>
