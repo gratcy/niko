@@ -8,9 +8,11 @@
                 </div>
 
                 <hr />
+			<?php if (__get_roles('DistributionRequestExecute')) : ?>
                 <a href="<?php echo site_url('request/request_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Distribution Request</a>
                 <br />
                 <br />
+			<?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -48,6 +50,7 @@
           <td><?php echo $v -> ddesc; ?></td>
           <td><?php echo ($v -> dstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approved</span>' : __get_status($v -> dstatus,1)); ?></td>
 		  <td style="text-align:center;">
+			<?php if (__get_roles('DistributionRequestExecute')) : ?>
 			  <?php if ($v -> dstatus != 3) : ?>
               <a href="<?php echo site_url('request/request_update/' . $v -> did); ?>"><i class="icon-pencil"></i></a>
               <a href="<?php echo site_url('request/request_delete/' . $v -> did); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
@@ -55,6 +58,7 @@
               <a href="<?php echo site_url('request/request_detail/' . $v -> did); ?>"><i class="icon-book"></i></a>
 			   <a href="<?php echo site_url('request/export/excel_detail/' . $v -> did); ?>"><i class="icon-file"></i></a>
               <a href="javascript:void(0);" onclick="print_data('<?php echo site_url('printpage/dist_request/' . $v -> did); ?>');"><i class="icon-print"></i></a>
+              <?php endif; ?>
               <?php endif; ?>
 		</td>
 										</tr>

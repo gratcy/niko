@@ -74,7 +74,9 @@
    <a class="btn btn-info" href="<?php echo site_url('request/request_list_items/2/' . $id); ?>" id="addItem">Add Item</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+			<?php if (__get_roles('DistributionRequestApproval')) : ?>
 				<button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approved</button>
+			<?php endif; ?>
 					</div>
 				</div>
             </form>

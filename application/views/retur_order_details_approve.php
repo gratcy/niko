@@ -206,7 +206,9 @@ minLength: 1,
 	<?php if($stat==3){?>		
 		
     <?php if($_POST['input']<>""){ ?>
+				<?php if (__get_roles('ReturnOrderApproval')) : ?>
 	<input type=submit name="approve" value="Complete Approval" class="btn text-muted text-center btn-danger">
+			                  <?php endif; ?>
 	<input type=submit value="Edit" class="btn text-muted text-center btn-primary">
      <?php }else{ ?>	
      <input type=submit name=input value="Input" class="btn text-muted text-center btn-primary">

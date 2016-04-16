@@ -79,7 +79,9 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
+			<?php if (__get_roles('DistributionTransferApproval')) : ?>
 				<button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approved</button>
+			<?php endif; ?>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>

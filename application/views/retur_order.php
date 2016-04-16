@@ -176,19 +176,16 @@ minLength: 1,
 		
 		
 		  <td>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
+				<?php if (__get_roles('ReturnOrderExecute')) : ?>
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('retur_order/home/retur_order_update/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-pencil"></i></a>
 			  <?php }?>
-                <?php endif; ?>
-				<?php if (__get_roles('SalesOrderUpdate')) : ?>
 			  <!--a href="<?php echo site_url('retur_order_detail/home/retur_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a-->
-                <?php endif; ?>
-				<?php if (__get_roles('SalesOrderDelete')) : ?>
+
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('retur_order/home/retur_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
 			  <?php } ?>
-                <?php endif; ?>
+			                  <?php endif; ?>
 			<?php if($sstatus==3){	?>
 				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_approve/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
 			<?php }?>
