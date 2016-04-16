@@ -165,6 +165,73 @@ minLength: 1,
 				
             </form>
         </div>
+		
+		
+		<br>
+		<table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+          
+          <th>Code</th>
+          <th>Name</th>
+		  <th>Qty/Coly</th>
+          <th>Qty/Pcs</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+    <?php
+		$totalqty=0;  
+		$total=0;
+		$totalppn=0;
+		$totalall=0;
+		
+		foreach($detail as $k => $v) :	
+			//print_r($v);
+			$sqtyx=$v -> sqty;
+			$spricex=$v -> sprice;
+			$sdiscx=$v -> sdisc;
+			$qtyx=$v -> sqty;
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+	
+    ?>
+          <tr>
+          
+          <td><?php echo $v -> pcode; ?> 
+		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
+		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> ssisa; ?>">
+		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
+		  </td>
+		  <td><?php echo $v -> pname; ?></td>
+		  <td><?php echo $v -> sqty/$v -> pvolume; ?></td>
+          <td><select name="sqty[]" class="form-control chzn-select">
+		  
+		  <?php $ssisa= $v -> ssisa; 
+		  for($k=$ssisa;$k>=0;$k--){
+		  echo "<option>$k</option>";	
+		  }
+		  ?>
+		  </select>
+		  </td>
+
+		  </tr>
+        <?php 
+		$total=$subtotal+$total;
+		$totalqty=$qtyx+$totalqty;
+		$totalppn=$total * 10/100;
+		// if($freeppn==1){
+		// $totalall= $total;
+		// }else{
+		// $totalall= $total + $totalppn;
+		// }
+		endforeach; ?>
+		
+                         </tbody>
+                                </table>
+								
+		
+		
     </div>
 </div>
 

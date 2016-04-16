@@ -406,7 +406,7 @@ $tret=$n->ptotal_retur;
           <th>Check List</th>
           <th>Return No.</th>
           <th>Return Date</th>
-          <th>Price</th>
+          <th>Total</th>
 	
          
 		  
@@ -472,12 +472,12 @@ $tret=$n->ptotal_retur;
 		  //echo $m;
 		  $sum_inv=$v -> rpotong;
 		  $snoro=$v -> snoro;
-		
+		  $sid=$v -> sid;
 		  ?>
 		  <input type=checkbox name="c[]" id='<?php echo "ge".$m;?>' value= "<?=$sum_inv;?>" onchange="UpdateCost()" <?=$dsbl;?> >
 		  </td>
           <td> 
-		  <input style="opacity:0; position:absolute; left:9999px;" type=checkbox name="d[]" id='<?php echo "gezz".$m;?>' value= "<?=$snoro;?>"    >
+		  <input style="opacity:0; position:absolute; left:9999px;" type=checkbox name="d[]" id='<?php echo "gezz".$m;?>' value= "<?=$sid;?>"    >
 		  <?php echo $snoro; ?> </td>	
 		  <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo __get_rupiah($sum_inv); ?></td>
@@ -576,7 +576,15 @@ $tret=$n->ptotal_retur;
           <th>
 		  <input type="text" id="totaltrans" name="payment[1]" value="" size="15" onchange="UpdateCost()" />
 		 
-		  </th><th> Rekening Tujuan</th><th><input type="text" id="rek" name="rekto" value="" size="15"  /></th>
+		  </th>
+		  <th> Rekening Tujuan</th><th>
+		  <select id="rek" name="rekto" />
+		  <option value="">PILIH</option>
+		  <option value="BCA Meiske A. - 7015152052">BCA Meiske A. - 7015152052</option>
+		  <option value="BCA PT.NEI - 0093033369">BCA PT.NEI - 0093033369</option>
+		  <option value="BCA L.T.Bing - 4090498199">BCA L.T.Bing - 4090498199</option>
+		  </select>
+		  </th>
 		  
       </tr>
 
@@ -626,7 +634,7 @@ $tret=$n->ptotal_retur;
 	 
         </tbody>
              </table>
-				<input class="btn text-muted text-center btn-danger" type=submit value="Complete" >
+				<input class="btn text-muted text-center btn-danger" type=submit value="Submit" >
 		</form>	
 		<br><br>
 			
@@ -650,10 +658,11 @@ $tret=$n->ptotal_retur;
                                     </thead>
                                     <tbody>
 		  <?php
+		  
 		  foreach($inv as $k => $v) :
 			  // echo "<pre>";
-	// print_r($pembayaran);
-	 // echo "</pre>";
+			  // print_r($pembayaran);
+			  // echo "</pre>";
 		  ?>
                                         <tr>
           <td><?php echo $v -> no_invoice; ?></td>
@@ -708,9 +717,7 @@ $tret=$n->ptotal_retur;
                                     <tbody>
 		  <?php
 		  foreach($pembayaran as $k => $v) :
-			  // echo "<pre>";
-	// print_r($pembayaran);
-	 // echo "</pre>";
+
 		  ?>
                                         <tr>
           <td><?php echo $v -> ptype; ?></td>
@@ -722,10 +729,7 @@ $tret=$n->ptotal_retur;
 		  <td><?php echo $v -> pamount; ?></td>
 		  
           <td><?php 
-		  //$noinv=$v -> no_invoice;
-		  // $byrcash=$v -> pcash;
-		  // $byrgiro=$v -> pgiro;
-		  // $piutang=$v -> piutang;
+
 		  $sstatus=$v -> pstatus;
 		  if($sstatus==1){
 		  $st="Pending";

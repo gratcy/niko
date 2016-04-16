@@ -10,6 +10,7 @@
                 <hr />
 				<?php 
 				$ssisa= $ssisa[0]->sisa;
+				//echo $ssisa;
 				if($ssisa >'0'){
 				$statusdo="Aktif";
 				?>
@@ -64,7 +65,7 @@
 		  <?php
 		  }else{
 			if($statusdo=="DONE"){ ?>
-              <a href="<?php echo site_url('sales_order_detail/home/invoice_order_add/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-pencil"></i></a>
+              <a target="_blank" href="<?php echo site_url('sales_order_detail/home/invoice_order_add/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-pencil"></i></a>
 			  
 			  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>			  
 			  <?php } ?>
@@ -72,7 +73,7 @@
 			<?php	
 			// echo $statusdo;die;
 			if($statusdo=="Aktif"){ ?>
-			<a href="<?php echo site_url('sales_order_detail/home/invoice_order_add/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-pencil"></i></a>
+			<a target="_blank" href="<?php echo site_url('sales_order_detail/home/invoice_order_add/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-pencil"></i></a>
 			   
 			  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $id .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
               <a hnopo="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>

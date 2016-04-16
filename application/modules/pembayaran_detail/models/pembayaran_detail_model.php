@@ -29,26 +29,26 @@ function __update_invoicez($noinv,$arr){
 		return $sql -> result();
 	}
 	function __get_pembayaran_detail($id) {
-		$this -> db -> select("* FROM pembayaran_detail_tab WHERE   pembayaran_detail_tab.pno_pm='$id'" );
-		// print_r($this -> db -> get() -> result());die;
+		//echo "$scid";die;
+		
+		$this -> db -> select("*,
+		(select pembayaran_tab.pstatus from pembayaran_tab where pembayaran_tab.pno_pm= pembayaran_detail_tab.pno_pm) as pstatuss
+		FROM pembayaran_detail_tab WHERE   pembayaran_detail_tab.pno_pm='$id' " );
 		return $this -> db -> get() -> result();
 	}
 
 	function __get_pembayaran_inv($id) {
-		$this -> db -> select("SUM(tamount) AS tamount, `sduedate_invoice`, `sno_invoice` AS no_invoice, `stgl_invoice` 
-FROM delivery_order_detail_tab WHERE delivery_order_detail_tab.pno_pm='$id' 
-AND delivery_order_detail_tab.sid<>0
-GROUP BY sno_invoice");
-		 //print_r($this -> db -> get() -> result());die;
+		$this -> db -> select("SUM(dototal) AS tamount, `sduedate_invoice`, `sno_invoice` AS no_invoice, `stgl_invoice` 
+		FROM delivery_order_detail_tab WHERE delivery_order_detail_tab.pno_pm='$id' 
+		AND delivery_order_detail_tab.sid=0
+		GROUP BY sno_invoice");
 		return $this -> db -> get() -> result();
 	}	
 	
 	function __get_pembayaran_ro($id) {
-		$this -> db -> select(" SUM(tamount) AS tamount, `sduedate_invoice`, `sno_invoice` AS no_invoice, `stgl_invoice` 
-FROM delivery_order_detail_tab WHERE delivery_order_detail_tab.pno_pm='$id' 
-AND delivery_order_detail_tab.sid<>0
-GROUP BY sno_invoice");
-		 //print_r($this -> db -> get() -> result());die;
+		$this -> db -> select(" SUM(sprice*sqty) AS tamount, `sduedate`, `snoro` AS snoro, `stgl` 
+		FROM retur_order_tab,retur_order_detail_tab WHERE retur_order_tab.sid=retur_order_detail_tab.sid AND retur_order_tab.pno_pm='$id' 
+		GROUP BY retur_order_detail_tab.ssid");
 		return $this -> db -> get() -> result();
 	}		
 	
@@ -69,38 +69,65 @@ GROUP BY sno_invoice");
 		return $this -> db -> get() -> result();
 	}	
 	
-function __bayar_lunas($pno_pm,$tots,$scid) {
+	function __bayar_lunas($pno_pm,$tots,$scid) {
+		$ndate=date('Y-m-d');
+		
+		
+		$que= $this->db->query("SELECT pm_tgl,ptgl_trans,ptgl_giro FROM pembayaran_detail_tab WHERE pno_pm='$pno_pm'");
+		$que = $que-> result();
+		$sj= count($que);
+		for($s=0;$s<$sj;$s++){
+			$dtx[]= $que[$s]->pm_tgl;
+			$dtx[]= $que[$s]->ptgl_trans;
+			$dtx[]= $que[$s]->ptgl_giro;
+		}
+		
+		$max_key = array_search(max($dtx), $dtx);
+		$ndate= $dtx[$max_key];
+		
+		
+		
+	$this -> db-> query("update delivery_order_detail_tab 
+		set pstatus='3',sdate_lunas='$ndate' where pno_pm='$pno_pm'");	
+		
 	
-$this -> db-> query("update delivery_order_detail_tab 
-	set pstatus='3' where pno_pm='$pno_pm'");	
-	
-$this -> db-> query("update customers_tab 
-	set climit=(climit + $tots ) where cid='$scid'");		
-
-return $this -> db-> query("update pembayaran_tab 
-	set pstatus='3' where pno_pm='$pno_pm'");
-
-
-}	
-	function __get_pembayaran_detail_inv($scid,$pno_pm) {
-	$pn="''";
-		$this -> db -> select("c.* ,sum( c.tamount ) AS sum_inv, b.scid FROM sales_order_tab b, delivery_order_detail_tab c WHERE b.sid = c.ssid AND (c.pno_pm='' or c.pno_pm is NULL) AND b.scid = '".$scid."' group by (c.snodo)");
-		return $this -> db -> get() -> result();
-	}		
-	
-function __update_terima($pno_pm,$amount) {	
 
 	return $this -> db-> query("update pembayaran_tab 
-	set ptotal_terima=(ptotal_terima+'$amount'),ptotal_pending=(ptotal_pending-'$amount') where pno_pm='$pno_pm'");
-}
+		set pstatus='3' where pno_pm='$pno_pm'");
+
+
+	}	
+	function __get_pembayaran_detail_inv($scid,$pno_pm) {
+		$pn="''";
+			$this -> db -> select("c.* ,sum( c.dototal ) AS sum_inv, b.scid FROM sales_order_tab b, delivery_order_detail_tab c WHERE 
+			c.sid=0 AND	b.sid = c.ssid AND (c.pno_pm='' or c.pno_pm is NULL) AND b.scid = '".$scid."' group by (c.snodo)");
+			return $this -> db -> get() -> result();
+		}		
+
+	function __update_terima_ro($pmid,$amount,$cid) {	
+	//echo "xxxx";die;
+		return $this -> db-> query("update customers_tab set climit=(climit+'$amount') where cid='$cid'");
+	}	
+		
+	function __update_terima($pmid,$amount,$cid) {	
+		$this -> db-> query("update customers_tab set climit=(climit+'$amount') where cid='$cid'");
+		
+		return $this -> db-> query("update pembayaran_tab 
+		set ptotal_terima=(ptotal_terima+'$amount'),ptotal_pending=(ptotal_pending-'$amount') where pno_pm='$pmid'");
+	}
 
 	function __sum_inv($pno_pm) {
-		 $this -> db -> select(" sum(tamount) as tamount FROM delivery_order_detail_tab WHERE pno_pm='$pno_pm' and sid<>0");
+		 $this -> db -> select(" sum(dototal) as tamount FROM delivery_order_detail_tab WHERE pno_pm='$pno_pm' and sid=0");
 		return $this -> db -> get() -> result();
 	}
 	
-	function __sum_ret($pno_pm) {
-		 $this -> db -> select(" sum(sprice) as sprice FROM retur_order_tab, retur_order_detail_tab WHERE retur_order_tab.sid=retur_order_detail_tab.ssid and pno_pm='$pno_pm' and status_potong='1'");
+	function __sum_ret($pno_pm) {		
+		 $this -> db -> select(" sum(sprice * sqty) as sprice 
+		 FROM retur_order_tab, retur_order_detail_tab,pembayaran_tab 
+		 WHERE pembayaran_tab.pno_pm=retur_order_tab.pno_pm and pembayaran_tab.pcid=retur_order_tab.scid AND 
+		 retur_order_tab.sid=retur_order_detail_tab.ssid and retur_order_tab.pno_pm='$pno_pm' and status_potong='1' 
+		 ");
+		 //group by retur_order_detail_tab.ssid
 		return $this -> db -> get() -> result();
 	}	
 
@@ -146,8 +173,9 @@ return $this -> db-> query("update pembayaran_detail_tab set pstatus='3' where p
         $this -> db -> where('sno_invoice', $snoinv);
         return $this -> db -> update('delivery_order_detail_tab', $data);
 	}		
-	function __update_ro($snoro, $data) {
-        $this -> db -> where('snoro', $snoro);
+	function __update_ro($snoro,$scid, $data) {
+        $this -> db -> where('sid', $snoro);
+		$this -> db -> where('scid', $scid);
         return $this -> db -> update('retur_order_tab', $data);
 	}
 
@@ -177,7 +205,7 @@ return $this -> db-> query("update pembayaran_detail_tab set pstatus='3' where p
         return $this -> db -> update('sales_order_tab', $data);
 	}	
 	function __insert_pembayaran_detail($data) {
-	
+	//print_r($data);die;
         return $this -> db -> insert('pembayaran_detail_tab', $data);
 	}
 	function __insert_delivery_order_detail($data) {

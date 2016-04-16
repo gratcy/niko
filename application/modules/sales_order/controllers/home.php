@@ -151,12 +151,15 @@ class Home extends MY_Controller {
 			$topx = str_replace('',',',$this -> input -> post('topx', TRUE));			
 			$ccash = str_replace('',',',$this -> input -> post('ccash', TRUE));
 			$ccredit = str_replace('',',',$this -> input -> post('ccredit', TRUE));
+			//echo $stypepay;die;
 			if($stypepay=="Cash"){
 
 			$sduedate = date("Y-m-d",strtotime("$stglin + $ccash days"));			
 			}else{			
 			$sduedate = date("Y-m-d",strtotime("$stglin + $ccredit days"));
 			}
+			
+			$sduedate = date("Y-m-d",strtotime("$stgl + 30 days"));	
 			$ssubtotal = 0;
 			$sppnnpwp = 0;
 			$stotalsubppn = 0;

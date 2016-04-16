@@ -130,8 +130,12 @@ $view['id'] = $id;
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
 		
-
-			$this->load->view('retur_order_report',$view,FALSE);
+			$view['hostname']=$this->db->hostname;
+			$view['username']=$this->db->username;
+			$view['password']=$this->db->password;
+			$view['database']=$this->db->database;	
+			//$this->load->view('retur_order_report',$view,FALSE);
+			$this->load->view('print_ro',$view,FALSE);
 	}	
 
 

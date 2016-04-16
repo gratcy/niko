@@ -231,7 +231,7 @@ $drv=explode("-",$detailx[0]->driver);
 		foreach($details as $l => $m) :	
 		//print_r($m -> ssisa);
 		?>
-		<input type=hidden name="qty[]" value="<?php echo $m -> ssisa; ?>">
+		<input type=hidden name="qtyyyy[]" value="<?php echo $m -> ssisa; ?>">
 		<?php
 		endforeach;
 		foreach($detail as $k => $v) :	
@@ -247,6 +247,7 @@ $drv=explode("-",$detailx[0]->driver);
 		  <input type=hidden name="did[]" value="<?php echo $v -> did; ?>">
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> hqty; ?>">
 		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
 		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
 		  <input type=hidden name="tamount[]" value="<?php echo $v -> sprice * $v -> sqty; ?>">

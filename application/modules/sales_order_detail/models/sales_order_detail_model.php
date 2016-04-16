@@ -26,7 +26,7 @@ class sales_order_detail_model extends CI_Model {
 
 	function __get_delivery_order_detail($id,$snodo) {
 	
-		$this -> db -> select("*,sum(delivery_order_detail_tab.tamount)as juminv,sales_order_tab.ssid as ssid_sales, delivery_order_detail_tab.ssid as ssid_so,			
+		$this -> db -> select("*,sum(delivery_order_detail_tab.dototal)as juminv,sales_order_tab.ssid as ssid_sales, delivery_order_detail_tab.ssid as ssid_so,			
 		(select sduration from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sdurationx,
 		
 		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,

@@ -101,6 +101,8 @@ left:inherit!important;
 		  <?php if($sstatus!=3){ ?>
 		  <!--a href="<?php echo site_url('pembayaran/home/pembayaran_update/' . $v -> pno_pm ); ?>"><i class="icon-pencil"></i></a-->
 		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$v->pcid.'/' . $v -> pno_pm ); ?>"><i class="icon-book"></i></a>
+		  <?php } else{?>
+		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$v->pcid.'/' . $v -> pno_pm ); ?>"><i class="icon-book"></i></a>
 		  <?php } ?>
 		  
 		  

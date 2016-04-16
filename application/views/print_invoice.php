@@ -299,7 +299,7 @@ $c=$p*$jum_baris;
 //print_r(mysqli_fetch_array($tampilx));//die;
 $cx=$c-$jum_baris;
 $sql="SELECT a.*,b.*,c.sqty AS dqty  FROM sales_order_detail_tab a,products_tab b, delivery_order_detail_tab c WHERE   
-a.spid=b.pid  AND c.snodo='$snodo'  AND a.sid=c.sid limit $cx,$jum_baris";
+a.spid=b.pid  AND c.snodo='$snodo'  AND a.sid=c.sid  AND c.sqty>0 limit $cx,$jum_baris";
 $tampil=mysqli_query($con,$sql);
 
 
@@ -442,7 +442,7 @@ while ($data=mysqli_fetch_array($tampil)){
 
 	if($detailx[0]->sfreeppn==1) { $data['sprice']=$data['sprice'];}else{ $data['sprice']=$data['sprice']*1;}
 	$branch=$this -> memcachedlib -> sesresult['ubid'];
-
+//if($data['dqty']>0){
 
 ?>
 	
@@ -455,8 +455,13 @@ while ($data=mysqli_fetch_array($tampil)){
           
           <td><?=$data[16];?><input name="id[]" value="76" type="hidden"></td>
           <td><?=$data[17];?></td>
-		  <td><?=$data['dqty']/$data['pvolume'];?></td>
-          <td><?=$data['dqty'];?></td>
+		  <td>
+		  <?php 
+		  $qv=$data['dqty']/$data['pvolume'];
+		  $qvv=number_format($qv,2,'.',',');
+		  echo str_replace('.00','',$qvv) ;?>
+		  </td>
+          <td><?php echo $data['dqty'];?></td>
           <td align="right"><?=number_format($data['sprice']);?></td>          
 		  <td align="right"><?=number_format($data['spromodisc']);?></td>
 		  <td align="right">
@@ -496,6 +501,7 @@ if(!isset($qtyy)){$qtyy=0;}
 	$r=0;
 	$rt=$rt+1;
 	//echo $r.'-'.$rt.'-'.$rr.'xx';
+//}
 }
 
 $f=(8-($r+$rt))/3;

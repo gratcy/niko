@@ -43,10 +43,32 @@
             <h5>Payment Detail Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
-	<?php echo __get_error_msg(); 
+	<?php echo __get_error_msg();
+//print_r($detailx);	
 	$pno_pm=$detailx[0]->pno_pm;
 	//$type_pay=$detailx[0]->type_bayar;
 	$type_pay="";
+$jpm=count($pembayaran);
+if($jpm==0){
+	$pembayaran[0] = new stdClass();
+	$pembayaran[0]->pstatuss=0;
+	$pembayaran[0]->ptgl_giro="";
+	$pembayaran[0]->ptgl_trans="";
+	$pembayaran[0]->ptype="";
+	$pembayaran[0]->pm_tgl="";
+	$pembayaran[0]->prekto="";
+	$pembayaran[0]->pamount="";
+	$pembayaran[0]->pgiroacc="";
+	$pembayaran[0]->pgirono="";
+	$pembayaran[0]->pstatus="";
+	}
+$jpr=count($detailrr);
+if($jpr==0){
+	$detailrr[0] = new stdClass();
+	$detailrr[0]->sprice=0;
+	$detailrr[0]->snoro="";
+	$detailrr[0]->stgl="";
+}
 	?>
 
 
@@ -115,6 +137,8 @@
 <!--form name="listForm"-->
 <?php 
 $jpb=count($detailx);
+
+// print_r($detailx);
 if($jpb==0){
 	//$totaltagihan=0;
 	//$totalterima=0;
@@ -122,13 +146,21 @@ if($jpb==0){
 	// $tinv=0;
 	// $tret=0;
 }else{
+	
+	//print_r($detailrr);
 foreach($detailx as $m => $n) {
 $totaltagihan=$n->ptotal_tagihan;
 $totalterima=$n->ptotal_terima;
 $totalpending=$n->ptotal_pending;
 $totaltagihanx=$totaltagihan-$totalterima;
 $tinv=$n->ptotal_inv;
-$tret=$n->ptotal_retur;
+//$tret=$n->ptotal_retur;
+
+}
+$tret=0;
+$tr= count($detailrr);
+for($d=0;$d<$tr;$d++){
+$tret=$detailrr[$d]->sprice+$tret;
 }
 }
 //echo $totaltagihanx;
@@ -262,10 +294,12 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           
 		  
 		  <td></td>
-		  </tr-->
+		  </tr>
+		  
+	<?php } ?>  -->
 	
 	<?php	
-	}
+	
 
 		foreach($detailr as $m => $v) :	
 		  $numa= count($detailr);
@@ -355,8 +389,15 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           <th>
 		  <input type="text" id="totaltrans" name="payment[1]" value="" size="15" onchange="UpdateCost()" />
 		 
-		  </th><th> Rekening Tujuan</th><th><input type="text" id="rek" name="rekto" value="" size="15"  /></th>
-		  
+		  </th>
+		  		  <th> Rekening Tujuan</th><th>
+		  <select id="rek" name="rekto" />
+		  <option value="">PILIH</option>
+		  <option value="BCA Meiske A. - 7015152052">BCA Meiske A. - 7015152052</option>
+		  <option value="BCA PT.NEI - 0093033369">BCA PT.NEI - 0093033369</option>
+		  <option value="BCA L.T.Bing - 4090498199">BCA L.T.Bing - 4090498199</option>
+		  </select>
+		  </th>
       </tr>
 
 	 <tr>
@@ -382,8 +423,8 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
       </tr>
 	 <tr>
           
-          <th colspan=3></th>
-          <th >
+          <th colspan=3><input type="text"  name="custompaid" value="" size="30" /></th>
+          <th > <input type="text" id="wo" name="payment[3]" value="" size="15" />
 		  
 		  &nbsp;</th><th>No Giro</th><th>
 		   <input  name="nogiro" type="text" size="15"  ></th>
@@ -401,16 +442,17 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
       </tr>
 	  
 
-	 <input type="hidden" id="wo" name="payment[3]" value="" size="15" />
+	
 
      <input type="hidden" id="totalsisa" name="totalsisa" value="" size="15" />
 	 
                                     </tbody>
                                 </table>
-								<input class="btn text-muted text-center btn-danger" type=submit value="Complete" >
+		<?php 	if($pembayaran[0]->pstatuss<3){?>						
+								<input class="btn text-muted text-center btn-danger" type=submit value="Submit" >
+		<?php } ?>						
 		</form>	
 		<br><br>
-		
 		
 	 <div class="form-group">
 		 <div class="panel-body">
@@ -443,7 +485,44 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 																				
         <?php endforeach; ?>
                                     </tbody>
-                                </table><br>					
+                                </table><br>
+
+
+
+	<table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+          
+         <th>Return No.</th>
+         <th>Date</th>         
+         <th>Total</th>
+		 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+		  <?php
+		  foreach($detailrr as $m => $v) :
+
+		  ?>
+                                        <tr>
+          <td><?php echo $v -> snoro; ?></td>
+          <td><?php 
+		  if($v -> stgl!=""){
+		  echo __get_date(strtotime($v -> stgl,2));} ?></td>
+          <td><?php echo __get_rupiah($v->sprice); ?></td>
+		  
+      		
+										</tr>
+																				
+        <?php endforeach; ?>
+                                    </tbody>
+                                </table><br>
+
+
+
+
+
+								
 		
 			
 		</div></div></div>
@@ -478,10 +557,11 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
                                     </thead>
                                     <tbody>
 		  <?php
+		  //if($jpm>0){
 		  foreach($pembayaran as $k => $v) :
-			  // echo "<pre>";
-	// print_r($pembayaran);
-	 // echo "</pre>";
+
+	 $pstatuss=$v->pstatuss;
+	 
 	 if($v -> ptgl_trans=="0000-00-00"){
 		 $v -> ptgl_trans="";
 	 }
@@ -491,14 +571,38 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  ?>
                                         <tr>
           <td><?php echo ucfirst($v -> ptype); ?></td>
-          <td><?php echo __get_date(strtotime($v -> pm_tgl),1); ?></td>
-		  <td><?php echo __get_rupiah($v -> pamount); ?></td>
+          <td><?php 
+		  if(($v -> pm_tgl!="")AND($v -> pm_tgl!="0000-00-00")){
+		  echo __get_date(strtotime($v -> pm_tgl),1); }else{ }
+		  
+		// if($v -> ptgl_giro==""){			
+			// echo "";
+		// }else{ echo __get_date(strtotime($v -> ptgl_giro),1);}		  
+		  
+		// if($v -> ptgl_trans==""){			
+			// echo "";
+		// }else{ echo __get_date(strtotime($v -> ptgl_trans),1);}		  
+		  
+		  ?>
+		  </td>
+		  <td><?php 
+		  if($v -> pamount>0){
+		  echo __get_rupiah($v -> pamount); }?></td>
 
 		<td><?php echo $v -> prekto; ?></td>
-		<td><?php echo __get_date(strtotime($v -> ptgl_trans),1); ?></td> 
+		<td><?php 
+		if($v -> ptgl_trans==""){			
+			echo "";
+		}else{ echo __get_date(strtotime($v -> ptgl_trans),1);}
+		
+		 ?></td> 
 		<td><?php echo $v -> pgiroacc; ?></td>
 		<td><?php echo $v -> pgirono; ?></td>
-		<td><?php echo __get_date(strtotime($v -> ptgl_giro),1); ?></td>
+		<td><?php 
+		if($v -> ptgl_giro==""){			
+			echo "";
+		}else{ echo __get_date(strtotime($v -> ptgl_giro),1);}
+		 ?></td>
 		 
 		
 		  
@@ -508,6 +612,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  // $byrgiro=$v -> pgiro;
 		  // $piutang=$v -> piutang;
 		  $sstatus=$v -> pstatus;
+		  $st="";
 		  if($sstatus==1){
 		  $st="Pending";
 		  }elseif($sstatus==3){
@@ -517,7 +622,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		  }
 		  ?>
 		  <?php if($st=="Pending"){ ?>
-		 <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_terima/'.$v ->pno_pm.'/'.$scid.'/'.$v ->pmdid.'/'.$v -> pamount); ?>"><?=$st;?></a>
+		 <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_terima/'.$v ->pno_pm.'/'.$scid.'/'.$v ->pmdid.'/'.$v -> pamount.'/'.$detailx[0]->pno_pm); ?>"><?=$st;?></a>
 		  <?php } else { echo $st;}?>
           </td>		
 		
@@ -525,7 +630,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 										</tr>
 																				
         <?php endforeach; 
-		
+		 // }
 		//echo $totaltagihanx;
 		?>
                                     </tbody>
@@ -533,6 +638,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		
 		
 	<br>
+	
 	<form method=POST action="<?php echo site_url('pembayaran_detail/home/pembayaran_lunas/'.$scid.'/'.$pno_pm); ?>" >
 <table>
 	 <tr>
@@ -545,7 +651,12 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		<input type=hidden name=pno_pm value="<?=$pno_pm;?>">
 		<input type=hidden name=scid value="<?=$scid;?>">
 		<input type=hidden id="totalz" name="sisaz" value="<?=$totaltagihanx;?>" size="15" />
-		</th><th><input class="btn text-muted text-center btn-danger" type=submit value="PAID"></th>
+		</th><th>
+		<?php if($pembayaran[0]->pstatuss<3){?>
+		<input class="btn text-muted text-center btn-danger" type=submit value="PAID">
+		<?php } ?>
+		
+		</th>
 		  
       </tr>
 

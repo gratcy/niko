@@ -70,7 +70,7 @@ minLength: 1,
 				
 				<div class="row">
 			<div class="col-lg-12">
-				<form method="POST">
+				<form method="POST" action="?search=1" >
 			   Customer					<input  name=cname type="text" id="search"   />
 
 					<input  name=cid type="hidden" id="theCid"    />
@@ -81,7 +81,7 @@ minLength: 1,
 
 			<div class="row">
 			<div class="col-lg-12">
-				<form method="POST">
+				<form method="POST" action="?search=1" >
 			   Reff No.<input type=text name="sreff"  >
 			   <input type=submit value=cari >
 			   </form>
@@ -90,7 +90,7 @@ minLength: 1,
 
 			<div class="row">
 			<div class="col-lg-12">
-				<form method=POST >
+				<form method=POST action="?search=1" >
 			   Status<select name=sisa >
 			   <option value="x">ALL</option>
 			   <option value="2">Active</option>			   

@@ -235,7 +235,7 @@ minLength: 1,
 		endforeach; ?>
           <tr>
           
-          <td colspan=5>TOTAL</td>
+          <td colspan=6>TOTAL</td>
           <td><?php echo __get_rupiah($total,2);?></td>	
 		  </tr>		
         

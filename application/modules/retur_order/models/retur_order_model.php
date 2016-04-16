@@ -19,6 +19,15 @@ class retur_order_model extends CI_Model {
 		WHERE retur_order_tab.sstatus<>2  ORDER BY retur_order_tab.sid DESC';
 	}
 	
+	function __get_retur_order_by_pno_pm($pno_pm,$scid) {
+		
+		$this -> db -> select("sum(sprice * sqty) as sprice,stgl,snoro FROM retur_order_tab, retur_order_detail_tab 
+		 WHERE retur_order_tab.sid=retur_order_detail_tab.ssid and scid='$scid' and pno_pm='$pno_pm' and status_potong='1' group by retur_order_detail_tab.ssid");
+
+		return $this -> db -> get() -> result();
+	}		
+	
+	
 	function __get_total_retur_order() {
 		$sql = $this -> db -> query('SELECT * FROM retur_order_tab WHERE sstatus=1');
 		return $sql -> num_rows();
@@ -96,7 +105,17 @@ class retur_order_model extends CI_Model {
 	}
 	
 	function __get_search($keyword) {
-		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname FROM retur_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) AND (sreff LIKE '%".$keyword."%' OR snoro LIKE '%".$keyword."%') ORDER BY sid DESC");
+		//$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname FROM retur_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) AND (sreff LIKE '%".$keyword."%' OR snoro LIKE '%".$keyword."%') ORDER BY sid DESC");
+		
+		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, 
+		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=retur_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,
+		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, 
+		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname FROM retur_order_tab,customers_tab WHERE 
+		(sstatus<>2 ) AND (sreff LIKE '%".$keyword."%' OR snoro LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
+		AND customers_tab.cid=retur_order_tab.scid ORDER BY sid DESC");
+		return $this -> db -> get() -> result();		
+		
+		
 		return $this -> db -> get() -> result();
 	}
 }

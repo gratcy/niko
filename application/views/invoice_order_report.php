@@ -85,9 +85,11 @@ minLength: 1,
 		  <th>Customer </th>
           <th>Sales</th>
 		  <th>Due Date </th>
-          <th>Payment </th>
+		
+          <th>Payment </th>		  
           <th>Total </th>
 		  <th>Status </th>
+		  <th>Payment Date </th>
 		  <th></th>
                                         </tr>
                                     </thead>
@@ -110,16 +112,32 @@ minLength: 1,
           <td><?php echo __get_date(strtotime($v -> stgl_invoice),1); ?></td>
           <td><?php echo $v -> cname; ?></td>
 		  <td><?php echo $v -> sname; ?></td>
-          <td><?php 
-		  $dy=$v->sdur;		 
+          <!--td><?php 
+		  $dy=$v->sdur;		  
 		  echo date('d/m/Y',strtotime($v -> stgl_invoice ." + $dy day"));
-		  //echo __get_date(strtotime($v -> sduedate_invoice),1); ?></td>
+		   ?></td-->
+		  
+		  <td><?php 
+
+		  echo date('d/m/Y',strtotime($v -> sduedate_invoice)); ?></td>
+		  
           <td><?php echo $v ->stypepay;?></td>
 		  <td><?php echo number_format($v ->dototal);?></td>
 		  <td><?php 
-		  if($v ->pstatus == '3'){ $stt="Paid";}else{ $stt="Pending";}
+		  if($v ->pstatus == '3'){ $stt="Paid";}
+		  else{ 
+		  $stt="Pending";
+	
+ $now = time(); // or your date as well
+     $your_date = strtotime($v -> sduedate_invoice);
+     $datediff = $now - $your_date;
+     $numberDaysa= floor($datediff/(60*60*24));
+
+if(($numberDaysa>=-2)&&($numberDaysa<=0)){$stt= "DUE DATE";}	
+else if($numberDaysa>0){ $stt= "OVER DATE";}
+		  }
 		  echo $stt;?></td>
-		
+		<td><?=$v->sdate_lunas;?> </td>
 		
 		  <td> <?php 
 		  if($v -> sno_invoice <>""){
@@ -130,7 +148,8 @@ minLength: 1,
 		  <a href="<?php echo site_url('sales_order_detail/home/delivery_order_details/' . $v -> ssidx .'/' . $v -> scid.'/'.$v -> snodo ); ?>"><i class="icon-book"></i></a>
 		  <?php
 		  }else{ }?>
-          </td>		
+          </td>	
+		
 		
 		</tr>
 										

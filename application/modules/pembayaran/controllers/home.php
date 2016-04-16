@@ -21,7 +21,7 @@ class Home extends MY_Controller {
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> pembayaran_model -> __get_pembayaran(),3,10,site_url('pembayaran'));
+			$pager = $this -> pagination_lib -> pagination($this -> pembayaran_model -> __get_pembayaran(),3,10,site_url('pembayaran/home/index/'));
 			$view['pembayaran'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';

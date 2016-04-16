@@ -10,7 +10,7 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_pembayaran() {
-		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab';
+		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab order by pmid DESC';
 	}
 
 	function __get_pembayaranid($pno_pm) {
@@ -27,7 +27,7 @@ class pembayaran_model extends CI_Model {
 	
 	$sql = $this -> db -> query("SELECT * FROM pembayaran_tab WHERE YEAR(pdate) = '$year' AND MONTH(pdate) = '$month' ");
 	$jum= $sql -> num_rows();
-	$sqlx=$this -> db -> query("UPDATE pembayaran_tab set pno_pm='$jum' WHERE pmid='$id' ");
+	$sqlx=$this -> db -> query("UPDATE pembayaran_tab set pno_pm='$id' WHERE pmid='$id' ");
 	}	
 
 	function __get_pno_pm($id) {
@@ -39,9 +39,24 @@ class pembayaran_model extends CI_Model {
 	function __get_pembayaran_detail($id) {
 		$this -> db -> select("*,
 		(select cname from customers_tab where customers_tab.cid=pembayaran_tab.pcid)as cname
-		FROM pembayaran_tab WHERE (pstatus<=3) AND pno_pm='" . $id ."'");
+		FROM pembayaran_tab WHERE (pstatus<=3) AND pno_pm='" . $id ."'");	
+		
 		return $this -> db -> get() -> result();
 	}
+	
+	
+	
+	function __get_pembayaran_detaila($id,$scid) {
+		
+	$que=$this->db->query("select pmid FROM pembayaran_tab WHERE   pembayaran_tab.pno_pm='$id' and pcid='$scid'" );
+    $que = $que-> result();
+	$pmid=$que[0] -> pmid;
+	$this -> db -> select("*,
+		(select cname from customers_tab where customers_tab.cid=pembayaran_tab.pcid)as cname
+		FROM pembayaran_tab WHERE (pstatus<=3) AND pmid='" . $pmid ."'");	
+		
+		return $this -> db -> get() -> result();
+	}	
 	function __get_customers_detail($id) {
 		$this -> db -> select('*,
 		(select sname from sales_tab where sales_tab.sid=customers_tab.csid)as sname
@@ -96,7 +111,7 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_suggestion() {
-		$this -> db -> select('sref as name FROM sales_order_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
+		$this -> db -> select('sreff as name FROM sales_order_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
 		$this -> db -> select('snoso as name FROM sales_order_tab WHERE (sstatus=1 OR sstatus=0) ORDER BY name ASC');
 		$pnobukti = $this -> db -> get() -> result();
@@ -104,7 +119,14 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_search($keyword) {
-		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname, (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname FROM sales_order_tab WHERE (sstatus=0 OR sstatus=1 OR sstatus=2) AND (sref LIKE '%".$keyword."%' OR snoso LIKE '%".$keyword."%') ORDER BY sid DESC");
+		// $this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname, (select cname from customers_tab 
+		// where customers_tab.cid=sales_order_tab.scid) as cname, (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname 
+		// FROM sales_order_tab, customers_tab 
+		// WHERE customers_tab.cid=sales_order_tab.scid AND (sstatus=0 OR sstatus=1 OR sstatus=2) AND (cname LIKE '%".$keyword."%' OR snoso LIKE '%".$keyword."%') ORDER BY sid DESC");
+		
+		$this -> db ->SELECT ("* ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab,customers_tab 
+		WHERE customers_tab.cid=pembayaran_tab.pcid AND cname LIKE '%".$keyword."%'");
+		
 		return $this -> db -> get() -> result();
 	}
 }

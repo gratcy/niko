@@ -194,6 +194,8 @@ return $this -> db -> get() -> result();
 		$pstatus=$this->input->post('pstatus');
 		$astgl=$this->input->post('astgl_invoice');
 		$bstgl=$this->input->post('bstgl_invoice');
+		
+		echo $pstatus;//die;
 		$tsales="";
 
 		if (($astgl<>"")OR($bstgl<>"")){
@@ -221,11 +223,21 @@ return $this -> db -> get() -> result();
 			$wsales=" AND sales_tab.sid=sales_order_tab.ssid";
 			$tsales=" , sales_tab ";
 		}
-		
-		if($pstatus==0){ $pstatus="";}
+		$datecurrent=date('Y-m-d');
+		//$ddate=date("Y-m-d",strtotime("$stgl + 30 days"));	
+		if($pstatus==0){ $pstatus=""; $wstatus="";}
 		if ($pstatus<>""){
 			$wstatus=" and pstatus='".$pstatus."' ";
+
+			if ($pstatus==4){
+			$wstatus=" and ((NOW() >= (sduedate_invoice - INTERVAL 2 DAY)) AND  (NOW()<=sduedate_invoice)) AND sdate_lunas IS NULL";
+		    }elseif ($pstatus==5){				
+			$wstatus=" and NOW() > sduedate AND sdate_lunas IS NULL";
+		    }			
+			
+			
 		}else{
+
 			$wstatus="";
 		}		
 		
@@ -240,7 +252,7 @@ return $this -> db -> get() -> result();
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
 		FROM delivery_order_detail_tab,sales_order_tab ".$tsales." WHERE (delivery_order_detail_tab.sid=0) ".$winv.$wcust.$wstatus.$wstgl.$wsales." AND sales_order_tab.sid=delivery_order_detail_tab.ssid	
-		and sales_order_tab.sbid='".$sbid."' ORDER BY did DESC");
+		and sales_order_tab.sbid='".$sbid."' AND delivery_order_detail_tab.sno_invoice!='' ORDER BY did DESC");
 		return $this -> db -> get() -> result();
 	}	
 		

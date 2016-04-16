@@ -398,7 +398,8 @@ $branch=$this -> memcachedlib -> sesresult['ubid'];
 // print_r($data);
 // echo '</pre>';
 
-
+$qtycoly=$data['sqty']/$data['pvolume'];
+$qtc= number_format($qtycoly,2,'.',',');
 ?>
 	
 	
@@ -410,7 +411,7 @@ $branch=$this -> memcachedlib -> sesresult['ubid'];
           
           <td><?=$data['pcode'];?></td>
           <td><?=$data['pname'];?></td>
-		  <td align=center ><?=$data['sqty']/$data['pvolume'];?></td>
+		  <td align=center ><?echo str_replace('.00','',$qtc);?></td>
           <td align=center ><?=$data['sqty'];?></td>
 	
 		  </tr>

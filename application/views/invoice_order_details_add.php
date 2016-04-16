@@ -75,7 +75,7 @@ minLength: 1,
     $duedate= floor($offset/60/60/24);
  ?>
  
- <input type=hidden name=durationx value="<?php echo $duedate; ?>">
+ <input type=hidden name=durationx value="<?php echo $durationx; ?>">
  
 <table border=0 width=90% ><tr><td width=50%>
 					<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" class="form-control" name=sbid >

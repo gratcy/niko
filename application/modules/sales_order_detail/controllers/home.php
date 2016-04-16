@@ -363,6 +363,10 @@ function invoice_order_add($id,$scid,$snodo) {
 			$view['scid'] = $scid;
 			$view['snodo'] = $snodo;
 			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			
+//print_r($view['detailx'][0]->sdurationx);die;			
+			$view['durationx']=$view['detailx'][0]->sdurationx;
+			
 			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);	
 			
 			$view['details'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);	
@@ -553,7 +557,7 @@ function invoice_order_add($id,$scid,$snodo) {
 			$scid=$this -> input -> post('scid', TRUE);
 			$dototal=$this -> input -> post('dototal', TRUE);
 			$snodo=$this -> input -> post('snodo', TRUE);
-			$arp=array('dototal'=>$dototal);
+			$arp=array('kurang_bayar'=>$dototal,'dototal'=>$dototal);
 			$this -> sales_order_detail_model -> __update_invoice_order($snodo,$arp);
 			redirect(site_url('sales_order_detail/home/invoice_report/'. $id .'/'. $scid .'/'.$snodo));
 			
