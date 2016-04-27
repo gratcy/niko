@@ -60,7 +60,7 @@ minLength: 1,
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesOrderAdd')) : ?>
+				<?php if (__get_roles('ReturnOrderExecute')) : ?>
                 <a href="<?php echo site_url('retur_order/home/retur_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Return Order</a>
                 <br />
                 <br />
@@ -188,7 +188,7 @@ minLength: 1,
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('retur_order/home/retur_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
 			  <?php } ?>
-			                  <?php endif; ?>
+                <?php endif; ?>
 			<?php if($sstatus==3){	?>
 				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_approve/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
 			<?php }?>

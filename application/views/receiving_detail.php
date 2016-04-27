@@ -3,6 +3,7 @@
 	if (hs) {
 	var ahs = hs.replace(/\#/g,'');
 		if ($('div.'+ahs).hasClass('active') == false) {
+	console.log(ahs);
 			$('div.active').addClass('inactive');
 			$('div.active').removeClass('active');
 			$('h3.active').addClass('inactive');
@@ -14,8 +15,38 @@
 		}
 	}
 </script>
-
-        <div class="box-body">
+        <!--PAGE CONTENT -->
+        <div id="content">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2> Distribution Receiving Detail </h2>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Distribution Receiving Detail
+                        </div>
+                        <div class="panel-body">
+                    <h2>
+                        <?php echo ($detail[0] -> rtype == 1 ? __get_receiving_name($detail[0] -> riid, $detail[0] -> rtype) : $detail[0] -> rvendor);?>
+                    </h2>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+		<thead>
+		<tr><td>Doc No.</td><td><?php echo $detail[0] -> rdocno;?></td></tr>
+		<tr><td>Type</td><td><?php echo __get_receiving_type($detail[0] -> rtype,1);?></td></tr>
+		<tr><td>Request No. / Vendor</td><td><?php echo __get_receiving_name($detail[0] -> riid, $detail[0] -> rtype);?></td></tr>
+		<tr><td>Date</td><td><?php echo __get_date($detail[0] -> rdate,2);?></td></tr>
+		<tr><td>Description</td><td><?php echo $detail[0] -> rdesc;?></td></tr>
+		<tr><td>Status</td><td>Approve</td></tr>
+		</thead>
+		</tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
 						  <div class="tabber">
 						  <ul class="tabList">
 						  <li class="on"><a href="#tcid_1" rel="tcid_1">Product</a></li>
@@ -23,35 +54,26 @@
 						  </ul>
 						  	</div>
 		<div class="active tcid_1">
-			<input type="hidden" name="did" value="<?php echo $did; ?>">
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-<!--
-          <th></th>
--->
           <th>Packaging</th>
           <th>Code</th>
           <th>Name</th>
           <th>Volume</th>
           <th>QTY</th>
-          <th style="width:35px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
 		  foreach($items[0] as $k => $v) :
 		  ?>
-          <tr idnya="<?php echo (isset($v -> did) ? $v -> did : 0); ?>">
-<!--
-          <td><input type="checkbox" value="<?php echo (isset($v -> did) ? $v -> did : 0); ?>" name="pid[]"></td>
--->
+          <tr>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pvolume; ?></td>
-			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items[<?php echo (isset($v -> did) ? $v -> did : 0); ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo (isset($v -> did) ? $v -> did : 0); ?>"><i class="icon-remove"></i></a></td>
+			<td><?php echo $v -> rqty; ?></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -61,35 +83,35 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-<!--
-          <th></th>
--->
           <th>Code</th>
           <th>Name</th>
-          <th>Component No. </th>
+          <th>Component No.</th>
           <th>QTY</th>
-          <th style="width:35px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
 		  <?php
 		  foreach($items[1] as $k => $v) :
 		  ?>
-          <tr idnya2="<?php echo (isset($v -> did) ? $v -> did : 0); ?>">
-<!--
-          <td><input type="checkbox" value="<?php echo (isset($v -> did) ? $v -> did : 0); ?>" name="sid[]"></td>
--->
+          <tr>
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
-			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items2[<?php echo (isset($v -> did) ? $v -> did : 0); ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo (isset($v -> did) ? $v -> did : 0); ?>"><i class="icon-remove"></i></a></td>
+			<td><?php echo $v -> rqty; ?></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
                                     </table>
                                     </div>
-                                    </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+       <!--END PAGE CONTENT -->
 
 <script>
 $('ul.tabList > li > a').click(function(){
@@ -102,21 +124,5 @@ $('ul.tabList > li > a').click(function(){
 	$('h3.'+$(this).attr('rel')).addClass('active');
 	$('ul.tabList > li').removeClass('on');
 	$(this).parent().addClass('on');
-});
-
-$('a.dellist').click(function(){
-	var idnya = $(this).attr('idnya');
-	var idnya2 = $(this).attr('idnya2');
-	$('tr[idnya='+idnya+']').remove();
-	$('tr[idnya2='+idnya2+']').remove();
-	<?php if ($type == 2) : ?>
-	var data = {'pid' : idnya, 'sid' : idnya2, 'did' : <?php echo $did; ?>};
-	<?php else : ?>
-	var data = {'pid' : idnya, 'sid' : idnya2};
-	<?php endif; ?>
-	$.post('<?php echo site_url('receiving/receiving_items_delete/' . $type); ?>', data,
-	function(datas) {
-		
-	});
 });
 </script>

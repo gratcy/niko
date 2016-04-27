@@ -28,7 +28,7 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-          <th>Pcs</th>
+          <th>Packaging</th>
           <th>Code</th>
           <th>Name</th>
           <th>Volume</th>
@@ -44,7 +44,7 @@
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pvolume; ?></td>
-			<td style="width:100px"><input type="text" name="qty[1][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
+			<td style="width:100px"><input type="number" name="qty[1][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
@@ -54,9 +54,9 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-          <th>Group Product</th>
+          <th>Code</th>
           <th>Name</th>
-          <th>Return</th>
+          <th>Component No.</th>
           <th>QTY</th>
                                         </tr>
                                     </thead>
@@ -65,10 +65,10 @@
 		  foreach($items[1] as $k => $v) :
 		  ?>
           <tr idnya2="<?php echo $v -> did; ?>">
-          <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
-			<td style="width:100px"><input type="text" name="qty[2][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
+          <td><?php echo $v -> snocomponent; ?></td>
+			<td style="width:100px"><input type="number" name="qty[2][<?php echo $v -> did; ?>]" class="form-control" style="width:100px" value="<?php echo $v -> dqty; ?>"></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>

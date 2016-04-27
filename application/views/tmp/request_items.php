@@ -28,8 +28,10 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
+<!--
           <th></th>
-          <th>Pcs</th>
+-->
+          <th>Packaging</th>
           <th>Code</th>
           <th>Name</th>
           <th>Volume</th>
@@ -42,7 +44,9 @@
 		  foreach($items[0] as $k => $v) :
 		  ?>
           <tr idnya="<?php echo $v -> did; ?>">
+<!--
           <td><input type="checkbox" value="<?php echo $v -> did; ?>" name="pid[]"></td>
+-->
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
@@ -58,11 +62,15 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
+<!--
           <th></th>
+-->
           <th>Code</th>
           <th>Name</th>
-          <th>No. Component</th>
+          <th>Component No.</th>
+<!--
           <th>Return</th>
+-->
           <th>QTY</th>
           <th style="width:35px;"></th>
                                         </tr>
@@ -72,11 +80,15 @@
 		  foreach($items[1] as $k => $v) :
 		  ?>
           <tr idnya2="<?php echo $v -> did; ?>">
+<!--
           <td><input type="checkbox" value="<?php echo $v -> did; ?>" name="sid[]"></td>
+-->
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
+<!--
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
+-->
 			<td><input type="number" value="<?php echo ($type == 1 ? '' : $v -> dqty); ?>" name="items2[<?php echo $v -> did; ?>]" class="form-control" style="width:100px;"></td>
 			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo $v -> did; ?>" mid2="<?php echo $v -> sid; ?>"><i class="icon-remove"></i></a></td>
 			</tr>

@@ -19,7 +19,7 @@
                                     <thead>
                                         <tr>
           <th></th>
-          <th>Pcs</th>
+          <th>Packaging</th>
           <th>Code</th>
           <th>Name</th>
           <th>Volume</th>
@@ -45,9 +45,9 @@
                                     <thead>
                                         <tr>
           <th></th>
-          <th>Group Product</th>
+          <th>Code</th>
           <th>Name</th>
-          <th>Return</th>
+          <th>Component No.</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,15 +56,15 @@
 		  ?>
           <tr>
           <td><input type="checkbox" value="<?php echo $v -> sid; ?>" name="sid[]"></td>
-          <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
+          <td><?php echo $v -> snocomponent; ?></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>
                                     </table>
                                     </div>
-<button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Save</button>
+<button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Add</button>
 </form>
                                     </div>
 

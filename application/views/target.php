@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Revenue </h2>
+                        <h2> Sales Target </h2>
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Revenue
+                            Sales Target
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -28,10 +28,9 @@
 <!--
           <th>Branch</th>
 -->
-          <th style="width: 250px;">Sales</th>
-          <th>Target Month/Year</th>
-          <th>Revenue Target</th>
-          <th>Payment Target</th>
+          <th style="width: 350px;">Sales</th>
+          <th>Month / Year</th>
+          <th style="width: 250px;">Target</th>
           <th>Status</th>
           <th style="width: 50px;"></th>
                                         </tr>
@@ -47,7 +46,6 @@
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> tmy; ?></td>
           <td style="text-align:right;"><?php echo __get_rupiah($v -> ttarget,1); ?></td>
-          <td style="text-align:right;"><?php echo __get_rupiah($v -> tpaytarget,1); ?></td>
           <td><?php echo __get_status($v -> tstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('TargetOmsetExecute')) : ?>

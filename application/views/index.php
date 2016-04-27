@@ -38,10 +38,12 @@
                                 <span>Services</span>
                             </a>
 -->
+<!--
                             <a class="quick-btn" href="<?php echo site_url('sparepart');?>">
                                 <i class="icon-cogs icon-2x"></i>
                                 <span>Spareparts</span>
                             </a>
+-->
 <!--
                             <a class="quick-btn" href="<?php echo site_url('journal');?>">
                                 <i class="icon-th icon-2x"></i>
@@ -207,6 +209,7 @@
                     </div>
                 </div>
             -->
+<!--
                 <div class="col-lg-12">
                     <div class="panel panel-info">
 						<div class="btn-group pull-right" style="padding:7px 10px;">
@@ -250,6 +253,7 @@
                     </div>
                 </div>
             </div>
+-->
                     <div class="row">
 <!--
                         <div class="col-lg-6">

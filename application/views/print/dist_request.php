@@ -7,7 +7,6 @@ html,body{margin:0;padding:0;}
 </head>
 <body style="font-size:18px;">
 <div style="width:850px;padding:3px 3px 3px 5px;">
-									<h2>PT. Niko Elektronic indonesia</h2>
 		<h3><?php echo $detail[0] -> dtitle;?></h3>
 		<div style="clear:both;"></div>
 		<div style="width:500px;">
@@ -20,7 +19,7 @@ html,body{margin:0;padding:0;}
 		<tr><td>Branch To</td><td><?php echo $detail[0] -> tbname;?></td></tr>
 		<tr><td>Title</td><td><?php echo $detail[0] -> dtitle;?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> ddesc;?></td></tr>
-		<tr><td>Status</td><td>Approved</td></tr>
+		<tr><td>Status</td><td>Approve</td></tr>
 		</thead>
 		</table>
 		</div>
@@ -28,7 +27,7 @@ html,body{margin:0;padding:0;}
 		
 		<table border="0" width="850" style="border-collapse: collapse;">
 		<thead>
-		<tr style="border:1px solid #000;padding:3px;"><th style="border:1px solid #000;padding:3px;">Pcs</th><th style="border:1px solid #000;padding:3px;">Code</th><th style="border:1px solid #000;padding:3px;">Name</th><th style="border:1px solid #000;padding:3px;">Volume</th><th style="border:1px solid #000;padding:3px;">QTY</th></tr>
+		<tr style="border:1px solid #000;padding:3px;"><th style="border:1px solid #000;padding:3px;">Packaging</th><th style="border:1px solid #000;padding:3px;">Code</th><th style="border:1px solid #000;padding:3px;">Name</th><th style="border:1px solid #000;padding:3px;">Volume</th><th style="border:1px solid #000;padding:3px;">QTY</th></tr>
 		</thead>
 		<tbody>
 		<?php foreach($items[0] as $k => $v) : ?>

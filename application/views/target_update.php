@@ -4,7 +4,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Revenue Update</h1>
+                    <h1 class="page-header">Sales Target Update</h1>
                 </div>
             </div>
 <div class="row">
@@ -12,7 +12,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Revenue Update</h5>
+            <h5>Sales Target Update</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -37,21 +37,14 @@
                     <label for="text1" class="control-label col-lg-4">Month / Year</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Month / Year" name="my" class="form-control" value="<?php echo $detail[0] -> tmy; ?>" />
+                        <input type="text" name="my" class="form-control" value="<?php echo $detail[0] -> tmy; ?>" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Revenue Target</label>
+                    <label for="text1" class="control-label col-lg-4">Target</label>
 
                     <div class="col-lg-4">
                         <input type="text"  onkeyup="formatharga(this.value,this)" name="target" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> ttarget,2); ?>" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Payment Target</label>
-
-                    <div class="col-lg-4">
-                        <input type="text"  onkeyup="formatharga(this.value,this)" name="ptarget" style="text-align:right;" class="form-control" value="<?php echo __get_rupiah($detail[0] -> tpaytarget,2); ?>" />
                     </div>
                 </div>
                 <div class="form-group">

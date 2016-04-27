@@ -335,14 +335,14 @@ function __get_receiving_name($id, $type) {
 
 function __get_request_type($id, $type) {
 	if ($type == 1)
-		return ($id == 2 ? 'Retur' : 'Transfer');
+		return ($id == 2 ? 'Return' : 'Transfer');
 	else
-		return ($id == 2 ? '<option value="1">Transfer</option><option value="2" selected>Retur</option>' : '<option value="1" selected>Transfer</option><option value="2">Retur</option>');
+		return ($id == 2 ? '<option value="1">Transfer</option><option value="2" selected>Return</option>' : '<option value="1" selected>Transfer</option><option value="2">Return</option>');
 }
 
 function __get_receiving_type($id, $type) {
 	if ($type == 1)
-		return ($id == 1 ? 'Branches' : 'Vendor / Factory');
+		return ($id == 1 ? 'Branches' : 'Factory / Vendor');
 	else
-		return ($id == 1 ? '<option value="1" selected>Branches</option><option value="2">Vendor / Factory</option>' : '<option value="1">Branches</option><option value="2" selected>Vendor / Factory</option>');
+		return ($id == 1 ? '<option value="1" selected>Branches</option><option value="2">Factory / Vendor</option>' : '<option value="1">Branches</option><option value="2" selected>Factory / Vendor</option>');
 }

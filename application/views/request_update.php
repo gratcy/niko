@@ -75,7 +75,7 @@
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 			<?php if (__get_roles('DistributionRequestApproval')) : ?>
-				<button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approved</button>
+				<button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approve</button>
 			<?php endif; ?>
 					</div>
 				</div>

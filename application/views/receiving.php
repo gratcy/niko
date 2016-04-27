@@ -9,7 +9,7 @@
 
                 <hr />
 				<?php if (__get_roles('ItemReceivingExecute')) : ?>
-                <a href="<?php echo site_url('receiving/receiving_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Receiving</a>
+                <a href="<?php echo site_url('receiving/receiving_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Distribution Receiving</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -44,7 +44,7 @@
           <td><?php echo ($v -> rtype == 1 ? __get_receiving_name($v -> riid, $v -> rtype) : $v -> rvendor); ?></td>
           <td><?php echo __get_date($v -> rdate); ?></td>
           <td><?php echo $v -> rdesc; ?></td>
-          <td><?php echo ($v -> rstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approved</span>' : __get_status($v -> rstatus,1)); ?></td>
+          <td><?php echo ($v -> rstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approve</span>' : __get_status($v -> rstatus,1)); ?></td>
 		  <td style="text-align:center;">
 			<?php if (__get_roles('ItemReceivingExecute')) : ?>
 				  <?php if ($v -> rstatus != 3) : ?>

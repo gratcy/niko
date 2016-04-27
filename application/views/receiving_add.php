@@ -38,13 +38,13 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Doc No.</label>
                     <div class="input-group col-lg-4">
-                        <input type="text" placeholder="Doc No." name="docno" class="form-control" />
+                        <input type="text" name="docno" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Date</label>
                     <div class="input-group col-lg-4">
-                        <input type="text"  name="waktu" class="form-control" autocomplete="off" />
+                        <input type="text" name="waktu" class="form-control" autocomplete="off" />
                     </div>
                 </div>
                 <div class="form-group">

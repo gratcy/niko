@@ -663,8 +663,9 @@ location.reload() //reload the doc (should happen whether download is in progres
 		<input type=hidden  value="<?php echo $sisaplafon_after;?>" name="sisaplafon_after" >
 		<input type=hidden  value=1 name="approve" >
 		<input type=hidden  value=0 name="add_plafon" >		
+				<?php if (__get_roles('SalesOrderApproval')) : ?>
 		<input class="btn text-muted text-center btn-danger" type=submit value="Complete Approval" >
-			
+			<?php endif; ?>
 		</form>	
 		<?php }else{ ?>
 		<font color=red >Credit Limit!</font> <br> 

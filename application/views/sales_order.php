@@ -180,11 +180,8 @@ minLength: 1,
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('sales_order/home/sales_order_update/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-pencil"></i></a>
 			  <?php }?>
-                <?php endif; ?>
-				<?php if (__get_roles('SalesOrderExecute')) : ?>
 			  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
-                <?php endif; ?>
-				<?php if (__get_roles('SalesOrderExecute')) : ?>
+
 				<?php if($sstatus<3){?>
               <a href="<?php echo site_url('sales_order/home/sales_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
 			  <?php } ?>

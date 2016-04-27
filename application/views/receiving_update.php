@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Doc No.</label>
                     <div class="input-group col-lg-4">
-                        <input type="text" placeholder="Doc No." name="docno" class="form-control" value="<?php echo $detail[0] -> rdocno;?>" />
+                        <input type="text" name="docno" class="form-control" value="<?php echo $detail[0] -> rdocno;?>" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -69,11 +69,12 @@
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
    <a class="btn btn-info" href="<?php echo site_url('receiving/receiving_list_items/2/' . $id); ?>" id="addItem">Add Item</a>
-	<?php if (__get_roles('ItemReceivingApproval')) : ?>
-   <button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approved</button>
-	<?php endif; ?>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+					<?php if (__get_roles('ItemReceivingApproval')) : ?>
+   <button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approve</button>
+	<?php endif; ?>
+
 					</div>
 				</div>
             </form>

@@ -48,7 +48,7 @@
           <td><?php echo $v -> tbname; ?></td>
           <td><?php echo $v -> dtitle; ?></td>
           <td><?php echo $v -> ddesc; ?></td>
-          <td><?php echo ($v -> dstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approved</span>' : __get_status($v -> dstatus,1)); ?></td>
+          <td><?php echo ($v -> dstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approve</span>' : __get_status($v -> dstatus,1)); ?></td>
 		  <td style="text-align:center;">
 			<?php if (__get_roles('DistributionRequestExecute')) : ?>
 			  <?php if ($v -> dstatus != 3) : ?>

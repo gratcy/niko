@@ -85,8 +85,8 @@ class Request_model extends CI_Model {
 	}
 	
 	function __get_request_items($type) {
-		if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname FROM products_tab a LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE b.ctype=3 AND a.pstatus=1');
-		else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,b.cname FROM sparepart_tab a LEFT JOIN categories_tab b ON a.sgroupproduct=b.cid WHERE a.sstatus=1');
+		if ($type == 1) $this -> db -> select('a.pid,a.pcode,a.pname,a.pvolume,b.cname FROM products_tab a LEFT JOIN categories_tab b ON a.ppid=b.cid WHERE b.ctype=3 AND a.pstatus=1 ORDER BY a.pname');
+		else $this -> db -> select('a.sid,a.scode,a.sname,a.snocomponent,a.sspecial,b.cname FROM sparepart_tab a LEFT JOIN categories_tab b ON a.sgroupproduct=b.cid WHERE a.sstatus=1 ORDER BY a.sname');
 		return $this -> db -> get() -> result();
 	}
 }

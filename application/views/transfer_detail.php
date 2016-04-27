@@ -36,6 +36,7 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
 		<thead>
+		<tr><td>Doc No.</td><td><?php echo $detail[0] -> ddocno; ?></td></tr>
 		<tr><td>Request No.</td><td><?php echo ($detail[0] -> dtype == 1 ? 'R01' : 'R02').str_pad($id, 4, "0", STR_PAD_LEFT); ?></td></tr>
 		<tr><td>Request Type</td><td><?php echo __get_request_type($detail[0] -> dtype,1);?></td></tr>
 		<tr><td>Date</td><td><?php echo __get_date($detail[0] -> ddate,2);?></td></tr>
@@ -43,7 +44,7 @@
 		<tr><td>Branch To</td><td><?php echo $detail[0] -> tbname;?></td></tr>
 		<tr><td>Title</td><td><?php echo $detail[0] -> dtitle;?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> ddesc;?></td></tr>
-		<tr><td>Status</td><td>Approved</td></tr>
+		<tr><td>Status</td><td>Approve</td></tr>
 		</thead>
 		</tbody>
                                 </table>
@@ -59,7 +60,7 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-          <th>Pcs</th>
+          <th>Packaging</th>
           <th>Code</th>
           <th>Name</th>
           <th>Volume</th>
@@ -88,7 +89,6 @@
           <th>Code</th>
           <th>Name</th>
           <th>No. Component</th>
-          <th>Return</th>
           <th>QTY</th>
                                         </tr>
                                     </thead>
@@ -100,7 +100,6 @@
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
-          <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
 			<td><?php echo $v -> dqty; ?></td>
 			</tr>
         <?php endforeach; ?>

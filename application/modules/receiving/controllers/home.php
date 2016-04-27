@@ -142,7 +142,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$r = $this -> receiving_model -> __get_receiving_vendor($id);
-			$res .= '<input type="text" placeholder="Vendor" name="vendor" class="form-control" autocomplete="off" value="'.($id ? $r[0] -> rvendor : '').'" />';
+			$res .= '<input type="text" name="vendor" class="form-control" autocomplete="off" value="'.($id ? $r[0] -> rvendor : '').'" />';
 		}
 		echo $res;
 	}
