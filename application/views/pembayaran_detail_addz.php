@@ -345,13 +345,13 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 <tr>
           
           <th colspan=3>Total Invoice</th>
-          <th><input type="text" id="totalcost"  value="<?=$tinv;?>" size="15" disabled />
+          <th><input type="text" id="totalcost"  value="<?php echo __get_rupiah($tinv);?>" size="15" disabled />
 		  <input type="hidden" id="totalcost" name="total" value="<?=$tinv;?>" size="15" />
 		  </th>
 		  
 		  <th>Total Pembayaran Sebelumnya</th>
           <th>
-		  <input type="text" id="totalcashx"  value="<?=$totalterima;?>" size="15" disabled />
+		  <input type="text" id="totalcashx"  value="<?php echo __get_rupiah($totalterima);?>" size="15" disabled />
 		  <input type="hidden" id="totalcashx" name="totalcashx" value="<?=$totalterima;?>" size="15" onchange="UpdateCost()" />
 		  </th>
 		  
@@ -360,12 +360,12 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 	 <tr>
           
           <th colspan=3>Total Return</th>
-          <th><input type="text" id="totalcut"  value="<?=$tret;?>" size="15" disabled />
+          <th><input type="text" id="totalcut"  value="<?php echo __get_rupiah($tret);?>" size="15" disabled />
 		  <input type="hidden" id="totalcut" name="total" value="<?=$tret;?>" size="15" />
 		  </th><th>Pembayaran Pending	 
 		  </th>
           <th>
-		  <input type="text" id="totalz"  value="<?=$totalpending;?>" size="15" disabled />
+		  <input type="text" id="totalz"  value="<?php echo __get_rupiah($totalpending);?>" size="15" disabled />
 		  <input type="hidden" id="totalz" name="sisaz" value="<?=$totalpending;?>" size="15" />
 		  </th>
 		  
@@ -377,12 +377,12 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		 
 		  </th>
           <th>
-		  <input type="text" id="totalz"  value="<?=$totaltagihan;?>" size="15" disabled />
+		  <input type="text" id="totalz"  value="<?php echo __get_rupiah($totaltagihan);?>" size="15" disabled />
 		  <input type="hidden" id="totalz" name="totalz" value="<?=$totaltagihan;?>" size="15" />
 		  </th><th>Sisa Tagihan	 
 		  </th>
           <th>
-		  <input type="text" id="totalz"  value="<?=$totaltagihanx;?>" size="15" disabled />
+		  <input type="text" id="totalz"  value="<?php echo __get_rupiah($totaltagihanx);?>" size="15" disabled />
 		  <input type="hidden" id="totalz" name="sisaz" value="<?=$totaltagihanx;?>" size="15" />
 		  </th>
 		  
@@ -401,7 +401,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           
           <th colspan=3>Cash</th>
           <th>
-		  <input type="text" id="totalcash" name="payment[0]" value="" size="15" onchange="UpdateCost()" />
+		  <input type="text" id="totalcash" name="payment[0]" value="" size="15" onchange="UpdateCost()" onkeyup="formatharga(this.value,this)" />
 		  </th><th>Date Cash</th><th><input type=text id="tglcash" name="date_cash" value="" size="15" ></th>
 		  
       </tr>	
@@ -410,7 +410,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           
           <th colspan=3>Transfer</th>
           <th>
-		  <input type="text" id="totaltrans" name="payment[1]" value="" size="15" onchange="UpdateCost()" />
+		  <input type="text" id="totaltrans" name="payment[1]" value="" size="15" onchange="UpdateCost()" onkeyup="formatharga(this.value,this)" />
 		 
 		  </th>
 		  		  <th> Rekening Tujuan</th><th>
@@ -438,7 +438,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
           
           <th colspan=3>Giro</th>
           <th>
-		  <input type="text" id="totalgiro" name="payment[2]" value="" size="15" onchange="UpdateCost()" />
+		  <input type="text" id="totalgiro" name="payment[2]" value="" size="15" onchange="UpdateCost()" onkeyup="formatharga(this.value,this)" />
 		  
 		  </th><th> Nama Giro</th><th>
 		   <input  name="accgiro" type="text" size="15"  ></th>
@@ -447,7 +447,7 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 	 <tr>
           
           <th colspan=3><input type="text"  name="custompaid" value="" size="30" /></th>
-          <th > <input type="text" id="wo" name="payment[3]" value="" size="15" />
+          <th > <input type="text" id="wo" name="payment[3]" value="" size="15" onkeyup="formatharga(this.value,this)" />
 		  
 		  &nbsp;</th><th>No Giro</th><th>
 		   <input  name="nogiro" type="text" size="15"  ></th>

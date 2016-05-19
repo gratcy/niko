@@ -8,6 +8,30 @@ header("Cache-Control: max-age=0");
  }
 ?>
 
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                
+                $('#example1').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+            
+            });
+        </script>
+		
+		<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                
+                $('#example2').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+            
+            });
+        </script>
+
  <script>
 $(function() {
 $("#search").autocomplete({
@@ -43,26 +67,31 @@ minLength: 1,
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
- <?php if($_POST['xexcel']=="Excel"){		}else{?>				
+	<?php if($_POST['xexcel']=="Excel"){		}else{ ?>				
 						<form method="POST">
 						<table>
-						<tr><td>No Invoice</td><td><div class="col-lg-5"><input type=text name="sno_invoice"></div></td></tr>
-						<tr><td>Sales</td><td ><div class="col-lg-8">
-						<select name="ssid" data-placeholder="Sales" ><?php echo $sales; ?></select>
-                    </div></td></tr>
-						<tr><td>Customer</td><td><div class="col-lg-5"><input type=text name="scidx" id="search" ></div>
+						<tr><td>Invoice No</td><td><input size=16 type=text name="sno_invoice"></td></tr>
+						<tr><td>Sales</td><td >
+						<select name="ssid" data-placeholder="Sales"  >
+						<?php echo $sales; ?>
+						</select>
+						</td></tr>
+						<tr><td>Customer</td><td><input size=16 type=text name="scidx" id="search" >
 						
 						<div style="display: none;">
 						<input type="text" name="scid" id="theCid" >
 						</div></td></tr>
-						<tr><td>Status</td><td><div class="col-lg-5"><select name="pstatus">
-						<option value="0">Pending</option>
+						<tr><td>Status</td><td><select name="pstatus">
+						<option value="0">Pending &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</option>
 						<option value="3">Paid</option>
 						<option value="4">Due date</option>
 						<option value="5">Over date</option>
-						</select></div>
+						</select>
 						</td></tr>
-						<tr><td>Period</td><td><input type=text name="astgl_invoice">&nbsp;&nbsp; TO &nbsp;&nbsp; <input type=text name="bstgl_invoice">
+						<tr><td>Period</td><td><input size=16 type=text name="astgl_invoice" id="example1" >&nbsp;&nbsp; TO &nbsp;&nbsp; 
+						<input size=16 type=text name="bstgl_invoice" id="example2" >
 						
 						</td></tr>
 						<tr><td><input type=submit value="Search"> <input type=submit name="xexcel" value="Excel"></td></tr>
@@ -137,7 +166,9 @@ if(($numberDaysa>=-2)&&($numberDaysa<=0)){$stt= "DUE DATE";}
 else if($numberDaysa>0){ $stt= "OVER DATE";}
 		  }
 		  echo $stt;?></td>
-		<td><?=$v->sdate_lunas;?> </td>
+		<td><?php 
+		if($v->sdate_lunas==""){}else{
+		echo date('d/m/Y',strtotime($v->sdate_lunas));}?> </td>
 		
 		  <td> <?php 
 		  if($v -> sno_invoice <>""){

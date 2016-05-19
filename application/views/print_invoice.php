@@ -279,7 +279,7 @@ $jum_baris="6";
 $ttqty=0;
 $pg=0;	
 $sqlx="SELECT a.*,b.*,c.sqty AS dqty  FROM sales_order_detail_tab a,products_tab b, delivery_order_detail_tab c WHERE   
-a.spid=b.pid  AND c.snodo='$snodo'  AND a.sid=c.sid";
+a.spid=b.pid  AND c.snodo='$snodo'  AND a.sid=c.sid  AND c.sqty>0";
 $tampilx=mysqli_query($con,$sqlx);
 //echo $sqlx;
 
@@ -596,13 +596,13 @@ $pg=$pg+1;
 <tr>
 	<td width=20% valign=top ><font  face="arial" size="2px">Tanda Terima</font></td>
 
-<td colspan=2 rowspan=3 width=50%  valign=top >
+<td colspan=2 rowspan=3 width=60%  valign=top >
 <font  face="arial" size="2px">
 Notes:<br><br>
- -Pembayaran dengan giro / cheque yang tidak diatas namakan rekening perusahaan kami, BUKAN TANGGUNG JAWAB KAMI.
-<br>
+ Pembayaran dengan giro / cheque yang tidak diatas namakan rekening perusahaan kami, BUKAN MENJADI TANGGUNG JAWAB KAMI.
+<br><br>
 
--Barang yang belum terbayar sewaktu-waktu dapat ditarik kembali (titip jual).
+Barang yang belum terbayar sewaktu-waktu dapat ditarik kembali (Titip Jual).
 </font>
 </td>
 <td rowspan=3 width=5% valign=top  ></td>

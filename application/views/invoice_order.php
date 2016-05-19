@@ -1,4 +1,44 @@
-        <!--PAGE CONTENT -->
+   
+<script>
+$(function() {
+$("#search").autocomplete({
+delay:0, 
+cacheLength: 0,
+minLength: 1,
+    source: '<?php echo site_url('sales_order/home/source'); ?>',
+     select: function(event, ui) { 
+	    $("#theCid").val(ui.item.cid),
+        $("#theCat").val(ui.item.ccat),
+		$("#theClimit").val(ui.item.climit),
+		$("#theClimitx").val(formatharga2(ui.item.climit)),
+		$("#theNpwp").val(ui.item.cnpwp),
+		$("#theDeliver").val(ui.item.cdeliver),
+		$("#theTopcash").val(ui.item.ccash),
+		$("#theTopcredit").val(ui.item.ccredit),
+		$("#theTopcashx").val(ui.item.ccash),
+		$("#theTopcashxnico").val(ui.item.ccashnico),
+		$("#theTopcreditx").val(ui.item.ccredit),
+		$("#theTopcreditxnico").val(ui.item.ccreditnico),
+		$("#theAddr").val(ui.item.caddr),
+		$("#thePkp").val(ui.item.cpkp),
+		$("#theSid").val(ui.item.csid),
+		$("#theSname").val(ui.item.csname),
+		$("#thePhone").val(ui.item.cphone),
+		$("#theTopx").val(ui.item.topx),
+		$("#theTopxx").val(ui.item.topx)
+	
+		
+    }
+	
+
+})
+
+});
+</script>
+
+
+
+  <!--PAGE CONTENT -->
         <div id="content">
             <div class="inner">
                 <div class="row">
@@ -9,7 +49,43 @@
 
                 <hr />
 
+				<div class="row">
+			<div class="col-lg-12">
+				<form method="POST"  action="?search=1" >
+			   Customer					<input  name=cname type="text" id="search"   />
+
+					<input  name=cid type="hidden" id="theCid"    />
+			   <input type=submit value=cari >
+			   </form>
+			   </div>
+            </div><br>
+
+			<div class="row">
+			<div class="col-lg-12">
+				<form method="POST" action="?search=1" >
+			   Inv No.<input type=text name="sno_invoice"  >
+			   <input type=submit value=cari >
+			   </form>
+			   </div>
+            </div><br>			
+			
+
+
+			<div class="row">
+			<div class="col-lg-12">
+				<form method=POST action="?search=1" >
+			   Status<select name=sisa >
+			   <option value="x">ALL</option>
+			   <option value="1">Paid</option>
+			   <option value="0">Pending</option>
+			   <input type=submit value=cari >
+			   </form>
+			   </div>
+            </div><br>			
+				
                 <br />
+				
+				
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

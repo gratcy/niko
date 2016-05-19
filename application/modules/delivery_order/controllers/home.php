@@ -51,10 +51,16 @@ class Home extends MY_Controller {
 
 	function invoice_order() {	
             $sbid= $this -> memcachedlib -> sesresult['ubid'];
+			if(!isset($_GET['search'])){ $_GET['search']="";}
 			//die;
 			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list(),3,10,site_url('delivery_order/home/invoice_order/'));
+			if($_GET['search']=='1'){
+			$view['sales_order'] = $this -> delivery_order_model -> __get_inv_listz();	
+			}else{			
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
-			//$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			}			
+			//$view['sales_order'] = $this -> pagination_lib -> paginate();
+
 			$view['pages'] = $this -> pagination_lib -> pages();
 			//$view['id'] = $id;
 			//$view['ssisa']=$this -> delivery_order_model -> __get_sisa_so($id);
@@ -67,22 +73,13 @@ class Home extends MY_Controller {
             $sbid= $this -> memcachedlib -> sesresult['ubid'];
 			//$sbid=2;
 			 if(!isset($_POST['xexcel'])){$_POST['xexcel']="";}
-			//print_r($_POST);
 			$xexcel=$_POST['xexcel'];
-			//echo $xexcel;//die;
 			if($xexcel=="Excel"){ $stx=False;}else{$stx=True;}
-			//echo $stx;//die;
 			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_inv_list_detail(),3,10,site_url('delivery_order/home/invoice_order_report/'));
-			//$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['sales_order'] =$this -> delivery_order_model -> __get_inv_list_detailk();
-
 			$view['pages'] = $this -> pagination_lib -> pages();
-			//$view['id'] = $id;
-			//$view['ssisa']=$this -> delivery_order_model -> __get_sisa_so($id);
 			$view['sbid'] = $sbid;	
-			//$view['sales'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 			$view['sales'] = $this -> sales_lib -> __get_sales('',2);
-			//$view['headerx'] = $this->delivery_order_model -> __get_do_select($id);
 			$this->load->view('invoice_order_report', $view,$stx);
 	}	
 	

@@ -122,9 +122,9 @@ class Home extends MY_Controller {
 				$piutang=$_POST['totalz'];
 				
 				//echo $piutang;die;
-				$custompaid=$_POST['custompaid'];
+				$custompaid=str_replace(',','',$_POST['custompaid']);
 				$pwrite_off="";
-				$kurang_bayar=$_POST['totalsisa'];
+				$kurang_bayar=str_replace(',','',$_POST['totalsisa']);
 				$pm=0;
 				$ptype=array('cash','transfer','Giro',$custompaid);
 				//print_r($_POST);
@@ -297,9 +297,9 @@ echo $snoro;
 				
 				//echo $piutang;die;
 				if(!isset($_POST['custompaid'])){$_POST['custompaid']="";}
-				$custompaid=$_POST['custompaid'];
+				$custompaid=str_replace(',','',$_POST['custompaid']);
 				$pwrite_off="";
-				$kurang_bayar=$_POST['totalsisa'];
+				$kurang_bayar=str_replace(',','',$_POST['totalsisa']);
 				$pm=0;
 				$ptype=array('cash','transfer','giro',$custompaid);
 				//print_r($_POST);
@@ -315,7 +315,7 @@ echo $snoro;
 					$rektox=$rekto;
 
 				
-				$pamount=$_POST['payment'][$p];
+				$pamount=str_replace(',','',$_POST['payment'][$p]);
 				//echo $ptype[$p].'-'.$p.'-'.$pamount.'<br>';
 				if(($pamount!=0) or ($pamount!='')){
 					//echo $ptype[$p];
@@ -343,9 +343,9 @@ echo $snoro;
 					$date_cash="";
 					$date_custom="";
 					}elseif($p==3){ 
-					$nogiro="";
-					$pgirox="";
-					$accgiro="";
+					$nogirox="";
+					$pgiroxx="";
+					$accgirox="";
 					$date_transx="";
 					$rektox="";
 					$date_cash="";					

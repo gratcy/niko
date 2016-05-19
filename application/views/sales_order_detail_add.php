@@ -311,7 +311,7 @@ $discdate= $this->uri->segment(6);
 						<input type=hidden  id="thePricex" class="form-control" name="pricex" >
 		<?php 
 		$ccats= $detailx[0]->ccat; 
-		if($ccats==0){
+		if(($ccats==0)||($ccats>=6)){
 		?>	
 
                 <div class="form-group">
