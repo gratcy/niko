@@ -74,4 +74,43 @@ class Inventory_model extends CI_Model {
 		$this -> db -> select('* FROM inventory_tab WHERE itype='.$type.' and ibid='.$branch.' and iiid=' . $pid, FALSE);
 		return $this -> db -> get() -> result();
 	}
+	
+	function __get_product($pid,$branch,$type) {
+		if ($type == 1 || $type == 3 || $type == 4 || $type == 6)
+			$this -> db -> select('a.istockbegining,b.pcode as code,b.pname as name FROM inventory_tab a LEFT JOIN products_tab b ON a.iiid=b.pid WHERE a.itype='.$type.' and a.ibid='.$branch.' and a.iiid=' . $pid, FALSE);
+		else
+			$this -> db -> select('a.istockbegining,b.scode as code,b.sname as name FROM inventory_tab a LEFT JOIN sparepart_tab b ON a.iiid=b.sid WHERE a.itype='.$type.' and a.ibid='.$branch.' and a.iiid=' . $pid, FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_stock_process($branch,$iid,$type) {
+		$total = 0;
+		if ($type == 1 || $type == 2) {
+			if ($type == 1) {
+				$this -> db -> select('SUM(b.sqty) as total FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid WHERE a.sbid='.$branch.' AND a.sstatus < 3 AND b.spid=' . $iid);
+				$pr = $this -> db -> get() -> result();
+
+				$this -> db -> select('SUM(b.sqty) as total FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid WHERE a.sbid='.$branch.' AND c.dstatus < 3 AND b.spid=' . $iid);
+				$pr2 = $this -> db -> get() -> result();
+			}
+			$this -> db -> select('SUM(b.rqty) as total FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid='.$branch.' AND b.rtype='.$type.' AND a.rstatus=1 AND b.riid=' . $iid);
+			$pr3 = $this -> db -> get() -> result();
+			
+			if ($type == 2)
+				$total = ($pr3[0] -> total ? $pr3[0] -> total : 0);
+			else
+				$total = $pr[0] -> total + $pr2[0] -> total + $pr3[0] -> total;
+		}
+		return $total;
+	}
+	
+	function __get_return_order($iid, $branch, $type, $stype) {
+		$this -> db -> select("b.sqty as tqty,a.stgl as ttanggal, a.sreff as tno, ".($stype == 1 ? 1 : 0)." as approved, c.cname as cname, 1 as ttypetrans FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid LEFT JOIN customers_tab c ON a.scid=c.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "a.sstatus >= 3" : "a.sstatus < 3")." AND b.spid=" . $iid, FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_sales_order($iid, $branch, $type, $stype) {
+		$this -> db -> select("".($stype == 1 ? "b.sqty" : "c.sqty")." as tqty,".($stype == 1 ? "a.stgl as ttanggal" : "c.stgldo as ttanggal").", ".($stype == 1 ? "a.snoso" : "c.snodo")." as tno, ".($stype == 1 ? 0 : 1)." as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "c.dstatus < 3" : "c.dstatus >= 3")." AND b.spid=" . $iid, FALSE);
+		return $this -> db -> get() -> result();
+	}
 }

@@ -27,4 +27,20 @@ class Opname_model extends CI_Model {
 			
 		return $this -> db -> get() -> result();
 	}
+	
+	function __get_stock_adjustment_hist($iid, $branch, $type, $stype) {
+		if ($stype == 1)
+			$this -> db -> select("oadjustplus as tqty,from_unixtime(odate,'%Y-%m-%d') as ttanggal, 'opname' as tno, 1 as approved, '' as cname, 1 as ttypetrans FROM opname_tab WHERE otype=".$type." AND ostatus=1 AND oidid=".$iid." AND oadjustplus!=0 AND obid=" . $branch, FALSE);
+		else
+			$this -> db -> select("oadjustmin as tqty,from_unixtime(odate,'%Y-%m-%d') as ttanggal, 'opname' as tno, 1 as approved, '' as cname, 2 as ttypetrans FROM opname_tab WHERE otype=".$type." AND ostatus=1 AND oidid=".$iid." AND oadjustmin!=0 AND obid=" . $branch, FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_stock_adjustment($iid, $branch, $type, $stype) {
+		if ($type == 1)
+			$this -> db -> select('SUM(oadjustplus) as total FROM opname_tab WHERE otype='.$stype.' AND ostatus=1 AND oidid='.$iid.' AND obid=' . $branch);
+		else
+			$this -> db -> select('SUM(oadjustmin) as total FROM opname_tab WHERE otype='.$stype.' AND ostatus=1 AND oidid='.$iid.' AND obid=' . $branch);
+		return $this -> db -> get() -> result();
+	}
 }

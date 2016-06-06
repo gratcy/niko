@@ -50,11 +50,6 @@ left:inherit!important;
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-		  <?php if (!$perm) : ?>
-<!--
-          <th>Branch</th>
--->
-          <?php endif; ?>
           <?php if ($type != 2 && $type != 5) : ?>
           <th>Code</th>
           <?php endif; ?>
@@ -62,10 +57,11 @@ left:inherit!important;
           <th>Stock Begining</th>
           <th>Stock In</th>
           <th>Stock Out</th>
+          <th>Adjusment (-)</th>
+          <th>Adjusment (+)</th>
+          <th>Stock Proccess</th>
           <th>Stock Final</th>
-<!--
-          <th>Status</th>
--->
+          <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,11 +69,6 @@ left:inherit!important;
 		  foreach($inventory as $k => $v) :
 		  ?>
                                         <tr>
-		  <?php if (!$perm) : ?>
-<!--
-          <td><?php echo $v -> bname; ?></td>
--->
-          <?php endif; ?>
           <?php if ($type != 2 && $type != 5) : ?>
           <td><?php echo $v -> code; ?></td>
           <?php endif; ?>
@@ -85,10 +76,11 @@ left:inherit!important;
           <td style="text-align:right;"><?php echo $v -> istockbegining; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockin; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
+          <td style="text-align:right;"><?php echo __get_stock_adjustment($v -> iiid, $this -> memcachedlib -> sesresult['ubid'], 2, $type); ?></td>
+          <td style="text-align:right;"><?php echo __get_stock_adjustment($v -> iiid, $this -> memcachedlib -> sesresult['ubid'], 1, $type); ?></td>
+          <td style="text-align:right;"><?php echo __get_stock_process($this -> memcachedlib -> sesresult['ubid'], $v -> iiid, $type); ?></td>
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
-<!--
-          <td><?php echo __get_status($v -> istatus,1); ?></td>
--->
+          <td><a href="javascript:void(0);" onclick="print_data('<?php echo site_url('inventory/card_stock/' . $v -> iiid.'/'.$type ); ?>', 'Print Kartu Stok');"><i class="icon-book"></i></a></td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

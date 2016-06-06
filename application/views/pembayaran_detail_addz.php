@@ -673,9 +673,11 @@ echo "<input type=hidden name=txtNum id=txtNum value=$num >";
 		<input type=hidden name=scid value="<?=$scid;?>">
 		<input type=hidden id="totalz" name="sisaz" value="<?=$totaltagihanx;?>" size="15" />
 		</th><th>
+		<?php if (__get_roles('PaymentOrderExecute')) : ?>
 		<?php if($pembayaran[0]->pstatuss<3){?>
 		<input class="btn text-muted text-center btn-danger" type=submit value="PAID">
 		<?php } ?>
+		<?php endif; ?>
 		
 		</th>
 		  

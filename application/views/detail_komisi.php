@@ -16,7 +16,7 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>komisi </h2>
+                        <h2>Detail Komisi - <?php echo $ino; ?> </h2>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            KOMISI
+                            Detail Komisi - <?php echo $ino; ?>
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					
@@ -95,7 +95,7 @@ left:inherit!important;
 		  <td></td>
 		  <td></td>
 		  <td></td>		  
-          <td><?php echo $ttl; ?></td>
+          <td><?php echo __get_rupiah($ttl); ?></td>
 		  
          
 		
@@ -107,6 +107,7 @@ left:inherit!important;
                                 </table>
     <?php echo $pages; ?>
                             </div>
+				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
                         </div>
                     </div>
                 </div>

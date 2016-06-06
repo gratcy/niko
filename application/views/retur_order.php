@@ -68,38 +68,58 @@ minLength: 1,
 				
 				
 				
+					<form method="POST" action="?search=1" class="form-horizontal" >
+						<input  name="cid" type="hidden" id="theCid" />
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="form-group">
+									<div class="col-lg-6">
+										Customer <input name="cname" type="text" id="search" class="form-control" />
+								</div>
+								<div class="col-lg-2"><br>
+									<input type="submit" value="cari" class="btn btn-default btn-grad" >
+								</div>
+							</div>
+							</div>
+						</div>
+					</form>
+
+				<form method="POST" action="?search=1" class="form-horizontal" >
 					<div class="row">
-			<div class="col-lg-12">
-				<form method="POST" action="?search=1" >
-			   Customer					<input  name=cname type="text" id="search"   />
-
-					<input  name=cid type="hidden" id="theCid"    />
-			   <input type=submit value=cari >
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+									Reff No.<input type="text" name="sreff" class="form-control"  >
+								</div>
+								<div class="col-lg-2"><br>
+									<input type="submit" value="cari" class="btn btn-default btn-grad">
+								</div>
+							</div>
+						</div>
+					</div>
 			   </form>
-			   </div>
-            </div><br>
 
-			<div class="row">
-			<div class="col-lg-12">
-				<form method="POST"  action="?search=1" >
-			   Reff No.<input type=text name="sreff"  >
-			   <input type=submit value=cari >
-			   </form>
-			   </div>
-            </div><br>
-
-			<div class="row">
-			<div class="col-lg-12">
-				<form method=POST action="?search=1" >
-			   Status<select name=status >
-			   <option value="x">ALL</option>			   
-			   <option value="0">Approve</option>
-			   <option value="1">Done</option>
-			   <option value="2">Paid</option>
-			   <input type=submit value=cari >
-			   </form>
-			   </div>
-            </div><br>				
+				<form method="POST" action="?search=1" class="form-horizontal" >
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+								   Status <select name="status" class="form-control">
+								   <option value="x">ALL</option>			   
+								   <option value="0">Approve</option>
+								   <option value="1">Done</option>
+								   <option value="2">Paid</option>
+								   </select>
+								</div>
+								<div class="col-lg-2">
+									<br>
+									<input type="submit" value="cari" class="btn btn-default btn-grad">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>		
+					<br />	
 				
 				
 	<?php echo __get_error_msg(); ?>
@@ -110,7 +130,7 @@ minLength: 1,
                             Return Order
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>

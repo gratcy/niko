@@ -293,9 +293,11 @@ $drv=explode("-",$detailx[0]->driver);
 			</form></td><td>
 		<?php 
 		if ($detailx[0]->dstatus==1){?>						
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type=submit value="Edit" ></form>	
+		<?php if (__get_roles('InvoiceOrderExecute')) : ?>
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type="submit" value="Edit" ></form>	
+		<?php endif; ?>
 		<?php }else{?>
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type=submit value="PRINT" ></form>	
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type="submit" value="PRINT" ></form>	
 		<?php }?></td></tr></table>
 
                             </div>

@@ -14,14 +14,11 @@ class Home extends MY_Controller {
 	}
 
 	function index($sno_invoice) {
+		if (!$sno_invoice) redirect(site_url('komisi/home'));
 		$pager = $this -> pagination_lib -> pagination($this -> detail_komisi_model -> __get_detail_komisi($sno_invoice),3,10,site_url('detail_komisi'));
-			$view['komisi'] = $this -> detail_komisi_model -> __get_detail_komisi($sno_invoice);
-			$view['pages'] = $this -> pagination_lib -> pages();
-
-
-		
+		$view['komisi'] = $this -> detail_komisi_model -> __get_detail_komisi($sno_invoice);
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['ino'] = $sno_invoice;
 		$this->load->view('detail_komisi', $view);
-		}
-		}
-		
-		?>
+	}
+}

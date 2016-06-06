@@ -355,6 +355,11 @@
 		$('ul#menu > li').removeClass('active');
 		$('ul#inventory').parent().addClass('active');
 	}
+	else if (/\/komisi\/home|detail_komisi\/home|technical_commision|reportopname|invoice_order_report/.test(window.location.href) === true) {
+		$('ul#Report').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#Report').parent().addClass('active');
+	}
 	else if (/\/sales_order|delivery_order|retur_order|pembayaran/.test(window.location.href) === true) {
 		$('ul#sales').addClass('in');
 		$('ul#menu > li').removeClass('active');
@@ -364,11 +369,6 @@
 		$('ul#accounting').addClass('in');
 		$('ul#menu > li').removeClass('active');
 		$('ul#accounting').parent().addClass('active');
-	}
-	else if (/\/komisi\/home|technical_commision|reportopname/.test(window.location.href) === true) {
-		$('ul#Report').addClass('in');
-		$('ul#menu > li').removeClass('active');
-		$('ul#Report').parent().addClass('active');
 	}
 	else if (/\/request|transfer|receiving/.test(window.location.href) === true) {
 		$('ul#distribution').addClass('in');

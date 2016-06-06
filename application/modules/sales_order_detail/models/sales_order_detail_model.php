@@ -58,7 +58,6 @@ class sales_order_detail_model extends CI_Model {
 		(select sdisc FROM sales_order_detail_tab c where c.sid=a.sid) as sdisc	FROM delivery_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=" . $id ." AND a.snodo='". $snodo . "'
 		 AND a.sqty!=0 ");
 		
-		//echo "select * FROM sales_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.sid= $id";die;
 		return $this -> db -> get() -> result();
 	}		
 
@@ -81,20 +80,11 @@ class sales_order_detail_model extends CI_Model {
 	}	
 
 	function __update_inventory($spid,$sbid,$data) {
-		//print_r($data);
 		$istockout=$data['istockout'];
-		// echo $istockout.$sbid.$spid;
-		// die;
         return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
         
 	}	
 	function __update_inventoryin($spid,$sbid,$data) {
-		// print_r($data);
-		 // $istockin=$data['istockin'];
-		// echo $istockin.$sbid.$spid;		
-		// echo "update inventory_tab set istockin='$istockin', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid'";
-
-		// die;
 		$istockin=$data['istockin'];
         return $this->db -> query("update inventory_tab set istockin='$istockin', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
         
@@ -118,12 +108,8 @@ class sales_order_detail_model extends CI_Model {
 	}	
 
 	function __update_invoice_order($snodo, $data) {
-		//print_r($data);die;
-		
         $this -> db -> where('snodo', $snodo);
         return $this -> db -> update('delivery_order_detail_tab', $data);
-		
-		//$sql="select sum(
 	}		
 	
 	function __delete_sales_order_detail($id) {

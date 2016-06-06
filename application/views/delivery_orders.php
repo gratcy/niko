@@ -50,39 +50,57 @@ minLength: 1,
 
                 <hr />			
 			 	
-				
-			<div class="row">
-			<div class="col-lg-12">
-				<form method="POST"  action="?search=1" >
-			   Customer					<input  name=cname type="text" id="search"   />
+					<form method="POST" action="?search=1" class="form-horizontal" >
+						<input  name="cid" type="hidden" id="theCid" />
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="form-group">
+									<div class="col-lg-6">
+										Customer <input name="cname" type="text" id="search" class="form-control" />
+								</div>
+								<div class="col-lg-2"><br>
+									<input type="submit" value="cari" class="btn btn-default btn-grad" >
+								</div>
+							</div>
+							</div>
+						</div>
+					</form>
 
-					<input  name=cid type="hidden" id="theCid"    />
-			   <input type=submit value=cari >
+				<form method="POST" action="?search=1" class="form-horizontal" >
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+									Reff No.<input type="text" name="sreff" class="form-control"  >
+								</div>
+								<div class="col-lg-2"><br>
+									<input type="submit" value="cari" class="btn btn-default btn-grad">
+								</div>
+							</div>
+						</div>
+					</div>
 			   </form>
-			   </div>
-            </div><br>
 
-			<div class="row">
-			<div class="col-lg-12">
-				<form method="POST" action="?search=1" >
-			   Reff No.<input type=text name="sreff"  >
-			   <input type=submit value=cari >
-			   </form>
-			   </div>
-            </div><br>
-
-			<div class="row">
-			<div class="col-lg-12">
-				<form method=POST action="?search=1" >
-			   Status<select name=sisa >
-			   <option value="x">ALL</option>
-			   <option value="1">Active</option>
-			   <option value="0">Done</option>
-			   <input type=submit value=cari >
-			   </form>
-			   </div>
-            </div><br>
-			
+				<form method="POST" action="?search=1" class="form-horizontal" >
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+								   Status <select name="sisa" class="form-control">
+								   <option value="x">ALL</option>
+								   <option value="1">Active</option>
+								   <option value="0">Done</option>
+								   </select>
+								</div>
+								<div class="col-lg-2">
+									<br>
+									<input type="submit" value="cari" class="btn btn-default btn-grad">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>		
+					<br />
                
 	<?php echo __get_error_msg(); ?>
             <div class="row">

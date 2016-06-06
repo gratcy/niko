@@ -70,18 +70,18 @@ minLength: 1,
 	<?php if($_POST['xexcel']=="Excel"){		}else{ ?>				
 						<form method="POST">
 						<table>
-						<tr><td>Invoice No</td><td><input size=16 type=text name="sno_invoice"></td></tr>
+						<tr><td style="width:150px">Invoice No</td><td><input size=16 type=text name="sno_invoice" class="form-control"></td></tr>
 						<tr><td>Sales</td><td >
-						<select name="ssid" data-placeholder="Sales"  >
+						<select name="ssid" data-placeholder="Sales" class="form-control"  >
 						<?php echo $sales; ?>
 						</select>
 						</td></tr>
-						<tr><td>Customer</td><td><input size=16 type=text name="scidx" id="search" >
+						<tr><td>Customer</td><td><input size=16 type=text name="scidx" id="search" class="form-control" >
 						
 						<div style="display: none;">
-						<input type="text" name="scid" id="theCid" >
+						<input type="text" name="scid" id="theCid" class="form-control" >
 						</div></td></tr>
-						<tr><td>Status</td><td><select name="pstatus">
+						<tr><td>Status</td><td><select name="pstatus" class="form-control">
 						<option value="0">Pending &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</option>
@@ -90,11 +90,13 @@ minLength: 1,
 						<option value="5">Over date</option>
 						</select>
 						</td></tr>
-						<tr><td>Period</td><td><input size=16 type=text name="astgl_invoice" id="example1" >&nbsp;&nbsp; TO &nbsp;&nbsp; 
-						<input size=16 type=text name="bstgl_invoice" id="example2" >
+						<tr><td>Period</td><td>
+							<input size=16 type=text name="astgl_invoice" id="example1" class="form-control" style="float:left;width:45%;">
+							<div style="float:left;width:10%;text-align:center"> TO </div> 
+							<input size=16 type=text name="bstgl_invoice" id="example2" class="form-control" style="float:left;width:45%;">
 						
 						</td></tr>
-						<tr><td><input type=submit value="Search"> <input type=submit name="xexcel" value="Excel"></td></tr>
+						<tr><td></td><td><input type=submit value="Search" class="btn btn-default btn-grad"> <input class="btn btn-default btn-grad" type=submit name="xexcel" value="Excel"></td></tr>
 						</table>
 						</form>
  <?php }?>					
@@ -198,7 +200,9 @@ else if($numberDaysa>0){ $stt= "OVER DATE";}
           <th></th>
 		  <th> </th>
           <th></th>
+		  <th> </th>
           <th><?=number_format($totaldox);?></th>
+		  <th> </th>
 		  <th> </th>
 		  <th></th>
                                         </tr>		

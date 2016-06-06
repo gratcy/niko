@@ -80,7 +80,7 @@ class Home extends MY_Controller {
 						$arr = array('istock' => $stock2 - $amin);
 					
 					if ($this -> inventory_model -> __update_inventory($id, $arr, $type)) {
-						$oarr = array('oidid' => $id,'otype' => $type, 'odate' => time(), 'ostockbegining' => $stockbegining2, 'ostockin' => $stockin2, 'ostockout' => $stockout2, 'ostock' => $stock2, 'oadjustmin' => $amin, 'oadjustplus' => $aplus, 'odesc' => $desc);
+						$oarr = array('obid' => $this -> memcachedlib -> sesresult['ubid'],'oidid' => $id,'otype' => $type, 'odate' => time(), 'ostockbegining' => $stockbegining2, 'ostockin' => $stockin2, 'ostockout' => $stockout2, 'ostock' => $stock2, 'oadjustmin' => $amin, 'oadjustplus' => $aplus, 'odesc' => $desc);
 						$this -> opname_model -> __insert_opname($oarr);
 						
 						__set_error_msg(array('info' => 'Stock opname berhasil dilakukan.'));

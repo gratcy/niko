@@ -30,9 +30,7 @@
 		  foreach($items[0] as $k => $v) :
 		  ?>
           <tr>
-<!--
           <td><input type="checkbox" value="<?php echo $v -> pid; ?>" name="pid[]"></td>
--->
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> pcode; ?></td>
           <td><?php echo $v -> pname; ?></td>
@@ -57,9 +55,7 @@
 		  foreach($items[1] as $k => $v) :
 		  ?>
           <tr>
-<!--
           <td><input type="checkbox" value="<?php echo $v -> sid; ?>" name="sid[]"></td>
--->
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>

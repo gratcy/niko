@@ -21,7 +21,7 @@ left:inherit!important;
                 </div>
 
                 <hr />
-				<?php if (__get_roles('SalesOrderExecute')) : ?>
+				<?php if (__get_roles('PaymentOrderExecute')) : ?>
                 <a href="<?php echo site_url('pembayaran/home/pembayaran_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Payment</a>
                 <br />
                 <br />
@@ -34,7 +34,7 @@ left:inherit!important;
                             Payment
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" style="width:180px;"/></div>
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>
@@ -98,15 +98,8 @@ left:inherit!important;
 		
 		
 		  <td>
-		  <?php if($sstatus!=3){ ?>
-		  <!--a href="<?php echo site_url('pembayaran/home/pembayaran_update/' . $v -> pno_pm ); ?>"><i class="icon-pencil"></i></a-->
 		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$v->pcid.'/' . $v -> pno_pm ); ?>"><i class="icon-book"></i></a>
-		  <?php } else{?>
-		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$v->pcid.'/' . $v -> pno_pm ); ?>"><i class="icon-book"></i></a>
-		  <?php } ?>
-		  
-		  
-          </td>		
+          </td>
 		
 		
 										</tr>
@@ -123,9 +116,3 @@ left:inherit!important;
         </div>
         </div>
        <!--END PAGE CONTENT -->
-
-<script type="text/javascript">
-$(function(){
-	$('div.searchTable > form > div.sLeft > input[name="keyword"]').sSuggestion('span#sg1','<?php echo current_url();?>/get_suggestion', 'keyword');
-});
-</script>

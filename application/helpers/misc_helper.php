@@ -346,3 +346,21 @@ function __get_receiving_type($id, $type) {
 	else
 		return ($id == 1 ? '<option value="1" selected>Branches</option><option value="2">Factory / Vendor</option>' : '<option value="1">Branches</option><option value="2" selected>Factory / Vendor</option>');
 }
+
+function __get_stock_adjustment($iid, $branch, $type, $stype) {
+    $CI =& get_instance();
+	$CI -> load -> model('opname/opname_model');
+	$data = $CI -> opname_model ->__get_stock_adjustment($iid, $branch, $type, $stype);
+	return (isset($data[0] -> total) ? $data[0] -> total : 0);
+}
+
+function __get_stock_process($bcid,$iid,$type) {
+    $CI =& get_instance();
+	$CI -> load -> model('inventory/inventory_model');
+	$data = $CI -> inventory_model ->__get_stock_process($bcid,$iid,$type);
+	return $data;
+}
+
+function __sortArrayByDate( $a, $b ) {
+    return strtotime($a -> ttanggal) - strtotime($b -> ttanggal);
+}

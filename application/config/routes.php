@@ -147,6 +147,7 @@ $route['inventory/(:num)/get_suggestion'] = 'inventory/home/get_suggestion/$1';
 $route['inventory/inventory_add/?(:num)?'] = 'inventory/home/inventory_add/$1';
 $route['inventory/inventory_update/?(:num)?/?(:num)?'] = 'inventory/home/inventory_update/$1/$2';
 $route['inventory/inventory_delete/(:num)/(:num)'] = 'inventory/home/inventory_delete/$1/$2';
+$route['inventory/card_stock/(:num)/(:num)'] = 'inventory/home/card_stock/$1/$2';
 
 $route['rawmaterial_type/?(:num)?'] = 'rawmaterial_type/home/index/$1';
 $route['rawmaterial_type/rawmaterial_type_add'] = 'rawmaterial_type/home/rawmaterial_type_add';

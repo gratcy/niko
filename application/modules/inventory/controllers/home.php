@@ -245,4 +245,35 @@ class Home extends MY_Controller {
 		
 		echo json_encode($hint);
 	}
+	
+	function card_stock($iid, $type) {
+		$this -> load -> model('opname/opname_model');
+		$this -> load -> model('receiving/receiving_model');
+		
+		$branch = $this -> memcachedlib -> sesresult['ubid'];
+		$opnamePlus = $this -> opname_model -> __get_stock_adjustment_hist($iid, $branch, $type, 1);
+		$opnameMin = $this -> opname_model -> __get_stock_adjustment_hist($iid, $branch, $type, 2);
+		
+		$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 1);
+		$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 2);
+		
+		if ($type == 1) :
+			$SO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 1);
+			$DO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 2);
+			
+			$returnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 1);
+			$returnUnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 2);
+		else :
+			$SO = array();
+			$DO = array();
+			$returnApp = array();
+			$returnUnApp = array();
+		endif;
+		
+		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $returnApp, $returnUnApp);
+		usort($data, "__sortArrayByDate");
+		$view['detail'] = $data;
+		$view['book'] = $this -> inventory_model -> __get_product($iid, $branch, $type);
+		$this->load->view('print/card_stock', $view, false);
+	}
 }
