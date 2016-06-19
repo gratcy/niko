@@ -76,11 +76,14 @@ left:inherit!important;
           <td style="text-align:right;"><?php echo $v -> istockbegining; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockin; ?></td>
           <td style="text-align:right;"><?php echo $v -> istockout; ?></td>
-          <td style="text-align:right;"><?php echo __get_stock_adjustment($v -> iiid, $this -> memcachedlib -> sesresult['ubid'], 2, $type); ?></td>
-          <td style="text-align:right;"><?php echo __get_stock_adjustment($v -> iiid, $this -> memcachedlib -> sesresult['ubid'], 1, $type); ?></td>
+          <td style="text-align:right;"><?php echo __get_stock_adjustment($v -> iid, $this -> memcachedlib -> sesresult['ubid'], 2, $type); ?></td>
+          <td style="text-align:right;"><?php echo __get_stock_adjustment($v -> iid, $this -> memcachedlib -> sesresult['ubid'], 1, $type); ?></td>
           <td style="text-align:right;"><?php echo __get_stock_process($this -> memcachedlib -> sesresult['ubid'], $v -> iiid, $type); ?></td>
           <td style="text-align:right;"><?php echo $v -> istock; ?></td>
-          <td><a href="javascript:void(0);" onclick="print_data('<?php echo site_url('inventory/card_stock/' . $v -> iiid.'/'.$type ); ?>', 'Print Kartu Stok');"><i class="icon-book"></i></a></td>
+          <td>
+				<a href="javascript:void(0);" onclick="print_data('<?php echo site_url('inventory/card_stock/' . $v -> iid.'/'. $v -> iiid.'/'.$type ); ?>', 'Print Kartu Stok');"><i class="icon-book"></i></a>
+				<a href="<?php echo site_url('inventory/card_stock/' . $v -> iid.'/'. $v -> iiid.'/'.$type ); ?>?export=excel"><i class="icon-file"></i></a>
+          </td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

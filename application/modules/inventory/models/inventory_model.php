@@ -110,7 +110,7 @@ class Inventory_model extends CI_Model {
 	}
 	
 	function __get_sales_order($iid, $branch, $type, $stype) {
-		$this -> db -> select("".($stype == 1 ? "b.sqty" : "c.sqty")." as tqty,".($stype == 1 ? "a.stgl as ttanggal" : "c.stgldo as ttanggal").", ".($stype == 1 ? "a.snoso" : "c.snodo")." as tno, ".($stype == 1 ? 0 : 1)." as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "c.dstatus < 3" : "c.dstatus >= 3")." AND b.spid=" . $iid, FALSE);
+		$this -> db -> select("".($stype == 1 ? "b.sqty" : "c.sqty")." as tqty,".($stype == 1 ? "a.stgl as ttanggal" : "c.stgldo as ttanggal").", ".($stype == 1 ? "a.snoso" : "c.snodo")." as tno, ".($stype == 1 ? 0 : 1)." as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid AND b.spid=c.spid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "c.dstatus < 3" : "c.dstatus >= 3")." AND ".($stype == 1 ? "b.sqty" : "c.sqty")." > 0 AND b.spid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 }

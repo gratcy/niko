@@ -80,9 +80,9 @@ class Receiving_model extends CI_Model {
 	
 	function __get_receiving_hist($iid, $branch, $type, $stype) {
 		if ($stype == 1)
-			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 1 as approved, '' as cname, 1 as ttypetrans FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch." AND b.rtype=".$type." AND a.rstatus=3 AND b.riid=" . $iid, FALSE);
+			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 1 as approved, 1 as ttypetrans, CASE a.rtype WHEN 2 THEN a.rvendor WHEN 1 THEN a.riid END as cname FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch." AND b.rtype=".$type." AND a.rstatus=3 AND b.riid=" . $iid, FALSE);
 		else
-			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 0 as approved, '' as cname, 1 as ttypetrans FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch." AND b.rtype=".$type." AND a.rstatus=1 AND b.riid=" . $iid, FALSE);
+			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 0 as approved, 1 as ttypetrans, CASE a.rtype WHEN 2 THEN a.rvendor WHEN 1 THEN a.riid END as cname FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch." AND b.rtype=".$type." AND a.rstatus=1 AND b.riid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 }
