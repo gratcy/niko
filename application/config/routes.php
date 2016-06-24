@@ -148,6 +148,7 @@ $route['inventory/inventory_add/?(:num)?'] = 'inventory/home/inventory_add/$1';
 $route['inventory/inventory_update/?(:num)?/?(:num)?'] = 'inventory/home/inventory_update/$1/$2';
 $route['inventory/inventory_delete/(:num)/(:num)'] = 'inventory/home/inventory_delete/$1/$2';
 $route['inventory/card_stock/(:num)/(:num)/(:num)'] = 'inventory/home/card_stock/$1/$2/$3';
+$route['inventory/export_excel/(:num)'] = 'inventory/home/export_excel/$1';
 
 $route['rawmaterial_type/?(:num)?'] = 'rawmaterial_type/home/index/$1';
 $route['rawmaterial_type/rawmaterial_type_add'] = 'rawmaterial_type/home/rawmaterial_type_add';

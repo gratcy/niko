@@ -31,6 +31,9 @@ left:inherit!important;
                 </div>
 
                 <hr />
+                <a href="<?php echo site_url('inventory/export_excel/' . $type); ?>" class="btn btn-default btn-grad"><i class="icon-file"></i> Export Excel</a>
+                <br />
+                <br />
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

@@ -286,4 +286,30 @@ class Home extends MY_Controller {
 		endif;
 		$this->load->view('print/card_stock', $view, false);
 	}
+	
+	function export_excel($type) {
+		ini_set('memory_limit', '-1');
+		$this -> load -> library('excel');
+		$data = $this -> inventory_model -> __export($type,$this -> memcachedlib -> sesresult['ubid']);
+		
+		$arr = array();
+		foreach($data as $K => $v) {
+			if ($type != 2 && $type != 5)
+				$arr[] = array($v -> code, $v -> name, $v -> istockbegining, $v -> istockin, $v -> istockout, __get_stock_adjustment($v -> iid, $this -> memcachedlib -> sesresult['ubid'], 2, $type), __get_stock_adjustment($v -> iid, $this -> memcachedlib -> sesresult['ubid'], 1, $type), __get_stock_process($this -> memcachedlib -> sesresult['ubid'], $v -> iiid, $type), $v -> istock);
+			else
+				$arr[] = array($v -> name, $v -> istockbegining, $v -> istockin, $v -> istockout, __get_stock_adjustment($v -> iid, $this -> memcachedlib -> sesresult['ubid'], 2, $type), __get_stock_adjustment($v -> iid, $this -> memcachedlib -> sesresult['ubid'], 1, $type), __get_stock_process($this -> memcachedlib -> sesresult['ubid'], $v -> iiid, $type), $v -> istock);
+		}
+		
+		if ($type != 2 && $type != 5)
+			$data = array('header' => array('Code', 'Name', 'Stock Begining', 'Stock In','Stock Out','Adjusment (-)','Adjusment (+)','Stock Proccess','Stock Final'), 'data' => $arr);
+		else
+			$data = array('header' => array('Name', 'Stock Begining', 'Stock In','Stock Out','Adjusment (-)','Adjusment (+)','Stock Proccess','Stock Final'), 'data' => $arr);
+
+		$this -> excel -> sEncoding = 'UTF-8';
+		$this -> excel -> bConvertTypes = false;
+		$this -> excel -> sWorksheetTitle = 'Inventory '.__get_inventory_type($type).' - PT. Niko Elektronic indonesia';
+		
+		$this -> excel -> addArray($data);
+		$this -> excel -> generateXML('inventory-'.__get_inventory_type($type).'-' . date('Ymd'));
+	}
 }

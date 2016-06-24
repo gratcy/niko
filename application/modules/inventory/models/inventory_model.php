@@ -113,4 +113,13 @@ class Inventory_model extends CI_Model {
 		$this -> db -> select("".($stype == 1 ? "b.sqty" : "c.sqty")." as tqty,".($stype == 1 ? "a.stgl as ttanggal" : "c.stgldo as ttanggal").", ".($stype == 1 ? "a.snoso" : "c.snodo")." as tno, ".($stype == 1 ? 0 : 1)." as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid AND b.spid=c.spid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "c.dstatus < 3" : "c.dstatus >= 3")." AND ".($stype == 1 ? "b.sqty" : "c.sqty")." > 0 AND b.spid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
+	
+	function __export($type, $bid) {
+		$bid = " AND ibid=" . $bid;
+		if ($type == 1 || $type == 3 || $type == 4 || $type == 6)
+			$this -> db -> select('a.*,b.bname,c.pname as name,c.pcode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join products_tab c on a.iiid=c.pid WHERE (c.pstatus=1 or c.pstatus=0) AND a.istatus=1'.$bid.' and a.itype='.$type.' ORDER BY c.pname ASC');
+		else
+			$this -> db -> select('a.*,b.bname,c.sname as name,c.scode as code FROM inventory_tab a left join branch_tab b ON a.ibid=b.bid left join sparepart_tab c on a.iiid=c.sid WHERE (c.sstatus=1 or c.sstatus=0) AND a.istatus=1'.$bid.' and a.itype='.$type.' ORDER BY c.sname ASC');
+		return $this -> db -> get() -> result();
+	}
 }
