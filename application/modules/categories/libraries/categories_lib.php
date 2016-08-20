@@ -19,5 +19,33 @@ class Categories_lib {
 				$res .= '<option value="'.$v -> cid.'">'.$v -> cname.'</option>';
 		return $res;
 	}
-
+    
+    function __get_categories_check($ccid='') {
+		if ($ccid) $ccid = unserialize($ccid);
+		$cat = $this -> _ci -> categories_model -> __get_categories(2);
+		$res = '<table>';
+		foreach($cat as $k => $v) {
+			$res .= '<tr>';
+			$res .= '<td><b>'.$v -> cname.'</b></td><td></td>';
+			$res .= '</tr>';
+			$res .= '<tr>';
+			$res .= '<td>Cash (%)</td><td><input type="text" value="'.(isset($ccid[$v -> cid]) ? $ccid[$v -> cid][0] : '').'" name="cid['.$v -> cid.'][]" class="form-control"></td>';
+			$res .= '</tr>';
+			$res .= '<tr>';
+			$res .= '<td>Credit (%)</td><td><input type="text" value="'.(isset($ccid[$v -> cid]) ? $ccid[$v -> cid][1] : '').'" name="cid['.$v -> cid.'][]" class="form-control"></td>';
+			$res .= '</tr>';
+			$res .= '<tr>';
+			$res .= '<td>Penalty (%)</td><td><input type="text" value="'.(isset($ccid[$v -> cid]) ? $ccid[$v -> cid][2] : '').'" name="cid['.$v -> cid.'][]" class="form-control"></td>';
+			$res .= '</tr>';
+			$res .= '<tr>';
+			$res .= '<td>Limit Cash</td><td><input type="number" value="'.(isset($ccid[$v -> cid]) ? $ccid[$v -> cid][3] : '').'" name="cid['.$v -> cid.'][]" class="form-control"></td>';
+			$res .= '</tr>';
+			$res .= '<tr>';
+			$res .= '<td>Limit Credit</td><td><input type="number" value="'.(isset($ccid[$v -> cid]) ? $ccid[$v -> cid][4] : '').'" name="cid['.$v -> cid.'][]" class="form-control"></td>';
+			$res .= '</tr>';
+			$res .= '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>';
+		}
+		$res .= '</table>';
+		return $res;
+	}
 }

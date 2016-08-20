@@ -240,7 +240,7 @@ class Home extends MY_Controller {
 		$view['sid'] = $id;
 		$rep = $this -> services_report_model -> __get_services_report_detail($id);
 		$id = $rep[0] -> ssid;
-		$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail_print($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
+		$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail_print($id, $this -> memcachedlib -> sesresult['ubid']);
 		$arr = $this -> services_wo_model -> __get_technical_services($id);
 		foreach($arr as $k => $v) $ids[] = $v -> stid;
 		$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
@@ -250,14 +250,15 @@ class Home extends MY_Controller {
 		foreach($arr as $k => $v) $ids[] = $v -> spid;
 		
 		$view['product'] = $this -> products_model -> __get_products_services(implode(',', $ids), 2, $id);
-		
+		$view['sparepart'] = array();
 		$ids = array();
 		$qr = $this -> services_sparepart_model -> __get_sparepart_services_det_r($id);
-		$id = $qr[0] -> sid;
-		$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
-		foreach($arr as $k => $v) $ids[] = $v -> sssid;
-		$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id);
-
+		if ($qr) {
+			$id = $qr[0] -> sid;
+			$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
+			foreach($arr as $k => $v) $ids[] = $v -> sssid;
+			$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id);
+		}
 		$this -> load -> view('print/services_report', $view, false);
 	}
 }

@@ -9,6 +9,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('sales/sales_lib');
 		$this -> load -> library('branch/branch_lib');
+		$this -> load -> library('categories/categories_lib');
 		$this -> load -> model('customers_model');
 	}
 
@@ -30,6 +31,7 @@ class Home extends MY_Controller {
 	
 	function customers_add() {
 		if ($_POST) {
+			$cid = serialize($this -> input -> post('cid', TRUE));
 			$name = $this -> input -> post('name', TRUE);
 			$contactname = $this -> input -> post('contactname', TRUE);
 			$email = $this -> input -> post('email', TRUE);
@@ -68,7 +70,7 @@ class Home extends MY_Controller {
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
+				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cstatus' => $status);
 				if ($this -> customers_model -> __insert_customers($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('customers'));
@@ -80,6 +82,7 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
+			$view['customer_check'] = $this -> categories_lib -> __get_categories_check('');
 			$view['branch'] = $this -> branch_lib -> __get_branch();
 			$view['sales'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 			$this->load->view(__FUNCTION__, $view);
@@ -88,6 +91,7 @@ class Home extends MY_Controller {
 	
 	function customers_update($id) {
 		if ($_POST) {
+			$cid = serialize($this -> input -> post('cid', TRUE));
 			$name = $this -> input -> post('name', TRUE);
 			$contactname = $this -> input -> post('contactname', TRUE);
 			$email = $this -> input -> post('email', TRUE);
@@ -128,7 +132,7 @@ class Home extends MY_Controller {
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'cstatus' => $status);
+					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cstatus' => $status);
 					if ($this -> customers_model -> __update_customers($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));
@@ -149,6 +153,7 @@ class Home extends MY_Controller {
 			$view['detail'] = $this -> customers_model -> __get_customers_detail($id, (__get_roles('ExecuteAllBranchCustomers') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['branch'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> cbid);
 			$view['sales'] = $this -> sales_lib -> __get_sales($view['detail'][0] -> csid,$this -> memcachedlib -> sesresult['ubid']);
+			$view['customer_check'] = $this -> categories_lib -> __get_categories_check($view['detail'][0] -> ccid);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

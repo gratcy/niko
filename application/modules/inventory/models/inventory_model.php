@@ -90,7 +90,7 @@ class Inventory_model extends CI_Model {
 				$this -> db -> select('SUM(b.sqty) as total FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid WHERE a.sbid='.$branch.' AND a.sstatus < 3 AND b.spid=' . $iid);
 				$pr = $this -> db -> get() -> result();
 
-				$this -> db -> select('SUM(b.sqty) as total FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid WHERE a.sbid='.$branch.' AND c.dstatus < 3 AND b.spid=' . $iid);
+				$this -> db -> select('SUM(c.sqty) as total FROM sales_order_tab a LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid WHERE a.sbid='.$branch.' AND c.dstatus < 3 AND c.spid=' . $iid);
 				$pr2 = $this -> db -> get() -> result();
 			}
 			$this -> db -> select('SUM(b.rqty) as total FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid='.$branch.' AND b.rtype='.$type.' AND a.rstatus=1 AND b.riid=' . $iid);
@@ -110,7 +110,10 @@ class Inventory_model extends CI_Model {
 	}
 	
 	function __get_sales_order($iid, $branch, $type, $stype) {
-		$this -> db -> select("".($stype == 1 ? "b.sqty" : "c.sqty")." as tqty,".($stype == 1 ? "a.stgl as ttanggal" : "c.stgldo as ttanggal").", ".($stype == 1 ? "a.snoso" : "c.snodo")." as tno, ".($stype == 1 ? 0 : 1)." as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid AND b.spid=c.spid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "c.dstatus < 3" : "c.dstatus >= 3")." AND ".($stype == 1 ? "b.sqty" : "c.sqty")." > 0 AND b.spid=" . $iid, FALSE);
+		if ($stype == 1)
+			$this -> db -> select("b.sqty as tqty,a.stgl as ttanggal, a.snoso as tno, 0 as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a LEFT JOIN sales_order_detail_tab b ON a.sid=b.ssid LEFT JOIN delivery_order_detail_tab c ON a.sid=c.ssid AND b.spid=c.spid LEFT JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND c.dstatus < 3 AND b.sqty > 0 AND b.spid=" . $iid, FALSE);
+		else
+			$this -> db -> select("c.sqty as tqty,c.stgldo as ttanggal, c.snodo as tno, 1 as approved, d.cname as cname, 2 as ttypetrans FROM sales_order_tab a JOIN delivery_order_detail_tab c ON a.sid=c.ssid JOIN customers_tab d ON a.scid=d.cid WHERE a.sbid=".$branch." AND c.dstatus >= 3 AND c.sqty > 0 AND c.spid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	

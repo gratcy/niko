@@ -89,6 +89,9 @@
 		  <th>TOP Credit</th>
 		  <th>TOP Credit Limit</th>
 		  <th>Credit Current</th>
+		  <th>Receivable</th>
+		  <th>Special Attention</th>
+		  <th>Status</th>
           
                                         </tr>
                                     </thead>
@@ -106,6 +109,16 @@
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> ctop,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> climit,2); ?></td>
+		  <td><?php echo __get_rupiah($v -> rcvb,2); ?></td>
+		  <td><?php echo ($v -> cspecial == 0 ? 'NO' : 'YES'); ?></td>
+		  <td>
+				<?php if (__get_roles('CustomersExecute')) : ?>
+              <a href="<?php echo site_url('customers/customers_update/' . $v -> cid); ?>"><i class="icon-pencil"></i></a>
+                <?php endif; ?>
+				<?php if (__get_roles('CustomersExecute')) : ?>
+              <a href="<?php echo site_url('customers/customers_delete/' . $v -> cid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
+                <?php endif; ?>
+          </td>
 										</tr>
         <?php endforeach; ?>
                                     </tbody>

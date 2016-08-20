@@ -94,20 +94,22 @@ class Home extends MY_Controller {
 							$this -> receiving_model -> __update_receiving_item($k,array('rqty' => $v));
 							if ($app == 1) {
 								$iid = $this -> receiving_model -> __get_receiving_item_detail($k);
-								
-								$iv = $this -> receiving_model -> __get_inventory_detail($k,1,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($k,$this -> memcachedlib -> sesresult['ubid'],1,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+								if (isset($iid[0] -> riid)) {
+									$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,1,$this -> memcachedlib -> sesresult['ubid']);
+									$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],1,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+								}
 							}
 						}
-						
+
 						$iid2 = 0;
 						foreach($items2 as $k => $v) {
 							$this -> receiving_model -> __update_receiving_item($k,array('rqty' => $v));
 							if ($app == 1) {
 								$iid = $this -> receiving_model -> __get_receiving_item_detail($k);
-								
-								$iv = $this -> receiving_model -> __get_inventory_detail($k,2,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($k,$this -> memcachedlib -> sesresult['ubid'],2,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+								if (isset($iid[0] -> riid)) {
+									$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,2,$this -> memcachedlib -> sesresult['ubid']);
+									$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+								}
 							}
 						}
 
