@@ -45,12 +45,17 @@ minLength: 1,
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Delivery Order </h2>
+						
+						
                     </div>
                 </div>
 
                 <hr />			
 			 	
-					<form method="POST" action="?search=1" class="form-horizontal" >
+				
+			<div class="row">
+			<div class="col-lg-12">
+				<form method="POST" action="?search=1" class="form-horizontal" >
 						<input  name="cid" type="hidden" id="theCid" />
 						<div class="row">
 							<div class="col-lg-8">
@@ -59,14 +64,13 @@ minLength: 1,
 										Customer <input name="cname" type="text" id="search" class="form-control" />
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad" >
+									
 								</div>
 							</div>
 							</div>
 						</div>
-					</form>
+					
 
-				<form method="POST" action="?search=1" class="form-horizontal" >
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -74,19 +78,17 @@ minLength: 1,
 									Reff No.<input type="text" name="sreff" class="form-control"  >
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									
 								</div>
 							</div>
 						</div>
 					</div>
-			   </form>
-
-				<form method="POST" action="?search=1" class="form-horizontal" >
+			 
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
 								<div class="col-lg-6">
-								   Status <select name="sisa" class="form-control">
+								   Status<select name="sisa" class="form-control">
 								   <option value="x">ALL</option>
 								   <option value="1">Active</option>
 								   <option value="0">Done</option>
@@ -94,13 +96,16 @@ minLength: 1,
 								</div>
 								<div class="col-lg-2">
 									<br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									<input type="submit" value="Search" class="btn btn-default btn-grad">
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>		
+				</form>
 					<br />
+			   </div>
+            </div><br>
+			
                
 	<?php echo __get_error_msg(); ?>
             <div class="row">
@@ -108,6 +113,13 @@ minLength: 1,
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Delivery Order
+							                <div class="searchTable">
+                <form action="<?php echo current_url();?>" method="post">
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
+                        <span id="sg1"></span>
+                </form>
+                </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -115,7 +127,7 @@ minLength: 1,
                                     <thead>
                                         <tr>
         
-          <th>Reff. No.</th>
+          <th>Reff No.</th>
 		  <th>SO No.</th>
           <th>Date</th>
           <th>Customer</th>

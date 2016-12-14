@@ -16,13 +16,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Services </h2>
+                        <h2> Service Work Order </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('ServicesWOExecute')) : ?>
-                <a href="<?php echo site_url('services_wo/services_wo_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Service</a>
+                <a href="<?php echo site_url('services_wo/services_wo_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Service Work Order</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,10 +31,10 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Services
+                            Service Work Order
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="No." name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sLeft"><input type="text" placeholder="Search !!!" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>

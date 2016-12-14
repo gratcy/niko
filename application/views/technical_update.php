@@ -6,7 +6,7 @@ $phone = explode('*', $detail[0] -> tphone);
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Technical Update</h1>
+                    <h1 class="page-header">Technician Update</h1>
                 </div>
             </div>
 <div class="row">
@@ -14,7 +14,7 @@ $phone = explode('*', $detail[0] -> tphone);
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Technical Update</h5>
+            <h5>Technician Update</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>

@@ -217,6 +217,14 @@ $addr = explode('*', $detail[0] -> caddr);
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Customer Commission</label>
+
+                    <div class="col-lg-4">
+                      <?php echo $customer_check; ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Delivery</label>
 
                     <div class="col-lg-4">

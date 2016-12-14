@@ -4,8 +4,8 @@
 <tr>
 <th>Code</th>
 <th>Name</th>
-<th>Group</th>
-<th>QTY</th>
+<th>Group Product</th>
+<th>QTY Service</th>
 <?php if ($report != 1) : ?>
 <th></th>
 <?php endif; ?>

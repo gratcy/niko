@@ -295,16 +295,17 @@ $tampil=mysqli_query($con,$sql);
 
 	
 <p align="center">
-<table class="gridtablex" align="center" border="0" width="900">
+<table class="gridtablex" align="center" border="0" width="800">
   
   
 
 <tbody><tr>
-<td rowspan="2" colspan="6" align="center">
+<td  colspan="6" align="center">
 <h1>DELIVERY ORDER</h1></td>
 </tr>
 <tr>
-<td></td><td></td>
+<td  colspan="6" align="center">
+&nbsp;</td>
 </tr>
 
 
@@ -314,21 +315,21 @@ $tampil=mysqli_query($con,$sql);
 
 
 <tr>
-<td align="left" width="10%"><b>Reff No.</b></td><td width="20%"><?=$detailx[0]->sreff;?></td>
-<td width="10%"></td><td  valign="top" width="30%"></td>
+<td align="left" width="5%"><b>Reff No.</b></td><td width="20%"><?=$detailx[0]->sreff;?></td>
+<td width="10%"></td><td  valign="top" width="20%"></td>
 
 
-<td align="left" width="10%"><b>Sales</b></td><td align="left" width="20%">
+<td align="left" ><b>Sales</b></td><td align="left" width="30%">
 <?php echo $detailx[0]->sname; ?></td>
 </tr>
 
 
 <tr>
-<td align="left" width="10%"><b>DO No.</b></td><td width="20%"><?= $detailx[0]->snodo; ?></td>
+<td align="left" width="5%"><b>DO No.</b></td><td width="20%"><?= $detailx[0]->snodo; ?></td>
 <td width="10%"></td><td rowspan="4" valign="top" width="30%"></td>
 
 
-<td align="left" width="10%"><b>Driver</b></td><td align="left" width="20%">
+<td align="left" width="16%" ><b>Driver</b></td><td align="left" width="20%">
 						
 <?php echo $drv[0]; ?></td>
 
@@ -336,17 +337,17 @@ $tampil=mysqli_query($con,$sql);
 <tr>
 
 </tr><tr>
-<td align="left" width="10%"><b>Date</b></td><td width="20%"><?=date('d/m/Y',strtotime($detailx[0]->stgldo));?></td>
+<td align="left" width="5%"><b>Date</b></td><td width="20%"><?=date('d/m/Y',strtotime($detailx[0]->stgldo));?></td>
 <td width="10%"></td>
 <td align="left"><b>A. Driver</b></td><td align="left"><?php echo $drv[1]; ?></td>
 </tr>
 <tr>
-<td align="left" width="10%"><b>Customer</b></td><td width="20%" ><?=$detailx[0]->cname;?></td>
+<td align="left" width="5%"><b>Customer</b></td><td width="20%" ><?=$detailx[0]->cname;?></td>
 <td width="10%"></td>
 <td align="left"><b>Car Number</b></td><td align="left"><?php echo $detailx[0]->snopol; ?></td>
 </tr>
-<tr><td align="left" width="10%"><b>Address</b></td><td width="20%"><?php echo trim($caddr[0]).' , '.$detailx[0]->ccity; ?></td>
-<td width="10%"></td><td rowspan="3" valign="top" width="30%"></td>
+<tr><td align="left" width="10%"><b>Address</b></td><td width="50%" colspan=4 ><?php echo trim($caddr[0]).' , '.$detailx[0]->ccity; ?></td>
+<td rowspan="2" valign="top" width="30%"></td>
 </tr>
 <tr>
 
@@ -363,7 +364,7 @@ $tampil=mysqli_query($con,$sql);
 	
 <div class="gridtable" align=center >
 
-							                                <table class="gridtable" border="1" width="900">
+							                                <table class="gridtable" border="1" width="800">
 	
 	
 
@@ -411,7 +412,7 @@ $qtc= number_format($qtycoly,2,'.',',');
           
           <td><?=$data['pcode'];?></td>
           <td><?=$data['pname'];?></td>
-		  <td align=center ><?echo str_replace('.00','',$qtc);?></td>
+		  <td align=center ><?=round($qtycoly,2);?></td>
           <td align=center ><?=$data['sqty'];?></td>
 	
 		  </tr>
@@ -467,7 +468,7 @@ $pg=$pg+1;
                                     </tbody>
                                 </table>
 <br>
-<table align=center class="gridtable" width="900px">
+<table align=center class="gridtable" width="800px">
 <tbody><tr>
 	<th valign="top" width="20%">H. WAREHOUSE <br><br><br><br><br></th><th valign="top" width="20%">A. WAREHOUSE</th>
 	<th valign="top" width="20%">DRIVER</th><th valign="top" width="20%">A. DRIVER</th><th valign="top" width="20%">CUSTOMER</th>

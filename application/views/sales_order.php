@@ -77,14 +77,13 @@
 										Customer <input name="cname" type="text" id="search" class="form-control" />
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad" >
+									
 								</div>
 							</div>
 							</div>
 						</div>
-					</form>
+					
 
-				<form method="POST" action="?search=1" class="form-horizontal" >
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -92,14 +91,12 @@
 									Reff No.<input type="text" name="sreff" class="form-control"  >
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									
 								</div>
 							</div>
 						</div>
 					</div>
-			   </form>
-
-				<form method="POST" action="?search=1" class="form-horizontal" >
+			 
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -113,7 +110,7 @@
 								</div>
 								<div class="col-lg-2">
 									<br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									<input type="submit" value="Search" class="btn btn-default btn-grad">
 								</div>
 							</div>
 						</div>
@@ -148,7 +145,7 @@
 	<!--
 			  <th>Branch</th>
 	-->			
-			  <th>Reff. No.</th>
+			  <th>Reff No.</th>
 			  <th>SO No.</th>    
 			  <th>Date</th>
 			  <th>Expiry Date</th>
@@ -162,11 +159,13 @@
 										</thead>
 										<tbody>
 			  <?php
+			  // echo '<pre>';
+			  // print_r($sales_order);
 			  foreach($sales_order as $k => $v) :
 			  ?>
 											<tr>
 	<!--
-			  <td><?php echo $v -> bname; ?></td>
+			  <td><?php echo $v -> bname; ?>-<?php echo $v -> sid;?></td>
 	-->
 			  <td><?php echo $v -> sreff; ?></td>
 			  <td><?php echo $v -> snoso; ?></td>      
@@ -188,9 +187,12 @@
 			  $st="Delete";
 			  }if($sstatus==3){
 			  $st="Approved";
-			  }if($v -> dstatus==3){
+			  }
+			  
+			  if($v -> ssisa==0){
 			  $st="Done";
 			  }
+			  //echo $v -> ssisa;
 			  echo $st; ?></td>
 			
 			

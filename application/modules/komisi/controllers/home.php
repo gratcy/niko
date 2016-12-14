@@ -14,27 +14,22 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> komisi_model -> __get_komisi(),3,10,site_url('komisi'));
-			$view['komisi'] = $this -> komisi_model -> __get_komisi();
-			$view['pages'] = $this -> pagination_lib -> pages();
-
-		//}
-		// if(!isset($_POST['approve'])){$_POST['approve']="";}
-		// if($_POST['approve']=='1'){
-			// $id=$this -> input -> post('id', TRUE);
-			// $arr=array('sstatus' => '3');
-			// $this -> pembayaran_model -> __update_pembayaran($id, $arr);
-			
-			   // $scid=$_POST['scid'];
-				// $limit=$_POST['sisaplafon_after'];
-				// $arrl = array('climit' => $limit);
-					// $this -> customers_model -> __update_customers($scid, $arrl);			
+		// $pager = $this -> pagination_lib -> pagination($this -> komisi_model -> __get_komisi(),3,10,site_url('komisi'));
+		// $view['komisi'] = $this -> komisi_model -> __get_komisi();
+		// $view['pages'] = $this -> pagination_lib -> pages();
 		
-		// }
-		//print_r($view);
+		
+		$pager = $this -> pagination_lib -> pagination($this -> komisi_model -> __get_komisi(),3,10,site_url('komisi'));
+		//$view['komisi'] = $this -> pagination_lib -> paginate();
+		$view['komisi'] = $this -> komisi_model -> __get_komisi();
+		$view['komisi_all'] = $this -> komisi_model -> __get_komisi_all();
+		$view['pages'] = $this -> pagination_lib -> pages();		
 		
 		$this->load->view('komisi', $view);
-		}
-		}
+	}
+
+
+	
+}
 		
-		?>
+?>

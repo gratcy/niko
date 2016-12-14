@@ -51,5 +51,29 @@ class komisi_model extends CI_Model {
 		//$this -> db -> select('sssid, tamount FROM delivery_order_detail_tab '  );
 		return $sql -> result();
 	}		
+
+
+	function __get_komisi_all() {
+		
+	$sql = $this -> db -> query("SELECT *,
+(SELECT ccid FROM customers_tab WHERE customers_tab.cid=delivery_order_detail_tab.scid)AS ccidd,	
+(SELECT sname FROM sales_tab WHERE sales_tab.sid=delivery_order_detail_tab.sssid)AS sname,
+(SELECT pname FROM products_tab WHERE products_tab.pid=delivery_order_detail_tab.spid)AS pname,
+(SELECT pcode FROM products_tab WHERE products_tab.pid=delivery_order_detail_tab.spid)AS pcode,
+(SELECT pcid FROM products_tab WHERE products_tab.pid=delivery_order_detail_tab.spid)AS pcid,
+(SELECT 
+(SELECT cname FROM categories_tab WHERE products_tab.pcid=categories_tab.cid)
+ FROM products_tab WHERE products_tab.pid=delivery_order_detail_tab.spid)AS catname,
+(SELECT stypepay FROM sales_order_tab WHERE sales_order_tab.sid=delivery_order_detail_tab.ssid)AS stypepay,
+(SELECT ccat FROM customers_tab WHERE customers_tab.cid=delivery_order_detail_tab.scid)AS ccat,
+(SELECT cname FROM customers_tab WHERE customers_tab.cid=delivery_order_detail_tab.scid)AS cname,
+(SELECT DATEDIFF(sdate_lunas,stgl_invoice)) AS days
+ FROM delivery_order_detail_tab WHERE sno_invoice IS NOT NULL   ");	
+//AND sssid='13' 
+//AND sdate_pay BETWEEN '2016-01-05' AND '2016-05-30'	
+	
+		//$this -> db -> select('sssid, tamount FROM delivery_order_detail_tab '  );
+		return $sql -> result();
+	}
 	
 }

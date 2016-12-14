@@ -83,7 +83,8 @@ $caddrx=explode("*",$detailx[0]->caddr);
 <td width="20%" align=left><b>Salesman</b></td><td  ><?php echo $detailx[0]->sname; ?></td><td></td>
 </tr>
 	<?php 
-		
+	
+
 		$ccats= $detailx[0] ->ctyperetur; 
 		if($ccats==0){
 			$cname="Tukar Barang";

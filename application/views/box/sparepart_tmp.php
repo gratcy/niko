@@ -1,10 +1,10 @@
-<h3>List Sparepart</h3>
+<h3>List Spareparts</h3>
 <table class="table table-bordered">
 <thead>
 <tr>
 <th>Group Product</th>
 <th>Name</th>
-<th>QTY</th>
+<th>QTY Request</th>
 <?php if ($report != 1) : ?>
 <th></th>
 <?php endif; ?>

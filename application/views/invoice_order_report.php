@@ -55,7 +55,7 @@ minLength: 1,
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Invoice Order </h2>
+                        <h2>Invoice</h2>
                     </div>
                 </div>
 
@@ -70,24 +70,29 @@ minLength: 1,
 	<?php if($_POST['xexcel']=="Excel"){		}else{ ?>				
 						<form method="POST">
 						<table>
-						<tr><td style="width:150px">Invoice No</td><td><input size=16 type=text name="sno_invoice" class="form-control"></td></tr>
-						<tr><td>Sales</td><td >
-						<select name="ssid" data-placeholder="Sales" class="form-control"  >
-						<?php echo $sales; ?>
-						</select>
-						</td></tr>
+						<tr><td style="width:150px">Invoice No.</td><td><input size=16 type=text name="sno_invoice" class="form-control"></td></tr>
+						
 						<tr><td>Customer</td><td><input size=16 type=text name="scidx" id="search" class="form-control" >
 						
 						<div style="display: none;">
 						<input type="text" name="scid" id="theCid" class="form-control" >
 						</div></td></tr>
+
+
+
+						<tr><td>Sales</td><td >
+						<select name="ssid" data-placeholder="Sales" class="form-control"  >
+						<?php echo $sales; ?>
+						</select>
+						</td></tr>
+						
 						<tr><td>Status</td><td><select name="pstatus" class="form-control">
 						<option value="0">Pending &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						</option>
-						<option value="3">Paid</option>
+						</option>						
 						<option value="4">Due date</option>
 						<option value="5">Over date</option>
+						<option value="3">Paid</option>
 						</select>
 						</td></tr>
 						<tr><td>Period</td><td>
@@ -111,7 +116,7 @@ minLength: 1,
           <!--th>Branch</th-->
 		  <th>Reff No.</th>
           <th>DO No.</th>
-		  <th>Inv No.</th>         
+		  <th>Invoice No.</th>         
           <th>Inv Date</th>
 		  <th>Customer </th>
           <th>Sales</th>
@@ -164,8 +169,8 @@ minLength: 1,
      $datediff = $now - $your_date;
      $numberDaysa= floor($datediff/(60*60*24));
 
-if(($numberDaysa>=-2)&&($numberDaysa<=0)){$stt= "DUE DATE";}	
-else if($numberDaysa>0){ $stt= "OVER DATE";}
+if(($numberDaysa>=-2)&&($numberDaysa<=0)){$stt= "Due Date";}	
+else if($numberDaysa>0){ $stt= "<font color=red >Over Date</font>";}
 		  }
 		  echo $stt;?></td>
 		<td><?php 

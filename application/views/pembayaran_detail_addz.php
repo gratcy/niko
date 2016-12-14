@@ -123,6 +123,7 @@ if($jpr==0){
 
                     <div class="col-lg-4">
 				<input type=text value="<?php echo __get_date(strtotime($detailx[0]->pdate),1); ?>" class="form-control" disabled>
+				
                     </div>   							
                 </div>
 

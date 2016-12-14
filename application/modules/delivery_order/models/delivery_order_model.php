@@ -8,6 +8,46 @@ class delivery_order_model extends CI_Model {
 		$this -> db -> select('bid,bname FROM sales_order_tab WHERE sstatus=1 ORDER BY bname ASC');
 		return $this -> db -> get() -> result();
 	}
+
+
+	function __get_search($keyword) {
+		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+		}
+
+		if($_POST['sreff']==""){ 
+			$wsreff="";
+		}else{
+			$wsreff=" and sreff = '".$_POST['sreff']."' ";
+		}
+		if($_POST['sisa']=="x"){ 
+			$wsisa="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and ssisa = '0' ";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and ssisa > '0' ";
+		}		
+		$this -> db -> select(" *,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid)as bname,
+		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid)as cname,
+        (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
+        (select sum(ssisa) from sales_order_detail_tab where sales_order_detail_tab.ssid=sales_order_tab.sid $wsisa )as sisa
+		FROM sales_order_tab, sales_order_detail_tab,customers_tab WHERE (sales_order_tab.sstatus=3) AND 
+		sales_order_detail_tab.ssid=sales_order_tab.sid  
+ AND (sales_order_tab.sreff LIKE '%".$keyword."%' OR sales_order_tab.snoso LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
+		AND customers_tab.cid=sales_order_tab.scid ORDER BY sales_order_tab.sid  DESC");
+		return $this -> db -> get() -> result();
+		
+		
+		
+		
+	}
 	
 	function __get_sales_order() {
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
@@ -99,7 +139,8 @@ return $this -> db -> get() -> result();
 	function __get_do_list($id) {
 		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
 		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
-		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
+		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,	
+        (select (select sreff from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sreff,			
 		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
@@ -168,6 +209,28 @@ return $this -> db -> get() -> result();
 		
 	}
 
+
+	function __get_inv_list_search($keyword) {
+		$sbid= $this -> memcachedlib -> sesresult['ubid'];
+		//$sbid=2;
+
+		
+		$this -> db ->SELECT (" *,sales_order_tab.sduration as sdur, delivery_order_detail_tab.sid as sid,delivery_order_detail_tab.ssid as ssid,(select stypepay from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as stypepay,
+		(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
+		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
+		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,		
+		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
+		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
+		(select sales_order_tab.sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
+		FROM delivery_order_detail_tab,sales_order_tab,customers_tab WHERE (delivery_order_detail_tab.sid=0) 
+        AND sales_order_tab.sid=delivery_order_detail_tab.ssid	and sales_order_tab.sbid='$sbid' 
+		AND delivery_order_detail_tab.sno_invoice<>'' AND customers_tab.cid=sales_order_tab.scid
+		AND (sales_order_tab.sreff LIKE '%".$keyword."%' OR sales_order_tab.snoso LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
+		ORDER BY did DESC");
+		
+		return $this -> db -> get() -> result();	
+	}		
+	
 	function __get_inv_list() {
 		$sbid= $this -> memcachedlib -> sesresult['ubid'];
 		//$sbid=2;

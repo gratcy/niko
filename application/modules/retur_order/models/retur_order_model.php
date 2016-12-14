@@ -58,7 +58,7 @@ class retur_order_model extends CI_Model {
 		// retur_order_detail_tab.ssid=retur_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY retur_order_detail_tab.ssid 
 		// ORDER BY retur_order_tab.sid  DESC';		die;
 		
-		$this -> db ->SELECT (' *,
+		$this -> db ->SELECT (' *,retur_order_tab.sid as sid,
 		(select sum(sprice*saccept) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid ) as totretur,
 		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,

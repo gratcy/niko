@@ -1,4 +1,4 @@
-<h3>List Technical</h3>
+<h3>List Technicians</h3>
 <table class="table table-bordered">
 <thead>
 <tr>

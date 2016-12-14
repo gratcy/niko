@@ -96,8 +96,10 @@ $pbadd = explode('*',$pbadd);
         </div>
         <!-- END PAGE CONTENT -->
 <script type="text/javascript">
+<?php if (__get_roles('ExecuteAllBranchPurchaseOrder') <> 1) : ?>
 $('select[name="pbid"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
 $('#pbranch').css('display','none');
+<?php endif; ?>
 $('select[name="pbid"]').change(function(){
 	$.post( "<?php echo site_url('purchase_order/home/branch_address');?>", { pbid: $(this).val() }).done(function( data ) {
 		$('input[name="pgudang"]').val(data);

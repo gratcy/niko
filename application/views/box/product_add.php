@@ -14,16 +14,16 @@
 <body>
 <div style="padding:10px;width: 99%;">
 <section class="content-header">
-<h1>Add product</h1>
+<h1>Add Product</h1>
 </section>
 	<?php echo __get_error_msg(); ?>
                     <div class="row">
 						<form action="<?php echo site_url('services_wo/product_search/' . $type); ?>" method="post">
 						<input type="hidden" name="type" value="<?php echo $type; ?>">
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-1" style="float:left;">Name/Code</label>
+                    <label for="text1" class="control-label col-lg-1" style="float:left;">Code/Name</label>
                         <div class="col-xs-6">
-                        <input type="text" style="width:200px!important;display:inline!important;" placeholder="Name/Code" name="keyword" class="form-control" autocomplete="off" />
+                        <input type="text" style="width:200px!important;display:inline!important;" placeholder="Search !!!" name="keyword" class="form-control" autocomplete="off" />
                         <button class="btn text-muted text-center btn-danger" type="submit">Go!</button>
                         <span id="sg1"></span>
                         <input type="hidden" name="id" />
@@ -40,7 +40,8 @@
 <th style="width:50px;"></th>
 <th>Code</th>
 <th>Name</th>
-<th>Group</th>
+<th>Group Product</th>
+<th>Stock</th>
 </tr>
 </thead>
 <tbody>
@@ -50,6 +51,7 @@
 <td><?php echo $v -> pcode; ?></td>
 <td><?php echo $v -> pname; ?></td>
 <td><?php echo $v -> cname; ?></td>
+<td><?php echo $v -> istock; ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

@@ -1,6 +1,0 @@
-http://localhost/dist/sales_order_detail/home/delivery_order_add/16/2  -->add new sub do
-http://localhost/dist/delivery_order/home/delivery_order_sub/16/123 -->list sub
-
-http://localhost/dist/sales_order_detail/home/delivery_order_details_add/18/2 -->add/edit item detail do
-
-http://localhost/dist/sales_order_detail/home/delivery_order_details/18/2/123-->hasi list do yg diinput

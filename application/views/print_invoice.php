@@ -223,6 +223,7 @@ table.gridtablex td {
  
  
 <?php   
+$noto=0;
 function Terbilang($satuan){  
 $huruf = array ("", "satu", "dua", "tiga", "empat", "lima", "enam",   
 "tujuh", "delapan", "sembilan", "sepuluh","sebelas");  
@@ -275,7 +276,7 @@ $mysql_password = $password;
 $mysql_database = $database;
 $con=mysqli_connect($mysql_server, $mysql_login, $mysql_password,$mysql_database);
 
-$jum_baris="6";
+$jum_baris="5";
 $ttqty=0;
 $pg=0;	
 $sqlx="SELECT a.*,b.*,c.sqty AS dqty  FROM sales_order_detail_tab a,products_tab b, delivery_order_detail_tab c WHERE   
@@ -322,14 +323,14 @@ $tampil=mysqli_query($con,$sql);
 
 	
 <p align="center">
-<table class="gridtablex" align="center" border="0" width="900">
+<table class="gridtablex" align="center" border="0" width="800" >
   
   
 
 <tbody><tr>
 <td rowspan="2" colspan="6" align="center">
-<br>
-<h1>INVOICE ORDER</h1>
+
+<font size=4 ><b>INVOICE ORDER</b></font>
 
 </td>
 </tr>
@@ -341,7 +342,7 @@ $tampil=mysqli_query($con,$sql);
 
 <tr>
 <td align="left" width="10%"><b>Do No.</b></td><td width="30%"><?php echo $detailx[0]->snodo; ?>&nbsp;(<?php echo $detailx[0]->sreff; ?>)</td>
-<td width="10%"></td><td rowspan="5" valign="top" width="30%"></td>
+<td width="10%"></td><td rowspan="5" valign="top" width="5%"></td>
 
 
 <td align="left" width="20%"><b>Invoice No.</b></td><td align="left" width="20%">
@@ -381,10 +382,10 @@ $tampil=mysqli_query($con,$sql);
 </tr>
 
 <tr>
-<td align="left" width="10%"><b>Address</b></td><td width="30%"><?php 
+<td align="left" width="10%"><b>Address</b></td><td width="30%" colspan=2  ><?php 
 $caddr=explode("*",$detailx[0]->caddr);
-echo $caddr[1].' , '.$detailx[0]->ccity; ?></td><td width="10%"></td>
-<td align="left"><b>Due Date</b></td><td align="left"><?php 
+echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
+<td align="left" valign=top ><b>Due Date</b></td><td align="left" valign=top ><?php 
 $dy=$detailx[0]->sdurationx;
 //echo $detailx[0]->stgl_invoice;
 echo date('d/m/Y',strtotime($detailx[0]->stgl_invoice ." + $dy day"));
@@ -407,7 +408,7 @@ echo date('d/m/Y',strtotime($detailx[0]->stgl_invoice ." + $dy day"));
 	
 <div class="gridtable" align=center >
 
-<table class="gridtable" border="1" width="900">
+<table class="gridtable" border="1" width="800">
 	
 	
 
@@ -415,20 +416,21 @@ echo date('d/m/Y',strtotime($detailx[0]->stgl_invoice ." + $dy day"));
                                         <tr>
           
           <th width="11%">Code</th>
-          <th width="35%">Name</th>
-          <th width="10">Qty/ Coly</th>
-	  <th width="10">Qty/ Pcs</th>
-          <th width="9%">Normal Price</th>
-          <th>Promo Discount </th>
-		  <th>Payment Discount </th>
+          <th width="30%">Name</th>
+          <th width="5%">Qty/ Coly</th>
+	  <th width="5%">Qty/ Pcs</th>
+          <th width="11%">Normal Price</th>
+          <th width="5%">Promo Disc </th>
+		  <th width="5%" >Payment Disc </th>
 		  <th width="10%">Net Price </th>
-		  <th width="16%">Total</th>
+		  <th width="12%">Total</th>
                                         </tr>
                                     </thead>
 	
   
 
 <?php
+ if(!isset($totr)){$totr=0;}
 $r=0;$rt=0;
 $jjx=0;
 $stot=0;
@@ -493,7 +495,7 @@ if(!isset($qtyy)){$qtyy=0;}
 	$rr=2;
 	$pjs=0;
 	$pjs=strlen($data[7]);
-
+   
 	$tnet=0;
 	$tot_brutto=0;
 	$tot_netto =0;
@@ -505,8 +507,8 @@ if(!isset($qtyy)){$qtyy=0;}
 }
 
 $f=(8-($r+$rt))/3;
-//echo $f;
 for($z=0;$z<$f;$z++){
+
 ?>
               <tr>
           
@@ -536,7 +538,7 @@ $pg=$pg+1;
           <th></th>
 		  <th></th>
 		  <th></th>		  
-          <th align="right">Rp. <?=number_format($stotz);?></th>
+          <th align="right"><?=number_format($stotz);?></th>
 		 </tr>		
          <tr>          
           <td align="center">PPN</td>
@@ -547,11 +549,15 @@ $pg=$pg+1;
 		$totalppn=0;	
 		$totalall= $stotx;
 		echo "0%";
+		$totr=$totalall;
 		}else{
 		$totalppn=$stotz * 10/100;	
+		//$totalall= $stotz + $totalppn;
 		$totalall= $stotz + $totalppn;
 		echo "10%";
+		$totr=$totr+$totalall;
 		}
+		
 		 ?> 
 		  
 		  
@@ -566,9 +572,26 @@ $pg=$pg+1;
 		  <td></td>
 		  <td></td>
 		  <td></td>
-          <td align="right"> <?=__get_rupiah($totalppn);?>		  </td>
+          <td align="right"> <?php //echo__get_rupiah($totalppn);?>
+		  <?=number_format($totalppn);?>		  </td>
 		 </tr>			
          <tr>          
+          <th><?php if($totalppn>0){ ?>TOTAL<?php }?>&nbsp;</th>
+          <th></th>
+          <th></th>
+          <th><?php if($totalppn>0){ ?><?=$qtyy;}?></th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
+          <th align="right"><?php if($totalppn>0){ ?> <?=number_format($totalall); } ?></th>
+		 </tr>		
+
+         <tr> 
+<?php 
+$noto=$noto+1;  
+if($noto==$jum_page){ 
+?>      
           <th>TOTAL</th>
           <th></th>
           <th></th>
@@ -577,20 +600,49 @@ $pg=$pg+1;
 		  <th></th>
 		  <th></th>
 		  <th></th>
-          <th align="right">Rp. <?=number_format($totalall);?></th>
-		 </tr>		
-
+          <th align="right"> <?=number_format($totr);?></th>
+		 </tr>		 
+		 
+		 
+		 
 		 <tr>          
           <th>Terbilang</th>
 
-          <td align=center colspan=8 ><b><?php echo terbilang($totalall). 'rupiah'; ?></b></td>
-		 </tr>	
+          <td align=center colspan=8 ><b><?php echo terbilang($totr). 'rupiah'; ?></b></td>
+		 </tr>
+
+<?php } else{?>
+
+          <th>&nbsp;</th>
+          <th></th>
+          <th></th>
+          <th>&nbsp;</th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
+          <th align="right"> &nbsp;</th>
+		 </tr>		 
+		 
+		 
+		 
+		 <tr>          
+          <th>Terbilang</th>
+
+          <td align=center colspan=8 ><b><?php echo terbilang($stotz). 'rupiah'; ?></b></td>
+		 </tr>
+
+
+<?php } ?>
+
+
+		 
 		 
                                     </tbody>
                                 </table>
-<br>
+
 <p align=center>
-<table align=center  border=0 width="900px">
+<table align=center  border=0 width="800px">
 
 
 <tr>
@@ -598,7 +650,7 @@ $pg=$pg+1;
 
 <td colspan=2 rowspan=3 width=60%  valign=top >
 <font  face="arial" size="2px">
-Notes:<br><br>
+Notes:<br>
  Pembayaran dengan giro / cheque yang tidak diatas namakan rekening perusahaan kami, BUKAN MENJADI TANGGUNG JAWAB KAMI.
 <br><br>
 
@@ -625,7 +677,7 @@ if($_GET['ox']==1){?>
 
 <tr>
 	<td>
-	<input type=hidden name="dototal" value="<?php echo $totalall; ?>">
+	<input type=hidden name="dototal" value="<?php echo $totr; ?>">
 	<input type=hidden name="snodo" value="<?php echo $detailx[0]->snodo; ?>">
 	<input type=hidden name="scid" value="<?php echo $detailx[0]->scid; ?>">
 	<input type=submit name="pst" value="POSTING" ></td>

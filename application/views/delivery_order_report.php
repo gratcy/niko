@@ -102,7 +102,7 @@ $drv=explode("-",$detailx[0]->driver);
 		$total=0;
 		$totalppn=0;
 		$totalall=0;
-		
+		//print_r($detail);
 		foreach($detail as $k => $v) :	
 			//print_r($v);
 			$sqtyx=$v -> sqty;

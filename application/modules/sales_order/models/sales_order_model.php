@@ -32,8 +32,9 @@ class sales_order_model extends CI_Model {
 		if($_POST['cid']==""){ 
 			$wcid="";
 		}else{
-			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+			$wcid=" and a.scid = '".$_POST['cid']."' ";
 		}
+
 
 		if($_POST['sreff']==""){ 
 			$wsreff="";
@@ -44,30 +45,58 @@ class sales_order_model extends CI_Model {
 			$wsisa="";
 			$wdo ="";
 			$wtabdo="";
-			$seldo="";
+				$seldo="(select d.dstatus from delivery_order_detail_tab d where d.ssid=a.sid and d.sid=0 limit 1)as dstatus,";
+		
 		}elseif($_POST['sisa']=='0'){
-			$wsisa=" and sales_order_tab.sstatus = '3' ";
-			$wtabdo="";
-			$seldo="";
+			$wsisa=" and a.sstatus = '3'  and b.ssisa>0 ";
+			$wtabdo=" ,sales_order_detail_tab ";
+				//$seldo="(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and  delivery_order_detail_tab.dstatus!='3' and delivery_order_detail_tab.sid=0 limit 1)as dstatus,";
+		$seldo="";
 		}elseif($_POST['sisa']=='1'){
 			
-			$wsisa=" and sales_order_tab.sstatus = '3' and delivery_order_detail_tab.dstatus='3' 
-			and delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 ";
+			$wsisa=" and a.sstatus = '3' and b.ssisa=0 ";
 			$wtabdo=" ,delivery_order_detail_tab ";
 			$seldo="(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,";
 		}elseif($_POST['sisa']=='2'){
 			$seldo="";
-			$wsisa=" and sales_order_tab.sstatus = '1' ";
+			$wsisa=" and a.sstatus = '1' and b.ssisa>0 ";
 			$wtabdo="";
 		}
-		return "SELECT *,
-		" .$seldo. "
-		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
-        (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname,
-		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname
-		FROM sales_order_tab ".$wtabdo." WHERE sstatus<>2 " .$wsreff.$wcid.$wsisa. " 
+		if($_POST['cid']==""){ 
+			$wcid="";
+			$seldox="";
+		}else{
+			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+			$seldox=" (select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus, ";
+		}	
+
+
+
+	
+/*
+		return " select distinct(a.sid),a.*,
+                (select sum(b.ssisa) from sales_order_detail_tab b where b.sid=a.ssid) as ssisa,
+		(select sname from sales_tab st where st.sid=a.ssid) as sname,
+		(select bname from branch_tab c where c.bid=a.sbid) as bname,
+		(select cname from customers_tab d where d.cid=a.scid) as cname
+		 from sales_order_tab a where 1 $wsisa $wcid  and a.sstatus!='2' order by a.sid desc";
+*/
 		
-		ORDER BY sales_order_tab.sid DESC";
+
+return " SELECT DISTINCT(a.sid),a.*,
+                SUM(b.ssisa) as ssisa,
+		(SELECT sname FROM sales_tab st WHERE st.sid=a.ssid) AS sname,
+		(SELECT bname FROM branch_tab c WHERE c.bid=a.sbid) AS bname,
+		(SELECT cname FROM customers_tab d WHERE d.cid=a.scid) AS cname
+		 FROM sales_order_tab a , sales_order_detail_tab b WHERE 1 $wsisa $wcid AND b.ssid=a.sid   AND a.sstatus!='2' AND ssisa>0 GROUP BY a.sid
+		  ORDER BY a.sid DESC ";
+		
+		
+		
+		
+		
+		
+		
 	}
 
 
@@ -81,8 +110,9 @@ class sales_order_model extends CI_Model {
 		if($_POST['cid']==""){ 
 			$wcid="";
 		}else{
-			$wcid=" and sales_order_tab.scid = '".$_POST['cid']."' ";
+			$wcid=" and a.scid = '".$_POST['cid']."' ";
 		}
+
 
 		if($_POST['sreff']==""){ 
 			$wsreff="";
@@ -93,29 +123,43 @@ class sales_order_model extends CI_Model {
 			$wsisa="";
 			$wdo ="";
 			$wtabdo="";
-			$seldo="";
+				$seldo="(select dstatus from delivery_order_detail_tab d where d.ssid=a.sid and d.sid=0 limit 1)as dstatus,";
+		
 		}elseif($_POST['sisa']=='0'){
-			$wsisa=" and sales_order_tab.sstatus = '3' ";
-			$wtabdo="";
-			$seldo="";
+			$wsisa=" and a.sstatus = '3'  and b.ssisa>0 ";
+			$wtabdo=" ,sales_order_detail_tab ";
+				//$seldo="(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and  delivery_order_detail_tab.dstatus!='3' and delivery_order_detail_tab.sid=0 limit 1)as dstatus,";
+		$seldo="";
 		}elseif($_POST['sisa']=='1'){
 			
-			$wsisa=" and sales_order_tab.sstatus = '3' and delivery_order_detail_tab.dstatus='3' 
-			and delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 ";
+			$wsisa=" and a.sstatus = '3' and b.ssisa=0 ";
 			$wtabdo=" ,delivery_order_detail_tab ";
 			$seldo="(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,";
 		}elseif($_POST['sisa']=='2'){
 			$seldo="";
-			$wsisa=" and sales_order_tab.sstatus = '1' ";
+			$wsisa=" and a.sstatus = '1' and b.ssisa>0 ";
 			$wtabdo="";
 		}
-		$this -> db ->SELECT (" *,
-		" .$seldo. "
-		(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname,
-        (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname,
-		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname
-		FROM sales_order_tab ".$wtabdo." WHERE sstatus<>2 " .$wsreff.$wcid.$wsisa. " ORDER BY sales_order_tab.sid DESC");
-		return $this -> db -> get() -> result();
+		if($_POST['cid']==""){ 
+			$wcid="";
+			$seldox="";
+		}else{
+			$wcid=" and a.scid = '".$_POST['cid']."' ";
+			$seldox=" (select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus, ";
+		}		
+
+
+		
+	$this -> db ->SELECT (" DISTINCT(a.sid),a.*,
+                SUM(b.ssisa) as ssisa,
+	(select sname from sales_tab st where st.sid=a.ssid) as sname,
+	(select bname from branch_tab c where c.bid=a.sbid) as bname,
+	(select cname from customers_tab d where d.cid=a.scid) as cname
+	 from sales_order_tab a, sales_order_detail_tab b where a.sid=b.ssid $wsisa $wcid  and a.sstatus!=2  group by a.sid order by a.sid desc");	
+	
+	return $this -> db -> get() -> result();
+		
+		
 	}
 
 

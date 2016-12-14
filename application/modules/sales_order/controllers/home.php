@@ -14,6 +14,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
+		if(!isset($_POST['cari'])){$_POST['cari']="";}
 		if(!isset($_GET['search'])){ $_GET['search']="";}
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
@@ -23,10 +24,12 @@ class Home extends MY_Controller {
 		}
 		else {
 			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order/home/index'));
-						if($_GET['search']=='1'){
-			$view['sales_order'] = $this -> sales_order_model -> __get_sales_orderz();	
-			}else{			
-			$view['sales_order'] = $this -> pagination_lib -> paginate();
+			if($_GET['search']=='1'){
+				//echo 'a';die;
+				$view['sales_order'] = $this -> sales_order_model -> __get_sales_orderz();	
+			}else{		
+//echo 'b';die;			
+				$view['sales_order'] = $this -> pagination_lib -> paginate();
 			}
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
@@ -43,9 +46,15 @@ class Home extends MY_Controller {
 				$this -> customers_model -> __update_customers($scid, $arrl);			
 		
 		}
+		if($_POST['cari']=='export excel'){
+			$kondisi=False;
+		}else{
+			$kondisi=True;
+		}
 		
+				
 		//print_r($view);die;
-		$this->load->view('sales_order', $view);
+		$this->load->view('sales_order', $view,$kondisi);
 	}
 	
 	function sales_order_add() {
@@ -128,6 +137,14 @@ class Home extends MY_Controller {
 		$view['password']=$this->db->password;
 		$view['database']=$this->db->database;
 		$this->load->view('source',$view,FALSE);
+	}
+
+	function source_sales() {
+		$view['hostname']=$this->db->hostname;
+		$view['username']=$this->db->username;
+		$view['password']=$this->db->password;
+		$view['database']=$this->db->database;
+		$this->load->view('source_sales',$view,FALSE);
 	}
 	
 	function sales_order_update($id,$scid) {

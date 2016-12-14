@@ -197,10 +197,14 @@ $this -> pembayaran_detail_model -> __bayar_lunas($pno_pm,$tots,$scid);//die;
 redirect(site_url('pembayaran/home'));
 }
 function pembayaran_detail_addz($scid,$pno_pm) {
+	
+	
 //PNO_PM di DETAIL == PMID pembayaran_tab
 		if($_POST) {
+			//print_r($_POST);die;
 		//echo $scid;die;	
 			if(!isset($_POST['rekto'])){$_POST['rekto']="";}
+			if(!isset($_POST['pdatee'])){$_POST['pdatee']="";}
 			if(!isset($_POST['accgiro'])){$_POST['accgiro']="";}
 			if(!isset($_POST['nogiro'])){$_POST['nogiro']="";}		
 			$pmid=$_POST['id'];			
@@ -229,26 +233,28 @@ function pembayaran_detail_addz($scid,$pno_pm) {
 				$date_custom="";
 			}
 			
-			
-			
-			
-			
-			
-			
+
 			
 			// $totinv=$_POST['a'][0];
 			// $totret=$_POST['c'][0];
 			// $tottag=$totinv-$totret;
+			//print_r($_POST);die;
+
+			$pbayar=explode("/",$_POST['pdatee']);
+			$pbayarx="$pbayar[2]-$pbayar[1]-$pbayar[0]";
 
 			if(!isset($_POST['b'])){ 
+			    //echo 'bbbx';die;
 				$_POST['b']="";$jum=0;
 				//$this -> pembayaran_detail_model -> __update_limit($snoro,$scid, $arrr);				
 				//}
 			}else{
+				//echo 'bbb';die;
 				$jum=count($_POST['b']);						
 				for($j=0;$j<$jum;$j++){				
 					$snoinv = $_POST['b'][$j];	
-					$sdate_pay=date('Y-m-d');			
+					//$sdate_pay=date('Y-m-d');	
+					$sdate_pay=$pbayarx;	
 					$arr = array('sdate_pay' => $sdate_pay,'pno_pm'=>$pno_pm );	
 					$this -> pembayaran_detail_model -> __update_invoice($snoinv, $arr);
 				}
@@ -378,7 +384,12 @@ echo $snoro;
 					//print_r($sumret);
 					$sinv=$suminv[0]->tamount;
 					$sret=$sumret[0]->sprice;
+					//$this -> pembayaran_detail_model -> __update_terima_ro($pno_pm, $sret,$scid);
+					if(!isset($_POST['addfirst'])){$_POST['addfirst']=0;}					
+					if($_POST['addfirst']==1){
 					$this -> pembayaran_detail_model -> __update_terima_ro($pno_pm, $sret,$scid);
+					}
+
 				$sumpending=$this -> pembayaran_detail_model -> __sum_bayar_pending($pno_pm);
 				$sumterima=$this -> pembayaran_detail_model -> __sum_bayar_terima($pno_pm);
 				
@@ -387,7 +398,7 @@ echo $snoro;
 				
 				$arp = array( 'ptotal_inv'=>$sinv,'ptotal_retur'=>$sret,'ptotal_tagihan'=>$piutang,
 				'ptotal_terima'=>$sterima,'ptotal_pending'=>$spending,'pstatus'=>'1','pnote'=>'');					
-				echo '<pre>';
+				//echo '<pre>';
 				//print_r($arp);die;
 				$this -> pembayaran_model -> __update_pembayaran($pno_pm, $arp);				
 				redirect(site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$scid.'/'.$pno_pm));
@@ -486,6 +497,19 @@ function pembayaran_terima($pmid,$cid,$pmdid,$amount,$pno_pm){
 		$view['scid']=$scid;
 		$this->load->view('sourcex',$view,FALSE);
 	}
+	
+	
+	function update_tglbayar() {
+		$view['hostname']=$this->db->hostname;
+		$view['username']=$this->db->username;
+		$view['password']=$this->db->password;
+		$view['database']=$this->db->database;
+		//$view['scid']=$scid;
+		$this->load->view('updatee',$view,FALSE);
+	}	
+	
+	
+	
 //---BEGIN DO-----	
 	
 	function delivery_order($id,$scid) {

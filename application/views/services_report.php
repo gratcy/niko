@@ -16,7 +16,7 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Services Report </h2>
+                        <h2> Service Report </h2>
                     </div>
                 </div>
 
@@ -31,10 +31,10 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Services Report
+                            Service Report
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="No. Work Order" name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sLeft"><input type="text" placeholder="Search !!!" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>
@@ -47,7 +47,7 @@ left:inherit!important;
                                         <tr>
           <th>WO No.</th>
           <th>Date</th>
-          <th>Desc</th>
+          <th>Description</th>
           <th>Status</th>
           <th style="width: 80px;"></th>
                                         </tr>

@@ -18,10 +18,13 @@ class Home extends MY_Controller {
 	function index() {
 		if(!isset($_GET['search'])){ $_GET['search']="";}
 		$keyword = $this -> input -> post('keyword');
+		$view['keyword'] = $keyword;
 		if ($keyword) {
-			$view['keyword'] = $keyword;
-			$view['pages'] = '';
-			$view['sales_order'] = '';
+			
+			
+			
+			//$view['pages'] = '';
+			$view['sales_order'] = $this -> delivery_order_model -> __get_search($keyword);
 		}
 		else {
 			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_sales_order(),3,10,site_url('delivery_order/home/index/'));
@@ -39,7 +42,7 @@ class Home extends MY_Controller {
 	function delivery_order_sub($id,$sbid) {
 		
 
-			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_do_list($id),3,10,site_url('delivery_order/home/delivery_order_details'));
+			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_do_list($id),3,10,site_url('delivery_order/home/delivery_order_sub/'.$id.'/'.$sbid.'/'));
 			$view['sales_order'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['id'] = $id;
@@ -50,6 +53,18 @@ class Home extends MY_Controller {
 	}
 
 	function invoice_order() {	
+	
+		if(!isset($_GET['search'])){ $_GET['search']="";}
+		$keyword = $this -> input -> post('keyword');
+		$view['keyword'] = $keyword;
+		if ($keyword) {
+			
+			//echo $keyword;//die;
+			
+			//$view['pages'] = '';
+			$view['sales_order'] = $this -> delivery_order_model -> __get_inv_list_search($keyword);
+		}else{	
+	
             $sbid= $this -> memcachedlib -> sesresult['ubid'];
 			if(!isset($_GET['search'])){ $_GET['search']="";}
 			//die;
@@ -66,7 +81,9 @@ class Home extends MY_Controller {
 			//$view['ssisa']=$this -> delivery_order_model -> __get_sisa_so($id);
 			$view['sbid'] = $sbid;			
 			//$view['headerx'] = $this->delivery_order_model -> __get_do_select($id);
+		}
 			$this->load->view('invoice_order', $view);
+		
 	}
 
 	function invoice_order_report() {	

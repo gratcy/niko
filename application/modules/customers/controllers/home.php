@@ -85,6 +85,7 @@ class Home extends MY_Controller {
 			$view['customer_check'] = $this -> categories_lib -> __get_categories_check('');
 			$view['branch'] = $this -> branch_lib -> __get_branch();
 			$view['sales'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
+			$view['customer_check'] = $this -> categories_lib -> __get_categories_check('');
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -92,6 +93,13 @@ class Home extends MY_Controller {
 	function customers_update($id) {
 		if ($_POST) {
 			$cid = serialize($this -> input -> post('cid', TRUE));
+<<<<<<< Updated upstream
+=======
+			// echo $cid;
+			// $uncid=unserialize($cid);
+			// echo '<pre>';
+			// print_r($uncid);die;
+>>>>>>> Stashed changes
 			$name = $this -> input -> post('name', TRUE);
 			$contactname = $this -> input -> post('contactname', TRUE);
 			$email = $this -> input -> post('email', TRUE);
@@ -133,7 +141,11 @@ class Home extends MY_Controller {
 				}
 				else {
 					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cstatus' => $status);
+<<<<<<< Updated upstream
 					if ($this -> customers_model -> __update_customers($id, $arr)) {	
+=======
+					if ($this -> customers_model -> __update_customers($id, $arr)) {
+>>>>>>> Stashed changes
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));
 					}

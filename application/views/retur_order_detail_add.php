@@ -76,7 +76,11 @@ minLength: 1,
             <h5>Return Order Detail Add <?php //echo "$id $scid";?></h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
-	<?php echo __get_error_msg(); ?>
+	<?php echo __get_error_msg(); 
+	
+	
+	if(!isset($_GET['tg'])){ $_GET['tg']="";}
+	?>
 
 
  <form  id="form1" name="myForm" class="form-horizontal" action="<?php echo site_url("retur_order_detail/home/retur_order_detail_add/$id/$scid"); ?>" method="post">
@@ -105,9 +109,16 @@ minLength: 1,
 				<input type=hidden value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>				
 				
 				
+				<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sending Date</label>
+
+                    <div class="col-lg-4">
+					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->scdate),1); ?>" class="form-control" disabled>
+                    </div>   							
+                </div>	
 				
 				<div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Date</label>
+                    <label for="text1" class="control-label col-lg-4">Receiving Date</label>
 
                     <div class="col-lg-4">
 					<input type=text value="<?php echo __get_date(strtotime($detailx[0]->stgl),1); ?>" class="form-control" disabled>
@@ -131,7 +142,7 @@ minLength: 1,
                 </div>  
 
 				
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Return Type</label>
 		<?php 
 		
@@ -144,18 +155,19 @@ minLength: 1,
 
 		?>
                     <div class="col-lg-4">
-                       	<!--input type=text  id="theNamecat" class="form-control" disabled-->
-						<input type=text   class="form-control" value="<?php echo $cname; ?>" disabled >
-						<input type=hidden  value="<?php echo $ccats; ?>" class="form-control" name="ccat" >
+                       	<!--input type=text  id="theNamecat" class="form-control" disabled>
+
 						
                     </div>
-                </div>					
+                </div-->					
 				
-		
+						
+						<input type=hidden  value="<?php echo $ccats; ?>" class="form-control" name="ccat" >
 		</td><td align=left width=600 >
 
-
+<?php if($_GET['tg']==""){?>
                <div class="form-group">
+			   
                     <label for="text1" class="control-label col-lg-4">Product</label>
 
                     <div class="col-lg-4">
@@ -163,7 +175,7 @@ minLength: 1,
 						<span id="confirmMessagea" style="float:left;"></span>
                     </div>
                 </div>	
-		
+	
 <input type=hidden  id="theId" class="form-control" name=spid  >
 						<input type=hidden  id="theStore" class="form-control" name="pricestore" >
 						<input type=hidden  id="theKey" class="form-control" name="pricekey" >
@@ -173,7 +185,7 @@ minLength: 1,
 						<input type=hidden  id="theConsume" class="form-control" name="priceconsume" >
 
 
-    
+ 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Qty/Pcs</label>
 
@@ -183,6 +195,8 @@ minLength: 1,
 						<span id="confirmMessagec" style="float:left;"></span>
                     </div>
                 </div>	
+				
+			
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Reject</label>
                     
@@ -194,9 +208,12 @@ minLength: 1,
                     <label for="text1" class="control-label col-lg-4">Notes</label>
                     <div class="col-lg-4">
 						<textarea name="notes" class="form-control"></textarea>
-                </div>
+                     </div>
                     
-                    </div>
+                 </div>
+				 
+				 
+<?php }?>					 
                 <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4"></label-->
 
@@ -208,11 +225,14 @@ minLength: 1,
                 <div class="form-group">
 					<label for="status" class="control-label col-lg-4"></label>
 					<div class="col-lg-4">
+					<?php if($_GET['tg']==""){?>
+					
 					<a class="btn text-muted text-center btn-primary" href="<?php echo site_url("retur_order/home/retur_order_update/$id/$scid"); ?>">
 					Edit Header	
 					</a>
                     
 				<button onclick="return validateForm();" class="btn text-muted text-center btn-danger" type="submit">Submit</button>	
+					<?php }?>
 				</div>
 				</div>
 				</td></tr></table>
@@ -244,6 +264,7 @@ minLength: 1,
           <th>Name</th>
           <th>Qty/Pcs</th>
           <th>Reject</th>
+		  <th>Return Type</th>
           <th>Notes</th>
 		  <th style="width:50px">Action</th>
                                         </tr>
@@ -274,6 +295,18 @@ minLength: 1,
 		  <td width=50% ><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> sqty; ?></td>
           <td><?php echo $v -> sreject; ?></td>
+		  <td>
+		  <?php if($_GET['tg']==""){ $dsb=""; }else{ $dsb="disabled"; } ?>
+		  
+		  
+		  <select name="rtype[]"  <?=$dsb;?> >
+		  <?php if($v -> srtype !='0'){?>		  
+		  <option value="<?=$v -> srtype;?>"><?=$v -> srtype;?></option>
+		  <?php }?>
+		  <option value="Tukar Guling">Tukar Guling</option>
+		  <option value="Potong Piutang">Potong Piutang</option>
+		  </select>
+		  </td>
           <td><?php echo $v -> note; ?></td>
 		  <td><a href="<?php echo site_url('retur_order_detail/home/retur_order_detail_delete/' . $v -> sid .'/'.$id.'/'.$scid ); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a></td>
 		  </tr>
@@ -295,10 +328,22 @@ minLength: 1,
                                     </tbody>
                                 </table>
 	
-
-		<input class="btn text-muted text-center btn-danger" type=submit value="Submit" >
+        <?php 
+		
+		
+		if($_GET['tg']==""){ ?>
+		<input class="btn text-muted text-center btn-danger" type=submit value="Approve" >
+		<?php } ?>
 		<!--input class="btn text-muted text-center btn-primary" type=button value="Back" onclick="location.href='javascript:history.go(-1);'"-->
 		</form>	
+		
+		<?php if($_GET['tg']=='0'){ ?>
+		
+		<a href="<?php echo site_url("retur_order_detail/home/retur_order_report/$id/$scid?tg=0");?>">
+		<button class="btn text-muted text-center btn-danger"   >Print</button>
+		</a>
+		
+		<?php  } ?>
 		
                             </div>
                         </div>

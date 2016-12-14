@@ -91,10 +91,17 @@ minLength: 1,
                 </div>			
 				
 				
-				
+<div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sending Date.</label>
+
+                    <div class="col-lg-4">
+                       <input type=hidden name=id value="<?php echo $id; ?>">
+					   <input type=text value="<?php echo __get_date(strtotime($detailx[0]->scdate),1); ?>" class="form-control" disabled>
+                    </div>
+                </div>					
 
 	<div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Date.</label>
+                    <label for="text1" class="control-label col-lg-4">Receiving Date.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
@@ -177,6 +184,7 @@ minLength: 1,
           <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
+		  <th>Return Type </th>
 		   <th>Price</th>
 		   <th>Total </th>
 		 
@@ -219,6 +227,7 @@ minLength: 1,
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>
           <td><?php echo $v -> sreject; ?></td>
+		  <td><?=$v -> srtype;?></td>
 		  <td><?php echo __get_rupiah($sprice,2); ?></td>
 		  <td><?php echo __get_rupiah($sum_sprice,2);?></td>	
 		  </tr>
@@ -235,7 +244,7 @@ minLength: 1,
 		endforeach; ?>
           <tr>
           
-          <td colspan=6>TOTAL</td>
+          <td colspan=7>TOTAL</td>
           <td><?php echo __get_rupiah($total,2);?></td>	
 		  </tr>		
         
@@ -243,7 +252,9 @@ minLength: 1,
                                 </table>
 
 	 </form>
-			<a href="<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>" target="_blank"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
+			<a href="<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid.'?tg=0'); ?>" target="_blank"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
+			
+			<a href="<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid.'?tg=1'); ?>" target="_blank"><input class="btn text-muted text-center btn-primary" type=button value=PRINT></a>
 			  
                             </div>
                         </div>

@@ -81,13 +81,18 @@ class sales_order_detail_model extends CI_Model {
 
 	function __update_inventory($spid,$sbid,$data) {
 		$istockout=$data['istockout'];
-        return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
+        //return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
+        return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istock - $istockout) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
+        
         
 	}	
 	function __update_inventoryin($spid,$sbid,$data) {
 		$istockin=$data['istockin'];
-        return $this->db -> query("update inventory_tab set istockin='$istockin', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
+       // return $this->db -> query("update inventory_tab set istockin='$istockin', istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
         
+	return $this->db -> query("update inventory_tab set istockin='$istockin', istock=(istock + $istockin) WHERE iiid='$spid' AND ibid='$sbid' ");
+       
+
 	}	
 	function __update_amount_status($did,$data) {
         $this -> db -> where('did', $did);

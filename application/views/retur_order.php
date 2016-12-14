@@ -67,8 +67,10 @@ minLength: 1,
                 <?php endif; ?>
 				
 				
-				
-					<form method="POST" action="?search=1" class="form-horizontal" >
+	
+
+
+				<form method="POST" action="?search=1" class="form-horizontal" >
 						<input  name="cid" type="hidden" id="theCid" />
 						<div class="row">
 							<div class="col-lg-8">
@@ -77,14 +79,13 @@ minLength: 1,
 										Customer <input name="cname" type="text" id="search" class="form-control" />
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad" >
+									
 								</div>
 							</div>
 							</div>
 						</div>
-					</form>
+					
 
-				<form method="POST" action="?search=1" class="form-horizontal" >
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -92,14 +93,12 @@ minLength: 1,
 									Reff No.<input type="text" name="sreff" class="form-control"  >
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									
 								</div>
 							</div>
 						</div>
 					</div>
-			   </form>
-
-				<form method="POST" action="?search=1" class="form-horizontal" >
+			 
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -113,12 +112,19 @@ minLength: 1,
 								</div>
 								<div class="col-lg-2">
 									<br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									<input type="submit" value="Search" class="btn btn-default btn-grad">
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>		
+				</form>
+
+
+
+
+
+
+				
 					<br />	
 				
 				
@@ -142,12 +148,13 @@ minLength: 1,
                                     <thead>
                                         <tr>
           
-          <th>Return No.</th>
-    
-          <th>Date</th>
+          <th>Reff No.</th>
+		  <th>Return No.</th>
+          <th>Sending Date</th>
+		  <th>Receiving Date</th>
 		  <th>Customer </th>
 		  <th>Sales </th>
-          <th>Return Type</th>
+          
 		  <th>Total</th>
           
           <th>Status</th>
@@ -160,11 +167,11 @@ minLength: 1,
 
 		  ?>
                                         <tr>
-<!--
-          <td><?php echo $v -> bname; ?></td>
--->
+
+          <td><?php echo $v -> sreff; ?></td>
+
           <td><?php echo $v -> snoro; ?></td>
-      
+          <td><?php echo __get_date(strtotime($v -> scdate,2)); ?></td>
           <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo $v -> cname; ?></td>
 		  <td><?php echo $v -> sname; ?></td>
@@ -180,7 +187,7 @@ minLength: 1,
 		?>		  
 		  
 		<?php if($v -> pno_pm   > 0){ $sbyr=" - Paid";}else{$sbyr="";}?> 
-          <td><?php echo $cname; ?></td>
+          <!--td><?php echo $cname; ?></td-->
 		  <td><?php echo __get_rupiah($v ->totretur,2); ?></td>
           <td><?php 
 		  $sstatus=$v -> sstatus;		  

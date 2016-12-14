@@ -14,6 +14,8 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
+		if(!isset($_POST['cari'])){$_POST['cari']="";}
+		if(!isset($_GET['search'])){ $_GET['search']="";}
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
 			$view['keyword'] = $keyword;
@@ -22,7 +24,15 @@ class Home extends MY_Controller {
 		}
 		else {
 			$pager = $this -> pagination_lib -> pagination($this -> pembayaran_model -> __get_pembayaran(),3,10,site_url('pembayaran/home/index/'));
+			//$view['pembayaran'] = $this -> pagination_lib -> paginate();
+			
+			if($_GET['search']=='1'){
+			$view['pembayaran'] = $this -> pembayaran_model -> __get_pembayaran_search();	
+			}else{			
 			$view['pembayaran'] = $this -> pagination_lib -> paginate();
+			}				
+			
+			
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
 		}
@@ -65,7 +75,8 @@ class Home extends MY_Controller {
 					$pno_pmx=$this -> pembayaran_model -> __get_pno_pm($lastid);
 					$pno_pm=$pno_pmx[0]->pno_pm;
 					//echo $pno_pm;die;
-					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm));
+					//redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm));
+					redirect(site_url('pembayaran_detail/home/pembayaran_detail_add/'. $scid .'/'.$pno_pm.'/?addfirst=1'));
 				}
 				else {
 					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));

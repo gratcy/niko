@@ -13,6 +13,46 @@ class pembayaran_model extends CI_Model {
 		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab order by pmid DESC';
 	}
 
+	function __get_pembayaran_search() {
+		
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['pno_pm'])){ $_POST['pno_pm']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+        if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if($_POST['sreff']==""){ 
+			$wreff="";
+		}else{
+			$wreff=" and pembayaran_tab.preff = '".$_POST['sreff']."' ";
+		}		
+		if($_POST['pno_pm']==""){ 
+			$wpno="";
+		}else{
+			$wpno=" and pembayaran_tab.pno_pm = '".$_POST['pno_pm']."' ";
+		}	
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and pembayaran_tab.pcid = '".$_POST['cid']."' ";
+		}
+		
+	    if($_POST['sisa']=="x"){ 
+			$wsisa="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and pstatus = '0' ";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and pstatus = '1' ";
+		}elseif($_POST['sisa']=='3'){
+			
+			$wsisa=" and pstatus = '3' ";
+		}
+		
+		$this -> db -> select(" * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab,
+        customers_tab 		
+		where 1 AND customers_tab.cid=pembayaran_tab.pcid $wreff $wcid $wpno $wsisa order by pmid DESC");
+	return $this -> db -> get() -> result();
+	}	
+	
 	function __get_pembayaranid($pno_pm) {
 		return "SELECT * from pembayaran_tab where pno_pm='".$pno_pm."'";
 	}	

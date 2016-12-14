@@ -15,6 +15,7 @@ class Home extends MY_Controller {
 
 	function index() {
 		if(!isset($_GET['search'])){ $_GET['search']="";}
+		if(!isset($_POST['cari'])){$_POST['cari']="";}
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
 			$view['keyword'] = $keyword;
@@ -46,9 +47,13 @@ class Home extends MY_Controller {
 					$this -> customers_model -> __update_customers($scid, $arrl);			
 		
 		}
+		if($_POST['cari']=='export excel'){
+			$kondisi=False;
+		}else{
+			$kondisi=True;
+		}
 		
-		
-		$this->load->view('retur_order', $view);
+		$this->load->view('retur_order', $view,$kondisi);
 	}
 	
 	function retur_order_add() {
@@ -62,7 +67,11 @@ class Home extends MY_Controller {
 			$ssid = $this -> input -> post('csid', TRUE);			
 			//$sstatus = (int)$this ->input -> post('sstatus', TRUE);
 			$sstatus=(int)0;
-			$scdate=date('Y-m-d');
+			//$scdate=date('Y-m-d');
+			
+			$stglp = explode("/",$this -> input -> post('scdate', TRUE));			
+			$scdate="$stglp[2]-$stglp[1]-$stglp[0]";		
+			
 			$scid = $this -> input -> post('cid', TRUE);
 			$stype = $this -> input -> post('stype', TRUE);
 			$sketerangan = $this -> input -> post('sketerangan', TRUE);

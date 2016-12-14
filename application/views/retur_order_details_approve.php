@@ -134,6 +134,7 @@ minLength: 1,
           <th>Qty/Pcs</th>
           <th>Accept</th>
           <th>Reject </th>
+		  <th>Return Type </th>
 		   <th style="width:150px;">Price </th>
 		   <th style="width:150px;">Total Price  </th>
 		 
@@ -165,7 +166,7 @@ minLength: 1,
 			$qtyx=$v -> sqty;			
 			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
 			
-	
+			if($v->srtype=="Tukar Guling"){ $dis="disabled";}else{ $dis="";}
     ?>
 	
 
@@ -177,7 +178,12 @@ minLength: 1,
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>
           <td><?php echo $v -> sreject; ?></td>
-		  <td><input type="text" name="sprice[]" value="<?php echo __get_rupiah($sprice,2); ?>" class="form-control" onkeyup="formatharga(this.value,this)"></td>
+		  <td><?php echo $v -> srtype; ?> </td>
+		  <td><input type="text" name="sprice[]" value="<?php echo __get_rupiah($sprice,2); ?>" class="form-control" onkeyup="formatharga(this.value,this)"  <?=$dis;?> >
+		  <?php if($dis!=""){ ?>
+		  <input type="hidden" name="sprice[]" >
+		  <?php } ?>
+		  </td>
 		  <td><input type="text" name="sum_sprice[]" value="<?php echo __get_rupiah($sum_sprice,2);?>" class="form-control" disabled ></td>	
 		  </tr>
         <?php 
@@ -193,7 +199,7 @@ minLength: 1,
 		endforeach; ?>
           <tr>
           
-          <td colspan=6>TOTAL</td>
+          <td colspan=6>TOTAL</td><td>&nbsp;</td>
           <td><?php echo __get_rupiah($total,2);?>
 		  <input type=hidden name="spotong" value="<?php echo $total; ?>">
 		  

@@ -209,6 +209,10 @@
                       <?php echo $customer_check; ?>
                     </div>
                 </div>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Delivery</label>
 

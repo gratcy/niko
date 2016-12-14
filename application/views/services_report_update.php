@@ -12,7 +12,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Services Report Update</h5>
+            <h5>Service Report Update</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -21,7 +21,7 @@
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 <input type="hidden" name="swo" value="<?php echo $detail[0] -> ssid; ?>">
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Work Order</label>
+                    <label for="text1" class="control-label col-lg-4">Work Order No.</label>
 
                     <div class="col-lg-4">
 						<select name="wo"  class="form-control chzn-select"><?php echo $wo; ?></select>
@@ -45,18 +45,17 @@
 					</div>
 				</div>
                 <div class="form-group">
-                    <div class="col-lg-8" id="technicalTMP" style="margin:0 auto;float:none;"> </div>
                     <div class="col-lg-8" id="productTMP" style="margin:0 auto;float:none;"> </div>
                     <div class="col-lg-8" id="sparepartTMP" style="margin:0 auto;float:none;"> </div>
+                    <div class="col-lg-8" id="technicalTMP" style="margin:0 auto;float:none;"> </div>
 				</div>
 				<div style="clear:both;"></div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
 				<?php if (__get_roles('ServicesReportApproval')) : ?>
-				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
+				<button class="btn text-muted text-center btn-danger" id="approve" type="button">Approve</button>
 				<?php endif; ?>
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
 				</div>

@@ -228,7 +228,7 @@ $drv=explode("-",$detailx[0]->driver);
           <td><?php echo $v -> pcode; ?> 
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
-		  <input type=hidden name="qty[]" value="<?php echo $v -> ssisa; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> sqty; ?>">
 		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
 		  </td>
 		  <td><?php echo $v -> pname; ?></td>

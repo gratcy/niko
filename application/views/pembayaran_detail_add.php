@@ -231,11 +231,15 @@ function UpdateCost() {
 	$pno_pm=$detailx[0]->pno_pm;
 	//$type_pay=$detailx[0]->type_bayar;
 	$type_pay="";
+
+	if(!isset($_GET['addfirst'])){$_GET['addfirst']=0;}
 	?>
 
 
  <form  id="form1" name="myForm" class="form-horizontal" method="post" 
  action="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$scid.'/'.$pno_pm.'/'.$type_pay); ?>" >
+
+<input type=hidden name="addfirst" value="<?=$_GET['addfirst'];?>" >
 <table border=0 width=90% ><tr><td width=50%>
 
 
@@ -265,7 +269,9 @@ function UpdateCost() {
 
                     <div class="col-lg-4">
 		<input type=text value="<?php echo __get_date(strtotime($detailx[0]->pdate),1); ?>" class="form-control" disabled>
-                    </div>   							
+                    
+				<input type=hidden name="pdatee" value="<?php echo __get_date(strtotime($detailx[0]->pdate),1); ?>" class="form-control" >	
+					</div>   							
                 </div>
 
 		

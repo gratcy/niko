@@ -16,13 +16,13 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Technical </h2>
+                        <h2> Technician </h2>
                     </div>
                 </div>
 
                 <hr />
 				<?php if (__get_roles('TechnicalExecute')) : ?>
-                <a href="<?php echo site_url('technical/technical_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Technical</a>
+                <a href="<?php echo site_url('technical/technical_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Technician</a>
                 <br />
                 <br />
                 <?php endif; ?>
@@ -31,10 +31,10 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Technical
+                            Technicians
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
-					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Name/Code' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search!!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
 					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
                         <span id="sg1"></span>
                 </form>

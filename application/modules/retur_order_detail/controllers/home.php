@@ -34,15 +34,20 @@ class Home extends MY_Controller {
 			
 			//echo "b";die;
 			$jp=count($_POST['pid']);
+			$rtype=$this -> input -> post('rtype', TRUE);
 			$sbidx=$this -> input -> post('sbidx', TRUE);
 			$sbidx= $this -> memcachedlib -> sesresult['ubid'];
 			$id=$this -> input -> post('id', TRUE);
 			for($i=0;$i<$jp;$i++){
 				$pid=$_POST['pid'][$i];
+				$sid=$_POST['sid'][$i];
 				$sqty=$_POST['sqty'][$i];
+				$srtype=$_POST['rtype'][$i];
 				$itype=4;
 				$arrp=array('istockin'=>$sqty);
+				$drtype=array('srtype'=>$srtype);
 				//echo $sbidx;die;
+				$this -> retur_order_detail_model ->__update_retur_order_detail($sid, $drtype);
 				$this -> retur_order_detail_model -> __update_inventory_retur($pid, $sqty,$itype,$sbidx);
 				//$this -> retur_order_detail_model ->__update_inventory_retur($pid,$sbidx,$arrp);
 			}
@@ -51,7 +56,9 @@ class Home extends MY_Controller {
 			$this -> retur_order_model -> __update_retur_order($id, $arr);
 			
 			$jum=count($_POST['sqty']);
-			redirect(site_url('retur_order/home'));	
+			//redirect(site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid.'?tg=0'));	
+			redirect(site_url('retur_order_detail/home/retur_order_detail_add/'.$id.'/'.$scid.'?tg=0'));	
+			
 		}
 			$view['id'] = $id;
 			$view['scid'] = $scid;
@@ -143,7 +150,7 @@ $view['id'] = $id;
 	function retur_order_detail_add($id,$scid) {
 		if ($_POST) {
 		//echo "sss";die;
-
+			$rtype = $this -> input -> post('rtype', TRUE);
 			$note = $this -> input -> post('note', TRUE);
 			$sreject = $this -> input -> post('sreject', TRUE);
 			$pricex = $this -> input -> post('pricex', TRUE);
@@ -194,7 +201,7 @@ $view['id'] = $id;
 			}
 		}	
 			$saccept=$sqty-$reject;
-					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc, 'saccept' => $saccept,'sreject'=>$reject,'ssisa'=>$sqty,'note'=>$notes);					
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc, 'saccept' => $saccept,'sreject'=>$reject,'ssisa'=>$sqty,'note'=>$notes,'srtype'=>$rtype);					
 
 					if ($this -> retur_order_detail_model -> __insert_retur_order_detail($arr)) {
 						$arrz=array('sstatus' => '1');

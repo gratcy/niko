@@ -26,7 +26,12 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Opname <?php echo __get_inventory_type($type); ?></h2>
+                        <h2> Opname <?php 	
+				if( __get_inventory_type($type)=="Reject Product"){
+				echo "Reject Service";
+				}else{
+				echo __get_inventory_type($type); 
+				}?></h2>
                     </div>
                 </div>
 
@@ -36,7 +41,12 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Opname <?php echo __get_inventory_type($type); ?>
+                            Opname  <?php 	
+				if( __get_inventory_type($type)=="Reject Product"){
+				echo "Reject Service";
+				}else{
+				echo __get_inventory_type($type); 
+				}?>
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>

@@ -13,6 +13,16 @@
             
             });
         </script>
+		<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                
+                $('#example1a').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+            
+            });
+        </script>
   
 <link rel="stylesheet" href="<?php echo site_url('application/views/assets/jqjason/jquery-ui-1.css'); ?>">  
   
@@ -113,7 +123,15 @@ minLength: 1,
 
 
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">Date</label>
+                <label for="text1" class="control-label col-lg-4">Sending Date</label>
+					<div class="col-lg-4">
+						<input  name="scdate" type="text"   id="example1a" class="form-control"  >
+					</div>
+       		</div>
+			
+			
+			<div class="form-group">
+                <label for="text1" class="control-label col-lg-4">Receiving Date</label>
 					<div class="col-lg-4">
 						<input  name="stgl" type="text"   id="example1" class="form-control"  >
 					</div>
@@ -143,7 +161,6 @@ minLength: 1,
                 </div>				
 				
 
-				
 
 
 	
@@ -156,7 +173,17 @@ minLength: 1,
                     </div>
                 </div>
                 		
-				
+	
+
+                    <div class="form-group">
+							<label for="status" class="control-label col-lg-4">PPN</label>
+                    <div class="col-lg-4">
+                            <div class="make-switch has-switch" data-on="danger" data-off="default">
+                                <?php echo __get_ppn(0,2); ?>
+                            </div>
+					</div>				
+
+					</div>
 
                 <div class="form-group">
 					<label for="status" class="control-label col-lg-4"></label> 

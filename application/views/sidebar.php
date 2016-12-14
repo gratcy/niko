@@ -25,17 +25,17 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">14</span>&nbsp;
+                       &nbsp; <span class="label label-danger">12</span>&nbsp;
                     </a>
                     <ul class="collapse" id="component-nav">
 						<?php if (__get_roles('BranchView') || __get_roles('BranchViewAsBranch')) : ?>
                         <li class=""><a href="<?php echo site_url('branch'); ?>"><i class="icon-angle-right"></i> Branch </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('CustomersView')) : ?>
-                         <li class=""><a href="<?php echo site_url('customers'); ?>"><i class="icon-angle-right"></i> Customers </a></li>
+                         <li class=""><a href="<?php echo site_url('customers'); ?>"><i class="icon-angle-right"></i> Customer </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ProductsView') || __get_roles('ProductViewAsBranch')) : ?>
-                        <li class=""><a href="<?php echo site_url('products'); ?>"><i class="icon-angle-right"></i> Products </a></li>
+                        <li class=""><a href="<?php echo site_url('products'); ?>"><i class="icon-angle-right"></i> Product </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('PackagingView')) : ?>
                         <li class=""><a href="<?php echo site_url('packaging'); ?>"><i class="icon-angle-right"></i> Packaging </a></li>
@@ -48,11 +48,11 @@
                          <?php endif; ?>
 						 
 						 <?php if (__get_roles('TechnicalView')) : ?>
-                          <li class=""><a href="<?php echo site_url('technical'); ?>"><i class="icon-angle-right"></i> Technicians </a></li>
+                          <li class=""><a href="<?php echo site_url('technical'); ?>"><i class="icon-angle-right"></i> Technician </a></li>
                          <?php endif; ?>
 						 
 						<?php if (__get_roles('SparepartView')) : ?>
-                         <li class=""><a href="<?php echo site_url('sparepart'); ?>"><i class="icon-angle-right"></i> Spareparts </a></li>
+                         <li class=""><a href="<?php echo site_url('sparepart'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('SalesView')) : ?>
                         <li class=""><a href="<?php echo site_url('sales'); ?>"><i class="icon-angle-right"></i> Sales </a></li>
@@ -60,9 +60,7 @@
 						<?php if (__get_roles('TargetOmsetView')) : ?>
                         <li class=""><a href="<?php echo site_url('target'); ?>"><i class="icon-angle-right"></i> Sales Target </a></li>
                          <?php endif; ?>
-						<?php if (__get_roles('SalesCommisionView')) : ?>
-                        <li class=""><a href="<?php echo site_url('sales_commision'); ?>"><i class="icon-angle-right"></i> Sales Commission </a></li>
-                         <?php endif; ?>
+						
 						
 						<?php //if (__get_roles('SuplierView')) : ?>
                         <!--li class=""><a href="<?php //echo site_url('suplier'); ?>"><i class="icon-angle-right"></i> Supplier </a></li-->
@@ -93,7 +91,7 @@
                     </ul>
                 </li>
 				<?php endif; ?>
-				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryRejectProductView') || __get_roles('InventoryRejectSparepartView') || __get_roles('InventoryReturnView') || __get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
+				<?php if (__get_roles('InventoryProductView') || __get_roles('InventorySparepartView') || __get_roles('InventoryRejectProductView') || __get_roles('InventoryRejectSparepartView') || __get_roles('InventoryReturnView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#inventory">
                         <i class="icon-barcode"> </i> Inventory
@@ -101,7 +99,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">6</span>&nbsp;
+                       &nbsp; <span class="label label-danger">5</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
@@ -122,7 +120,7 @@
 									
 									<ul>
 									<?php if (__get_roles('InventoryRejectProductView')) : ?>
-									<li><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Product</a></li>
+									<li><a href="<?php echo site_url('inventory/3'); ?>"><i class="icon-angle-right"></i> Service</a></li>
 									<?php endif; ?>
 									<?php if (__get_roles('InventoryRejectSparepartView')) : ?>
 									<li><a href="<?php echo site_url('inventory/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
@@ -130,10 +128,21 @@
 									</ul>
 									</li>
 							<?php endif; ?>
-							<?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
-								<li class=""><a href="javascript:void(0);"><i class="icon-angle-down"></i> Opname </a>
-							<?php endif; ?>
-								<ul>
+								</li>
+                    </ul>
+                </li>
+			   <?php endif; ?>
+			   <?php if (__get_roles('OpnameProductView') || __get_roles('OpnameSparepartView') || __get_roles('OpnameReturnView')) : ?>
+                <li class="panel ">
+                    <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#inventoryOpname">
+                        <i class="icon-magic"> </i> Inventory Opname
+	   
+                        <span class="pull-right">
+                          <i class="icon-angle-left"></i>
+                        </span>
+                       &nbsp; <span class="label label-danger">5</span>&nbsp;
+                    </a>
+                    <ul class="collapse" id="inventoryOpname">
 							<?php if (__get_roles('OpnameProductView')) : ?>
 								<li><a href="<?php echo site_url('opname/1'); ?>"><i class="icon-angle-right"></i> Product </a></li>
 							<?php endif; ?>
@@ -151,7 +160,7 @@
 									<a href="javascript:void(0);"><i class="icon-angle-down"></i> Reject </a>
 									<ul>
 									<?php if (__get_roles('OpnameRejectProductView')) : ?>
-									<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Product</a></li>
+									<li><a href="<?php echo site_url('opname/3'); ?>"><i class="icon-angle-right"></i> Service</a></li>
 									<?php endif; ?>
 									<?php if (__get_roles('InventoryRejectSparepartView')) : ?>
 									<li><a href="<?php echo site_url('opname/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
@@ -159,8 +168,6 @@
 									</ul>
 								</li>
 							<?php endif; ?>
-								</ul>
-								</li>
                     </ul>
                 </li>
 			   <?php endif; ?>
@@ -209,7 +216,7 @@
 <?php if (__get_roles('ServicesWOView') || __get_roles('ServicesSparepartView') || __get_roles('ServicesReportView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#services">
-                        <i class="icon-cogs"> </i> Services
+                        <i class="icon-cogs"> </i> Service
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
@@ -217,7 +224,7 @@
                     </a>
                     <ul class="collapse" id="services">
 						<?php if (__get_roles('ServicesWOView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Service </a></li>
+                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Service Work Order </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ServicesSparepartView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Service Sparepart </a></li>
@@ -264,17 +271,20 @@
                        &nbsp; <span class="label label-danger">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="Report">
+
+                         <?php if (__get_roles('ReportTechnicalCommision')) : ?>
+                        <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> SO Pending </a></li>
+						<?php endif; ?>
+
 						<?php if (__get_roles('ReportInvoice')) : ?>
-                       <li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order_report/1'); ?>"><i class="icon-angle-right"></i> Invoice Report </a></li>
+                       <li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order_report/1'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<?php endif; ?>
 						<?php if (__get_roles('ReportSalesCommision')) : ?>
 						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
 						<?php endif; ?>
-						<?php if (__get_roles('ReportTechnicalCommision')) : ?>
-                        <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> Technical Commision </a></li>
-						<?php endif; ?>
+						
 						<?php if (__get_roles('ReportOpname')) : ?>
-                        <li class=""><a href="javascript:void(0);"><i class="icon-angle-right"></i> Stock Opname </a>
+                        <li class=""><a href="javascript:void(0);"><i class="icon-angle-right"></i> Opname </a>
                         <ul>
 								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product</a></li>
 								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
@@ -350,10 +360,15 @@
 		$('ul#menu > li').removeClass('active');
 		$('ul#services').parent().addClass('active');
 	}
-	else if (/\/inventory|\/opname/.test(window.location.href) === true) {
+	else if (/\/inventory/.test(window.location.href) === true) {
 		$('ul#inventory').addClass('in');
 		$('ul#menu > li').removeClass('active');
 		$('ul#inventory').parent().addClass('active');
+	}
+	else if (/\/opname/.test(window.location.href) === true) {
+		$('ul#inventoryOpname').addClass('in');
+		$('ul#menu > li').removeClass('active');
+		$('ul#inventoryOpname').parent().addClass('active');
 	}
 	else if (/\/komisi\/home|detail_komisi\/home|technical_commision|reportopname|invoice_order_report/.test(window.location.href) === true) {
 		$('ul#Report').addClass('in');

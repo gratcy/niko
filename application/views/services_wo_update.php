@@ -4,7 +4,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Service Update</h1>
+                    <h1 class="page-header">Service Work Order Update</h1>
                 </div>
             </div>
 <div class="row">
@@ -12,7 +12,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Services Update</h5>
+            <h5>Service Work Order Update</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -32,6 +32,14 @@
 
                     <div class="col-lg-4">
 						<a href="<?php echo site_url('services_wo/product_add/2?id=' . $id); ?>" class="btn btn-info" id="addProduct">Add Product</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Technician</label>
+
+                    <div class="col-lg-4">
+				<a href="<?php echo site_url('services_wo/technical_add/2?id=' . $id); ?>" class="btn btn-info" id="addTechnical">Add Technician</a>
                     </div>
                 </div>
 
@@ -72,9 +80,7 @@
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
-				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
-				<a href="<?php echo site_url('services_wo/technical_add/2?id=' . $id); ?>" class="btn btn-info" id="addTechnical">Add Technical</a>
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
+				<button class="btn text-muted text-center btn-danger" id="approve" type="button">Approve</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
 				</div>

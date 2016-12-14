@@ -4,7 +4,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Services Sparepart Update</h1>
+                    <h1 class="page-header">Service Sparepart Update</h1>
                 </div>
             </div>
 <div class="row">
@@ -12,7 +12,7 @@
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Services Sparepart Update</h5>
+            <h5>Service Sparepart Update</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
@@ -20,7 +20,13 @@
 
 <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Work Order</label>
+                    <label for="text1" class="control-label col-lg-4">Sparepart</label>
+                    <div class="col-lg-4">
+				<a href="<?php echo site_url('services_sparepart/sparepart_add/2?id=' . $id); ?>" class="btn text-muted text-center btn-info" id="sparepart">Add Sparepart</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Work Order No.</label>
 <input type="hidden" name="owo" value="<?php echo $detail[0] -> ssid; ?>">
                     <div class="col-lg-4">
 						<select name="wo" data-placeholder="Work Order" class="form-control chzn-select"><?php echo $wo; ?></select>
@@ -52,10 +58,8 @@
 							<label for="status" class="control-label col-lg-4"></label>
                     <div class="col-lg-4">
 			<?php if (__get_roles('ServicesSparepartApproval')) : ?>
-				<button class="btn text-muted text-center btn-info" id="approve" type="button">Approve</button>
+				<button class="btn text-muted text-center btn-danger" id="approve" type="button">Approve</button>
 				<?php endif; ?>
-				<a href="<?php echo site_url('services_sparepart/sparepart_add/2?id=' . $id); ?>" class="btn text-muted text-center btn-info" id="sparepart">Add Sparepart</a>
-				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 					</div>
 				</div>

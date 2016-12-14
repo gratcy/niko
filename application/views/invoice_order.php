@@ -49,7 +49,7 @@ minLength: 1,
 
                 <hr />
 
-					<form method="POST" action="?search=1" class="form-horizontal" >
+<form method="POST" action="?search=1" class="form-horizontal" >
 						<input  name="cid" type="hidden" id="theCid" />
 						<div class="row">
 							<div class="col-lg-8">
@@ -58,34 +58,41 @@ minLength: 1,
 										Customer <input name="cname" type="text" id="search" class="form-control" />
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad" >
+									
 								</div>
 							</div>
 							</div>
 						</div>
-					</form>
 
-				<form method="POST" action="?search=1" class="form-horizontal" >
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
 								<div class="col-lg-6">
-									Inv No.<input type="text" name="sno_invoice" class="form-control"  >
+									Invoice No.<input type="text" name="sno_invoice" class="form-control"  >
+								</div>
+
+							</div>
+						</div>
+					</div>						
+
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+									Reff No.<input type="text" name="sreff" class="form-control"  >
 								</div>
 								<div class="col-lg-2"><br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									
 								</div>
 							</div>
 						</div>
 					</div>
-			   </form>
-
-				<form method="POST" action="?search=1" class="form-horizontal" >
+			 
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="form-group">
 								<div class="col-lg-6">
-								   Status <select name="sisa" class="form-control">
+								   Status<select name="sisa" class="form-control">
 								   <option value="x">ALL</option>
 								   <option value="1">Paid</option>
 								   <option value="0">Pending</option>
@@ -93,12 +100,15 @@ minLength: 1,
 								</div>
 								<div class="col-lg-2">
 									<br>
-									<input type="submit" value="cari" class="btn btn-default btn-grad">
+									<input type="submit" value="Search" class="btn btn-default btn-grad">
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>		
+				</form>
+					<br />
+
+			
 					<br />
 				
 	<?php echo __get_error_msg(); ?>
@@ -106,7 +116,14 @@ minLength: 1,
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          <?php //echo $statusdo;?>
+                          Invoice Order
+				<div class="searchTable">
+                <form action="<?php echo current_url();?>" method="post">
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
+                        <span id="sg1"></span>
+                </form>
+                </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -114,9 +131,10 @@ minLength: 1,
                                     <thead>
                                         <tr>
           <!--th>Branch</th-->
+          <th>Reff No.</th>
           <th>DO No.</th>
-		  <th>Inv No.</th>         
-          <th>Inv Date</th>
+		  <th>Invoice No.</th>         
+          <th>Invoice Date</th>
 		  <th>Customer </th>
           <th>Sales</th>
 		  <th>Due Date </th>
@@ -136,7 +154,7 @@ minLength: 1,
 	//if($v -> sno_invoice <>""){
 		  ?>
                                         <tr>
-          <!--td><?php //echo $v -> bname; ?></td-->
+          <td><?php echo $v -> sreff; ?></td>
           <td><?php echo $v -> snodo; ?></td>
           <td><?php echo $v -> sno_invoice; ?></td>
           <td><?php echo __get_date(strtotime($v -> stgl_invoice),1); ?></td>
@@ -159,7 +177,7 @@ minLength: 1,
 		  
 		  
 		  </td>
-          <td><?php echo $v ->stypepay;?></td>
+          <td><?php echo ucfirst($v ->stypepay);?></td>
 		  <td><?php echo number_format($v ->dototal);?></td>
 		  <td><?php 
 		  if($v ->pstatus == '3'){ $stt="Paid";}else{ $stt="Pending";}
