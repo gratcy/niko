@@ -74,14 +74,10 @@ left:inherit!important;
           <td><?php echo __get_rupiah($v -> ctop,2); ?></td>
           <td><?php echo __get_rupiah($v -> climit,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> rcvb,2); ?></td>
-<<<<<<< Updated upstream
-		  <td><?php echo ($v -> cspecial == 0 ? 'NO' : 'YES'); ?></td>
-=======
 		  <td><?php 
 		  if($v -> cspecial==0){$spc="NO";}else{$spc="YES";}
 		  
 		  echo  $spc ?></td>
->>>>>>> Stashed changes
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
 		  <td>
 				<?php if (__get_roles('CustomersExecute')) : ?>

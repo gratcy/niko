@@ -109,7 +109,7 @@ class Home extends MY_Controller {
 							if ($r2[0])
 								$this -> inventory_model -> __update_inventory($r2[0] -> iid, array('istockin' => ($r2[0] -> istockin + $tqty[$pid[$i]]), 'istock' => ($r2[0] -> istock + $tqty[$pid[$i]])), 6);
 							else
-								$this -> inventory_model -> __insert_inventory(array('ibid' => $branch, 'iiid' => $pid[$i], 'itype' => 6, 'istockbegining' => $tqty[$pid[$i]], 'istock' => $tqty[$pid[$i]], 'istatus' => 1));
+								$this -> inventory_model -> __insert_inventory(array('ibid' => $branch, 'iiid' => $pid[$i], 'itype' => 6, 'istockin' => $tqty[$pid[$i]], 'istock' => $tqty[$pid[$i]], 'istatus' => 1));
 						}
 					}
 					
@@ -223,6 +223,27 @@ class Home extends MY_Controller {
 		}
 	}
 	
+	function technical_search($type) {
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$type = $this -> input -> post('type');
+			$view['technical'] = $this -> technical_model -> __get_search($keyword, $this -> memcachedlib -> sesresult['ubid']);
+			$view['id'] = $id;
+			$view['type'] = $type;
+			$view['services'] = true;
+			$this -> load -> view('box/technical_add', $view, false);
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> technical_model -> __get_technical_services(''),3,10,site_url('services_wo/technical_add/' . $type));
+			$view['technical'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['id'] = $id;
+			$view['type'] = $type;
+			$view['services'] = true;
+			$this -> load -> view('box/technical_add', $view, false);
+		}
+	}
+	
 	function technical_tmp($type) {
 		$id = (int) $this -> input -> get('id');
 		$rep = (int) $this -> input -> get('r');
@@ -294,7 +315,28 @@ class Home extends MY_Controller {
 			redirect(site_url('services_wo/product_add/' . $type . '?id=' . $id));
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products_services(''),3,10,site_url('services_wo/product_add/' . $type));
+			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products_services(0,0,0,$this -> memcachedlib -> sesresult['ubid']),3,10,site_url('services_wo/product_add/' . $type));
+			$view['product'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['id'] = $id;
+			$view['type'] = $type;
+			$view['services'] = true;
+			$this -> load -> view('box/product_add', $view, false);
+		}
+	}
+	
+	function product_search($type) {
+		if ($_POST) {
+			$type = $this -> input -> post('type');
+			$keyword = $this -> input -> post('keyword');
+			$view['product'] = $this -> products_model -> __get_products_services_search($this -> memcachedlib -> sesresult['ubid'], $keyword);
+			$view['id'] = $id;
+			$view['type'] = $type;
+			$view['services'] = true;
+			$this -> load -> view('box/product_add', $view, false);
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products_services(0,0,0,$this -> memcachedlib -> sesresult['ubid']),3,10,site_url('services_wo/product_add/' . $type));
 			$view['product'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['id'] = $id;

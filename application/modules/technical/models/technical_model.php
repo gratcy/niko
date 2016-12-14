@@ -43,7 +43,7 @@ class Technical_model extends CI_Model {
 	}
 	
 	function __get_search($keyword,$bid) {
-		if ($bid != "") $bid = " AND tid=" . $bid;
+		if ($bid != "") $bid = " AND tbid=" . $bid;
 		else $bid = "";
 		$this -> db -> select("a.*,b.bname FROM technical_tab a left join branch_tab b ON a.tbid=b.bid WHERE (a.tstatus=1 OR a.tstatus=0)".$bid." AND (a.tname LIKE '%".$keyword."%' OR a.tcode LIKE '%".$keyword."%') ORDER BY a.tname ASC");
 		return $this -> db -> get() -> result();

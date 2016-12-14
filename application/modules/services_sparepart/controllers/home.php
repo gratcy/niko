@@ -178,8 +178,8 @@ class Home extends MY_Controller {
 			if ($type == 1) {
 				$ids = $this -> memcachedlib -> get('__services_sparepart_sparepart_add');
 				if ($ids) $arr = array_unique(array_merge($sid, $ids));
-				else $arr = $sid;
-				
+				else $arr = array_unique($sid);
+
 				$this -> memcachedlib -> set('__services_sparepart_sparepart_add', $arr, 3600);
 			}
 			else {
@@ -197,7 +197,7 @@ class Home extends MY_Controller {
 			redirect(site_url('services_sparepart/sparepart_add/' . $type . '?id=' . $id));
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> sparepart_model -> __get_sparepart_services('',''),3,10,site_url('services_sparepart/sparepart_add/' . $type));
+			$pager = $this -> pagination_lib -> pagination($this -> sparepart_model -> __get_sparepart_services('','',$this -> memcachedlib -> sesresult['ubid']),3,10,site_url('services_sparepart/sparepart_add/' . $type));
 			$view['sparepart'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['id'] = $id;
@@ -222,8 +222,10 @@ class Home extends MY_Controller {
 				$qr = $this -> services_sparepart_model -> __get_sparepart_services_det_r($id);
 				$id = $qr[0] -> sid;
 			}
-			$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
-			foreach($arr as $k => $v) $ids[] = $v -> sssid;
+			if ($id) {
+				$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
+				foreach($arr as $k => $v) $ids[] = $v -> sssid;
+			}
 		}
 
 		$view['id'] = $id;
@@ -232,7 +234,7 @@ class Home extends MY_Controller {
 		$view['services'] = true;
 		$view['sid'] = $sid;
 		if ($ids) {
-			$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id);
+			$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id,$this -> memcachedlib -> sesresult['ubid']);
 			$this -> load -> view('box/sparepart_tmp', $view, false);
 		}
 	}
@@ -241,7 +243,7 @@ class Home extends MY_Controller {
 		$view['detail'] = $this -> services_sparepart_model -> __get_services_sparepart_detail_print($id);
 		$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($id);
 		foreach($arr as $k => $v) $ids[] = $v -> sssid;
-		$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id);
+		$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids),$id,$this -> memcachedlib -> sesresult['ubid']);
 		$this -> load -> view('print/services_sparepart', $view, false);
 	}
 }
