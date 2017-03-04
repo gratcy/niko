@@ -48,6 +48,7 @@ left:inherit!important;
           <th>WO No.</th>
           <th>Date</th>
           <th>Duration</th>
+          <th>Technician</th>
           <th>Status</th>
           <th style="width: 80px;"></th>
                                         </tr>
@@ -60,6 +61,7 @@ left:inherit!important;
           <td><?php echo $v -> sno; ?></td>
           <td><?php echo __get_date($v -> sdate); ?></td>
           <td><?php echo __get_date($v -> sdatefrom,1) . ' &raquo; ' . __get_date($v -> sdateto,1); ?></td>
+          <td><?php echo __get_service_technical($v -> sid); ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
 			  <?php if ($v -> sstatus == 3) : ?>

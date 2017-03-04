@@ -26,6 +26,9 @@ left:inherit!important;
                 <br />
                 <br />
                 <?php endif; ?>
+                <a href="<?php echo site_url('products/export_products'); ?>" class="btn btn-default btn-grad"><i class="icon-book"></i> Export Excel</a>
+                <br />
+                <br />
 	<?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">

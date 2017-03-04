@@ -34,7 +34,17 @@ class Services_wo_model extends CI_Model {
 	function __get_services_wo_select($bid="") {
 		if ($bid != "") $bid = " AND sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('sid,sno FROM services_workorder_tab WHERE sstatus=3'.$bid);
+		
+		
+		$this -> db -> select('ssid FROM services_report_tab WHERE sstatus>=1');
+		$sid = $this -> db -> get() -> result();
+		$sdone = array();
+		foreach($sid as $k => $v)
+			$sdone[] = $v -> ssid;
+		if (count($sdone) > 0)
+			$this -> db -> select('sid,sno FROM services_workorder_tab WHERE sid NOT IN ('.implode(',',$sdone).') AND sstatus=3'.$bid, FALSE);
+		else
+			$this -> db -> select('sid,sno FROM services_workorder_tab WHERE sstatus=3'.$bid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -108,7 +118,13 @@ class Services_wo_model extends CI_Model {
 	function __get_search($keyword, $bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select("a.*,b.bname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0)".$bid." AND a.sno LIKE '%".$keyword."%' ORDER BY a.sid DESC");
+		
+		if (preg_match('/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/', $keyword)) {
+			$keyword = date('Y-m-d',strtotime(str_replace('/','-',$keyword)));
+			$this -> db -> select("a.*,b.bname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0 or a.sstatus=3)".$bid." AND from_unixtime(a.sdate,'%Y-%m-%d')='".$keyword."' ORDER BY a.sid DESC", FALSE);
+		}
+		else
+			$this -> db -> select("a.*,b.bname FROM services_workorder_tab a left join branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 or a.sstatus=0 or a.sstatus=3)".$bid." AND (a.sno LIKE '%".$keyword."%' OR (SELECT GROUP_CONCAT(c.tname, \" \") FROM technical_tab c JOIN services_tecnical_tab d ON c.tid=d.stid WHERE d.ssid=a.sid) LIKE '%".$keyword."%') ORDER BY a.sid DESC", FALSE);
 		return $this -> db -> get() -> result();
 	}
 	

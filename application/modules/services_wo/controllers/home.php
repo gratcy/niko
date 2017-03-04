@@ -255,7 +255,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$arr = $this -> services_wo_model -> __get_technical_services($id);
-			foreach($arr as $k => $v) $ids[] = $v -> stid;
+			foreach($arr as $k => $v) if ($v -> stid) $ids[] = $v -> stid;
 		}
 		
 		$view['id'] = $id;
@@ -358,7 +358,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$arr = $this -> services_wo_model -> __get_product_services($id);
-			foreach($arr as $k => $v) $ids[] = $v -> spid;
+			foreach($arr as $k => $v) if ($v -> spid) $ids[] = $v -> spid;
 		}
 		
 		$view['id'] = $id;
@@ -383,7 +383,7 @@ class Home extends MY_Controller {
 		
 		$ids = array();
 		$arr = $this -> services_wo_model -> __get_product_services($id);
-		foreach($arr as $k => $v) $ids[] = $v -> spid;
+		foreach($arr as $k => $v) if ($v -> spid) $ids[] = $v -> spid;
 		
 		$view['product'] = $this -> products_model -> __get_products_services(implode(',', $ids), 2, $id);
 		$this -> load -> view('print/services_wo', $view, false);

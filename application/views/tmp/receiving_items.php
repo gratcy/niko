@@ -51,7 +51,7 @@
           <td><?php echo $v -> pname; ?></td>
           <td><?php echo $v -> pvolume; ?></td>
 			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items[<?php echo ($type == 1 ? (isset($v -> did) ? $v -> did : 0) : (isset($v -> rid) ? $v -> rid : 0)); ?>]" class="form-control" style="width:100px;"></td>
-			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo ($type == 1 ? (isset($v -> did) ? $v -> did : 0) : (isset($v -> rid) ? $v -> rid : 0)); ?>"><i class="icon-remove"></i></a></td>
+			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya="<?php echo ($type == 1 ? (isset($v -> did) ? $v -> did : 0) : (isset($v -> did) ? $v -> did : 0)); ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>
                                     </tbody>

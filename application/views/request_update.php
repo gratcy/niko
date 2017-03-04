@@ -23,7 +23,7 @@
 
                     <div class="col-lg-4">
                                             <select class="form-control" name="rtype">
-											<?php echo __get_request_type(0,2);?>
+											<?php echo __get_request_type($detail[0] -> dtype,2);?>
                                             </select>
                     </div>
                 </div>

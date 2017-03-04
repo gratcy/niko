@@ -68,6 +68,7 @@ $route['customers/get_suggestion'] = 'customers/home/get_suggestion';
 $route['customers/customers_add'] = 'customers/home/customers_add';
 $route['customers/customers_update/?(:num)?'] = 'customers/home/customers_update/$1';
 $route['customers/customers_delete/(:num)'] = 'customers/home/customers_delete/$1';
+$route['customers/export_customers'] = 'customers/home/export_customers';
 
 $route['categories/?(:num)?'] = 'categories/home/index/$1';
 $route['categories/categories_add'] = 'categories/home/categories_add';
@@ -89,6 +90,7 @@ $route['products/get_suggestion'] = 'products/home/get_suggestion';
 $route['products/products_add'] = 'products/home/products_add';
 $route['products/products_update/?(:num)?'] = 'products/home/products_update/$1';
 $route['products/products_delete/(:num)'] = 'products/home/products_delete/$1';
+$route['products/export_products'] = 'products/home/export_products';
 
 $route['group_product/?(:num)?'] = 'group_product/home/index/$1';
 $route['group_product/group_product_add'] = 'group_product/home/group_product_add';

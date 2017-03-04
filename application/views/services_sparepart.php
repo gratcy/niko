@@ -49,6 +49,8 @@ left:inherit!important;
 <!--
           <th>Branch</th>
 -->
+          <th>Date</th>
+          <th>Technical</th>
           <th>Description</th>
           <th>Status</th>
           <th style="width: 80px;"></th>
@@ -63,6 +65,8 @@ left:inherit!important;
 <!--
           <td><?php echo $v -> bname; ?></td>
 -->
+          <td><?php echo __get_date($v -> sdate); ?></td>
+          <td><?php echo __get_service_technical($v -> ssid); ?></td>
           <td><?php echo $v -> sdesc; ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>

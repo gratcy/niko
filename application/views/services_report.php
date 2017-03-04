@@ -48,6 +48,8 @@ left:inherit!important;
           <th>WO No.</th>
           <th>Date</th>
           <th>Description</th>
+          <th>Technician</th>
+          <th>Point</th>
           <th>Status</th>
           <th style="width: 80px;"></th>
                                         </tr>
@@ -60,6 +62,8 @@ left:inherit!important;
           <td><?php echo $v -> sno; ?></td>
           <td><?php echo __get_date($v -> sdate); ?></td>
           <td><?php echo $v -> sdesc; ?></td>
+          <td><?php echo __get_service_technical($v -> ssid); ?></td>
+          <td><?php echo __get_total_point($v -> sid); ?></td>
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
 			  <?php if ($v -> sstatus == 3) : ?>

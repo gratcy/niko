@@ -354,11 +354,32 @@ function __get_stock_adjustment($iid, $branch, $type, $stype) {
 	return (isset($data[0] -> total) ? $data[0] -> total : 0);
 }
 
+function __get_total_point($sid) {
+    $CI =& get_instance();
+	$CI -> load -> model('services_report/services_report_model');
+	$data = $CI -> services_report_model -> __get_total_point($sid);
+	return $data[0] -> total;
+}
+
 function __get_stock_process($bcid,$iid,$type) {
     $CI =& get_instance();
 	$CI -> load -> model('inventory/inventory_model');
 	$data = $CI -> inventory_model ->__get_stock_process($bcid,$iid,$type);
 	return $data;
+}
+
+function __get_service_technical($id) {
+    $CI =& get_instance();
+	$CI -> load -> model('service_wo/services_wo_model');
+	$CI -> load -> model('technical/technical_model');
+	$arr = $CI -> services_wo_model -> __get_technical_services($id);
+	$ids = array();
+	foreach($arr as $k => $v)
+		if ($v -> stid) $ids[] = $v -> stid;
+	$technical = $CI -> technical_model -> __get_technical_services(implode(',', $ids));
+	$res = '';
+	foreach($technical as $k => $v) $res .= $v -> tcode . ' - ' . $v -> tname . '<br />';
+	return $res;
 }
 
 function __sortArrayByDate( $a, $b ) {

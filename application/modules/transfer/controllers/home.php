@@ -93,7 +93,7 @@ class Home extends MY_Controller {
 			else $status = (int) $this -> input -> post('status');
 			
 			if ($rtype == 2) $rno = $rno2;
-			
+
 			if ($id) {
 				if (!$title || !$rno) {
 					__set_error_msg(array('error' => 'Judul dan Request No harus di isi !!!'));
@@ -141,14 +141,17 @@ class Home extends MY_Controller {
 						$docno = 'T'.date('m', strtotime($waktu)).date('y', strtotime($waktu)).$id.str_pad($rno, 2, "0", STR_PAD_LEFT);
 						$arr = array('dtype' => $rtype, 'ddrid' => $rno, 'ddocno' => $docno, 'ddate' => strtotime($waktu), 'dtitle' => $title, 'ddesc' => $desc, 'dstatus' => $status);
 						if ($this -> transfer_model -> __update_transfer($id, $arr)) {
+							$stype = ($rtype == 1 ? 1 : 4);
 							foreach($req as $k => $v) {
-								$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,1,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($v -> pid,$this -> memcachedlib -> sesresult['ubid'],1,array('istockout' => ($iv[0] -> istockout+$v -> dqty),'istock' => ($iv[0] -> istock - $v -> dqty)));
+								$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,$stype,$this -> memcachedlib -> sesresult['ubid']);
+								$this -> receiving_model -> __update_inventory($v -> pid,$this -> memcachedlib -> sesresult['ubid'],$stype,array('istockout' => ($iv[0] -> istockout+$v -> dqty),'istock' => ($iv[0] -> istock - $v -> dqty)));
 							}
 							
-							foreach($req2 as $k => $v) {
-								$iv2 = $this -> receiving_model -> __get_inventory_detail($v -> sid,2,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($v -> sid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockout' => ($iv2[0] -> istockout+$v -> dqty),'istock' => ($iv2[0] -> istock - $v -> dqty)));
+							if ($rtype == 1) {
+								foreach($req2 as $k => $v) {
+									$iv2 = $this -> receiving_model -> __get_inventory_detail($v -> sid,2,$this -> memcachedlib -> sesresult['ubid']);
+									$this -> receiving_model -> __update_inventory($v -> sid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockout' => ($iv2[0] -> istockout+$v -> dqty),'istock' => ($iv2[0] -> istock - $v -> dqty)));
+								}
 							}
 							
 							__set_error_msg(array('info' => 'Data berhasil diubah.'));

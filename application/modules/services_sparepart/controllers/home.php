@@ -45,7 +45,7 @@ class Home extends MY_Controller {
 				redirect(site_url('services_sparepart' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('ssid' => $wo, 'sdesc' => $desc, 'sstatus' => $status);
+				$arr = array('ssid' => $wo, 'sdate' => time(), 'sdesc' => $desc, 'sstatus' => $status);
 				if ($this -> services_sparepart_model -> __insert_services_sparepart($arr)) {
 					$lastID = $this -> db -> insert_id();
 					

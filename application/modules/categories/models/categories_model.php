@@ -3,11 +3,7 @@ class Categories_model extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-<<<<<<< Updated upstream
-
-=======
     
->>>>>>> Stashed changes
 	function __get_categories($type=1) {
 		if ($type == 1) {
 			return 'SELECT * FROM categories_tab WHERE (cstatus=1 OR cstatus=0) AND ctype=1 ORDER BY cid DESC';

@@ -200,4 +200,23 @@ class Home extends MY_Controller {
 		
 		echo json_encode($hint);
 	}
+	
+	function export_products() {
+		ini_set('memory_limit', '-1');
+		$this -> load -> library('excel');
+		$data = $this -> products_model -> __get_export($this -> memcachedlib -> sesresult['ubid']);
+		
+		$arr = array();
+		foreach($data as $K => $v) {
+			$arr[] = array($v -> pcode, $v -> pname, $v -> pvolume, $v -> ppname, __get_rupiah($v -> pdist,1), __get_rupiah($v -> psemi,1), __get_rupiah($v -> pkey,1), __get_rupiah($v -> pstore,1), __get_rupiah($v -> pconsume,1), __get_status($v -> pstatus,1));
+		}
+		
+		$data = array('header' => array('Code', 'Name', 'Volume/Pcs','Packaging','Price Distributor','Price Semi','Price Agent','Price Store', 'Price Consumer', 'Status'), 'data' => $arr);
+		$this -> excel -> sEncoding = 'UTF-8';
+		$this -> excel -> bConvertTypes = false;
+		$this -> excel -> sWorksheetTitle = 'Product List - PT. Niko Elektronic indonesia';
+		
+		$this -> excel -> addArray($data);
+		$this -> excel -> generateXML('ProductList-' . date('Ymd'));
+	}
 }

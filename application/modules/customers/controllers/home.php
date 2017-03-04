@@ -82,7 +82,6 @@ class Home extends MY_Controller {
 			}
 		}
 		else {
-			$view['customer_check'] = $this -> categories_lib -> __get_categories_check('');
 			$view['branch'] = $this -> branch_lib -> __get_branch();
 			$view['sales'] = $this -> sales_lib -> __get_sales('',$this -> memcachedlib -> sesresult['ubid']);
 			$view['customer_check'] = $this -> categories_lib -> __get_categories_check('');
@@ -93,13 +92,6 @@ class Home extends MY_Controller {
 	function customers_update($id) {
 		if ($_POST) {
 			$cid = serialize($this -> input -> post('cid', TRUE));
-<<<<<<< Updated upstream
-=======
-			// echo $cid;
-			// $uncid=unserialize($cid);
-			// echo '<pre>';
-			// print_r($uncid);die;
->>>>>>> Stashed changes
 			$name = $this -> input -> post('name', TRUE);
 			$contactname = $this -> input -> post('contactname', TRUE);
 			$email = $this -> input -> post('email', TRUE);
@@ -141,11 +133,7 @@ class Home extends MY_Controller {
 				}
 				else {
 					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cstatus' => $status);
-<<<<<<< Updated upstream
-					if ($this -> customers_model -> __update_customers($id, $arr)) {	
-=======
 					if ($this -> customers_model -> __update_customers($id, $arr)) {
->>>>>>> Stashed changes
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));
 					}
@@ -218,5 +206,25 @@ class Home extends MY_Controller {
 		}
 		
 		echo json_encode($hint);
+	}
+	
+	function export_customers() {
+		ini_set('memory_limit', '-1');
+		$this -> load -> library('excel');
+		$data = $this -> customers_model -> __get_export($this -> memcachedlib -> sesresult['ubid']);
+		
+		$arr = array();
+		foreach($data as $K => $v) {
+			$addr = explode('*', $v -> caddr);
+			$arr[] = array(__get_customer_category($v -> ccat,1), $v -> cname, $v -> ccontactname, $v -> sname, __get_rupiah($v -> ccash,2), __get_rupiah($v -> ccredit,2), __get_rupiah($v -> ctop,2), __get_rupiah($v -> climit,2), __get_rupiah($v -> rcvb,2), ($v -> cspecial == 0 ? 'No' : 'Yes'), __get_status($v -> cstatus,1));
+		}
+		
+		$data = array('header' => array('Name', 'Name', 'PIC','Sales','TOP Cash','TOP Credit','TOP Credit Limit','Credit Current', 'Receivable', 'Special Attention', 'Status'), 'data' => $arr);
+		$this -> excel -> sEncoding = 'UTF-8';
+		$this -> excel -> bConvertTypes = false;
+		$this -> excel -> sWorksheetTitle = 'Customer - PT. Niko Elektronic indonesia';
+		
+		$this -> excel -> addArray($data);
+		$this -> excel -> generateXML('customer-' . date('Ymd'));
 	}
 }
