@@ -7,7 +7,7 @@ class Services_sparepart_model extends CI_Model {
 	function __get_services_sparepart($bid="") {
 		if ($bid != "") $bid = " AND b.sbid=" . $bid;
 		else $bid = "";
-		return 'SELECT a.*,b.sno,c.bname FROM services_sparepart_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
+		return 'SELECT a.*,b.sno,b.sdate,c.bname FROM services_sparepart_tab a left join services_workorder_tab b ON a.ssid=b.sid left join branch_tab c ON b.sbid=c.bid WHERE (a.sstatus=1 or a.sstatus=0 OR a.sstatus=3)'.$bid.' ORDER BY a.sid DESC';
 	}
 	
 	function __get_services_sparepart_detail($id) {

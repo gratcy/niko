@@ -258,6 +258,8 @@ class Home extends MY_Controller {
 		$recevingUnApp = array();
 		$returnApp = array();
 		$returnUnApp = array();
+		$returnTransApp = array();
+		$returnTransUnApp = array();
 		$SO = array();
 		$DO = array();
 		
@@ -267,15 +269,22 @@ class Home extends MY_Controller {
 		
 			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 1);
 			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 2);
+		elseif ($type == 2) :
+			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1);
+			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2);
 		elseif ($type == 4) :
 			$returnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 1);
 			$returnUnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 2);
+			
+			$returnTransApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 1);
+			$returnTransUnApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 2);
 		else :
 		
 		endif;
 		
-		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $returnApp, $returnUnApp);
+		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp);
 		usort($data, "__sortArrayByDate");
+		$view['type'] = $type;
 		$view['detail'] = $data;
 		$view['book'] = $this -> inventory_model -> __get_product($iid, $branch, $type);
 		if ($this -> input -> get('export') == 'excel') :

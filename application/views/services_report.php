@@ -67,7 +67,7 @@ left:inherit!important;
           <td><?php echo __get_status($v -> sstatus,3); ?></td>
 		  <td>
 			  <?php if ($v -> sstatus == 3) : ?>
-			  <a href="javascript:void(0);" onclick="print_data('<?php echo site_url('services_report/services_report_print/' . $v -> sid); ?>');" ><i class="icon-print"></i></a>
+			  <a href="<?php echo site_url('services_report/services_report_print/' . $v -> sid); ?>" target="_blank"><i class="icon-print"></i></a>
 			  <?php endif; ?>
 			  <?php if ($v -> sstatus <> 3) : ?>
 				<?php if (__get_roles('ServicesReportExecute')) : ?>

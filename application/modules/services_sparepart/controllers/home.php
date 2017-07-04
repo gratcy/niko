@@ -45,7 +45,7 @@ class Home extends MY_Controller {
 				redirect(site_url('services_sparepart' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('ssid' => $wo, 'sdate' => time(), 'sdesc' => $desc, 'sstatus' => $status);
+				$arr = array('ssid' => $wo, 'sdesc' => $desc, 'sstatus' => $status);
 				if ($this -> services_sparepart_model -> __insert_services_sparepart($arr)) {
 					$lastID = $this -> db -> insert_id();
 					
@@ -162,9 +162,8 @@ class Home extends MY_Controller {
 		$id = (int) $this -> input -> get('id');
 		$keyword = $this -> input -> post('keyword');
 		
-		$pager = $this -> pagination_lib -> pagination($this -> sparepart_model -> __get_sparepart_services_search($keyword),3,10,site_url('services_sparepart/sparepart_add/' . $type));
-		$view['sparepart'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services_search($keyword, $this -> memcachedlib -> sesresult['ubid']);
+		$view['pages'] = '';
 		$view['id'] = $id;
 		$view['type'] = $type;
 		$view['services'] = true;
@@ -197,7 +196,7 @@ class Home extends MY_Controller {
 			redirect(site_url('services_sparepart/sparepart_add/' . $type . '?id=' . $id));
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> sparepart_model -> __get_sparepart_services('','',$this -> memcachedlib -> sesresult['ubid']),3,10,site_url('services_sparepart/sparepart_add/' . $type));
+			$pager = $this -> pagination_lib -> pagination($this -> sparepart_model -> __get_sparepart_services('','',$this -> memcachedlib -> sesresult['ubid']),3,1000,site_url('services_sparepart/sparepart_add/' . $type));
 			$view['sparepart'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['id'] = $id;

@@ -19,6 +19,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Distribution Request
+                <div class="searchTable">
+                <form action="<?php echo current_url();?>" method="post">
+					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
+					<div class="sRight"><button class="btn text-muted text-center btn-danger" type="submit">Go</button></div>
+                        <span id="sg1"></span>
+                </form>
+                </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -57,7 +64,7 @@
               <?php else: ?>
               <a href="<?php echo site_url('request/request_detail/' . $v -> did); ?>"><i class="icon-book"></i></a>
 			   <a href="<?php echo site_url('request/export/excel_detail/' . $v -> did); ?>"><i class="icon-file"></i></a>
-              <a href="javascript:void(0);" onclick="print_data('<?php echo site_url('printpage/dist_request/' . $v -> did); ?>');"><i class="icon-print"></i></a>
+              <a href="<?php echo site_url('printpage/dist_request/' . $v -> did); ?>" target="_blank"><i class="icon-print"></i></a>
               <?php endif; ?>
               <?php endif; ?>
 		</td>

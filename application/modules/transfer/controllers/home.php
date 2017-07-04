@@ -15,9 +15,18 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> transfer_model -> __get_transfer($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('transfer'));
-		$view['transfer'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		$view['keyword'] = '';
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['transfer'] = $this -> transfer_model -> __get_transfer_search($keyword, $this -> memcachedlib -> sesresult['ubid']);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> transfer_model -> __get_transfer($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('transfer'));
+			$view['transfer'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+		}
 		$this->load->view('transfer', $view);
 	}
 	
@@ -113,20 +122,22 @@ class Home extends MY_Controller {
 					foreach($qty[2] as $k => $v)
 						$this -> request_model -> __update_request_item($k,array('dqty' => $v));
 					
+					$itypeP = ($rtype == 1 ? 1 : 4);
 					if ($status == 3) {
 						$req = $this -> request_model -> __get_items($rno,1,2);
 						foreach($req as $k => $v) {
-							$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,1,$this -> memcachedlib -> sesresult['ubid']);
-							if ($iv[0] -> istock < 1) {
+							$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,$itypeP,$this -> memcachedlib -> sesresult['ubid']);
+							if ($iv[0] -> istock <= $v -> dqty) {
 								$st = true;
 								$cd[] = $v -> pcode;
 							}
 						}
 						
 						$req2 = $this -> request_model -> __get_items($rno,2,2);
+						
 						foreach($req2 as $k => $v) {
 							$iv = $this -> receiving_model -> __get_inventory_detail($v -> sid,2,$this -> memcachedlib -> sesresult['ubid']);
-							if ($iv[0] -> istock < 1) {
+							if ($iv[0] -> istock <= $v -> dqty) {
 								$st = true;
 								$cd[] = $v -> scode;
 							}
@@ -141,10 +152,10 @@ class Home extends MY_Controller {
 						$docno = 'T'.date('m', strtotime($waktu)).date('y', strtotime($waktu)).$id.str_pad($rno, 2, "0", STR_PAD_LEFT);
 						$arr = array('dtype' => $rtype, 'ddrid' => $rno, 'ddocno' => $docno, 'ddate' => strtotime($waktu), 'dtitle' => $title, 'ddesc' => $desc, 'dstatus' => $status);
 						if ($this -> transfer_model -> __update_transfer($id, $arr)) {
-							$stype = ($rtype == 1 ? 1 : 4);
+							
 							foreach($req as $k => $v) {
-								$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,$stype,$this -> memcachedlib -> sesresult['ubid']);
-								$this -> receiving_model -> __update_inventory($v -> pid,$this -> memcachedlib -> sesresult['ubid'],$stype,array('istockout' => ($iv[0] -> istockout+$v -> dqty),'istock' => ($iv[0] -> istock - $v -> dqty)));
+								$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,$itypeP,$this -> memcachedlib -> sesresult['ubid']);
+								$this -> receiving_model -> __update_inventory($v -> pid,$this -> memcachedlib -> sesresult['ubid'],$itypeP,array('istockout' => ($iv[0] -> istockout+$v -> dqty),'istock' => ($iv[0] -> istock - $v -> dqty)));
 							}
 							
 							if ($rtype == 1) {

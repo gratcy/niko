@@ -8,6 +8,16 @@ class Receiving_model extends CI_Model {
 		return 'SELECT a.*, (SELECT COUNT(*) FROM receiving_item_tab b WHERE b.rrid=a.rid) as total_item FROM receiving_tab a WHERE (a.rstatus=1 OR a.rstatus=0 OR a.rstatus=3) AND a.rbid='.$bid.' ORDER BY a.rid DESC';
 	}
 	
+	function __get_receiving_search($keyword, $bid=0) {
+		if (preg_match('/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/', $keyword)) {
+			$keyword = date('Y-m-d',strtotime(str_replace('/','-',$keyword)));
+			$this -> db -> select("a.*, (SELECT COUNT(*) FROM receiving_item_tab b WHERE b.rrid=a.rid) as total_item FROM receiving_tab a WHERE (a.rstatus=1 OR a.rstatus=0 OR a.rstatus=3) AND a.rbid=".$bid." AND from_unixtime(a.rdate,'%Y-%m-%d')='".$keyword."' ORDER BY a.rid DESC", FALSE);
+		}
+		else
+			$this -> db -> select("a.*, (SELECT COUNT(*) FROM receiving_item_tab b WHERE b.rrid=a.rid) as total_item FROM receiving_tab a WHERE (a.rstatus=1 OR a.rstatus=0 OR a.rstatus=3) AND a.rbid=".$bid." AND a.rdocno='".$keyword."' ORDER BY a.rid DESC", FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
 	function __export($bid=0) {
 		$sql = $this -> db -> query(self::__get_receiving($bid));
 		return $sql -> result(); 

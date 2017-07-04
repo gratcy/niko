@@ -13,9 +13,18 @@ class Home extends MY_Controller {
 
 	function index() {
 		(!$this -> memcachedlib -> get('__request_items') ? '' : $this -> memcachedlib -> delete('__request_items'));
-		$pager = $this -> pagination_lib -> pagination($this -> request_model -> __get_request($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('request'));
-		$view['request'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		$view['keyword'] = '';
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['request'] = $this -> request_model -> __get_request_search($keyword, $this -> memcachedlib -> sesresult['ubid']);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> request_model -> __get_request($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('request'));
+			$view['request'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+		}
 		$this->load->view('request', $view);
 	}
 	

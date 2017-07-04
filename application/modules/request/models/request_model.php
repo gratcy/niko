@@ -10,6 +10,19 @@ class Request_model extends CI_Model {
 		return 'SELECT a.did,a.dtype,a.ddate,a.dtitle,a.ddesc,a.dstatus,b.bname as fbname,c.bname as tbname, (SELECT count(*) FROM distribution_item_tab d WHERE d.ddrid=a.did) as total_item FROM distribution_request_tab a LEFT JOIN branch_tab b ON a.dbfrom=b.bid LEFT JOIN branch_tab c ON a.dbto=c.bid WHERE (a.dstatus=1 OR a.dstatus=0 OR a.dstatus=3)'.$bid.' ORDER BY a.did DESC';
 	}
 	
+    function __get_request_search($keyword, $bid="") {
+		if ($bid) $bid = ' AND (a.dbfrom='.$bid.' OR a.dbto='.$bid.')';
+		else $bid = '';
+		
+		if (preg_match('/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/', $keyword)) {
+			$keyword = date('Y-m-d',strtotime(str_replace('/','-',$keyword)));
+			$this -> db -> select("a.did,a.dtype,a.ddate,a.dtitle,a.ddesc,a.dstatus,b.bname as fbname,c.bname as tbname, (SELECT count(*) FROM distribution_item_tab d WHERE d.ddrid=a.did) as total_item FROM distribution_request_tab a LEFT JOIN branch_tab b ON a.dbfrom=b.bid LEFT JOIN branch_tab c ON a.dbto=c.bid WHERE (a.dstatus=1 OR a.dstatus=0 OR a.dstatus=3)".$bid." AND from_unixtime(a.ddate,'%Y-%m-%d')='".$keyword."' ORDER BY a.did DESC", FALSE);
+		}
+		else
+			$this -> db -> select("a.did,a.dtype,a.ddate,a.dtitle,a.ddesc,a.dstatus,b.bname as fbname,c.bname as tbname, (SELECT count(*) FROM distribution_item_tab d WHERE d.ddrid=a.did) as total_item FROM distribution_request_tab a LEFT JOIN branch_tab b ON a.dbfrom=b.bid LEFT JOIN branch_tab c ON a.dbto=c.bid WHERE (a.dstatus=1 OR a.dstatus=0 OR a.dstatus=3)".$bid." AND CONCAT('R0',a.dtype,LPAD(a.did, 4, 0))='".$keyword."' ORDER BY a.did DESC", FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_request_select($bid='',$type) {
 		if ($type == 3) {
 			$bid = ' AND (dbto='.$bid.' OR dbfrom='.$bid.')';
@@ -22,7 +35,13 @@ class Request_model extends CI_Model {
 			else $type = '';
 		}
 		
-		$this -> db -> select('did,dtype,dtitle FROM distribution_request_tab WHERE dstatus=3'.$bid.$type.' order by did desc');
+		$this -> db -> select('ddrid FROM distribution_tab WHERE dtype=2 AND dstatus!=2');
+		$not = $this -> db -> get() -> result();
+		
+		if (count($not) > 0)
+			$this -> db -> select('did,dtype,dtitle FROM distribution_request_tab WHERE did NOT IN ('.implode(',', array_keys($not)).') AND dstatus=3'.$bid.$type.' order by did desc', FALSE);
+		else
+			$this -> db -> select('did,dtype,dtitle FROM distribution_request_tab WHERE dstatus=3'.$bid.$type.' order by did desc');
 		return $this -> db -> get() -> result();
 	}
 	

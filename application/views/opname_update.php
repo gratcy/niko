@@ -28,8 +28,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-          <td><?php echo ($type == 2 ? $items[0] -> scode : $items[0] -> pcode); ?></td>
-          <td><?php echo ($type == 2 ? $items[0] -> sname : $items[0] -> pname); ?></td>
+          <td><?php echo ($type == 2 || $type == 5 ? $items[0] -> scode : $items[0] -> pcode); ?></td>
+          <td><?php echo ($type == 2 || $type == 5 ? $items[0] -> sname : $items[0] -> pname); ?></td>
           <td style="text-align:right;"><?php echo $detail[0] -> istockbegining; ?></td>
           <td style="text-align:right;"><?php echo $detail[0] -> istockin; ?></td>
           <td style="text-align:right;"><?php echo $detail[0] -> istockout; ?></td>

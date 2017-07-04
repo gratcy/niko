@@ -82,7 +82,7 @@
           <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo $v -> snocomponent; ?></td>
-			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items2[<?php echo (isset($v -> did) ? $v -> did : 0); ?>]" class="form-control" style="width:100px;"></td>
+			<td><input type="number" value="<?php echo ($type == 1 ? '' : (isset($v -> rqty) ? $v -> rqty : 0)); ?>" name="items2[<?php echo ($type == 1 ? (isset($v -> did) ? $v -> did : 0) : (isset($v -> rid) ? $v -> rid : 0)); ?>]" class="form-control" style="width:100px;"></td>
 			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo (isset($v -> did) ? $v -> did : 0); ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>

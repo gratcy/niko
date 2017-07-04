@@ -93,6 +93,9 @@ $(function(){
 	$('select[name="rno"]').change(function(){
 		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());
 	});
+	$('select[name="rno2"]').change(function(){
+		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());
+	});
 	$('select[name="rtype"]').change(function(){
 		if ($(this).val() == 1) {
 			$('#rno2').css({'display':'none'});

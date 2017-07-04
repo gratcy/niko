@@ -36,7 +36,7 @@ class Services_wo_model extends CI_Model {
 		else $bid = "";
 		
 		
-		$this -> db -> select('ssid FROM services_report_tab WHERE sstatus>=1');
+		$this -> db -> select('ssid FROM services_report_tab WHERE sstatus>1');
 		$sid = $this -> db -> get() -> result();
 		$sdone = array();
 		foreach($sid as $k => $v)

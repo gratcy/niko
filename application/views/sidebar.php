@@ -99,7 +99,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">3</span>&nbsp;
+                       &nbsp; <span class="label label-danger">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventory">
 							<?php if (__get_roles('InventoryProductView')) : ?>
@@ -110,6 +110,9 @@
 							<?php endif; ?>
 							<?php if (__get_roles('InventoryReturnView')) : ?>
 								<li class=""><a href="<?php echo site_url('inventory/4'); ?>"><i class="icon-angle-right"></i> Return </a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('InventoryRejectSparepartView')) : ?>
+								<li class=""><a href="<?php echo site_url('inventory/5'); ?>"><i class="icon-angle-right"></i> Sparepart (Reject) </a></li>
 							<?php endif; ?>
 							<!--
 							<?php if (__get_roles('InventoryServiceView')) : ?>
@@ -142,7 +145,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">3</span>&nbsp;
+                       &nbsp; <span class="label label-danger">4</span>&nbsp;
                     </a>
                     <ul class="collapse" id="inventoryOpname">
 							<?php if (__get_roles('OpnameProductView')) : ?>
@@ -153,6 +156,9 @@
 							<?php endif; ?>
 							<?php if (__get_roles('OpnameReturnView')) : ?>
 								<li><a href="<?php echo site_url('opname/4'); ?>"><i class="icon-angle-right"></i> Return </a></li>
+							<?php endif; ?>
+							<?php if (__get_roles('InventoryRejectSparepartView')) : ?>
+								<li><a href="<?php echo site_url('opname/5'); ?>"><i class="icon-angle-right"></i> Sparepart (Reject) </a></li>
 							<?php endif; ?>
 							<!--
 							<?php if (__get_roles('OpnameServiceView')) : ?>
@@ -182,7 +188,7 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">5</span>&nbsp;
+                       &nbsp; <span class="label label-danger">6</span>&nbsp;
                     </a>
                     <ul class="collapse" id="sales">
 						<?php if (__get_roles('SalesOrderView')) : ?>
@@ -190,12 +196,16 @@
 						<?php endif; ?>
 						<?php if (__get_roles('DeliveryOrderView')) : ?>
                          <li class=""><a href="<?php echo site_url('delivery_order/home/'); ?>"><i class="icon-angle-right"></i> Delivery Order </a></li>
-						 
-						 <li class=""><a href="<?php echo site_url('retur_order/home/retur_order_tg'); ?>"><i class="icon-angle-right"></i> Delivery Order Return Order</a></li>
-						<?php endif; ?>
+						 <?php endif; ?>
+
 						<?php if (__get_roles('ReturnOrderView')) : ?>
 						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Return Order </a></li>
 						<?php endif; ?>
+						
+						 <?php if (__get_roles('DeliveryOrderView')) : ?>
+						 <li class=""><a href="<?php echo site_url('retur_order/home/retur_order_tg'); ?>"><i class="icon-angle-right"></i> Delivery Order Return</a></li>
+						<?php endif; ?>						
+						
 						<?php if (__get_roles('InvoiceOrderView')) : ?>
 						<li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order/1'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<?php endif; ?>
@@ -295,7 +305,6 @@
 								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product</a></li>
 								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
 								<li><a href="<?php echo site_url('reportopname/4'); ?>"><i class="icon-angle-right"></i> Return</a></li>
-								<!--
 								<li><a href="<?php echo site_url('reportopname/6'); ?>"><i class="icon-angle-right"></i> Services</a></li>
 								<li class="">
 									<a href="javascript:void(0);"><i class="icon-angle-down"></i> Reject </a>
@@ -304,7 +313,6 @@
 									<li><a href="<?php echo site_url('reportopname/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
 									</ul>
 								</li>
-								-->
                         </ul>                        </li>
 			   <?php endif; ?>
                     </ul>

@@ -1,5 +1,5 @@
 <html>
-<title>Stock Card</title>
+<title>Stock Card | <?php echo __get_inventory_type($type); ?></title>
 <body>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">                
@@ -13,10 +13,10 @@
                                     <div class="box-body">
 									<h2>PT. Niko Elektronik Indonesia</h2>
 									<table border="0">
-									<tr><td><b>Stock Card</b></td><td></td></tr>
+									<tr><td><b>Stock Card ( <?php echo __get_inventory_type($type); ?> )</b></td><td></td></tr>
 									<tr><td>Date</td><td>: <?php echo date('d  M  Y');?></td></tr>
-									<tr><td>Item</td><td>: <?php echo $book[0]->name; ?></td></tr>
 									<tr><td>Code</td><td>: <?php echo $book[0]->code; ?></td></tr>
+									<tr><td>Item</td><td>: <?php echo $book[0]->name; ?></td></tr>
 									<tr><td>Stock Begining</td><td>: <?php echo $book[0] -> istockbegining; ?></td></tr>
 									</table>
 									<br />
@@ -25,7 +25,7 @@
 						<thead>
 						<tr style="border:1px solid #000;padding:3px;">
 						<th style="border:1px solid #000;padding:3px;">Date</th>
-						<th style="border:1px solid #000;padding:3px;">Trans No.</th>
+						<th style="border:1px solid #000;padding:3px;">Transaction No.</th>
 						<th style="border:1px solid #000;padding:3px;">Customer</th>
 						<th style="border:1px solid #000;padding:3px;">Stock In</th>
 						<th style="border:1px solid #000;padding:3px;">Stock Out</th>

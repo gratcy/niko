@@ -213,7 +213,7 @@ class Home extends MY_Controller {
 			redirect(site_url('services_wo/technical_add/' . $type . '?id=' . $id));
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> technical_model -> __get_technical_services(''),3,10,site_url('services_wo/technical_add/' . $type));
+			$pager = $this -> pagination_lib -> pagination($this -> technical_model -> __get_technical_services(''),3,100,site_url('services_wo/technical_add/' . $type));
 			$view['technical'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['id'] = $id;
@@ -315,7 +315,7 @@ class Home extends MY_Controller {
 			redirect(site_url('services_wo/product_add/' . $type . '?id=' . $id));
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products_services(0,0,0,$this -> memcachedlib -> sesresult['ubid']),3,10,site_url('services_wo/product_add/' . $type));
+			$pager = $this -> pagination_lib -> pagination($this -> products_model -> __get_products_services(0,0,0,$this -> memcachedlib -> sesresult['ubid']),3,1000,site_url('services_wo/product_add/' . $type));
 			$view['product'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['id'] = $id;

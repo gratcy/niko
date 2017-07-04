@@ -104,6 +104,11 @@ class Inventory_model extends CI_Model {
 		return $total;
 	}
 	
+	function __get_return_transfer($iid, $branch, $stype) {
+		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN branch_tab d ON c.dbto=d.bid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND b.diid=" . $iid, FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_return_order($iid, $branch, $type, $stype) {
 		$this -> db -> select("b.sqty as tqty,a.stgl as ttanggal, a.sreff as tno, ".($stype == 1 ? 1 : 0)." as approved, c.cname as cname, 1 as ttypetrans FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid LEFT JOIN customers_tab c ON a.scid=c.cid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "a.sstatus >= 3" : "a.sstatus < 3")." AND b.spid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();

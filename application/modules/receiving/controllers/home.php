@@ -15,9 +15,18 @@ class Home extends MY_Controller {
 
 	function index() {
 		(!$this -> memcachedlib -> get('__receiving_items') ? '' : $this -> memcachedlib -> delete('__receiving_items'));
-		$pager = $this -> pagination_lib -> pagination($this -> receiving_model -> __get_receiving($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('receiving'));
-		$view['receiving'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$keyword = $this -> input -> post('keyword');
+		$view['keyword'] = '';
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['receiving'] = $this -> receiving_model -> __get_receiving_search($keyword, $this -> memcachedlib -> sesresult['ubid']);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> receiving_model -> __get_receiving($this -> memcachedlib -> sesresult['ubid']),3,10,site_url('receiving'));
+			$view['receiving'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+		}
 		$this->load->view('receiving', $view);
 	}
 	
