@@ -15,9 +15,9 @@ class Request_lib {
 		$res = '<option value=""></option>';
 		foreach($receiving as $k => $v)
 			if ($id == $v -> did)
-				$res .= '<option dtitle="'.$v -> dtitle.'" value="'.$v -> did.'" selected>'.($v -> dtype == 1 ? 'R01' : 'R02').str_pad($v -> did, 4, "0", STR_PAD_LEFT).'</option>';
+				$res .= '<option dtitle="'.$v -> dtitle.'" ddate="'.date('d/m/Y', $v -> ddate).'" value="'.$v -> did.'" selected>'.($v -> dtype == 1 ? 'R01' : 'R02').str_pad($v -> did, 4, "0", STR_PAD_LEFT).'</option>';
 			else
-				$res .= '<option dtitle="'.$v -> dtitle.'" value="'.$v -> did.'">'.($v -> dtype == 1 ? 'R01' : 'R02').str_pad($v -> did, 4, "0", STR_PAD_LEFT).'</option>';
+				$res .= '<option dtitle="'.$v -> dtitle.'" ddate="'.date('d/m/Y', $v -> ddate).'" value="'.$v -> did.'">'.($v -> dtype == 1 ? 'R01' : 'R02').str_pad($v -> did, 4, "0", STR_PAD_LEFT).'</option>';
 		return $res;
 	}
 }

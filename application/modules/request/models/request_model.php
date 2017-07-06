@@ -39,9 +39,9 @@ class Request_model extends CI_Model {
 		$not = $this -> db -> get() -> result();
 		
 		if (count($not) > 0)
-			$this -> db -> select('did,dtype,dtitle FROM distribution_request_tab WHERE did NOT IN ('.implode(',', array_keys($not)).') AND dstatus=3'.$bid.$type.' order by did desc', FALSE);
+			$this -> db -> select('did,dtype,dtitle,ddate FROM distribution_request_tab WHERE did NOT IN ('.implode(',', array_keys($not)).') AND dstatus=3'.$bid.$type.' order by did desc', FALSE);
 		else
-			$this -> db -> select('did,dtype,dtitle FROM distribution_request_tab WHERE dstatus=3'.$bid.$type.' order by did desc');
+			$this -> db -> select('did,dtype,dtitle,ddate FROM distribution_request_tab WHERE dstatus=3'.$bid.$type.' order by did desc');
 		return $this -> db -> get() -> result();
 	}
 	

@@ -89,6 +89,7 @@
 $(function(){
 	$('select[name="rno"],select[name="rno2"]').change(function(){
 		$('input[name="title"]').val($('option:selected', this).attr('dtitle'));
+		$('input[name="waktu"]').val($('option:selected', this).attr('ddate'));
 	});
 	$('select[name="rno"]').change(function(){
 		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());

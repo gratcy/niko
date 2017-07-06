@@ -91,7 +91,8 @@ class Home extends MY_Controller {
 			$fpqty = $this -> input -> post('fpqty');
 			$suqty = $this -> input -> post('suqty');
 			$tqty = $this -> input -> post('tqty');
-
+			$qty = $this -> input -> post('qty');
+			
 			if ($id) {
 				if (!$swo) {
 					__set_error_msg(array('error' => 'No Work Order harus di isi !!!'));
@@ -100,6 +101,13 @@ class Home extends MY_Controller {
 				else {
 					if ($appsev == 3) $status = 3;
 					$arr = array('sdesc' => $desc, 'sstatus' => $status);
+					
+					foreach($fpqty as $k => $v)
+					$this -> services_report_model -> __update_services_report_product($id, $k, array('sqty' => $v));
+					
+					foreach($suqty as $k => $v)
+						$this -> services_report_model -> __update_services_report_sparepart($id, $k, array('sqty' => $v));
+						
 					if ($this -> services_report_model -> __update_services_report($id, $arr)) {
 						if ($appsev == 3) {
 							$dwo = $this -> services_wo_model -> __get_services_wo_detail($swo);
@@ -111,16 +119,16 @@ class Home extends MY_Controller {
 									
 									$d = $this -> inventory_model -> __check_inventory(5,$dwo[0] -> sbid,$sid[$i]);
 									if ($d) {
-										$arr = array('istockin' => ($d[0] -> istockin + ($qty[$sid[$i]] - $qty[$sid[$i]])), 'istock' => ($d[0] -> istock + ($qty[$sid[$i]] - $qty[$sid[$i]])));
+										$arr = array('istockin' => ($d[0] -> istockin + $suqty[$sid[$i]]), 'istock' => ($d[0] -> istock + $suqty[$sid[$i]]));
 										$this -> inventory_model -> __update_inventory($d[0] -> iid, $arr, 5);
 									}
 									else {
-										$arr = array('ibid' => $dwo[0] -> sbid, 'iiid' => $sid[$i], 'itype' => 5, 'istockin' => ($qty[$sid[$i]] - $qty[$sid[$i]]), 'istockout' => 0, 'istock' => ($qty[$sid[$i]] - $qty[$sid[$i]]), 'istatus' => 1);
+										$arr = array('ibid' => $dwo[0] -> sbid, 'iiid' => $sid[$i], 'itype' => 5, 'istockin' => ($suqty[$sid[$i]] - $suqty[$sid[$i]]), 'istockout' => 0, 'istock' => ($suqty[$sid[$i]] - $suqty[$sid[$i]]), 'istatus' => 1);
 										$this -> inventory_model -> __insert_inventory($arr);	
 									}
 								endfor;
 							}
-							
+
 							if ($pid) {
 								for($i=0;$i<count($pid);++$i) :
 									$r1 = $this -> inventory_model -> __check_inventory(1,$dwo[0] -> sbid,$pid[$i]);

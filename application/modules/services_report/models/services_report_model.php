@@ -28,6 +28,12 @@ class Services_report_model extends CI_Model {
         return $this -> db -> insert('services_report_sparepart_tab', $data);
 	}
 	
+	function __update_services_report_sparepart($ssid, $sssid, $data) {
+        $this -> db -> where('ssid', $ssid);
+        $this -> db -> where('sssid', $sssid);
+        return $this -> db -> update('services_report_sparepart_tab', $data);
+	}
+	
 	function __check_sparepart($id) {
 		$this -> db -> select('* FROM services_report_sparepart_tab WHERE (sstatus=1 OR sstatus=0 OR sstatus=3) AND ssid=' . $id);
 		return $this -> db -> get() -> result();
@@ -46,8 +52,9 @@ class Services_report_model extends CI_Model {
         return $this -> db -> insert('services_report_product_tab', $data);
 	}
 	
-	function __update_services_report_product($id, $data) {
-        $this -> db -> where('sid', $id);
+	function __update_services_report_product($ssid, $spid, $data) {
+        $this -> db -> where('ssid', $ssid);
+        $this -> db -> where('spid', $spid);
         return $this -> db -> update('services_report_product_tab', $data);
 	}
 	

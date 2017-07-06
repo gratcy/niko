@@ -3,7 +3,6 @@
 	if (hs) {
 	var ahs = hs.replace(/\#/g,'');
 		if ($('div.'+ahs).hasClass('active') == false) {
-	console.log(ahs);
 			$('div.active').addClass('inactive');
 			$('div.active').removeClass('active');
 			$('h3.active').addClass('inactive');

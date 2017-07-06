@@ -60,7 +60,7 @@
                     <label for="text1" class="control-label col-lg-4">Adjust Min (-)</label>
 
                     <div class="col-lg-4">
-                        <input type="text" placeholder="Adjust Plus (-)" name="amin" class="form-control" />
+                        <input type="text" placeholder="Adjust Min (-)" name="amin" class="form-control" />
                     </div>
                 </div>
 
