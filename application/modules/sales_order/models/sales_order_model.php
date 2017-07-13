@@ -225,6 +225,13 @@ return " SELECT DISTINCT(a.sid),a.*,
         return $this -> db -> update('sales_order_tab', $data);
 	}
 	
+	function __update_retur_order($id, $data) {
+        $this -> db -> where('sid', $id);
+        return $this -> db -> update('retur_order_tab', $data);
+	}
+		
+	
+	
 	function __delete_sales_order($id) {
 		return $this -> db -> query('update sales_order_tab set sstatus=2 where sid=' . $id);
 	}

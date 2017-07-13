@@ -56,6 +56,52 @@ class Home extends MY_Controller {
 		$this->load->view('retur_order', $view,$kondisi);
 	}
 	
+	
+	
+	function retur_order_tg() {
+		if(!isset($_GET['search'])){ $_GET['search']="";}
+		if(!isset($_POST['cari'])){$_POST['cari']="";}
+		$keyword = $this -> input -> post('keyword');
+		if ($keyword) {
+			$view['keyword'] = $keyword;
+			$view['retur_order'] = $this -> retur_order_model -> __get_search($keyword);
+			$view['pages'] = '';
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> retur_order_model -> __get_retur_order_tg(),3,10,site_url('retur_order/home/index/'));
+			if($_GET['search']=='1'){
+			$view['retur_order'] = $this -> retur_order_model -> __get_retur_orderzz();	
+			}else{			
+			$view['retur_order'] = $this -> pagination_lib -> paginate();
+			}			
+			
+			
+			
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['keyword'] = '';
+		}
+		if(!isset($_POST['approve'])){$_POST['approve']="";}
+		if($_POST['approve']=='1'){
+			$id=$this -> input -> post('id', TRUE);
+			$arr=array('sstatus' => '3');
+			$this -> retur_order_model -> __update_retur_order($id, $arr);
+			
+			   $scid=$_POST['scid'];
+				$limit=$_POST['sisaplafon_after'];
+				$arrl = array('climit' => $limit);
+					$this -> customers_model -> __update_customers($scid, $arrl);			
+		
+		}
+		if($_POST['cari']=='export excel'){
+			$kondisi=False;
+		}else{
+			$kondisi=True;
+		}
+		
+		$this->load->view('retur_order_tg', $view,$kondisi);
+	}	
+	
+	
 	function retur_order_add() {
 		if ($_POST) {
 		

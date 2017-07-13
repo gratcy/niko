@@ -139,6 +139,14 @@ class Home extends MY_Controller {
 		$this->load->view('source',$view,FALSE);
 	}
 
+	function source_cust() {
+		$view['hostname']=$this->db->hostname;
+		$view['username']=$this->db->username;
+		$view['password']=$this->db->password;
+		$view['database']=$this->db->database;
+		$this->load->view('source_cust',$view,FALSE);
+	}
+
 	function source_sales() {
 		$view['hostname']=$this->db->hostname;
 		$view['username']=$this->db->username;
@@ -146,6 +154,7 @@ class Home extends MY_Controller {
 		$view['database']=$this->db->database;
 		$this->load->view('source_sales',$view,FALSE);
 	}
+
 	
 	function sales_order_update($id,$scid) {
 		if ($_POST) {

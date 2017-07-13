@@ -127,6 +127,21 @@ $view['id'] = $id;
 	
 			$this->load->view('retur_order_details_done',$view);
 	}	
+
+
+// function retur_order_details_done_tg($id,$scid) {	
+// $view['id'] = $id;
+			// $view['scid'] = $scid;
+			// $view['detailx'] = $this -> retur_order_model -> __get_retur_order_detail_approve($id);			
+			// $view['detail'] =$this -> retur_order_detail_model -> __get_retur_order_detail_tg($id);	
+            // $view['jumtg'] =$this -> retur_order_detail_model ->__get_jum_accept_ro_tg($id);		
+			// $view['pbid'] = $this -> branch_lib -> __get_branch();
+			// $view['psid'] = $this -> sales_lib -> __get_sales();
+			// $view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			// $this->load->view('retur_order_details_done_tg',$view);
+	// }	
+
 	
 	function retur_order_report($id,$scid) {
 			$view['id'] = $id;
@@ -201,7 +216,9 @@ $view['id'] = $id;
 			}
 		}	
 			$saccept=$sqty-$reject;
-					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc, 'saccept' => $saccept,'sreject'=>$reject,'ssisa'=>$sqty,'note'=>$notes,'srtype'=>$rtype);					
+					$arr = array( 'sid' =>'' ,'ssid' => $ssid,'spid' => $spid,
+					'sqty' => $sqty ,'sprice' => $sprice,'sdisc' => $sdisc, 
+					'saccept' => $saccept,'sreject'=>$reject,'ssisa'=>$saccept,'note'=>$notes,'srtype'=>$rtype);					
 
 					if ($this -> retur_order_detail_model -> __insert_retur_order_detail($arr)) {
 						$arrz=array('sstatus' => '1');

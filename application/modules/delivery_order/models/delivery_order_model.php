@@ -135,6 +135,14 @@ class delivery_order_model extends CI_Model {
 		AND sales_order_tab.sid='.$id);
 return $this -> db -> get() -> result();
 	}	 	
+
+	function __get_sisa_ro($id) {
+		$this -> db -> SELECT ("sum(retur_order_detail_tab.ssisa) as sisa
+		FROM retur_order_tab,retur_order_detail_tab where   retur_order_tab.sid=retur_order_detail_tab.ssid
+		AND retur_order_tab.sid='".$id ."' AND retur_order_detail_tab.srtype='Tukar Guling' ");
+return $this -> db -> get() -> result();
+	}
+
 	
 	function __get_do_list($id) {
 		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
@@ -147,6 +155,34 @@ return $this -> db -> get() -> result();
 		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY did DESC';
 	}		
 
+	
+	function __get_do_list_tg($id) {
+		return 'SELECT *,(select (select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as bname,		
+		(select (select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as cname,
+		(select (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sname,	
+        (select (select sreff from sales_tab where sales_tab.sid=sales_order_tab.ssid) from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sreff,			
+		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
+		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
+		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
+		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY did DESC';
+	}		
+
+
+
+	function __get_do_list_tgx($id,$noro) {
+		return "SELECT  * ,
+		(select cname from customers_tab where customers_tab.cid=delivery_order_detail_tab.scid)as cname
+		FROM delivery_order_detail_tab 
+		WHERE snodo like '".$id."-".$noro."-%' ";
+	}		
+	
+	function __get_noro($id) {
+		$this -> db -> select(" snoro,
+        (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid)as sname
+		FROM retur_order_tab where sid='$id'");
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_inv_listz() {
 		$sbid= $this -> memcachedlib -> sesresult['ubid'];
 		//$sbid=2;
@@ -331,8 +367,8 @@ return $this -> db -> get() -> result();
 		//echo $astgl.$bstgl;die;
 	    }
 		else{
-				$astgl="";
-			    $bstgl="";
+				$astgl=date('Y-m-').'01';
+			    $bstgl=date('Y-m-d');
 		}
 		//echo $pstatus;//die;
 		$tsales="";
@@ -371,7 +407,9 @@ return $this -> db -> get() -> result();
 			if ($pstatus==4){
 			$wstatus=" and ((NOW() >= (sduedate_invoice - INTERVAL 2 DAY)) AND  (NOW()<=sduedate_invoice)) AND sdate_lunas IS NULL";
 		    }elseif ($pstatus==5){				
-			$wstatus=" and NOW() > sduedate AND sdate_lunas IS NULL";
+			$wstatus=" and NOW() > sduedate_invoice AND sdate_lunas IS NULL";
+		    }elseif ($pstatus==6){				
+			$wstatus=" and (( NOW() < (sduedate_invoice - INTERVAL 2 DAY))  AND sdate_lunas IS NULL)";
 		    }			
 			
 			

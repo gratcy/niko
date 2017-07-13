@@ -65,14 +65,35 @@ AND retur_order_detail_tab.ssid ='". $id."'");
 	function __get_retur_order_detail_prod($id) {
 		$this -> db -> select('* FROM retur_order_detail_tab a,products_tab b WHERE   a.spid=b.pid AND a.ssid=' . $id);
 		return $this -> db -> get() -> result();
-	}		
+	}
+
+	function __get_retur_order_detail_tg($id) {
+		$this -> db -> select("* FROM retur_order_detail_tab a,products_tab b WHERE   
+		a.spid=b.pid AND a.ssid=" . $id ." and a.srtype='Tukar Guling'");
+		return $this -> db -> get() -> result();
+	}
+
+	function __get_retur_order_detail_tgx($id,$noro) {
+		$this -> db -> select(" * FROM delivery_order_detail_tab 
+		WHERE snodo like '".$id."-".$noro."-%'");
+		return $this -> db -> get() -> result();
+	}	
+	
+
+
+	function __get_jum_accept_ro_tg($id) {
+		$this -> db -> select("sum(saccept) as juma FROM retur_order_detail_tab a,products_tab b WHERE   
+		a.spid=b.pid AND a.ssid=" . $id ." and srtype='Tukar Guling'");
+		return $this -> db -> get() -> result();
+	}
+	
 	function __update_inventory_retur($pid, $sqty,$itype,$sbidx){
 		$sbidx= $this -> memcachedlib -> sesresult['ubid'];
 		// echo "update inventory_tab 
 	// set itype=$itype,istockin=(istockin + $sqty ),istock=(istockbegining+istockin-istockout) where iiid='$pid'  AND ibid='$sbidx' and itype='4'";die;
 		
 		$this -> db-> query("update inventory_tab 
-	set itype=$itype,istockin=(istockin + $sqty ),istock=(istockbegining+istockin-istockout) where iiid='$pid'  AND ibid='$sbidx' and itype='4'");
+	set itype=$itype,istockin=(istockin + $sqty ),istock=(istock + $sqty ) where iiid='$pid'  AND ibid='$sbidx' and itype='4'");
 		
 		
 	}

@@ -10,7 +10,9 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_pembayaran() {
-		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab order by pmid DESC';
+		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname,
+         (SELECT SUM(komisi_tab.pno_pm) FROM komisi_tab WHERE komisi_tab.pno_pm=pembayaran_tab.pno_pm )AS jumb			
+		 from pembayaran_tab order by pmid DESC';
 	}
 
 	function __get_pembayaran_search() {
@@ -18,7 +20,31 @@ class pembayaran_model extends CI_Model {
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['pno_pm'])){ $_POST['pno_pm']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+		if(!isset($_POST['sid'])){ $_POST['sid']="";}
         if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		
+			if(!isset($_POST['monthh'])){ $_POST['monthh']=0;}
+			if(!isset($_POST['years'])){ $_POST['years']=0;}
+			//print_r($_POST);
+			
+			if($_POST['monthh']!=0){
+			
+				$monthh=$_POST['monthh'];
+				$years=$_POST['years'];
+				
+				$dz=cal_days_in_month(CAL_GREGORIAN,$monthh,$years);
+
+				$datea=$years.'-'.$monthh.'-01';
+				$dateb=$years.'-'.$monthh.'-'.$dz;
+				//echo $datea.'---'.$dateb.'<br>';die;
+				$my=$monthh.'/'.$years;	
+
+                $wpdate=" and pembayaran_tab.pdate between '".$datea."' AND '".$dateb."' ";				
+		
+		    }else{
+				$wpdate="";
+			}	
+		
 		if($_POST['sreff']==""){ 
 			$wreff="";
 		}else{
@@ -34,6 +60,13 @@ class pembayaran_model extends CI_Model {
 		}else{
 			$wcid=" and pembayaran_tab.pcid = '".$_POST['cid']."' ";
 		}
+
+
+		if($_POST['sid']==""){ 
+			$wsid="";
+		}else{
+			$wsid=" and pembayaran_tab.psid = '".$_POST['sid']."' ";
+		}
 		
 	    if($_POST['sisa']=="x"){ 
 			$wsisa="";
@@ -47,9 +80,11 @@ class pembayaran_model extends CI_Model {
 			$wsisa=" and pstatus = '3' ";
 		}
 		
-		$this -> db -> select(" * ,(select cname from customers_tab where cid=pcid)as pcname from pembayaran_tab,
+		$this -> db -> select(" * ,(select customers_tab.cname from customers_tab where cid=pcid)as pcname,
+         (SELECT SUM(komisi_tab.pno_pm) FROM komisi_tab WHERE komisi_tab.pno_pm=pembayaran_tab.pno_pm )AS jumb	
+		from pembayaran_tab,
         customers_tab 		
-		where 1 AND customers_tab.cid=pembayaran_tab.pcid $wreff $wcid $wpno $wsisa order by pmid DESC");
+		where 1 AND customers_tab.cid=pembayaran_tab.pcid $wreff $wcid $wpno $wsisa $wpdate order by pdate DESC");
 	return $this -> db -> get() -> result();
 	}	
 	

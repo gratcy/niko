@@ -15,6 +15,15 @@ class Home extends MY_Controller {
 		$this -> load -> model('purchase_order/purchase_order_model');
 		$this -> load -> model('purchase_order_detail/purchase_order_detail_model');	
 		$this -> load -> model('customers/customers_model');
+		
+		$this -> load -> library('products/products_lib');
+		$this -> load -> library('delivery_order/delivery_order_lib');
+		//$this -> load -> model('sales_order_model');
+		$this -> load -> model('retur_order/retur_order_model');
+		$this -> load -> model('retur_order_detail/retur_order_detail_model');		
+		
+		
+		
 	}
 
 	function index() {
@@ -48,6 +57,35 @@ class Home extends MY_Controller {
 
 		$this->load->view('sales_order_details',$view);
 	}
+	
+	
+	
+	
+	function sales_order_details_sisa($id,$scid) {
+		if(!isset($_POST['approve'])){$_POST['approve']="";}
+		if($_POST['approve'] == '1') {
+			$totalso=$this -> input -> post('totalso', TRUE);
+			$id=$this -> input -> post('id', TRUE);
+			$arr=array('sstatus' => '3','sototal'=>$totalso);
+			$this -> sales_order_model -> __update_sales_order($id, $arr);
+			
+			$scid=$_POST['scid'];
+			$limit=$_POST['sisaplafon_after'];
+			$arrl = array('climit' => $limit);
+			$this -> customers_model -> __update_customers($scid, $arrl);
+		}
+		
+		$view['id'] = $id;
+		$view['scid'] = $scid;
+		$view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);			
+		$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+		$view['pbid'] = $this -> branch_lib -> __get_branch();
+		$view['psid'] = $this -> sales_lib -> __get_sales();
+		$view['pppid'] = $this -> products_lib -> __get_products();	
+
+		$this->load->view('sales_order_details_sisa',$view);
+	}	
+	
 
 	function sales_order_report($id,$scid) {
 		$view['id'] = $id;
@@ -264,6 +302,53 @@ class Home extends MY_Controller {
 			$this->load->view('delivery_order_add',$view);
 		}
 	}
+
+
+	function delivery_order_add_tg($id,$scid) {
+		if ($_POST) {
+		    $sid = $this -> input -> post('id', TRUE);
+			$scid = $this -> input -> post('scid', TRUE);
+			$snodo = $this -> input -> post('snodo', TRUE);
+			$snopol = $this -> input -> post('snopol', TRUE);
+			$stgldos = $this -> input -> post('stgldo', TRUE);
+			$drivera = $this -> input -> post('driver', TRUE);
+			$driverb = $this -> input -> post('adriver', TRUE);
+			$driver=$drivera.'-'.$driverb;
+			$stgldox = explode("/",$stgldos);			
+			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";
+			$snomor = $this -> input -> post('snomor', TRUE);
+			
+			$arr = array('sid' => 0, 'ssid' => $id, 'spid' => 0, 'sqty' => 0, 'scid'=>$scid,'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'driver'=>$driver,'dstatus'=>1	);						
+			if ($this -> sales_order_detail_model -> __insert_delivery_order_detail($arr)) {
+				__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+				redirect(site_url('sales_order_detail/home/delivery_order_details_add_tg/'. $id .'/'. $scid .'/'.$snodo));
+			}
+			else {
+				__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+				redirect(site_url('sales_order_detail/home/delivery_order_add_tg/'. $id .'/'. $scid .''));
+			}
+		}
+		else {
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			// $view['detailx'] = $this -> sales_order_model -> __get_sales_order_detail($id);
+			// $view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);
+
+
+			$view['detailx'] = $this -> retur_order_model -> __get_retur_order_detail_approve($id);	
+
+            $noro=$view['detailx'][0]->snoro;
+			$view['detail'] =$this -> retur_order_detail_model -> __get_retur_order_detail_tg($id);	
+            $view['jumtg'] =$this -> retur_order_detail_model ->__get_jum_accept_ro_tg($id);
+
+			
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();				
+			$this->load->view('delivery_order_add_tg',$view);
+		}
+	}
+
 	
 	function invoice_order_add($id,$scid,$snodo) {
 		$view['id'] = $id;
@@ -373,6 +458,89 @@ class Home extends MY_Controller {
 			$this->load->view('delivery_order_details_add',$view);
 		}
 	}
+	
+	
+	
+	function delivery_order_details_add_tg($id,$scid,$snodo) {
+		if ($_POST) {
+			$sbid = $this -> input -> post('sbid', TRUE);
+			$scid = $this -> input -> post('scid', TRUE);
+			$snodo = $this -> input -> post('snodo', TRUE);
+			$snopol = $this -> input -> post('snopol', TRUE);
+			$stgldos = $this -> input -> post('stgldo', TRUE);			
+			$stgldox = explode("/",$stgldos);			
+			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";				
+			$snomor = $this -> input -> post('snomor', TRUE);		
+			$jum=count($_POST['sqty']);
+			$sbid=$this -> input -> post('sbid', TRUE);
+			
+			for($j=0;$j<$jum;$j++){
+				$did = $_POST['did'][$j];
+				$sid = $_POST['sid'][$j];
+				$spid = $_POST['spid'][$j];
+				$qty = $_POST['qty'][$j];
+				$sqty =$_POST['sqty'][$j];			
+				$sssid =$_POST['sssid'][$j];
+				$samount =$_POST['samount'][$j];
+				$tamount =$_POST['tamount'][$j];
+				$ssisa[$j]=$qty-$sqty;
+			
+				$arrp=array('istockout'=>$sqty);
+				$arrqx = array('sstatus'=>4);
+				$arrdos=array('dstatus'=>4);
+				$arrdo=array('dstatus'=>4,'sssid'=>$sssid,'samount'=>$samount,'tamount'=>$tamount);
+				$arrqty = array('ssisa' => $ssisa[$j]);
+				// echo '<pre>';
+				// print_r($arrqty);
+				$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid,  'sqty' => $sqty,'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>3,'sssid'=>$sssid,'tamount'=>$samount	);	
+				if ($this -> sales_order_detail_model ->__update_do_status($snodo,$arrdos)) {
+					$this -> sales_order_model ->__update_retur_order($id,$arrqx);
+					$this -> sales_order_detail_model ->__update_inventory($spid,$sbid,$arrp);
+					$this -> sales_order_detail_model ->__update_amount_status($did,$arrdo);
+					$this -> sales_order_detail_model ->__update_retur_order_detail($sid,$arrqty);
+					$arrx = array('ibid' => $sbid, 'iiid' => $spid, 'itype' => 1, 'istockbegining' => '', 'istockin' => '', 'istockout' => $sqty, 'istock' => '', 'istatus' => 1 );
+					$this -> sales_order_detail_model -> __insert_inventory($arrx);						
+				}
+				else {
+					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+					redirect(site_url('sales_order_detail/home/delivery_order_details_add_tg/'. $id .'/'. $scid .''));
+				}
+			}
+			
+			//die;
+			__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+			redirect(site_url('sales_order_detail/home/delivery_order_details_tg/'. $id .'/'. $scid .'/'.$snodo));	
+
+		}
+		else {
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['snodo'] = $snodo;
+		
+			//$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			//$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);
+
+			//$view['detail'] =$this -> retur_order_detail_model -> __get_retur_order_detail_tg($id);	
+
+
+			$view['detailx'] = $this -> retur_order_model -> __get_retur_order_detail_approve_tg($id,$snodo);	
+
+            //$noro=$view['detailx'][0]->snoro;
+			$view['detail'] =$this -> retur_order_detail_model -> __get_retur_order_detail_tg($id);	
+
+
+
+
+			
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			$this->load->view('delivery_order_details_add_tg',$view);
+		}
+	}	
+	
+	
 
 	function delivery_order_details_add_confirm($id,$scid,$snodo) {
 		if ($_POST) {
@@ -424,6 +592,63 @@ class Home extends MY_Controller {
 		}
 	}
 	
+	
+	
+
+	function delivery_order_details_add_confirm_tg($id,$scid,$snodo) {
+		if ($_POST) {
+		    $sbid = $this -> input -> post('sbid', TRUE);
+			$scid = $this -> input -> post('scid', TRUE);
+			$snodo = $this -> input -> post('snodo', TRUE);
+			$snopol = $this -> input -> post('snopol', TRUE);
+			$stgldos = $this -> input -> post('stgldo', TRUE);			
+			$stgldox = explode("/",$stgldos);			
+			$stgldo="$stgldox[2]-$stgldox[1]-$stgldox[0]";				
+			$snomor = $this -> input -> post('snomor', TRUE);	
+			$jum=count($_POST['sqty']);
+			$this -> sales_order_detail_model ->__del_do_item($snodo);	
+		
+			for($j=0;$j<$jum;$j++){		
+				$sid = $_POST['sid'][$j];
+				$spid = $_POST['spid'][$j];
+				$qty = $_POST['qty'][$j];
+				$sqty = $_POST['sqty'][$j];			
+				$ssisa = $qty-$sqty;
+				$samount = $_POST['samount'][$j];
+
+				$arrdo=array('dstatus'=>1);
+				$arr = array('sid' => $sid,'ssid' => $id,'spid' => $spid, 'scid'=>$scid, 'sqty' => $sqty,'snodo' => $snodo, 'snopol' => $snopol, 'stgldo' => $stgldo, 'snomor' => $snomor,'dstatus'=>1,'samount'=>$samount	);										
+				if ($this -> sales_order_detail_model -> __insert_delivery_order_detail($arr)) {
+					$this -> sales_order_detail_model ->__update_do_status($snodo,$arrdo);
+					$arrx = array('ibid' => $sbid, 'iiid' => $spid, 'itype' => 1, 'istockbegining' => '', 'istockin' => '', 'istockout' => $sqty, 'istock' => '', 'istatus' => 1 );
+					$this -> sales_order_detail_model -> __insert_inventory($arrx);	
+				}
+				else {
+					__set_error_msg(array('error' => 'Gagal menambahkan data !!!'));
+					redirect(site_url('sales_order_detail/home/delivery_order_details_add_tg/'. $id .'/'. $scid .''));
+				}
+			}
+			__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
+			redirect(site_url('sales_order_detail/home/delivery_order_details_tg/'. $id .'/'. $scid .'/'.$snodo));
+		}
+		else {
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['snodo'] = $snodo;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			$this->load->view('delivery_order_details_add_confirm',$view);
+		}
+	}	
+	
+	
+	
+	
+	
 	function delivery_order_details($id,$scid,$snodo) {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
@@ -437,6 +662,22 @@ class Home extends MY_Controller {
 	
 			$this->load->view('delivery_order_details',$view);
 	}	
+	
+	
+	function delivery_order_details_tg($id,$scid,$snodo) {
+			$view['id'] = $id;
+			$view['scid'] = $scid;
+			$view['snodo'] = $snodo;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail_tg($id,$snodo);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod_tg($id,$snodo);	
+			$view['details'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);	
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+	
+			$this->load->view('delivery_order_details_tg',$view);
+	}		
+	
 
 	function delivery_order_report($id,$sbid,$snodo) {
 			$view['id'] = $id;
@@ -452,6 +693,23 @@ class Home extends MY_Controller {
 			$view['password']=$this->db->password;
 			$view['database']=$this->db->database;
 			$this->load->view('print_do',$view,FALSE);
+	}	
+	
+	
+	function delivery_order_report_tg($id,$sbid,$snodo) {
+			$view['id'] = $id;
+			$view['snodo'] = $snodo;
+			$view['sbid'] = $sbid;
+			$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail_tg($id,$snodo);
+			$view['detail'] =$this -> sales_order_detail_model -> __get_delivery_order_detail_prod($id,$snodo);						
+			$view['pbid'] = $this -> branch_lib -> __get_branch();
+			$view['psid'] = $this -> sales_lib -> __get_sales();
+			$view['pppid'] = $this -> products_lib -> __get_products();	
+			$view['hostname']=$this->db->hostname;
+			$view['username']=$this->db->username;
+			$view['password']=$this->db->password;
+			$view['database']=$this->db->database;
+			$this->load->view('print_do_tg',$view,FALSE);
 	}	
 	
 	function invoice_report($id,$sbid,$snodo) {

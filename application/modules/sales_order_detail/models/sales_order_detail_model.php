@@ -20,7 +20,9 @@ class sales_order_detail_model extends CI_Model {
 	
 	function __get_sales_order_detail($id) {
 	
-		$this -> db -> select('*,(select sbid from sales_order_tab where sales_order_tab.sid=sales_order_detail_tab.ssid)as sbid FROM sales_order_detail_tab WHERE  ssid=' . $id);
+		$this -> db -> select('*,(select sbid from sales_order_tab where 
+		sales_order_tab.sid=sales_order_detail_tab.ssid)as sbid 
+		FROM sales_order_detail_tab WHERE  ssid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 
@@ -39,9 +41,36 @@ class sales_order_detail_model extends CI_Model {
 		(select climit from customers_tab where customers_tab.cid=sales_order_tab.scid)as sisaplafon,
 		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
 		delivery_order_detail_tab.snodo as snodo
-		FROM sales_order_tab,delivery_order_detail_tab WHERE  sales_order_tab.sid=delivery_order_detail_tab.ssid AND (sstatus=1 OR sstatus=3)  AND delivery_order_detail_tab.snodo='" .$snodo ."'");
+		FROM sales_order_tab,delivery_order_detail_tab WHERE  
+		sales_order_tab.sid=delivery_order_detail_tab.ssid AND (sstatus=1 OR sstatus=3) 
+		AND delivery_order_detail_tab.snodo='" .$snodo ."'");
 		return $this -> db -> get() -> result();
 	}	
+	
+	
+	function __get_delivery_order_detail_tg($id,$snodo) {
+	
+		$this -> db -> select(" *,SUM(delivery_order_detail_tab.dototal)AS juminv,retur_order_tab.ssid AS ssid_sales, 
+		delivery_order_detail_tab.ssid AS ssid_so,			
+		(SELECT sduration FROM retur_order_tab WHERE retur_order_tab.sid=delivery_order_detail_tab.ssid)AS sdurationx,		
+		(SELECT bname FROM branch_tab WHERE branch_tab.bid=retur_order_tab.sbid)AS bname,
+		(SELECT cname FROM customers_tab WHERE customers_tab.cid=retur_order_tab.scid)AS cname,
+		(SELECT caddr FROM customers_tab WHERE customers_tab.cid=retur_order_tab.scid)AS caddr,
+		(SELECT 
+		(SELECT cname FROM city_tab WHERE city_tab.cid=customers_tab.ccity)
+		FROM customers_tab WHERE customers_tab.cid=retur_order_tab.scid)AS ccity,
+		(SELECT ccat FROM customers_tab WHERE customers_tab.cid=retur_order_tab.scid)AS ccat,
+		(SELECT climit FROM customers_tab WHERE customers_tab.cid=retur_order_tab.scid)AS sisaplafon,
+		(SELECT sname FROM sales_tab WHERE sales_tab.sid=retur_order_tab.ssid)AS sname,
+		delivery_order_detail_tab.snodo AS snodo
+		FROM retur_order_tab,delivery_order_detail_tab,retur_order_detail_tab WHERE  
+		retur_order_detail_tab.ssid=delivery_order_detail_tab.ssid 
+		AND retur_order_tab.sid= retur_order_detail_tab.ssid 
+		AND delivery_order_detail_tab.snodo='" .$snodo ."'");
+		return $this -> db -> get() -> result();
+	}	
+		
+	
 	
 	
 	function __get_sales_order_detail_prod($id) {
@@ -62,6 +91,25 @@ class sales_order_detail_model extends CI_Model {
 	}		
 
 
+	
+	function __get_delivery_order_detail_prod_tg($id,$snodo) {
+		$this -> db -> select(" *,a.sqty as qtyy,
+(SELECT o.ssisa	FROM retur_order_detail_tab o WHERE o.ssid=a.sid)AS hqty,		
+		(SELECT sprice FROM retur_order_detail_tab c WHERE c.ssid=a.sid) AS sprice
+		FROM 
+		delivery_order_detail_tab a,products_tab b, retur_order_detail_tab d
+		 WHERE   
+		 d.sid=a.sid AND
+		
+		 a.spid=b.pid AND 
+		a.ssid=" . $id ." AND
+		a.snodo='". $snodo . "' AND
+		a.sqty!=0 AND	
+		d.srtype='Tukar Guling'  ");
+		
+		return $this -> db -> get() -> result();
+	}			
+	
 
 	function __del_do_item($snodo) {
 	     return $this->db -> query("delete from delivery_order_detail_tab  WHERE snodo='".$snodo."' AND spid >0 ");
@@ -73,6 +121,16 @@ class sales_order_detail_model extends CI_Model {
         $this -> db -> where('sid', $id);
         return $this -> db -> update('sales_order_detail_tab', $data);
 	}
+
+
+	function __update_retur_order_detail($id, $data) {
+		// print_r($data);
+		// echo $id;die;
+        $this -> db -> where('sid', $id);
+        return $this -> db -> update('retur_order_detail_tab', $data);
+	}
+
+
 	
 	function __update_do_status($snodo,$data) {
         $this -> db -> where('snodo', $snodo);
@@ -81,6 +139,7 @@ class sales_order_detail_model extends CI_Model {
 
 	function __update_inventory($spid,$sbid,$data) {
 		$istockout=$data['istockout'];
+		//echo "update inventory_tab set istockout=(istockout + $istockout ), istock=(istock - $istockout) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ";die;
         //return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istockbegining-istockout+istockin) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
         return $this->db -> query("update inventory_tab set istockout=(istockout + $istockout ), istock=(istock - $istockout) WHERE iiid='$spid' AND ibid='$sbid' AND itype='1' ");
         

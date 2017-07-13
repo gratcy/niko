@@ -10,17 +10,45 @@ class retur_order_model extends CI_Model {
 	}
 	
 	function __get_retur_order() {
-		return 'SELECT retur_order_tab.*,	
+		return "SELECT retur_order_tab.*,	
+		sum(retur_order_detail_tab.ssisa) as ssisa,
 		(select sum(sprice*saccept) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid ) as totretur,
+		(select sum(retur_order_detail_tab.saccept) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid 
+		and retur_order_detail_tab.srtype='Tukar Guling') as tgaccept,
+		(select sum(retur_order_detail_tab.sqty) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid 
+		and retur_order_detail_tab.srtype='Tukar Guling') as tgqty,
 		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,
 		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur,
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname
-		FROM retur_order_tab
-		WHERE retur_order_tab.sstatus<>2  ORDER BY retur_order_tab.sid DESC';
+		FROM retur_order_tab, retur_order_detail_tab 
+		WHERE 
+		retur_order_detail_tab.ssid=retur_order_tab.sid AND
+		retur_order_tab.sstatus<>2  
+		group by retur_order_detail_tab.ssid 
+		ORDER BY retur_order_tab.sid DESC";
 	}
 
 
+	function __get_retur_order_tg() {
+		return "SELECT retur_order_tab.*, retur_order_detail_tab.srtype, 
+		sum(ssisa) as jumacep,
+		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, 
+		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, 
+		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur, 
+		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname 
+		FROM retur_order_tab, retur_order_detail_tab 
+		WHERE retur_order_detail_tab.ssid=retur_order_tab.sid 
+		AND retur_order_detail_tab.srtype ='Tukar Guling' 
+		AND retur_order_tab.sstatus=4 
+		group by retur_order_detail_tab.ssid 
+		ORDER BY retur_order_tab.sid DESC ";
+		
+		// HAVING SUM(retur_order_detail_tab.saccept) > 0
+		// ORDER BY retur_order_tab.sid DESC 
+	}	
+	
+	
 	function __get_retur_orderz() {
 		if(!isset($_POST['status'])){ $_POST['status']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
@@ -48,17 +76,17 @@ class retur_order_model extends CI_Model {
 		}elseif($_POST['status']=='2'){
 			
 			$wsisa=" and retur_order_tab.sstatus = '4' and retur_order_tab.pno_pm>0";
+		}elseif($_POST['status']=='3'){
+			
+			$wsisa=" and retur_order_tab.sstatus = '4' AND retur_order_detail_tab.srtype ='Tukar Guling' and retur_order_detail_tab.ssisa = '0' ";
 		}
 		
-// echo 'select *,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid)as bname,
-		// (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid)as cname,
-        // (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid)as sname,
-        // (select sum(ssisa) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid ' .$wsisa. ')as sisa
-		// FROM retur_order_tab, retur_order_detail_tab WHERE (retur_order_tab.sstatus=3) AND 
-		// retur_order_detail_tab.ssid=retur_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY retur_order_detail_tab.ssid 
-		// ORDER BY retur_order_tab.sid  DESC';		die;
+		
+		
+		
 		
 		$this -> db ->SELECT (' *,retur_order_tab.sid as sid,
+		retur_order_detail_tab.ssisa as ssisa,
 		(select sum(sprice*saccept) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid ) as totretur,
 		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,
@@ -67,8 +95,87 @@ class retur_order_model extends CI_Model {
 		FROM retur_order_tab, retur_order_detail_tab WHERE 1 AND
 		retur_order_detail_tab.ssid=retur_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY retur_order_detail_tab.ssid 
 		ORDER BY retur_order_tab.sid  DESC');
+		
 		return $this -> db -> get() -> result();
 	}
+	
+	
+	
+	function __get_retur_orderzz() {
+		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
+		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
+		if(!isset($_POST['cid'])){ $_POST['cid']="";}
+
+		if($_POST['cid']==""){ 
+			$wcid="";
+		}else{
+			$wcid=" and retur_order_tab.scid = '".$_POST['cid']."' ";
+		}
+
+		if($_POST['sreff']==""){ 
+			$wsreff="";
+		}else{
+			$wsreff=" and sreff = '".$_POST['sreff']."' ";
+		}
+		$wsisa="";
+		
+		if($_POST['sisa']=="x"){ 
+			$wsisa="";
+		}elseif($_POST['sisa']=='0'){
+			$wsisa=" and retur_order_detail_tab.ssisa = '0' ";
+		}elseif($_POST['sisa']=='1'){
+			
+			$wsisa=" and retur_order_detail_tab.ssisa >'0' ";
+		}
+
+		
+		// $this -> db ->SELECT (' *,retur_order_tab.sid as sid,
+		// (select sum(sprice*saccept) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid ) as totretur,
+		// (select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
+        // (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,
+		// (select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur,
+		// (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname
+		// FROM retur_order_tab, retur_order_detail_tab WHERE 1 AND
+		// retur_order_detail_tab.ssid=retur_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY retur_order_detail_tab.ssid 
+		// ORDER BY retur_order_tab.sid  DESC');
+		
+		
+		
+		
+		$this -> db ->SELECT (" retur_order_tab.*, retur_order_detail_tab.srtype, 
+		sum(retur_order_detail_tab.ssisa) as jumacep,
+		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, 
+		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, 
+		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur, 
+		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname 
+		FROM retur_order_tab, retur_order_detail_tab 
+		WHERE retur_order_detail_tab.ssid=retur_order_tab.sid 
+		AND retur_order_detail_tab.srtype ='Tukar Guling' 
+		AND retur_order_tab.sstatus=4 ".$wsisa.$wsreff.$wcid."
+		group by retur_order_detail_tab.ssid 
+		ORDER BY retur_order_tab.sid DESC");		
+		
+		
+		// echo " retur_order_tab.*, retur_order_detail_tab.srtype, 
+		// sum(retur_order_detail_tab.ssisa) as jumacep,
+		// (select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, 
+		// (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, 
+		// (select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur, 
+		// (select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname 
+		// FROM retur_order_tab, retur_order_detail_tab 
+		// WHERE retur_order_detail_tab.ssid=retur_order_tab.sid 
+		// AND retur_order_detail_tab.srtype ='Tukar Guling' 
+		// AND retur_order_tab.sstatus=4 ".$wsisa.$wsreff.$wcid."
+		// group by retur_order_detail_tab.ssid 
+		// ORDER BY retur_order_tab.sid DESC";die;
+		
+		
+		
+		
+		
+		
+		return $this -> db -> get() -> result();
+	}	
 	
 	function __get_retur_order_by_pno_pm($pno_pm,$scid) {
 		
@@ -119,6 +226,23 @@ class retur_order_model extends CI_Model {
 		FROM retur_order_tab WHERE  sstatus<=4 AND sid=' . $id);
 		return $this -> db -> get() -> result();
 	}	
+
+
+	function __get_retur_order_detail_approve_tg($id,$snodo) {
+		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid)as bname,
+		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid)as cname,
+		(select caddr from customers_tab where customers_tab.cid=retur_order_tab.scid)as caddr,
+		(select ccat from customers_tab where customers_tab.cid=retur_order_tab.scid)as ccat,
+		(select climit from customers_tab where customers_tab.cid=retur_order_tab.scid)as sisaplafon,
+		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid)as ctyperetur,
+		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid)as sname
+		FROM retur_order_tab,delivery_order_detail_tab WHERE  
+		retur_order_tab.sid=delivery_order_detail_tab.ssid AND
+		retur_order_tab.sstatus<=4 AND retur_order_tab.sid='" . $id . "' AND 
+		delivery_order_detail_tab.snodo = '$snodo'");
+		return $this -> db -> get() -> result();
+	}
+
 	
 	function __get_customers_detail($id) {
 		$this -> db -> select('*,

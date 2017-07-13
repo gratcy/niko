@@ -17,6 +17,7 @@ class Home extends MY_Controller {
 		if(!isset($_POST['cari'])){$_POST['cari']="";}
 		if(!isset($_GET['search'])){ $_GET['search']="";}
 		$keyword = $this -> input -> post('keyword');
+		
 		if ($keyword) {
 			$view['keyword'] = $keyword;
 			$view['pembayaran'] = $this -> pembayaran_model -> __get_search($keyword);
@@ -26,11 +27,12 @@ class Home extends MY_Controller {
 			$pager = $this -> pagination_lib -> pagination($this -> pembayaran_model -> __get_pembayaran(),3,10,site_url('pembayaran/home/index/'));
 			//$view['pembayaran'] = $this -> pagination_lib -> paginate();
 			
-			if($_GET['search']=='1'){
-			$view['pembayaran'] = $this -> pembayaran_model -> __get_pembayaran_search();	
-			}else{			
-			$view['pembayaran'] = $this -> pagination_lib -> paginate();
-			}				
+				if($_GET['search']=='1'){
+	
+					$view['pembayaran'] = $this -> pembayaran_model -> __get_pembayaran_search();	
+				}else{			
+					$view['pembayaran'] = $this -> pagination_lib -> paginate();
+				}				
 			
 			
 			$view['pages'] = $this -> pagination_lib -> pages();
