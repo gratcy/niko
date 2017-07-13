@@ -19,10 +19,12 @@ $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-       source: '<?php echo site_url('sales_order/home/source_cust'); ?>',
+    source: '<?php echo site_url('sales_order/home/source_cust'); ?>',
      select: function(event, ui) { 
 	    $("#theCid").val(ui.item.cid),
         $("#theCat").val(ui.item.ccat)
+		
+	
 		
     }
 	
@@ -37,14 +39,80 @@ minLength: 1,
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Return Order </h2>
+                        <h2>Delivery Order Return </h2>
                     </div>
                 </div>
 
                 <hr />
+				
+				
+				
+				
+			<div class="row">
+			<div class="col-lg-12">
+				<form method="POST" action="?search=1" class="form-horizontal" >
+						<input  name="cid" type="hidden" id="theCid" />
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="form-group">
+									<div class="col-lg-6">
+										Customer <input name="cname" type="text" id="search" class="form-control" />
+								</div>
+								<div class="col-lg-2"><br>
+									
+								</div>
+							</div>
+							</div>
+						</div>
+					
+
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+									Reff No.<input type="text" name="sreff" class="form-control"  >
+								</div>
+								<div class="col-lg-2"><br>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+			 
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+								   Status<select name="sisa" class="form-control">
+								   <option value="x">ALL</option>
+								   <option value="1">Active</option>
+								   <option value="0">Complete</option>
+								   </select>
+								</div>
+								<div class="col-lg-2">
+									<br>
+									<input type="submit" value="Search" class="btn btn-default btn-grad">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+					<br />
+			   </div>
+            </div><br>
+			
+     				
+				
+				
+				
+				
+				
+				
+				
+				
 				<?php if (__get_roles('ReturnOrderExecute')) : ?>
-                <a href="<?php echo site_url('retur_order/home/retur_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Return Order</a>
-                <br />
+                <!--a href="<?php echo site_url('retur_order/home/retur_order_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Return Order</a>
+                <br /-->
                 <br />
                 <?php endif; ?>
 				
@@ -52,7 +120,7 @@ minLength: 1,
 	
 
 
-				<form method="POST" action="?search=1" class="form-horizontal" >
+				<!--form method="POST" action="?search=1" class="form-horizontal" >
 						<input  name="cid" type="hidden" id="theCid" />
 						<div class="row">
 							<div class="col-lg-8">
@@ -90,7 +158,6 @@ minLength: 1,
 								   <option value="0">Approve</option>
 								   <option value="1">Done</option>
 								   <option value="2">Paid</option>
-								   <option value="3">Completed</option>
 								   </select>
 								</div>
 								<div class="col-lg-2">
@@ -100,7 +167,7 @@ minLength: 1,
 							</div>
 						</div>
 					</div>
-				</form>
+				</form-->
 
 
 
@@ -116,7 +183,7 @@ minLength: 1,
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Return Order
+                            Delivery Order Return
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
@@ -138,7 +205,7 @@ minLength: 1,
 		  <th>Customer </th>
 		  <th>Sales </th>
           
-		  <th>Total</th>
+		 
           
           <th>Status</th>
 		  <th style="width: 50px;"></th>
@@ -146,10 +213,8 @@ minLength: 1,
                                     </thead>
                                     <tbody>
 		  <?php
-		  // echo '<pre>';
-		  // print_r($retur_order);
 		  foreach($retur_order as $k => $v) :
-
+			//if(($v ->tgqty >0)AND($v -> sstatus=='4')){
 		  ?>
                                         <tr>
 
@@ -168,56 +233,56 @@ minLength: 1,
 		}elseif($ccats==1){
 			$cname="Potong Piutang";
 		}
-        $sbyr="";
-		$ssbyr="";
+
 		?>		  
 		  
 		<?php if($v -> pno_pm   > 0){ $sbyr=" - Paid";}else{$sbyr="";}?> 
-		<?php if($v -> ssisa   == 0){ $ssbyr=" - Completed";}else{$ssbyr="";}?> 
           <!--td><?php echo $cname; ?></td-->
-		  <td><?php echo __get_rupiah($v ->totretur,2); ?> 
-
+	
+          <td>
+		  <?php 
+			  $sstatus=$v -> sstatus;		  
+			  if($sstatus==0){
+				$st="Pending";
+			  }elseif($sstatus==1){
+				$st="Active";
+			  }if($sstatus==2){
+				$st="Delete";
+			  }if($sstatus==3){
+				$st="Approved";
+			  }if($sstatus==4){
+				$st="Done";
+			  }
+			  echo $st.$sbyr; 
+			  if($v -> jumacep==0){
+				  echo " - Complete";
+			  }else{
+				  echo " - Active";
+			  }
+		     
+		  
+		  
+		  
+		  ?>
+		  
+		  
 		  </td>
-          <td><?php 
-		  $sstatus=$v -> sstatus;		  
-		  if($sstatus==0){
-		  $st="Pending";
-		  }elseif($sstatus==1){
-		  $st="Active";
-		  }if($sstatus==2){
-		  $st="Delete";
-		  }if($sstatus==3){
-		  $st="Approved";
-		  }if($sstatus==4){
-		  $st="Done";
-		  }
-		  echo $st.$sbyr.$ssbyr; ?></td>
 		
 		
 		  <td>
-				<?php if (__get_roles('ReturnOrderExecute')) : ?>
-				<?php if($sstatus<3){?>
-              <a href="<?php echo site_url('retur_order/home/retur_order_update/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-pencil"></i></a>
-			  <?php }?>
-			  <!--a href="<?php echo site_url('retur_order_detail/home/retur_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a-->
+			<?php if (__get_roles('ReturnOrderExecute')) : ?>
 
-				<?php if($sstatus<3){?>
-              <a href="<?php echo site_url('retur_order/home/retur_order_delete/' . $v -> sid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="icon-remove"></i></a>
-			  <?php } ?>
-                <?php endif; ?>
-			<?php if($sstatus==3){	?>
-				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_approve/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
-			<?php }?>
-
-			<?php if($sstatus==4){	?>
-				<a href="<?php echo site_url('retur_order_detail/home/retur_order_details_done/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
-			<?php }?>
+				<a href="<?php echo site_url('delivery_order/home/delivery_order_sub_tg/'.$v->sid.'/'.$v->scid); ?>"><i class="icon-book"></i> </a>
 			
+			<?php endif; ?>
           </td>		
 		
 		
 										</tr>
-        <?php endforeach; ?>
+        <?php 
+			//}
+		endforeach; 
+		?>
                                     </tbody>
                                 </table>
     <?php echo $pages; ?>

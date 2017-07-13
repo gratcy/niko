@@ -220,8 +220,8 @@ echo $caddr[1].' , '.$detailx[0]->ccity; ?></td>
 		  
 		  echo __get_rupiah($netprice,2); ?></td>
 		  <td align=right> <?php 
-		  $subtotalx=$sqtyx * $netprice;
-		  echo __get_rupiah($subtotalx,2); ?> </td>
+		  $subtotal=$sqtyx * $netprice;
+		  echo __get_rupiah($subtotal,2); ?> </td>
 		  </tr>
         <?php 
 	

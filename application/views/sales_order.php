@@ -210,6 +210,9 @@
 				  <?php if($sstatus==3 || $sstatus==1){ ?>
 				  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-book"></i></a>
 				  <?php } ?>
+				  <?php  if($st=="Approved"){  ?>
+				  <a href="<?php echo site_url('sales_order_detail/home/sales_order_details_sisa/' . $v -> sid . '/' . $v -> scid); ?>"><i class="icon-table"></i></a>
+				  <?php } ?>
 			  </td>		
 			
 			

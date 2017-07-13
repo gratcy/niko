@@ -61,58 +61,46 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Delivery Order  <?php //echo "$id $scid";?></h5>
+            <h5>Delivery Order </h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <!--form class="form-horizontal" action="<?php //echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
-<?php //echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
-<?php  
-//echo "<pre>";
-//print_r($detailx);
-//print_r($detail);die;
-//echo "</pre>";
-?>
 
-
- <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/sales_order_detail_add/$id/$scid"); ?>" method="post">
+ <form  id="form1" class="form-horizontal"  method="POST">
 <table border=0 width=90% ><tr><td width=50%>
                 <!--div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
 
                     <div class="col-lg-4">	
-					<input type=text value="<?php echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=text value="<?php //echo $detailx[0]->bname; ?>" class="form-control" disabled>
+					<input type=hidden value="<?php //echo $detailx[0]->sbid; ?>" class="form-control" name=sbid >
                     </div>
                 </div-->
-				
-                <div class="form-group">
-				<br>
+
+				<div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Reff No.</label>
 
                     <div class="col-lg-4">
                        <input type=hidden name=id value="<?php echo $id; ?>">
 					   <input type=text value="<?php echo $detailx[0]->sreff; ?>" class="form-control" disabled>
                     </div>
-                </div>					
-
+                </div>
+				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">DO No.</label>
 
                     <div class="col-lg-4">
-					
                        <input type=hidden name=id value="<?php echo $id; ?>">
 					   <input type=text value="<?php echo $detailx[0]->snodo; ?>" class="form-control" disabled>
                     </div>
                 </div>
 
 		<?php 
-		//print_r($detailx);die;
-			$stgldos=$detailx[0]->stgldo;			
+ 			$stgldos=$detailx[0]->stgldo;
 			$stgldox = explode("-",$stgldos);			
-			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";
-			$caddr=explode("*",$detailx[0]->caddr);
-			
-		?>				
+			$stgldo="$stgldox[2]/$stgldox[1]/$stgldox[0]";	
+		?>			
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Date</label>
 
@@ -120,6 +108,7 @@ minLength: 1,
 					<input type=text value="<?php echo $stgldo; ?>" class="form-control" disabled>
                     </div>   							
                 </div>				
+				
 				
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Customer</label>
@@ -129,37 +118,35 @@ minLength: 1,
                     </div>
                 </div>
 				
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Address</label>
-
-                    <div class="col-lg-4">
-                       	<input type=text value="<?php echo trim($caddr[0]). ' , '.$detailx[0]->ccity; ?>" class="form-control" disabled>
-                    </div>
-                </div>			
+			
+				
 </td><td width=40%>
 
 <?php
+
+// echo '<pre>';
+// print_r($detailx[0]);
 $drv=explode("-",$detailx[0]->driver);
 ?> 
-				
+
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Sales</label>
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $detailx[0]->sname; ?>" class="form-control" disabled>
                     </div>
-                </div>			
+                </div>
 
-                <div class="form-group">
+				<div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Driver</label>
 
                     <div class="col-lg-4">
                        	<input type=text value="<?php echo $drv[0]; ?>" class="form-control" disabled>
                     </div>
-                </div>	
-				
+                </div>
 
-                <div class="form-group">
+
+				<div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Assistant Driver</label>
 
                     <div class="col-lg-4">
@@ -198,26 +185,28 @@ $drv=explode("-",$detailx[0]->driver);
 
 
 
- <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add/$id/$scid/$snodo"); ?>" method="post">
-
-<input type=hidden value="<?php echo $detailx[0]->sbid; ?>" name=sbid class="form-control" >
+ <form  id="form1" class="form-horizontal" 
+ action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add_confirm_tg/$id/$scid/$snodo"); ?>" method="post">
 <input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
 <input type=hidden value="<?php echo $stgldo; ?>" name=stgldo class="form-control" >
+<?php //print_r($detailx[0]);?>
 <input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->snodo; ?>" name=snodo class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->snopol; ?>" name=snopol class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->snomor; ?>" name=snomor class="form-control" >
-<div class="panel-body">
+  <div class="panel-body">
                             <div class="table-responsive">
-							<?php 	$freeppn=$detailx[0]->sfreeppn;		?>
+							<?php 
+							$freeppn=$detailx[0]->sfreeppn;
+							?>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
           
           <th>Code</th>
           <th>Name</th>
-		  <th>Qty/Coly</th>
-          <th>Qty/Pcs</th>
+		  <th>Accept</th>
+          <th>Sisa</th>
 
                                         </tr>
                                     </thead>
@@ -227,50 +216,38 @@ $drv=explode("-",$detailx[0]->driver);
 		$total=0;
 		$totalppn=0;
 		$totalall=0;
-		 
-		foreach($details as $l => $m) :	
-		//print_r($m -> ssisa);
-		?>
-		<input type=hidden name="qtyyyy[]" value="<?php echo $m -> ssisa; ?>">
-		<?php
-		endforeach;
+		
 		foreach($detail as $k => $v) :	
-			
+			//print_r($v);
 			$sqtyx=$v -> sqty;
+			$spricex=$v -> sprice;
+			$sdiscx=$v -> sdisc;
 			$qtyx=$v -> sqty;
-			$subtotal=$sqtyx;
-	    if($v -> sqty > 0){
-						
-		  $paymentdisc=$v->sdisc *($v->sprice - $v->spromodisc)/100;		 
-
-		  $netprice=($v->sprice-($v->spromodisc + $paymentdisc)) * $v -> sqty;			
-			
-			
-			
-			
+			$subtotal=$sqtyx * ($spricex - ($spricex * $sdiscx/100));
+	
     ?>
           <tr>
           
-          <td>
-		  <input type=hidden name="did[]" value="<?php echo $v -> did; ?>">
+          <td><?php echo $v -> pcode; ?> 
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
-		  <input type=hidden name="qty[]" value="<?php echo $v -> hqty; ?>">
-		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> ssisa; ?>">
 		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
-		  <!--input type=hidden name="tamount[]" value="<?php //echo $v -> sprice * $v -> sqty; ?>"-->
-		 
-		  <input type=hidden name="tamount[]" value="<?php echo $netprice; ?>">
-		 
-		  <?php echo $v -> pcode; ?><input type=hidden name="sssid[]" 
-		  value="<?php echo $detailx[0]->ssid_sales; ?>"></td>
+		  </td>
 		  <td><?php echo $v -> pname; ?></td>
-		  <td><?php echo $v -> sqty/$v -> pvolume; ?>  </td>
-          <td><?php echo $v -> sqty; ?>  </td>
+		  <td><?php echo $v -> saccept; ?></td>
+          <td><select name="sqty[]" class="form-control chzn-select">
+		  
+		  <?php $ssisa= $v -> ssisa; 
+		  for($k=$ssisa;$k>=0;$k--){
+		  echo "<option>$k</option>";	
+		  }
+		  ?>
+		  </select>
+		  </td>
 
 		  </tr>
         <?php 
-		}
 		$total=$subtotal+$total;
 		$totalqty=$qtyx+$totalqty;
 		$totalppn=$total * 10/100;
@@ -281,34 +258,12 @@ $drv=explode("-",$detailx[0]->driver);
 		}
 		endforeach; ?>
 		
-         <tr>          
-          <td>TOTAL</td>
-		  <td></td>
-		  <td></td>
-          <td><?php echo $totalqty; ?></td>
-          
-		 </tr>		
-        
-                                    </tbody>
+                         </tbody>
                                 </table>
-								<br>
-		<table border=0>
-        <tr><td>		
 								
-		<?php 	
-		//echo $detailx[0]->dstatus;
-		if ($detailx[0]->dstatus==1){?>						
-			<input class="btn text-muted text-center btn-danger" type=submit value="Posting">
-		<?php }?>						
-			</form></td><td>
-		<?php 
-		if ($detailx[0]->dstatus==1){?>						
-		<?php if (__get_roles('InvoiceOrderExecute')) : ?>
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type="submit" value="Edit" ></form>	
-		<?php endif; ?>
-		<?php }else{?>
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type="submit" value="PRINT" ></form>	
-		<?php }?></td></tr></table>
+							
+		<input class="btn text-muted text-center btn-danger" type=submit value ="Create" >						
+		</form>						
 
                             </div>
                         </div>

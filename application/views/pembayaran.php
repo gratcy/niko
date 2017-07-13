@@ -36,6 +36,8 @@ minLength: 1,
 });
 </script>
 
+
+
 <style type="text/css">
 div#txtHint{position: absolute;
 width: 230px;
@@ -70,19 +72,64 @@ left:inherit!important;
 	
 
 <form method="POST" action="?search=1" class="form-horizontal" >
-						<input  name="cid" type="hidden" id="theCid" />
-						<div class="row">
-							<div class="col-lg-8">
-								<div class="form-group">
-									<div class="col-lg-6">
-										Customer <input name="cname" type="text" id="search" class="form-control" />
-								</div>
-								<div class="col-lg-2"><br>
-									
-								</div>
+					<input  name="cid" type="hidden" id="theCid"  **/>
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+									Customer <input name="cname" type="text" id="search" class="form-control" />
 							</div>
+							<div class="col-lg-2"><br>
+								
 							</div>
 						</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div class="col-lg-6">
+								
+								Date/Year <br>
+									<select name=monthh class="form-control"  >
+									    <option value="0" >Pilih</option>
+										<option value="01" >Januari</option>
+										<option value="02" >Februari</option>
+										<option value="03" >Maret</option>
+										<option value="04" >April</option>
+										<option value="05" >Mei</option>
+										<option value="06" >Juni</option>
+										<option value="07" >Juli</option>
+										<option value="08" >Agustus</option>
+										<option value="09" >September</option>
+										<option value="10" >Oktober</option>
+										<option value="11" >November</option>
+										<option value="12" >Desember</option>
+									</select>
+							</div>
+							<div class="col-lg-2">
+							<br>
+							<select name=years class="form-control"  >
+				
+				<?php 				
+					$thisyear=date('Y')+1;
+					for($t=2009;$t< $thisyear;$t++){
+					echo "<option value='$t' >$t</option>";
+					}
+				?>
+				
+				</select>
+							
+							
+							
+								
+							</div>
+						</div>
+						</div>
+					</div>
+					
+					
 
 					<div class="row">
 						<div class="col-lg-8">
@@ -223,6 +270,10 @@ left:inherit!important;
 		
 		  <td>
 		  <a href="<?php echo site_url('pembayaran_detail/home/pembayaran_detail_addz/'.$v->pcid.'/' . $v -> pno_pm ); ?>"><i class="icon-book"></i></a>
+		  
+		  <?php if(($v->jumb==0)AND($st=="Done")){ ?>
+		  <a href="<?php echo site_url('komisi/home/add_komisi/'.$v -> pno_pm ); ?>"><i class="icon-pencil"></i></a>
+		  <?php } ?>
           </td>
 		
 		

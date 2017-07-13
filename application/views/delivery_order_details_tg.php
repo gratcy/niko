@@ -198,7 +198,7 @@ $drv=explode("-",$detailx[0]->driver);
 
 
 
- <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add/$id/$scid/$snodo"); ?>" method="post">
+ <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order_details_add_tg/$id/$scid/$snodo"); ?>" method="post">
 
 <input type=hidden value="<?php echo $detailx[0]->sbid; ?>" name=sbid class="form-control" >
 <input type=hidden value="<?php echo $detailx[0]->scid; ?>" name=scid class="form-control" >
@@ -234,20 +234,14 @@ $drv=explode("-",$detailx[0]->driver);
 		<input type=hidden name="qtyyyy[]" value="<?php echo $m -> ssisa; ?>">
 		<?php
 		endforeach;
+		// echo '<pre>';
+		// print_r($detail);
 		foreach($detail as $k => $v) :	
 			
 			$sqtyx=$v -> sqty;
 			$qtyx=$v -> sqty;
 			$subtotal=$sqtyx;
 	    if($v -> sqty > 0){
-						
-		  $paymentdisc=$v->sdisc *($v->sprice - $v->spromodisc)/100;		 
-
-		  $netprice=($v->sprice-($v->spromodisc + $paymentdisc)) * $v -> sqty;			
-			
-			
-			
-			
     ?>
           <tr>
           
@@ -255,24 +249,22 @@ $drv=explode("-",$detailx[0]->driver);
 		  <input type=hidden name="did[]" value="<?php echo $v -> did; ?>">
 		  <input type=hidden name="spid[]" value="<?php echo $v -> spid; ?>">
 		  <input type=hidden name="sid[]" value="<?php echo $v -> sid; ?>">
-		  <input type=hidden name="qty[]" value="<?php echo $v -> hqty; ?>">
-		  <input type=hidden name="sqty[]" value="<?php echo $v -> sqty; ?>">
+		  <input type=hidden name="qty[]" value="<?php echo $v -> ssisa; ?>">
+		  <input type=hidden name="sqty[]" value="<?php echo $v -> qtyy; ?>">
 		  <input type=hidden name="samount[]" value="<?php echo $v -> sprice; ?>">
-		  <!--input type=hidden name="tamount[]" value="<?php //echo $v -> sprice * $v -> sqty; ?>"-->
-		 
-		  <input type=hidden name="tamount[]" value="<?php echo $netprice; ?>">
+		  <input type=hidden name="tamount[]" value="<?php echo $v -> sprice * $v -> sqty; ?>">
 		 
 		  <?php echo $v -> pcode; ?><input type=hidden name="sssid[]" 
 		  value="<?php echo $detailx[0]->ssid_sales; ?>"></td>
 		  <td><?php echo $v -> pname; ?></td>
 		  <td><?php echo $v -> sqty/$v -> pvolume; ?>  </td>
-          <td><?php echo $v -> sqty; ?>  </td>
+          <td><?php echo $v -> qtyy; ?>  </td>
 
 		  </tr>
         <?php 
 		}
 		$total=$subtotal+$total;
-		$totalqty=$qtyx+$totalqty;
+		$totalqty=$v -> qtyy+$totalqty;
 		$totalppn=$total * 10/100;
 		if($freeppn==1){
 		$totalall= $total;
@@ -304,10 +296,10 @@ $drv=explode("-",$detailx[0]->driver);
 		<?php 
 		if ($detailx[0]->dstatus==1){?>						
 		<?php if (__get_roles('InvoiceOrderExecute')) : ?>
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type="submit" value="Edit" ></form>	
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_details_add_tg/'.$id.'/'.$scid.'/'.$snodo); ?>" ><input class="btn text-muted text-center btn-primary" type="submit" value="Edit" ></form>	
 		<?php endif; ?>
 		<?php }else{?>
-		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type="submit" value="PRINT" ></form>	
+		<form action="<?php echo site_url('sales_order_detail/home/delivery_order_report_tg/'.$id.'/'.$scid.'/'.$snodo); ?>" target=_blank ><input class="btn text-muted text-center btn-danger" type="submit" value="PRINT" ></form>	
 		<?php }?></td></tr></table>
 
                             </div>

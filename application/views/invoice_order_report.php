@@ -87,18 +87,20 @@ minLength: 1,
 						</td></tr>
 						
 						<tr><td>Status</td><td><select name="pstatus" class="form-control">
-						<option value="0">Pending &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<option value="0">ALL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						</option>						
-						<option value="4">Due date</option>
-						<option value="5">Over date</option>
+						</option>		
+						<option value="6">Pending</option>
+						<option value="4">Due Date</option>
+						<option value="5">Over Date</option>
 						<option value="3">Paid</option>
+						
 						</select>
 						</td></tr>
 						<tr><td>Period</td><td>
-							<input size=16 type=text name="astgl_invoice" id="example1" class="form-control" style="float:left;width:45%;">
+							<input size=16 type=text name="astgl_invoice" id="example1" class="form-control" value="<?php echo "01".date('/m/Y');?>" style="float:left;width:45%;">
 							<div style="float:left;width:10%;text-align:center"> TO </div> 
-							<input size=16 type=text name="bstgl_invoice" id="example2" class="form-control" style="float:left;width:45%;">
+							<input size=16 type=text name="bstgl_invoice" id="example2" class="form-control" value="<?php echo date('d/m/Y');?>" style="float:left;width:45%;">
 						
 						</td></tr>
 						<tr><td></td><td><input type=submit value="Search" class="btn btn-default btn-grad"> <input class="btn btn-default btn-grad" type=submit name="xexcel" value="Excel"></td></tr>
@@ -117,7 +119,7 @@ minLength: 1,
 		  <th>Reff No.</th>
           <th>DO No.</th>
 		  <th>Invoice No.</th>         
-          <th>Inv Date</th>
+          <th>Invoice Date</th>
 		  <th>Customer </th>
           <th>Sales</th>
 		  <th>Due Date </th>
@@ -160,17 +162,26 @@ minLength: 1,
           <td><?php echo $v ->stypepay;?></td>
 		  <td><?php echo number_format($v ->dototal);?></td>
 		  <td><?php 
-		  if($v ->pstatus == '3'){ $stt="Paid";}
-		  else{ 
-		  $stt="Pending";
-	
+		  
  $now = time(); // or your date as well
      $your_date = strtotime($v -> sduedate_invoice);
      $datediff = $now - $your_date;
-     $numberDaysa= floor($datediff/(60*60*24));
-
-if(($numberDaysa>=-2)&&($numberDaysa<=0)){$stt= "Due Date";}	
-else if($numberDaysa>0){ $stt= "<font color=red >Over Date</font>";}
+     $numberDaysa= floor($datediff/(60*60*24));		  
+		  
+		  
+		  if($v ->pstatus == '3'){ $stt="Paid";
+		  
+		  //else 
+		  //$stt="";
+	
+ // $now = time(); // or your date as well
+     // $your_date = strtotime($v -> sduedate_invoice);
+     // $datediff = $now - $your_date;
+     // $numberDaysa= floor($datediff/(60*60*24));
+}
+elseif(($numberDaysa>=-2)&&($numberDaysa<=0)){$stt= "Due Date";}	
+else if($numberDaysa>0){ $stt= "<font color=red >Over Date</font>";} elseif(($numberDaysa< -2)){
+			  $stt="Pending";
 		  }
 		  echo $stt;?></td>
 		<td><?php 
@@ -215,7 +226,7 @@ else if($numberDaysa>0){ $stt= "<font color=red >Over Date</font>";}
 		
                                     </tbody>
                                 </table>
-    <?php echo $pages; ?>
+    <?php //echo $pages; ?>
                             </div>
                         </div>
                     </div>
