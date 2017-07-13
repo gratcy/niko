@@ -37,6 +37,12 @@
                          <select name="rno2" class="form-control chzn-select"><?php echo $rno2; ?></select>
                     </div>
                 </div>
+                <div class="form-group" id="rno3">
+                    <label for="text1" class="control-label col-lg-4">Request No.</label>
+                    <div class="input-group col-lg-4">
+                         <select name="rno3" class="form-control chzn-select"><?php echo $rno3; ?></select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Date</label>
                     <div class="input-group col-lg-4">
@@ -87,7 +93,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('select[name="rno"],select[name="rno2"]').change(function(){
+	$('select[name="rno"],select[name="rno2"],select[name="rno3"]').change(function(){
 		$('input[name="title"]').val($('option:selected', this).attr('dtitle'));
 		$('input[name="waktu"]').val($('option:selected', this).attr('ddate'));
 	});
@@ -97,16 +103,24 @@ $(function(){
 	$('select[name="rno2"]').change(function(){
 		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());
 	});
+	$('select[name="rno3"]').change(function(){
+		$('div#Items').load('<?php echo site_url('transfer/transfer_request_items/'); ?>'+'/'+$(this).val());
+	});
 	$('select[name="rtype"]').change(function(){
 		if ($(this).val() == 1) {
-			$('#rno2').css({'display':'none'});
+			$('#rno2, #rno3').css({'display':'none'});
 			$('#rno').css({'display':'block'});
-			$('#rno .chosen-container, #rno2 .chosen-container').css('width','100%');
+			$('#rno .chosen-container, #rno2 .chosen-container, #rno3 .chosen-container').css('width','100%');
+		}
+		else if ($(this).val() == 2) {
+			$('#rno2').css({'display':'block'});
+			$('#rno,#rno3').css({'display':'none'});
+			$('#rno .chosen-container, #rno2 .chosen-container, #rno3 .chosen-container').css('width','100%');
 		}
 		else {
-			$('#rno2').css({'display':'block'});
-			$('#rno').css({'display':'none'});
-			$('#rno .chosen-container, #rno2 .chosen-container').css('width','100%');
+			$('#rno3').css({'display':'block'});
+			$('#rno, #rno2').css({'display':'none'});
+			$('#rno .chosen-container, #rno2 .chosen-container, #rno3 .chosen-container').css('width','100%');
 		}
 	});
 	

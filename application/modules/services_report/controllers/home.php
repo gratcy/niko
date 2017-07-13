@@ -149,15 +149,15 @@ class Home extends MY_Controller {
 								endfor;
 								
 								for($i=0;$i<count($pid);++$i) :
-									$r3 = $this -> inventory_model -> __check_inventory(4,$dwo[0] -> sbid,$pid[$i]);
-									if (!$r3[0]) {
-										$arr3 = array('ibid' => $dwo[0] -> sbid, 'iiid' => $pid[$i], 'itype' => 4, 'istockin' => $fpqty[$pid[$i]], 'istockout' => $fpqty[$pid[$i]], 'istock' => $fpqty[$pid[$i]], 'istatus' => 1);
-										$this -> inventory_model -> __insert_inventory($arr3);
-									}
-									else {
-										$arr3 = array('istockout' => ($r3[0] -> istockout + $fpqty[$pid[$i]]), 'istock' => ($r3[0] -> istock - $fpqty[$pid[$i]]));
-										$this -> inventory_model -> __update_inventory($r3[0] -> iid, $arr3, 4);
-									}
+									//~ $r3 = $this -> inventory_model -> __check_inventory(4,$dwo[0] -> sbid,$pid[$i]);
+									//~ if (!$r3[0]) {
+										//~ $arr3 = array('ibid' => $dwo[0] -> sbid, 'iiid' => $pid[$i], 'itype' => 4, 'istockin' => $fpqty[$pid[$i]], 'istockout' => $fpqty[$pid[$i]], 'istock' => $fpqty[$pid[$i]], 'istatus' => 1);
+										//~ $this -> inventory_model -> __insert_inventory($arr3);
+									//~ }
+									//~ else {
+										//~ $arr3 = array('istockout' => ($r3[0] -> istockout + $fpqty[$pid[$i]]), 'istock' => ($r3[0] -> istock - $fpqty[$pid[$i]]));
+										//~ $this -> inventory_model -> __update_inventory($r3[0] -> iid, $arr3, 4);
+									//~ }
 								endfor;
 							}
 						}

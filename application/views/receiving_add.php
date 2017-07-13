@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Request No. / Vendor</label>
+                    <label for="text1" class="control-label col-lg-4">Request No. / Vendor / Customer</label>
                     <div class="input-group col-lg-4">
                         <span id="bp"></span>
                     </div>

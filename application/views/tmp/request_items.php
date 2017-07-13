@@ -89,7 +89,7 @@
 <!--
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
 -->
-			<td><input type="number" value="<?php echo ($type == 1 ? '' : $v -> dqty); ?>" name="items2[<?php echo $v -> did; ?>]" class="form-control" style="width:100px;"></td>
+			<td><input type="number" value="<?php echo ($type == 1 ? '1' : $v -> dqty); ?>" name="items2[<?php echo $v -> did; ?>]" class="form-control" style="width:100px;"></td>
 			<td style="text-align:center;"><a href="javascript:void(0);" class="dellist" idnya2="<?php echo $v -> did; ?>" mid2="<?php echo $v -> sid; ?>"><i class="icon-remove"></i></a></td>
 			</tr>
         <?php endforeach; ?>

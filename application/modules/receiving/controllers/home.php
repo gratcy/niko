@@ -9,6 +9,7 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('branch/branch_lib');
 		$this -> load -> library('request/request_lib');
+		$this -> load -> library('customers/customers_lib');
 		$this -> load -> model('request/request_model');
 		$this -> load -> model('receiving_model');
 	}
@@ -88,6 +89,9 @@ class Home extends MY_Controller {
 
 			if ($app == 1) $status = 3;
 			else $status = (int) $this -> input -> post('status');
+			
+			$iptype = ($rtype == 3 ? 3 : 1);
+			$istype = ($rtype == 3 ? 5 : 2);
 
 			if ($id) {
 				if (!$docno) {
@@ -104,8 +108,8 @@ class Home extends MY_Controller {
 							if ($app == 1) {
 								$iid = $this -> receiving_model -> __get_receiving_item_detail($k);
 								if (isset($iid[0] -> riid)) {
-									$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,1,$this -> memcachedlib -> sesresult['ubid']);
-									$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],1,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+									$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,$iptype,$this -> memcachedlib -> sesresult['ubid']);
+									$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],$iptype,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
 								}
 							}
 						}
@@ -116,8 +120,8 @@ class Home extends MY_Controller {
 							if ($app == 1) {
 								$iid = $this -> receiving_model -> __get_receiving_item_detail($k);
 								if (isset($iid[0] -> riid)) {
-									$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,2,$this -> memcachedlib -> sesresult['ubid']);
-									$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
+									$iv = $this -> receiving_model -> __get_inventory_detail($iid[0] -> riid,$istype,$this -> memcachedlib -> sesresult['ubid']);
+									$this -> receiving_model -> __update_inventory($iid[0] -> riid,$this -> memcachedlib -> sesresult['ubid'],$istype,array('istockin' => ($iv[0] -> istockin+$v),'istock' => ($iv[0] -> istock + $v)));
 								}
 							}
 						}
@@ -148,12 +152,17 @@ class Home extends MY_Controller {
 		$res = '';
 		if ($type == 1) {
 			$res .= '<select name="rid" class="form-control" id="rid">';
-			$res .= $this -> request_lib -> __get_request($id,$this -> memcachedlib -> sesresult['ubid'],3);
+			$res .= $this -> request_lib -> __get_request($id,$this -> memcachedlib -> sesresult['ubid'],0);
 			$res .= '</select>';
 		}
-		else {
+		else if ($type == 2) {
 			$r = $this -> receiving_model -> __get_receiving_vendor($id);
 			$res .= '<input type="text" name="vendor" class="form-control" autocomplete="off" value="'.($id ? $r[0] -> rvendor : '').'" />';
+		}
+		else {
+			$res .= '<select name="vendor" class="form-control" id="vendor">';
+			$res .= $this -> customers_lib -> __get_customers($id,$this -> memcachedlib -> sesresult['ubid'],0);
+			$res .= '</select>';
 		}
 		echo $res;
 	}

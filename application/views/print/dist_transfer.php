@@ -13,53 +13,129 @@ html,body{margin:0;padding:0;}
 		<table border="0" width="500" style="border-collapse: collapse;">
 		<thead>
 		<tr><td>Doc No.</td><td><?php echo $detail[0] -> ddocno; ?></td></tr>
-		<tr><td>Request No.</td><td><?php echo ($detail[0] -> dtype == 1 ? 'R01' : 'R02').str_pad($id, 4, "0", STR_PAD_LEFT); ?></td></tr>
+		<tr><td>Request No.</td><td><?php echo 'R0'.$detail[0] -> dtype.str_pad($detail[0] -> ddrid, 4, "0", STR_PAD_LEFT); ?></td></tr>
 		<tr><td>Request Type</td><td><?php echo __get_request_type($detail[0] -> dtype,1);?></td></tr>
 		<tr><td>Date</td><td><?php echo __get_date($detail[0] -> ddate,2);?></td></tr>
-		<tr><td>Branch From</td><td><?php echo $detail[0] -> fbname;?></td></tr>
-		<tr><td>Branch To</td><td><?php echo $detail[0] -> tbname;?></td></tr>
+		<tr><td>From</td><td><?php echo $detail[0] -> fbname;?></td></tr>
+		<tr><td>To</td><td><?php echo ($detail[0] -> dtype == 3 ? $detail[0] -> tcname : $detail[0] -> tbname);?></td></tr>
 		<tr><td>Title</td><td><?php echo $detail[0] -> dtitle;?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> ddesc;?></td></tr>
 		<tr><td>Status</td><td>Approve</td></tr>
 		</thead>
 		</table>
 		</div>
+		<?php if ($items[0] && count($items[0]) > 0) : ?>
 		<h3>List Product</h3>
 		
 		<table border="0" width="850" style="border-collapse: collapse;">
 		<thead>
-		<tr style="border:1px solid #000;padding:3px;"><th style="border:1px solid #000;padding:3px;">Packaging</th><th style="border:1px solid #000;padding:3px;">Code</th><th style="border:1px solid #000;padding:3px;">Name</th><th style="border:1px solid #000;padding:3px;">Volume</th><th style="border:1px solid #000;padding:3px;">QTY</th></tr>
+		<tr style="border:1px solid #000;padding:3px;">
+		<th style="border:1px solid #000;padding:3px;">Packaging</th>
+		<th style="border:1px solid #000;padding:3px;">Code</th>
+<!--
+		<th style="border:1px solid #000;padding:3px;">Name</th>
+-->
+<!--
+		<th style="border:1px solid #000;padding:3px;">Volume</th>
+-->
+		<th style="border:1px solid #000;padding:3px;">Price</th>
+		<th style="border:1px solid #000;padding:3px;">QTY</th>
+		<th style="border:1px solid #000;padding:3px;">Total</th>
+		</tr>
 		</thead>
 		<tbody>
-		<?php foreach($items[0] as $k => $v) : ?>
+		<?php
+		$ttotal = 0;
+		$tspriceagent = 0;
+		$tqty = 0;
+		foreach($items[0] as $k => $v) :
+		?>
 			<tr style="border:1px solid #000;padding:3px;">
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> cname; ?></td>
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> pcode; ?></td>
+<!--
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> pname; ?></td>
+-->
+<!--
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> pvolume; ?></td>
+-->
+			<td style="border:1px solid #000;padding:3px;"><?php echo __get_rupiah($v -> pkey,4); ?></td>
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> dqty; ?></td>
+			<td style="border:1px solid #000;padding:3px;"><?php echo __get_rupiah(($v -> dqty*$v -> pkey),4); ?></td>
 			</tr>
-		<?php endforeach; ?>
+		<?php
+		$ttotal += $v -> dqty*$v -> pkey; 
+		$tspriceagent += ($v -> dqty > 0 ? $v -> pkey : 0); 
+		$tqty += $v -> dqty; 
+		endforeach;
+		?>
 		</tbody>
+		<tfoot>
+		<tr>
+		<td style="border:1px solid #000;padding:3px;"><b>Grand Total</b></td>
+		<td style="border:1px solid #000;padding:3px;"></td>
+		<td style="border:1px solid #000;padding:3px;text-align:right;"><b><?php echo __get_rupiah($tspriceagent,4); ?></b></td>
+		<td style="border:1px solid #000;padding:3px;"><b><?php echo $tqty; ?></b></td>
+		<td style="border:1px solid #000;padding:3px;text-align:right;"><b><?php echo __get_rupiah($ttotal,4); ?></b></td>
+		</tr>
+		</tfoot>
 		</table>
+		<?php endif; ?>
 		<?php if ($items[1]) : ?>
 		<h3>List Sparepart</h3>
 		
 		<table border="0" width="850" style="border-collapse: collapse;">
 		<thead>
-		<tr style="border:1px solid #000;padding:3px;"><th style="border:1px solid #000;padding:3px;">Code</th><th style="border:1px solid #000;padding:3px;">Name</th><th style="border:1px solid #000;padding:3px;">No. Component</th><th style="border:1px solid #000;padding:3px;">Return</th><th style="border:1px solid #000;padding:3px;">QTY</th></tr>
+		<tr style="border:1px solid #000;padding:3px;">
+			<th style="border:1px solid #000;padding:3px;">Code</th>
+			<th style="border:1px solid #000;padding:3px;">Name</th>
+<!--
+			<th style="border:1px solid #000;padding:3px;">No. Component</th>
+-->
+<!--
+			<th style="border:1px solid #000;padding:3px;">Return</th>
+-->
+			<th style="border:1px solid #000;padding:3px;">Price</th>
+			<th style="border:1px solid #000;padding:3px;">QTY</th>
+			<th style="border:1px solid #000;padding:3px;">Total</th>
+			</tr>
 		</thead>
 		<tbody>
-		<?php foreach($items[1] as $k => $v) : ?>
+		<?php
+		$ttotal = 0;
+		$tspriceagent = 0;
+		$tqty = 0;
+		foreach($items[1] as $k => $v) : 
+		?>
 			<tr style="border:1px solid #000;padding:3px;">
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> scode; ?></td>
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> sname; ?></td>
+<!--
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> snocomponent; ?></td>
+-->
+<!--
 			<td style="border:1px solid #000;padding:3px;"><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
+-->
+			<td style="border:1px solid #000;padding:3px;text-align:right;"><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> dqty; ?></td>
+			<td style="border:1px solid #000;padding:3px;text-align:right;"><?php echo __get_rupiah(($v -> dqty*$v -> spriceagent),4); ?></td>
 			</tr>
-		<?php endforeach; ?>
+		<?php
+		$ttotal += $v -> dqty*$v -> spriceagent; 
+		$tspriceagent += ($v -> dqty > 0 ? $v -> spriceagent : 0); 
+		$tqty += $v -> dqty; 
+		endforeach;
+		?>
 		</tbody>
+		<tfoot>
+		<tr>
+		<td style="border:1px solid #000;padding:3px;"><b>Grand Total</b></td>
+		<td style="border:1px solid #000;padding:3px;"></td>
+		<td style="border:1px solid #000;padding:3px;text-align:right;"><b><?php echo __get_rupiah($tspriceagent,4); ?></b></td>
+		<td style="border:1px solid #000;padding:3px;"><b><?php echo $tqty; ?></b></td>
+		<td style="border:1px solid #000;padding:3px;text-align:right;"><b><?php echo __get_rupiah($ttotal,4); ?></b></td>
+		</tr>
+		</tfoot>
 		</table>
 		<?php endif; ?>
 		</div>

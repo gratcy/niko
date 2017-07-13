@@ -8,6 +8,7 @@ class Home extends MY_Controller {
 		parent::__construct();
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('branch/branch_lib');
+		$this -> load -> library('customers/customers_lib');
 		$this -> load -> model('request_model');
 	}
 
@@ -36,8 +37,11 @@ class Home extends MY_Controller {
 			$items2 = $this -> input -> post('items2');
 			$bfrom = (int) $this -> input -> post('bfrom');
 			$bto = (int) $this -> input -> post('bto');
+			$cto = (int) $this -> input -> post('cto');
 			$rtype = (int) $this -> input -> post('rtype');
 			$status = (int) $this -> input -> post('status');
+
+			if ($rtype == 3) $bto = $cto;
 			
 			if (!$bto || !$bfrom || !$title) {
 				__set_error_msg(array('error' => 'Cabang Asal, Tujuan dan Judul harus di isi !!!'));
@@ -74,6 +78,7 @@ class Home extends MY_Controller {
 		else {
 			$view['bfrom'] = $this -> branch_lib -> __get_branch();
 			$view['bto'] = $this -> branch_lib -> __get_branch();
+			$view['cto'] = $this -> customers_lib -> __get_customers();
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -88,6 +93,9 @@ class Home extends MY_Controller {
 			$bto = (int) $this -> input -> post('bto');
 			$app = (int) $this -> input -> post('app');
 			$rtype = (int) $this -> input -> post('rtype');
+			$cto = (int) $this -> input -> post('cto');
+			
+			if ($rtype == 3) $bto = $cto;
 			
 			if ($app == 1) $status = 3;
 			else $status = (int) $this -> input -> post('status');
@@ -130,6 +138,7 @@ class Home extends MY_Controller {
 			$view['detail'] = $this -> request_model -> __get_request_detail($id);
 			$view['bfrom'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> dbfrom);
 			$view['bto'] = $this -> branch_lib -> __get_branch($view['detail'][0] -> dbto);
+			$view['cto'] = $this -> customers_lib -> __get_customers($view['detail'][0] -> dbto);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}

@@ -321,7 +321,7 @@ function __get_PTMP() {
 		$CI -> memcachedlib -> delete(__keyTMP($_SERVER['HTTP_REFERER']));
 		return json_encode(array());
 	}
-    $res = json_encode($CI -> memcachedlib -> get(__keyTMP($_SERVER['REQUEST_URI'])));
+    $res = json_encode(($CI -> memcachedlib -> get(__keyTMP($_SERVER['REQUEST_URI'])) ? $CI -> memcachedlib -> get(__keyTMP($_SERVER['REQUEST_URI'])) : array()));
     $CI -> memcachedlib -> delete(__keyTMP($_SERVER['REQUEST_URI']));
     return $res;
 }
@@ -334,17 +334,35 @@ function __get_receiving_name($id, $type) {
 }
 
 function __get_request_type($id, $type) {
-	if ($type == 1)
-		return ($id == 2 ? 'Return' : 'Transfer');
-	else
-		return ($id == 2 ? '<option value="1">Transfer</option><option value="2" selected>Return</option>' : '<option value="1" selected>Transfer</option><option value="2">Return</option>');
+	$data = array('Transfer','Return','Transfer Customer');
+	if ($type == 1) {
+		return $data[$id-1];
+	}
+	else {
+		$res = '';
+		foreach($data as $k => $v)
+			if ($id == ($k + 1))
+				$res .= '<option value="'.($k+1).'" selected>'.$v.'</option>';
+			else
+				$res .= '<option value="'.($k+1).'">'.$v.'</option>';
+		return $res;
+	}
 }
 
 function __get_receiving_type($id, $type) {
-	if ($type == 1)
-		return ($id == 1 ? 'Branches' : 'Factory / Vendor');
-	else
-		return ($id == 1 ? '<option value="1" selected>Branches</option><option value="2">Factory / Vendor</option>' : '<option value="1">Branches</option><option value="2" selected>Factory / Vendor</option>');
+	$data = array('Branches','Factory / Vendor','Customer');
+	if ($type == 1) {
+		return $data[$id-1];
+	}
+	else {
+		$res = '';
+		foreach($data as $k => $v)
+			if ($id == ($k + 1))
+				$res .= '<option value="'.($k+1).'" selected>'.$v.'</option>';
+			else
+				$res .= '<option value="'.($k+1).'">'.$v.'</option>';
+		return $res;
+	}
 }
 
 function __get_stock_adjustment($iid, $branch, $type, $stype) {

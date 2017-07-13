@@ -38,10 +38,12 @@ class Home extends MY_Controller {
 			$qty = $this -> input -> post('qty', TRUE);
 			$rno = (int) $this -> input -> post('rno');
 			$rno2 = (int) $this -> input -> post('rno2');
+			$rno3 = (int) $this -> input -> post('rno3');
 			$status = (int) $this -> input -> post('status');
 			$rtype = (int) $this -> input -> post('rtype');
 			
 			if ($rtype == 2) $rno = $rno2;
+			if ($rtype == 3) $rno = $rno3;
 			
 			if (!$title || !$rno) {
 				__set_error_msg(array('error' => 'Judul dan Request No harus di isi !!!'));
@@ -81,6 +83,7 @@ class Home extends MY_Controller {
 		else {
 			$view['rno'] = $this -> request_lib -> __get_request(0,$this -> memcachedlib -> sesresult['ubid'],1);
 			$view['rno2'] = $this -> request_lib -> __get_request(0,$this -> memcachedlib -> sesresult['ubid'],2);
+			$view['rno3'] = $this -> request_lib -> __get_request(0,$this -> memcachedlib -> sesresult['ubid'],3);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -95,6 +98,7 @@ class Home extends MY_Controller {
 			$waktu = str_replace('/','-',$this -> input -> post('waktu', TRUE));
 			$rno = (int) $this -> input -> post('rno');
 			$rno2 = (int) $this -> input -> post('rno2');
+			$rno3 = (int) $this -> input -> post('rno3');
 			$app = (int) $this -> input -> post('app');
 			$rtype = (int) $this -> input -> post('rtype');
 
@@ -102,6 +106,7 @@ class Home extends MY_Controller {
 			else $status = (int) $this -> input -> post('status');
 			
 			if ($rtype == 2) $rno = $rno2;
+			if ($rtype == 3) $rno = $rno3;
 
 			if ($id) {
 				if (!$title || !$rno) {
@@ -116,13 +121,17 @@ class Home extends MY_Controller {
 					$st = false;
 					$cd = array();
 					
-					foreach($qty[1] as $k => $v)
-						$this -> request_model -> __update_request_item($k,array('dqty' => $v));
-						
-					foreach($qty[2] as $k => $v)
-						$this -> request_model -> __update_request_item($k,array('dqty' => $v));
+					if (!empty($qty[1])) {
+						foreach($qty[1] as $k => $v)
+							$this -> request_model -> __update_request_item($k,array('dqty' => $v));
+					}
 					
-					$itypeP = ($rtype == 1 ? 1 : 4);
+					if (!empty($qty[2])) {
+						foreach($qty[2] as $k => $v)
+							$this -> request_model -> __update_request_item($k,array('dqty' => $v));
+					}
+					
+					$itypeP = ($rtype == 1 || $rtype == 3 ? 1 : 4);
 					if ($status == 3) {
 						$req = $this -> request_model -> __get_items($rno,1,2);
 						foreach($req as $k => $v) {
@@ -158,7 +167,7 @@ class Home extends MY_Controller {
 								$this -> receiving_model -> __update_inventory($v -> pid,$this -> memcachedlib -> sesresult['ubid'],$itypeP,array('istockout' => ($iv[0] -> istockout+$v -> dqty),'istock' => ($iv[0] -> istock - $v -> dqty)));
 							}
 							
-							if ($rtype == 1) {
+							if ($rtype == 1 || $rtype == 3) {
 								foreach($req2 as $k => $v) {
 									$iv2 = $this -> receiving_model -> __get_inventory_detail($v -> sid,2,$this -> memcachedlib -> sesresult['ubid']);
 									$this -> receiving_model -> __update_inventory($v -> sid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockout' => ($iv2[0] -> istockout+$v -> dqty),'istock' => ($iv2[0] -> istock - $v -> dqty)));
@@ -185,6 +194,7 @@ class Home extends MY_Controller {
 			$view['detail'] = $this -> transfer_model -> __get_transfer_detail($id);
 			$view['rno'] = $this -> request_lib -> __get_request($view['detail'][0] -> ddrid,$this -> memcachedlib -> sesresult['ubid'],1);
 			$view['rno2'] = $this -> request_lib -> __get_request($view['detail'][0] -> ddrid,$this -> memcachedlib -> sesresult['ubid'],2);
+			$view['rno3'] = $this -> request_lib -> __get_request($view['detail'][0] -> ddrid,$this -> memcachedlib -> sesresult['ubid'],3);
 			$this->load->view(__FUNCTION__, $view);
 		}
 	}
@@ -224,9 +234,9 @@ class Home extends MY_Controller {
 			$arr = array();
 		
 			foreach($data as $K => $v)
-				$arr[] = array($v -> ddocno,'R'.str_pad($v -> did, 4, "0", STR_PAD_LEFT),__get_date($v -> ddate), $v -> fbname, $v -> tbname, $v -> dtitle, $v -> ddesc, $v -> total_items, ($v -> dstatus == 3 ? 'Approved' : __get_status($v -> dstatus,1)));
+				$arr[] = array($v -> ddocno,'R0'.$v -> dtype.str_pad($v -> did, 4, "0", STR_PAD_LEFT),__get_date($v -> ddate), $v -> fbname, ($v -> dtype != 3 ? $v -> tbname : $v -> tcname), $v -> dtitle, $v -> ddesc, $v -> total_items, ($v -> dstatus == 3 ? 'Approved' : __get_status($v -> dstatus,1)));
 			
-			$data = array('header' => array('Doc No.', 'Request No.', 'Date', 'Branch From','Branch To','Title','Description','Total Item','Status'), 'data' => $arr);
+			$data = array('header' => array('Doc No.', 'Request No.', 'Date', 'From','To','Title','Description','Total Item','Status'), 'data' => $arr);
 
 			$this -> excel -> sEncoding = 'UTF-8';
 			$this -> excel -> bConvertTypes = false;

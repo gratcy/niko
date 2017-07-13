@@ -12,17 +12,18 @@ html,body{margin:0;padding:0;}
 		<div style="width:500px;">
 		<table border="0" width="500" style="border-collapse: collapse;">
 		<thead>
-		<tr><td>Request No.</td><td><?php echo ($detail[0] -> dtype == 1 ? 'R01' : 'R02').str_pad($id, 4, "0", STR_PAD_LEFT); ?></td></tr>
+		<tr><td>Request No.</td><td><?php echo 'R0'.$detail[0] -> dtype.str_pad($id, 4, "0", STR_PAD_LEFT); ?></td></tr>
 		<tr><td>Request Type</td><td><?php echo __get_request_type($detail[0] -> dtype,1);?></td></tr>
 		<tr><td>Date</td><td><?php echo __get_date($detail[0] -> ddate,2);?></td></tr>
-		<tr><td>Branch From</td><td><?php echo $detail[0] -> fbname;?></td></tr>
-		<tr><td>Branch To</td><td><?php echo $detail[0] -> tbname;?></td></tr>
+		<tr><td>From</td><td><?php echo $detail[0] -> fbname;?></td></tr>
+		<tr><td>To</td><td><?php echo ($detail[0] -> dtype == 3 ? $detail[0] -> tcname : $detail[0] -> tbname);?></td></tr>
 		<tr><td>Title</td><td><?php echo $detail[0] -> dtitle;?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> ddesc;?></td></tr>
 		<tr><td>Status</td><td>Approve</td></tr>
 		</thead>
 		</table>
 		</div>
+		<?php if ($items[0] && count($items[0]) > 0) : ?>
 		<h3>List Product</h3>
 		
 		<table border="0" width="850" style="border-collapse: collapse;">
@@ -41,6 +42,7 @@ html,body{margin:0;padding:0;}
 		<?php endforeach; ?>
 		</tbody>
 		</table>
+		<?php endif; ?>
 		<?php if ($items[1]) : ?>
 		<h3>List Sparepart</h3>
 		

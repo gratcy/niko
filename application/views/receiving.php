@@ -48,7 +48,7 @@
                                         <tr>
           <td><?php echo $v -> rdocno; ?></td>
           <td><?php echo __get_receiving_type($v -> rtype,1); ?></td>
-          <td><?php echo ($v -> rtype == 1 ? __get_receiving_name($v -> riid, $v -> rtype) : $v -> rvendor); ?></td>
+          <td><?php echo ($v -> rtype == 1 ? __get_receiving_name($v -> riid, $v -> rtype) : ($v -> rtype == 3 ? $v -> cname : $v -> rvendor)); ?></td>
           <td><?php echo __get_date($v -> rdate); ?></td>
           <td><?php echo $v -> rdesc; ?></td>
           <td><?php echo ($v -> rstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approve</span>' : __get_status($v -> rstatus,1)); ?></td>

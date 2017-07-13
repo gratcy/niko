@@ -1,3 +1,6 @@
+<style>
+.chosen-container{width:100%!important}
+</style>
 <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">
@@ -36,11 +39,19 @@
 						</select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group branchto">
                     <label for="text1" class="control-label col-lg-4">Branch To</label>
                     <div class="input-group col-lg-4">
 						<select class="form-control" name="bto">
 							<?php echo $bto; ?>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group transfercust" style="display:none">
+                    <label for="text1" class="control-label col-lg-4">Customer</label>
+                    <div class="input-group col-lg-4">
+						<select class="form-control" name="cto">
+							<?php echo $cto; ?>
 						</select>
                     </div>
                 </div>
@@ -74,7 +85,7 @@
    <a class="btn btn-info" href="<?php echo site_url('request/request_list_items/2/' . $id); ?>" id="addItem">Add Item</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-			<?php if (__get_roles('DistributionRequestApproval')) : ?>
+			<?php if (!__get_roles('DistributionRequestApproval')) : ?>
 				<button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approve</button>
 			<?php endif; ?>
 					</div>
@@ -117,8 +128,20 @@ $(function(){
 		$('form.form-horizontal').submit();
 	});
 	
-	$('select[name="rtype"]').chosen({disable_search_threshold: 10});
+	$('select[name="cto"]').chosen({disable_search_threshold: 10});
+	$('select[name="rtype"], select[name="bfrom"], select[name="bto"]').chosen({disable_search_threshold: 10});
 	$('select[name="bfrom"]').val(<?php echo $detail[0] -> dbfrom; ?>);
 	$('#pbranch').css('display','none');
+	$('select[name="rtype"]').change(function(){
+		if ($(this).val() == 3) {
+			$('.branchto').hide()
+			$('.transfercust').show()
+		}
+		else {
+			$('.branchto').show()
+			$('.transfercust').hide()
+		}
+	})
+	$('select[name="rtype"]').change()
 });
 </script>

@@ -20,9 +20,10 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Request Type</label>
                     <div class="col-lg-4">
-						<select class="form-control" name="rtype">
+						<select class="form-control" name="tmprtype" disabled>
 						<?php echo __get_request_type($detail[0] -> dtype,2);?>
 						</select>
+                         <input type="hidden" name="rtype" value="<?php echo $detail[0] -> dtype?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,6 +45,13 @@
                     <div class="input-group col-lg-4">
                          <select name="rno233" class="form-control chzn-select" disabled><?php echo $rno2; ?></select>
                          <input type="hidden" name="rno2" value="<?php echo $detail[0] -> ddrid?>">
+                    </div>
+                </div>
+                <div class="form-group" id="rno3">
+                    <label for="text1" class="control-label col-lg-4">Request No.</label>
+                    <div class="input-group col-lg-4">
+                         <select name="rno233" class="form-control chzn-select" disabled><?php echo $rno3; ?></select>
+                         <input type="hidden" name="rno3" value="<?php echo $detail[0] -> ddrid?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -106,21 +114,26 @@ $(function(){
 		$('form.form-horizontal').submit();
 	});
 	
-	$('select[name="rtype"]').change(function(){
+	$('select[name="tmprtype"]').change(function(){
 		if ($(this).val() == 1) {
-			$('#rno2').css({'display':'none'});
+			$('#rno2, #rno3').css({'display':'none'});
 			$('#rno').css({'display':'block'});
-			$('#rno .chosen-container, #rno2 .chosen-container').css('width','100%');
+			$('#rno .chosen-container, #rno2 .chosen-container, #rno3 .chosen-container').css('width','100%');
+		}
+		else if ($(this).val() == 2) {
+			$('#rno2').css({'display':'block'});
+			$('#rno,#rno3').css({'display':'none'});
+			$('#rno .chosen-container, #rno2 .chosen-container, #rno3 .chosen-container').css('width','100%');
 		}
 		else {
-			$('#rno2').css({'display':'block'});
-			$('#rno').css({'display':'none'});
-			$('#rno .chosen-container, #rno2 .chosen-container').css('width','100%');
+			$('#rno3').css({'display':'block'});
+			$('#rno, #rno2').css({'display':'none'});
+			$('#rno .chosen-container, #rno2 .chosen-container, #rno3 .chosen-container').css('width','100%');
 		}
 	});
 	
-	$('select[name="rtype"]').chosen({disable_search_threshold: 10});
-	$('select[name="rtype"]').change();
+	$('select[name="tmprtype"]').chosen({disable_search_threshold: 10});
+	$('select[name="tmprtype"]').change();
 	$('input[name="waktu"]').datepicker({format: 'dd/mm/yyyy'});
 });
 </script>

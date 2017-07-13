@@ -267,34 +267,45 @@ class Home extends MY_Controller {
 		$ServiceProductUnApp = array();
 		$ServiceSparepartApp = array();
 		$ServiceSparepartUnApp = array();
+		$TransCustomerApp = array();
+		$TransCustomerUnApp = array();
 		
 		if ($type == 1) :
 			$SO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 1);
 			$DO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 2);
 		
-			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 1);
-			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 2);
+			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 1, 0);
+			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 2, 0);
+			
+			$TransCustomerApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 1, 1);
+			$TransCustomerUnApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 2, 1);
 		elseif ($type == 2) :
-			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1);
-			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2);
+			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1, 0);
+			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2, 0);
 			
 			$ServiceSparepartApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 1);
 			$ServiceSparepartUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 2);
+			
+			$TransCustomerApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 1, 2);
+			$TransCustomerUnApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 2, 2);
 		elseif ($type == 4) :
 			$returnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 1);
 			$returnUnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 2);
 			
-			$returnTransApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 1);
-			$returnTransUnApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 2);
+			$returnTransApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 1, 1);
+			$returnTransUnApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 2, 1);
 			
 			$ServiceProductApp = $this -> inventory_model -> __get_services_items($iid, $branch, 1, 1);
 			$ServiceProductUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 1, 2);
 		elseif ($type == 5) :
+			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1, 1);
+			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2, 1);
+			
 			$ServiceSparepartApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 1);
 			$ServiceSparepartUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 2);
 		endif;
 		
-		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp);
+		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp, $TransCustomerApp, $TransCustomerUnApp);
 		usort($data, "__sortArrayByDate");
 		$view['type'] = $type;
 		$view['detail'] = $data;

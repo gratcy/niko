@@ -38,6 +38,7 @@
 	
 	$.fn.postTMP = function(obj) {
 		if( $('form').length == 0 ) return false;
+		if( obj.length == 0 ) return false;
 		var obj = jQuery.parseJSON( obj );
 		var target = '';
 		$.each( obj, function( key, value ) {

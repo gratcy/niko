@@ -1,3 +1,6 @@
+<style>
+.chosen-container{width:100%!important}
+</style>
 <!--PAGE CONTENT -->
         <div id="content">
                 <div class="inner">
@@ -35,11 +38,19 @@
 						</select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group branchto">
                     <label for="text1" class="control-label col-lg-4">Branch To</label>
                     <div class="input-group col-lg-4">
 						<select class="form-control" name="bto">
 							<?php echo $bto; ?>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group transfercust" style="display:none">
+                    <label for="text1" class="control-label col-lg-4">Customer</label>
+                    <div class="input-group col-lg-4">
+						<select class="form-control" name="cto">
+							<?php echo $cto; ?>
 						</select>
                     </div>
                 </div>
@@ -107,8 +118,19 @@ $(function(){
 		$('div#Items').load('<?php echo site_url('request/request_items'); ?>');
 		$.fancybox.originalClose();
 	}
-	$('select[name="rtype"]').chosen({disable_search_threshold: 10});
+	$('select[name="cto"]').chosen({disable_search_threshold: 10});
 	$('select[name="bfrom"]').val(<?php echo $this -> memcachedlib -> sesresult['ubid']; ?>);
+	$('select[name="rtype"], select[name="bfrom"], select[name="bto"]').chosen({disable_search_threshold: 10});
 	$('#pbranch').css('display','none');
+	$('select[name="rtype"]').change(function(){
+		if ($(this).val() == 3) {
+			$('.branchto').hide()
+			$('.transfercust').show()
+		}
+		else {
+			$('.branchto').show()
+			$('.transfercust').hide()
+		}
+	})
 });
 </script>

@@ -112,8 +112,13 @@ class Inventory_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 	
-	function __get_return_transfer($iid, $branch, $stype) {
-		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN branch_tab d ON c.dbto=d.bid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND b.diid=" . $iid, FALSE);
+	function __get_transfer_customer($iid, $branch, $stype, $itype) {
+		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.cname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN customers_tab d ON c.dbto=d.cid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_return_transfer($iid, $branch, $stype, $itype) {
+		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN branch_tab d ON c.dbto=d.bid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	

@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Request No. / Vendor</label>
+                    <label for="text1" class="control-label col-lg-4">Request No. / Vendor / Customer</label>
                     <div class="input-group col-lg-4">
                         <span id="bp"></span>
                     </div>
@@ -71,7 +71,7 @@
    <a class="btn btn-info" href="<?php echo site_url('receiving/receiving_list_items/2/' . $id); ?>" id="addItem">Add Item</a>
 				<button class="btn text-muted text-center btn-danger" type="submit">Submit</button>
 				<button class="btn text-muted text-center btn-primary" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-<?php if (__get_roles('ItemReceivingApproval')) : ?>
+<?php if (!__get_roles('ItemReceivingApproval')) : ?>
    <button type="button" id="approve" class="btn btn-warning"> <i class="fa fa-save"></i> Approve</button>
 <?php endif; ?>
 
@@ -119,7 +119,7 @@ $(function(){
 		$.fancybox.originalClose();
 	}
 	$('select[name="rtype"]').change(function(){
-		$('span#bp').load('<?php echo site_url('receiving/receiving_types'); ?>/'+$(this).val() + '/<?php echo ($detail[0] -> rtype == 1 ? $detail[0] -> riid : $id);?>');
+		$('span#bp').load('<?php echo site_url('receiving/receiving_types'); ?>/'+$(this).val() + '/<?php echo ($detail[0] -> rtype == 1 ? $detail[0] -> riid : ($detail[0] -> rtype == 3 ? $detail[0] -> rvendor : $id));?>');
 	});
 	
 	$('select[name="rtype"]').change();
