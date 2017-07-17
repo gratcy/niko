@@ -280,8 +280,8 @@ class Home extends MY_Controller {
 			$TransCustomerApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 1, 1);
 			$TransCustomerUnApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 2, 1);
 		elseif ($type == 2) :
-			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1, 0);
-			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2, 0);
+			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 2, 1, 0);
+			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 2, 2, 0);
 			
 			$ServiceSparepartApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 1);
 			$ServiceSparepartUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 2);
@@ -300,6 +300,9 @@ class Home extends MY_Controller {
 		elseif ($type == 5) :
 			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1, 1);
 			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2, 1);
+			
+			$returnTransApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 1, 2);
+			$returnTransUnApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 2, 2);
 			
 			$ServiceSparepartApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 1);
 			$ServiceSparepartUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 2);

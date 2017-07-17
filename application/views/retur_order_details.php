@@ -236,7 +236,9 @@ minLength: 1,
 
 			<a href="<?php echo site_url('retur_order_detail/home/retur_order_report/'.$id.'/'.$scid); ?>" target="_blank"><input class="btn text-muted text-center btn-danger" type=button value=PRINT></a>
 			   <?php }else{?>
+				<?php if (__get_roles('ReturnOrderExecute')) : ?>
 			<a href="<?php echo site_url('retur_order_detail/home/retur_order_detail_add/'.$id.'/'.$scid); ?>"><input type=button class="btn text-muted text-center btn-danger" value="APPROVE / EDIT SO"></a>		
+				<?php endif; ?>
     <?php } ?>
                             </div>
                         </div>

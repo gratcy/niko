@@ -16,7 +16,9 @@
 				if($ssisa >'0'){
 				// $statusdo="Aktif";
 				?>
+				<?php if (__get_roles('DeliveryOrderReturnExecute')) : ?>
                 <a href="<?php 	echo site_url('sales_order_detail/home/delivery_order_add_tg/'.$id.'/'.$sbid); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Delivery Order</a>
+                <?php endif; ?>
 				<?php  }else{$statusdo="DONE";} ?>
 				<?php //endif; ?>
                 <br />

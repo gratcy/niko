@@ -173,6 +173,12 @@ class Home extends MY_Controller {
 									$this -> receiving_model -> __update_inventory($v -> sid,$this -> memcachedlib -> sesresult['ubid'],2,array('istockout' => ($iv2[0] -> istockout+$v -> dqty),'istock' => ($iv2[0] -> istock - $v -> dqty)));
 								}
 							}
+							if ($rtype == 2) {
+								foreach($req2 as $k => $v) {
+									$iv2 = $this -> receiving_model -> __get_inventory_detail($v -> sid,5,$this -> memcachedlib -> sesresult['ubid']);
+									$this -> receiving_model -> __update_inventory($v -> sid,$this -> memcachedlib -> sesresult['ubid'],5,array('istockout' => ($iv2[0] -> istockout+$v -> dqty),'istock' => ($iv2[0] -> istock - $v -> dqty)));
+								}
+							}
 							
 							__set_error_msg(array('info' => 'Data berhasil diubah.'));
 							redirect(site_url('transfer'));

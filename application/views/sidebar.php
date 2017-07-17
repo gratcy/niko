@@ -202,7 +202,7 @@
 						<li class=""><a href="<?php echo site_url('retur_order/home/'); ?>"><i class="icon-angle-right"></i> Return Order </a></li>
 						<?php endif; ?>
 						
-						 <?php if (__get_roles('DeliveryOrderView')) : ?>
+						 <?php if (__get_roles('DeliveryOrderReturnView')) : ?>
 						 <li class=""><a href="<?php echo site_url('retur_order/home/retur_order_tg'); ?>"><i class="icon-angle-right"></i> Delivery Order Return</a></li>
 						<?php endif; ?>						
 						
@@ -305,15 +305,12 @@
 								<li><a href="<?php echo site_url('reportopname/1'); ?>"><i class="icon-angle-right"></i> Product</a></li>
 								<li><a href="<?php echo site_url('reportopname/2'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
 								<li><a href="<?php echo site_url('reportopname/4'); ?>"><i class="icon-angle-right"></i> Return</a></li>
+<!--
 								<li><a href="<?php echo site_url('reportopname/6'); ?>"><i class="icon-angle-right"></i> Services</a></li>
-								<li class="">
-									<a href="javascript:void(0);"><i class="icon-angle-down"></i> Reject </a>
-									<ul>
-									<li><a href="<?php echo site_url('reportopname/3'); ?>"><i class="icon-angle-right"></i> Product</a></li>
-									<li><a href="<?php echo site_url('reportopname/5'); ?>"><i class="icon-angle-right"></i> Sparepart</a></li>
-									</ul>
-								</li>
-                        </ul>                        </li>
+-->
+								<li><a href="<?php echo site_url('reportopname/5'); ?>"><i class="icon-angle-right"></i> Sparepart (Reject)</a></li>
+						</ul>
+						</li>
 			   <?php endif; ?>
                     </ul>
                 </li>
