@@ -117,7 +117,7 @@ class Home extends MY_Controller {
 		header('Content-type: application/javascript');
 		$hint = '';
 		$a = array();
-		$q = $_SERVER['QUERY_STRING'];
+		$q = urldecode($_SERVER['QUERY_STRING']);
 		$arr = $this -> technical_model -> __get_suggestion();
 		if (strlen($q) < 2) return false;
 		

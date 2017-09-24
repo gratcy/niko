@@ -46,6 +46,7 @@ left:inherit!important;
                                     <thead>
                                         <tr>
           <th>Group Product</th>
+          <th>Code</th>
           <th>Name</th>
           <th>Price Agent</th>
           <th>Price Consumer</th>
@@ -60,6 +61,7 @@ left:inherit!important;
 		  ?>
                                         <tr>
           <td><?php echo $v -> cname; ?></td>
+          <td><?php echo $v -> scode; ?></td>
           <td><?php echo $v -> sname; ?></td>
           <td><?php echo __get_rupiah($v -> spriceagent,1); ?></td>
           <td><?php echo __get_rupiah($v -> spriceretail,1); ?></td>

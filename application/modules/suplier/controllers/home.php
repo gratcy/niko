@@ -119,7 +119,7 @@ class Home extends MY_Controller {
 	function get_suggestion() {
 		$hint = '';
 		$a = array();
-		$q = $_SERVER['QUERY_STRING'];
+		$q = urldecode($_SERVER['QUERY_STRING']);
 		$arr = $this -> suplier_model -> __get_suggestion();
 		
 		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
