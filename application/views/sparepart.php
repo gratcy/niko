@@ -61,8 +61,8 @@ left:inherit!important;
                                         <tr>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> sname; ?></td>
-          <td><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
-          <td><?php echo __get_rupiah($v -> spriceretail,4); ?></td>
+          <td><?php echo __get_rupiah($v -> spriceagent,1); ?></td>
+          <td><?php echo __get_rupiah($v -> spriceretail,1); ?></td>
           <td><?php echo __get_customers_spec($v -> sspecial,1, 'special'); ?></td>
           <td><?php echo __get_status($v -> sstatus,1); ?></td>
 		  <td>
