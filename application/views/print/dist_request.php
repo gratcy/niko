@@ -19,7 +19,6 @@ html,body{margin:0;padding:0;}
 		<tr><td>To</td><td><?php echo ($detail[0] -> dtype == 3 ? $detail[0] -> tcname : $detail[0] -> tbname);?></td></tr>
 		<tr><td>Title</td><td><?php echo $detail[0] -> dtitle;?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> ddesc;?></td></tr>
-		<tr><td>Status</td><td>Approve</td></tr>
 		</thead>
 		</table>
 		</div>

@@ -20,7 +20,6 @@ html,body{margin:0;padding:0;}
 		<tr><td>To</td><td><?php echo ($detail[0] -> dtype == 3 ? $detail[0] -> tcname : $detail[0] -> tbname);?></td></tr>
 		<tr><td>Title</td><td><?php echo $detail[0] -> dtitle;?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> ddesc;?></td></tr>
-		<tr><td>Status</td><td>Approve</td></tr>
 		</thead>
 		</table>
 		</div>
@@ -88,7 +87,9 @@ html,body{margin:0;padding:0;}
 		<thead>
 		<tr style="border:1px solid #000;padding:3px;">
 			<th style="border:1px solid #000;padding:3px;">Code</th>
+<!--
 			<th style="border:1px solid #000;padding:3px;">Name</th>
+-->
 <!--
 			<th style="border:1px solid #000;padding:3px;">No. Component</th>
 -->
@@ -97,7 +98,9 @@ html,body{margin:0;padding:0;}
 -->
 			<th style="border:1px solid #000;padding:3px;">Price</th>
 			<th style="border:1px solid #000;padding:3px;">QTY</th>
+<!--
 			<th style="border:1px solid #000;padding:3px;">Total</th>
+-->
 			</tr>
 		</thead>
 		<tbody>
@@ -109,7 +112,9 @@ html,body{margin:0;padding:0;}
 		?>
 			<tr style="border:1px solid #000;padding:3px;">
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> scode; ?></td>
+<!--
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> sname; ?></td>
+-->
 <!--
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> snocomponent; ?></td>
 -->
@@ -118,7 +123,9 @@ html,body{margin:0;padding:0;}
 -->
 			<td style="border:1px solid #000;padding:3px;text-align:right;"><?php echo __get_rupiah($v -> spriceagent,4); ?></td>
 			<td style="border:1px solid #000;padding:3px;"><?php echo $v -> dqty; ?></td>
+<!--
 			<td style="border:1px solid #000;padding:3px;text-align:right;"><?php echo __get_rupiah(($v -> dqty*$v -> spriceagent),4); ?></td>
+-->
 			</tr>
 		<?php
 		$ttotal += $v -> dqty*$v -> spriceagent; 
@@ -130,10 +137,14 @@ html,body{margin:0;padding:0;}
 		<tfoot>
 		<tr>
 		<td style="border:1px solid #000;padding:3px;"><b>Grand Total</b></td>
+<!--
 		<td style="border:1px solid #000;padding:3px;"></td>
+-->
 		<td style="border:1px solid #000;padding:3px;text-align:right;"><b><?php echo __get_rupiah($tspriceagent,4); ?></b></td>
 		<td style="border:1px solid #000;padding:3px;"><b><?php echo $tqty; ?></b></td>
+<!--
 		<td style="border:1px solid #000;padding:3px;text-align:right;"><b><?php echo __get_rupiah($ttotal,4); ?></b></td>
+-->
 		</tr>
 		</tfoot>
 		</table>

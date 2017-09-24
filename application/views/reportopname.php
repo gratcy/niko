@@ -15,7 +15,7 @@
                 <div class="form-group">
                 <div class="col-lg-4">From <input type="text" data-date-format="dd/mm/yyyy" name="dfrom" class="form-control" value="<?php echo $from; ?>" /></div>
                 <div class="col-lg-4">To <input type="text" data-date-format="dd/mm/yyyy" name="dto" class="form-control" value="<?php echo $to; ?>" /></div>
-                <div class="col-lg-2"> <br /><button class="btn text-muted text-center btn-danger" type="submit">Sort</button></div>
+                <div class="col-lg-2"> <br /><button class="btn text-muted text-center btn-danger" type="submit">Search</button></div>
 				</div>
 			</div>
 		</div>
@@ -33,15 +33,14 @@
                                     <thead>
                                         <tr>
           <th>Date</th>
-          <th>Branch</th>
           <th>Code</th>
           <th>Name</th>
           <th>Stock Begining</th>
           <th>Stock In</th>
           <th>Stock Out</th>
           <th>Stock Final</th>
-          <th>Adjust Min (-)</th>
           <th>Adjust Plus (+)</th>
+          <th>Adjust Min (-)</th>
           <th>Description</th>
                                         </tr>
                                     </thead>
@@ -51,15 +50,14 @@
 		  ?>
                                         <tr>
           <td><?php echo __get_date($v -> odate); ?></td>
-          <td><?php echo $v -> bname; ?></td>
           <td><?php echo $v -> code; ?></td>
           <td><?php echo $v -> name; ?></td>
           <td style="text-align:right;"><?php echo $v -> ostockbegining; ?></td>
           <td style="text-align:right;"><?php echo $v -> ostockin; ?></td>
           <td style="text-align:right;"><?php echo $v -> ostockout; ?></td>
           <td style="text-align:right;"><?php echo $v -> ostock; ?></td>
-          <td style="text-align:right;"><?php echo $v -> oadjustmin; ?></td>
           <td style="text-align:right;"><?php echo $v -> oadjustplus; ?></td>
+          <td style="text-align:right;"><?php echo $v -> oadjustmin; ?></td>
           <td style="text-align:justify;"><?php echo $v -> odesc; ?></td>
 										</tr>
         <?php endforeach; ?>

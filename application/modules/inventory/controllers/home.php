@@ -262,6 +262,7 @@ class Home extends MY_Controller {
 		$returnTransUnApp = array();
 		$SO = array();
 		$DO = array();
+		$TukarGuling = array();
 		
 		$ServiceProductApp = array();
 		$ServiceProductUnApp = array();
@@ -273,6 +274,7 @@ class Home extends MY_Controller {
 		if ($type == 1) :
 			$SO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 1);
 			$DO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 2);
+			$TukarGuling = $this -> inventory_model -> __get_tukar_guling($iid, $branch, $type, 2);
 		
 			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 1, 0);
 			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, $type, 2, 0);
@@ -308,7 +310,7 @@ class Home extends MY_Controller {
 			$ServiceSparepartUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 2);
 		endif;
 		
-		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp, $TransCustomerApp, $TransCustomerUnApp);
+		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $TukarGuling, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp, $TransCustomerApp, $TransCustomerUnApp);
 		usort($data, "__sortArrayByDate");
 		$view['type'] = $type;
 		$view['detail'] = $data;

@@ -136,7 +136,7 @@ class Home extends MY_Controller {
 						$req = $this -> request_model -> __get_items($rno,1,2);
 						foreach($req as $k => $v) {
 							$iv = $this -> receiving_model -> __get_inventory_detail($v -> pid,$itypeP,$this -> memcachedlib -> sesresult['ubid']);
-							if ($iv[0] -> istock <= $v -> dqty) {
+							if ($iv[0] -> istock < $v -> dqty) {
 								$st = true;
 								$cd[] = $v -> pcode;
 							}
@@ -146,7 +146,7 @@ class Home extends MY_Controller {
 						
 						foreach($req2 as $k => $v) {
 							$iv = $this -> receiving_model -> __get_inventory_detail($v -> sid,2,$this -> memcachedlib -> sesresult['ubid']);
-							if ($iv[0] -> istock <= $v -> dqty) {
+							if ($iv[0] -> istock < $v -> dqty) {
 								$st = true;
 								$cd[] = $v -> scode;
 							}
