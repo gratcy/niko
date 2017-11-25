@@ -131,7 +131,7 @@ class Inventory_model extends CI_Model {
 	}
 	
 	function __get_tukar_guling($iid, $branch, $type, $stype) {
-		$this -> db -> select("b.sqty as tqty,d.stgldo as ttanggal, d.snodo as tno, ".($stype == 1 ? 1 : 0)." as approved, c.cname as cname, 2 as ttypetrans FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid LEFT JOIN customers_tab c ON a.scid=c.cid JOIN delivery_order_detail_tab d ON b.sid=d.sid AND b.spid=d.spid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "a.sstatus >= 3" : "a.sstatus < 3")." AND b.srtype='Tukar Guling' AND b.spid=" . $iid, FALSE);
+		$this -> db -> select("d.sqty as tqty,d.stgldo as ttanggal, d.snodo as tno, ".($stype == 1 ? 1 : 0)." as approved, c.cname as cname, 2 as ttypetrans FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid LEFT JOIN customers_tab c ON a.scid=c.cid JOIN delivery_order_detail_tab d ON b.sid=d.sid AND b.spid=d.spid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "a.sstatus >= 3" : "a.sstatus < 3")." AND b.srtype='Tukar Guling' AND b.spid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	

@@ -30,6 +30,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Code</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" name="code" class="form-control" value="<?php echo $detail[0] -> scode; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Name</label>
 
                     <div class="col-lg-4">

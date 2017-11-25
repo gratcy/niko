@@ -34,6 +34,7 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$agent = str_replace(',','',$this -> input -> post('agent', TRUE));
 			$retail = str_replace(',','',$this -> input -> post('retail', TRUE));
+			$code = $this -> input -> post('code', TRUE);
 			$name = $this -> input -> post('name', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
 			$status = (int) $this -> input -> post('status');
@@ -44,7 +45,7 @@ class Home extends MY_Controller {
 				redirect(site_url('sparepart' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('sgroupproduct' => $groupproduct, 'sname' => $name, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
+				$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
 				if ($this -> sparepart_model -> __insert_sparepart($arr)) {
 					$sid = $this -> db -> insert_id();
 					$branch = $this -> branch_model -> __get_branch_select('');
@@ -75,6 +76,7 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$agent = str_replace(',','',$this -> input -> post('agent', TRUE));
 			$retail = str_replace(',','',$this -> input -> post('retail', TRUE));
+			$code = $this -> input -> post('code', TRUE);
 			$name = $this -> input -> post('name', TRUE);
 			$groupproduct = (int) $this -> input -> post('groupproduct');
 			$status = (int) $this -> input -> post('status');
@@ -87,7 +89,7 @@ class Home extends MY_Controller {
 					redirect(site_url('sparepart' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('sgroupproduct' => $groupproduct, 'sname' => $name, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
+					$arr = array('sgroupproduct' => $groupproduct, 'scode' => $code, 'sname' => $name, 'spriceagent' => $agent, 'spriceretail' => $retail, 'sspecial' => $special, 'sstatus' => $status);
 					if ($this -> sparepart_model -> __update_sparepart($id, $arr)) {	
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('sparepart'));

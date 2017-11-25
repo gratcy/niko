@@ -270,6 +270,8 @@ class Home extends MY_Controller {
 		$ServiceSparepartUnApp = array();
 		$TransCustomerApp = array();
 		$TransCustomerUnApp = array();
+		$TukarGulingApp = array();
+		$TukarGulingUnApp = array();
 		
 		if ($type == 1) :
 			$SO = $this -> inventory_model -> __get_sales_order($iid, $branch, $type, 1);
@@ -312,6 +314,7 @@ class Home extends MY_Controller {
 		endif;
 		
 		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $TukarGulingApp, $TukarGulingUnApp, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp, $TransCustomerApp, $TransCustomerUnApp);
+
 		usort($data, "__sortArrayByDate");
 		$view['type'] = $type;
 		$view['detail'] = $data;
