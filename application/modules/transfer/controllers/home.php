@@ -145,7 +145,7 @@ class Home extends MY_Controller {
 						$req2 = $this -> request_model -> __get_items($rno,2,2);
 						
 						foreach($req2 as $k => $v) {
-							$iv = $this -> receiving_model -> __get_inventory_detail($v -> sid,2,$this -> memcachedlib -> sesresult['ubid']);
+							$iv = $this -> receiving_model -> __get_inventory_detail($v -> sid,($rtype == 2 ? 5 : 2),$this -> memcachedlib -> sesresult['ubid']);
 							if ($iv[0] -> istock < $v -> dqty) {
 								$st = true;
 								$cd[] = $v -> scode;

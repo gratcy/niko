@@ -20,7 +20,7 @@ class Sparepart_model extends CI_Model {
 	}
 	
 	function __get_sparepart_services_search($keyword, $bid) {
-		$this -> db -> select("a.sid,a.sname,a.scode,a.snocomponent,b.cname,c.istock FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid LEFT JOIN inventory_tab c ON a.sid=c.iiid WHERE c.ibid=".$bid." AND (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') AND b.ctype=4 ORDER BY a.sname ASC");
+		$this -> db -> select("a.sid,a.sname,a.scode,a.snocomponent,b.cname,c.istock FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid LEFT JOIN inventory_tab c ON a.sid=c.iiid WHERE c.ibid=".$bid." AND c.itype=2 AND (a.sstatus=1 or a.sstatus=0) AND (a.sname LIKE '%".$keyword."%' OR a.scode LIKE '%".$keyword."%') AND b.ctype=4 ORDER BY a.sname ASC");
 		return $this -> db -> get() -> result();
 	}
 	
