@@ -4,6 +4,11 @@ class Sparepart_model extends CI_Model {
         parent::__construct();
     }
 	
+	function __get_export() {
+		$this -> db -> select('a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY b.cname ASC', FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_sparepart() {
 		return 'SELECT a.*,b.cname FROM sparepart_tab a left join categories_tab b ON a.sgroupproduct=b.cid WHERE (a.sstatus=1 or a.sstatus=0) AND b.ctype=4 ORDER BY b.cname ASC';
 	}

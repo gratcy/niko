@@ -174,6 +174,7 @@ $route['sparepart/get_suggestion'] = 'sparepart/home/get_suggestion';
 $route['sparepart/sparepart_add'] = 'sparepart/home/sparepart_add';
 $route['sparepart/sparepart_update/?(:num)?'] = 'sparepart/home/sparepart_update/$1';
 $route['sparepart/sparepart_delete/(:num)'] = 'sparepart/home/sparepart_delete/$1';
+$route['sparepart/export_sparepart'] = 'sparepart/home/export_sparepart';
 
 $route['suplier/?(:num)?'] = 'suplier/home/index/$1';
 $route['suplier/get_suggestion'] = 'suplier/home/get_suggestion';

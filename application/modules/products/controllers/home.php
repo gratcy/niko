@@ -208,10 +208,10 @@ class Home extends MY_Controller {
 		
 		$arr = array();
 		foreach($data as $K => $v) {
-			$arr[] = array($v -> pcode, $v -> pname, $v -> pvolume, $v -> ppname, __get_rupiah($v -> pdist,1), __get_rupiah($v -> psemi,1), __get_rupiah($v -> pkey,1), __get_rupiah($v -> pstore,1), __get_rupiah($v -> pconsume,1), __get_status($v -> pstatus,1));
+			$arr[] = array($v -> pid, $v -> pcode, $v -> pname, $v -> pvolume, $v -> ppname, __get_rupiah($v -> pdist,1), __get_rupiah($v -> psemi,1), __get_rupiah($v -> pkey,1), __get_rupiah($v -> pstore,1), __get_rupiah($v -> pconsume,1), __get_status($v -> pstatus,1));
 		}
 		
-		$data = array('header' => array('Code', 'Name', 'Volume/Pcs','Packaging','Price Distributor','Price Semi','Price Agent','Price Store', 'Price Consumer', 'Status'), 'data' => $arr);
+		$data = array('header' => array('Product ID','Code', 'Name', 'Volume/Pcs','Packaging','Price Distributor','Price Semi','Price Agent','Price Store', 'Price Consumer', 'Status'), 'data' => $arr);
 		$this -> excel -> sEncoding = 'UTF-8';
 		$this -> excel -> bConvertTypes = false;
 		$this -> excel -> sWorksheetTitle = 'Product List - PT. Niko Elektronic indonesia';

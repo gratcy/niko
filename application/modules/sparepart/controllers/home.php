@@ -162,4 +162,23 @@ class Home extends MY_Controller {
 		
 		echo json_encode($hint);
 	}
+	
+	function export_sparepart() {
+		ini_set('memory_limit', '-1');
+		$this -> load -> library('excel');
+		$data = $this -> sparepart_model -> __get_export();
+		
+		$arr = array();
+		foreach($data as $K => $v) {
+			$arr[] = array($v -> sid, $v -> cname, $v -> scode, $v -> sname, $v -> spriceagent, $v -> spriceretail, __get_customers_spec($v -> sspecial,1, 'special'), __get_status($v -> sstatus,1));
+		}
+		
+		$data = array('header' => array('Sparepart ID', 'Group Product', 'Code','Name','Price Agent','Price Consumer','Return', 'Status'), 'data' => $arr);
+		$this -> excel -> sEncoding = 'UTF-8';
+		$this -> excel -> bConvertTypes = false;
+		$this -> excel -> sWorksheetTitle = 'Sparepart List - PT. Niko Elektronic indonesia';
+		
+		$this -> excel -> addArray($data);
+		$this -> excel -> generateXML('SparepartList-' . date('Ymd'));
+	}
 }

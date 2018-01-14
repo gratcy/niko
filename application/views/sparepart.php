@@ -25,6 +25,9 @@ left:inherit!important;
                 <a href="<?php echo site_url('sparepart/sparepart_add'); ?>" class="btn btn-default btn-grad"><i class="icon-plus"></i> Add Sparepart</a>
                 <br />
                 <br />
+                <a href="<?php echo site_url('sparepart/export_sparepart'); ?>" class="btn btn-default btn-grad"><i class="icon-book"></i> Export Excel</a>
+                <br />
+                <br />
                 <?php endif; ?>
 	<?php echo __get_error_msg(); ?>
             <div class="row">
