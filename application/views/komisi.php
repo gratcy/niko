@@ -42,17 +42,23 @@ var ee=document.getElementById('result_ee').value;
 // var tpm=document.getElementById('tpm').value;
 // var tpc=document.getElementById('tpc').value;
 
-document.getElementById('tpaymentt').value = document.getElementById('txtTotpay').value;
+document.getElementById('tpaymentt').value = document.getElementById('txtTotpay').value  -  document.getElementById('treturns').value  - document.getElementById('tdisc').value;
 document.getElementById('tpaycom').value = document.getElementById('txtTotcom').value;
 
 document.getElementById('result_b').value =0;
 document.getElementById('result_c').value =0;
 document.getElementById('result_d').value =0;
 document.getElementById('result_e').value =parseInt(document.getElementById('tpaycom').value);
+document.getElementById('result_g').value =0;
+document.getElementById('rg').value =0;
+
+
 
 ee=parseInt(document.getElementById('tpaycom').value);
 ee= ee.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 document.getElementById('result_ee').value=ee;
+document.getElementById('result_f').value =ee;
+document.getElementById('result_ff').value =ee;
 
 
 tpc=parseInt(document.getElementById('tpaycom').value);
@@ -76,6 +82,8 @@ function cala() {
 	ee=parseInt(document.getElementById('result_e').value);
 	ee= ee.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 	document.getElementById('result_ee').value=ee;
+	document.getElementById('result_ff').value=ee;
+	document.getElementById('result_f').value=ee;
 
 	rb=parseInt(document.getElementById('result_b').value);
 	rb= rb.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -92,6 +100,8 @@ function calb() {
 	ee=parseInt(document.getElementById('result_e').value);
 	ee= ee.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 	document.getElementById('result_ee').value=ee;	
+	document.getElementById('result_ff').value=ee;
+	document.getElementById('result_f').value=ee;
 	
 	rc=parseInt(document.getElementById('result_c').value);
 	rc= rc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -107,11 +117,41 @@ function calc() {
 	
 	ee=parseInt(document.getElementById('result_e').value);
 	ee= ee.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-	document.getElementById('result_ee').value=ee;		
+	document.getElementById('result_ee').value=ee;
+    document.getElementById('result_ff').value=ee;
+    document.getElementById('result_f').value=ee;	
 	
 	rd=parseInt(document.getElementById('result_d').value);
 	rd= rd.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 	document.getElementById('rd').value=rd;	
+	
+}
+
+
+
+
+function calg() {
+	var ee=document.getElementById('result_ee').value;
+	var ff=document.getElementById('result_e').value;
+	var rg=document.getElementById('rg').value;
+	
+
+
+	
+	ee=parseInt(document.getElementById('result_e').value);
+	ee= ee.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	document.getElementById('result_ee').value=ee;
+    document.getElementById('result_ff').value=ee;
+    document.getElementById('result_f').value=ff;	
+
+
+	document.getElementById('result_g').value = (document.getElementById('result_f').value * document.getElementById('cal_g').value) / 100;
+	
+	
+	
+	rg=parseInt(document.getElementById('result_g').value);
+	rg= rg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	document.getElementById('rg').value=rg;	
 	
 }
 
@@ -159,7 +199,7 @@ header("Expires: 0");
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Komisi </h2>
+                        <h2>Commission </h2>
                     </div>
                 </div>
 
@@ -203,7 +243,7 @@ header("Expires: 0");
 				
 				<?php 
 				$thisyear=date('Y')+1;
-				for($t=2009;$t< $thisyear;$t++){
+				for($t=2016;$t< $thisyear;$t++){
 				echo "<option value='$t' >$t</option>";
 				}
 				
@@ -245,8 +285,9 @@ header("Expires: 0");
 		//print_r($starget);
 		$stargett=0;
 		if(!isset($starget)){ $starget="";}	
-		
-		if($starget!=""){
+		$cstarget=count($starget);
+		//echo $cstarget.'-----<br>';
+		if($cstarget>0){
 			$stargett=$starget[0]->ttarget;
 		}
 		$ttdisc=0;
@@ -428,7 +469,7 @@ header("Expires: 0");
 			<tr>
 
 				<td>                   
-					SUB TOTAL KOMISI
+					SUB TOTAL COMISSION
                 </td>
 				<td>
 					
@@ -447,11 +488,23 @@ header("Expires: 0");
 				</td>				
 			</tr>
 
-		
-			<tr>
+		<input type=hidden  id="tpaymentt" name="tpaymentt" class="form-control"  >
+					<input type=hidden  id="tpm" name="tpm" class="form-control"  >
+					<!--select name="cal_a" id="cal_a" onchange="cala()" class="form-control">
+						<option value="0">0 %</option>
+						<option value="0.025">0.025 %</option>
+						<option value="0.05">0.05 %</option>
+						<option value="0.075">0.075 %</option>
+						<option value="0.1">0.1 %</option>						
+					</select-->
+				<input type=hidden  value="0" id="cal_a" name="cal_a" class="form-control"  >	
+<input type=hidden id="result_b" name="result_b" class="form-control"  >
+				<input type=hidden id="rb" name="rb" class="form-control"  >					
+					
+			<!--tr>
 
 				<td>                   
-					TOTAL PAYMENT
+					TOTAL PAYMENT NETTO
                 </td>
 				<td>
 					<input type=hidden  id="tpaymentt" name="tpaymentt" class="form-control"  >
@@ -476,7 +529,7 @@ header("Expires: 0");
 				<input type=hidden id="result_b" name="result_b" class="form-control"  >
 				<input type=text id="rb" name="rb" class="form-control"  >
 				</td>				
-			</tr>
+			</tr-->
 
 			<tr>
 
@@ -566,7 +619,33 @@ header("Expires: 0");
 
 
 
-
+				<td>
+                   
+					PERFORMANCE COMISSION
+                </td>
+				<td>
+						<input type=hidden name="result_f" id="result_f" class="form-control"  >
+						<input type=text  class="form-control" name="result_ff" id="result_ff" >
+				</td>
+				<td>
+				<select name="cal_g" id="cal_g" onchange="calg()" class="form-control">
+						<option value="0">0 %</option>
+						<option value="12.5">12.5 %</option>
+						<option value="25">25 %</option>
+						<option value="37.5">37.5 %</option>												
+					</select>
+				
+				</td>
+				
+				<td>
+				
+				</td>
+				<td>
+						<input type=hidden id="result_g" name="result_g" class="form-control"  > 
+						<input type=text id="rg" name="rg" class="form-control"  > 
+						
+				</td>				
+</tr>
 
 </table>				
                         <span id="sg1"></span>
@@ -575,7 +654,7 @@ header("Expires: 0");
 <?php } ?>
 
 <br>
-<a href="<?php echo site_url();?>komisi/home/komisi_detail" >Detail Komisi</a>
+Detail Commission
 <br>						
 
 					<table border=1 class="table table-striped table-bordered table-hover"  >
@@ -584,10 +663,10 @@ header("Expires: 0");
 					<!--td>CCIDD</td-->
 					<td>Sales Name</td>
 					<td>Invoice No</td>
-					<td>Customer Name</td>
+					<td>Customer</td>
 					<td>Invoice Date</td>					
-					<td>Paid Date</td>
 					<td>Payment Date</td>
+					<td>Settlement Date</td>
 					<td>Amount</td>
 					<!--td>Kategori</td>
 					<td>Produk</td>
@@ -619,9 +698,9 @@ header("Expires: 0");
 					<td><?php echo $v -> sname; ?></td>
 					<td><a href="<?php echo site_url();?>komisi/home/komisi_detail?no_invoice=<?=$v -> sno_invoice;?>" target=blank ><?php echo $v -> sno_invoice; ?></a></td>
 					<td><?php echo $v -> cname; ?></td>
-					<td><?php echo date('d/m/Y',strtotime($v -> date_inv)); ?></td>					
-					<td><?php echo date('d/m/Y',strtotime($v -> date_lunas)); ?></td>
+					<td><?php echo date('d/m/Y',strtotime($v -> date_inv)); ?></td>						
 					<td><?php echo date('d/m/Y',strtotime($v->date_bayar));?></td>
+					<td><?php echo date('d/m/Y',strtotime($v -> date_lunas)); ?></td>
 					<td><?php echo number_format($v -> tp_amount); ?></td>
 					<!--td><?php echo $v -> kategori; ?></td>
 					<td><?php echo $v -> pname; ?></td>					

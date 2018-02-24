@@ -17,18 +17,23 @@ class Home extends MY_Controller {
 	function index() {
 			if(!isset($_GET['search'])){ $_GET['search']=0;}
             
+			if(!isset($_POST['xcl'])){ $_POST['xcl']="";}
+			if(!isset($_POST['sid'])){ $_POST['sid']="";}
+			if(!isset($_POST['monthh'])){ $_POST['monthh']=date('m');}
+			if(!isset($_POST['years'])){ $_POST['years']=date('Y');}
+
 			
 			if($_POST){
 				//print_r($_POST);
 			if(!isset($_POST['xcl'])){ $_POST['xcl']="";}
 			if(!isset($_POST['sid'])){ $_POST['sid']="";}
-			if(!isset($_POST['monthh'])){ $_POST['monthh']=0;}
-			if(!isset($_POST['years'])){ $_POST['years']=0;}
+			if(!isset($_POST['monthh'])){ $_POST['monthh']=date('m');}
+			if(!isset($_POST['years'])){ $_POST['years']=date('Y');}
 			//print_r($_POST);
 				$sid=$_POST['sid'];
 				$monthh=$_POST['monthh'];
 				$years=$_POST['years'];
-				
+				// echo $monthh.'--'.$years.'<br>';
 				$dz=cal_days_in_month(CAL_GREGORIAN,$monthh,$years);
 
 				$datea=$years.'-'.$monthh.'-01';
@@ -88,7 +93,7 @@ class Home extends MY_Controller {
 		
 	}	
 	
-	function add_komisi($pno_pm) {
+		function add_komisi($pno_pm) {
 
 		$zz=$this -> komisi_model -> __get_komisi_zz($pno_pm);
 		
@@ -346,6 +351,7 @@ class Home extends MY_Controller {
 		redirect('/pembayaran/home');
 	}
 
+	
 	function komisi_header() {
 
 		//$pager = $this -> pagination_lib -> pagination($this -> komisi_model -> __get_komisi_header(),3,10,site_url('komisi'));

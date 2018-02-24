@@ -5,12 +5,15 @@ class delivery_order_model extends CI_Model {
     }
     
     function __get_sales_order_select() {
-		$this -> db -> select('bid,bname FROM sales_order_tab WHERE sstatus=1 ORDER BY bname ASC');
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
+		$this -> db -> select('bid,bname FROM sales_order_tab,branch_tab WHERE 
+		branch_tab.bid=sales_order_tab.sbid AND sstatus=1 AND bid='.$branchid.' ORDER BY bname ASC');
 		return $this -> db -> get() -> result();
 	}
 
 
 	function __get_search($keyword) {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -39,9 +42,10 @@ class delivery_order_model extends CI_Model {
         (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
         (select sum(ssisa) from sales_order_detail_tab where sales_order_detail_tab.ssid=sales_order_tab.sid $wsisa )as sisa
 		FROM sales_order_tab, sales_order_detail_tab,customers_tab WHERE (sales_order_tab.sstatus=3) AND 
+		sales_order_tab.sbid='".$branchid."' AND 
 		sales_order_detail_tab.ssid=sales_order_tab.sid  
  AND (sales_order_tab.sreff LIKE '%".$keyword."%' OR sales_order_tab.snoso LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
-		AND customers_tab.cid=sales_order_tab.scid ORDER BY sales_order_tab.sid  DESC");
+		AND customers_tab.cid=sales_order_tab.scid ORDER BY sales_order_tab.stgl  DESC");
 		return $this -> db -> get() -> result();
 		
 		
@@ -50,6 +54,7 @@ class delivery_order_model extends CI_Model {
 	}
 	
 	function __get_sales_order() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -78,12 +83,14 @@ class delivery_order_model extends CI_Model {
         (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
         (select sum(ssisa) from sales_order_detail_tab where sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa. ')as sisa
 		FROM sales_order_tab, sales_order_detail_tab WHERE (sales_order_tab.sstatus=3) AND 
-		sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY sales_order_detail_tab.ssid ORDER BY sales_order_tab.sid  DESC';
+		sales_order_tab.sbid='.$branchid.' AND
+		sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY sales_order_detail_tab.ssid ORDER BY sales_order_tab.stgl  DESC';
 
 	}
 
 	
 	function __get_sales_orderz() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -112,7 +119,8 @@ class delivery_order_model extends CI_Model {
         (select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid)as sname,
         (select sum(ssisa) from sales_order_detail_tab where sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa. ')as sisa
 		FROM sales_order_tab, sales_order_detail_tab WHERE (sales_order_tab.sstatus=3) AND 
-		sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY sales_order_detail_tab.ssid ORDER BY sales_order_tab.sid  DESC');
+		sales_order_tab.sbid='.$branchid.' AND
+		sales_order_detail_tab.ssid=sales_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY sales_order_detail_tab.ssid ORDER BY sales_order_tab.stgl  DESC');
 		return $this -> db -> get() -> result();
 	}
 	
@@ -126,7 +134,7 @@ class delivery_order_model extends CI_Model {
 		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
-		FROM delivery_order_detail_tab WHERE (sid=0) AND snodo='.$snodo.' ORDER BY did DESC';
+		FROM delivery_order_detail_tab WHERE (sid=0) AND snodo='.$snodo.' ORDER BY stgldo DESC';
 	}	
 
 	function __get_sisa_so($id) {
@@ -152,7 +160,7 @@ return $this -> db -> get() -> result();
 		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
-		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY did DESC';
+		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY stgldo DESC';
 	}		
 
 	
@@ -164,13 +172,13 @@ return $this -> db -> get() -> result();
 		(select snoso from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as snoso,
 		(select scid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as scid	,
 		(select sbid from sales_order_tab where sales_order_tab.sid=delivery_order_detail_tab.ssid)as sbid
-		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY did DESC';
+		FROM delivery_order_detail_tab WHERE (sid=0) AND ssid='.$id.' ORDER BY stgldo DESC';
 	}		
 
 
 
 	function __get_do_list_tgx($id,$noro) {
-		return "SELECT  * ,
+		return "SELECT  DISTINCT(snodo) ,stgldo,sno_invoice,scid,
 		(select cname from customers_tab where customers_tab.cid=delivery_order_detail_tab.scid)as cname
 		FROM delivery_order_detail_tab 
 		WHERE snodo like '".$id."-".$noro."-%' ";

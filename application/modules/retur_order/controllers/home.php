@@ -68,7 +68,7 @@ class Home extends MY_Controller {
 			$view['pages'] = '';
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> retur_order_model -> __get_retur_order_tg(),3,10,site_url('retur_order/home/index/'));
+			$pager = $this -> pagination_lib -> pagination($this -> retur_order_model -> __get_retur_order_tg(),3,10,site_url('retur_order/home/retur_order_tg/'));
 			if($_GET['search']=='1'){
 			$view['retur_order'] = $this -> retur_order_model -> __get_retur_orderzz();	
 			}else{			
@@ -265,7 +265,7 @@ class Home extends MY_Controller {
 	function get_suggestion() {
 		$hint = '';
 		$a = array();
-		$q = urldecode($_SERVER['QUERY_STRING']);
+		$q = $_SERVER['QUERY_STRING'];
 		$arr = $this -> retur_order_model -> __get_suggestion();
 		
 		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);

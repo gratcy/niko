@@ -19,7 +19,7 @@ $("#search").autocomplete({
 delay:0, 
 cacheLength: 0,
 minLength: 1,
-       source: '<?php echo site_url('sales_order/home/source_cust'); ?>',
+       source: '<?php echo site_url('sales_order/home/source'); ?>',
      select: function(event, ui) { 
 	    $("#theCid").val(ui.item.cid),
         $("#theCat").val(ui.item.ccat)

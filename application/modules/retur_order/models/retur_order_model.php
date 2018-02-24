@@ -5,11 +5,15 @@ class retur_order_model extends CI_Model {
     }
     
     function __get_retur_order_select() {
-		$this -> db -> select('bid,bname FROM retur_order_tab WHERE sstatus=1 ORDER BY bname ASC');
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
+		$this -> db -> select('bid,bname FROM retur_order_tab,branch_tab  WHERE 
+		branch_tab.bid=retur_order_tab.sbid AND
+		sstatus=1 AND bid='.$branchid.' ORDER BY bname ASC');
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_retur_order() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		return "SELECT retur_order_tab.*,	
 		sum(retur_order_detail_tab.ssisa) as ssisa,
 		(select sum(sprice*saccept) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid ) as totretur,
@@ -23,14 +27,16 @@ class retur_order_model extends CI_Model {
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname
 		FROM retur_order_tab, retur_order_detail_tab 
 		WHERE 
+		retur_order_tab.sbid='".$branchid."' AND 
 		retur_order_detail_tab.ssid=retur_order_tab.sid AND
 		retur_order_tab.sstatus<>2  
 		group by retur_order_detail_tab.ssid 
-		ORDER BY retur_order_tab.sid DESC";
+		ORDER BY retur_order_tab.stgl DESC";
 	}
 
 
 	function __get_retur_order_tg() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		return "SELECT retur_order_tab.*, retur_order_detail_tab.srtype, 
 		sum(ssisa) as jumacep,
 		(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname, 
@@ -39,10 +45,11 @@ class retur_order_model extends CI_Model {
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname 
 		FROM retur_order_tab, retur_order_detail_tab 
 		WHERE retur_order_detail_tab.ssid=retur_order_tab.sid 
+		AND retur_order_tab.sbid='$branchid'
 		AND retur_order_detail_tab.srtype ='Tukar Guling' 
 		AND retur_order_tab.sstatus=4 
 		group by retur_order_detail_tab.ssid 
-		ORDER BY retur_order_tab.sid DESC ";
+		ORDER BY retur_order_tab.stgl DESC ";
 		
 		// HAVING SUM(retur_order_detail_tab.saccept) > 0
 		// ORDER BY retur_order_tab.sid DESC 
@@ -50,6 +57,7 @@ class retur_order_model extends CI_Model {
 	
 	
 	function __get_retur_orderz() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['status'])){ $_POST['status']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -93,8 +101,9 @@ class retur_order_model extends CI_Model {
 		(select ctyperetur from customers_tab where customers_tab.cid=retur_order_tab.scid) as ctyperetur,
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname
 		FROM retur_order_tab, retur_order_detail_tab WHERE 1 AND
+		retur_order_tab.sbid='.$branchid.' AND 
 		retur_order_detail_tab.ssid=retur_order_tab.sid ' .$wsisa.$wsreff.$wcid. ' GROUP BY retur_order_detail_tab.ssid 
-		ORDER BY retur_order_tab.sid  DESC');
+		ORDER BY retur_order_tab.stgl  DESC');
 		
 		return $this -> db -> get() -> result();
 	}
@@ -102,6 +111,7 @@ class retur_order_model extends CI_Model {
 	
 	
 	function __get_retur_orderzz() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -150,10 +160,11 @@ class retur_order_model extends CI_Model {
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname 
 		FROM retur_order_tab, retur_order_detail_tab 
 		WHERE retur_order_detail_tab.ssid=retur_order_tab.sid 
+		AND retur_order_tab.sbid ='".$branchid."'
 		AND retur_order_detail_tab.srtype ='Tukar Guling' 
 		AND retur_order_tab.sstatus=4 ".$wsisa.$wsreff.$wcid."
 		group by retur_order_detail_tab.ssid 
-		ORDER BY retur_order_tab.sid DESC");		
+		ORDER BY retur_order_tab.stgl DESC");		
 		
 		
 		// echo " retur_order_tab.*, retur_order_detail_tab.srtype, 
@@ -229,6 +240,7 @@ class retur_order_model extends CI_Model {
 
 
 	function __get_retur_order_detail_approve_tg($id,$snodo) {
+
 		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid)as bname,
 		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid)as cname,
 		(select caddr from customers_tab where customers_tab.cid=retur_order_tab.scid)as caddr,
@@ -287,7 +299,7 @@ class retur_order_model extends CI_Model {
 		(select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname, 
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname FROM retur_order_tab,customers_tab WHERE 
 		(sstatus<>2 ) AND (sreff LIKE '%".$keyword."%' OR snoro LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
-		AND customers_tab.cid=retur_order_tab.scid ORDER BY sid DESC");
+		AND customers_tab.cid=retur_order_tab.scid ORDER BY stgl DESC");
 		return $this -> db -> get() -> result();		
 		
 		

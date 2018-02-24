@@ -59,7 +59,8 @@ class Home extends MY_Controller {
 	function delivery_order_sub_tg($id,$sbid) {
 		
 			$noro=$this -> delivery_order_model -> __get_noro($id);
-			//print_r($noro);
+			// echo '<pre>';
+			// print_r($noro);die;
 			$norox= $noro[0]->snoro;//die;
 			$view['snamex']= $noro[0]->sname;
 			$pager = $this -> pagination_lib -> pagination($this -> delivery_order_model -> __get_do_list_tgx($id,$norox),3,10,site_url('delivery_order/home/delivery_order_sub_tg/'.$id.'/'.$sbid.'/'));

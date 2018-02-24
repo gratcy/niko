@@ -5,7 +5,10 @@ class sales_order_model extends CI_Model {
     }
     
     function __get_sales_order_select() {
-		$this -> db -> select('bid,bname FROM sales_order_tab WHERE sstatus=1 ORDER BY bname ASC');
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
+		$this -> db -> select('bid,bname FROM sales_order_tab,branch_tab WHERE
+        branch_tab.bid=sales_order_tab.sbid AND 		
+		bid='.$branchid.' AND sstatus=1 ORDER BY bname ASC');
 		return $this -> db -> get() -> result();
 	}
 	
@@ -24,7 +27,7 @@ class sales_order_model extends CI_Model {
 	}
 	
 	function __get_sales_order() {
-		
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -88,8 +91,8 @@ return " SELECT DISTINCT(a.sid),a.*,
 		(SELECT sname FROM sales_tab st WHERE st.sid=a.ssid) AS sname,
 		(SELECT bname FROM branch_tab c WHERE c.bid=a.sbid) AS bname,
 		(SELECT cname FROM customers_tab d WHERE d.cid=a.scid) AS cname
-		 FROM sales_order_tab a , sales_order_detail_tab b WHERE 1 $wsisa $wcid AND b.ssid=a.sid   AND a.sstatus!='2' AND ssisa>0 GROUP BY a.sid
-		  ORDER BY a.sid DESC ";
+		 FROM sales_order_tab a , sales_order_detail_tab b WHERE 1 $wsisa $wcid AND b.ssid=a.sid   AND a.sstatus!='2' AND ssisa>0 AND a.sbid='$branchid' GROUP BY a.sid
+		  ORDER BY a.stgl DESC ";
 		
 		
 		
@@ -102,7 +105,7 @@ return " SELECT DISTINCT(a.sid),a.*,
 
 
 	function __get_sales_orderz() {
-		
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sisa'])){ $_POST['sisa']="x";}
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -155,7 +158,7 @@ return " SELECT DISTINCT(a.sid),a.*,
 	(select sname from sales_tab st where st.sid=a.ssid) as sname,
 	(select bname from branch_tab c where c.bid=a.sbid) as bname,
 	(select cname from customers_tab d where d.cid=a.scid) as cname
-	 from sales_order_tab a, sales_order_detail_tab b where a.sid=b.ssid $wsisa $wcid  and a.sstatus!=2  group by a.sid order by a.sid desc");	
+	 from sales_order_tab a, sales_order_detail_tab b where a.sid=b.ssid $wsisa $wcid  and a.sstatus!=2  and a.sbid='$branchid' group by a.sid order by a.stgl desc");	
 	
 	return $this -> db -> get() -> result();
 		
@@ -245,13 +248,13 @@ return " SELECT DISTINCT(a.sid),a.*,
 	}
 	
 	function __get_search($keyword) {
-		
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=sales_order_tab.sbid) as bname, 
 		(select dstatus from delivery_order_detail_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid and delivery_order_detail_tab.sid=0 limit 1)as dstatus,
 		(select cname from customers_tab where customers_tab.cid=sales_order_tab.scid) as cname, 
-		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname FROM sales_order_tab,customers_tab WHERE 
+		(select sname from sales_tab where sales_tab.sid=sales_order_tab.ssid) as sname FROM sales_order_tab,customers_tab WHERE  sales_order_tab.sbid='".$branchid."' AND 
 		(sstatus<>2 ) AND (sreff LIKE '%".$keyword."%' OR snoso LIKE '%".$keyword."%' OR customers_tab.cname LIKE '%".$keyword."%') 
-		AND customers_tab.cid=sales_order_tab.scid ORDER BY sid DESC");
+		AND customers_tab.cid=sales_order_tab.scid ORDER BY sales_order_tab.stgl DESC");
 		return $this -> db -> get() -> result();
 	}
 }

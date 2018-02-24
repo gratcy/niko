@@ -2,6 +2,7 @@
 class pembayaran_model extends CI_Model {
     function __construct() {
         parent::__construct();
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
     }
     
     function __get_pembayaran_select() {
@@ -10,13 +11,14 @@ class pembayaran_model extends CI_Model {
 	}
 	
 	function __get_pembayaran() {
-		return 'SELECT * ,(select cname from customers_tab where cid=pcid)as pcname,
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
+		return 'SELECT pembayaran_tab.* ,customers_tab.cname as pcname,
          (SELECT SUM(komisi_tab.pno_pm) FROM komisi_tab WHERE komisi_tab.pno_pm=pembayaran_tab.pno_pm )AS jumb			
-		 from pembayaran_tab order by pmid DESC';
+		 FROM pembayaran_tab , customers_tab  WHERE pembayaran_tab.pcid=customers_tab.cid AND customers_tab.cbid='.$branchid.' order by pmid DESC';
 	}
 
 	function __get_pembayaran_search() {
-		
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		if(!isset($_POST['sreff'])){ $_POST['sreff']="";}
 		if(!isset($_POST['pno_pm'])){ $_POST['pno_pm']="";}
 		if(!isset($_POST['cid'])){ $_POST['cid']="";}
@@ -80,27 +82,29 @@ class pembayaran_model extends CI_Model {
 			$wsisa=" and pstatus = '3' ";
 		}
 		
-		$this -> db -> select(" * ,(select customers_tab.cname from customers_tab where cid=pcid)as pcname,
+		$this -> db -> select(" * ,customers_tab.cname as pcname,
          (SELECT SUM(komisi_tab.pno_pm) FROM komisi_tab WHERE komisi_tab.pno_pm=pembayaran_tab.pno_pm )AS jumb	
 		from pembayaran_tab,
         customers_tab 		
-		where 1 AND customers_tab.cid=pembayaran_tab.pcid $wreff $wcid $wpno $wsisa $wpdate order by pdate DESC");
+		where 1 AND customers_tab.cid=pembayaran_tab.pcid AND customers_tab.cbid='".$branchid."' $wreff $wcid $wpno $wsisa $wpdate order by pdate DESC");
 	return $this -> db -> get() -> result();
 	}	
 	
 	function __get_pembayaranid($pno_pm) {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
 		return "SELECT * from pembayaran_tab where pno_pm='".$pno_pm."'";
 	}	
 	function __get_total_pembayaran() {
-		$sql = $this -> db -> query('SELECT * FROM sales_order_tab WHERE sstatus=1');
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];
+		$sql = $this -> db -> query('SELECT * FROM sales_order_tab WHERE sstatus=1 and sbid='.$branchid);
 		return $sql -> num_rows();
 	}
 
 	
 	
 	function __get_total_pembayaran_monthly($month,$year,$id) {
-	
-	$sql = $this -> db -> query("SELECT * FROM pembayaran_tab WHERE YEAR(pdate) = '$year' AND MONTH(pdate) = '$month' ");
+	$branchid=$this -> memcachedlib -> sesresult['ubid'];
+	$sql = $this -> db -> query("SELECT pembayaran_tab.* FROM pembayaran_tab, customers_tab  WHERE pembayaran_tab.pcid=customers_tab.cid AND customers_tab.cbid='".$branchid."' AND YEAR(pembayaran_tab.pdate) = '$year' AND MONTH(pembayaran_tab.pdate) = '$month' ");
 	$jum= $sql -> num_rows();
 	$sqlx=$this -> db -> query("UPDATE pembayaran_tab set pno_pm='$id' WHERE pmid='$id' ");
 	}	

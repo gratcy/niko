@@ -11,10 +11,10 @@ if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
 
 $conn = mysql_connect($mysql_server, $mysql_login, $mysql_password);
 $db = mysql_select_db($mysql_database, $conn);
-
+$branchid=$this -> memcachedlib -> sesresult['ubid'];
 $req = "SELECT sid,sname "
 	."FROM sales_tab  "
-	."WHERE   sstatus='1' AND sname LIKE '%".$_REQUEST['term']."%'"; 
+	."WHERE   sstatus='1' AND sbid= '".$branchid."' AND sname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req".$database;
 	//echo "$req";die;

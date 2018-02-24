@@ -463,6 +463,7 @@ class Home extends MY_Controller {
 	
 	function delivery_order_details_add_tg($id,$scid,$snodo) {
 		if ($_POST) {
+			
 			$sbid = $this -> input -> post('sbid', TRUE);
 			$scid = $this -> input -> post('scid', TRUE);
 			$snodo = $this -> input -> post('snodo', TRUE);
@@ -516,6 +517,7 @@ class Home extends MY_Controller {
 			$view['id'] = $id;
 			$view['scid'] = $scid;
 			$view['snodo'] = $snodo;
+		
 		
 			//$view['detailx'] = $this -> sales_order_detail_model -> __get_delivery_order_detail($id,$snodo);
 			//$view['detail'] =$this -> sales_order_detail_model -> __get_sales_order_detail_prod($id);

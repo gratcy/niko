@@ -177,7 +177,6 @@ class Home extends MY_Controller {
 			$view['pbid'] = $this -> branch_lib -> __get_branch();
 			$view['psid'] = $this -> sales_lib -> __get_sales();
 			$view['pppid'] = $this -> products_lib -> __get_products();	
-
 			$this->load->view('pembayaran_detail_add',$view);
 		}
 	}

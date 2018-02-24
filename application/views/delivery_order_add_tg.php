@@ -184,7 +184,7 @@ minLength: 1,
           <th>Name</th>
           <th>Qty/Pcs</th>
           <th>Accept</th>
-          <th>Reject </th>
+          <th>Sisa</th>
 		  <th>Return Type </th>
 
 		 
@@ -226,7 +226,7 @@ minLength: 1,
           <td><?php echo $v -> sqty; ?></td>
           <td><?php echo $v -> saccept; ?><input type=hidden name="saccept[]" value="<?php echo $v -> saccept; ?>"></td>
 		  <?php $sum_sprice= $v -> saccept * $sprice;?>
-          <td><?php echo $v -> sreject; ?></td>
+          <td><?php //echo $v -> sreject; ?><?php echo $v ->ssisa; ?></td>
 		  <td><?=$v -> srtype;?></td>
 	
 		  </tr>

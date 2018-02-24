@@ -332,9 +332,7 @@ minLength: 1,
 		
 		
 		if($_GET['tg']==""){ ?>
-		<?php if (__get_roles('ReturnOrderApproval')) : ?>
-		<input class="btn text-muted text-center btn-danger" type="submit" value="Approve" >
-		<?php endif; ?>
+		<input class="btn text-muted text-center btn-danger" type=submit value="Approve" >
 		<?php } ?>
 		<!--input class="btn text-muted text-center btn-primary" type=button value="Back" onclick="location.href='javascript:history.go(-1);'"-->
 		</form>	

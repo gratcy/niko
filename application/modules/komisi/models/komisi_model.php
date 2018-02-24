@@ -43,10 +43,13 @@ class komisi_model extends CI_Model {
 	}	
 
 	function __get_komisi() {
-		
-	$sql = $this -> db -> query("SELECT sssid,
+	$branchid=$this -> memcachedlib -> sesresult['ubid'];	
+	$sql = $this -> db -> query("SELECT delivery_order_detail_tab.ssid,
 		(select sname from sales_tab where sales_tab.sid=delivery_order_detail_tab.sssid)as sname,
-		 sno_invoice,sum(tamount) as tamount FROM delivery_order_detail_tab group by sno_invoice");	
+		 sno_invoice,sum(tamount) as tamount FROM delivery_order_detail_tab,
+		 sales_order_tab where delivery_order_detail_tab.ssid=sales_order_tab.sid AND
+		 sales_order_tab.sbid='".$branchid."'
+		 group by sno_invoice");	
 		return $sql -> result();
 	}		
 
@@ -54,6 +57,7 @@ class komisi_model extends CI_Model {
 
 
 	function __get_komisi_header() {
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];	
 		if(!isset($_GET['no_invoice'])){ $_GET['no_invoice']="";}
 		$winv="";
 		if($_GET['no_invoice']!=""){
@@ -69,7 +73,9 @@ class komisi_model extends CI_Model {
 					(select b.sname from sales_tab b where a.sssid=b.sid ) as sname,
 					(select c.cname from customers_tab c where c.cid=a.scid)as cname,
 					(SELECT d.pname FROM products_tab d WHERE d.pid=a.spid)AS pname
-					from komisi_tab a  group by a.sno_invoice  ");
+					from komisi_tab a ,customers_tab ct where a.scid=ct.cid
+					and ct.cbid='".$branchid."' 
+				    group by a.sno_invoice  ");
 
 		return $sql -> result();
 	}	
@@ -96,15 +102,13 @@ class komisi_model extends CI_Model {
 
 	
 	function __get_komisi_selheader($sid,$datea,$dateb) {
-		
-		
-	
+		$branchid=$this -> memcachedlib -> sesresult['ubid'];	
 		$sql = $this -> db -> query("SELECT a.* ,sum(a.amount_com)as tamount_com,sum(a.p_amount)as tp_amount,
 					(select b.sname from sales_tab b where a.sssid=b.sid ) as sname,
 					(select c.cname from customers_tab c where c.cid=a.scid)as cname,
 					(SELECT d.pname FROM products_tab d WHERE d.pid=a.spid)AS pname
-					from komisi_tab a  
-					where  a.sssid='$sid' 
+					from komisi_tab a , customers_tab ct 
+					where  a.sssid='$sid' AND ct.cid=a.scid	AND ct.cbid='".$branchid."' 				
 					AND a.date_bayar BETWEEN '$datea' AND '$dateb'
 					group by a.sno_invoice  ");
 

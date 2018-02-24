@@ -31,9 +31,11 @@ function __update_invoicez($noinv,$arr){
 	function __get_pembayaran_detail($id) {
 		//echo "$scid";die;
 		
+
+		
 		$this -> db -> select("*,
 		(select pembayaran_tab.pstatus from pembayaran_tab where pembayaran_tab.pno_pm= pembayaran_detail_tab.pno_pm) as pstatuss
-		FROM pembayaran_detail_tab WHERE   pembayaran_detail_tab.pno_pm='$id' " );
+		FROM pembayaran_detail_tab WHERE   pembayaran_detail_tab.pno_pm='$id' order by pm_tgl DESC" );
 		return $this -> db -> get() -> result();
 	}
 
@@ -100,7 +102,7 @@ function __update_invoicez($noinv,$arr){
 	function __get_pembayaran_detail_inv($scid,$pno_pm) {
 		$pn="''";
 			$this -> db -> select("c.* ,sum( c.dototal ) AS sum_inv, b.scid FROM sales_order_tab b, delivery_order_detail_tab c WHERE 
-			c.sid=0 AND	b.sid = c.ssid AND (c.pno_pm='' or c.pno_pm is NULL) AND b.scid = '".$scid."' group by (c.snodo)");
+			c.sid=0 AND	b.sid = c.ssid AND (c.pno_pm='' or c.pno_pm is NULL) AND b.scid = '".$scid."' group by (c.snodo)  ORDER BY stgl_invoice DESC");
 			return $this -> db -> get() -> result();
 		}		
 

@@ -410,7 +410,7 @@ $tret=$n->ptotal_retur;
                                         <tr>
           
           <th>Check List</th>
-          <th>Return No.</th>
+          <th>Reff No.</th>
           <th>Return Date</th>
           <th>Total</th>
 	
@@ -478,13 +478,14 @@ $tret=$n->ptotal_retur;
 		  //echo $m;
 		  $sum_inv=$v -> rpotong;
 		  $snoro=$v -> snoro;
+		  $sreff=$v->sreff;
 		  $sid=$v -> sid;
 		  ?>
 		  <input type=checkbox name="c[]" id='<?php echo "ge".$m;?>' value= "<?=$sum_inv;?>" onchange="UpdateCost()" <?=$dsbl;?> >
 		  </td>
           <td> 
 		  <input style="opacity:0; position:absolute; left:9999px;" type=checkbox name="d[]" id='<?php echo "gezz".$m;?>' value= "<?=$sid;?>"    >
-		  <?php echo $snoro; ?> </td>	
+		  <?php echo $sreff; ?> </td>	
 		  <td><?php echo __get_date(strtotime($v -> stgl,2)); ?></td>
           <td><?php echo __get_rupiah($sum_inv); ?></td>
         

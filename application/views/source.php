@@ -5,7 +5,7 @@ $mysql_server = $hostname;
 $mysql_login = $username;
 $mysql_password = $password;
 $mysql_database = $database;
-
+$branchid=$this -> memcachedlib -> sesresult['ubid'];
 if(!isset($_REQUEST['term'])){$_REQUEST['term']="";}
 
 
@@ -14,7 +14,7 @@ $db = mysql_select_db($mysql_database, $conn);
 
 $req = "SELECT cid,cbid,ccat, cname,caddr,cdeliver,cphone,csid,ccash,ccredit,climit, cnpwp,cpkp,cspecial,bname,sname,ccashnico,ccreditnico "
 	."FROM customers_tab a,branch_tab b,sales_tab c "
-	."WHERE a.cbid=b.bid  AND a.csid=c.sid   AND  cstatus='1' AND cname LIKE '%".$_REQUEST['term']."%'"; 
+	."WHERE a.cbid=b.bid  AND a.cbid='$branchid' AND a.csid=c.sid   AND  cstatus='1' AND cname LIKE '%".$_REQUEST['term']."%'"; 
 
 	//echo "$req".$database;
 	//echo "$req";die;

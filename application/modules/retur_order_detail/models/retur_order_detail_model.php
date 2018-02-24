@@ -37,14 +37,15 @@ AND retur_order_detail_tab.ssid ='". $id."'");
 	
 
 	function __get_retur_order_detail_by_cust($scid) {
-		
-		$this -> db -> select(' *,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
+
+
+		$this -> db -> select("*,(select bname from branch_tab where branch_tab.bid=retur_order_tab.sbid) as bname,
         (select cname from customers_tab where customers_tab.cid=retur_order_tab.scid) as cname,
 		(select sname from sales_tab where sales_tab.sid=retur_order_tab.ssid) as sname,
 		(select sum(sprice*sqty) from retur_order_detail_tab where retur_order_detail_tab.ssid=retur_order_tab.sid) as rpotong
-		FROM retur_order_tab WHERE sstatus<>2 AND scid='.$scid.' and (status_potong=0 or status_potong is NULL) ORDER BY sid DESC');
-
+		FROM retur_order_tab WHERE sstatus<>2 AND scid='".$scid."' and (status_potong=0 or status_potong is NULL)");
 		return $this -> db -> get() -> result();
+		
 	}
 	
 	function __get_delivery_order_detail($id,$snodo) {

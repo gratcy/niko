@@ -24,13 +24,13 @@ class Home extends MY_Controller {
 		}
 		else {
 			$pager = $this -> pagination_lib -> pagination($this -> sales_order_model -> __get_sales_order(),3,10,site_url('sales_order/home/index'));
-			if($_GET['search']=='1'){
-				//echo 'a';die;
-				$view['sales_order'] = $this -> sales_order_model -> __get_sales_orderz();	
-			}else{		
-//echo 'b';die;			
-				$view['sales_order'] = $this -> pagination_lib -> paginate();
-			}
+				if($_GET['search']=='1'){
+					//echo 'a';die;
+					$view['sales_order'] = $this -> sales_order_model -> __get_sales_orderz();	
+				}else{		
+	//echo 'b';die;			
+					$view['sales_order'] = $this -> pagination_lib -> paginate();
+				}
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';
 		}
@@ -275,7 +275,7 @@ class Home extends MY_Controller {
 	function get_suggestion() {
 		$hint = '';
 		$a = array();
-		$q = urldecode($_SERVER['QUERY_STRING']);
+		$q = $_SERVER['QUERY_STRING'];
 		$arr = $this -> sales_order_model -> __get_suggestion();
 		
 		foreach($arr as $k => $v) $a[] = array('name' => $v -> name);
