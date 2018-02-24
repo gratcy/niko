@@ -40,6 +40,7 @@ class Home extends MY_Controller {
 			$cto = (int) $this -> input -> post('cto');
 			$rtype = (int) $this -> input -> post('rtype');
 			$status = (int) $this -> input -> post('status');
+			$waktu = str_replace('/','-',$this -> input -> post('waktu', TRUE));
 
 			if ($rtype == 3) $bto = $cto;
 			
@@ -56,7 +57,7 @@ class Home extends MY_Controller {
 				redirect(site_url('request' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('dtype' => $rtype, 'dbfrom' => $bfrom, 'dbto' => $bto, 'ddate' => time(), 'dtitle' => $title, 'ddesc' => $desc, 'dstatus' => $status);
+				$arr = array('dtype' => $rtype, 'dbfrom' => $bfrom, 'dbto' => $bto, 'ddate' => strtotime($waktu), 'dtitle' => $title, 'ddesc' => $desc, 'dstatus' => $status);
 				if ($this -> request_model -> __insert_request($arr)) {
 					$drid = $this -> db -> insert_id();
 					
@@ -94,6 +95,7 @@ class Home extends MY_Controller {
 			$app = (int) $this -> input -> post('app');
 			$rtype = (int) $this -> input -> post('rtype');
 			$cto = (int) $this -> input -> post('cto');
+			$waktu = str_replace('/','-',$this -> input -> post('waktu', TRUE));
 			
 			if ($rtype == 3) $bto = $cto;
 			
@@ -110,7 +112,7 @@ class Home extends MY_Controller {
 					redirect(site_url('request' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('dtype' => $rtype, 'dbfrom' => $bfrom, 'dbto' => $bto, 'ddate' => time(), 'dtitle' => $title, 'ddesc' => $desc, 'dstatus' => $status);
+					$arr = array('dtype' => $rtype, 'dbfrom' => $bfrom, 'dbto' => $bto, 'ddate' => strtotime($waktu), 'dtitle' => $title, 'ddesc' => $desc, 'dstatus' => $status);
 					if ($this -> request_model -> __update_request($id, $arr)) {
 						
 					foreach($items as $k => $v)

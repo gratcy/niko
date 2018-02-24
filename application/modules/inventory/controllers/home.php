@@ -300,8 +300,8 @@ class Home extends MY_Controller {
 			$returnTransApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 1, 1);
 			$returnTransUnApp = $this -> inventory_model -> __get_return_transfer($iid, $branch, 2, 1);
 			
-			$ServiceProductApp = $this -> inventory_model -> __get_services_items($iid, $branch, 1, 1);
-			$ServiceProductUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 1, 2);
+			//~ $ServiceProductApp = $this -> inventory_model -> __get_services_items($iid, $branch, 1, 1);
+			//~ $ServiceProductUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 1, 2);
 		elseif ($type == 5) :
 			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 1, 1);
 			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 1, 2, 1);

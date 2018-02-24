@@ -34,10 +34,12 @@ class Technical_model extends CI_Model {
         return $this -> db -> update('technical_tab', $data);
 	}
 	
-	function __get_suggestion() {
-		$this -> db -> select('tid as id,tname as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY name ASC');
+	function __get_suggestion($bid="") {
+		if ($bid != "") $bid = " AND tbid=" . $bid;
+		else $bid = "";
+		$this -> db -> select('tid as id,tname as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) '.$bid.' ORDER BY name ASC');
 		$name = $this -> db -> get() -> result();
-		$this -> db -> select('tid as id,tcode as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY name ASC');
+		$this -> db -> select('tid as id,tcode as name FROM technical_tab WHERE (tstatus=1 OR tstatus=0) '.$bid.' ORDER BY name ASC');
 		$code = $this -> db -> get() -> result();
 		return array_merge($name, $code);
 	}

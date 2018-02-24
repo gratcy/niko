@@ -13,12 +13,12 @@ class Home extends MY_Controller {
 	function index() {
 		$keyword = $this -> input -> post('keyword');
 		if ($keyword) {
-			$view['branch'] = $this -> branch_model -> __get_search($keyword,(__get_roles('ExecuteAllBranch') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
+			$view['branch'] = $this -> branch_model -> __get_search($keyword,(__get_roles('BranchExecute') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 			$view['pages'] = '';
 			$view['keyword'] = $keyword;
 		}
 		else {
-			$pager = $this -> pagination_lib -> pagination($this -> branch_model -> __get_branch((__get_roles('ExecuteAllBranch') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('branch'));
+			$pager = $this -> pagination_lib -> pagination($this -> branch_model -> __get_branch((__get_roles('BranchExecute') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid'])),3,10,site_url('branch'));
 			$view['branch'] = $this -> pagination_lib -> paginate();
 			$view['pages'] = $this -> pagination_lib -> pages();
 			$view['keyword'] = '';

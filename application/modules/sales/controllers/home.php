@@ -120,7 +120,7 @@ class Home extends MY_Controller {
 		$hint = '';
 		$a = array();
 		$q = urldecode($_SERVER['QUERY_STRING']);
-		$arr = $this -> sales_model -> __get_suggestion();
+		$arr = $this -> sales_model -> __get_suggestion((__get_roles('ExecuteAllBranchSales') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 		if (strlen($q) < 2) return false;
 		
 		foreach($arr as $k => $v) $a[] = array('name' => $v -> name, 'id' => $v -> id);
