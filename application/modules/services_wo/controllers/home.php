@@ -373,6 +373,22 @@ class Home extends MY_Controller {
 		}
 	}
 	
+	function services_wo_detail($id) {
+		$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail_print($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
+		$arr = $this -> services_wo_model -> __get_technical_services($id);
+		foreach($arr as $k => $v) {
+			if ($v -> stid) $ids[] = $v -> stid;
+		}
+		$view['technical'] = $this -> technical_model -> __get_technical_services(implode(',', $ids));
+		
+		$ids = array();
+		$arr = $this -> services_wo_model -> __get_product_services($id);
+		foreach($arr as $k => $v) if ($v -> spid) $ids[] = $v -> spid;
+		
+		$view['product'] = $this -> products_model -> __get_products_services(implode(',', $ids), 2, $id);
+		$this->load->view(__FUNCTION__, $view);
+	}
+	
 	function services_wo_print($id) {
 		$view['detail'] = $this -> services_wo_model -> __get_services_wo_detail_print($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']));
 		$arr = $this -> services_wo_model -> __get_technical_services($id);

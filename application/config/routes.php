@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "home";
+$route['switchbranch/?(:num)?'] = "home/switchbranch/$1";
 $route['404_override'] = '';
 
 $route['login'] = 'login/home';
@@ -116,6 +117,7 @@ $route['sales_commision/sales_commision_delete/(:num)'] = 'sales_commision/home/
 $route['services_wo/?(:num)?'] = 'services_wo/home/index/$1';
 $route['services_wo/get_suggestion'] = 'services_wo/home/get_suggestion';
 $route['services_wo/services_wo_print/?(:num)?'] = 'services_wo/home/services_wo_print/$1';
+$route['services_wo/services_wo_detail/?(:num)?'] = 'services_wo/home/services_wo_detail/$1';
 $route['services_wo/services_wo_add'] = 'services_wo/home/services_wo_add';
 $route['services_wo/services_wo_update/?(:num)?'] = 'services_wo/home/services_wo_update/$1';
 $route['services_wo/services_wo_delete/(:num)'] = 'services_wo/home/services_wo_delete/$1';

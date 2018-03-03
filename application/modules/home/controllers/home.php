@@ -20,4 +20,16 @@ class Home extends MY_Controller {
 		$view['total_branch'] = $this -> branch_model -> __get_total_branch();
 		$this->load->view('index', $view);
 	}
+
+	function switchbranch($id) {
+		if ($this -> memcachedlib -> sesresult['uid'] == 6 || $this -> memcachedlib -> sesresult['uid'] == 13 || $this -> memcachedlib -> sesresult['uid'] == 23 || $this -> memcachedlib -> sesresult['uid'] == 1) {
+			$login = $this -> memcachedlib -> get('__login');
+			$login['ubid'] = $id;
+			$login['ubranch'] = __get_branch($id, 1);
+			$this -> memcachedlib -> __regenerate_cache('__login', $login, false);
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		else
+			redirect(site_url());
+	}
 }

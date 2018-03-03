@@ -129,7 +129,7 @@
 				</div>
 
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Point</label>
+                    <label for="text1" class="control-label col-lg-4">Service Point</label>
 
                     <div class="col-lg-4">
                         <input type="text" name="point" class="form-control" value="<?php echo $detail[0] -> ppoint; ?>" />

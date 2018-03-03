@@ -78,10 +78,16 @@ class Memcachedlib {
         return $this -> ses_id . $key;
 
     }
+    
     function delete($key=false) {
         if ($key)
             $this -> memcached_obj -> delete($this -> ses_id . $key);
         else
             $this -> memcached_obj -> flush(1);
     }
+
+	function __regenerate_cache($key,$arr,$time=3600,$keyGlobal=false) {
+		self::delete($key, $keyGlobal);
+		return self::set($key, $arr, $time, $keyGlobal);
+	}
 }

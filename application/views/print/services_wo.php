@@ -28,11 +28,10 @@ table.gridtable td {
 </style>
 <body>
 <div style="padding:10px;width: 800px;">
-	<h1 style="margin: 0;">PT. Niko Electronik Indonesia</h1>
 	<h3 style="margin: 0;">Services Work Order</h3>
 	<div style="border-bottom:1px solid #000;margin-bottom: 10px;"></div>
 	<table border="0">
-	<tr><td width="120">No. Work Order</td><td>: <?php echo $detail[0] -> sno; ?></td></tr>
+	<tr><td width="120">WO No.</td><td>: <?php echo $detail[0] -> sno; ?></td></tr>
 	<tr><td>Branch</td><td>:  <?php echo $detail[0] -> bname; ?></td></tr>
 	<tr><td>Date</td><td>:  <?php echo __get_date($detail[0] -> sdatefrom,1) . ' s/d ' .__get_date($detail[0] -> sdatefrom,1); ?></td></tr>
 	<tr><td>Description</td><td>:  <?php echo $detail[0] -> sdesc; ?></td></tr>

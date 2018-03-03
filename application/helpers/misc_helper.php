@@ -5,6 +5,21 @@ function __set_error_msg($arr) {
 	return $CI -> memcachedlib -> set('__msg', $arr, '60');
 }
 
+function __get_branch($id, $type) {
+	$branch = array(1 => 'FACTORY', 2 => 'JAKARTA', 3 => 'BANDUNG');
+	if ($type == 1) {
+		$res = $branch[$id];
+	}
+	else {
+		$res = '';
+		foreach($branch as $k => $v) {
+			if ($id == $k) $res .= '<option value="'.$k.'" selected>'.$v.'</option>';
+			else $res .= '<option value="'.$k.'">'.$v.'</option>';
+		}
+	}
+	return $res;
+}
+
 function __get_roles($key) {
     $arr = array();
     $CI =& get_instance();
@@ -33,7 +48,7 @@ function __get_status($status, $type) {
 	elseif ($type == 2)
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="status" value="1" />' : '<input type="checkbox" name="status" value="1" />');
 	else
-		return ($status == 3 ? '<span style="font-weight:bold;color:#5cb85c;">Approved</span>' : ($status == 1 ? 'Active' : 'No Active'));
+		return ($status == 3 ? '<span>Approved</span>' : ($status == 1 ? 'Active' : 'No Active'));
 }
 
 function __get_fkp_sp($str) {
@@ -223,7 +238,7 @@ function __get_new_pm($uid) {
 }
 
 function __get_customer_category($cid, $type) {
-	$data = array('DISTRIBUTOR', 'SEMI','AGENT', 'STORE', 'CONSUMER', 'SUPERMARKET', 'OEM');
+	$data = array('DISTRIBUTOR', 'SEMI','AGENT', 'CONSUMER');
 	if ($type == 1) {
 		return $data[$cid];
 	}
@@ -334,7 +349,7 @@ function __get_receiving_name($id, $type) {
 }
 
 function __get_request_type($id, $type) {
-	$data = array('Transfer','Return','Transfer Customer');
+	$data = array('Transfer','Return','Customer');
 	if ($type == 1) {
 		return $data[$id-1];
 	}
@@ -350,7 +365,7 @@ function __get_request_type($id, $type) {
 }
 
 function __get_receiving_type($id, $type) {
-	$data = array('Branches','Factory / Vendor','Customer');
+	$data = array(1 => 'Factory', 0 => 'Branch', 2 => 'Customer');
 	if ($type == 1) {
 		return $data[$id-1];
 	}

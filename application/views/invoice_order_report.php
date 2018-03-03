@@ -70,13 +70,13 @@ minLength: 1,
 	<?php if($_POST['xexcel']=="Excel"){		}else{ ?>				
 						<form method="POST">
 						<table>
-						<tr><td style="width:150px">Invoice No.</td><td><input size=16 type=text name="sno_invoice" class="form-control"></td></tr>
+						<tr><td style="width:150px">Invoice No.</td><td><input size=16 type=text name="sno_invoice" class="form-control"></td><td></td></tr>
 						
 						<tr><td>Customer</td><td><input size=16 type=text name="scidx" id="search" class="form-control" >
 						
 						<div style="display: none;">
 						<input type="text" name="scid" id="theCid" class="form-control" >
-						</div></td></tr>
+						</div></td><td></td></tr>
 
 
 
@@ -84,7 +84,7 @@ minLength: 1,
 						<select name="ssid" data-placeholder="Sales" class="form-control"  >
 						<?php echo $sales; ?>
 						</select>
-						</td></tr>
+						</td><td></td></tr>
 						
 						<tr><td>Status</td><td><select name="pstatus" class="form-control">
 						<option value="0">ALL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -96,14 +96,15 @@ minLength: 1,
 						<option value="3">Paid</option>
 						
 						</select>
-						</td></tr>
+						</td><td></td></tr>
 						<tr><td>Period</td><td>
 							<input size=16 type=text name="astgl_invoice" id="example1" class="form-control" value="<?php echo "01".date('/m/Y');?>" style="float:left;width:45%;">
 							<div style="float:left;width:10%;text-align:center"> TO </div> 
 							<input size=16 type=text name="bstgl_invoice" id="example2" class="form-control" value="<?php echo date('d/m/Y');?>" style="float:left;width:45%;">
 						
-						</td></tr>
-						<tr><td></td><td><input type=submit value="Search" class="btn btn-default btn-grad"> <input class="btn btn-default btn-grad" type=submit name="xexcel" value="Excel"></td></tr>
+						</td>
+						<td>&nbsp;<input type=submit value="Search" class="btn btn-default btn-grad">&nbsp; <button class="btn btn-default btn-grad" type=submit name="xexcel" value="Excel"><i class="icon-book"></i> Export Excel</button></td>
+					</tr>
 						</table>
 						</form>
  <?php }?>					

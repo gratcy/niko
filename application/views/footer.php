@@ -14,6 +14,9 @@
 				formInit(); 
 			});
 			<?php endif; ?>
+            $('select[name="switchbranch"]').change(function(){
+                window.location.href = '/switchbranch/' + $(this).val();
+            });
         </script>
         
      <!--END PAGE LEVEL SCRIPT-->

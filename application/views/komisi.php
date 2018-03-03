@@ -143,8 +143,6 @@ function calg() {
 	document.getElementById('result_ee').value=ee;
     document.getElementById('result_ff').value=ee;
     document.getElementById('result_f').value=ff;	
-
-
 	document.getElementById('result_g').value = (document.getElementById('result_f').value * document.getElementById('cal_g').value) / 100;
 	
 	
@@ -329,7 +327,7 @@ header("Expires: 0");
                 <div>
                 <form action="<?php echo current_url();?>" method="post">
 					
-		<table>
+                                <table class="table" style="width:80%;">
 					
 			<tr>
 
@@ -463,7 +461,7 @@ header("Expires: 0");
                 <div>
                 <form action="<?php echo current_url();?>" method="post">
 					
-		<table>
+                                <table class="table" style="width:80%;">
 
 
 			<tr>
@@ -541,24 +539,27 @@ header("Expires: 0");
 <input type=hidden name=treturns id="treturns" class="form-control" value="<?=$ttret;?>"  >
 <input type=text  class="form-control" value="<?=number_format($ttret);?>"  >
 				</td>
-				<td>
+				<td style="display:none">
 				<select name="cal_b" id="cal_b" onchange="calb()" class="form-control">
 						<option value="0">0 %</option>
 						<option value="0.25">0.25 %</option>
 						<option value="0.3">0.3 %</option>
 						<option value="0.35">0.35 %</option>
-						<option value="0.4">0.4 %</option>						
+						<option value="0.4" selected>0.4 %</option>						
 					</select>
 				
 				</td>
 				
 				<td>
-			
-				</td>
-				<td>
 					<input type=hidden id="result_c" name="result_c" class="form-control"  >
 					<input type=text id="rc" name="rc" class="form-control"  >
-				</td>				
+				</td>		
+				<td>
+			
+				</td>		
+				<td>
+			
+				</td>		
 </tr>
 
 <tr>
@@ -571,18 +572,14 @@ header("Expires: 0");
 						<input type=hidden name="tdiscc" id="tdisc" class="form-control" value="<?=$ttdisc;?>" >
 						<input type=text  class="form-control" value="<?=number_format($ttdisc);?>" >
 				</td>
-				<td>
+				<td style="display:none">
 				<select name="cal_c" id="cal_c" onchange="calc()" class="form-control">
 						<option value="0">0 %</option>
 						<option value="0.25">0.25 %</option>
 						<option value="0.3">0.3 %</option>
 						<option value="0.35">0.35 %</option>
-						<option value="0.4">0.4 %</option>						
+						<option value="0.4" selected>0.4 %</option>						
 					</select>
-				
-				</td>
-				
-				<td>
 				
 				</td>
 				<td>
@@ -590,6 +587,13 @@ header("Expires: 0");
 						<input type=text id="rd" name="rd" class="form-control"  > 
 						
 				</td>				
+				
+				<td>
+				
+				</td>
+				<td>
+			
+				</td>		
 </tr>
 
 
@@ -633,7 +637,8 @@ header("Expires: 0");
 						<option value="12.5">12.5 %</option>
 						<option value="25">25 %</option>
 						<option value="37.5">37.5 %</option>												
-					</select>
+					</select>												
+					
 				
 				</td>
 				

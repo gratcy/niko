@@ -34,7 +34,7 @@ left:inherit!important;
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Products
+                            Product
                 <div class="searchTable">
                 <form action="<?php echo current_url();?>" method="post">
 					<div class="sLeft"><input type="text" placeholder="<?php echo ($keyword == '' ? 'Search !!!' : $keyword)?>" name="keyword" class="form-control" autocomplete="off" /></div>
@@ -46,7 +46,7 @@ left:inherit!important;
                         <div class="panel-body">
                             <div class="table-responsive">
 								<div style="overflow:auto;">
-                                <table class="table table-striped table-bordered table-hover" style="width: 1400px;">
+                                <table class="table table-striped table-bordered table-hover" style="width:100%;min-width: 1400px;">
                                     <thead>
                                         <tr>
           <th>Code</th>

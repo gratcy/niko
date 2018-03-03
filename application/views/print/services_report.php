@@ -28,7 +28,6 @@ table.gridtable td {
 </style>
 <body>
 <div style="padding:10px;width: 800px;">
-	<h1 style="margin: 0;">PT. Niko Electronic Indonesia</h1>
 	<h3 style="margin: 0;">Services Work Order</h3>
 	<div style="border-bottom:1px solid #000;margin-bottom: 10px;"></div>
 	<table border="0">

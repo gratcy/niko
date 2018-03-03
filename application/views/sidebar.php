@@ -3,13 +3,21 @@
             <div class="media user-media well-small">
                 <div class="media-body">
                     <h5 class="media-heading" style="color:#ed9c28;"> Branch, <?php echo $this -> memcachedlib -> sesresult['ubranch']; ?></h5>
-					<?php $bid= $this -> memcachedlib -> sesresult['ubid']; ?>
                     <h5 class="media-heading"> <?php echo $this -> memcachedlib -> sesresult['uemail']; ?></h5>
                     <ul class="list-unstyled user-info">
                         <li>
                              <a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a> Online
                         </li>
                     </ul>
+                    <?php
+        if ($this -> memcachedlib -> sesresult['uid'] == 6 || $this -> memcachedlib -> sesresult['uid'] == 13 || $this -> memcachedlib -> sesresult['uid'] == 23 || $this -> memcachedlib -> sesresult['uid'] == 1) {
+            ?>
+                    <div style="padding: 10px 0">
+                    <select class="form-control" name="switchbranch">
+                        <?php echo __get_branch($this -> memcachedlib -> sesresult['ubid'],2); ?>
+                    </select>
+                    </div>
+                    <?php } ?>
                 </div>
                 <br />
             </div>
@@ -240,13 +248,13 @@
                     </a>
                     <ul class="collapse" id="services">
 						<?php if (__get_roles('ServicesWOView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Service Work Order </a></li>
+                         <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Work Order </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ServicesSparepartView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Service Sparepart </a></li>
+                         <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
                          <?php endif; ?>
 						<?php if (__get_roles('ServicesReportView')) : ?>
-                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Service Report </a></li>
+                         <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Report </a></li>
                          <?php endif; ?>
                     </ul>
                 </li>
@@ -289,14 +297,14 @@
                     <ul class="collapse" id="Report">
 
                          <?php if (__get_roles('ReportTechnicalCommision')) : ?>
-                        <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> SO Pending </a></li>
+                        <!-- <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> SO Pending </a></li> -->
 						<?php endif; ?>
 
 						<?php if (__get_roles('ReportInvoice')) : ?>
                        <li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order_report/1'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<?php endif; ?>
 						<?php if (__get_roles('ReportSalesCommision')) : ?>
-						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Sales Commision </a></li>
+						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Sales Commission </a></li>
 						<?php endif; ?>
 						
 						<?php if (__get_roles('ReportOpname')) : ?>
@@ -348,7 +356,7 @@
                         <li><a href="<?php echo site_url('users'); ?>"><i class="icon-angle-right"></i> Users </a></li>
 			   <?php endif; ?>
 				<?php if (__get_roles('UsersGroupView')) : ?>
-                        <li><a href="<?php echo site_url('users/users_group'); ?>"><i class="icon-angle-right"></i> User Group</a></li>
+                        <li><a href="<?php echo site_url('users/users_group'); ?>"><i class="icon-angle-right"></i> Group</a></li>
 			   <?php endif; ?>
                     </ul>
                 </li>

@@ -34,7 +34,7 @@
                                         <tr>
           <th>Doc No.</th>
           <th>Type</th>
-          <th>Request No. / Vendor</th>
+          <th>Name</th>
           <th>Date</th>
           <th>Description</th>
           <th>Status</th>
@@ -51,7 +51,7 @@
           <td><?php echo ($v -> rtype == 1 ? __get_receiving_name($v -> riid, $v -> rtype) : ($v -> rtype == 3 ? $v -> cname : $v -> rvendor)); ?></td>
           <td><?php echo __get_date($v -> rdate); ?></td>
           <td><?php echo $v -> rdesc; ?></td>
-          <td><?php echo ($v -> rstatus == 3 ? '<span style="color:#9e3;font-weight:bold;">Approve</span>' : __get_status($v -> rstatus,1)); ?></td>
+          <td><?php echo ($v -> rstatus == 3 ? '<span>Approve</span>' : __get_status($v -> rstatus,1)); ?></td>
 		  <td style="text-align:center;">
 			<?php if (__get_roles('ItemReceivingExecute')) : ?>
 				  <?php if ($v -> rstatus != 3) : ?>

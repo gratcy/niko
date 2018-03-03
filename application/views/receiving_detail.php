@@ -38,7 +38,7 @@
 		<thead>
 		<tr><td>Doc No.</td><td><?php echo $detail[0] -> rdocno;?></td></tr>
 		<tr><td>Type</td><td><?php echo __get_receiving_type($detail[0] -> rtype,1);?></td></tr>
-		<tr><td>Request No. / Vendor / Customer</td><td><?php echo (__get_receiving_name($detail[0] -> riid, $detail[0] -> rtype) ? __get_receiving_name($detail[0] -> riid, $detail[0] -> rtype) : ($detail[0] -> rtype == 3 ? $detail[0] -> cname : $detail[0] -> rvendor));?></td></tr>
+		<tr><td>Name</td><td><?php echo (__get_receiving_name($detail[0] -> riid, $detail[0] -> rtype) ? __get_receiving_name($detail[0] -> riid, $detail[0] -> rtype) : ($detail[0] -> rtype == 3 ? $detail[0] -> cname : $detail[0] -> rvendor));?></td></tr>
 		<tr><td>Date</td><td><?php echo __get_date($detail[0] -> rdate,2);?></td></tr>
 		<tr><td>Description</td><td><?php echo $detail[0] -> rdesc;?></td></tr>
 		<tr><td>Status</td><td>Approve</td></tr>
