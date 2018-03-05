@@ -3,7 +3,7 @@
                 <div class="inner">
                     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Closing Period</h1>
+                    <h1 class="page-header">Accounting Closing Period</h1>
                 </div>
             </div>
 <div class="row">
@@ -33,7 +33,7 @@
 				<?php if (isset($history)) : ?>
 				<p>&nbsp;</p>
                             <div class="table-responsive">
-	<h3>History Closing Period</h3>	
+	<h3>AHistory Closing Period</h3>	
 <table class="table table-striped table-bordered table-hover">
 <thead>
 <tr>

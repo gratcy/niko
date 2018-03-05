@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Chart of Account </h2>
+                        <h2> Accounting Chart of Account </h2>
                     </div>
                 </div>
 

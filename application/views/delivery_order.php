@@ -61,17 +61,10 @@ minLength: 1,
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-edit"></i></div>
-            <h5>Delivery Order <?php //echo "$id $scid";?></h5>
+            <h5>Delivery Order</h5>
         </header>
         <div id="div-1" class="accordion-body collapse in body">
 	<?php echo __get_error_msg(); ?>
-            <!--form class="form-horizontal" action="<?php echo site_url('sales_order_detail/home/sales_order_detail_add'); ?>" method="post"-->
-<?php //echo site_url('application/views/assets/sourcex.php?scid='.$scid); ?>	
-<?php  
-//print_r($detailx);
-//print_r($detail);die;
-?>
-
 
  <form  id="form1" class="form-horizontal" action="<?php echo site_url("sales_order_detail/home/delivery_order/$id/$scid"); ?>" method="post">
 <table border=0 width=90% ><tr><td width=50%>

@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> City </h2>
+                        <h2> Master City </h2>
                     </div>
                 </div>
 

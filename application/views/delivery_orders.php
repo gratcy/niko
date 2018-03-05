@@ -44,7 +44,7 @@ minLength: 1,
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Delivery Order </h2>
+                        <h2>Transaction Delivery Order </h2>
 						
 						
                     </div>

@@ -97,6 +97,8 @@
                                     </thead>
                                     <tbody>
 		  <?php
+		  // echo '<pre>';
+		  // print_r($customers);die;
 		  foreach($customers as $k => $v) :
 		  $phone = explode('*', $v -> cphone);
 		  ?>
@@ -109,7 +111,7 @@
           <td><?php echo __get_rupiah($v -> ccredit,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> ctop,2); ?></td>
 		  <td><?php echo __get_rupiah($v -> climit,2); ?></td>
-		  <td><?php echo __get_rupiah($v -> rcvb,2); ?></td>
+		  <td><?php //echo __get_rupiah($v -> rcvb,2); ?></td>
 		  <td><?php echo ($v -> cspecial == 0 ? 'NO' : 'YES'); ?></td>
 		  <td>
 				<?php if (__get_roles('CustomersExecute')) : ?>

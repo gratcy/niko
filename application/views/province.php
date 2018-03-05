@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Province </h2>
+                        <h2> Master Province </h2>
                     </div>
                 </div>
 

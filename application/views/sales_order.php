@@ -53,7 +53,7 @@
 				<div class="inner">
 					<div class="row">
 						<div class="col-lg-12">
-							<h2>Sales Order </h2>
+							<h2>Transaction Sales Order </h2>
 						</div>
 					</div>
 

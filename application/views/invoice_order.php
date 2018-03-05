@@ -43,7 +43,7 @@ minLength: 1,
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Invoice Order </h2>
+                        <h2>Transaction Invoice Order </h2>
                     </div>
                 </div>
 

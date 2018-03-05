@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Group Product </h2>
+                        <h2> Master Group Product </h2>
                     </div>
                 </div>
 

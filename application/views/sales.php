@@ -16,7 +16,7 @@ left:inherit!important;
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Sales </h2>
+                        <h2> Master Sales </h2>
                     </div>
                 </div>
 

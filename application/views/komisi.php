@@ -197,7 +197,7 @@ header("Expires: 0");
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Commission </h2>
+                        <h2>Report Commission </h2>
                     </div>
                 </div>
 
@@ -210,17 +210,15 @@ header("Expires: 0");
              
                 <form action="<?php echo current_url();?>" method="POST">
 					
-					<table><tr>
-					<td>Sales Name &nbsp;&nbsp;</td>
-
-				<td>
-                   
-					<input  name=sname type="text" id="search" class="form-control"   />
-					<div  style="display: none;">
-					<input  name=sid type="text" id="theSid" class="form-control"   **/>
+					<table class="table-striped"><tr>
+					<td>Sales Name</td>
+				<td style="padding-left: 5px">
+					<input name=sname type="text" id="search" class="form-control" />
+					<div style="display: none;">
+					<input name=sid type="text" id="theSid" class="form-control" />
 					</div>
                 </td>
-				<td>
+				<td style="padding-left: 5px">
 				<select name=monthh class="form-control"  >
 				<option value="01" >Januari</option>
 				<option value="02" >Februari</option>
@@ -236,7 +234,7 @@ header("Expires: 0");
 				<option value="12" >Desember</option>
 				</select>
 				</td>
-				<td>
+				<td style="padding-left: 5px">
 				<select name=years class="form-control"  >
 				
 				<?php 
@@ -260,14 +258,14 @@ header("Expires: 0");
 				</select>
 				</td>
 				
-				<td>
-				<input type=submit name="xcl" value=Submit class="form-control"  >
+				<td style="padding-left: 5px">
+				<input type="submit" name="xcl" value="Submit" class="btn btn-default btn-grad" >
 				</td>
-				<td>
-				<input type=reset class="form-control" onclick="repres()" >
+				<td style="padding-left: 5px">
+				<input type="reset" value="Reset" class="btn btn-default btn-grad" onclick="repres()" >
 				</td>	
-				<td>
-				<input type=submit name="xcl" class="form-control" value="Excel"  >
+				<td style="padding-left: 5px">
+                <button value="Excel" type="submit" class="btn btn-default btn-grad"><i class="icon-book"></i> Export Excel</button>
 				</td>				
 </tr>
 </table>				
@@ -658,11 +656,13 @@ header("Expires: 0");
                
 <?php } ?>
 
-<br>
-Detail Commission
-<br>						
-
-					<table border=1 class="table table-striped table-bordered table-hover"  >
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            DETAIL COMMISSION
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
 					<tr>
 					<td>No</td>
 					<!--td>CCIDD</td-->
@@ -727,7 +727,7 @@ Detail Commission
 					
 					<tr>
 					<td></td>					
-					<td>Total</td>
+					<td>TOTAL</td>
 					<td colspan=5 >&nbsp;</td>
 					<td><?php echo number_format($totp_amount); ?>
 					<td><?php echo number_format($total_com); ?>
@@ -751,9 +751,10 @@ Detail Commission
 					
 					
 					</table>
-<?php //echo $pages; ?>
 						
 
+                        </div>
+                        </div>
                         </div>
                     </div>
 					
