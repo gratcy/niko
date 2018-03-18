@@ -18,6 +18,7 @@
 	<?php echo __get_error_msg(); ?>
             <form class="form-horizontal" action="<?php echo site_url('services_wo/services_wo_update'); ?>" method="post">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="hidden" name="sparepart_id" value="<?php echo $detail[0] -> sparepart_id; ?>">
 
                 <div class="form-group" id="pbranch">
                     <label for="text1" class="control-label col-lg-4">Branch</label>
@@ -32,6 +33,13 @@
 
                     <div class="col-lg-4">
 						<a href="<?php echo site_url('services_wo/product_add/2?id=' . $id); ?>" class="btn btn-info" id="addProduct">Add Product</a>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Sparepart</label>
+                    <div class="col-lg-4">
+                <a href="<?php echo site_url('services_sparepart/sparepart_add/2?id=' . $detail[0] -> sparepart_id); ?>" class="btn text-muted text-center btn-info" id="addSparepart">Add Sparepart</a>
                     </div>
                 </div>
 
@@ -74,8 +82,11 @@
                     <div class="col-lg-8" id="ProductTMP" style="margin:0 auto;float:none;"> </div>
 				</div>
                 <div class="form-group">
-                    <div class="col-lg-8" id="TechnicalTMP" style="margin:0 auto;float:none;"> </div>
+                    <div class="col-lg-8" id="sparepartTMP" style="margin:0 auto;float:none;"> </div>
 				</div>
+                <div class="form-group">
+                    <div class="col-lg-8" id="TechnicalTMP" style="margin:0 auto;float:none;"> </div>
+                </div>
 				<div style="clear:both;"></div>
                 <div class="form-group">
 							<label for="status" class="control-label col-lg-4"></label>
@@ -112,8 +123,9 @@ $(function(){
 	});
 	
 	$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
-	$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
-	$("#addTechnical, #addProduct").fancybox({
+    $('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
+    $('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/2?id=' . $detail[0] -> sparepart_id);?>');
+	$("#addTechnical, #addProduct, #addSparepart").fancybox({
 		'width'				: '65%',
 		'height'			: '100%',
 		'autoScale'			: false,
@@ -124,11 +136,13 @@ $(function(){
 	$('a#fancybox-close').click(function(){
 		$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
 		$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
+        $('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/2?id=' . $detail[0] -> sparepart_id);?>');
 	});
 	$.fancybox.originalClose = $.fancybox.close;
 	$.fancybox.close = function() {
 		$('div#TechnicalTMP').load('<?php echo site_url('services_wo/technical_tmp/2?id=' . $id);?>');
 		$('div#ProductTMP').load('<?php echo site_url('services_wo/product_tmp/2?id=' . $id);?>');
+        $('div#sparepartTMP').load('<?php echo site_url('services_sparepart/sparepart_tmp/2?id=' . $detail[0] -> sparepart_id);?>');
 		$.fancybox.originalClose();
 	}
 });

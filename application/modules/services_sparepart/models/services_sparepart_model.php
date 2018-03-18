@@ -33,6 +33,10 @@ class Services_sparepart_model extends CI_Model {
 		return $this -> db -> query('update services_sparepart_tab set sstatus=2 where sid=' . $id);
 	}
 	
+	function __delete_services_sparepart_by_wo($id) {
+		return $this -> db -> query('update services_sparepart_tab set sstatus=2 where ssid=' . $id);
+	}
+	
 	function __insert_services_sparepart_det($data) {
         return $this -> db -> insert('services_sparepart_detail_tab', $data);
 	}

@@ -244,15 +244,15 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">3</span>&nbsp;
+                       &nbsp; <span class="label label-danger">2</span>&nbsp;
                     </a>
                     <ul class="collapse" id="services">
 						<?php if (__get_roles('ServicesWOView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_wo'); ?>"><i class="icon-angle-right"></i> Work Order </a></li>
                          <?php endif; ?>
-						<?php if (__get_roles('ServicesSparepartView')) : ?>
+					<!-- 	<?php if (__get_roles('ServicesSparepartView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_sparepart'); ?>"><i class="icon-angle-right"></i> Sparepart </a></li>
-                         <?php endif; ?>
+                         <?php endif; ?> -->
 						<?php if (__get_roles('ServicesReportView')) : ?>
                          <li class=""><a href="<?php echo site_url('services_report'); ?>"><i class="icon-angle-right"></i> Report </a></li>
                          <?php endif; ?>

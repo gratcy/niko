@@ -3,8 +3,12 @@
 <title>Print Service Report</title>
 </head>
 <style type="text/css">
+body p, body h1, body h3, body b {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
 table.gridtable {
-	font-family: verdana,arial,sans-serif;
+	font-family: Verdana, Geneva, sans-serif;
 	font-size:11px;
 	color:#333333;
 	border-width: 1px;
@@ -12,6 +16,7 @@ table.gridtable {
 	border-collapse: collapse;
 }
 table.gridtable th {
+	font-family: Verdana, Geneva, sans-serif;
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
@@ -19,6 +24,7 @@ table.gridtable th {
 	background-color: #dedede;
 }
 table.gridtable td {
+	font-family: Verdana, Geneva, sans-serif;
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
@@ -28,13 +34,13 @@ table.gridtable td {
 </style>
 <body>
 <div style="padding:10px;width: 800px;">
-	<h3 style="margin: 0;">Services Work Order</h3>
-	<div style="border-bottom:1px solid #000;margin-bottom: 10px;"></div>
-	<table border="0">
-	<tr><td width="120">No. Work Order</td><td>: <?php echo $detail[0] -> sno; ?></td></tr>
-	<tr><td>Branch</td><td>:  <?php echo $detail[0] -> bname; ?></td></tr>
-	<tr><td>Date</td><td>:  <?php echo __get_date($detail[0] -> sdate,1); ?></td></tr>
-	<tr><td>Description</td><td>:  <?php echo $detail[0] -> sdesc; ?></td></tr>
+	<div style="text-align:center;"><h1 style="margin: 0;font-size:28px">SERVICE WORK ORDER</h1></div>
+	<div style="margin-bottom: 20px;"></div>
+	<table border="0" style="width:600px">
+	<tr><td width="120"><b>WO No.</b></td><td style="width: 100%"><b>:</b> <?php echo $detail[0] -> sno; ?></td></tr>
+	<tr><td><b>Date</b></td><td><b>:</b>  <?php echo __get_date($detail[0] -> sdate,1); ?></td></tr>
+	<tr><td><b>Duration</b></td><td><b>:</b>  <?php echo __get_date($detail[0] -> sdatefrom,1) . ' &raquo; ' . __get_date($detail[0] -> sdateto,1); ?></td></tr>
+	<tr><td><b>Description</b></td><td><b>:</b>  <?php echo $detail[0] -> sdesc; ?></td></tr>
 	<?php foreach($technical as $k => $v) : ?>
 	<tr><td>Technician</td><td>: <?php echo $v -> tname; ?></td></tr>
 	<?php endforeach; ?>
@@ -51,7 +57,7 @@ table.gridtable td {
 $qty = $this -> services_report_model -> __get_qty($sid,$v -> pid, 1);
 	$tpoint += $qty[0] -> sqty*$v -> ppoint;
 	?>
-	<tr><td><?php echo $v -> pcode; ?></td><td><?php echo $v -> pname; ?></td><td><?php echo $v -> cname; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td><td style="text-align:right;"><?php echo $qty[0] -> sqty; ?></td><td style="text-align:right;"><?php echo $qty[0] -> sqty*$v -> ppoint; ?></td></tr>
+	<tr><td><?php echo $v -> pcode; ?></td><td><?php echo $v -> pname; ?></td><td><?php echo $v -> cname; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td><td style="text-align:right;"><?php echo $qty[0] -> sqty; ?></td><td style="text-align:center;"><?php echo $qty[0] -> sqty*$v -> ppoint; ?></td></tr>
 	<?php endforeach; ?>
                                     </tbody>
      <tfoot>
@@ -60,8 +66,8 @@ $qty = $this -> services_report_model -> __get_qty($sid,$v -> pid, 1);
      <td></td>
      <td></td>
      <td></td>
-     <td>Total</td>
-     <td style="text-align:right;"><?php echo $tpoint; ?></td>
+     <td style="text-align:center;"><b>TOTAL</b></td>
+     <td style="text-align:center;"><?php echo $tpoint; ?></td>
      </tr>
      </tfoot>
 	</table>
@@ -73,7 +79,6 @@ $qty = $this -> services_report_model -> __get_qty($sid,$v -> pid, 1);
                                     </thead>
                                     <tbody>
 	<?php foreach($sparepart as $k => $v) :
-	
 $qty = $this -> services_report_model -> __get_qty($sid,$v -> sid, 2);
 	?>
 	<tr><td><?php echo $v -> cname; ?></td><td><?php echo $v -> scode; ?></td><td><?php echo $v -> sname; ?></td><td style="text-align:right;"><?php echo $v -> sqty; ?></td><td style="text-align:right;"><?php echo $qty[0] -> sqty; ?></td></tr>
@@ -85,8 +90,7 @@ $qty = $this -> services_report_model -> __get_qty($sid,$v -> sid, 2);
 	<br />
 	
 	<table border="0" style="width:800px;">
-	<tr><td>Head Technician</td><td style="text-align:center;">Technician</td><td style="text-align:right;padding-right:35px;">Admin</td></tr>
-	<tr><td style="height:200px;">.........................</td><td style="height:200px;text-align:center;">.........................</td><td style="text-align:right;">&nbsp;.........................</td></tr>
+	<tr><td style="width:270px"><b>HEAD TECHNICIAN</b></td><td style="text-align:center;"><b>TECHNICIAN</b></td><td style="text-align:right;padding-right:35px;"><b>ADMIN</b></td></tr>
 	</table>
 </div>
 </body>

@@ -11,7 +11,9 @@ class Home extends MY_Controller {
 		$this -> load -> library('products/products_lib');
 		$this -> load -> model('technical/technical_model');
 		$this -> load -> model('products/products_model');
+		$this -> load -> model('sparepart/sparepart_model');
 		$this -> load -> model('services_wo_model');
+		$this -> load -> model('services_sparepart/services_sparepart_model');
 		$this -> load -> model('inventory/inventory_model');
 		$this -> load -> model('services_report/services_report_model');
 	}
@@ -43,7 +45,9 @@ class Home extends MY_Controller {
 			$status = (int) $this -> input -> post('status');
 			$tid = $this -> input -> post('tid');
 			$pid = $this -> input -> post('pid');
+			$sid = $this -> input -> post('sid');
 			$tqty = $this -> input -> post('tqty');
+			$sqty = $this -> input -> post('sqty');
 
 			if (!$dfrom || !$dto || !$branch) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
@@ -59,11 +63,23 @@ class Home extends MY_Controller {
 					$nowo = str_pad($lastID, 4, "0", STR_PAD_LEFT) . '/0'.$branch.'/'.date('m/Y/'). str_pad(($this -> services_wo_model -> __check_nowo($branch) + 1), 3, "0", STR_PAD_LEFT);
 					$this -> services_wo_model -> __update_services_wo($lastID, array('sno' => $nowo));
 					
-					for($i=0;$i<count($tid);++$i) $this -> services_wo_model -> __insert_services_wo_technical(array('ssid' => $lastID, 'stid' => $tid[$i], 'sstatus' => 1));
-					
+					for($i=0;$i<count($tid);++$i) {
+						$this -> services_wo_model -> __insert_services_wo_technical(array('ssid' => $lastID, 'stid' => $tid[$i], 'sstatus' => 1));
+					}
+
 					for($i=0;$i<count($pid);++$i) {
 						$this -> services_wo_model -> __insert_services_wo_product(array('ssid' => $lastID, 'spid' => $pid[$i], 'sqty' => $tqty[$pid[$i]], 'sstatus' => 1));
 					}
+
+					$arr = array('ssid' => $lastID, 'sdesc' => $desc, 'sstatus' => $status);
+					if ($this -> services_sparepart_model -> __insert_services_sparepart($arr)) {
+						$lastIDSparepart = $this -> db -> insert_id();
+
+						for($i=0;$i<count($sid);++$i) {
+							$this -> services_sparepart_model -> __insert_services_sparepart_det(array('ssid' => $lastIDSparepart, 'sssid' => $sid[$i], 'sqty' => $sqty[$sid[$i]], 'sstatus' => 1));
+						}
+					}
+
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('services_wo'));
 				}
@@ -87,13 +103,16 @@ class Home extends MY_Controller {
 			$desc = $this -> input -> post('desc', TRUE);
 			$branch = (int) $this -> input -> post('branch');
 			$tqty = $this -> input -> post('tqty');
+			$sqty = $this -> input -> post('sqty');
 			$pid = $this -> input -> post('pid');
+			$sid = $this -> input -> post('sid');
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
+			$sparepart_id = (int) $this -> input -> post('sparepart_id');
 
 			if ($appsev == 3) $status = 3;
 			
-			if ($id) {
+			if ($id && $sparepart_id) {
 				if (!$dfrom || !$dto || !$branch) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('services_wo' . '/' . __FUNCTION__ . '/' . $id));
@@ -114,7 +133,14 @@ class Home extends MY_Controller {
 					}
 					
 					$arr = array('sbid' => $branch, 'sdate' => time(), 'sdatefrom' => $dfrom, 'sdateto' => $dto, 'sdesc' => $desc, 'sstatus' => $status);
-					if ($this -> services_wo_model -> __update_services_wo($id, $arr)) {	
+					if ($this -> services_wo_model -> __update_services_wo($id, $arr)) {
+						$arr = array('sdesc' => $desc, 'sstatus' => $status);
+						$this -> services_sparepart_model -> __update_services_sparepart($sparepart_id, $arr);
+
+						for($i=0;$i<count($sid);++$i) {
+							$this -> services_sparepart_model -> __update_services_sparepart_det($sparepart_id,$sid[$i],array('sqty' => $sqty[$sid[$i]]));
+						}
+
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('services_wo'));
 					}
@@ -139,6 +165,7 @@ class Home extends MY_Controller {
 	
 	function services_wo_delete($id) {
 		if ($this -> services_wo_model -> __delete_services_wo($id, (__get_roles('ExecuteAllBranchServicesWO') == 1 ? 0 : $this -> memcachedlib -> sesresult['ubid']))) {
+			$this -> services_sparepart_model -> __delete_services_sparepart_by_wo($id);
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
 			redirect(site_url('services_wo'));
 		}
@@ -271,6 +298,7 @@ class Home extends MY_Controller {
 			$this -> load -> view('box/technical_tmp', $view, false);
 		}
 	}
+
 	function product_delete($type) {
 		$pid = (int) $this -> input -> post('pid');
 		$sid = (int) $this -> input -> post('sid');
@@ -386,6 +414,12 @@ class Home extends MY_Controller {
 		foreach($arr as $k => $v) if ($v -> spid) $ids[] = $v -> spid;
 		
 		$view['product'] = $this -> products_model -> __get_products_services(implode(',', $ids), 2, $id);
+
+		$ids = array();
+		$arr = $this -> services_sparepart_model -> __get_sparepart_services_det($view['detail'][0] -> sparepart_id);
+		foreach($arr as $k => $v) if ($v -> sssid) $ids[] = $v -> sssid;
+
+		$view['sparepart'] = $this -> sparepart_model -> __get_sparepart_services(implode(',', $ids), $view['detail'][0] -> sparepart_id, $this -> memcachedlib -> sesresult['ubid']);
 		$this->load->view(__FUNCTION__, $view);
 	}
 	

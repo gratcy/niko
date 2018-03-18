@@ -20,14 +20,14 @@ class Services_wo_model extends CI_Model {
 	function __get_services_wo_detail_print($id, $bid="") {
 		if ($bid != "") $bid = " AND a.sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('a.*,b.bname FROM services_workorder_tab a LEFT JOIN branch_tab b ON a.sbid=b.bid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3)'.$bid.' AND a.sid=' . $id);
+		$this -> db -> select('a.*,b.bname,c.sid as sparepart_id FROM services_workorder_tab a LEFT JOIN branch_tab b ON a.sbid=b.bid LEFT JOIN services_sparepart_tab c ON a.sid=c.ssid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3)'.$bid.' AND a.sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_services_wo_detail($id, $bid="") {
 		if ($bid != "") $bid = " AND sbid=" . $bid;
 		else $bid = "";
-		$this -> db -> select('* FROM services_workorder_tab WHERE (sstatus=1 OR sstatus=0 OR sstatus=3)'.$bid.' AND sid=' . $id);
+		$this -> db -> select('a.*,b.sid as sparepart_id FROM services_workorder_tab a LEFT JOIN services_sparepart_tab b ON a.sid=b.ssid WHERE (a.sstatus=1 OR a.sstatus=0 OR a.sstatus=3)'.$bid.' AND a.sid=' . $id);
 		return $this -> db -> get() -> result();
 	}
 	

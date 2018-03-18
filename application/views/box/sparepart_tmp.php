@@ -19,7 +19,7 @@
 <input type="hidden" name="sid[]" value="<?php echo $v -> sid;?>">
 <td><?php echo $v -> cname; ?></td>
 <td><?php echo $v -> sname; ?></td>
-<td><input type="text" style="width:60px!important;" name="qty[<?php echo $v -> sid;?>]" value="<?php echo ($type == 2 ? (int) $v -> sqty : 0); ?>" class="form-control"></td>
+<td><input type="text" style="width:60px!important;" name="sqty[<?php echo $v -> sid;?>]" value="<?php echo ($type == 2 ? (int) $v -> sqty : 0); ?>" class="form-control"></td>
 <?php if ($report != 1) : ?>
 <td style="text-align:center;"><a href="javascript:void(0);" id="Delsparepart" sid="<?php echo $v -> sid; ?>"><i class="icon-remove"></i></a></td>
 <?php endif; ?>
