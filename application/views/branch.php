@@ -51,7 +51,7 @@ left:inherit!important;
 <!--
           <th>NPWP</th>
 -->
-          <th>Address</th>
+          <th>Address ku</th>
           <th>City</th>
           <th>Province</th>
           <th>Phone I</th>
