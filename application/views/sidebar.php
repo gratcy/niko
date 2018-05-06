@@ -260,7 +260,7 @@
                 </li>
 			   <?php endif; ?>
 	
-				<?php if (__get_roles('COAView') || __get_roles('JournalView')) : ?>
+				<?php if (__get_roles('COAView') || __get_roles('JournalView') || __get_roles('PetiCashView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#accounting">
                         <i class="icon-book"> </i> Accounting
@@ -268,10 +268,14 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">5</span>&nbsp;
+                       &nbsp; <span class="label label-danger">7</span>&nbsp;
                     </a>
                     <ul class="collapse" id="accounting">
                        
+                <?php if (__get_roles('PetiCashView')) : ?>
+                        <li class=""><a href="<?php echo site_url('peticash_categories'); ?>"><i class="icon-angle-right"></i> Peticash Category </a></li>
+                        <li class=""><a href="<?php echo site_url('peticash'); ?>"><i class="icon-angle-right"></i> Peticash </a></li>
+               <?php endif; ?>
 				<?php if (__get_roles('COAView')) : ?>
                         <li class=""><a href="<?php echo site_url('coa'); ?>"><i class="icon-angle-right"></i> COA </a></li>
                         <li class=""><a href="<?php echo site_url('coagroup'); ?>"><i class="icon-angle-right"></i> COA Group </a></li>
@@ -401,7 +405,7 @@
 		$('ul#menu > li').removeClass('active');
 		$('ul#sales').parent().addClass('active');
 	}
-	else if (/\/coa|coagroup|journal|generalledger|closingperiod/.test(window.location.href) === true) {
+	else if (/\/coa|coagroup|journal|generalledger|closingperiod|peticash/.test(window.location.href) === true) {
 		$('ul#accounting').addClass('in');
 		$('ul#menu > li').removeClass('active');
 		$('ul#accounting').parent().addClass('active');

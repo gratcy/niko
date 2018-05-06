@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://192.168.2.142:1111/';
+$config['base_url']	= 'http://localhost:4503/';
 
 /*
 |--------------------------------------------------------------------------

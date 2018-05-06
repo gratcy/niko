@@ -75,6 +75,20 @@ function __get_ppn($status, $type) {
 		return ($status == 1 ? '<input type="checkbox" checked="checked" name="sfreeppn" value="1" />' : '<input type="checkbox" name="sfreeppn" value="1" />');
 }
 
+function __get_peticash_type($status, $type) {
+	if ($type == 1) {
+		return ($status == 1 ? 'Debit' : 'Credit');
+	}
+	else {
+		if ($status === 0) {
+			return '<label>Debit <input type="radio" name="ptype" value="1" /></label> <label>Credit <input type="radio" name="ptype" value="2" /></label>';
+		}
+		else {
+			return ($status == 1 ? '<label>Debit <input type="radio" checked="checked" name="ptype" value="1" /></label> <label>Credit <input type="radio" name="ptype" value="2" /></label>' : '<label>Debit <input type="radio" name="ptype" value="1" /></label> <label>Credit <input type="radio" name="ptype" checked="checked" value="2" /></label>');	
+		}
+	}
+}
+
 function __get_customers_spec($status, $type, $name='') {
 	if ($type == 1)
 		return ($status == 1 ? 'Yes' : 'No');

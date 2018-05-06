@@ -91,11 +91,11 @@ class Receiving_model extends CI_Model {
 	function __get_receiving_hist($iid, $branch, $type, $stype, $reject) {
 		if ($reject != 1) $reject = " AND (a.rtype=1 OR a.rtype=2)";
 		else $reject = " AND a.rtype=3";
-		
+
 		if ($stype == 1)
-			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 1 as approved, 1 as ttypetrans, CASE a.rtype WHEN 3 THEN (select c.cname FROM customers_tab c WHERE c.cid=a.rvendor) WHEN 2 THEN a.rvendor WHEN 1 THEN a.riid END as cname FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch.$reject." AND b.rtype=".$type." AND a.rstatus=3 AND b.riid=" . $iid, FALSE);
+			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 1 as approved, 1 as ttypetrans, CASE a.rtype WHEN 3 THEN (select c.cname FROM customers_tab c WHERE c.cid=a.rvendor) WHEN 2 THEN a.rvendor WHEN 1 THEN a.riid END as cname FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch.$reject." AND b.ritype=".$type." AND a.rstatus=3 AND b.riid=" . $iid, FALSE);
 		else
-			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 0 as approved, 1 as ttypetrans, CASE a.rtype WHEN 3 THEN (select c.cname FROM customers_tab c WHERE c.cid=a.rvendor) WHEN 2 THEN a.rvendor WHEN 1 THEN a.riid END as cname FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch.$reject." AND b.rtype=".$type." AND a.rstatus=1 AND b.riid=" . $iid, FALSE);
+			$this -> db -> select("b.rqty as tqty,from_unixtime(rdate,'%Y-%m-%d') as ttanggal, a.rdocno as tno, 0 as approved, 1 as ttypetrans, CASE a.rtype WHEN 3 THEN (select c.cname FROM customers_tab c WHERE c.cid=a.rvendor) WHEN 2 THEN a.rvendor WHEN 1 THEN a.riid END as cname FROM receiving_tab a LEFT JOIN receiving_item_tab b ON a.rid=b.rrid WHERE a.rbid=".$branch.$reject." AND b.ritype=".$type." AND a.rstatus=1 AND b.riid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 }

@@ -184,6 +184,15 @@ $route['suplier/suplier_add'] = 'suplier/home/suplier_add';
 $route['suplier/suplier_update/?(:num)?'] = 'suplier/home/suplier_update/$1';
 $route['suplier/suplier_delete/(:num)'] = 'suplier/home/suplier_delete/$1';
 
+$route['peticash_categories/?(:num)?'] = 'peticash_categories/home/index/$1';
+$route['peticash_categories/peticash_categories_add'] = 'peticash_categories/home/peticash_categories_add';
+$route['peticash_categories/peticash_categories_update/?(:num)?'] = 'peticash_categories/home/peticash_categories_update/$1';
+$route['peticash_categories/peticash_categories_delete/(:num)'] = 'peticash_categories/home/peticash_categories_delete/$1';
+
+$route['peticash/?(:num)?'] = 'peticash/home/index/$1';
+$route['peticash/sortpeticash/?(:num)?/?(:num)?'] = 'peticash/home/sortpeticash/$1/$2';
+$route['peticash/peticash_add'] = 'peticash/home/peticash_add';
+
 $route['coa/?(:num)?'] = 'coa/home/index/$1';
 $route['coa/coa_add'] = 'coa/home/coa_add';
 $route['coa/coa_update/?(:num)?'] = 'coa/home/coa_update/$1';
