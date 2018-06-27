@@ -109,19 +109,24 @@ class Inventory_model extends CI_Model {
 	
 	function __get_services_items($iid, $branch, $type, $stype) {
 		if ($type == 1)
-		$this -> db -> select("b.sqty as tqty,from_unixtime(c.sdate,'%Y-%m-%d') as ttanggal,c.sno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM services_report_tab a JOIN services_workorder_tab c ON a.ssid=c.sid JOIN services_report_product_tab b ON a.sid=b.ssid JOIN branch_tab d ON c.sbid=d.bid WHERE c.sbid=".$branch." AND a.sstatus=".($stype == 1 ? 3 : 1)." AND b.spid=" . $iid, FALSE);
+			$this -> db -> select("b.sqty as tqty,from_unixtime(c.sdate,'%Y-%m-%d') as ttanggal,c.sno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM services_report_tab a JOIN services_workorder_tab c ON a.ssid=c.sid JOIN services_report_product_tab b ON a.sid=b.ssid JOIN branch_tab d ON c.sbid=d.bid WHERE c.sbid=".$branch." AND a.sstatus=".($stype == 1 ? 3 : 1)." AND b.spid=" . $iid, FALSE);
 		else
-		$this -> db -> select("b.sqty as tqty,from_unixtime(c.sdate,'%Y-%m-%d') as ttanggal,c.sno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM services_report_tab a JOIN services_workorder_tab c ON a.ssid=c.sid JOIN services_report_sparepart_tab b ON a.sid=b.ssid JOIN branch_tab d ON c.sbid=d.bid WHERE c.sbid=".$branch." AND a.sstatus=".($stype == 1 ? 3 : 1)." AND b.sssid=" . $iid, FALSE);
+			$this -> db -> select("b.sqty as tqty,from_unixtime(c.sdate,'%Y-%m-%d') as ttanggal,c.sno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM services_report_tab a JOIN services_workorder_tab c ON a.ssid=c.sid JOIN services_report_sparepart_tab b ON a.sid=b.ssid JOIN branch_tab d ON c.sbid=d.bid WHERE c.sbid=".$branch." AND a.sstatus=".($stype == 1 ? 3 : 1)." AND b.sssid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_transfer_customer($iid, $branch, $stype, $itype) {
-		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.cname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN customers_tab d ON c.dbto=d.cid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
+		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.cname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN customers_tab d ON c.dbto=d.cid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND a.dtype=3 AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	
 	function __get_return_transfer($iid, $branch, $stype, $itype) {
-		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN branch_tab d ON c.dbto=d.bid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
+		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN branch_tab d ON c.dbto=d.bid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND a.dtype=2 AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_request_transfer($iid, $branch, $stype, $itype) {
+		$this -> db -> select("b.dqty as tqty,from_unixtime(a.ddate,'%Y-%m-%d') as ttanggal,a.ddocno as tno,".($stype == 1 ? 1 : 0)." as approved, d.bname as cname, 2 as ttypetrans FROM distribution_tab a JOIN distribution_request_tab c ON a.ddrid=c.did JOIN distribution_item_tab b ON a.ddrid=b.ddrid JOIN branch_tab d ON c.dbto=d.bid WHERE c.dbfrom=".$branch." AND a.dstatus=".($stype == 1 ? 3 : 1)." AND a.dtype=1 AND b.ditype=".$itype." AND b.diid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}
 	
@@ -131,6 +136,7 @@ class Inventory_model extends CI_Model {
 	}
 	
 	function __get_tukar_guling($iid, $branch, $type, $stype) {
+		//~ $this -> db -> select("d.sqty as tqty,d.stgldo as ttanggal, d.snodo as tno, ".($stype == 1 ? 1 : 0)." as approved, c.cname as cname, 2 as ttypetrans FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid LEFT JOIN customers_tab c ON a.scid=c.cid JOIN delivery_order_detail_tab d ON b.sid=d.sid AND b.spid=d.spid JOIN sales_order_tab e ON e.sid=d.ssid WHERE a.sbid=".$branch." AND e.sbid=".$branch." AND ".($stype == 1 ? "a.sstatus >= 3" : "a.sstatus < 3")." AND b.srtype='Tukar Guling' AND b.spid=" . $iid, FALSE);
 		$this -> db -> select("d.sqty as tqty,d.stgldo as ttanggal, d.snodo as tno, ".($stype == 1 ? 1 : 0)." as approved, c.cname as cname, 2 as ttypetrans FROM retur_order_tab a LEFT JOIN retur_order_detail_tab b ON a.sid=b.ssid LEFT JOIN customers_tab c ON a.scid=c.cid JOIN delivery_order_detail_tab d ON b.sid=d.sid AND b.spid=d.spid WHERE a.sbid=".$branch." AND ".($stype == 1 ? "a.sstatus >= 3" : "a.sstatus < 3")." AND b.srtype='Tukar Guling' AND b.spid=" . $iid, FALSE);
 		return $this -> db -> get() -> result();
 	}

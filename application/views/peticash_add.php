@@ -46,6 +46,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">No. Reference</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" name="refno" class="form-control" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Description</label>
 
                     <div class="col-lg-4">

@@ -192,6 +192,7 @@ $route['peticash_categories/peticash_categories_delete/(:num)'] = 'peticash_cate
 $route['peticash/?(:num)?'] = 'peticash/home/index/$1';
 $route['peticash/sortpeticash/?(:num)?/?(:num)?'] = 'peticash/home/sortpeticash/$1/$2';
 $route['peticash/peticash_add'] = 'peticash/home/peticash_add';
+$route['peticash/export_peticash'] = 'peticash/home/export_peticash';
 
 $route['coa/?(:num)?'] = 'coa/home/index/$1';
 $route['coa/coa_add'] = 'coa/home/coa_add';

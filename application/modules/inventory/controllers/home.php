@@ -260,6 +260,8 @@ class Home extends MY_Controller {
 		$returnUnApp = array();
 		$returnTransApp = array();
 		$returnTransUnApp = array();
+		$requestTransApp = array();
+		$requestTransUnApp = array();
 		$SO = array();
 		$DO = array();
 		$TukarGuling = array();
@@ -284,6 +286,9 @@ class Home extends MY_Controller {
 			
 			$TransCustomerApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 1, 1);
 			$TransCustomerUnApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 2, 1);
+
+			$requestTransApp = $this -> inventory_model -> __get_request_transfer($iid, $branch, 1, 1);
+			$requestTransUnApp = $this -> inventory_model -> __get_request_transfer($iid, $branch, 2, 1);
 		elseif ($type == 2) :
 			$recevingApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 2, 1, 0);
 			$recevingUnApp = $this -> receiving_model -> __get_receiving_hist($iid, $branch, 2, 2, 0);
@@ -293,6 +298,9 @@ class Home extends MY_Controller {
 			
 			$TransCustomerApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 1, 2);
 			$TransCustomerUnApp = $this -> inventory_model -> __get_transfer_customer($iid, $branch, 2, 2);
+			
+			$requestTransApp = $this -> inventory_model -> __get_request_transfer($iid, $branch, 1, 2);
+			$requestTransUnApp = $this -> inventory_model -> __get_request_transfer($iid, $branch, 2, 2);
 		elseif ($type == 4) :
 			$returnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 1);
 			$returnUnApp = $this -> inventory_model -> __get_return_order($iid, $branch, $type, 2);
@@ -313,7 +321,7 @@ class Home extends MY_Controller {
 			$ServiceSparepartUnApp = $this -> inventory_model -> __get_services_items($iid, $branch, 2, 2);
 		endif;
 		
-		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $TukarGulingApp, $TukarGulingUnApp, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp, $TransCustomerApp, $TransCustomerUnApp);
+		$data = array_merge($opnamePlus, $opnameMin, $recevingApp, $recevingUnApp, $SO, $DO, $TukarGulingApp, $TukarGulingUnApp, $returnApp, $returnUnApp, $returnTransApp, $returnTransUnApp, $ServiceProductApp, $ServiceProductUnApp, $ServiceSparepartApp, $ServiceSparepartUnApp, $TransCustomerApp, $TransCustomerUnApp, $requestTransApp, $requestTransUnApp);
 
 		usort($data, "__sortArrayByDate");
 		$view['type'] = $type;

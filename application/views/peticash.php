@@ -25,6 +25,9 @@
                 <br />
                 <br />
                 <?php endif; ?>
+                <a href="<?php echo site_url('peticash/export_peticash?from='.$from.'&to='.$to); ?>" class="btn btn-default btn-grad"><i class="icon-book"></i> Export Excel</a>
+                <br />
+                <br />
   <?php echo __get_error_msg(); ?>
             <div class="row">
                 <div class="col-lg-12">
@@ -39,9 +42,10 @@
                                         <tr>
           <th>Date</th>
           <th>Category</th>
-          <th>Transaction Type</th>
+          <th>No. Reference</th>
           <th>Description</th>
-          <th>Nominal</th>
+          <th>Debit</th>
+          <th>Credit</th>
           <th>Saldo</th>
                                         </tr>
                                     </thead>
@@ -52,9 +56,10 @@
                                         <tr>
           <td><?php echo __get_date($v -> pdate); ?></td>
           <td><?php echo $v -> cname; ?></td>
-          <td><?php echo __get_peticash_type($v -> ptype, 1); ?></td>
+          <td><?php echo $v -> prefno; ?></td>
           <td><?php echo $v -> pdesc; ?></td>
-          <td><?php echo __get_rupiah($v -> pnominal,2); ?></td>
+          <td><?php echo ($v -> ptype == 1 ? __get_rupiah($v -> pnominal,2) : '-'); ?></td>
+          <td><?php echo ($v -> ptype == 2 ? __get_rupiah($v -> pnominal,2) : '-'); ?></td>
           <td><?php echo __get_rupiah($v -> psaldo,2); ?></td>
                     </tr>
         <?php endforeach; ?>
