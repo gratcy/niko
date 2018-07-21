@@ -245,6 +245,13 @@ $addr = explode('*', $detail[0] -> caddr);
                 </div>
 				
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Notes</label>
+
+                    <div class="col-lg-4">
+                        <textarea name="note" class="form-control" ><?php echo $detail[0] -> cnote; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
 							<label for="status" class="control-label col-lg-4">Status</label>
                     <div class="col-lg-4">
 						

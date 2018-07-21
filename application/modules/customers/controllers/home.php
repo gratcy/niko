@@ -33,6 +33,7 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$cid = serialize($this -> input -> post('cid', TRUE));
 			$name = $this -> input -> post('name', TRUE);
+			$note = $this -> input -> post('note', TRUE);
 			$contactname = $this -> input -> post('contactname', TRUE);
 			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
@@ -70,7 +71,7 @@ class Home extends MY_Controller {
 				redirect(site_url('customers' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cstatus' => $status);
+				$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cnote' => $note, 'cstatus' => $status);
 				if ($this -> customers_model -> __insert_customers($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('customers'));
@@ -93,6 +94,7 @@ class Home extends MY_Controller {
 		if ($_POST) {
 			$cid = serialize($this -> input -> post('cid', TRUE));
 			$name = $this -> input -> post('name', TRUE);
+			$note = $this -> input -> post('note', TRUE);
 			$contactname = $this -> input -> post('contactname', TRUE);
 			$email = $this -> input -> post('email', TRUE);
 			$addr = $this -> input -> post('addr', TRUE);
@@ -132,7 +134,7 @@ class Home extends MY_Controller {
 					redirect(site_url('customers' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cstatus' => $status);
+					$arr = array('cbid' => $branch, 'ccat' => $cat, 'cname' => $name, 'caddr' => $addr . '*' . $addr2, 'ccity' => $city, 'cprov' => $prov, 'cdeliver' => $delivery, 'cphone' => $phone1 . '*' . $phone2 . '*' . $fax, 'ccontactname' => $contactname, 'cfkp' => $fkp.'*'.$sp, 'cjoindate' => $joindate, 'cemail' => $email, 'csid' => $sales, 'ccash' => $cash, 'ccredit' => $credit, 'ccashnico' => $cashnico, 'ccreditnico' => $creditnico, 'climit' => $limit, 'ctop' => $ctop, 'cnpwp' => $npwp, 'cpkp' => $pkp, 'cspecial' => $special, 'ctyperetur' => $ctyperetur, 'ccid' => $cid, 'cnote' => $note, 'cstatus' => $status);
 					if ($this -> customers_model -> __update_customers($id, $arr)) {
 						__set_error_msg(array('info' => 'Data berhasil diubah.'));
 						redirect(site_url('customers'));

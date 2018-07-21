@@ -53,7 +53,7 @@ class Home extends MY_Controller {
 				if ($ptype == 1) $saldo = $nominal + $csaldo[0] -> psaldo;
 				else $saldo = $csaldo[0] -> psaldo - $nominal;
 				
-				$arr = array('pcid' => $category, 'ptype' => $ptype, 'pnominal' => $nominal, 'psaldo' => $saldo, 'pbid' => $this -> memcachedlib -> sesresult['ubid'], 'pdate' => strtotime($waktu), 'prefno' => $refno, 'pdesc' => $desc, 'pstatus' => 1);
+				$arr = array('pcid' => $category, 'ptype' => $ptype, 'pnominal' => $nominal, 'psaldo' => $saldo, 'pbid' => $this -> memcachedlib -> sesresult['ubid'], 'pdate' => date('Y-m-d',strtotime($waktu)), 'prefno' => $refno, 'pdesc' => $desc, 'pstatus' => 1);
 				if ($this -> peticash_model -> __insert_peticash($arr)) {
 					__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 					redirect(site_url('peticash'));
@@ -80,7 +80,7 @@ class Home extends MY_Controller {
 		
 		$arr = array();
 		foreach($data as $K => $v) {
-			$arr[] = array(__get_date($v -> pdate), $v -> cname, $v -> prefno, $v -> pdesc, ($v -> ptype == 1 ? __get_rupiah($v -> pnominal,2) : '-'), ($v -> ptype == 2 ? __get_rupiah($v -> pnominal,2) : '-'), __get_rupiah($v -> psaldo,2));
+			$arr[] = array(__get_date(strtotime($v -> pdate)), $v -> cname, $v -> prefno, $v -> pdesc, ($v -> ptype == 1 ? __get_rupiah($v -> pnominal,2) : '-'), ($v -> ptype == 2 ? __get_rupiah($v -> pnominal,2) : '-'), __get_rupiah($v -> psaldo,2));
 		}
 		
 		$data = array('header' => array('Date','Category', 'No. Reference', 'Description','Debit','Credit','Saldo'), 'data' => $arr);

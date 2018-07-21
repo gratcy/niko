@@ -260,7 +260,7 @@
                 </li>
 			   <?php endif; ?>
 	
-				<?php if (__get_roles('COAView') || __get_roles('JournalView') || __get_roles('PetiCashView')) : ?>
+				<?php if (__get_roles('PetiCashView')) : ?>
                 <li class="panel ">
                     <a href="javascript:void(0);" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#accounting">
                         <i class="icon-book"> </i> Accounting
@@ -268,14 +268,15 @@
                         <span class="pull-right">
                           <i class="icon-angle-left"></i>
                         </span>
-                       &nbsp; <span class="label label-danger">7</span>&nbsp;
+                       &nbsp; <span class="label label-danger">2</span>&nbsp;
                     </a>
                     <ul class="collapse" id="accounting">
                        
                 <?php if (__get_roles('PetiCashView')) : ?>
-                        <li class=""><a href="<?php echo site_url('peticash_categories'); ?>"><i class="icon-angle-right"></i> Peticash Category </a></li>
-                        <li class=""><a href="<?php echo site_url('peticash'); ?>"><i class="icon-angle-right"></i> Peticash </a></li>
+                        <li class=""><a href="<?php echo site_url('peticash_categories'); ?>"><i class="icon-angle-right"></i> Petty Cash Category </a></li>
+                        <li class=""><a href="<?php echo site_url('peticash'); ?>"><i class="icon-angle-right"></i> Petty Cash </a></li>
                <?php endif; ?>
+<!--
 				<?php if (__get_roles('COAView')) : ?>
                         <li class=""><a href="<?php echo site_url('coa'); ?>"><i class="icon-angle-right"></i> COA </a></li>
                         <li class=""><a href="<?php echo site_url('coagroup'); ?>"><i class="icon-angle-right"></i> COA Group </a></li>
@@ -285,6 +286,7 @@
 			   <?php endif; ?>
                         <li class=""><a href="<?php echo site_url('generalledger'); ?>"><i class="icon-angle-right"></i> General Ledger </a></li>
                         <li class=""><a href="<?php echo site_url('closingperiod'); ?>"><i class="icon-angle-right"></i> Closing Period </a></li>
+-->
                     </ul>
                 </li>
 			   <?php endif; ?>
@@ -303,14 +305,41 @@
                          <?php if (__get_roles('ReportTechnicalCommision')) : ?>
                         <!-- <li class=""><a href="<?php echo site_url('technical_commision'); ?>"><i class="icon-angle-right"></i> SO Pending </a></li> -->
 						<?php endif; ?>
+						
+						<?php if (__get_roles('ReportSOPending')) : ?>
+						<li class=""><a href="<?php echo site_url('chartx/rso'); ?>"><i class="icon-angle-right"></i> SO Pending </a></li>
+						<?php endif; ?>						
 
 						<?php if (__get_roles('ReportInvoice')) : ?>
                        <li class=""><a href="<?php echo site_url('delivery_order/home/invoice_order_report/1'); ?>"><i class="icon-angle-right"></i> Invoice </a></li>
 						<?php endif; ?>
+						
+						<?php if (__get_roles('ReportCustomer')) : ?>
+						<li class=""><a href="<?php echo site_url('chartx/rcust'); ?>"><i class="icon-angle-right"></i> Customer </a></li>
+						<?php endif; ?>						
+						
+						<?php if (__get_roles('ReportProduct')) : ?>
+						<li class=""><a href="<?php echo site_url('chartx/home'); ?>"><i class="icon-angle-right"></i> Product  </a></li>
+						<?php endif; ?>						
+						
+						<?php if (__get_roles('ReportSalesPerformance')) : ?>
+						<li class=""><a href="<?php echo site_url('chartx/rsales'); ?>"><i class="icon-angle-right"></i> Sales Performance </a></li>
+						<?php endif; ?>						
+						
 						<?php if (__get_roles('ReportSalesCommision')) : ?>
 						<li class=""><a href="<?php echo site_url('komisi/home'); ?>"><i class="icon-angle-right"></i> Sales Commission </a></li>
 						<?php endif; ?>
 						
+
+                        
+
+
+
+
+
+
+						
+
 						<?php if (__get_roles('ReportOpname')) : ?>
                         <li class=""><a href="javascript:void(0);"><i class="icon-angle-right"></i> Opname </a>
                         <ul>
@@ -395,7 +424,7 @@
 		$('ul#menu > li').removeClass('active');
 		$('ul#inventoryOpname').parent().addClass('active');
 	}
-	else if (/\/komisi\/home|detail_komisi\/home|technical_commision|reportopname|invoice_order_report/.test(window.location.href) === true) {
+	else if (/\/komisi\/home|detail_komisi\/home|technical_commision|reportopname|invoice_order_report|chartx\/(.*)|delivery_order\/home\/invoice_order_report/.test(window.location.href) === true) {
 		$('ul#Report').addClass('in');
 		$('ul#menu > li').removeClass('active');
 		$('ul#Report').parent().addClass('active');

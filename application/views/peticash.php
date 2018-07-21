@@ -3,7 +3,7 @@
             <div class="inner">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2> Peticash </h2>
+                        <h2> Petty Cash </h2>
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Peticash
+                            Petty Cash
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -54,7 +54,7 @@
       foreach($peticash as $k => $v) :
       ?>
                                         <tr>
-          <td><?php echo __get_date($v -> pdate); ?></td>
+          <td><?php echo __get_date(strtotime($v -> pdate)); ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> prefno; ?></td>
           <td><?php echo $v -> pdesc; ?></td>
