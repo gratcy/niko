@@ -50,7 +50,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover">
       <thead>
 		<tr>
 		<th>Name</th>
